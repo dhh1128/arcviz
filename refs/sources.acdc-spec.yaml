@@ -1,0 +1,92 @@
+# arcviz ACDC-spec source record (audit stream 2A — ACDC field and section inventory).
+#
+# Same schema as ../sources.yaml; see ../docs/research/EVIDENCE.md for the rules.
+# Owned exclusively by the Phase 2A ACDC-inventory stream. Do not merge into sources.yaml
+# without checking for key collisions first.
+#
+# Capture note: these three specs are vendored as local git checkouts under ~/code/me/
+# (per AGENTS.md item 5: "The vendored spec is at ~/code/me/kswg-acdc-specification"), which
+# already satisfies EVIDENCE.md rule 3 ("capture it locally") — they are persistent, version-
+# controlled local copies, not fetched-and-discarded web pages. The `capture` field below points
+# at the vendored file path plus the exact commit read, which is the durable local artifact.
+# Where the vendored checkout was found to be stale or diverged from trustoverip/main on a
+# cited passage (see acdc-inventory.md "Sources read"), the quote is instead sourced from a
+# `main`-branch capture and that is noted explicitly in the record.
+
+sources:
+  - key: acdc-spec-vendored
+    title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md"
+    author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Samuel M. Smith et al.)"
+    url: "https://trustoverip.github.io/kswg-acdc-specification/"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/kswg-acdc-specification/spec/spec-body.md, branch fix-worked-examples-schema-1520, commit 651df33e14396d5a79e1b1abf419111a97a97f42 (2026-07-21)"
+    status: primary
+    supports: "All top-level ACDC field definitions and ordering; the a-vs-A (Attribute vs Aggregate) selective/partial-disclosure distinction; the complete Edge section (Edge-group, Edge, unary/m-ary operators); the complete Rule section; the seven named Graduated Disclosure mechanisms (Compact/Metadata/Partial/Nested Partial/Full/Selective/Bulk-issued Instance Disclosure); Contractually Protected Disclosure (Chain-link Confidentiality, Contingent Disclosure); blinding/UUID mechanics at every nesting level; TEL registry message types and the Blinded Attribute Block; ACDC Protocol Message Types and top-level field ordering for CESR-native forms"
+    quote: "When present, the top-level fields MUST appear in the following order: `[v, t, d, u, i, rd, s, a, A, e, r]`."
+    locator: "spec/spec-body.md:32 (Field Ordering); see docs/research/acdc-inventory.md for the full set of ~40 quoted passages with individual line locators across this file"
+
+  - key: acdc-spec-main-crosscheck
+    title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md (trustoverip/kswg-acdc-specification@main)"
+    author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Samuel M. Smith et al.)"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-acdc-specification/main/spec/spec-body.md"
+    retrieved: "2026-09-04"
+    capture: "fetched to /tmp for diff verification only, not persisted in-repo (ephemeral cross-check artifact, not a citation source in its own right); commit f0bd097de318fbbe2d069a2b46cecd42550762e3"
+    status: primary
+    supports: "Confirms the vendored checkout (acdc-spec-vendored) is byte-identical to published main on every section cited in acdc-inventory.md (top-level field table, Attribute/Aggregate/Edge/Rule sections, disclosure-mechanism enumeration, Registry/blinding fields); identifies the vendored checkout's only divergences as additive worked-examples/lifecycle prose not cited here"
+    quote: "diff acdc-upstream.md spec/spec-body.md: 0 differences in lines 1095-1215 (Edge/Rule operator tables); differences elsewhere confined to added worked-examples sections (Registry-Dependent Issuance Lifecycle) and minor wording (dt field precision, bulk-derivation hex-vs-decimal path rendering) not relied upon by any claim in acdc-inventory.md"
+    locator: "diff performed 2026-09-04 between the two full files; see acdc-inventory.md 'Sources read' for summary"
+
+  - key: acdc-spec-e1e-proposal
+    title: "Add E1E identity edge operator to the unary Operator table (proposed, unmerged)"
+    author: "Daniel Hardman (proposal), against the ACDC specification"
+    url: "https://github.com/dhh1128/kswg-acdc-specification (local branch add-e1e-edge-operator, not a public PR URL confirmed in this session)"
+    retrieved: "2026-09-04"
+    capture: "vendored worktree ~/code/me/kswg-acdc-specification/.worktrees/e1e, branch add-e1e-edge-operator, commit 0b28b50c3fb53a2d53bc219605151a59785dca64 (2026-07-28)"
+    status: secondary
+    supports: "Existence of a proposed but not-yet-normative fifth unary Edge operator (E1E), flagged as an open question in acdc-inventory.md rather than treated as part of the spec"
+    quote: "`E1E`| IssueE-To-IssueE, The Issuee AID of this ACDC MUST be the Issuee AID of the node this Edge points to. This is an identity relation on the two ACDCs' Issuees and places no constraint on either ACDC's Issuer."
+    locator: "spec/spec-body.md:1195 on branch add-e1e-edge-operator"
+
+  - key: dossier-spec-main
+    title: "Verifiable Dossier Specification — spec/dossier-spec-body.md (trustoverip/kswg-dossier-specification@main)"
+    author: "Daniel Hardman et al., ToIP KSWG"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-dossier-specification/main/spec/dossier-spec-body.md"
+    retrieved: "2026-09-04"
+    capture: "fetched to /tmp for this reading, not persisted in-repo; commit b9227753cc1bbb92ed237970fc3b89bf1d0c904f. Used in preference to the vendored checkout (see dossier-spec-vendored-stale below) because main corrects a substantive terminology error present in the vendored copy."
+    status: primary
+    supports: "Dossier-as-ACDC structure; edges-as-primary-payload vs a-section-as-proximate-metadata; anchoring (not signing) as the authentication mechanism, with the narrow ephemeral-attached-signature exception; the four joint-issuance threshold operators MxN/RMxN/MxQ/RMxQ and their slot-disposition mechanics (Pending/Endorsed/Declined); finalization via the `fi` field; independently configurable revocation thresholds; Annotation Edges as the mechanism for mutable-looking state over immutable ACDCs"
+    quote: "A dossier is not a signed document. The issuer does not compute a signature over the dossier ACDC and attach that signature to it as proof of authenticity, which is what \"signing a credential\" means in most other verifiable credential ecosystems. Instead: 1. The assembled dossier ACDC is saidified, yielding its SAID. 2. The issuer constructs a seal containing that SAID. 3. The issuer anchors the seal in an append-only verifiable log..."
+    locator: "spec/dossier-spec-body.md, section 'How a Dossier Is Issued: Anchoring, Not Attached Signatures' (near top of file, before 'The Role of the Issuer'), as of commit b9227753"
+
+  - key: dossier-spec-vendored-stale
+    title: "Verifiable Dossier Specification — spec/dossier-spec-body.md (vendored checkout, superseded on anchoring-vs-signing)"
+    author: "Daniel Hardman et al., ToIP KSWG"
+    url: "https://trustoverip.github.io/kswg-dossier-specification/"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/kswg-dossier-specification/spec/dossier-spec-body.md, branch ci-pages-step-strict, commit 7669358f3cfd754c2544d451aca48e2045603909 (2026-09-03)"
+    status: secondary
+    supports: "Recorded ONLY to document staleness: this vendored checkout describes dossier issuance as direct signing ('The issuer's signature makes a specific, verifiable assertion...'), which trustoverip/kswg-dossier-specification@main has since corrected to an anchoring model. Not cited as a source for any normative claim in acdc-inventory.md; dossier-spec-main is used instead throughout."
+    quote: "The issuer of a dossier is the entity that curates the collection of evidence and attests to its composition by digitally signing the container. The issuer's signature makes a specific, verifiable assertion..."
+    locator: "spec/dossier-spec-body.md:9 (vendored checkout, commit 7669358)"
+
+  - key: cesr-spec-vendored
+    title: "Composable Event Streaming Representation (CESR) Specification — spec/spec-body.md"
+    author: "Samuel M. Smith et al., ToIP KSWG"
+    url: "https://trustoverip.github.io/kswg-cesr-specification/"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/kswg-cesr-specification/spec/spec-body.md, branch pq, commit 34c3978d5cd7531897dfdd26d954051937ff0640 (2026-08-25)"
+    status: primary
+    supports: "Version String field format (2.XX and legacy 1.XX) as what a renderer parses from a JSON/CBOR/MGPK-serialized ACDC; SAID CESR-primitive encoding (derivation code + Base64); confirmation that CESR-native messages carry sizing/kind information in the count/group framing code rather than a regex-parsable v field; confirmed absence of any presentation/display/rendering guidance in this spec"
+    quote: "The format of the Version String is `PPPPMmmGggKKKKBBBB.`. It is 19 characters in length and is divided into five parts..."
+    locator: "spec/spec-body.md:1174"
+
+  - key: cesr-spec-main-crosscheck
+    title: "CESR Specification — spec/spec-body.md (trustoverip/kswg-cesr-specification@main)"
+    author: "Samuel M. Smith et al., ToIP KSWG"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-cesr-specification/main/spec/spec-body.md"
+    retrieved: "2026-09-04"
+    capture: "fetched to /tmp for diff verification only, not persisted in-repo; commit bad6edd84f928fe1e77a722edbdd829e0878377f"
+    status: primary
+    supports: "Confirms the vendored checkout (cesr-spec-vendored) is identical to published main on the Version String field and SAID sections cited in acdc-inventory.md; identifies the vendored checkout's only divergence as an unmerged post-quantum signature-code table addition, irrelevant to what is cited"
+    quote: "diff cesr-upstream.md spec/spec-body.md: differences confined to Annex A post-quantum code-table entries and one Annex prose section ('Post-Quantum Cryptographic Primitives'), not present in either version's Version String or SAID sections"
+    locator: "diff performed 2026-09-04 between the two full files; see acdc-inventory.md 'Sources read' for summary"
