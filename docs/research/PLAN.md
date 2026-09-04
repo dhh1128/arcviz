@@ -1,10 +1,17 @@
 # Research plan: visualizing ACDCs
 
-*Draft 1, 2026-09-04. Proposed home: a new repo under `~/code/me/`, modeled on `entviz` (structure, rigor) and `entviz-js` (JS/React shape). This file becomes `docs/research/PLAN.md` in that repo at Phase 0 and is deleted from `/tmp`.*
+*Draft 2, 2026-09-04. Home: this repository, `arcviz`, modeled on [entviz](https://github.com/dhh1128/entviz) for structure and rigor and on [entviz-js](https://github.com/dhh1128/entviz-js) for the JS/React shape.*
+
+## Decisions taken 2026-09-04
+
+- **Name: `arcviz`.** An *arc* is both an electric arc and a directed edge in a graph, which is precisely the thing that makes ACDCs hard to draw. The bare name `arc` is unavailable on both PyPI and npm, so the suffixed form is required for packages anyway, and it makes the family symmetric: `arcviz` on PyPI, `@arcviz/core` and `@arcviz/react` on npm, alongside entviz's identical pattern.
+- **Deliverable: specification + Python reference implementation + React implementation.** Python earns its place twice — it lets CI prove the spec against a conformance corpus without a browser, and it lets system tooling generate credential views outside a web context. This is exactly entviz's shape.
+- **Rendering authority is deferred to Phase 3.** Whether the issuer supplies a rendering template (the W3C path) or the viewer derives everything from the schema is the sharpest architectural fork in the project, and it will be decided on the audit's evidence rather than on a prior. Phase 1A is scoped to gather exactly what that decision needs.
+- **Open, deferred:** whether the JS/React implementation lives in this repository under `impl/` (the COIA pattern) or in a sibling `arcviz-js` repository (the entviz pattern). npm packaging argues for the sibling; simplicity argues for one repo. Decide at implementation time, not now.
 
 ## The shape of the proposal, in one paragraph
 
-Six phases, with the cheap-to-discard artifacts deliberately front-loaded: a home and a citation discipline; five parallel prior-art streams that capture verbatim sources rather than summaries; a domain-constraint pass that turns ACDC's disclosure modes into an explicit display-state matrix; a synthesis pass that names principles and a threat model; an affordance inventory mapped to Norman and to intent boundaries; and an adversarial review of the research corpus *before* any design work begins. Design and implementation follow as separate commissions, each with its own adversarial gate. Two structural recommendations run through it: publish a language-independent **rendering spec** alongside the React reference implementation (entviz's proven pattern), and build a **corpus of real and adversarial ACDCs early**, because it is what makes design claims falsifiable and it doubles as the conformance fixture set.
+Six phases, with the cheap-to-discard artifacts deliberately front-loaded: a home and a citation discipline; five parallel prior-art streams that capture verbatim sources rather than summaries; a domain-constraint pass that turns ACDC's disclosure modes into an explicit display-state matrix; a synthesis pass that names principles and a threat model; an affordance inventory mapped to Norman and to intent boundaries; and an adversarial review of the research corpus *before* any design work begins. Design and implementation follow as separate commissions, each with its own adversarial gate. Two structural commitments run through it: publish a language-independent **rendering spec** with a Python reference implementation and a React implementation held to one conformance corpus (entviz's proven pattern), and build a **corpus of real and adversarial ACDCs early**, because it is what makes design claims falsifiable and it doubles as that conformance fixture set.
 
 ---
 
@@ -29,7 +36,7 @@ Small, mechanical, done first because everything else writes into it.
 
 **Citation discipline.** Every substantive claim in `docs/research/` carries a `sources.yaml` key. A source is only usable if someone on this project has read the cited section — relaying another author's summary of a primary source is the failure mode to design against. Each research agent is required to quote the sentence it is relying on, with a locator, into its report.
 
-**Naming.** Candidates and the argument for each are in the chat message accompanying this draft; the repo is not created until Daniel picks.
+**Naming.** Settled — see the decisions at the top of this file.
 
 ---
 
@@ -46,7 +53,7 @@ Daniel's recollection is of a W3C task force producing a spec for rendering VCs 
 - CCG mailing-list and minutes archives for the task-force history and the arguments that were had.
 - Any reference implementations or sample templates linked from the above (Digital Bazaar and the CCG's own repos are the likely sources).
 
-**The security question this stream must answer:** if the issuer supplies the rendering template, the issuer supplies *content that runs in the verifier's viewer*. SVG carries script, external references, and enough expressive power to counterfeit the viewer's own security chrome. Capture what the spec says about sanitization, and what the reference implementations actually do. This is the single biggest architectural fork for our component (see the open questions).
+**The security question this stream must answer:** if the issuer supplies the rendering template, the issuer supplies *content that runs in the verifier's viewer*. SVG carries script, external references, and enough expressive power to counterfeit the viewer's own security chrome. Capture what the spec says about sanitization, and what the reference implementations actually do. This is the single biggest architectural fork for our component, and by decision it is settled in Phase 3 on this stream's evidence — so this stream is scoped to gather exactly what that decision needs.
 
 ### 1B. Overlays Capture Architecture (OCA)
 
@@ -145,7 +152,7 @@ Out of scope for this commission, sketched so the sequence is visible.
 
 **Implementation** as a monorepo modeled on `entviz-js`: a core package plus a React package, authored so consumers inherit no JSX-transform requirement, with the Phase 2C corpus as golden fixtures, Playwright visual regression across mobile/desktop/print media, accessibility tests, and a docs playground site.
 
-**Recommended structural split, matching entviz:** a language-independent **rendering spec** plus a conformance corpus, with the React package as the reference implementation. Daniel's entviz has six conformant ports held to one corpus, and that is why it is credible. A React component alone is a component; a spec with a reference implementation is a standard other people can adopt.
+**Structural split, matching entviz (decided):** a language-independent **rendering spec** plus a conformance corpus, with a **Python reference implementation** and a **React implementation** both held to that corpus. Python is not decoration here — it lets CI prove conformance headlessly and lets system tooling render credential views outside a browser. entviz has six conformant ports held to one corpus, and that is why it is credible. A React component alone is a component; a spec with conformant implementations is a standard other people can adopt.
 
 ---
 
