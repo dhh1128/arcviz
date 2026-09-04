@@ -1,0 +1,449 @@
+# Source records for docs/research/prior-art/papers-acdc.md (audit stream 1F-a: Daniel Hardman's papers on ACDC/KERI semantics).
+# Format follows refs/sources.yaml. This file is owned by stream 1F-a; do not merge into refs/sources.yaml without review.
+#
+# All sources in this file are Daniel Hardman's own papers, held locally in the sibling repo ~/code/me/papers/
+# (listed as a sibling project in arcviz/AGENTS.md). They are not fetched web content requiring a refs/captures/
+# snapshot: the "capture" field below is the absolute local path to the already version-controlled markdown source
+# in that sibling repo, which is the text actually quoted. "url" is each paper's public pdf_url from its own
+# frontmatter, for anyone outside this machine who wants to verify the quote.
+
+sources:
+  - key: acdc-vc-diff-lossy-thesis
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "W3C VCs are framed as lossy; ACDCs as lossless; this is the paper's organizing thesis"
+    quote: "One of the buzz-getting credential formats today — the W3C Verifiable Credentials Data Model — is lossy. It discards information about trust chains, time, key history, relationship weights, and use cases outside the credential model. ... Authentic Chained Data Containers ([ACDCs]...), by contrast, are lossless."
+    locator: "acdc-vc-diff.md:27 (version 1.1, revision_date 2026-01-14)"
+
+  - key: acdc-vc-diff-said-chain
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "A SAID is a cryptographic hash of the target credential embedded in the source, allowing registry-free chain traversal"
+    quote: "Each link is a Self-Addressing Identifier (SAID) — a cryptographic hash of the target credential embedded directly in the source. A verifier can traverse the entire chain without consulting a registry, and the integrity of every link is mathematically enforced."
+    locator: "acdc-vc-diff.md:39"
+
+  - key: acdc-vc-diff-edge-attrs
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "ACDC edges are first-class objects carrying native weight/operator/schema/target fields, unlike RDF triples"
+    quote: "ACDCs use a property graph model, where edges are first-class objects that hold attributes. An ACDC can express \"Alice → Bob, weight=0.9, limit=$500, expires=2025-12-31\" in a single edge structure. The weight (`w`), operator (`o`), schema (`s`), and target node (`n`) are native fields."
+    locator: "acdc-vc-diff.md:61"
+
+  - key: acdc-vc-diff-anchored-cryptoperiod
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "KERI anchors credential issuance to a specific key state, proving issuance occurred within a valid key's cryptoperiod"
+    quote: "KERI anchors credential issuances to specific key states in the KEL, proving that a credential was issued during the cryptoperiod of a valid key."
+    locator: "acdc-vc-diff.md:85"
+
+  - key: acdc-vc-diff-schema-said
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "ACDC schemas are referenced by SAID, not URL, eliminating link-rot/redefinition risk that affects JSON-LD @context"
+    quote: "ACDCs embed the schema (or its SAID) directly in the credential. The schema is referenced by its cryptographic content, not its location. ... The meaning is as immutable as the signature. There is no link that can rot."
+    locator: "acdc-vc-diff.md:101"
+
+  - key: acdc-vc-diff-raw-jpeg
+    title: "ACDCs and W3C VCs: Lossless vs. Lossy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-vc-diff.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-vc-diff.md"
+    status: primary
+    supports: "Recommended pattern is lossless ACDC as source of truth, lossy VC generated on demand as a derivative"
+    quote: "In an ideal world, you would maintain lossless ACDCs as the authoritative source of truth and generate W3C VCs from them when needed — just as you would export JPEGs from RAW files for web display. You keep the lossless original. You distribute the lossy derivative."
+    locator: "acdc-vc-diff.md:129"
+
+  - key: sdjwt-acdc-terminology
+    title: "How SD-JWT and ACDC are similar and different"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sdjwt-acdc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sdjwt-acdc.md"
+    status: primary
+    supports: "Daniel explicitly prefers ACDC's term 'graduated disclosure' over SD-JWT's 'selective disclosure', for stated reasons"
+    quote: "Both use a technique where salted hashes of credential attributes can replace plaintext attributes, allowing part of a credential to be shared and part to be hidden from the verifier. SD-JWT calls this feature \"selective disclosure\", and ACDCs calls it \"graduated disclosure.\" ... I prefer the ACDC term, because it won't confuse and put off people in the regulatory community."
+    locator: "sdjwt-acdc.md:29-31"
+
+  - key: sdjwt-acdc-aid-strictness
+    title: "How SD-JWT and ACDC are similar and different"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sdjwt-acdc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sdjwt-acdc.md"
+    status: primary
+    supports: "ACDC issuers and issuees MUST be identified with an AID, unlike SD-JWT's flexible identifier schemes"
+    quote: "SD-JWTs allow an issuer and a holder to be identified with a DID, a URL, a URN, or some other identifier scheme. ACDCs are stricter: issuers MUST be identified with an AID, and issuees, if present, MUST also be identified with an AID."
+    locator: "sdjwt-acdc.md:38-39"
+
+  - key: sdjwt-acdc-identifier-not-key
+    title: "How SD-JWT and ACDC are similar and different"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sdjwt-acdc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sdjwt-acdc.md"
+    status: primary
+    supports: "ACDCs are signed by an identifier (via KEL indirection), not merely by a key, unlike a JWT's kid-referenced key"
+    quote: "ACDCs are signed, but it would be more accurate to say that ACDCs are signed by an *identifier*, not just a *key*."
+    locator: "sdjwt-acdc.md:50"
+
+  - key: sdjwt-acdc-chaining-registries
+    title: "How SD-JWT and ACDC are similar and different"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sdjwt-acdc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sdjwt-acdc.md"
+    status: primary
+    supports: "SD-JWT's standalone-envelope model requires centralized trust registries; ACDC chains reuse SAID-linking to qualify issuers instead"
+    quote: "A practical consequence of the standalone envelope model is that SD-JWTs will need registries of trusted issuers. ... On the other hand, ACDCs prove the bona fides of issuers by chaining to other ACDCs."
+    locator: "sdjwt-acdc.md:63-65"
+
+  - key: sdjwt-acdc-compaction
+    title: "How SD-JWT and ACDC are similar and different"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sdjwt-acdc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sdjwt-acdc.md"
+    status: primary
+    supports: "ACDCs can compact an arbitrarily large data structure or tree down to a single ~44-byte SAID via graduated disclosure elision"
+    quote: "because of graduated disclosure, ACDCs can elide data that's already known from another context, allowing compaction down to something as small as a single identifier (hash) of about 44 bytes for an entire data structure of arbitrary size (multiple KB), or an entire tree of data structures (possibly, MB)."
+    locator: "sdjwt-acdc.md:72"
+
+  - key: acdc-mtc-said-vs-membership
+    title: "Comparison: ACDCs and Merkle Tree Certificates"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-and-mtc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-and-mtc.md"
+    status: primary
+    supports: "A SAID commits to meaning/content-identity of a claim; an MTC inclusion proof commits to membership/position in a log"
+    quote: "What is being committed to | Meaning: the identity of a structured claim, independent of presentation | Membership: inclusion of an object in a publicly auditable history"
+    locator: "acdc-and-mtc.md:48-51, comparative-map table (version 1.0, revision_date 2026-01-06)"
+
+  - key: acdc-mtc-said-vs-inclusion-summary
+    title: "Comparison: ACDCs and Merkle Tree Certificates"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-and-mtc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-and-mtc.md"
+    status: primary
+    supports: "Summary statement distinguishing what a Merkle inclusion proof establishes (placement in history) from what a SAID establishes (identity of content)"
+    quote: "A Merkle inclusion proof establishes placement in a history. A SAID establishes identity of content."
+    locator: "acdc-and-mtc.md:86"
+
+  - key: acdc-mtc-disclosure-equivalence
+    title: "Comparison: ACDCs and Merkle Tree Certificates"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-and-mtc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-and-mtc.md"
+    status: primary
+    supports: "A fully expanded ACDC and a partially disclosed one verify the same way and anchor to the same underlying claim"
+    quote: "A fully expanded ACDC and a partially disclosed one verify the same way, lead to the same status checks, and anchor to the same underlying claim."
+    locator: "acdc-and-mtc.md:104"
+
+  - key: acdc-mtc-offline-verification
+    title: "Comparison: ACDCs and Merkle Tree Certificates"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-and-mtc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-and-mtc.md"
+    status: primary
+    supports: "KERI verification of continuity/freshness can be performed offline given access to relevant events and receipts"
+    quote: "Freshness here is about continuity rather than immediacy. A verifier asks whether the key state it sees forms a valid, uninterrupted chain from inception to the present. Verification can be performed offline, provided the verifier has access to the relevant events and receipts."
+    locator: "acdc-and-mtc.md:132"
+
+  - key: acdc-mtc-revocation-reconciled
+    title: "Comparison: ACDCs and Merkle Tree Certificates"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acdc-and-mtc.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/acdc-and-mtc.md"
+    status: primary
+    supports: "ACDC revocation is reconciled from events over time; the verifier's task is reconciliation, not a live service query"
+    quote: "Revocation follows the same pattern. An ACDC is revoked through events that change its status within a registry or key state framework. The verifier's task is to reconcile events, not to query a live service."
+    locator: "acdc-and-mtc.md:134"
+
+  - key: keri-primer-keri-vs-acdc-split
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "KERI handles identity (Who); ACDC handles data (What)"
+    quote: "While KERI handles the *identity* (the \"Who\"), *authentic chained data containers* (ACDCs) handle the *data* (the \"What\")."
+    locator: "keri-primer.md:163 (version 1.2, revision_date 2026-06-08)"
+
+  - key: keri-primer-said-crystallized-fact
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "A SAID's identifier field matches the hash of the whole structure; any change invalidates the SAID; an ACDC is not mutable"
+    quote: "The identifier field matches the hash of the whole structure. If a single character of the payload changes, the SAID is invalidated, enforcing schema compliance and version control. An ACDC is not a mutable document; it is a crystallized fact."
+    locator: "keri-primer.md:188"
+
+  - key: keri-primer-anchored-vs-paired
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Definition of anchored signatures as distinct from paired signatures (JWT, X.509, W3C VC proof block)"
+    quote: "In contrast, ACDCs use *anchored signatures*. The signature may travel as a sidecar attachment (and thus resemble pairing), but independent of any container context, there's a provable association between the two because of an anchoring association in the KEL."
+    locator: "keri-primer.md:194"
+
+  - key: keri-primer-verifier-steps
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "The four-step procedure a verifier follows to check an anchored ACDC signature against the issuer's KEL"
+    quote: "When a verifier checks an ACDC: 1. They extract the issuer's AID. 2. They retrieve the issuer's KEL from a witness. 3. They traverse the KEL to the sequence number specified in the signature. 4. They verify that the *digest* of the ACDC is present in that event."
+    locator: "keri-primer.md:196-200"
+
+  - key: keri-primer-nist-sp800-102
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: secondary
+    supports: "NIST SP 800-102 is quoted for the claim that a signed message alone provides no assurance about when it was signed relative to key state"
+    quote: "As NIST SP 800-102 states, a signed message \"provides no assurance that the private key was used to sign the message at that time\""
+    locator: "keri-primer.md:202 (Hardman's paraphrase/quote of NIST SP 800-102, not independently verified against the NIST document by this audit)"
+
+  - key: keri-primer-dag-chaining
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "ACDC chaining allows an arbitrary directed acyclic graph, including links to foreign evidence types beyond ACDCs"
+    quote: "using ACDCs, you can build a directed acyclic graph (DAG) of arbitrarily rich semantics. The whole graph is verifiable and cacheable (modulo revocation tests) as a unit or in any desired subset. ACDCs even offer a path to include foreign evidence types such as signed PDFs, scientific measurements, W3C VCs, X509 certificates, biometric readings, and so forth."
+    locator: "keri-primer.md:206"
+
+  - key: keri-primer-transitive-trust
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Worked supply-chain example: consumer gains transitive trust via chain traversal, not manufacturer say-so; tamper-evidence of the chain"
+    quote: "The consumer gains *transitive trust*; they know that the metal in the phone actually came from a conflict-free mine, not because the manufacturer said so, but because the cryptographic chain leads back to the mine's original issuance and its certification from an international governing body. Because SAIDs are immutable, no party in the middle can swap out a bad component for a good one without breaking the chain"
+    locator: "keri-primer.md:215"
+
+  - key: keri-primer-witness-not-ca
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "A witness makes no assertion about identity truth, unlike a CA; it only stores and serves events"
+    quote: "Witnesses serve a fundamentally different role than CAs. A CA is trusted to attest to identity—to assert \"this public key belongs to this entity.\" A witness makes no such assertion. A witness simply stores and serves events."
+    locator: "keri-primer.md:153"
+
+  - key: keri-primer-watcher-duplicity
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Watchers detect duplicity by comparing witness reports of the log head; a mismatch is proof of fraud/compromise"
+    quote: "If Hash X and Hash Y differ, the watcher has detected duplicity. The watcher can broadcast the conflicting events as cryptographic proof of fraud."
+    locator: "keri-primer.md:159"
+
+  - key: keri-primer-graduated-disclosure-mechanism
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Mechanism of graduated disclosure: salted per-section digests, Merkle-proof style reveal of only requested sections"
+    quote: "A well-designed ACDC payload is not a monolithic block. It is structured into sections... When the issuer creates the ACDC, they generate a random salt and a digest for each section. When the holder presents the credential to a verifier, they can use a Merkle-proof style strategy that reveal only the [needed section], with other sections represented only by their hash."
+    locator: "keri-primer.md:219-221"
+
+  - key: keri-primer-erasure-vs-hash
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Under GDPR-style erasure, only the payload is destroyed; the hash remains in the log, structurally indistinguishable from an undisclosed section"
+    quote: "In KERI, the KEL stores only the anchors (hashes) of the credentials. The actual data payload resides in the ACDC, which is held off-chain by the issuer and holder. When a user requests data deletion, the payload is destroyed. The hash remains in the log to preserve the integrity of the chain, but without the payload, the hash is irreversible."
+    locator: "keri-primer.md:223"
+
+  - key: keri-primer-real-time-status
+    title: "A Primer on KERI, ACDCs, and CESR"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/keri-primer.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/keri-primer.md"
+    status: primary
+    supports: "Closing summary claims TEL-anchored ACDCs allow real-time status checks without privacy leaks (contrast with acdc-and-mtc's 'reconciled over time' framing, flagged as a tension in the report)"
+    quote: "Revocability: ACDCs anchored in TELs allow for real-time status checks without privacy leaks."
+    locator: "keri-primer.md:269"
+
+  - key: bes-abstract-canonical-assumption
+    title: "Bytewise and Externalized SAIDs"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bes.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/bes.md"
+    status: primary
+    supports: "Standard CESR SAID mechanism assumes canonically serializable, safely-rewritable data structures"
+    quote: "Existing self-addressing identifier (SAID) mechanisms, including those defined in the CESR specification, assume data structures that can be canonically serialized and safely rewritten after hashing."
+    locator: "bes.md:7 (version 1.6, revision_date 2026-06-02)"
+
+  - key: bes-bsaid-definition
+    title: "Bytewise and Externalized SAIDs"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bes.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/bes.md"
+    status: primary
+    supports: "Definition of the bytewise SAID (bSAID): a distinct algorithm/kind of SAID for opaque byte-stream data, embedded via delimiter"
+    quote: "We call this modified algorithm (including minor enhancements described in 3.5 below) the *bytewise SAID algorithm*, a SAD that uses it a *bytewise SAD*, a SAID produced by it a *bytewise SAID* (or *bSAID* for short), and a delim+placeholder an *insertion point*."
+    locator: "bes.md:53"
+
+  - key: bes-xsaid-definition
+    title: "Bytewise and Externalized SAIDs"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bes.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/bes.md"
+    status: primary
+    supports: "Definition of the externalized SAID (xSAID): a distinct algorithm/kind of SAID carried in the filename for formats that can't be rewritten after save"
+    quote: "We call this (including minor enhancements described in 3.5 below) the *externalized SAID algorithm*, a SAD that uses it an *externalized SAD*, a SAID produced by it an *externalized SAID* (or *xSAID* for short), and the combination of delimiter+regex an *exsertion instruction*"
+    locator: "bes.md:121"
+
+  - key: bes-threat-model
+    title: "Bytewise and Externalized SAIDs"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bes.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/bes.md"
+    status: primary
+    supports: "Any byte-stream change after saidification necessarily produces a new SAID, treated as a new artifact version"
+    quote: "The threat model assumes that adversarial or accidental modifications to an artifact—such as byte insertion, deletion, rewriting, or unauthorized renaming—should be detectable by recomputing and checking the SAID. Any change to the byte stream after saidification necessarily produces a different SAID and is therefore treated as a new version of the artifact."
+    locator: "bes.md:152"
+
+  - key: bes-xsaid-rename-binding
+    title: "Bytewise and Externalized SAIDs"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bes.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/bes.md"
+    status: primary
+    supports: "An xSAID's tamper-evidence depends on filename preservation; renaming the file breaks the binding unless a regex constraint embedded in content is checked"
+    quote: "This may seem like a futile exercise. The same flexibility that allows us to embed a SAID in a filename will allow someone else to remove the SAID. However, before saidifying, we can insert into the file content a regex to express a constraint on the file's name. This makes such a rename tamper-evident"
+    locator: "bes.md:119"
+
+  - key: was-retrograde-attack-def
+    title: "Why Anchored Signatures?"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/was.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/was.md"
+    status: primary
+    supports: "Bare signatures cannot be sequenced relative to key compromise/revocation, enabling retrograde (backdating) attacks"
+    quote: "By themselves, digital signatures are much weaker evidence than casual thinkers might imagine. The reason is that the secret upon which they depend (a private key) can be compromised or revoked, but *simple signatures are difficult to sequence relative to a compromise or revocation event*. An inability to reason about sequence enables retrograde attacks."
+    locator: "was.md:18 (version 1.0, revision_date 2025-02-20)"
+
+  - key: was-current-moment-only
+    title: "Why Anchored Signatures?"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/was.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/was.md"
+    status: primary
+    supports: "X.509/current-moment-only signature verification designs make historical audits impossible; described as a 'pyrrhic victory' mitigation"
+    quote: "Whenever purported evidence from Alice is encountered, the only question that can be validly asked about it is: *Does Alice's signature validate this evidence in the current moment?* ... After-the-fact audits are impossible, because anything in the past can be faked with compromised keys."
+    locator: "was.md:52"
+
+  - key: was-anchored-signature-formula
+    title: "Why Anchored Signatures?"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/was.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/was.md"
+    status: primary
+    supports: "One-sentence definition of an anchored signature as the fix for retrograde attacks"
+    quote: "Keep tamper-evident records that can prove how a given signing event relates in time to changes in the associated key state."
+    locator: "was.md:70-72"
+
+  - key: was-historical-audits-possible
+    title: "Why Anchored Signatures?"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/was.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/was.md"
+    status: primary
+    supports: "Anchored signatures make historical audits possible regardless of when the analysis is performed"
+    quote: "An analysis of an anchored signature will produce the same result no matter when it happens, which makes historical audits of cryptographic decisions possible."
+    locator: "was.md:86"
+
+  - key: sda-vc-open-loop
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/sda.md"
+    status: primary
+    supports: "Verifiable credentials, including ACDCs, are open-loop: a third party can verify authority without consulting the issuer"
+    quote: "Verifiable credentials are **open-loop**. The entire point is that a third party who is *not* the issuer can verify authority *without* consulting the issuer — no callback, no shared state — from the credential and the actor's key-state alone."
+    locator: "sda.md:115 (version 1.2, revision_date 2026-07-14)"
+
+  - key: heartbeat-witness-duplicity-not-liveness
+    title: "Analysis of did:cel Heartbeat: Relevance to KERI"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/heartbeat-and-witnesses.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/heartbeat-and-witnesses.md"
+    status: primary
+    supports: "KERI witnesses reject conflicting events at the same sequence number; duplicity is proof of compromise/dishonesty, not a liveness-based 'winner' selection like did:cel's heartbeat"
+    quote: "Witnesses serve as a check against duplicity; they will not accept a new event if it conflicts with an existing event at the same sequence number. ... this detection does not trigger a selection process to find the \"winner\" based on liveness; rather, it provides cryptographic proof that the controller is compromised or dishonest."
+    locator: "heartbeat-and-witnesses.md:40-42 (version 1.1, revision_date 2026-06-02)"
+
+  - key: kspqs-prerotation-thwarts-coup
+    title: "KERI's Strategy for Post-Quantum Security"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/kspqs.pdf"
+    retrieved: "2026-09-04"
+    capture: "/home/daniel/code/me/papers/kspqs.md"
+    status: primary
+    supports: "Legitimate rotation event, once published and witnessed, invalidates all fraudulent events signed by a compromised key"
+    quote: "Once the legitimate rotation event is published and witnessed, it invalidates all fraudulent events signed by the compromised key. The coup is thwarted, and the identity is secured under a new ruler."
+    locator: "kspqs.md:86 (version 1.2, revision_date 2026-08-20)"
