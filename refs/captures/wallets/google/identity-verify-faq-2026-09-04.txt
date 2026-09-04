@@ -1,0 +1,488 @@
+Title: Digital Identity & Credentials FAQ
+
+URL Source: https://developers.google.com/wallet/identity/verify/faq
+
+Markdown Content:
+[Skip to main content](https://developers.google.com/wallet/identity/verify/faq#main-content)
+
+[![Image 1: Google Wallet](https://developers.google.com/static/wallet/images/wallet-icon.png)](https://developers.google.com/wallet)
+*   [Wallet](https://developers.google.com/wallet)
+
+[Documentation](https://developers.google.com/wallet/identity/verify)
+
+*   Access
+*   [Overview](https://developers.google.com/wallet/access)
+*   [Digital Car Keys Lock, unlock, and start your car from an Android-powered device](https://developers.google.com/wallet/access/digital-car-key/overview)
+*   [Campus IDs Identify users, grant building access, and enable payment](https://developers.google.com/wallet/access/campus-id/get-started/overview)
+*   [Corporate Badges Identify employees and grant them access to workplace resources](https://developers.google.com/wallet/access/corporate-badge/get-started/overview)
+*   [Hotel Keys Enable digital hotel key experiences for guests](https://developers.google.com/wallet/access/hotel-key/get-started/overview)
+*   [Multi-family Keys Enable digital multi-family residential keys](https://developers.google.com/wallet/access/multi-family-key/get-started/overview)
+
+*   Health
+*   [Overview](https://developers.google.com/wallet/health)
+*   [Health Insurance Cards Users can store a digital copy of their health insurance card in Google Wallet on their Android-powered device](https://developers.google.com/wallet/generic-private-pass)
+*   [Test Records Securely store and display COVID-19 testing records](https://developers.google.com/wallet/health/test-records)
+*   [COVID Cards Securely store and display COVID-19 vaccination records](https://developers.google.com/wallet/health/vaccine-cards)
+
+*   Identity
+*   [Overview](https://developers.google.com/wallet/identity)
+*   [Provisioning Digital Credentials Provision Digital Credentials into Google Wallet](https://developers.google.com/wallet/identity/provisioning)
+*   [Verify with Google Wallet Present credentials on Android-powered devices](https://developers.google.com/wallet/identity/verify/accepting-ids-from-wallet-online)
+
+*   Retail
+*   [Overview](https://developers.google.com/wallet/retail)
+*   [Gift Cards Add and redeem gift cards in-store and online](https://developers.google.com/wallet/retail/gift-cards)
+*   [Loyalty Cards Access rewards and purchase history](https://developers.google.com/wallet/retail/loyalty-cards)
+*   [Offers Add offers from your web site or app](https://developers.google.com/wallet/retail/offers)
+*   [In-store payments Enable fast, simple checkout experiences](https://developers.google.com/pay/issuers)
+
+*   Tickets and transit
+*   [Overview](https://developers.google.com/wallet/tickets)
+*   [Boarding Passes Add boarding passes and receive real-time flight updates](https://developers.google.com/wallet/tickets/boarding-passes)
+*   [Event Tickets Enter venues using barcodes, QR codes, or NFC](https://developers.google.com/wallet/tickets/events)
+*   [Closed Loop Transit Passes Use virtual transit cards to travel and manage account balances](https://developers.google.com/wallet/tickets/closed-loop/get-started/overview)
+*   [Open Loop Transit Passes Use credit and debit cards with rich transit receipts](https://developers.google.com/wallet/tickets/open-loop/get-started/overview)
+*   [Transit Passes Replace paper tickets and reduce fraud](https://developers.google.com/wallet/tickets/transit-passes)
+
+*   Generic
+*   [Overview](https://developers.google.com/wallet/generic-overview)
+*   [Generic pass Create your own unique pass experiences in Google Wallet](https://developers.google.com/wallet/generic)
+*   [Generic private pass Create a generic private pass for more sensitive user data, such as health insurance cards](https://developers.google.com/wallet/generic-private-pass)
+
+*   Other Resources
+*   [Smart Tap Enable pass redemption via NFC tap](https://developers.google.com/wallet/smart-tap)
+*   [Release Notes View Google Wallet release notes](https://developers.google.com/wallet/docs/release-notes)
+
+[Blog](https://developers.googleblog.com/search/?query=wallet)[Events](https://developers.google.com/wallet/events)[For Business](https://developers.google.com/wallet/partners) Community 
+
+*   [StackOverflow](https://stackoverflow.com/questions/tagged/google-wallet)
+*   [GitHub](https://github.com/google-wallet)
+*   [YouTube](https://www.youtube.com/@GooglePay)
+*   [X (Twitter)](https://twitter.com/googlepaydevs)
+*   [Discord](https://goo.gle/payments-dev-community)
+
+More
+
+/
+
+*   [English](https://developers.google.com/wallet/identity/verify/faq)
+*   [Deutsch](https://developers.google.com/wallet/identity/verify/faq?hl=de)
+*   [Español](https://developers.google.com/wallet/identity/verify/faq?hl=es)
+*   [Español – América Latina](https://developers.google.com/wallet/identity/verify/faq?hl=es-419)
+*   [Français](https://developers.google.com/wallet/identity/verify/faq?hl=fr)
+*   [Indonesia](https://developers.google.com/wallet/identity/verify/faq?hl=id)
+*   [Italiano](https://developers.google.com/wallet/identity/verify/faq?hl=it)
+*   [Polski](https://developers.google.com/wallet/identity/verify/faq?hl=pl)
+*   [Português – Brasil](https://developers.google.com/wallet/identity/verify/faq?hl=pt-br)
+*   [Tiếng Việt](https://developers.google.com/wallet/identity/verify/faq?hl=vi)
+*   [Türkçe](https://developers.google.com/wallet/identity/verify/faq?hl=tr)
+*   [Русский](https://developers.google.com/wallet/identity/verify/faq?hl=ru)
+*   [עברית](https://developers.google.com/wallet/identity/verify/faq?hl=he)
+*   [العربيّة](https://developers.google.com/wallet/identity/verify/faq?hl=ar)
+*   [فارسی](https://developers.google.com/wallet/identity/verify/faq?hl=fa)
+*   [हिंदी](https://developers.google.com/wallet/identity/verify/faq?hl=hi)
+*   [বাংলা](https://developers.google.com/wallet/identity/verify/faq?hl=bn)
+*   [ภาษาไทย](https://developers.google.com/wallet/identity/verify/faq?hl=th)
+*   [中文 – 简体](https://developers.google.com/wallet/identity/verify/faq?hl=zh-cn)
+*   [中文 – 繁體](https://developers.google.com/wallet/identity/verify/faq?hl=zh-tw)
+*   [日本語](https://developers.google.com/wallet/identity/verify/faq?hl=ja)
+*   [한국어](https://developers.google.com/wallet/identity/verify/faq?hl=ko)
+
+[Sign in](https://developers.google.com/_d/signin?continue=https%3A%2F%2Fdevelopers.google.com%2Fwallet%2Fidentity%2Fverify%2Ffaq&prompt=select_account)
+
+*   [Verify with Google Wallet](https://developers.google.com/wallet/identity/verify)
+
+[Reference](https://developers.google.com/wallet/identity/verify)[Support](https://developers.google.com/wallet/identity/verify/support)More
+
+[![Image 2: Google Wallet](https://developers.google.com/static/wallet/images/wallet-icon.png)](https://developers.google.com/wallet)
+*   [Wallet](https://developers.google.com/wallet)
+
+*   [Documentation](https://developers.google.com/wallet/identity/verify)
+    *    More 
+
+    *   [Reference](https://developers.google.com/wallet/identity/verify)
+    *   [Support](https://developers.google.com/wallet/identity/verify/support)
+
+*   [Blog](https://developers.googleblog.com/search/?query=wallet)
+*   [Events](https://developers.google.com/wallet/events)
+*   [For Business](https://developers.google.com/wallet/partners)
+*    Community 
+    *    More 
+
+*   [Overview](https://developers.google.com/wallet/identity/verify)
+*   Acceptance of IDs from Google Wallet 
+*   
+[](https://developers.google.com/wallet/identity/verify/faq)Online Presentation 
+    *   [Relying Parties (Online)](https://developers.google.com/wallet/identity/verify/accepting-ids-from-wallet-online)
+    *   [Verifier Registrars](https://developers.google.com/wallet/identity/verify/verifier-registrar)
+
+*   [In-person Acceptance (Offline)](https://developers.google.com/wallet/identity/verify/accepting-ids-from-wallet-offline)
+*   Resources 
+*   
+[](https://developers.google.com/wallet/identity/verify/faq)Terms of Service 
+    *   [Relying Party](https://developers.google.com/wallet/identity/verify/relying-party-tos)
+    *   [Verifier Registrar](https://developers.google.com/wallet/identity/verify/verifier-registrar-tos)
+
+*   [FAQ](https://developers.google.com/wallet/identity/verify/faq)
+*   [Brand Guidelines](https://developers.google.com/wallet/identity/verify/brand-guidelines)
+*   [Supported attributes for credentials in Google Wallet](https://developers.google.com/wallet/identity/verify/supported-credential-attributes)
+*   [Supported issuers and their IACA certificates](https://developers.google.com/wallet/identity/verify/supported-issuers-iaca-certs)
+*   [Sandbox Mode](https://developers.google.com/wallet/identity/verify/sandbox)
+*   [Create a test ID](https://developers.google.com/wallet/identity/verify/create-test-id)
+
+*    Access 
+*   [Overview](https://developers.google.com/wallet/access)
+*   [Digital Car Keys](https://developers.google.com/wallet/access/digital-car-key/overview)
+*   [Campus IDs](https://developers.google.com/wallet/access/campus-id/get-started/overview)
+*   [Corporate Badges](https://developers.google.com/wallet/access/corporate-badge/get-started/overview)
+*   [Hotel Keys](https://developers.google.com/wallet/access/hotel-key/get-started/overview)
+*   [Multi-family Keys](https://developers.google.com/wallet/access/multi-family-key/get-started/overview)
+*    Health 
+*   [Overview](https://developers.google.com/wallet/health)
+*   [Health Insurance Cards](https://developers.google.com/wallet/generic-private-pass)
+*   [Test Records](https://developers.google.com/wallet/health/test-records)
+*   [COVID Cards](https://developers.google.com/wallet/health/vaccine-cards)
+*    Identity 
+*   [Overview](https://developers.google.com/wallet/identity)
+*   [Provisioning Digital Credentials](https://developers.google.com/wallet/identity/provisioning)
+*   [Verify with Google Wallet](https://developers.google.com/wallet/identity/verify/accepting-ids-from-wallet-online)
+*    Retail 
+*   [Overview](https://developers.google.com/wallet/retail)
+*   [Gift Cards](https://developers.google.com/wallet/retail/gift-cards)
+*   [Loyalty Cards](https://developers.google.com/wallet/retail/loyalty-cards)
+*   [Offers](https://developers.google.com/wallet/retail/offers)
+*   [In-store payments](https://developers.google.com/pay/issuers)
+*    Tickets and transit 
+*   [Overview](https://developers.google.com/wallet/tickets)
+*   [Boarding Passes](https://developers.google.com/wallet/tickets/boarding-passes)
+*   [Event Tickets](https://developers.google.com/wallet/tickets/events)
+*   [Closed Loop Transit Passes](https://developers.google.com/wallet/tickets/closed-loop/get-started/overview)
+*   [Open Loop Transit Passes](https://developers.google.com/wallet/tickets/open-loop/get-started/overview)
+*   [Transit Passes](https://developers.google.com/wallet/tickets/transit-passes)
+*    Generic 
+*   [Overview](https://developers.google.com/wallet/generic-overview)
+*   [Generic pass](https://developers.google.com/wallet/generic)
+*   [Generic private pass](https://developers.google.com/wallet/generic-private-pass)
+*    Other Resources 
+*   [Smart Tap](https://developers.google.com/wallet/smart-tap)
+*   [Release Notes](https://developers.google.com/wallet/docs/release-notes)
+
+*   [StackOverflow](https://stackoverflow.com/questions/tagged/google-wallet)
+*   [GitHub](https://github.com/google-wallet)
+*   [YouTube](https://www.youtube.com/@GooglePay)
+*   [X (Twitter)](https://twitter.com/googlepaydevs)
+*   [Discord](https://goo.gle/payments-dev-community)
+
+*   On this page
+*   [Onboard & Get Started](https://developers.google.com/wallet/identity/verify/faq#onboard_get_started)
+*   [Verifier Registrars](https://developers.google.com/wallet/identity/verify/faq#verifier_registrars)
+*   [Technical Integration & API](https://developers.google.com/wallet/identity/verify/faq#technical_integration_api)
+*   [Credentials & Data](https://developers.google.com/wallet/identity/verify/faq#credentials_data)
+*   [Testing & Environments](https://developers.google.com/wallet/identity/verify/faq#testing_environments)
+*   [User Experience (UX)](https://developers.google.com/wallet/identity/verify/faq#user_experience_ux)
+*   [Security & Compliance](https://developers.google.com/wallet/identity/verify/faq#security_compliance)
+*   [Advanced Features & Roadmap](https://developers.google.com/wallet/identity/verify/faq#advanced_features_roadmap)
+*   [Others](https://developers.google.com/wallet/identity/verify/faq#others)
+
+*   [Home](https://developers.google.com/)
+*    [Products](https://developers.google.com/products)
+*    [Google Wallet](https://developers.google.com/wallet)
+*    [Verify with Google Wallet](https://developers.google.com/wallet/identity/verify)
+
+# Digital Identity & Credentials FAQ Stay organized with collections  Save and categorize content based on your preferences.
+
+*   On this page
+*   [Onboard & Get Started](https://developers.google.com/wallet/identity/verify/faq#onboard_get_started)
+*   [Verifier Registrars](https://developers.google.com/wallet/identity/verify/faq#verifier_registrars)
+*   [Technical Integration & API](https://developers.google.com/wallet/identity/verify/faq#technical_integration_api)
+*   [Credentials & Data](https://developers.google.com/wallet/identity/verify/faq#credentials_data)
+*   [Testing & Environments](https://developers.google.com/wallet/identity/verify/faq#testing_environments)
+*   [User Experience (UX)](https://developers.google.com/wallet/identity/verify/faq#user_experience_ux)
+*   [Security & Compliance](https://developers.google.com/wallet/identity/verify/faq#security_compliance)
+*   [Advanced Features & Roadmap](https://developers.google.com/wallet/identity/verify/faq#advanced_features_roadmap)
+*   [Others](https://developers.google.com/wallet/identity/verify/faq#others)
+
+This page answers frequently asked questions about integrating with Google Wallet for Digital Identity and Credentials.
+
+## Onboard & Get Started
+
+#### [Q: What is the step-by-step process for a new partner to onboard as a Relying Party (RP)?](https://developers.google.com/wallet/identity/verify/faq)
+A: Refer to the steps at: [Accepting IDs from Wallet Online](https://developers.google.com/wallet/identity/verify/accepting-ids-from-wallet-online#request_format).
+
+#### [Q: What is the typical duration for the RP onboarding process?](https://developers.google.com/wallet/identity/verify/faq)
+A: Typically onboarding should take 3-5 business days.
+
+#### [Q: How can we track the status of our Relying Party (RP) application after submission?](https://developers.google.com/wallet/identity/verify/faq)
+A: If you have not heard back after 5 days, please reach out to our support team on `wallet-identity-rp-support@google.com`.
+
+#### [Q: Where can we find the RP onboarding form and the official developer documentation?](https://developers.google.com/wallet/identity/verify/faq)
+A:
+
+*   **Onboarding Form:**[Google Wallet Identity Relying Partners Contact Form](https://support.google.com/pay/merchants/contact/wallet_identity_relying_partners)
+*   **Developer Documentation:**[Digital Identity Overview](https://developers.google.com/wallet/identity/verify)
+
+#### [Q: How will the information we provide (like Product Name and Logo) be used in the product experience?](https://developers.google.com/wallet/identity/verify/faq)
+A: The Product Name and Logo are displayed on the user-facing consent screen to help users identify which Relying Party is requesting their digital ID. URLs and policy links may also be featured in the product experience.
+
+#### [Q: Do we need to sign the Terms of Service if we only plan to use the sandbox environment for development and testing?](https://developers.google.com/wallet/identity/verify/faq)
+A: No, accepting the Terms of Service is not a required step for testing.
+
+#### [Q: Where can we find a reference implementation, sample code, or a demo application to get started?](https://developers.google.com/wallet/identity/verify/faq)
+A:
+
+*   **GitHub Repository:**[Identity Reference Implementation](https://github.com/google-wallet/identity-reference-implementation).
+*   **Test Website:**[verifier.multipaz.org](https://verifier.multipaz.org/)
+
+* * *
+
+## Verifier Registrars
+
+#### [Q: What is the Verifier Registrar and how does it work?](https://developers.google.com/wallet/identity/verify/faq)
+A: The Verifier Registrar acts as a Certificate Authority that onboards downstream clients (End RPs). The End RP does not interact directly with Google Wallet.
+
+#### [Q: What is the specific onboarding process for a Verifier Registrar and their downstream clients?](https://developers.google.com/wallet/identity/verify/faq)
+A: Refer to the steps at: [Verifier Registrar Guide](https://developers.google.com/wallet/identity/verify/verifier-registrar).
+
+#### [Q: How does it differ from a direct RP integration?](https://developers.google.com/wallet/identity/verify/faq)
+A: Verifier Registrars manage the trust relationship for their clients and handle the integration with Google Wallet on their behalf, whereas direct RPs manage their own configuration with Google.
+
+#### [Q: In the Verifier Registrar, who gets allow listed in Google's configuration: the Verifier Registrar, the end RP, or both?](https://developers.google.com/wallet/identity/verify/faq)
+A: Google allowlists the Verifier Registrar's Root CA certificate. The Verifier Registrar then issues new leaf certificates for each downstream End RP.
+
+#### [Q: How does the data flow between the end RP, the Verifier Registrar, and Google Wallet?](https://developers.google.com/wallet/identity/verify/faq)
+A: The Verifier Registrar sends the API request to Google Wallet for the End RP. Google Wallet returns encrypted credential data to the Verifier Registrar, who then processes it and sends the final signal to the End RP.
+
+#### [Q: For white-labeled solutions, is it required to show the Verifier Registrar's name in the user consent flow, or can it just be the end RP's name?](https://developers.google.com/wallet/identity/verify/faq)
+A: No. The Verifier Registrar can choose not to display their details.
+
+#### [Q: What are the permitted key types and curves for Root CAs and RP Certificates?](https://developers.google.com/wallet/identity/verify/faq)
+A: Certificates should be generated using P-256 / ECDSA.
+
+#### [Q: Can we use intermediate signer certificates between our Root CA and RP leaf certificates?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes. You can securely store a long-lived root certificate (e.g., in an HSM) to infrequently sign operational intermediate certificates. Those intermediate certificates can then be used to sign end-RP leaf certificates, allowing for easier rotation in the event of a breach without affecting the root.
+
+#### [Q: What is the required lifetime for certificates?](https://developers.google.com/wallet/identity/verify/faq)
+A: A 10-year lifetime is perfectly acceptable for a Root CA certificate. End-RP leaf certificates should generally follow a ~1-year renewal timeline to ensure they can be efficiently rotated if issues arise.
+
+#### [Q: Do we need to manage a separate leaf certificate for each individual Relying Party (RP) customer?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes. For the initial launch period, aggregators must manage separate certificates for each downstream RP. This enables per-RP display configurations and accurate abuse tracking. While this adds operational overhead at scale, we intend to revisit potential alternatives (such as using RP metadata hashes) following the initial rollout.
+
+#### [Q: Are partners permitted to have multiple active certificates simultaneously?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes, the configuration supports any number of active certificates per RP or aggregator, which is useful for partners operating under various business names.
+
+#### [Q: How should the Distinguished Name (Subject) be formatted?](https://developers.google.com/wallet/identity/verify/faq)
+A: The Distinguished Name must be globally unique per partner. This serves as a static identifier that Google uses to monitor incoming partner requests and ensure ecosystem trust.
+
+#### [Q: How does domain binding work? Do origins need to be embedded in the certificate?](https://developers.google.com/wallet/identity/verify/faq)
+A: Domains don't need to be embedded directly within the certificate itself. Instead, domain verification is performed using the expected origins parameter within the API call. Furthermore, multiple domains can be seamlessly associated with a single certificate. For unsigned requests, binding is executed using the Domain or App package name alongside a fingerprint.
+
+#### [Q: Can aggregator details be omitted from the verification UI for a white-labeled experience?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes, aggregator information (such as name, logo, URL, and privacy policy) is completely optional within the verifier metadata. This enables a fully white-labeled solution where only the end-RP details are displayed to the user.
+
+#### [Q: What do we need to provide to begin testing in the Sandbox environment?](https://developers.google.com/wallet/identity/verify/faq)
+A: From a technical standpoint, you only need to provide your Sandbox Root Certificate. The Sandbox is designed to identically mirror the production environment.
+
+#### [Q: How does the onboarding process differ for Verifier Registrars (Aggregators) compared to direct RPs?](https://developers.google.com/wallet/identity/verify/faq)
+A: Aggregators undergo a slightly modified process. After executing the specific Verifier Registrar Terms of Service, the intake is split into two parts: a primary form to establish your status as a Verifier Registrar, followed by a streamlined form required for each individual RP you onboard. Each RP submission typically requires a video recording of the integration, and the review process generally takes 2-3 business days.
+
+#### [Q: Can we onboard customers who intend to act as intermediaries or resell verification services to other entities?](https://developers.google.com/wallet/identity/verify/faq)
+A: No. Google's current model and preference is to work directly with Verifier Registrars (aggregators) and their direct end-RPs, rather than supporting nested reseller or intermediary models.
+
+* * *
+
+## Technical Integration & API
+
+#### [Q: What is the underlying protocol for requests? What versions are supported?](https://developers.google.com/wallet/identity/verify/faq)
+A: The primary protocol is OpenID for Verifiable Presentations (OpenID4VP) version 1.0.
+
+#### [Q: Which ISO 18013-7 annexes (e.g., Annex B, C, D) does Google support for m DL presentation?](https://developers.google.com/wallet/identity/verify/faq)
+A: Google supports Annex D [currently in draft] (OpenID4VP using DC API).
+
+#### [Q: How do we correctly structure an API request to ask for multiple credentials in a single user presentation?](https://developers.google.com/wallet/identity/verify/faq)
+A: Both credential types should be requested within a single `dcql` query object in the same JSON request.
+
+#### [Q: Does the API allow requesting a generic credential without listing every possible credential type?](https://developers.google.com/wallet/identity/verify/faq)
+A: No.
+
+#### [Q: How does the API handle age verification? Can we request the exact date of birth, or only an "over X" signal?](https://developers.google.com/wallet/identity/verify/faq)
+A: Both are supported. You can request `birth_date`, `age_in_years`, or a privacy-preserving "over X" signal. Zero-Knowledge Proofs (ZKPs) can also be used for a true/false signal.
+
+#### [Q: What are the requirements for our PKI infrastructure?](https://developers.google.com/wallet/identity/verify/faq)
+A: RPs need a PKI to sign requests. Verifier Registrars act as their own CA.
+
+#### [Q: Can we use our own existing certificates, or do we need to get a new one signed by Google?](https://developers.google.com/wallet/identity/verify/faq)
+A: RPs need a new certificate signed by Google or a Verifier Registrar. For Verifier Registrars, Google will trust your Root certificate if you follow the "Trust Establishment" steps in the documentation.
+
+#### [Q: What is the recommended integration strategy for web versus Android app?](https://developers.google.com/wallet/identity/verify/faq)
+A: The entire request should be generated server-side. On Android, use the Credman API; on the web, use the Digital Credentials (DC) API.
+
+#### [Q: What debugging, logging, and observability tools are available for developers?](https://developers.google.com/wallet/identity/verify/faq)
+A: Partners can use the `wallet-identity-rp-support@google.com` support alias. No specific logging or observability tools are provided.
+
+* * *
+
+## Credentials & Data
+
+#### [Q: Which digital IDs, issuers, and credentials are supported by country and region?](https://developers.google.com/wallet/identity/verify/faq)
+A: Find supported regions here: [Supported Issuers and Certificates](https://developers.google.com/wallet/identity/verify/supported-issuers-iaca-certs).
+
+#### [Q: When are you planning to support credentials from new countries or regions?](https://developers.google.com/wallet/identity/verify/faq)
+A: We are actively adding new regions; check the supported issuers page for updates.
+
+#### [Q: When a credential is updated by the issuer, does the end-user receive a notification?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes, the user is notified and the update is applied automatically.
+
+* * *
+
+## Testing & Environments
+
+#### [Q: How do we get access to a sandbox environment to test the full end-to-end flow?](https://developers.google.com/wallet/identity/verify/faq)
+A: The sandbox is open at: [Sandbox Mode](https://developers.google.com/wallet/identity/verify/sandbox).
+
+#### [Q: What is the process for partners not based in an officially launched region to be added to the allowlist for testing?](https://developers.google.com/wallet/identity/verify/faq)
+A: Email the Gmail IDs of test wallets to `wallet-identity-rp-support@google.com`.
+
+#### [Q: What is the process to enable a test website or app for demo purposes, allowing anyone with a production credential to present it?](https://developers.google.com/wallet/identity/verify/faq)
+A: Partners must complete standard RP onboarding, including a sandbox video demonstration.
+
+* * *
+
+## User Experience (UX)
+
+#### [Q: What is the user experience if a user doesn't have a digital ID or the Google Wallet app installed when they initiate a verification flow?](https://developers.google.com/wallet/identity/verify/faq)
+A: Users without the app are directed to the Play Store. Those without an ID can create one in-flow using the half-screen UI.
+
+#### [Q: Can we programmatically detect if a user has a digital ID in their Wallet before showing them the verification option?](https://developers.google.com/wallet/identity/verify/faq)
+A: No, the API must be user-invoked to protect privacy.
+
+#### [Q: Can we require the user to unlock their device with a biometric before presenting a credential?](https://developers.google.com/wallet/identity/verify/faq)
+A: User authentication (biometric, PIN, or pattern) is required by default and cannot be disabled.
+
+#### [Q: Is it possible to customize the order of requested attributes on the user consent screen?](https://developers.google.com/wallet/identity/verify/faq)
+A: No, Google Wallet reorders them alphabetically.
+
+* * *
+
+## Security & Compliance
+
+#### [Q: Our use case involves re-sharing user data with third parties. Is this permitted under the Terms of Service?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes, restrictions may apply, see our terms of service for more details.
+
+#### [Q: What documentation is available regarding the security, reliability, and accessibility of the digital identity solutions for our compliance purposes?](https://developers.google.com/wallet/identity/verify/faq)
+A: Partners can reference Trail of Bits security reviews.
+
+* * *
+
+## Advanced Features & Roadmap
+
+#### [Q: What are the capabilities of Zero-Knowledge Proofs (ZKP) for privacy-preserving age verification?](https://developers.google.com/wallet/identity/verify/faq)
+A: Zero-Knowledge Proof (ZKP) is a cryptographic method that allows an individual (the prover) to prove to a verifier that they possess a certain piece of identity information or meet a specific criterion (e.g., are over 18, hold a valid credential) without revealing the actual underlying data itself.
+
+#### [Q: How are different versions of the ZK circuits handled?](https://developers.google.com/wallet/identity/verify/faq)
+A: RPs must implement ZK verifier services to request the latest available circuits.
+
+#### [Q: How does credential sharing and management work across multiple devices, such as a phone and a wearable?](https://developers.google.com/wallet/identity/verify/faq)
+A: Credentials are provisioned to a single device and cannot be shared.
+
+* * *
+
+## Others
+
+#### [Q: How does Google handle ID pass revocations if a passport is revoked?](https://developers.google.com/wallet/identity/verify/faq)
+A: Users can delete passes from Google Account settings; lost devices can be reported to revoke credentials.
+
+#### [Q: How is mDL revocation handled? Is it realtime?](https://developers.google.com/wallet/identity/verify/faq)
+A: It can be user-triggered or pushed by the issuer (DMV). It is real-time if the device is online; otherwise, short-lived security objects (MSOs) will expire.
+
+#### [Q: What is the key rotation policy for RPs?](https://developers.google.com/wallet/identity/verify/faq)
+A: Annual rotation is recommended.
+
+#### [Q: What is the minimum Android version supported for the Digital Credentials API?](https://developers.google.com/wallet/identity/verify/faq)
+A: Android 9 (API level 28) and higher.
+
+#### [Q: What is the minimum Chrome version that supports the Digital Credentials API?](https://developers.google.com/wallet/identity/verify/faq)
+A: Chrome version 128 and higher.
+
+#### [Q: Which Browsers support the Digital Credentials API?](https://developers.google.com/wallet/identity/verify/faq)
+A: You can find browser support details here: [https://digitalcredentials.dev/ecosystem-support](https://digitalcredentials.dev/ecosystem-support)
+
+#### [Q: Which users will have the ability to add an ID when a new country is launched?](https://developers.google.com/wallet/identity/verify/faq)
+A: Access is based on the user's country setting in the Play Store.
+
+#### [Q: Does the Digital Credentials API work with iOS?](https://developers.google.com/wallet/identity/verify/faq)
+A: Yes, The API works using supported browsers like Safari. However OpenID4VP is not supported by Apple.
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-07-28 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-28 UTC."],[],[]] 
+
+*   ### Engage
+
+    *   [Google Developer Program](https://developers.google.com/program)
+    *   [Google Developer Groups](https://developers.google.com/community)
+    *   [Google Developer Experts](https://developers.google.com/community/experts)
+    *   [Accelerators](https://developers.google.com/community/accelerators)
+    *   [Google Cloud & NVIDIA](https://developers.google.com/community/nvidia)
+
+*   ### Connect
+
+    *   [Blog](https://googledevelopers.blogspot.com/)
+    *   [Bluesky](https://bsky.app/profile/developers.google.com)
+    *   [Instagram](https://www.instagram.com/googlefordevs/)
+    *   [LinkedIn](https://www.linkedin.com/showcase/googledevelopers/)
+    *   [X (Twitter)](https://twitter.com/googledevs)
+    *   [YouTube](https://www.youtube.com/user/GoogleDevelopers)
+
+*   ### Build
+
+    *   [Android](https://developer.android.com/)
+    *   [Chrome](https://developer.chrome.com/)
+    *   [Firebase](https://firebase.google.com/)
+    *   [Google AI Studio](https://aistudio.google.com/)
+    *   [Google Antigravity](https://antigravity.google/)
+    *   [Google Cloud](https://cloud.google.com/)
+    *   [Google Play](https://play.google.com/console/about/)
+    *   [View all](https://developers.google.com/products)
+
+[![Image 3: Google Developers](https://www.gstatic.com/devrel-devsite/prod/v5e941f15ff6710591bee254538202655020220785b40a3f4d932e94adb9f6037/developers/images/lockup-google-for-developers.svg)](https://developers.google.com/)
+*   [Android](https://developer.android.com/)
+*   [Chrome](https://developer.chrome.com/home)
+*   [Firebase](https://firebase.google.com/)
+*   [Google Cloud Platform](https://cloud.google.com/)
+*   [Google AI](https://ai.google.dev/)
+*   [All products](https://developers.google.com/products)
+
+*   [Terms](https://developers.google.com/terms/site-terms)
+*   [Privacy](https://policies.google.com/privacy)
+*   [Manage cookies](https://developers.google.com/wallet/identity/verify/faq#)
+
+*   [English](https://developers.google.com/wallet/identity/verify/faq)
+*   [Deutsch](https://developers.google.com/wallet/identity/verify/faq?hl=de)
+*   [Español](https://developers.google.com/wallet/identity/verify/faq?hl=es)
+*   [Español – América Latina](https://developers.google.com/wallet/identity/verify/faq?hl=es-419)
+*   [Français](https://developers.google.com/wallet/identity/verify/faq?hl=fr)
+*   [Indonesia](https://developers.google.com/wallet/identity/verify/faq?hl=id)
+*   [Italiano](https://developers.google.com/wallet/identity/verify/faq?hl=it)
+*   [Polski](https://developers.google.com/wallet/identity/verify/faq?hl=pl)
+*   [Português – Brasil](https://developers.google.com/wallet/identity/verify/faq?hl=pt-br)
+*   [Tiếng Việt](https://developers.google.com/wallet/identity/verify/faq?hl=vi)
+*   [Türkçe](https://developers.google.com/wallet/identity/verify/faq?hl=tr)
+*   [Русский](https://developers.google.com/wallet/identity/verify/faq?hl=ru)
+*   [עברית](https://developers.google.com/wallet/identity/verify/faq?hl=he)
+*   [العربيّة](https://developers.google.com/wallet/identity/verify/faq?hl=ar)
+*   [فارسی](https://developers.google.com/wallet/identity/verify/faq?hl=fa)
+*   [हिंदी](https://developers.google.com/wallet/identity/verify/faq?hl=hi)
+*   [বাংলা](https://developers.google.com/wallet/identity/verify/faq?hl=bn)
+*   [ภาษาไทย](https://developers.google.com/wallet/identity/verify/faq?hl=th)
+*   [中文 – 简体](https://developers.google.com/wallet/identity/verify/faq?hl=zh-cn)
+*   [中文 – 繁體](https://developers.google.com/wallet/identity/verify/faq?hl=zh-tw)
+*   [日本語](https://developers.google.com/wallet/identity/verify/faq?hl=ja)
+*   [한국어](https://developers.google.com/wallet/identity/verify/faq?hl=ko)
+
+Info 
+
+Chat 
+
+API

@@ -1,0 +1,57 @@
+Title: Security of IDs in Apple Wallet
+
+URL Source: https://support.apple.com/guide/security/security-of-ids-in-apple-wallet-secb569bf393/web
+
+Markdown Content:
+![Image 1](https://help.apple.com/assets/697B90C2034C22A38709E327/697B90C921233886B402A162/en_US/52d714626638d3391623c853be0c593b.png)
+The following features help increase the security of using IDs in Apple Wallet.
+
+## Identity data integrity and antiforgery
+
+IDs in Apple Wallet use an issuer-provided signature to allow any ISO/IEC 18013-5 compliant reader to verify a user’s ID in Apple Wallet. In addition, all data elements on ID in Wallet are individually protected against forgery. This allows the identity reader to request a specific subset of the data elements present on the ID in Apple Wallet and for the ID in Apple Wallet to respond with that same subset, thus only sharing the requested data and maximizing the user’s privacy.
+
+## Device binding
+
+IDs in Apple Wallet authentication use a device signature to protect against the cloning of an ID and the replay of an identity presentation. Apple Wallet stores the private key for ID authentication in the iPhone device’s Secure Element, so the ID is bound to the same device that the state issuing authority created the ID for.
+
+## Informed consent
+
+IDs in Apple Wallet may use authentication to identify the reader using the protocol defined in the ISO/IEC 18013-5 standard. During presentation, if the reader has its own certificate that’s trusted by Apple Wallet, an icon is shown to them to give the user an assurance that they’re interacting with the intended party.
+
+## User data confidentiality over radio links
+
+Session encryption helps ensure that all personally identifiable information (PII) exchanged between the ID in Apple Wallet and that the identity reader is encrypted. Encryption is performed by the application layer. The security of session encryption is therefore not reliant on the security provided by the transmission layer (for example, NFC, Bluetooth, and Wi-Fi).
+
+## IDs in Apple Wallet help keep users’ information private
+
+Apple doesn’t have access to the identity data stored in IDs in Apple Wallet. Identity data is only released from a device when a user explicitly authorizes each presentation. The following features further help protect users’ privacy during identity presentations.
+
+**Device retrieval**
+
+IDs in Apple Wallet adhere to the “device retrieval” process outlined in ISO/IEC 18013-5. Device retrieval obviates the need to make server calls during presentation, thereby protecting users from being tracked by Apple and the issuer.
+
+**Unlinkable presentation**
+
+As described in [Identity data integrity and antiforgery](https://support.apple.com/guide/security/security-of-ids-in-apple-wallet-secb569bf393/1/web/1#sec0cf23b427), elements like the issuer-provided signature are included in the Mobile Security Object (MSO) for a reader to verify an ID. In order to reduce traceability of these static elements and help prevent tracking ID presentations between relying parties, the device manages multiple ID authentication keys for each ID in Apple Wallet. The ID issuer generates unique MSO payloads during ID issuance and updates for each of these ID authentication keys which are sent to and stored encrypted on the user’s device. During presentation, the device selects a random ID authentication key and its associated MSO to use for the transaction. This is beneficial when the user is presenting non-identifiable information, such as `age_over_18` or other age elements, as it reduces the potential for multiple parties to reliably match elements and identify a specific user. To reduce overhead, keys may be reused in some situations, such as during presentation to the same relying party or when presentation already includes inherently linkable information. When all ID authentication keys are used at least once, if the issuer has opted in to support early rotation, the device initiates the process to generate a new batch of keys and request refreshed payloads.
+
+## ID verifier security
+
+On an iPhone with iOS 17 or later, U.S. businesses and organizations can use iPhone to seamlessly and securely read ISO/IEC 18013-5 or ISO/IEC 23220 compliant mobile IDs in person—without the need for external hardware. ID Verifier can be used in two different ways, depending on the verification use case:
+
+*   _ID Verifier Display Only:_ This enables use of an iOS user interface to display Name, Age, ID Photo, and Age Over N data for use cases that only require visual confirmation. It is also designed to prevent all screenshot and screen-recording features from capturing the displayed information. This service doesn’t permit _personally identifiable information (PII)_ collection that can be tied back to the presenter.
+
+*   _ID Verifier Data Transfer:_ This enables apps to request additional data elements, such as date of birth and address, in order to meet legal verification requirements. Access to the ID Verifier Data Transfer API is managed with entitlements, and apps need to conform to requirements with respect to how data is used. For example, apps need to demonstrate a legal requirement to request identity data. Apps are also required to maintain a privacy policy that details its processing, storage, or other use of the requested identity data.
+
+## Reading a mobile ID
+
+ID Verifier follows the protocol defined in the ISO/IEC 18013-5 standard. When an app using the ID Verifier API requests to read a mobile ID, a sheet—controlled by iOS—is displayed and prompts the mobile ID holder to hold their device near the identity reader. That initial NFC engagement (as defined by the ISO/IEC 18013-5 standard, a QR code can be used to initiate a Bluetooth handover process instead of NFC) establishes a secure Bluetooth Low Energy (BLE) connection between both devices. At that point, the mobile ID holder can review on their device the information that’s being requested. After the mobile ID holder consents, the requested identity data is transferred to the reading device. Apps using the ID Verifier Data Transfer API receive the response data for processing, while apps using the ID Verifier Display Only API see data displayed by iOS directly.
+
+The ISO/IEC 18013-5 standard provides for multiple security mechanisms to detect, deter, and mitigate security risks. Among those, ID Verifier performs both issuer signature and device signature validation. On an iPhone with iOS 26.4 or later, ID Verifier also supports Message Authentication Code (MAC) based device authentication as defined in the standard, which uses a key agreement mechanism to verify that identity data originates from the intended device. Additionally, ID Verifier supports reader authentication using the protocol defined in the ISO/IEC 18013-5 standard. Apps can choose to display an icon and name to deliver assurance that the ID holder is interacting with the intended party using the reader’s certificate.
+
+## Issuer and device validation
+
+As a protection against forgery, ID Verifier validates the signature of the Mobile Security Object by the trusted issuer of the mobile identity. ID Verifier Data Transfer also provides an API that enables apps to conduct their own signature validation, instead of iOS, if desired. To deliver an assurance to the business or organization that the mobile ID has not been copied from one device to another, ID Verifier validates the device signature or MAC over session data.
+
+## Reader authentication
+
+At the time of presentment, the ID Verifier reader request is signed by the private key associated with the reader authentication certificate that chains up to the Apple Root certificate authority (CA), which contains relevant x509 custom extensions to indicate to the holder if the business intends to store the data. If an application would like to display name and icon to the ID holder, the app administrator is required to register using Apple Business Register and provide accurate branding information. After the submitted information is successfully verified, at the time of a transaction, the reader authentication certificate provides the ID holder with the information about the entity from Apple Register via the reader authentication certificate.

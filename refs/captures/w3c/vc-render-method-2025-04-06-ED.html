@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Verifiable Credential Rendering Methods</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <!--
+      === NOTA BENE ===
+      For the three scripts below, if your spec resides on dev.w3 you can check them
+      out in the same tree and use relative links so that they'll work offline,
+     -->
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
+    <script class="remove" src="https://w3c.github.io/vc-data-integrity/common.js"></script>
+
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+        // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+        specStatus: "CG-DRAFT",
+
+        // the specification's short name, as in http://www.w3.org/TR/short-name/
+        shortName: "vc-render-method",
+        group: "credentials",
+
+        // if you wish the publication date to be other than today, set this
+        //publishDate:  "2023-04-18",
+
+        // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+        // and its maturity status
+        // previousPublishDate:  "1977-03-15",
+        // previousMaturity:  "WD",
+
+        // if there a publicly available Editor's Draft, this is the link
+        edDraftURI: "https://w3c-ccg.github.io/vc-render-method/",
+        //latestVersion: "https://www.w3.org/community/reports/credentials/CG-FINAL-di-eddsa-2020-20220724/",
+
+        // if this is a LCWD, uncomment and set the end of its review period
+        // lcEnd: "2009-08-05",
+
+        // if you want to have extra CSS, append them to this list
+        // it is recommended that the respec.css stylesheet be kept
+        //extraCSS:             ["spec.css", "prettify.css"],
+
+        // editors, add as many as you like
+        // only "name" is required
+        editors: [{
+          name: "Manu Sporny",
+          url: "https://www.linkedin.com/in/manusporny/",
+          company: "Digital Bazaar",
+          companyURL: "https://digitalbazaar.com/",
+          w3cid: 41758
+        }, {
+          name: "Dmitri Zagidulin",
+          url: "https://www.linkedin.com/in/dzagidulin/",
+          company: "MIT Digital Credentials Consortium",
+          companyURL: "https://digitalcredentials.mit.edu/",
+          w3cid: 86708
+        }, {
+          name: "Calvin Cheng",
+          url: "https://linkedin.com/in/cxcheng/",
+          company: "Government Technology Agency of Singapore",
+          companyURL: "https://www.tech.gov.sg/"
+        }, {
+          name: "Kyle Huang Junyuan",
+          url: "https://www.linkedin.com/in/kyle-huang-junyuan/",
+          company: "Government Technology Agency of Singapore",
+          companyURL: "https://www.tech.gov.sg/"
+        }, {
+          name: "Patrick St. Louis",
+          url: "https://www.linkedin.com/in/patrick-stlouis/",
+          company: "Open Security and Identity",
+          companyURL: "https://opsecid.ca/"
+        }],
+
+        authors: [{
+          name: "Manu Sporny", url: "https://www.linkedin.com/in/manusporny/",
+          company: "Digital Bazaar", companyURL: "https://digitalbazaar.com/",
+          w3cid: 41758
+        }, {
+          name: "Dmitri Zagidulin",
+          url: "https://www.linkedin.com/in/dzagidulin/",
+          company: "MIT Digital Credentials Consortium",
+          companyURL: "https://digitalcredentials.mit.edu/",
+          w3cid: 86708
+        }, {
+          name: "Calvin Cheng",
+          url: "https://linkedin.com/in/cxcheng/",
+          company: "Government Technology Agency of Singapore",
+          companyURL: "https://www.tech.gov.sg/"
+        }, {
+          name: "Kyle Huang Junyuan",
+          url: "https://www.linkedin.com/in/kyle-huang-junyuan/",
+          company: "Government Technology Agency of Singapore",
+          companyURL: "https://www.tech.gov.sg/"
+        }, {
+          name: "Patrick St. Louis",
+          url: "https://www.linkedin.com/in/patrick-stlouis/",
+          company: "Open Security and Identity",
+          companyURL: "https://opsecid.ca/"
+        }],
+
+        github: "https://github.com/w3c-ccg/vc-render-method/",
+
+        // URI of the patent status for this WG, for Rec-track documents
+        // !!!! IMPORTANT !!!!
+        // This is important for Rec-track documents, do not copy a patent URI from a random
+        // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+        // Team Contact.
+        // wgPatentURI:  "",
+        maxTocLevel: 4,
+        /*preProcess: [ webpayments.preProcess ],
+        alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
+        */
+        localBiblio: {
+          MULTIBASE: {
+            title: "Multibase",
+            href: "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01",
+          },
+          MULTICODEC: {
+            title: "Multicodec",
+            href: "https://github.com/multiformats/multicodec/",
+          },
+        },
+        lint: {"no-unused-dfns": false},
+        postProcess: [restrictRefs]
+      };
+    </script>
+    <style>
+code {
+  color: rgb(199, 73, 0);
+  font-weight: bold;
+}
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+pre .highlight {
+  font-weight: bold;
+  color: Green;
+}
+pre .subject {
+  font-weight: bold;
+  color: RoyalBlue;
+}
+pre .property {
+  font-weight: bold;
+  color: DarkGoldenrod;
+}
+pre .comment {
+  font-weight: bold;
+  color: SteelBlue;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+code a[href] {
+  color: inherit;
+  border-bottom: none;
+}
+code a[href]:hover {
+  border-bottom: 1px solid #c63501;
+}
+ol.algorithm {
+  counter-reset: numsection;
+  list-style-type: none;
+}
+ol.algorithm li {
+  margin: 0.5em 0;
+}
+ol.algorithm li:before {
+  font-weight: bold;
+  counter-increment: numsection;
+  content: counters(numsection, ".") ") ";
+}
+table.simple {
+  border-collapse: collapse;
+  margin: 25px 0;
+  min-width: 75%;
+  border: 1px solid #dddddd;
+}
+table.simple thead tr {
+  background-color: #005a9c;
+  color: #ffffff;
+  text-align: left;
+}
+table.simple th,
+table.simple td {
+  padding: 12px 15px;
+  vertical-align: top;
+  text-align: left;
+}
+table.simple tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+table.simple tbody tr:nth-of-type(even) {
+  background-color: #00000008;
+}
+table.simple tbody tr:last-of-type {
+  border-bottom: 2px solid #005a9c;
+}
+    </style>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>
+This specification describes mechanisms that can be used to represent a
+Verifiable Credential through a visual, auditory, or haptic medium. It covers
+rendering a Verifiable Credential to a physical document, digital image,
+screen reader, or braille output.
+      </p>
+    </section>
+
+    <section id="sotd">
+      <p>
+This is an experimental specification and is undergoing regular revisions. It is
+not fit for production deployment.
+      </p>
+    </section>
+
+    <section>
+      <h2>Introduction</h2>
+
+        <p>
+Rendering methods can be used when the [=issuer=] has a specific way that
+they want to express a [=verifiable credential=] to an observer through
+a visual, auditory, or haptic mechanism. For example, an [=issuer=] of an
+employee badge credential might want to include rich imagery of their corporate
+logo and specific placement of employee information in specific areas of the
+badge. They might also want to provide an audio read out of the important
+aspects of the badge for individuals that have accessibility needs related
+to their eyesight.
+        </p>
+
+      <section id="terminology">
+        <h3>Terminology</h3>
+
+        <div data-include="https://w3c.github.io/vc-data-model/terms.html"></div>
+
+      </section>
+
+      <section id="conformance">
+        <p>
+A <dfn>conforming render method</dfn> is any concrete expression of the data
+model that complies with the normative statements in this specification.
+Specifically, all relevant normative statements in Sections
+<a href="#data-model"></a> and <a href="#algorithms"></a>
+of this document MUST be enforced.
+        </p>
+
+        <p>
+A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
+as software and/or hardware that generates or consumes a
+[=conforming render method=]. Conforming processors MUST produce errors when
+non-conforming documents are consumed.
+        </p>
+        <p>
+This document also contains examples that contain JSON and JSON-LD content. Some
+of these examples contain characters that are invalid JSON, such as inline
+comments (`//`) and the use of ellipsis (`...`) to denote
+information that adds little value to the example. Implementers are cautioned to
+remove this content if they desire to use the information as valid JSON or
+JSON-LD.
+        </p>
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Data Model</h2>
+
+      <p>
+The following sections outline the data model that is used by this specification
+for rendering methods
+      </p>
+
+      <section>
+        <h3>The `renderMethod` Property</h3>
+
+        <p>
+The `renderMethod` property is a
+<a href="https://www.w3.org/TR/vc-data-model-2.0/#reserved-extension-points">
+reserved extension point</a> in the Verifiable Credentials Data Model
+specification [[VC-DATA-MODEL-2.0]]. An [=issuer=] can utilize this
+property in a [=verifiable credential=] to express one or more preferred
+render methods.
+        </p>
+
+        <dl>
+          <dt><var>renderMethod</var></dt>
+          <dd>
+The value of the `renderMethod` property MUST specify one or
+more rendering methods that can be used by software to express the
+[=verifiable credential=] using a visual, auditory, or haptic mechanism. Each
+`renderMethod` value MUST specify its `type`, for example,
+`TemplateRenderMethod`. The precise contents of each rendering
+hint is determined by the specific `renderMethod` `type`
+definition.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h4>TemplateRenderMethod</h4>
+
+        <p>
+When an [=issuer=] desires to specify template-based rendering instructions
+for a [=verifiable credential=], they MAY add a `render` property that uses
+the data model described below.
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th style="white-space: nowrap">Property</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>
+An OPTIONAL [=string=] that follows the [[[URL]]] and, when fetched,
+dereferences to a render template.
+              </td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>
+A REQUIRED [=string=] that MUST be the value `TemplateRenderMethod`.
+              </td>
+            </tr>
+            <tr>
+              <td>renderSuite</td>
+              <td>
+A REQUIRED [=string=] that identifies the algorithms that are used for
+generating the concrete rendering.
+              </td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+An OPTIONAL human-readable [=string=] that can be displayed to provide a hint to
+the type of rendering that will be performed. This property might be used in a
+graphical interface that enables an individual to select between multiple
+presentation modes.
+              </td>
+            </tr>
+            <tr>
+              <td>description</td>
+              <td>
+An OPTIONAL human-readable [=string=] that provides a more involved description
+than `name` of when the particular rendering might be useful.
+              </td>
+            </tr>
+            <tr>
+              <td>disclosedProperty</td>
+              <td>
+An OPTIONAL [=list=] of [=string=] values that each conform to the
+[[[RFC6901]]] syntax that specifies which properties from the [=verifiable
+credential=] are exposed when using this specific render method. If
+`disclosedProperty` is not provided, the entire [=verifiable credential=] is
+presumed to be shared when the render method is used.
+              </td>
+            </tr>
+            <tr>
+              <td>template</td>
+              <td>
+An OPTIONAL [=string=] or [=ordered map|map=] that provides the template that
+will be used to perform the rendering. If the value is a [=string=], it MUST be
+a URL. If the value is a [=ordered map|map=], it MUST conform to the following
+rules:
+                <table class="simple">
+                  <thead>
+                    <tr>
+                      <th style="white-space: nowrap">Property</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>id</td>
+                      <td>
+An REQUIRED [=string=] that follows the [[[URL]]] and, when fetched,
+dereferences to a template such as an SVG or PDF file.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>mediaType</td>
+                      <td>
+A RECOMMENDED [=string=] that identifies the media type for the `id` value
+as specified in [[[RFC6838]]].
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>digestMultibase</td>
+                      <td>
+An OPTIONAL multibase-encoded Multihash of the template file. The multibase
+value MUST be `z` and the multihash value MUST be SHA-2 with 256-bits of output
+(`0x12`).
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>digestMultibase</td>
+                <td>
+An OPTIONAL multibase-encoded Multihash of the render method referenced if `id`
+is specified. The multibase value MUST be `z` and the multihash value MUST be
+SHA-2 with 256-bits of output (`0x12`).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+The data model shown above is expressed in a [=verifiable credential=]
+in the example below.
+          </p>
+
+          <pre class="example nohighlight"
+          title="Usage of the render property by an issuer">
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://www.w3.org/ns/credentials/examples/v2",
+    "https://w3id.org/vc/render-method/v1"
+  ],
+  "id": "http://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "issuer": "https://example.edu/issuers/14",
+  "validFrom": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+  <span class="highlight">"renderMethod": {
+    "type": "TemplateRenderMethod",
+    "renderSuite": "svg-mustache",
+    "template": {
+      "id": "https://example.edu/credentials/BachelorDegree.svg",
+      "mediaType": "image/svg",
+      "digestMultibase": "zQmerWC85Wg6wFl9znFCwYxApG270iEu5h6JqWAPdhyxz2dR",
+      "disclosedProperty": [
+        "/issuer", "/validFrom", "/credentialSubject/degree/name"
+      ]
+    }
+  }
+  </span>
+}
+        </pre>
+
+        <p>
+In the example above, the [=issuer=] has provided a Mustache-based SVG rendering
+template for a Bachelor's degree that will be filled in with specific
+information from the [=verifiable credential=] listed in `disclosedProperty`.
+        </p>
+
+        <section>
+          <h3>The `svg-mustache` Render Suite</h3>
+          <p>
+The `svg-mustache` render suite uses the Mustache templating language to
+modify an SVG file, which is then used to render a visual representation
+of the [=verifiable credential=].
+          </p>
+
+          <p>
+In the example below, a fully embedded SVG file is used as the rendering
+template.
+          </p>
+
+          <pre class="example nohighlight"
+               title="Basic usage of the svg-mustache render suite">
+{
+  <span class="comment">...</span>
+  "renderMethod": {
+    "type": "TemplateRenderMethod",
+    "renderSuite": "svg-mustache",
+    <span class="comment">// the SVG file is embedded in the VC</span>
+    "template": "data:image/svg;base64,Qjei89...3jZpW"
+  }
+}
+          </pre>
+
+          <p>
+The next example links to the SVG file on the Web and secures it against
+modification by using the `digestMultibase` property.
+          </p>
+
+          <pre class="example nohighlight"
+              title="A remotely hosted SVG file for an SVG render template">
+{
+<span class="comment">...</span>
+"renderMethod": {
+  "type": "TemplateRenderMethod",
+  "renderSuite": "svg-mustache",
+  "template": {
+    <span class="comment">// this SVG file is fetched from the Web</span>
+    "id": "https://degree.example/bachelors.svg",
+    "mediaType": "image/svg",
+    "digestMultibase": "zQmerWC85Wg6wFl9znFCwYxApG270iEu5h6JqWAPdhyxz2dR"
+  }
+}
+          </pre>
+
+          <p>
+The next example links to the rendering template on the Web and secures it
+using the `digestMultibase` property:
+          </p>
+
+          <pre class="example nohighlight"
+              title="A remotely hosted SVG render method">
+{
+<span class="comment">...</span>
+"renderMethod": {
+  <span class="comment">// this render method is fetched from the Web</span>
+  "id": "https://degrees.example/bachelors-svg.jsonld",
+  "type": "TemplateRenderMethod",
+  "renderSuite": "svg-mustache",
+  "digestMultibase": "zQmG270iEu5h6JqWAPdhyxz2dRerWC85Wg6wFl9znFCwYxAp"
+}
+          </pre>
+
+        </section>
+
+        <section>
+          <h3>The `pdf-mustache` Render Suite</h3>
+          <p>
+The `pdf-mustache` render suite uses the Mustache templating language to
+modify a PDF file, which is then used to render a visual representation
+of the [=verifiable credential=].
+          </p>
+
+          <p>
+In the example below, a fully embedded PDF file is used as the rendering
+template.
+          </p>
+
+          <pre class="example nohighlight"
+               title="Basic usage of the pdf-mustache render suite">
+{
+  <span class="comment">...</span>
+  "renderMethod": {
+    "type": "TemplateRenderMethod",
+    "renderSuite": "pdf-mustache",
+    <span class="comment">// this PDF file is embedded in the VC</span>
+    "template": "data:application/pdf;base64,k309SK...pwK83b"
+  }
+}
+          </pre>
+
+          <p>
+The next example links to the PDF file on the Web and secures it against
+modification by using the `digestMultibase` property.
+          </p>
+
+          <pre class="example nohighlight"
+              title="Remotely hosted PDF file for a PDF rendering template">
+{
+<span class="comment">...</span>
+"renderMethod": {
+  "type": "TemplateRenderMethod",
+  "renderSuite": "pdf-mustache",
+  "template": {
+    <span class="comment">// this PDF file is fetched from the Web</span>
+    "id": "https://degree.example/bachelors.pdf",
+    "mediaType": "application/pdf",
+    "digestMultibase": "zQmznFCwYxApG270iEu5h6JqWAPdhyxz2dRerWC85Wg6wFl9"
+  }
+}
+          </pre>
+
+          <p>
+The next example links to the rendering template on the Web and secures it
+using the `digestMultibase` property:
+          </p>
+
+          <pre class="example nohighlight"
+              title="Remotely hosted PDF rendering template">
+{
+<span class="comment">...</span>
+"renderMethod": {
+  <span class="comment">// this render method is fetched from the Web</span>
+  "id": "https://degrees.example/bachelors-pdf.jsonld",
+  "type": "TemplateRenderMethod",
+  "renderSuite": "pdf-mustache",
+  "digestMultibase": "zQmEu5h6JqWAPdhyxmz2dRerWC85Wg6wFl9znFCwYxApG270"
+}
+          </pre>
+
+        </section>
+
+        <section>
+          <h3>The `nfc` Render Suite</h3>
+          <p>
+The `nfc` render suite transmits a binary payload representing the
+[=verifiable credential=] over a wireless NFC connection.
+          </p>
+
+          <p>
+In the example below, a fully embedded NFC payload is used as the rendering
+template, which only discloses the barcode identifier associated with the
+credential.
+          </p>
+
+          <pre class="example nohighlight"
+               title="Usage of the nfc render suite">
+{
+  <span class="comment">...</span>
+  "renderMethod": {
+    "type": "TemplateRenderMethod",
+    "renderSuite": "nfc",
+    "name": "Tap to send",
+    <span class="comment">// the NFC payload is embedded</span>
+    "template": "data:application/octet-stream;base64,2QZkpQGDG...G8XJWnROcY4Biw",
+    <span class="comment">// only the barcode is transmitted over NFC</span>
+    "disclosedProperty": ["/credentialSubject/barcode"]
+  }
+  </span>
+}
+        </pre>
+
+      </section>
+    </section>
+
+    <section>
+      <h4>OpenAttestationEmbeddedRenderer</h4>
+
+      <p>
+        OpenAttestationEmbeddedRenderer is used by an issuer to render a verifiable
+        credential. The verifiable credential is rendered in HTML within an embedded
+        `&ltiframe&gt` through a Template Renderer website referenced in
+        the document. This arrangement allows for interactive selective disclosure
+        using OpenAttestationMerkleProofSignature2018.
+      </p>
+      <p>
+        The Template Renderer is a web application embedded in an iframe. It renders
+        verifiable credentials based on selected templates and must listen for
+        specific messages from the Host application to facilitate the rendering
+        process.
+      </p>
+      <p>
+        There currently exists a number of OpenAttestationEmbeddedRenderer issuers
+        and decentralized renderer implementations.
+      </p>
+      <p>
+        When an [=issuer=] desires to specify an embedded rendering instructions
+        for a [=verifiable credential=], they MAY add a `renderMethod` property
+        that uses the data model described below.
+      </p>
+
+      <table class="simple">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>
+              A URL that locates a website that implements the
+              OpenAttestationEmbeddedRenderer Action API.
+            </td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>The `type` property MUST be `OpenAttestationEmbeddedRenderer`.</td>
+          </tr>
+          <tr>
+            <td>renderName</td>
+            <td>
+              Name of the template used by the website specified by `id` to render
+              the document. A different template can be used for the decentralized
+              renderer to present a different HTML view of the verifiable
+              credential.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        The data model shown above is expressed in a [=verifiable credential=] in
+        the example below.
+      </p>
+
+      <pre
+        class="example nohighlight"
+        title="Usage of the renderMethod property by an issuer"
+      >
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://schemata.openattestation.com/com/openattestation/4.0/alpha-context.json"
+      ],
+      "type": ["VerifiableCredential", "OpenAttestationCredential"],
+      "validFrom": "2021-03-08T12:00:00+08:00",
+      "name": "Republic of Singapore Driving Licence",
+      "issuer": {
+        "id": "did:ethr:0xB26B4941941C51a4885E5B7D3A1B861E54405f90",
+        "type": "OpenAttestationIssuer",
+        "name": "Government Technology Agency of Singapore (GovTech)",
+        "identityProof": { "identityProofType": "DNS-DID", "identifier": "example.openattestation.com" }
+      },
+      "credentialSubject": {
+        "id": "urn:uuid:a013fb9d-bb03-4056-b696-05575eceaf42",
+        "type": ["DriversLicense"],
+        "name": "John Doe",
+        "address": "123 Choa Chu Kang Road, Singapore 123456",
+        "licenses": [
+          {
+            "class": "3",
+            "description": "Motor cars with unladen weight <= 3000kg",
+            "effectiveDate": "2013-05-16T00:00:00+08:00"
+          },
+          {
+            "class": "3A",
+            "description": "Motor cars with unladen weight <= 3000kg",
+            "effectiveDate": "2013-05-16T00:00:00+08:00"
+          }
+        ]
+      },
+      <span class="highlight">"renderMethod": [{
+        "id": "https://demo-renderer.opencerts.io",
+        "type": "OpenAttestationEmbeddedRenderer",
+        "rendererName": "GOVTECH_DEMO"
+      }]</span>
+    }
+      </pre>
+
+      <p>
+        The [=verifiable credential=] specifies a decentralized renderer at
+        `https://demo-renderer.opencerts.io`, using the template named
+        `GOVTECH_DEMO`.
+      </p>
+      <p>
+        The decentralized renderer can support different templates that can provide
+        different views of the verifiable credentials. Below are two renderings of
+        the same [=verifiable credential=] using different templates.
+      </p>
+
+      <figure id="oa-embedded-certificate">
+        <img
+          style="width: 100%"
+          src="images/oa-embedded-certificate.png"
+          alt="Certificate Template"
+        />
+        <figcaption>Certificate Template</figcaption>
+      </figure>
+      <figure id="oa-embedded-transcript">
+        <img
+          style="width: 100%"
+          src="images/oa-embedded-transcript.png"
+          alt="Transcript Template"
+        />
+        <figcaption>Transcript Template</figcaption>
+      </figure>
+        <section>
+            <h5>Action API</h5>
+
+            <p>
+                The Host is the application that displays the document with the help of the
+                Template Renderer. The Template Renderer MUST be a web application embedded
+                within an iframe specified by `renderMethod`.`id`. It MUST communicate with the
+                Host application using postMessage API to perform actions.
+            </p>
+
+            <p>
+                All actions follow the same structure. They are composed of `type` and
+                `payload`:
+            </p>
+            <ol class="algorithm">
+                <li>
+                    `type` indicates the kind of action being executed, for instance,
+                    `RENDER_DOCUMENT` means rendering a document. The type of an action is
+                    mandatory.
+                </li>
+                <li>
+                    `payload` indicates optional data associated to the type, for instance,
+                    the content of the document to render.
+                </li>
+            </ol>
+
+            <p>
+                An open source reference implementation is available on
+                <a
+                        href="https://github.com/Open-Attestation/decentralized-renderer-react-components"
+                >GitHub</a
+                >.
+            </p>
+            <p>
+                The interaction between the Host and the Template Renderer is illustrated in
+                the following diagram.
+            </p>
+            <figure id="oa-embedded-sequence-diagram">
+                <img
+                        style="width: 100%"
+                        src="images/oa-embedded-sequence-diagram.png"
+                        alt="Sequence Diagram"
+                />
+                <figcaption>Sequence Diagram</figcaption>
+            </figure>
+
+            <section>
+                <h6>Host-to-Frame Actions</h6>
+
+                <p>
+                    When the iframe is first displayed, the host sends commands to the iframe
+                    to render the document. The 4 types of actions supported are described
+                    below.
+                </p>
+
+                <table class="simple">
+                    <thead>
+                    <tr>
+                        <th>type</th>
+                        <th>payload</th>
+                        <th>action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>`GET_TEMPLATES`</td>
+                        <td><pre>{ type: "GET_TEMPLATES" }</pre></td>
+                        <td>
+                            Obtain a list of templates supported by the renderer for the given
+                            document. The list of templates is returned from UPDATE_TEMPLATES
+                            call from the iframe.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>`SELECT_TEMPLATE`</td>
+                        <td>
+                  <pre>
+      {
+        type: "SELECT_TEMPLATE",
+        payload: "CUSTOM_TEMPLATE"
+      }
+                  </pre>
+                        </td>
+                        <td>
+                            Select the template to be used for rendering. It should be from the
+                            list returned by GET_TEMPLATES. If not found, a default template is
+                            used.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>`RENDER_DOCUMENT`</td>
+                        <td>
+                  <pre>
+      {
+        type: "RENDER_DOCUMENT",
+        payload: {
+          document: {
+            credentialSubject: ...,
+            renderMethod: ...
+          }
+        }
+      }
+                  </pre>
+                        </td>
+                        <td>
+                            Render the verifiable credential inside the IFRAME using the
+                            selected template. Document is JSON object form of the verifiable
+                            credential.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>`PRINT`</td>
+                        <td><pre>{ type: "PRINT" }</pre></td>
+                        <td>
+                            MUST show the print dialog so the contents of the IFRAME can be
+                            printed.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h6>Frame-to-Host Actions</h6>
+
+                <p>
+                    These are used by the iframe to update the host to make adjustments on
+                    formatting, or selective redaction.
+                </p>
+
+                <table class="simple">
+                    <thead>
+                    <tr>
+                        <th>type</th>
+                        <th>payload</th>
+                        <th>action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>`OBFUSCATE`</td>
+                        <td>
+                  <pre>
+      {
+        type: "OBFUSCATE",
+        payload: "a[0].b.c",
+      }
+                </pre
+                >
+                        </td>
+                        <td>
+                            This is used for selective redaction. The Host is informed of the
+                            path of the field that has been obfuscated so that the host can
+                            create an updated version of the document with the selected field
+                            obfuscated.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>`UPDATE_HEIGHT`</td>
+                        <td>
+                  <pre>
+      {
+        type: "UPDATE_HEIGHT",
+        payload: 150,
+      }
+                  </pre>
+                        </td>
+                        <td>
+                            Notify the Host of the height of the embedded iframe in pixels so
+                            the Host can adjust the size on the browser.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>`UPDATE_TEMPLATES`</td>
+                        <td>
+                  <pre>
+      {
+        type: "UPDATE_TEMPLATES",
+        payload: [
+          {
+            id: "template1",
+            label: "template1",
+          },
+          {
+            id: "template2",
+            label: "template2",
+          }
+        ]
+      }
+                  </pre>
+                        </td>
+                        <td>
+                            Notify the Host of the list of template names that are usable from
+                            RENDER_METHOD, or GET_TEMPLATES calls.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </section>
+  </section>
+
+  <section>
+    <h2>Algorithms</h2>
+
+    <p>
+The following sections outline the algorithms that is used by this specification
+for rendering methods.
+    </p>
+
+    <section>
+      <h5>Render (TemplateRenderMethod)</h5>
+
+      <p>
+The following algorithm is used to transform the SVG image template into the
+final SVG image that is displayed. The inputs to the algorithm are the
+[=verifiable credential=] (`verifiableCredential`) and the SVG image
+source code (`svgImage`). The output is a SVG image.
+      </p>
+
+      <ol class="algorithm">
+        <li>
+Generate a map, `replacementMap`, by finding all strings in `svgImage` that
+start with `{{` (double open braces) and end with `}}`
+(double close braces). For each string, `templateKey`, that is found:
+            <ol class="algorithm">
+              <li>
+Generate another string, `templateValue`, by evaluating the value of
+`templateKey` (without the opening or closing braces) using the JSON
+Pointer [[RFC6901]] algorithm with the `verifiableCredential` as input to the
+algorithm. If the evaluation is `null`, set `templateValue` to the empty string.
+              </li>
+              <li>
+Set a key in `replacementMap` by using `templateKey` and associate it with
+`templateValue`.
+              </li>
+            </ol>
+          </li>
+          <li>
+For every key in `replacementMap`, replace each corresponding
+string in `svgImage` that matches the key with the associated value in the
+`replacementMap`.
+          </li>
+        </ol>
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Security Considerations</h2>
+
+      <p class="issue" title="Summary of Security Considerations">
+The list of security considerations listed below need to be converted into
+sections:
+      </p>
+
+      <ul>
+        <li>
+If a cryptographic hash for a display template isn't provided, you can't know
+if it has been tampered with since issuance. There are good reasons an issuer
+might allow for this, such as being able to update the look/feel of a
+long-lived credential over time.
+        </li>
+        <li>
+If a cryptographic hash for a display template is provided, implementations
+that don't check it run the risk of display attacks, which might sound benign,
+but they aren't; Verifiers might use verifiable displays to show what the
+issuer intended, and if those displays don't check the cryptographic hash,
+they might show the wrong info to an individual checking the credential on
+the verifiable display.
+        </li>
+        <li>
+Fetching resources from external locations can be used as a denial-of-service
+attack vector where the resource is never served, or served at a very slow pace.
+        </li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Privacy Considerations</h2>
+
+      <p class="issue" title="Summary of Privacy Considerations">
+The list of privacy considerations listed below need to be converted into
+sections:
+      </p>
+
+      <ul>
+        <li>
+An issuer could use a rendering method `id` to track individuals. These
+values should be aggressively cached client-side, or looked up using a
+mixnet or proxy service.
+        </li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Internationalization Considerations</h2>
+
+      <p class="issue" title="Summary of Internationalization Considerations">
+The list of internationalization considerations listed below need to be
+converted into sections:
+      </p>
+
+      <ul>
+        <li>
+Are we allowed to use media queries to detect language and provide different
+displays based on language?
+        </li>
+      </ul>
+
+    </section>
+
+  </body>
+</html>

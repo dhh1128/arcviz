@@ -1,0 +1,219 @@
+# Source records for docs/research/prior-art/wallets.md (audit stream 1C: wallet paradigms).
+# Format matches ../refs/sources.yaml — see ../docs/research/EVIDENCE.md for the rules.
+# Owned by the wallets stream. Do not merge into sources.yaml; do not edit sources.yaml from here.
+
+sources:
+
+  # ---------------------------------------------------------------------------
+  # Apple
+  # ---------------------------------------------------------------------------
+
+  - key: apple-hig-wallet
+    title: "Wallet | Apple Developer Documentation (Human Interface Guidelines)"
+    author: Apple Inc.
+    url: https://developer.apple.com/design/human-interface-guidelines/wallet
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/apple/hig-wallet-2026-09-04.txt
+    status: primary
+    supports: "Pass field types (logo, header, primary, secondary/auxiliary, footer, back), pass styles, and the Identity verification section describing the Verify with Wallet button, purpose strings, data-minimization guidance, and intent-to-store disclosure."
+    quote: "Header fields: Show critical information that remains visible when the pass is collapsed. Primary field: Shows the most important information people need. Secondary and auxiliary fields: Show useful, but less critical information."
+    locator: "section 'Pass field types'"
+
+  - key: apple-hig-id-verifier
+    title: "ID Verifier | Apple Developer Documentation (Human Interface Guidelines)"
+    author: Apple Inc.
+    url: https://developer.apple.com/design/human-interface-guidelines/id-verifier
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/apple/hig-id-verifier-2026-09-04.txt
+    status: primary
+    supports: "Distinction between Display Only requests (data never leaves system UI, not transmitted to the relying app) and Data Transfer requests (entitlement-gated, app receives data); guidance to request only minimum data."
+    quote: "When you make a Display Only request, the customer's data remains within the system-provided UI and isn't transmitted to your app."
+    locator: "introductory paragraph, bullet 'Display Only request'"
+
+  - key: apple-verify-with-wallet
+    title: "Get started with the Verify with Wallet API"
+    author: Apple Inc.
+    url: https://developer.apple.com/wallet/get-started-with-verify-with-wallet/
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/apple/get-started-verify-with-wallet-2026-09-04.txt
+    status: primary
+    supports: "Verification-state semantics ('verified by the government issuing authority'), privacy-preserving design (Apple/issuer cannot see when/where a user shares), and the full list of identity data elements an app may request."
+    quote: "Identity information that your app gets via Verify with Wallet has been verified by the government issuing authority. In order to add an ID card to Apple Wallet, the user must prove ownership of a valid government issued ID card."
+    locator: "section 'Verified and authenticated identity data'"
+
+  - key: apple-security-of-ids
+    title: "Security of IDs in Apple Wallet"
+    author: Apple Inc. (Apple Platform Security guide, support.apple.com)
+    url: https://support.apple.com/guide/security/security-of-ids-in-apple-wallet-secb569bf393/web
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/apple/security-of-ids-2026-09-04.txt
+    status: primary
+    supports: "Selective disclosure at the protocol level (element-level signatures allow releasing a requested subset), the reader-trust icon signal, device binding, and that IDs in Apple Wallet implement ISO/IEC 18013-5 device retrieval, unlinkable presentation, and reader authentication."
+    quote: "During presentation, if the reader has its own certificate that's trusted by Apple Wallet, an icon is shown to them to give the user an assurance that they're interacting with the intended party."
+    locator: "section 'Informed consent'"
+
+  - key: apple-passkit-pg-creating
+    title: "Wallet Developer Guide: Pass Design and Creation (PassKit Programming Guide, archived)"
+    author: Apple Inc.
+    url: https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/Creating.html
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/apple/passkit-pg-creating-2026-09-04.txt
+    status: primary
+    supports: "pass.json field dictionary structure (key/label/value), field-count limits per pass style, back-field data-detector linking, barcode dictionary keys, and pass.strings localization mechanism."
+    quote: "The primary fields contain the most important information and are shown prominently on the pass. Secondary fields are less important and less prominent, and auxiliary fields are even less so. Header fields contain highly salient information, and they are the only field that is visible when the passes are stacked up in Wallet, so use them sparingly."
+    locator: "chapter 4, 'Pass Structure'"
+
+  # ---------------------------------------------------------------------------
+  # Google
+  # ---------------------------------------------------------------------------
+
+  - key: google-generic-pass-overview
+    title: "Generic Pass overview"
+    author: Google LLC
+    url: https://developers.google.com/wallet/generic
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/google/generic-pass-overview-2026-09-04.txt
+    status: primary
+    supports: "Generic pass as the catch-all pass type for use cases outside ticket/loyalty/offer types; Generic Private pass type as the pre-approved path for PII/sensitive-data passes."
+    quote: "There are cases where your pass or use case may involve sensitive information, such as personally identifiable information (PII) and health data. For these scenarios, the Generic Private pass type is available for pre-approved use cases."
+    locator: "section 'Passes that include sensitive information'"
+
+  - key: google-genericclass-reference
+    title: "REST Resource: genericclass | Reference Documentation"
+    author: Google LLC
+    url: https://developers.google.com/wallet/reference/rest/v1/genericclass
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/google/reference-genericclass-2026-09-04.txt
+    status: primary
+    supports: "GenericClass JSON schema: classTemplateInfo, imageModulesData, textModulesData (max 10 class + 10 object), linksModuleData, multipleDevicesAndHoldersAllowedStatus, messages, valueAddedModuleData."
+    quote: "textModulesData[] object (TextModuleData) Text module data. If textModulesData is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object."
+    locator: "table 'Fields', row textModulesData"
+
+  - key: google-generic-brand-guidelines
+    title: "Brand guidelines | Generic pass"
+    author: Google LLC
+    url: https://developers.google.com/wallet/generic/resources/brand-guidelines
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/google/generic-brand-guidelines-2026-09-04.txt
+    status: primary
+    supports: "Pass Creation Guidelines: card background color, hero images, logo placement, module usage (infoModuleData, linksModuleData), and content/heading style rules."
+    quote: "Modules such as infoModuleData, linksModuleData, and textModulesData structure content appropriately."
+    locator: "section 'Modules'"
+
+  - key: google-identity-verify-overview
+    title: "Overview | Verify with Google Wallet"
+    author: Google LLC
+    url: https://developers.google.com/wallet/identity/verify
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/google/identity-verify-overview-2026-09-04.txt
+    status: primary
+    supports: "ISO 18013-5/-7 basis, Zero-Knowledge Proof selective disclosure, unlinkability claim, user-invocation requirement (apps cannot silently query the wallet), and the step-by-step online presentation flow (selector screen, Google Wallet consent screen showing RP name/logo/privacy policy, authentication)."
+    quote: "Apps cannot silently query the wallet. The API must be user-invoked to protect privacy, and user authentication (biometrics, PIN, or pattern) is required prior to sharing data."
+    locator: "section 'Privacy-Forward & Zero-Knowledge Proofs (ZKP)', bullet 'User Consent'"
+
+  - key: google-identity-verify-faq
+    title: "Digital Identity & Credentials FAQ | Verify with Google Wallet"
+    author: Google LLC
+    url: https://developers.google.com/wallet/identity/verify/faq
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/google/identity-verify-faq-2026-09-04.txt
+    status: primary
+    supports: "Consent-screen attribute ordering is fixed (alphabetical, not RP-customizable), credentials cannot be shared/synced across a holder's devices, dcql query mechanism for requesting multiple credential types in one presentation, and mDL/ID-pass revocation handling."
+    quote: "Q: Is it possible to customize the order of requested attributes on the user consent screen? A: No, Google Wallet reorders them alphabetically."
+    locator: "section 'User Experience (UX)'"
+
+  # ---------------------------------------------------------------------------
+  # ISO/IEC 18013-5 / 18013-7 (mDL) — via AAMVA implementation guidelines
+  # ---------------------------------------------------------------------------
+
+  - key: aamva-mdl-implementation-guidelines-v1.6
+    title: "Mobile Driver's License Implementation Guidelines, r1.6"
+    author: American Association of Motor Vehicle Administrators (AAMVA)
+    url: https://www.aamva.org/getmedia/1bc1f2b3-bc7b-4e44-8112-127a4110ad94/mDLImplementationGuidelines-16.pdf
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/iso-mdl/aamva-mdl-implementation-guidelines-v1.6-2026-09-04.pdf
+    status: primary
+    supports: "Explicit statement that ISO/IEC 18013-5 specifies interfaces, not user interface; selective data release and data-minimization requirements including summarized-request disclosure, blanket-sharing-awareness, and full data-element visibility; the VICAL/Digital Trust Service trust model distinguishing 'this signature verifies' from 'this Issuing Authority is bona fide'; multiple-mDL-per-device handling; and mDL refresh/revocation mechanisms. Full ISO/IEC 18013-5 and 18013-7 texts are paywalled and were not directly fetched — all ISO clause numbers here are as quoted/cited by this AAMVA guide, itself freely published."
+    quote: "Note that ISO/IEC 18013-5 specifies system interfaces and a certificate exchange method, and on purpose does not address the user interface (e.g. the look, feel and functionality of an mDL app residing on an mDL holder's device). It is left up to Issuing Authorities (and their implementers) to innovate in this area."
+    locator: "section 2, p. 9, paragraph following the device/server retrieval method list"
+
+  - key: iso-18013-5-lead
+    title: "ISO/IEC 18013-5:2021 Personal identification — ISO-compliant driving licence — Part 5: Mobile driving licence (mDL) application"
+    author: International Organization for Standardization
+    url: https://www.iso.org/standard/69084.html
+    retrieved: "2026-09-04"
+    capture: ".ignored/private-refs/papers/ (not fetched — paywalled)"
+    status: lead
+    supports: "N/A — not fetched. The full standard text was not obtained; ISO.org returned 403 to automated retrieval and the standard is sold, not openly published. All claims about its contents in this report are sourced from AAMVA's implementation guidelines (aamva-mdl-implementation-guidelines-v1.6) or from Apple/Google developer docs that describe their own conformance to it, never from the standard directly."
+    quote: ""
+    locator: ""
+
+  - key: iso-18013-7-lead
+    title: "ISO/IEC 18013-7 Personal identification — ISO-compliant driving licence — Part 7: Mobile driving licence (mDL) add-on functions"
+    author: International Organization for Standardization
+    url: https://www.iso.org/standard/82772.html
+    retrieved: "2026-09-04"
+    capture: ".ignored/private-refs/papers/ (not fetched — paywalled)"
+    status: lead
+    supports: "N/A — not fetched. Referenced only indirectly, via Google's FAQ statement that it supports 'Annex D [currently in draft]' of 18013-7 for online presentation."
+    quote: ""
+    locator: ""
+
+  # ---------------------------------------------------------------------------
+  # EUDI Wallet / ARF v3.0.0 (captured locally via ~/code/bakobo/eidas-eudi's pinned corpus)
+  # ---------------------------------------------------------------------------
+
+  - key: arf-annex-5.01-design-guide
+    title: "EUDI Wallet ARF Annex 5.01 - Design Guide"
+    author: European Commission / eIDAS Expert Group
+    url: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v3.0.0/docs/annexes/annex-5/annex-5.01-design-guide.md
+    retrieved: "2026-07-31"
+    capture: refs/captures/wallets/eudi/arf-annex-5.01-design-guide.md
+    status: primary
+    supports: "General UX design criteria (Nielsen Norman heuristics adopted wholesale) plus the ARF's own list of design areas still needing elaboration, including 'Browsing credentials/documents' and 'Trust Mark' placement — confirming the many-cards navigation question is flagged but not yet answered by the ARF design guide itself."
+    quote: "This design guide outlines the principles, guidelines, and best practices for creating consistent and effective design solutions for the EUDI wallet."
+    locator: "section 1.1, and section 3.2 'Browsing credentials/documents'"
+
+  - key: arf-annex-5.02-design-guide-data-sharing
+    title: "EUDI Wallet ARF Annex 5.02 - Design Guide - Data Sharing Scenarios"
+    author: European Commission / eIDAS Expert Group
+    url: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v3.0.0/docs/annexes/annex-5/annex-5.02-design-guide-data-sharing-scenarios.md
+    retrieved: "2026-07-31"
+    capture: refs/captures/wallets/eudi/arf-annex-5.02-design-guide-data-sharing-scenarios.md
+    status: primary
+    supports: "Selective-disclosure UI requirements: optional data grouped in collapsed, unselected-by-default sections, mandatory data clearly non-deselectable; pre-authorisation ('friction-full' consent profiles) with mandatory post-hoc notification; Trust Mark/badge as the relying-party trust signal, clickable for an explanation of what trust means."
+    quote: "It is recommended that optional data shall be grouped in collapsed sections and be unselected by default. On the other hand, it should be clearly depicted that mandatory data cannot be unselected."
+    locator: "section 3, bullet 'Selective Disclosure'"
+
+  - key: arf-main-06-trust-model
+    title: "EUDI Wallet ARF main document, chapter 6 - Trust model"
+    author: European Commission / eIDAS Expert Group
+    url: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v3.0.0/docs/main/06-trust-model.md
+    retrieved: "2026-07-31"
+    capture: refs/captures/wallets/eudi/arf-main-06-trust-model.md
+    status: primary
+    supports: "The Trust Mark as the wallet-solution-certification signal (distinct from issuer trust), rendered on demand with informational text and links; PID/Attestation Provider registration and trust-anchor (LoTE/Trusted List) verification chain; explicit note that non-technical trust (Conformity Assessment Bodies, Trusted List Providers) is rooted in 'authority and in procedural measures ... rather than in technical measures.'"
+    quote: "When the User invokes this Trust Mark, it: renders the official Trust Mark graphics and/or logo, shows an informational text about Wallet Solution certification, localised for the User's device language, and provides web links to a list of certified Wallet Solutions, as well as to a web page containing certification information of User's Wallet Solution."
+    locator: "section 6.5.3.7"
+
+  - key: arf-topic-k-combined-presentation
+    title: "EUDI ARF Discussion Paper, Topic K - Combined presentation of Attestations"
+    author: European Digital Identity Cooperation Group
+    url: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v3.0.0/docs/discussion-topics/k-combined-presentation-of-attestations.md
+    retrieved: "2026-07-31"
+    capture: refs/captures/wallets/eudi/arf-discussion-topic-k-combined-presentation.md
+    status: primary
+    supports: "The one shipped-adjacent (though still discussion-stage, not finalized ARF requirement) mechanism resembling a credential-to-credential relationship: identity matching / cryptographic binding across attestations from different issuers, so a Relying Party can trust that a PID and a separate attestation belong to the same User. Explicitly framed as unsolved/immature: prior requirements ACP_03-ACP_09 were withdrawn because the binding mechanisms 'are currently unavailable or not sufficiently mature for practical deployment.'"
+    quote: "This mechanism does not, by itself, guarantee that two attestations belong to the same User. For such assurance, a Provider must ensure that the device to which an attestation is bound is indeed controlled by the User to whom the attestation refers."
+    locator: "section 3.4 'Cryptographic Binding of attestations'"
+
+  - key: arf-topic-d-embedded-disclosure-policies
+    title: "EUDI ARF Discussion Paper, Topic D - Embedded Disclosure Policies"
+    author: European Digital Identity Cooperation Group
+    url: https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v3.0.0/docs/discussion-topics/d-embedded-disclosure-policies.md
+    retrieved: "2026-07-31"
+    capture: refs/captures/wallets/eudi/arf-discussion-topic-d-embedded-disclosure-policies.md
+    status: primary
+    supports: "Denial-invisibility requirement: when a user declines to present an attestation, the wallet must make the relying party unable to distinguish a declined attestation from one that never existed, to avoid leaking the attestation's existence."
+    quote: "When the presentation of an attestation is denied by the User, the Wallet Unit SHALL behave towards the Relying Party as if the attestation did not exist."
+    locator: "section 4.1, REQUIREMENT 4"

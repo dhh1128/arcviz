@@ -1,0 +1,50 @@
+Title: REST Resource: genericclass  |  Reference Documentation  |  Google for Developers
+
+URL Source: https://developers.google.com/wallet/reference/rest/v1/genericclass
+
+Markdown Content:
+*   The Generic Class resource allows you to create and manage generic passes within Google Wallet.
+
+*   It provides fields for customizing the pass's appearance, content, and functionality, such as images, text modules, links, and smart tap capabilities.
+
+*   Developers can utilize various methods to interact with Generic Class resources, including adding messages, retrieving class details, inserting new classes, listing existing classes, and updating class information.
+
+*   Each Generic Class is identified by a unique ID and leverages JSON for data representation and communication with the Google Wallet API.
+
+*   [Resource: GenericClass](https://developers.google.com/wallet/reference/rest/v1/genericclass#GenericClass)
+    *   [JSON representation](https://developers.google.com/wallet/reference/rest/v1/genericclass#GenericClass.SCHEMA_REPRESENTATION)
+
+*   [Methods](https://developers.google.com/wallet/reference/rest/v1/genericclass#METHODS_SUMMARY)
+
+Generic Class
+
+| JSON representation |
+| --- |
+| { "id": string, "classTemplateInfo": { object (`ClassTemplateInfo`) }, "imageModulesData": [ { object (`ImageModuleData`) } ], "textModulesData": [ { object (`TextModuleData`) } ], "linksModuleData": { object (`LinksModuleData`) }, "enableSmartTap": boolean, "redemptionIssuers": [ string ], "securityAnimation": { object (`SecurityAnimation`) }, "multipleDevicesAndHoldersAllowedStatus": enum (`MultipleDevicesAndHoldersAllowedStatus`), "callbackOptions": { object (`CallbackOptions`) }, "viewUnlockRequirement": enum (`ViewUnlockRequirement`), "messages": [ { object (`Message`) } ], "appLinkData": { object (`AppLinkData`) }, "valueAddedModuleData": [ { object (`ValueAddedModuleData`) } ], "merchantLocations": [ { object (`MerchantLocation`) } ] } |
+
+| Fields |
+| --- |
+| `id` | `string` Required. The unique identifier for the class. This ID must be unique across all from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`. |
+| `classTemplateInfo` | `object (ClassTemplateInfo)` Template information about how the class should be displayed. If unset, Google will fallback to a default set of fields to display. |
+| `imageModulesData[]` | `object (ImageModuleData)` Image module data. If `imageModulesData` is also defined on the object, both will be displayed. Only one of the image from class and one from object level will be rendered when both set. |
+| `textModulesData[]` | `object (TextModuleData)` Text module data. If `textModulesData` is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object. |
+| `linksModuleData` | `object (LinksModuleData)` Links module data. If `linksModuleData` is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object. |
+| `enableSmartTap` | `boolean` Available only to Smart Tap enabled partners. Contact support for additional guidance. |
+| `redemptionIssuers[]` | `string (int64 format)` Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap. |
+| `securityAnimation` | `object (SecurityAnimation)` Optional information about the security animation. If this is set a security animation will be rendered on pass details. |
+| `multipleDevicesAndHoldersAllowedStatus` | `enum (MultipleDevicesAndHoldersAllowedStatus)` Identifies whether multiple users and devices will save the same object referencing this class. |
+| `callbackOptions` | `object (CallbackOptions)` Callback options to be used to call the issuer back for every save/delete of an object for this class by the end-user. All objects of this class are eligible for the callback. |
+| `viewUnlockRequirement` | `enum (ViewUnlockRequirement)` View Unlock Requirement options for the generic pass. |
+| `messages[]` | `object (Message)` An array of messages displayed in the app. All users of this object will receive its associated messages. The maximum number of these fields is 10. |
+| `appLinkData` | `object (AppLinkData)` Optional app or website link that will be displayed as a button on the front of the pass. If AppLinkData is provided for the corresponding object that will be used instead. |
+| `valueAddedModuleData[]` | `object (ValueAddedModuleData)` Optional value added module data. Maximum of ten on the class. For a pass only ten will be displayed, prioritizing those from the object. |
+| `merchantLocations[]` | `object (MerchantLocation)` Merchant locations. There is a maximum of ten on the class. Any additional MerchantLocations added beyond the 10 will be rejected. These locations will trigger a notification when a user enters within a Google-set radius of the point. This field replaces the deprecated LatLongPoints. |
+
+| ## Methods |
+| --- |
+| ### `addmessage` | Adds a message to the generic class referenced by the given class ID. |
+| ### `get` | Returns the generic class with the given class ID. |
+| ### `insert` | Inserts a generic class with the given ID and properties. |
+| ### `list` | Returns a list of all generic classes for a given issuer ID. |
+| ### `patch` | Updates the generic class referenced by the given class ID. |
+| ### `update` | Updates the Generic class referenced by the given class ID. |

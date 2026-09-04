@@ -1,0 +1,1355 @@
+[W3C]
+
+Verifiable Credential Rendering Methods v1.0
+
+W3C Working Draft 22 August 2026
+
+More details about this document
+
+This version:
+    https://www.w3.org/TR/2026/WD-vc-render-method-20260822/
+
+Latest published version:
+    https://www.w3.org/TR/vc-render-method/
+
+Latest editor's draft:
+    https://w3c.github.io/vc-render-method/
+
+History:
+    https://www.w3.org/standards/history/vc-render-method/
+    Commit history
+
+Editors:
+    Dmitri Zagidulin (MIT Digital Credentials Consortium)
+    Manu Sporny (Digital Bazaar)
+    Patrick St. Louis (Open Security and Identity)
+    Isaac KOH (Infocomm Media Development Authority of Singapore)
+
+Authors:
+    Manu Sporny (Digital Bazaar)
+    Dmitri Zagidulin (MIT Digital Credentials Consortium)
+    Calvin Cheng (Government Technology Agency of Singapore)
+    Kyle Huang Junyuan (Government Technology Agency of Singapore)
+    Patrick St. Louis (Open Security and Identity)
+
+Feedback:
+    GitHub w3c/vc-render-method (pull requests, new issue, open issues)
+
+Copyright © 2026 World Wide Web Consortium. W3C^(®) liability, trademark
+and permissive document license rules apply.
+
+------------------------------------------------------------------------
+
+Abstract
+
+This specification describes an extension mechanism for the Verifiable
+Credential Data Model, that can be used to represent a Verifiable
+Credential through a visual, auditory, or haptic medium. It covers
+rendering a Verifiable Credential to a physical document, digital image,
+screen reader, or braille output.
+
+Status of This Document
+
+This section describes the status of this document at the time of its
+publication. A list of current W3C publications and the latest revision
+of this technical report can be found in the W3C standards and drafts
+index.
+
+This is an experimental specification and is undergoing regular
+revisions. It is not fit for production deployment.
+
+This document was published by the Verifiable Credentials Working Group
+as a Working Draft using the Recommendation track.
+
+Publication as a Working Draft does not imply endorsement by W3C and its
+Members.
+
+This is a draft document and may be updated, replaced, or obsoleted by
+other documents at any time. It is inappropriate to cite this document
+as other than a work in progress.
+
+This document was produced by a group operating under the W3C Patent
+Policy. W3C maintains a public list of any patent disclosures made in
+connection with the deliverables of the group; that page also includes
+instructions for disclosing a patent. An individual who has actual
+knowledge of a patent that the individual believes contains Essential
+Claim(s) must disclose the information in accordance with section 6 of
+the W3C Patent Policy.
+
+This document is governed by the 18 August 2025 W3C Process Document.
+
+Table of Contents
+
+1.  Abstract
+2.  Status of This Document
+3.  1. Introduction
+    1.  1.1 Terminology
+    2.  1.2 Conformance
+4.  2. Data Model
+    1.  2.1 The renderMethod Property
+    2.  2.2 TemplateRenderMethod
+        1.  2.2.1 The card Render Suite
+            1.  2.2.1.1 JSON Template Schema
+            2.  2.2.1.2 Card Output Schema
+        2.  2.2.2 The html Render Suite
+            1.  2.2.2.1 Host Page
+            2.  2.2.2.2 Output Preferences
+        3.  2.2.3 The nfc Render Suite
+5.  3. Algorithms
+    1.  3.1 Card Template Processing
+    2.  3.2 HTML Template Processing
+        1.  3.2.1 Host Page
+        2.  3.2.2 Wrapper Code
+6.  A. Threat Model
+    1.  A.1 Target Threats
+    2.  A.2 Implementation Threats
+    3.  A.3 Deployment Threats
+    4.  A.4 External Threats
+    5.  A.5 Dependency Threats
+7.  B. Relationship to Other Technologies
+8.  C. References
+    1.  C.1 Normative references
+    2.  C.2 Informative references
+
+1. Introduction
+
+Rendering methods can be used when the issuer has a specific way that
+they want to express a verifiable credential to an observer through a
+visual, auditory, or haptic mechanism. For example, an issuer of an
+employee badge credential might want to include rich imagery of their
+corporate logo and specific placement of employee information in
+specific areas of the badge. They might also want to provide an audio
+read out of the important aspects of the badge for individuals that have
+accessibility needs related to their eyesight.
+
+1.1 Terminology
+
+Some terminology used throughout this document is defined in the
+Terminology section of the Verifiable Credentials Data Model v2.1
+specification.
+
+1.2 Conformance
+
+As well as sections marked as non-normative, all authoring guidelines,
+diagrams, examples, and notes in this specification are non-normative.
+Everything else in this specification is normative.
+
+The key words MAY, MUST, MUST NOT, OPTIONAL, RECOMMENDED, REQUIRED, and
+SHOULD in this document are to be interpreted as described in BCP 14
+[RFC2119] [RFC8174] when, and only when, they appear in all capitals, as
+shown here.
+
+A conforming render method is any concrete expression of the data model
+that complies with the normative statements in this specification.
+Specifically, all relevant normative statements in Sections 2. Data
+Model and 3. Algorithms of this document MUST be enforced.
+
+A conforming processor is any algorithm realized as software and/or
+hardware that generates or consumes a conforming render method.
+Conforming processors MUST produce errors when non-conforming documents
+are consumed.
+
+This document also contains examples that contain JSON and JSON-LD
+content. Some of these examples contain characters that are invalid
+JSON, such as inline comments (//) and the use of ellipsis (...) to
+denote information that adds little value to the example. Implementers
+are cautioned to remove this content if they desire to use the
+information as valid JSON or JSON-LD.
+
+2. Data Model
+
+The following sections outline the data model that is used by this
+specification for rendering methods
+
+2.1 The renderMethod Property
+
+The renderMethod property is a reserved extension point in the
+Verifiable Credentials Data Model v2.1 specification . An issuer can
+utilize this property in a verifiable credential to express one or more
+preferred render methods.
+
+renderMethod
+    The value of the renderMethod property MUST specify one or more
+    rendering methods that can be used by software to express the
+    verifiable credential using a visual, auditory, or haptic mechanism.
+    Each renderMethod value MUST specify its type, for example,
+    TemplateRenderMethod. The precise contents of each rendering hint is
+    determined by the specific renderMethod type definition.
+
+2.2 TemplateRenderMethod
+
+When an issuer desires to specify template-based rendering instructions
+for a verifiable credential, they MAY add a renderMethod property that
+uses the data model described below.
+
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Property                          | Description                                                                                                                                                                                               |
++===================================+===========================================================================================================================================================================================================+
+| id                                | An OPTIONAL string that follows the URL Standard and, when fetched, dereferences to a render template.                                                                                                    |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| type                              | A REQUIRED string that MUST be the value TemplateRenderMethod.                                                                                                                                            |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| renderSuite                       | A REQUIRED string that identifies the algorithms that are used for generating the concrete rendering.                                                                                                     |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| name                              | An OPTIONAL human-readable string that can be displayed to provide a hint to the type of rendering that will be performed. This property might be used in a graphical interface that enables an           |
+|                                   | individual to select between multiple presentation modes.                                                                                                                                                 |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| description                       | An OPTIONAL human-readable string that provides a more involved description than name of when the particular rendering might be useful.                                                                   |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| renderProperty                    | An OPTIONAL list of string values that each conform to the JavaScript Object Notation (JSON) Pointer syntax that specifies which properties from the verifiable credential are exposed when using this    |
+|                                   | specific render method. If renderProperty is not provided, the entire verifiable credential is presumed to be shared when the render method is used.                                                      |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| template                          | An OPTIONAL URL or map that provides or refers to the template that will be used to perform the rendering. If the value is a URL, it MAY be a data: URL [RFC2397] containing the template code. If the    |
+|                                   | value is a map, it MUST conform to the following rules:                                                                                                                                                   |
+|                                   |                                                                                                                                                                                                           |
+|                                   |   Property          Description                                                                                                                                                                           |
+|                                   |   ----------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                                   |   id                An REQUIRED string that follows the URL Standard and, when fetched, dereferences to a template such as an SVG or PDF file.                                                            |
+|                                   |   mediaType         A RECOMMENDED string that identifies the media type for the id value as specified in Media Type Specifications and Registration Procedures.                                           |
+|                                   |   digestMultibase   An OPTIONAL multibase-encoded Multihash of the template file. The multibase value MUST be u (base64url-nopad) and the multihash value MUST be SHA-2 with 256-bits of output (0x12).   |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| digestMultibase                   | An OPTIONAL multibase-encoded Multihash of the render method referenced if id is specified. The multibase value MUST be u (base64url-nopad) and the multihash value MUST be SHA-2 with 256-bits of output |
+|                                   | (0x12).                                                                                                                                                                                                   |
++-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+2.2.1 The card Render Suite
+
+The card render suite uses JSON templates to transform a verifiable
+credential into a standardized data display format. This format enables
+wallets to display credentials in a responsive card layout with key data
+highlighted and configurable additional fields. Wallets that implement
+this method can render the standardized JSON output in their own card UI
+designs, allowing credentials to be displayed even when a wallet doesn't
+natively support a specific credential type.
+
+The template is a JSON object that matches the card output structure.
+String values in the template can be JSON pointer strings (as specified
+in JavaScript Object Notation (JSON) Pointer) that reference fields in
+the verifiable credential. When processing the template, JSON pointer
+strings are evaluated against the credential data and replaced with the
+resolved values. The template MUST conform to the JSON template schema
+defined below, and the resulting output MUST conform to the card output
+schema. Compound data across multiple fields is not supported; each
+field references a single JSON pointer.
+
+2.2.1.1 JSON Template Schema
+
+The template for a card render suite MUST be a JSON object that conforms
+to the following structure. The template structure matches the output
+structure, but string values can be either literal strings or JSON
+pointer strings (starting with /) that reference fields in the
+verifiable credential. The template SHOULD be validated against this
+schema before processing.
+
++-----------------------+-----------------------+-----------------------------------+
+| Property              | Type                  | Description                       |
++=======================+=======================+===================================+
+| name                  | string                | A REQUIRED string that is either  |
+|                       |                       | a literal display name or a JSON  |
+|                       |                       | pointer string (e.g.,             |
+|                       |                       | "/credentialSubject/degree/name") |
+|                       |                       | that references the credential    |
+|                       |                       | data.                             |
++-----------------------+-----------------------+-----------------------------------+
+| description           | string                | A REQUIRED string that is either  |
+|                       |                       | a literal description or a JSON   |
+|                       |                       | pointer string that references    |
+|                       |                       | the credential data.              |
++-----------------------+-----------------------+-----------------------------------+
+| icon                  | string                | An OPTIONAL string that is either |
+|                       |                       | a literal URL/data URI or a JSON  |
+|                       |                       | pointer string that references    |
+|                       |                       | the credential data.              |
++-----------------------+-----------------------+-----------------------------------+
+| theme                 | map                   | An OPTIONAL color theme object    |
+|                       |                       | with the following properties:    |
+|                       |                       |                                   |
+|                       |                       | - primaryColor (string): Primary  |
+|                       |                       |   color as a literal string or    |
+|                       |                       |   JSON pointer                    |
+|                       |                       | - accentColor (string): Accent    |
+|                       |                       |   color as a literal string or    |
+|                       |                       |   JSON pointer                    |
++-----------------------+-----------------------+-----------------------------------+
+| fields                | list                  | A REQUIRED ordered list of custom |
+|                       |                       | data fields. Each field is an     |
+|                       |                       | object with:                      |
+|                       |                       |                                   |
+|                       |                       | - label (string): The field label |
+|                       |                       |   (MUST be a literal string, not  |
+|                       |                       |   a JSON pointer)                 |
+|                       |                       | - value (string): The field value |
+|                       |                       |   as a JSON pointer string (e.g., |
+|                       |                       |   "/issuer")                      |
+|                       |                       | - language (string): An OPTIONAL  |
+|                       |                       |   language tag (as specified in   |
+|                       |                       |   Tags for Identifying Languages) |
+|                       |                       |   indicating the language of the  |
+|                       |                       |   field's label and/or value      |
+|                       |                       | - direction (string): An OPTIONAL |
+|                       |                       |   direction tag (as specified in  |
+|                       |                       |   Strings on the Web: Language    |
+|                       |                       |   and Direction Metadata)         |
+|                       |                       |   indicating the text direction   |
+|                       |                       |   of the field's label and/or     |
+|                       |                       |   value                           |
++-----------------------+-----------------------+-----------------------------------+
+| validFrom             | string                | An OPTIONAL string that is either |
+|                       |                       | a literal ISO 8601 date or a JSON |
+|                       |                       | pointer string that references    |
+|                       |                       | the credential data (validity     |
+|                       |                       | start date).                      |
++-----------------------+-----------------------+-----------------------------------+
+| validUntil            | string                | An OPTIONAL string that is either |
+|                       |                       | a literal ISO 8601 date or a JSON |
+|                       |                       | pointer string that references    |
+|                       |                       | the credential data (validity end |
+|                       |                       | date).                            |
++-----------------------+-----------------------+-----------------------------------+
+
+The following JSON Schema implements the template structure rules
+defined above:
+
+Example 1: JSON Schema for card template
+
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "required": ["name", "description", "fields"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name as a literal string or JSON pointer (e.g., \"/credentialSubject/degree/name\")"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description as a literal string or JSON pointer"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon URL/data URI as a literal string or JSON pointer"
+        },
+        "theme": {
+          "type": "object",
+          "properties": {
+            "primaryColor": {
+              "type": "string",
+              "description": "Primary color as a literal string or JSON pointer"
+            },
+            "accentColor": {
+              "type": "string",
+              "description": "Accent color as a literal string or JSON pointer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["label", "value"],
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Field label (MUST be a literal string, not a JSON pointer)"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "^/",
+                "description": "Field value as a JSON pointer string (MUST start with \"/\")"
+              },
+              "language": {
+                "type": "string",
+                "description": "Optional BCP 47 language tag for the field"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "validFrom": {
+          "type": "string",
+          "description": "Validity start date as a literal ISO 8601 date string or JSON pointer"
+        },
+        "validUntil": {
+          "type": "string",
+          "description": "Validity end date as a literal ISO 8601 date string or JSON pointer"
+        }
+      },
+      "additionalProperties": false
+    }
+
+The following example shows a valid card template with JSON pointer
+strings:
+
+Example 2: Example card template
+
+    {
+      "name": "/credentialSubject/degree/name",
+      "description": "University Degree Credential",
+      "icon": "/credentialSubject/icon",
+      "theme": {
+        "primaryColor": "#1a5490",
+        "accentColor": "/credentialSubject/theme/accentColor"
+      },
+      "fields": [
+        {
+          "label": "Institution",
+          "value": "/issuer"
+        },
+        {
+          "label": "Degree Type",
+          "value": "/credentialSubject/degree/type"
+        },
+        {
+          "label": "Issue Date",
+          "value": "/validFrom"
+        }
+      ],
+      "validFrom": "/validFrom",
+      "validUntil": "/validUntil"
+    }
+
+2.2.1.2 Card Output Schema
+
+The output of a card template MUST be a JSON object that conforms to the
+following structure:
+
++-----------------------+-----------------------+-----------------------+
+| Property              | Type                  | Description           |
++=======================+=======================+=======================+
+| name                  | string                | A REQUIRED display    |
+|                       |                       | name for the          |
+|                       |                       | credential card.      |
++-----------------------+-----------------------+-----------------------+
+| description           | string                | A REQUIRED            |
+|                       |                       | description text for  |
+|                       |                       | the credential card.  |
++-----------------------+-----------------------+-----------------------+
+| icon                  | string                | An OPTIONAL URL or    |
+|                       |                       | data URI for an icon  |
+|                       |                       | or image to display   |
+|                       |                       | on the card.          |
++-----------------------+-----------------------+-----------------------+
+| theme                 | map                   | An OPTIONAL color     |
+|                       |                       | theme object with the |
+|                       |                       | following properties: |
+|                       |                       |                       |
+|                       |                       | - primaryColor        |
+|                       |                       |   (string): Primary   |
+|                       |                       |   color for           |
+|                       |                       |   backgrounds and     |
+|                       |                       |   highlights          |
+|                       |                       | - accentColor         |
+|                       |                       |   (string): Accent    |
+|                       |                       |   color for           |
+|                       |                       |   highlights and      |
+|                       |                       |   emphasis            |
++-----------------------+-----------------------+-----------------------+
+| fields                | list                  | A REQUIRED ordered    |
+|                       |                       | list of custom data   |
+|                       |                       | fields. Each field is |
+|                       |                       | an object with:       |
+|                       |                       |                       |
+|                       |                       | - label (string): The |
+|                       |                       |   field label         |
+|                       |                       | - value (string): The |
+|                       |                       |   field value         |
+|                       |                       | - language (string):  |
+|                       |                       |   An OPTIONAL         |
+|                       |                       |   language tag (as    |
+|                       |                       |   specified in Tags   |
+|                       |                       |   for Identifying     |
+|                       |                       |   Languages)          |
+|                       |                       |   indicating the      |
+|                       |                       |   language of the     |
+|                       |                       |   field               |
+|                       |                       | - direction (string): |
+|                       |                       |   An OPTIONAL         |
+|                       |                       |   direction tag (as   |
+|                       |                       |   specified in        |
+|                       |                       |   Strings on the Web: |
+|                       |                       |   Language and        |
+|                       |                       |   Direction Metadata) |
+|                       |                       |   indicating the text |
+|                       |                       |   direction of the    |
+|                       |                       |   field's label       |
+|                       |                       |   and/or value        |
++-----------------------+-----------------------+-----------------------+
+| validFrom             | string                | An OPTIONAL ISO 8601  |
+|                       |                       | date string           |
+|                       |                       | indicating when the   |
+|                       |                       | credential becomes    |
+|                       |                       | valid.                |
++-----------------------+-----------------------+-----------------------+
+| validUntil            | string                | An OPTIONAL ISO 8601  |
+|                       |                       | date string           |
+|                       |                       | indicating when the   |
+|                       |                       | credential ceases to  |
+|                       |                       | be valid.             |
++-----------------------+-----------------------+-----------------------+
+
+The following example shows a valid card output:
+
+Example 3: Example card output
+
+    {
+      "name": "Bachelor of Science and Arts",
+      "description": "University Degree Credential",
+      "icon": "https://example.edu/icons/degree.svg",
+      "theme": {
+        "primaryColor": "#1a5490",
+        "accentColor": "#4a90e2"
+      },
+      "fields": [
+        {
+          "label": "Institution",
+          "value": "Example University"
+        },
+        {
+          "label": "Degree Type",
+          "value": "BachelorDegree"
+        },
+        {
+          "label": "Graduation Date",
+          "value": "2010-05-15"
+        }
+      ],
+      "validFrom": "2010-01-01T19:23:24Z",
+      "validUntil": null
+    }
+
+In the example below, a fully embedded JSON template is used as the
+rendering template. The template uses JSON pointer strings to reference
+credential data.
+
+Example 4: Basic usage of the card render suite
+
+    {
+      ...
+      "renderMethod": {
+        "type": "TemplateRenderMethod",
+        "renderSuite": "card",
+        // the JSON template is embedded in the VC
+        "template": "data:application/json;base64,eyJuYW1lIjogIi9jcmVkZW50aWFsU3ViamVjdC9kZWdyZWUvbmFtZSIsICJkZXNjcmlwdGlvbiI6ICJVbml2ZXJzaXR5IERlZ3JlZSBDcmVkZW50aWFsIiwgImZpZWxkcyI6IFt7ImxhYmVsIjogIkluc3RpdHV0aW9uIiwgInZhbHVlIjogIi9pc3N1ZXIifV19"
+      }
+    }
+
+The next example links to the JSON template on the Web and secures it
+against modification by using the digestMultibase property.
+
+Example 5: A remotely hosted JSON template for a card render template
+
+    {
+    ...
+    "renderMethod": {
+      "type": "TemplateRenderMethod",
+      "renderSuite": "card",
+      "template": {
+        // this JSON template is fetched from the Web
+        "id": "https://degree.example/credential-templates/bachelors.json",
+        "mediaType": "application/json",
+        "digestMultibase": "zQmerWC85Wg6wFl9znFCwYxApG270iEu5h6JqWAPdhyxz2dR"
+      }
+    }
+
+The next example links to the rendering template on the Web and secures
+it using the digestMultibase property:
+
+Example 6: A remotely hosted card render method
+
+    {
+    ...
+    "renderMethod": {
+      // this render method is fetched from the Web
+      "id": "https://degrees.example/bachelors-card.jsonld",
+      "mediaType": "application/ld+json",
+      "type": "TemplateRenderMethod",
+      "renderSuite": "card",
+      "digestMultibase": "zQmG270iEu5h6JqWAPdhyxz2dRerWC85Wg6wFl9znFCwYxAp"
+    }
+
+2.2.2 The html Render Suite
+
+The html render suite allows template authors to provide an HTML
+template to render a verifiable credential. The HTML can be referenced
+remotely or via a data: URL as the value of either template or
+template.id (when the value of template is an object). JavaScript within
+the HTML fragment is responsible for rendering the filtered verifiable
+credential data provided via an HTML data block (i.e.
+<script type="application/vc"></script>) hosted in a sandboxed iframe
+alongside the HTML template.
+
+Example 7: Example VC using the HTML render suite
+
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://www.w3.org/ns/credentials/examples/v2"
+      ],
+      "type": [
+        "VerifiableCredential",
+        "NameCredential"
+      ],
+      "issuer": {
+        "id": "did:example:1234",
+        "name": "The Issuer"
+      },
+      "credentialSubject": {
+        "name": "Example Name",
+        "notRendered": "should not appear"
+      },
+      "renderMethod": {
+        "type": "TemplateRenderMethod",
+        "renderSuite": "html",
+        "renderProperty": [
+          "/issuer/name",
+          "/credentialSubject/name"
+        ],
+        "template": {
+          "id": "https://test.example/credential-templates/NameCredential.html",
+          "mediaType": "text/html",
+          "digestMultibase": "zQmerWC85Wg6wFl9znFCwYxApG270iEu5h6JqWAPdhyxz2dR"
+        },
+        "outputPreference": {
+          "accessMode": [
+            "visual"
+          ],
+          "mediaType": "application/html",
+          "style": {
+            "width": "800px",
+            "height": "800px"
+          }
+        }
+      }
+    }
+
+Implementations MUST provide an environment that allows for JavaScript
+to safely render the HTML template using the filtered verifiable
+credential data. Additionally, a host page SHOULD protect the privacy of
+any request made (for example, dereferencing template.id) by using
+Oblivious HTTP [RFC9458] or other means of disassociating the requesting
+client from the requested origin by using a protecting relay.
+
+The following terminology is used to describe this environment:
+
+host page
+    Provides the secure environment for rendering the HTML template.
+
+template code
+    The HTML fragment provided within or remotely referenced by the
+    Render Method.
+
+wrapper code
+    Code that wraps the HTML template to provide additional security
+    restrictions and communication with the host page.
+
+At minimum, the environment MUST prevent navigation, loading of external
+content, and access to the host page in order to prevent tracking and
+other privacy harms.
+
+Browser based implementations, for example, can provide such an
+environment using a combination of Content Security Policy [CSP3]
+restrictions on a host page, sandboxing of an iframe hosting the HTML
+template, and wrapper code that wraps the HTML template to add
+additional CSP restrictions and provides ready and error event
+communication with the host page.
+
+[]
+
+2.2.2.1 Host Page
+
+The host page (typically a Wallet or verifiable credential renderer)
+MUST prevent the HTML template from navigating the top-level browsing
+context, accessing external content, accessing the host page, and
+loading any remote content.
+
+If a host page is used, the following rules apply:
+
+- The Content Security Policy (CSP) restrictions MUST include
+  frame-src 'none'. This forces the use of srcdoc instead of src for
+  iframes, which prevents the browser from loading the HTML template. In
+  turn, this forces the host page code to preload remotely referenced
+  template code and check the response against the related
+  digestMultibase value prior to injecting the template into the wrapper
+  code.
+- sandbox="allow-scripts" MUST be set on the iframe hosting the HTML
+  template to prevent navigation and top-level access.
+
+Example 8: Minimal Host Page
+
+    <html>
+      <head>
+        <meta http-equiv="content-security-policy" content="frame-src 'none'">
+      </head>
+      <body>
+        <iframe id="renderer" sandbox="allow-scripts allow-modals" srcdoc=""></iframe>
+      </body>
+    </html>
+
+2.2.2.1.1 Template Code
+
+The HTML template code referenced by the template property in the
+renderMethod MUST be an HTML fragment that contains the HTML, CSS, and
+JavaScript necessary to render the verifiable credential. The template
+code MUST NOT include any <html>, <head>, or <body> tags, as these will
+be provided by the wrapper code.
+
+Example 9: Example HTML Template Fragment
+
+    <div>
+      <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          console.log('running template render script');
+
+          // display credential as JSON as an example renderer; anything
+          // could be done here instead, including mustache/other-style
+          // template processing to generate the HTML for display
+
+          // FIXME: determine best name/location for the datablock/script tag
+          const credential = JSON.parse(document.querySelector(
+            'head > script[name="credential"]').innerHTML);
+
+          document.querySelector('#credentialSubject-name').innerText =
+            credential.credentialSubject.name;
+          document.querySelector('#issuer-name').innerText =
+            credential.issuer.name;
+
+          // TBD: signal to host that rendering is complete
+          window.renderMethodReady();
+        });
+      </script>
+      <style>
+        h1 {
+          color: blue;
+        }
+      </style>
+
+      <h1 id="credentialSubject-name"></h1>
+      <p>Issued by: <span id="issuer-name"></span></p>
+    </div>
+
+2.2.2.1.2 Wrapper Code
+
+The template HTML fragment MUST be wrapped in wrapper code that provides
+the data block containing the partial verifiable credential and adds an
+additional CSP policies to prevent navigation and external content
+loading. Specifically, the wrapper code MUST add the following CSP
+restrictions of default-src data: 'unsafe-inline' to prevent any network
+requests from being made by the template code.
+
+Example 10: Wrapper Code to wrap template and credential in
+iframe[srcdoc]
+
+    <html>
+      <head>
+        <meta http-equiv="content-security-policy" content="default-src data: 'unsafe-inline'">
+        <script name="credential" type="application/vc">${JSON.stringify(credential)}</script>
+      </head>
+      <body>${template}</body>
+    </html>
+
+To complete the setup, the host page MUST inject the wrapper code (once
+populated with the verifiable credential and the template code) into the
+iframe's srcdoc attribute which will run any JavaScript contained in the
+wrapper code and template code.
+
+Example 11: Combined Wrapper Code with Template and Credential
+
+    <html>
+      <head>
+        <meta http-equiv="content-security-policy" content="default-src 'none' data: 'unsafe-inline'">
+
+    <!-- The credential data block injected into the Wrapper Code. -->
+    <script name="credential" type="application/vc">{
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://www.w3.org/ns/credentials/examples/v2"
+      ],
+      "type": [
+        "VerifiableCredential",
+        "NameCredential"
+      ],
+      "issuer": {
+        "id": "did:example:1234",
+        "name": "The Issuer"
+      },
+      "credentialSubject": {
+        "name": "Example Name"
+      }
+    }</script>
+    <!-- End credential data block -->
+
+    </head>
+    <body>
+
+    <!-- The template HTML injected into the Wrapper Code. -->
+    <div>
+      <script>
+        console.log('running template render script');
+
+        // display credential as JSON as an example renderer; anything
+        // could be done here instead, including mustache/other-style
+        // template processing to generate the HTML for display
+
+        // FIXME: determine best name/location for the datablock/script tag
+        const credential = JSON.parse(document.querySelector(
+          'head > script[name="credential"]').innerHTML);
+
+        document.querySelector('#credentialSubject-name').innerText =
+          credential.credentialSubject.name;
+        document.querySelector('#issuer-name').innerText =
+          credential.issuer.name;
+
+        // TBD: signal to host that rendering is complete
+        window.renderMethodReady()
+      </script>
+      <style>
+        h1 {
+          color: blue;
+        }
+      </style>
+
+      <h1 id="credentialSubject-name"></h1>
+      <p>Issued by: <span id="issuer-name"></span></p>
+    </div>
+    <!-- End template HTML -->
+
+      </body>
+    </html>
+
+2.2.2.1.3 Ready and Error Events
+
+The iframe created in the wrapper code MUST provide a communication
+channel to allow the template to notify the host page when rendering is
+complete or if there was an error during rendering. This can be
+accomplished using the postMessage API with a MessageChannel setup by
+the wrapper code.
+
+The JavaScript shown below would be added to the above host page to add
+an onload event to the iframe which sets up the MessageChannel. The host
+page also creates a Promise that resolves when a ready message is
+received from the wrapper code or rejects when an error message is
+received. The wrapper code also provides a window.renderMethodReady
+method for use by the template to notify the host page that rendering is
+complete or send back an error message.
+
+Example 12: Additions to the Host Page to setup MessageChannel
+
+    // a promise that resolves when the rendering is ready (or rejects if it
+    // fails); can be used to show the display or an error instead
+    let resolveRender;
+    let rejectRender;
+    const readyPromise = new Promise((resolve, reject) => {
+      resolveRender = resolve;
+      rejectRender = reject;
+    });
+
+    // Setup communication channel for use by the template code in the iframe
+    renderer.onload = () => {
+      // create a MessageChannel; transfer one port to the iframe
+      const channel = new MessageChannel();
+      // start message queue so messages won't be lost while iframe loads
+      channel.port1.start();
+      // handle `ready` message
+      channel.port1.onmessage = function ready(event) {
+        if(event.data === 'ready') {
+          // unhide the iframe because it's ready
+          resolveRender();
+        } else {
+          rejectRender(new Error(event.data?.error?.message));
+        }
+        channel.port1.onmessage = undefined;
+      };
+      // send "start" message; send `port2` to iframe for return communication
+      renderer.contentWindow.postMessage('start', '*', [channel.port2]);
+    };
+
+    // setup event responses to ready or error
+    // NOTE: this section is idiosyncratic to the Wallet/Renderer's UX needs
+    readyPromise.then(() => {
+      console.log('rendering ready');
+      const renderer = document.getElementById('renderer');
+      renderer.hidden = false;
+    }).catch(err => {
+      const errorMessage = document.getElementById('error-message');
+      errorMessage.style.display = 'block';
+      errorMessage.innerText = 'Rendering failed: ' + err.message;
+      console.error('rendering failed', err);
+    });
+
+Example 13: Wrapper Code additions to connect the MessageChannel and
+create `renderMethodReady`
+
+    // add promise that will resolve to the communication port from
+    // the parent window
+    const portPromise = new Promise(resolve => {
+      window.addEventListener('message', function start(event) {
+        if(event.data === 'start' && event.ports?.[0]) {
+          window.removeEventListener('message', start);
+          resolve(event.ports[0]);
+        }
+      });
+    });
+
+    // attach a function to the window for the template to call when
+    // it's "ready" (or that an error occurred) that will send a message
+    // to the parent so the parent can decide whether to show the iframe
+    window.renderMethodReady = function(err) {
+      portPromise.then(port => port.postMessage(
+        !err ? 'ready' : {error: {message: err.message}}));
+    };
+
+With this setup, the template JavaScript can call
+window.renderMethodReady() to notify the host page that rendering is
+complete or call window.renderMethodReady(new Error("error message")) to
+notify the host page of an error.
+
+2.2.2.2 Output Preferences
+
+Rendering environment preferences MAY be provided within the Render
+Method. The purpose of this object is to provide suggested use, display,
+and intended access mode when rendering the provided template. An
+implementation SHOULD follow these preferences when provided.
+
+  Property           Description
+  ------------------ -----------------------------------------------------------------------------------------------
+  outputPreference   An OPTIONAL map that expresses the preferred rendering environment for the provided template.
+
+The outputPreference object MAY contain any of the following properties:
+
+  Property     Description
+  ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  accessMode   An OPTIONAL list of one or more string values of auditory, tactile, textual, or visual as defined in https://w3c.github.io/cg-reports/a11y-discov-vocab/CG-FINAL-vocabulary-20260128/#accessMode-vocabulary
+  mediaType    An OPTIONAL string stating a valid media type listed in the IANA Media Types preferred for rendering. This value MAY be used when suggesting addtional processing prior to rendering. Examples include converting an SVG template into a static image or an HTML document into a PDF.
+  style        An OPTIONAL map which defines style properties to potentially be used by the rendering environment.
+
+The style object MAY contain any of the following properties:
+
+  Property   Description
+  ---------- -------------------------------------------------------------------------------------------
+  width      An OPTIONAL string containing a CSS compatible width preference to be set on the iframe.
+  height     An OPTIONAL string containing a CSS compatible height preference to be set on the iframe.
+
+2.2.3 The nfc Render Suite
+
+The nfc render suite transmits a binary payload representing the
+verifiable credential over a wireless NFC connection.
+
+In the example below, a fully embedded NFC payload is used as the
+rendering template, which only discloses the barcode identifier
+associated with the credential.
+
+Example 14: Usage of the nfc render suite
+
+    {
+    ...
+    "renderMethod": {
+      "type": "TemplateRenderMethod",
+      "renderSuite": "nfc",
+      "name": "Tap to send",
+      // the NFC payload is embedded
+      "template": "data:application/octet-stream;base64,2QZkpQGDG...G8XJWnROcY4Biw",
+      // only the barcode is transmitted over NFC
+      "renderProperty": ["/credentialSubject/barcode"]
+    }
+    ...
+    }
+
+3. Algorithms
+
+The following sections outline the algorithms that is used by this
+specification for rendering methods.
+
+3.1 Card Template Processing
+
+When processing a card template, the following steps MUST be performed:
+
+1.  Validate the template JSON object against the JSON template schema
+    defined above. If validation fails, processing MUST stop and an
+    error MUST be returned.
+2.  For each string value in the template object:
+    1.  If the string value starts with / (indicating it is a JSON
+        pointer), evaluate it using the JSON Pointer algorithm
+        JavaScript Object Notation (JSON) Pointer against the verifiable
+        credential as the target document.
+    2.  If the JSON pointer evaluation succeeds, replace the JSON
+        pointer string with the resolved value. If the resolved value is
+        not a string, convert it to a string representation.
+    3.  If the JSON pointer evaluation fails or returns null, the
+        behavior is implementation-specific. Implementations MAY use an
+        empty string, leave the value as null, or signal an error.
+    4.  If the string value does not start with /, treat it as a literal
+        string and leave it unchanged.
+3.  Validate the resulting JSON object against the card output schema.
+    If validation fails, processing MUST stop and an error MUST be
+    returned.
+
+Note that compound data across multiple fields is not supported. Each
+field in the template references a single JSON pointer that resolves to
+a single value from the credential.
+
+3.2 HTML Template Processing
+
+The following sections outline the algorithms that are used by the html
+render suite to safely render the HTML template. Alternative algorithms
+MAY be used as long as the security and privacy outcomes as well as the
+output is the same.
+
+3.2.1 Host Page
+
+The host page MUST create an iframe element to host the HTML template.
+The host page MUST set the sandbox attribute on the iframe to
+allow-scripts to prevent navigation and top-level access.
+
+1.  Let vc be the verifiable credential to be rendered.
+2.  Let renderMethod be the chosen renderMethod property in vc where
+    renderMethod.type is TemplateRenderMethod and
+    renderMethod.renderSuite is html.
+3.  If renderMethod.template is a string, then let template be the value
+    of renderMethod.template.
+4.  If renderMethod.template is a map, then let template be the result
+    of fetching the URL in renderMethod.template.id.
+
+The host page MUST filter the verifiable credential vc to only include
+the properties specified in renderMethod.renderProperty, if it is
+present. If renderMethod.renderProperty is not present, the entire
+verifiable credential is used.
+
+This filtering MUST be done by applying the selectJsonLd algorithm
+defined in Section 3.4.13 selectJsonLd of the Data Integrity ECDSA
+Cryptosuites v1.0 specification [VC-DI-ECDSA] to the JSON Pointer
+[RFC6901] values present in renderMethod.renderProperty.
+
+The host page MUST create the wrapper code by embedding the filtered
+verifiable credential and the HTML template into the wrapper code
+template defined above.
+
+1.  Let wrapperCode be an HTML Document with
+    <meta http-equiv="Content-Security-Policy" content="default-src data: 'unsafe-inline'">
+    in the <head>.
+2.  Let datablock be an HTML Data Block with a type of application/vc.
+3.  Set the contents of datablock to be the filtered verifiable
+    credential in stringified JSON format.
+4.  Insert datablock into the <head> of wrapperCode.
+5.  Insert the value of template into the <body> of wrapperCode.
+
+The host page MUST set the srcdoc attribute of the iframe to the
+resulting wrapper code.
+
+1.  Set the srcdoc attribute of the iframe to the stringified HTML of
+    wrapperCode.
+
+The host page MUST setup a communication channel with the wrapper code
+to receive ready and error messages as described above.
+
+1.  Let renderPromise be a new Promise that:
+    1.  On resolve, can be used to display the iframe to the user.
+    2.  On reject, display the error message to the user.
+2.  In the onload event of the iframe:
+    1.  Let channel be a new MessageChannel.
+    2.  Create and start a new port1 listener on channel that listens
+        for a ready message from the code in template now injected into
+        the iframe via wrapperCode.
+    3.  In the port1 listener, if a ready message is received, resolve
+        renderPromise. If an error message is received, reject
+        renderPromise with the error message.
+    4.  Use postMessage to send port2 of channel to the iframe content
+        window.
+
+The host page SHOULD use the renderPromise to determine when rendering
+is complete or if there was an error during rendering.
+
+3.2.2 Wrapper Code
+
+The wrapper code MUST setup to receive communication from the host page
+via the MessageChannel and provide the window.renderMethodReady method
+for use by the template code.
+
+1.  In the window.onload event...
+    1.  Let port be the MessagePort received from the host page via the
+        message event.
+    2.  Create window.renderMethodReady function that...
+        1.  If called with no arguments, sends a ready message to the
+            host page via port.
+        2.  If called with an Error argument, sends an error message to
+            the host page via port with the error message.
+
+A. Threat Model
+
+This section is non-normative.
+
+This section summarizes the threat model for this specification,
+covering the security and privacy considerations relevant to the
+publication, retrieval, and processing of render methods. The full
+analysis, including responses and the data flow diagram, is provided in
+the Verifiable Credentials Render Method Threat Model.
+
+Readers are urged to familiarize themselves with the general threat
+model provided in the Threat Model section of the Verifiable Credentials
+Data Model v2.1 specification before reading this section. Implementers
+are expected to apply the general analysis provided in that
+specification to each specific feature provided by this specification.
+
+A.1 Target Threats
+
+1.  Uncontrolled Credential Presentation security - Without an
+    issuer-asserted render method, the choice of how to display a
+    verifiable credential falls entirely to holder or verifier software,
+    which can omit claims, reorder or relabel fields, drop validity
+    information, or apply misleading branding, so an observer forms an
+    incorrect understanding of what the issuer attested even though the
+    credential is authentic.
+
+A.2 Implementation Threats
+
+1.  Unsafe Rendering of Untrusted Data security - The html render suite
+    executes template-supplied code and consumes credential values that
+    are untrusted input, so hostile content arriving inside a
+    well-formed, verified credential can attempt to reach the
+    surrounding host page, navigate away, or contact external locations
+    during rendering.
+
+A.3 Deployment Threats
+
+1.  Tracking via Template and Resource Fetches privacy - Retrieving a
+    template or its referenced resources by location reveals to the
+    issuer or host that a credential is being rendered, and
+    per-credential locations or credential data encoded into outbound
+    requests turn each render into a tracking or exfiltration signal.
+
+A.4 External Threats
+
+1.  Harmful Rendering Output security - Because a render template
+    controls the visual, auditory, and tactile output, a hostile
+    template can be crafted to harm the person viewing it, for example
+    with a flashing pattern capable of triggering a seizure or a sudden
+    disruptive sound, even when the underlying credential is authentic.
+
+A.5 Dependency Threats
+
+1.  Inherited Rendering Environment Attack Surface security - The html
+    render suite relies on the confinement provided by the chosen
+    rendering environment, so a defect that lets the sandbox be escaped,
+    a policy be bypassed, or the isolation between template and host be
+    broken becomes a defect in the render process even when the render
+    method is used exactly as specified.
+
+Security Considerations
+
+W3C is migrating to a holistic threat modelling approach and is in the
+process of deprecating the Security Considerations sections in new
+specifications. Please refer to Appendix A. Threat Model for
+documentation related to security considerations.
+
+Privacy Considerations
+
+W3C is migrating to a holistic threat modelling approach and is in the
+process of deprecating the Privacy Considerations sections in new
+specifications. Please refer to Appendix A. Threat Model for
+documentation related to privacy considerations.
+
+B. Relationship to Other Technologies
+
+This section is non-normative.
+
+Several existing approaches and technologies were considered for
+conveying an issuer-preferred, human-perceivable presentation of a
+verifiable credential. This section summarizes those alternatives and
+why the render method approach described in this specification was
+chosen.
+
+Client-Determined Rendering
+
+Defining no mechanism and leaving presentation to the holder or verifier
+software requires no extra data, but gives the issuer no way to convey
+intended presentation, so credentials render inconsistently and claims
+or branding can be misrepresented, as described in Uncontrolled
+Credential Presentation. Credential formats such as ISO/IEC 18013-5
+mobile driving licence (mDL) and the JSON Web Tokens (RFC 7519) take
+this approach, defining the claims a credential carries but leaving
+their presentation to the consuming software. Microsoft's Information
+Card (CardSpace), now discontinued, took a limited variant of this,
+letting an issuer supply only a card name and logo that the identity
+selector rendered in a uniform card chrome. This specification adds an
+issuer-asserted alternative rather than prohibiting client-determined
+rendering.
+
+Credential-Type-Specific Display Registries
+
+Standardizing presentation per credential type via a registry gives
+consistent renderings for well-known types but requires prior knowledge
+of each type, does not scale to custom credentials, and cannot express
+issuer-specific branding. Platform wallets such as Apple Wallet
+(PassKit), Google Wallet, and Samsung Wallet take this approach,
+rendering a fixed set of predefined pass or object types in fixed,
+platform-controlled layouts where an issuer can fill in field values and
+assets but cannot express layout or branding outside the platform's
+catalog. The render method strategy defined by this specification
+instead travels with or is referenced from the credential, so even an
+unfamiliar type can be rendered as intended by its issuer.
+
+Such a centralized, controlled, registry-focused solution also works
+against the distributed, decentralized, and permissionless patterns
+otherwise specified to be part of the ecosystem of Decentralized
+Identifiers (DIDs) and Verifiable Credentials (VCs).
+
+Presentation Formats Such as PDF, SVG, and HTML Documents
+
+Distributing a fully-rendered PDF, static SVG, or HTML document is
+self-contained and widely supported, but such snapshots do not adapt to
+selective disclosure, cannot be re-rendered from the verified data, and
+are not bound to what was secured. This specification reuses these
+formats as templates combined with claim values at render time rather
+than as finished documents.
+
+Data Integrity and Proof Mechanisms
+
+Rather than defining a new integrity mechanism, this specification
+relies on existing securing mechanisms such as Verifiable Credential
+Data Integrity 1.0 and the digestMultibase property to bind a referenced
+template to the credential. Readers can learn about these general
+protection mechanisms by reading about the Tampering with Unprotected
+External Resources threat in the Verifiable Credential Threat Model.
+
+SD-JWT VC Type Metadata Rendering
+
+SD-JWT VC defines a rendering property to choose between a simple method
+that supports a fixed set of styling attributes, and an svg_templates
+method that forbids any code execution and substitutes claim values into
+text placeholders in an SVG. The group explored this approach and found
+it too limited for real-world use cases: because placeholders appear
+only in text nodes and no code can run, data-driven presentation tools
+such as conditional fields, variable-length lists, value formatting, and
+responsive layout cannot be expressed. These features are requirements
+in sectors such as healthcare, retail, and banking/finance. In contrast,
+this specification is not tied to a single credential serialization, and
+instead defines render suites that span a code-free declarative card
+suite, a data-driven html suite executed in a confined, "sandboxed"
+environment, and a static nfc suite.
+
+C. References
+
+C.1 Normative references
+
+[BCP47]
+    Tags for Identifying Languages. IETF. URL:
+    https://www.rfc-editor.org/info/bcp47
+
+[CSP3]
+    Content Security Policy Level 3. Mike West; Antonio Sartori. W3C. 13
+    August 2026. W3C Working Draft. URL: https://www.w3.org/TR/CSP3/
+
+[infra]
+    Infra Standard. Anne van Kesteren; Domenic Denicola. WHATWG. Living
+    Standard. URL: https://infra.spec.whatwg.org/
+
+[RFC2119]
+    Key words for use in RFCs to Indicate Requirement Levels. S.
+    Bradner. IETF. March 1997. Best Current Practice. URL:
+    https://www.rfc-editor.org/info/rfc2119/
+
+[RFC2397]
+    The "data" URL scheme. L. Masinter. IETF. August 1998. Proposed
+    Standard. URL: https://www.rfc-editor.org/info/rfc2397/
+
+[RFC6838]
+    Media Type Specifications and Registration Procedures. N. Freed; J.
+    Klensin; T. Hansen. IETF. January 2013. Best Current Practice. URL:
+    https://www.rfc-editor.org/info/rfc6838/
+
+[RFC6901]
+    JavaScript Object Notation (JSON) Pointer. P. Bryan, Ed.; K. Zyp; M.
+    Nottingham, Ed. IETF. April 2013. Proposed Standard. URL:
+    https://www.rfc-editor.org/info/rfc6901/
+
+[RFC8174]
+    Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words. B. Leiba.
+    IETF. May 2017. Best Current Practice. URL:
+    https://www.rfc-editor.org/info/rfc8174/
+
+[STRING-META]
+    Strings on the Web: Language and Direction Metadata. Richard Ishida;
+    Addison Phillips. W3C. 16 July 2026. FPWD. URL:
+    https://www.w3.org/TR/string-meta/
+
+[URL]
+    URL Standard. Anne van Kesteren. WHATWG. Living Standard. URL:
+    https://url.spec.whatwg.org/
+
+[VC-DATA-MODEL-2.1]
+    Verifiable Credentials Data Model v2.1. Manu Sporny; Ted Thibodeau
+    Jr; Ivan Herman. W3C. 16 August 2026. W3C Working Draft. URL:
+    https://www.w3.org/TR/vc-data-model-2.1/
+
+[VC-DI-ECDSA]
+    Data Integrity ECDSA Cryptosuites v1.0. Manu Sporny; Dave Longley;
+    Greg Bernstein. W3C. 15 May 2025. W3C Recommendation. URL:
+    https://www.w3.org/TR/vc-di-ecdsa/
+
+C.2 Informative references
+
+[DID]
+    Decentralized Identifiers (DIDs) v1.0. Manu Sporny; Amy Guy; Markus
+    Sabadello; Drummond Reed. W3C. 19 July 2022. W3C Recommendation.
+    URL: https://www.w3.org/TR/did-core/
+
+[RFC9458]
+    Oblivious HTTP. M. Thomson; C. A. Wood. IETF. January 2024. Proposed
+    Standard. URL: https://www.rfc-editor.org/info/rfc9458/
+
+[VC-DATA-INTEGRITY]
+    Verifiable Credential Data Integrity 1.0. Ivan Herman; Manu Sporny;
+    Ted Thibodeau Jr; Dave Longley; Greg Bernstein. W3C. 15 May 2025.
+    W3C Recommendation. URL: https://www.w3.org/TR/vc-data-integrity/
+
+[VC-DATA-MODEL]
+    Verifiable Credentials Data Model v2.0. Ivan Herman; Michael Jones;
+    Manu Sporny; Ted Thibodeau Jr; Gabe Cohen. W3C. 15 May 2025. W3C
+    Recommendation. URL: https://www.w3.org/TR/vc-data-model-2.0/
+
+↑
+
+Permalink
+
+Referenced in:
+
+- § 1.2 Conformance
+
+Permalink
+
+Referenced in:
+
+- Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+- § 2.2.2 The html Render Suite (2) (3) (4) (5) (6)
+- § 2.2.2.1 Host Page (2) (3) (4)
+- § 2.2.2.1.2 Wrapper Code
+- § 2.2.2.1.3 Ready and Error Events (2) (3) (4) (5) (6)
+- § 3.2.1 Host Page (2) (3) (4) (5) (6) (7)
+- § 3.2.2 Wrapper Code (2) (3) (4)
+- § A.2 Implementation Threats
+
+Permalink
+
+Referenced in:
+
+- § 2.2.2.1.1 Template Code (2)
+- § 2.2.2.1.2 Wrapper Code (2) (3)
+- § 3.2.2 Wrapper Code
+
+Permalink
+
+Referenced in:
+
+- § 2.2.2 The html Render Suite
+- § 2.2.2.1 Host Page
+- § 2.2.2.1.1 Template Code
+- § 2.2.2.1.2 Wrapper Code (2) (3) (4)
+- § 2.2.2.1.3 Ready and Error Events (2) (3) (4)
+- § 3.2.1 Host Page (2) (3) (4)
+- § 3.2.2 Wrapper Code

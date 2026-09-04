@@ -1,0 +1,319 @@
+Title: Get started with the Verify with Wallet API - Apple Developer
+
+URL Source: https://developer.apple.com/wallet/get-started-with-verify-with-wallet/
+
+Markdown Content:
+Apps that require age or identity verification can use the Verify with Wallet API to quickly and securely verify a person’s information using their ID stored in Apple Wallet.
+
+![Image 1: iPhone sending identity verification with the Verify with Wallet API](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/screen-hero-large_2x.png)
+
+## Overview
+
+![Image 2](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/verify.svg)
+
+### Streamline your verification process
+
+Verify with Wallet lets people share information from their ID card in Apple Wallet for an easier and faster verification experience within your app. Designed to streamline the verification process for services that require users to prove their identity or age, it eliminates cumbersome activities like scanning documents or taking selfies. By enabling a simple one-tap experience, apps can reduce friction and abandonment.
+
+![Image 3](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/id.svg)
+
+### Verified and authenticated identity data
+
+Identity information that your app gets via Verify with Wallet has been verified by the government issuing authority. In order to add an ID card to Apple Wallet, the user must prove ownership of a valid government issued ID card. During this proofing process, the issuing authority confirms that the user’s ID card is authentic and belongs to that user. Additionally, in order to present their ID information to your app, the user needs to authenticate with the same Face ID or Touch ID that they used to add the ID card to Apple Wallet.
+
+![Image 4](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/privacy.svg)
+
+### Privacy preserving
+
+When you integrate with Verify with Wallet, you provide full transparency into the identity information your app requests and for how long. Your app will be entitled to request only the specific data required to complete the transaction. This prevents users from having to overshare their identity information. Furthermore, neither the issuing authority nor Apple can see when and where a user shares their license or ID.
+
+## Availability and requirements
+
+Verify with Wallet requires a mobile driver’s license or ID stored in Apple Wallet on a supported device in the following regions:
+
+*   Driver’s licenses and IDs in Arizona, Colorado, Georgia, Hawaii, Illinois, Iowa, Maryland, Montana, New Mexico, North Dakota, Ohio, and West Virginia require iPhone 8 or later running iOS 16.5 or later; or Apple Watch Series 4 or later running watchOS 9.5 or later.
+*   Driver’s licenses and IDs in Arkansas and Oklahoma require iPhone 8 or later running iOS 16.5 or later; or Apple Watch Series 6 or later running watchOS 11 or later.
+*   Driver’s licenses and IDs in Virginia require iPhone 8 or later running iOS 16.5 or later; or Apple Watch Series 6 or later running watchOS 10 or later.
+*   Driver’s licenses and IDs in California require iPhone XS or later running iOS 17.5 or later; or Apple Watch Series 4 or later running watchOS 10 or later.
+*   Driver’s licenses and IDs in Puerto Rico require iPhone XS or later running iOS 18.1 or later; or Apple Watch Series 6 or later running watchOS 11 or later.
+*   My Number Cards in Japan require iPhone XS or later running iOS 18.5 or later.
+*   Digital IDs using a U.S. passport require iPhone 11 or later running iOS 26.1 or later; or Apple Watch Series 6 or later running watchOS 26.1 or later.
+
+## Request the entitlement
+
+If you’d like to use the Verify with Wallet API, you’ll need to have an entitlement assigned to your app. Account Holders in the Apple Developer Program can [submit an entitlement request](https://developer.apple.com/contact/request/verify-with-wallet/) for the Verify with Wallet API. Requests are granted per bundle ID (the app’s unique identifier) and assigned entitlements can only be used with the single binary associated with the bundle ID.
+
+### Information you’ll need to provide
+
+#### App information
+
+*   App name
+*   Bundle ID (the app’s unique identifier)
+*   App Store or TestFlight URL
+*   App Clip App ID (if applicable)
+*   Description of the good or service being offered through your app that requires age or identity verification
+*   Screenshots of your identity or age verification process for users that do not use an ID in Apple Wallet
+
+#### Data available to request
+
+**Age verification data:**
+
+*   Age Over N Flag
+*   Age in Years
+*   Issuing Authority
+*   ID Photo
+
+**Identity verification data:**
+
+*   Given Name
+*   Family Name
+*   Address
+*   Date of Birth
+*   Eye color
+*   Hair color
+*   Height
+*   Weight
+*   Organ donor status
+*   Veteran status
+*   Sex
+*   Document Number
+*   Document Issue Date
+*   Document Expiration Date
+*   Driving Privileges
+*   DHS Compliance (Real ID)
+*   ID Photo Date
+*   Signature
+*   Nationality
+*   Place of Birth
+*   Temporary lawful status
+
+#### Usage information
+
+In order to be eligible, your app must require an equivalent age or identity verification process for each user who obtains the same goods or services for the relevant jurisdiction
+
+*   Describe the good or service being offered through your app that requires age or identity verification and how verification is addressed today.
+*   Upload screenshots of your proposed age or identity verification process for users that use ID in Apple Wallet, as well as the existing or proposed age or identity verification process for users that do not use ID in Apple Wallet.
+*   Provide the URL link to your app’s privacy policy, and the privacy policy of each third party that will collect or retain any types of data for Verify with Wallet.
+
+## Implement the API
+
+Once you receive the Verify with Wallet API entitlement, you can invoke the Verify with Wallet API in the PassKit framework and specify the information you’re requesting. To offer a consistent experience across apps, the API provides a set of buttons you can use in your app when you need to ask for identity or age verification. Tapping a button displays a sheet that describes your request and lets people agree to share their information or cancel. If they agree, your app will receive an encrypted response which it passes to your server for decryption and verification.
+
+![Image 5: Verify with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/verify-with-apple-wallet_2x.png)
+
+![Image 6: Continue with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/continue-with-apple-wallet_2x.png)
+
+![Image 7: Verify Age with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/verify-age-with-apple-wallet_2x.png)
+
+![Image 8: Verify Identity with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/verify-identity-with-apple-wallet_2x.png)
+
+### Localized buttons
+
+![Image 9: Verify with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/jp-verify-with-apple-wallet_2x.png)
+
+![Image 10: Continue with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/jp-continue-with-apple-wallet_2x.png)
+
+![Image 11: Verify Age with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/jp-verify-age-with-apple-wallet_2x.png)
+
+![Image 12: Verify Identity with Apple Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/images/jp-verify-identity-with-apple-wallet_2x.png)
+
+#### Documentation, videos, and resources
+
+*   [IDs in Apple Wallet: privacy and security overview](https://support.apple.com/en-us/HT213046/)
+*   [Human Interface Guidelines: Identity verification](https://developer.apple.com/design/human-interface-guidelines/wallet#Identity-verification)
+*   [Requesting identity data from a Wallet pass](https://developer.apple.com/documentation/passkit/requesting-identity-data-from-a-wallet-pass/)
+*   [Verifying Wallet identity requests](https://developer.apple.com/documentation/passkit/verifying-wallet-identity-requests/)
+*   [PKIdentityDriversLicenseDescriptor](https://developer.apple.com/documentation/passkit/pkidentitydriverslicensedescriptor/)
+*   [PKIdentityNationalIDCardDescriptor](https://developer.apple.com/documentation/passkit/pkidentitynationalidcarddescriptor/)
+*   [What’s new in Wallet and Apple Pay](https://developer.apple.com/videos/all-videos/?q=wallet)
+*   [Sample data and simulator keys](https://developer.apple.com/sample-code/wallet/identity_verification_sample.zip)
+*   [Wallet and Apple mDL Developer Integrator profile](https://developer.apple.com/bug-reporting/profiles-and-logs/?name=wallet)
+*   [Developer forums](https://developer.apple.com/forums/tags/wallet/)
+*   [Feedback Assistant](https://feedbackassistant.apple.com/)
+
+#### Issuing authority certificates
+
+In order to verify a payload from a user’s issuing authority, you’ll need to download and use its IACA certificate from their website.
+
+##### U.S. driver’s license and state ID
+
+*   [IACA certificate for Arizona](https://azmvdnow.gov/certificates/)
+*   [IACA certificate for Arkansas](https://www.dfa.arkansas.gov/office/driver-services/mobile-id/apple-wallet/)
+*   [IACA certificate for California](https://www.dmv.ca.gov/portal/ca-dmv-wallet/mdl-reader/)
+*   [IACA certificate for Colorado](http://dmv.colorado.gov/applewallet/)
+*   [IACA certificate for Georgia](https://dds.georgia.gov/georgia-licenseid/ga-digital-drivers-license)
+*   [IACA certificate for Hawaii](https://hidot.hawaii.gov/highways/mobile-driver-license/)
+*   [IACA certificate for Illinois](https://www.ilsos.gov/departments/drivers/mobile-id/support.html)
+*   [IACA certificate for Iowa](https://iowadot.gov/mvd/MID-businesses)
+*   [IACA certificate for Maryland](https://mva.maryland.gov/Pages/MDMobileID_Apple.aspx)
+*   [IACA certificate for Montana](https://mvdmt.gov/mobile-id/id-in-apple-wallet/)
+*   [IACA certificate for New Mexico](https://www.mvd.newmexico.gov/new-mexico-mobile-id-in-apple-wallet/)
+*   [IACA certificate for North Dakota](https://www.dot.nd.gov/driver/mobile-id-information/apple-wallet)
+*   [IACA certificate for Ohio](https://bmvonline.dps.ohio.gov/home/Certificate)
+*   [IACA certificate for Oklahoma](https://oklahoma.gov/service/popular-services/digitalid/applewallet.html#businesses-faq)
+*   [IACA certificate for Puerto Rico](https://www.idmovil.pr.gov/)
+*   [IACA certificate for Virginia](https://www.dmv.virginia.gov/licenses-ids/mobile-id/business)
+*   [IACA certificate for West Virginia](https://dmv.wv.gov/apple-wallet-faq)
+
+##### Japan My Number Card
+
+*   [IACA certificate for Government of Japan](https://www.j-lis.go.jp/pn/mdociaca.html)
+**Note:** Per [relevant law](https://laws.e-gov.go.jp/law/425AC0000000027/20250401_506AC0000000047), identity verification services that utilize My Number Cards must undergo a functional certification process. For details, view the [Digital Agency of Japan’s website](https://www.digital.go.jp/policies/mynumber/mynumbercard-mdoc).
+
+##### Digital ID using a U.S. passport
+
+*   [IACA certificates for Apple](https://www.apple.com/certificateauthority/apki202505/)
+
+## Verify with Wallet Usage Guidelines
+
+There are specific guidelines for using Verify with Wallet. You can’t incorporate Verify with Wallet with any app that:
+
+*   Violates any law or otherwise fails to comply with legal requirements
+*   Fails to accurately and truthfully disclose their data usage and data processing practices to the users
+*   Primarily offers or sells drug paraphernalia or sexually-oriented items or services
+*   Promotes violence for any reason
+*   Engages in fraud
+*   Infringes or violates the intellectual property, publicity, or privacy rights of another
+*   Shows Apple or its products in a false or derogatory light
+*   Offers services or transactions involving: 
+    *   Tobacco, marijuana, or vaping products
+    *   Firearms, weapons, or ammunition
+    *   Illegal drugs or non-legally prescribed controlled substances
+    *   Items that create consumer safety risks
+    *   Items that are intended to be used to engage in illegal activities
+    *   Counterfeit or stolen goods
+    *   Pornography
+
+**Important:** Apple reserves the right at any time to disable Verify with Wallet to your app for any reason it deems prudent.
+
+## Frequently asked questions
+
+### Using the API
+
+#### Once I’ve been granted the entitlement, how do I set up my developer account and Xcode project?
+
+In the "Certificates, Identifiers, & Profiles" section of the Apple Developer website:
+
+1.   Create a merchant ID. If you already have a merchant ID you use for Apple Pay, you can reuse it here.
+2.   Create an "Identity Access Certificate" for your merchant ID. This will show up in the "Identity" tab in the "Edit or Configure a Merchant ID" page. 
+    1.   Note that the private key of the encryption certificate will be used by your server to decrypt the encryptedData returned from the API.
+
+3.   Add the "In App Identity Presentment" capability to your App ID. This will appear in the "Additional Capabilities" tab of the "Edit your App ID Configuration" page.
+4.   Add the 'In App Identity Presentment Merchant IDs' capability to your App ID and select the associated Merchant IDs.
+5.   Generate a new provisioning profile with these changes.
+
+You’ll also need to manually configure your app’s entitlements plist file.
+
+##### Entitlement #1:
+
+Choose document-type you want to be granted entitlement via submit an entitlement request.
+
+```
+"com.apple.developer.in-app-identity-presentment": {
+		"document-types": [
+			"us-drivers-license"
+		],
+		"elements": [
+			"given-name",
+			"family-name",
+			"portrait",
+			"address",
+			"issuing-authority",
+			"document-expiration-date",
+			"document-number",
+			"driving-privileges",
+			"age",
+			"date-of-birth"
+		]
+	},
+```
+
+Filter the list of entitlements to just the ones you requested through the entitlement request.
+
+##### Entitlement #2:
+
+```
+"com.apple.developer.in-app-identity-presentment.merchant-identifiers": [
+		“your-merchant-id-goes-here”
+	]
+```
+
+Note that you must add this entitlement even if you’re using the same merchant ID for Apple Pay. Apple Pay’s com.apple.developer.in-app-payments entitlement is NOT recognized for identity verification.
+
+For browser-based online presentment, we intend to support the mDoc request API as developed in the W3C, pending its final definition, in a way that also enables presentment of conforming identity credentials from third party applications that meet appropriate privacy and security guidelines.
+
+#### How can I test my use of the API?
+
+There are several ways to test your use of the API:
+
+*   **Using the iOS simulator.** The simulator comes preloaded with mock data you can use to test your integration with the API. For details on the keys and other resources needed to validate responses from the simulator’s mock data, download the [Sample data and simulator keys](https://developer.apple.com/sample-code/wallet/identity_verification_sample.zip) bundle.
+*   **On an iOS device.** When you install the [Wallet and Apple mDL Developer Integrator profile](https://developer.apple.com/bug-reporting/profiles-and-logs/?name=wallet), the API will return mock data containing a real device signature but no issuer signature.
+*   **Test sample.** The [Sample data and simulator keys](https://developer.apple.com/sample-code/wallet/identity_verification_sample.zip) bundle contains a sample response with all of the keys and certificates needed to validate it. Use this to test your response validation logic.
+
+#### Which descriptor should I use to request ID data?
+
+### Elements
+
+#### What is the difference between the ISO/IEC 18013-5 and AAMVA namespaces?
+
+In the ISO/IEC 18013-5 specification supports namespaces that allow different sets of elements to coexist within an identity document. ISO/IEC 18013-5 defines a set of standard elements within the org.iso.18013.5.1 namespace. The American Association of Motor Vehicle Administrators (AAMVA) defines its own namespace containing additional information specific to U.S. driver’s licenses.
+
+For more information about the namespaces and elements supported by Verify with Wallet, see the [PKIdentityDriversLicenseDescriptor documentation](https://developer.apple.com/documentation/passkit/pkidentitydriverslicensedescriptor).
+
+#### What is the difference between the ISO/IEC 18013-5, ISO/IEC 23220 and Government of Japan namespaces?
+
+ISO/IEC 18013-5 defines a set of standard elements within the org.iso.18013.5.1 namespace related to Driver’s License. ISO/IEC 23220-2 defines a generic namespace within the org.iso.23220.1 to describe photo IDs. The Government of Japan defines its own namespace, org.iso.23220.1.jp, which contains additional data elements specific to the Japan MyNumber Card.
+
+For more information about the namespaces and elements supported by Verify with Wallet, see the [PKIdentityNationalIDCardDescriptor documentation](https://developer.apple.com/documentation/passkit/pkidentitynationalidcarddescriptor).
+
+#### What does the address field consist of? Is it possible to get city, state (if applicable), and zip code as well?
+
+Yes. The “address” element in the request provides the street address, city, state (if applicable), country and zip code.
+
+The address field of the My Number Card in Japan also includes the local government code, a 5 digits code defined by the Minister of Internal Affairs and Communications of Japan for prefectures and municipalities nationwide. For further details, please refer to: [https://www.soumu.go.jp/denshijiti/code.html](https://www.soumu.go.jp/denshijiti/code.html)
+
+#### What does document number refer to?
+
+This refers to the ID document number, which can be driver license number, passport number, or the My Number in My Number Card, a twelve-digit ID number issued to all citizens and residents of Japan (The use of My Number is governed by applicable laws and regulations).
+
+#### What’s the difference between age and age threshold?
+
+Age is the user’s age in years. Age threshold is a boolean indicating whether the user is above a certain age. For example, if the user is 42 years old:
+
+*   Age would return 42
+*   AgeThresholdElementWithAge:18 would return true
+*   AgeThresholdElementWithAge:65 would return false
+
+If you only need to verify whether the user is above or below a certain age, you should use an age threshold element as it is the most privacy preserving approach.
+
+#### What does issuing authority refer to? Is it is the name of the governent issuing the license or ID?
+
+This corresponds to the “issuing authority”, “issuing jurisdiction”, “issuing country” and “un distinguishing sign” elements described in the ISO 18013-5 specification.
+
+#### What is the structure of the name elements?
+
+The API defines two name elements: given name and family name. These correspond to the “given_name” and ”family_name“ elements defined in the ISO 18013-5 specification. When available, requesting given name will also return the ”given_name_truncation“, ”aka_given_name“, ”name_suffix“, and ”aka_suffix“ elements from the AAMVA namespace. Likewise, when available, requesting family name will also return the ”family_name_truncation“ and ”aka_family_name“ elements from the AAMVA namespace.
+
+The ISO 18013-5 specification does not include an element for middle name(s). Generally, middle names are included with the given name field, but that’s ultimately at the discretion of each issuer.
+
+#### Does Apple Wallet also allow for non-standard Driver’s Licenses (DLs) such as probationary and provisional DLs? If so, what’s the best way for us to differentiate between different kinds of DLs?
+
+### Response format
+
+#### Where is the session transcript used?
+
+While decrypting the response, you will construct a session transcript object. The session transcript is used as the “info” parameter during HPKE decryption, and is used again while verifying the device signature as defined in ISO 18013-5. See [Verifying Wallet Identity Requests](https://developer.apple.com/documentation/passkit/wallet/verifying_wallet_identity_requests) for more details.
+
+#### What is an IACA certificate? Which IACA certificates should I support?
+
+The IACA (issuing authority certificate authority) certificate is the root of trust used to verify that an identity credential was created by a valid issuer, for example, a state’s Department of Motor Vehicles, Government of Japan or Apple.
+
+The IACA certificates used by the Verify with Wallet API are [listed above](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/#authority). In order to authenticate information returned from IDs in Wallet, your server will need to trust these IACA certificates.
+
+#### Why must I verify the response on my server?
+
+Verifying the response on a server is necessary in order to ensure that the identity document was created by a valid issuer and was presented from the correct device. Skipping verification or performing the verification within your app leaves you vulnerable to identity documents tampered with by malicious users.
+
+#### How do I know which issuer issued the identity credential?
+
+You can obtain the issuer (for example, a state’s Department of Motor Vehicles, Government of Japan, or Apple) that issued a given identity credential by requesting the issuing authority element. Alternatively, you can identify the issuer through the IACA certificate corresponding to the identity credential’s signing certificate.

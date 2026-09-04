@@ -1,0 +1,76 @@
+Title: Generic Pass overview
+
+URL Source: https://developers.google.com/wallet/generic
+
+Markdown Content:
+*   The Generic Pass is a versatile pass type in Google Wallet, suitable for various use cases beyond standard tickets or loyalty cards, allowing custom data through defined labels and values.
+
+*   Sensitive information like PII should be handled using the Generic Private pass type, with pre-approval needed for specific use cases.
+
+*   Google Wallet API enables pass creation and management across Android, web, and messaging platforms through REST API and Android SDK.
+
+*   Developers need a Google Wallet API Issuer Account, along with a Google Cloud Account (non-Android) or Google Play Services setup (Android).
+
+*   Google offers resources like codelabs, a pass builder tool, and GitHub repositories to help developers integrate and utilize the Google Wallet API effectively.
+
+The Generic Pass is available for when your use case doesn't fit into any of the other predefined pass types. Unlike other passes that include fields and features that are specific to a use case, such as tickets, loyalty cards, and offers, the Generic Pass is intended to be flexible enough to support a variety of purposes by providing fields where you can define custom labels and values.
+
+## Example use cases
+
+The following are just a few examples of what you can do with the Generic pass type:
+
+*   Parking passes
+*   Library cards
+*   Membership cards
+*   Insurance cards
+*   Reservation confirmations
+*   Customer pre-screen confirmation codes
+
+## Passes that include sensitive information
+
+There are cases where your pass or use case may involve sensitive information, such as personally identifiable information (PII) and health data. For these scenarios, the Generic Private pass type is available for pre-approved use cases. For more information, see the [Generic Private Pass documentation](https://developers.google.com/wallet/generic-private-pass) and the [Acceptable Use Policy (AUP)](https://payments.developers.google.com/terms/aup#sensitive-data).
+
+## Supported platforms
+
+With the Google Wallet API, you can issue passes for your users to save in their Google Wallet across multiple platforms, including Android apps, and anywhere hyperlinks are supported, such as websites, email, and SMS messages.
+
+### APIs & SDKs
+
+The Google Wallet API offers a REST API and an Android SDK to help you issue and manage your passes quickly and easily.
+
+*   [Google Wallet REST API](https://developers.google.com/wallet/generic/web/prerequisites)
+To issue passes on platforms such as the Web, email, or SMS, we recommend you use the Google Wallet REST API. The API provides a set of endpoints that let you create, retrieve, and update the various components of passes.
+
+*   [Google Wallet Android SDK](https://developers.google.com/wallet/generic/android/prerequisites)
+To issue passes in an Android app, we recommend you use the Google Wallet Android SDK. The SDK provides a variety of convenience methods that make it easy to integrate the Google Wallet API into your mobile apps using native code.
+
+Note: Using the Google Wallet REST API or Google Wallet Android SDK is not required to issue passes with the Google Wallet API, but are strongly recommended. For more information on issuing passes without using the REST API or Android SDK, see [Creating Passes Objects and Passes Classes in the JWT](https://developers.google.com/wallet/retail/offers/overview/add-to-google-wallet-flow#creating-passes-objects-and-passes-classes-in-the-jwt).
+
+## Requirements
+
+To issue passes with the Google Wallet API, you will first need to do the following:
+
+*   Create a [Google Wallet API Issuer account](https://developers.google.com/wallet/generic/getting-started/issuer-onboarding).
+*   Non-Android developers: Create a [Google Cloud account](https://console.cloud.google.com/freetrial).
+*   Android developers: [Set up Google Play services.](https://developers.google.com/android/guides/setup)
+
+## Getting started with the Google Wallet API
+
+Before you start working with the Google Wallet API, take a look at these useful articles that will familiarize you with the basic features and terminology.
+
+*   [Key concepts and terminology](https://developers.google.com/wallet/generic/resources/terminology): This article will familiarize you with all the important terms and features you will need to work with the Google Wallet API.
+*   [Passes Classes and Objects overview](https://developers.google.com/wallet/generic/overview/how-classes-objects-work): Passes that you issue to your users are created by combining a Passes Class with a Passes Objects. This article will familiarize you with both of these concepts, and how they are used to create passes.
+*   [Google Wallet pass development flow](https://developers.google.com/wallet/generic/overview/add-to-google-wallet-flow): This article provides an end-to-end overview of all of the steps needed to create a pass with the Google Wallet API from start to finish.
+
+### Tools & resources
+
+*   **Codelabs**
+Self-guided codelabs walk you through the necessary steps to add a pass to Google Wallet. To get started, choose "Android" if your implementation will be on Android devices only and choose "Web" if your implementation supports Android, Web, Email or SMS.
+
+[Android](https://g.co/wallet/android-codelab)[Web](https://g.co/wallet/web-codelab)
+
+*   **Pass builder**
+Build your first pass visually with the [pass builder](https://developers.google.com/wallet/generic/resources/pass-builder) tool, and automatically generate the JSON you need to create the pass with the Google Wallet API.
+
+*   **Google Wallet Github**
+Get helpful tools, libraries and sample code for a variety of programming languages in the [Google Wallet Github org](https://github.com/google-wallet).
