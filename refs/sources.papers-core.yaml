@@ -159,3 +159,15 @@ sources:
     supports: "The corollary that disciplines over-confirmation: arcviz must not put a dialog in front of an action whose intent is already unambiguous."
     quote: "A corollary to this principle is also worth mentioning: Don't imagine boundaries where they don't actually exist. Pretending that we don't know the user's intent can add annoying and unnessary friction. If we know, let's make it so, ASAP."
     locator: "intent-boundaries.md:84"
+
+  - key: eff-info-theory
+    title: "A Primer on Information Theory and Privacy"
+    author: "Peter Eckersley, Electronic Frontier Foundation"
+    url: "https://www.eff.org/deeplinks/2010/01/primer-information-theory-and-privacy"
+    retrieved: "2026-09-05"
+    capture: "refs/captures/lit/eff-info-theory-privacy.html"
+    status: primary
+    supports: "Identifiability is measurable in bits, and partial facts stack additively toward a threshold; an AID match is not a partial narrowing but a landing, which is why suppressing it withholds a fact rather than protecting a subject."
+    quote: "the identity of a random, unknown person contains just under 33 bits of entropy [...] if we know someone's birthday, and we know their ZIP code is 40203, we have 8.51 + 23.81 = 32.32 bits; that's almost, but perhaps not quite, enough to know who they are."
+    locator: "sections 'Information Theory' and 'Combining Facts'"
+    note: "Combination is only additive where the facts are independent; the article says so explicitly, and redundant correlators add nothing."
