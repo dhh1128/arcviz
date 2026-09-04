@@ -1,0 +1,115 @@
+# arcviz OCA source record (audit stream 1B — Overlays Capture Architecture).
+#
+# Same schema as ../sources.yaml; see ../docs/research/EVIDENCE.md for the rules.
+# Owned exclusively by the OCA audit stream. Do not merge into sources.yaml without
+# checking for key collisions first.
+
+sources:
+  - key: oca-spec-v2
+    title: "OCA Technical Specification"
+    author: "Human Colossus Foundation (Paul Knowles, Ryan Barrett, Robert Mitwicki, Michal Pietrus, Marcin Olichwiruk, Philippe Page)"
+    url: "https://oca.colossi.network/specification/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/oca-specification-v2.0.0.txt"
+    status: primary
+    supports: "Capture Base definition; complete taxonomy and definitions of the 13 current base overlays; Bundle canonical form and SAID digest mechanism; Community Overlays; absence of any selective-disclosure/redaction mechanism in the base spec"
+    quote: "A Capture Base is a base object that defines a single dataset in its purest form, providing a structural base to harmonise data. The object defines attribute names and types."
+    locator: "section 'Capture Base'; also see sections Overlays, Character Encoding Overlay, Format Overlay, Label Overlay, Meta Overlay, Standard Overlay, Cardinality Overlay, Conformance Overlay, Entry Code Overlay, Entry Overlay, Unit Overlay, Attribute Mapping Overlay, Entry Code Mapping Overlay, Sensitive Overlay, Community Overlays, Bundle"
+
+  - key: oca-spec-v2-raw
+    title: "OCA Technical Specification (raw HTML capture)"
+    author: "Human Colossus Foundation"
+    url: "https://oca.colossi.network/specification/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/oca-specification-v2.0.0-raw.html"
+    status: primary
+    supports: "Raw source for oca-spec-v2; retained for re-derivation if the plain-text extraction is questioned"
+    quote: "Version: v2.0.0"
+    locator: "page metadata block, <dl> near top of document"
+
+  - key: oca-v1_1_0-rc-wayback
+    title: "OCA Technical Specification v1.1.0-rc (Wayback Machine snapshot, the version Aries RFC 0755/0756 cite)"
+    author: "Human Colossus Foundation"
+    url: "http://web.archive.org/web/20221006204115/http://oca.colossi.network/v1.1.0-rc.html"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/oca-v1.1.0-rc-wayback.txt"
+    status: primary
+    supports: "The overlay taxonomy Aries RFC 0755/0756 were written against, including Information Overlay, Credential Layout Overlay, and Form Layout Overlay, none of which exist in the current live spec; the Credential Layout Overlay worked example showing an embedded CSS/font-loading markup DSL; the unfinished (TODO) state of the Sensitive Overlay at that time"
+    locator: "sections 'Information Overlay' (line 165), 'Credential Layout Overlay' (line ~427), 'Form Layout Overlay', 'Sensitive Overlay' (end of document)"
+
+  - key: aries-0013
+    title: "Aries RFC 0013: Overlays"
+    author: "Paul Knowles, The Human Colossus Foundation"
+    url: "https://github.com/decentralized-identity/aries-rfcs/blob/main/concepts/0013-overlays/README.md"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/aries-rfcs/concepts/0013-overlays/README.md (not re-captured; already a local checkout named in AGENTS.md as the vendored copy)"
+    status: primary
+    supports: "RFC 0013 is RETIRED, superseded by the OCA specification directly, and by RFC 0755 for the Aries-specific use"
+    quote: "Although this RFP is in the retired status, the use of overlays and the Overlays Capture Architecture (OCA) is active in Aries. This RFP is an early of the OCA specification, and its content is replaced by the Overlays Capture Architecture Specification."
+    locator: "lines 4-6 (Status / Status Note)"
+
+  - key: aries-0755
+    title: "Aries RFC 0755: Overlays Capture Architecture (OCA) For Aries"
+    author: "Stephen Curran"
+    url: "https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0755-oca-for-aries/README.md"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/aries-rfcs/features/0755-oca-for-aries/README.md"
+    status: primary
+    supports: "How an issuer packages/delivers an OCA Bundle in Aries via the oca-bundle credential supplement; the nine core overlays Aries expects; dateint/Unix Time formatting convention; the branding overlay's field set and its structured-data-not-markup design intent; the explicit rationale for not offering pixel-perfect issuer layout; external-attachment tracking risk warning"
+    quote: "It is deliberate that the credential branding defined in this RFC does not attempt to achieve pixel-perfect on screen rendering of the equivalent paper credential."
+    locator: "lines 341-343; also lines 4-9 (status), 86-99 (motivation), 139-220 (overlay list), 243-267 (dateint/Unix Time), 268-339 (branding overlay), 497-516 (external attachment tracking warning), 636-663 (rationale vs JSON-LD and alternative flows)"
+
+  - key: aries-0756
+    title: "Aries RFC 0756: OCA for Aries Style Guide"
+    author: "Stephen Curran"
+    url: "https://github.com/decentralized-identity/aries-rfcs/blob/main/features/0756-oca-for-aries-style-guide/README.md"
+    retrieved: "2026-09-04"
+    capture: "vendored at ~/code/me/aries-rfcs/features/0756-oca-for-aries-style-guide/README.md"
+    status: primary
+    supports: "The three fixed wallet-controlled credential layouts; that branding fields map into fixed slots rather than issuer-defined positions; coexistence of OCA layout versions 1.0 and 1.1 as a fragmentation risk; non-production watermark mechanism; rationale citing Apple/Google Wallet as prior art for constrained issuer branding control"
+    quote: "There are 2 versions of the OCA that can be used. Version 1.1 does not remove version 1.0, but rather propose a different view for credential layout. It is to the wallet maintainer to chose which one would be used in their application."
+    locator: "line 26; also lines 105-129 (elements pulled from OCA Bundle), 131-211 (three layouts and numbered slot list), 615-629 (non-production watermark), 765-775 (prior art: Apple/Google Wallet)"
+
+  - key: bcgov-oca-bundles-readme
+    title: "bcgov/aries-oca-bundles README"
+    author: "BC Government (British Columbia) and contributors"
+    url: "https://github.com/bcgov/aries-oca-bundles"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/bcgov-aries-oca-bundles-README.md"
+    status: primary
+    supports: "BC Gov's production OCA Bundle registry: its purpose, its governance/authority-verification process for submissions, and that it is open to non-BC-Gov publishers"
+    quote: "This GitHub repository is for hosting published Overlays Capture Architecture (OCA) Bundles to be used by Hyperledger Aries agents (issuers, holders and verifiers)."
+    locator: "README, opening paragraph"
+
+  - key: bc-wallet-mobile-411
+    title: "bcgov/bc-wallet-mobile Issue #411: Add OCA Bundle handling in the Aries Bifold wallet (or AFJ?) such that it can be exposed and used in the BC Wallet"
+    author: "BC Government bc-wallet-mobile contributors"
+    url: "https://github.com/bcgov/bc-wallet-mobile/issues/411"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/bc-wallet-mobile-issue-411-raw.html"
+    status: primary
+    supports: "The real integration/verification cost of adding OCA Bundle support to a production wallet: bundle lookup by SchemaId/CredDefId, required issuer/publisher signature verification, required Capture-Base-to-schema attribute matching, and that signature verification was scoped as skippable in an initial implementation if absent"
+    quote: "the OCA Bundle is supposed to be signed by the Schema Publisher or Issuer, and verification should also include that the Capture Base attributes match those of the AnonCreds Schema, which should be enforced"
+    locator: "issue body, opened 2022-07-08, closed; verification-requirements section"
+
+  - key: swiyu-vc-visual-oca
+    title: "Designing the visualisation for Issuer, Verifier and Credential (swiyu technical documentation)"
+    author: "Swiss Federal Office (swiyu / e-id-admin)"
+    url: "https://swiyu-admin-ch.github.io/cookbooks/vc-visual-presentation-oca/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/swiyu-vc-visual-presentation-oca.txt"
+    status: primary
+    supports: "A live production government wallet's use of the OCA Branding Overlay; the mutual-exclusivity/no-mixing rule between OCA Bundle and Credential Issuer Metadata; production hardening constraints on the branding overlay beyond what Aries RFC 0755/0756 require (no SVG, size cap, forced monochrome); the Sensitive Overlay's actual (non-)effect on protection"
+    quote: "If an OCA Bundle is present and valid, it takes priority over the Credential Issuer Metadata. If neither is declared, a fallback visualisation takes place. There is no mix of visualisation information between OCA Bundle and Credential Issuer Metadata, either one or the other is applied."
+    locator: "line 772; also line 240 (512x512 logo cap), line 248 (monochrome conversion), line 802 (SVG refused, PNG/JPEG only), line 574 (Sensitive Overlay is display-only, no enforcement)"
+
+  - key: e-id-admin-discussion-32
+    title: "Feedback - Visualization of Verifiable Credential with OCA Specification (GitHub Discussion #32)"
+    author: "e-id-admin/open-source-community contributors, including Paul Knowles and Robert Mitwicki of the Human Colossus Foundation"
+    url: "https://github.com/e-id-admin/open-source-community/discussions/32"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/oca/e-id-admin-discussion-32-raw.html"
+    status: primary
+    supports: "The Swiss federal e-ID team's decision to create a modified/clarified Swiss OCA specification rather than adopt OCA unmodified, and their stated specific reasons: unresolved Layout Overlay TODO, no overlay-dependency/ordering mechanism, and the Branding Overlay's primary/secondary attribute fields being unenforceable on a wallet; HCF's own preference for granular PII-flagged attributes over an attribute-aggregation overlay"
+    quote: "We created the Swiss OCA specification because we felt the need to clarify points that were not clear enough in the OCA specification..."
+    locator: "discussion comment by bj-ms, October 2024; also comment noting 'an Issuer won't be able to force a wallet implementer to have the primary and secondary attributes displayed on one or multiple lines'"

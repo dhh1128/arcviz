@@ -1,0 +1,1347 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>Designing the visualisation for Issuer, Verifier and Credential - swiyu technical documentation</title>
+<meta name="description" content="Learn how to define the visual layout for issuer, verifier and credentials with OCA">
+
+
+  <meta name="author" content="Your Name">
+  
+  <meta property="article:author" content="Your Name">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="swiyu technical documentation">
+<meta property="og:title" content="Designing the visualisation for Issuer, Verifier and Credential">
+<meta property="og:url" content="https://swiyu-admin-ch.github.io/cookbooks/vc-visual-presentation-oca/">
+
+
+  <meta property="og:description" content="Learn how to define the visual layout for issuer, verifier and credentials with OCA">
+
+
+
+  <meta property="og:image" content="https://swiyu-admin-ch.github.io/assets/images/cookbook_verifiablecredential.jpg">
+  
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-04T07:32:11+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://swiyu-admin-ch.github.io/cookbooks/vc-visual-presentation-oca/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="swiyu technical documentation Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <! start custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+<link rel="manifest" href="/assets/images/site.webmanifest"/>
+
+<! end custom head snippets -->
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/swiyu_logo_88_88.jpg" alt="swiyu"></a>
+        
+        <a class="site-title" href="/">
+          swiyu
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/introduction/"
+                
+                
+              >Introduction</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/technology-stack/"
+                
+                
+              >Technology Stack</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/open-source-components/"
+                
+                
+              >Open Source Components</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/cookbooks/"
+                
+                
+              >Cookbooks</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/specifications/"
+                
+                
+              >Specifications</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/roadmap"
+                
+                
+              >Roadmap</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/release-announcements"
+                
+                
+              >Release Announcements</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/change-dossiers"
+                
+                
+              >Change Dossiers</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/threat-model"
+                
+                
+              >Threat Model</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+  
+    
+
+
+
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/cookbooks" itemprop="item"><span itemprop="name">Cookbooks</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Designing the visualisation for Issuer, Verifier and Credential</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+    
+ 
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Designing the visualisation for Issuer, Verifier and Credential">
+    <meta itemprop="description" content="Learn how to define the visual layout for issuer, verifier and credentials with OCA">
+    <meta itemprop="datePublished" content="2026-09-04T07:32:11+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://swiyu-admin-ch.github.io/cookbooks/vc-visual-presentation-oca/" itemprop="url">Designing the visualisation for Issuer, Verifier and Credential
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc" aria-label="Table of contents">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#introduction">Introduction</a></li><li><a href="#purpose-and-overview">Purpose and Overview</a></li><li><a href="#multilanguage">Multilanguage</a></li><li><a href="#background-color">Background Color</a></li><li><a href="#logoicon-for-issuer-verifier--credential">Logo/Icon for Issuer, Verifier &amp; Credential</a><ul><li><a href="#credential-logo">Credential Logo</a></li><li><a href="#issuer-logo">Issuer Logo</a></li><li><a href="#verifier-logo">Verifier Logo</a></li></ul></li><li><a href="#name">Name</a><ul><li><a href="#credential-name">Credential Name</a></li><li><a href="#attribute-name">Attribute Name</a></li><li><a href="#issuer-name">Issuer Name</a></li><li><a href="#verifier-name">Verifier Name</a></li></ul></li><li><a href="#description">Description</a></li><li><a href="#order-of-attributes">Order of Attributes</a></li><li><a href="#sensitive-attributes">Sensitive Attributes</a></li><li><a href="#clustering-of-attributes">Clustering of Attributes</a></li><li><a href="#data-types">Data Types</a></li><li><a href="#fallback-visualisation">Fallback Visualisation</a></li><li><a href="#theming">Theming</a></li><li><a href="#general-questions">General questions</a></li><li><a href="#further-assistance">Further assistance</a></li></ul>
+            </nav>
+          </aside>
+        
+        
+<div class="notice--danger">
+  <h4 class="no_toc">Sandbox</h4>
+  
+<p>The underlying specification and the new Swiss Profiles are currently under revision and are subject to change. <br />
+The outdated version of this cookbook has been <a href="/archive/vc-visual-presentation/">archived</a>. <br />
+Last edited: 2026-08-12</p>
+
+
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This manual describes how to define the visual presentation of a Verifiable Credential (VC) displayed in the swiyu Wallet, the digital wallet app of the Swiss Confederation.</p>
+
+<p>Its goal is to enable issuers in creating clean, professional looking credentials that effectively represent their organisation or service. This guide provides all necessary information to prepare from the start the appropriate graphic assets and determine the suitable settings.</p>
+
+<p>The instruction is based on the credential visualisation with OID Credential Issuer Metadata and Overlays Capture Architecture (OCA), which are defined in the <a href="/specifications//oca-v1-0/">Swiss Profile</a>.</p>
+
+<h2 id="purpose-and-overview">Purpose and Overview</h2>
+
+<p>In the swiyu Wallet, Verifiable Credentials (VC) are visually represented as cards to allow users to easily recognise and utilise them. According to the implemented credential visualisation metadata, an issuer/verifier can define the following:</p>
+
+<ul>
+  <li>the verifier’s or issuer’s name and logo</li>
+  <li>the background colour of the credential</li>
+  <li>the logo of the credential</li>
+  <li>the name of the credential</li>
+  <li>the displayed complementary info of the credential (description)</li>
+  <li>the name and value appearance of credential attributes (claims)</li>
+  <li>the clustering and ordering of the credential attributes</li>
+</ul>
+
+<p>All these visible or readable features are set and configured by the issuer/verifier in it’s Credential Issuer Metadata and/or OCA Bundle.</p>
+
+<p>Below is an example of how various credentials are displayed in different situations in the swiyu Wallet.</p>
+
+<p><a href="../../assets/images/oca-overview.png"><img src="../../assets/images/oca-overview.png" alt="overview" /></a>
+<a href="../../assets/images/vc-credential-preview-detail.png"><img src="../../assets/images/vc-credential-preview-detail.png" alt="credential preview and detail" /></a></p>
+
+<p>As an example, the visualisation metadata in OID4VCI and OID4VP with focus on only the relevant fields (technical fields are hidden) look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "display": [
+    {
+      "name": "Issuer title",
+      "locale": "en",
+      "logo": {
+        "uri": "data:image/png;base64,&lt;...base64code....&gt;"
+      }
+    }
+  ],
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "display": [
+          {
+            "name": "Title of credential",
+            "locale": "en",
+            "logo": {
+              "uri": "data:image/png;base64,&lt;...base64code....&gt;"
+            },
+            "description": "Demo purpose",
+            "background_color": "#FF5733"
+          }
+        ],
+        "claims": [
+          {
+            "path": ["family_name"],
+            "display": [
+              {
+                "name": "Lastname",
+                "locale": "en"
+              }
+            ]
+          },
+          {
+            "path": ["given_name"],
+            "display": [
+              {
+                "name": "Firstname",
+                "locale": "en"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "capture_bases": [
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "abc-123",
+      "attributes": {
+        "given_name": "Text",
+        "family_name": "Text"
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "type": "spec/overlays/meta/1.0",
+      "capture_base": "abc-123",
+      "language": "en",
+      "name": "Title of credential",
+      "description": "Demo purpose"
+    },
+    {
+      "type": "spec/overlays/label/1.1",
+      "capture_base": "abc-123",
+      "language": "en",
+      "attribute_labels": {
+        "given_name": "Firstname",
+        "family_name": "Lastname"
+      }
+    },
+    {
+      "type": "aries/overlays/branding/1.1",
+      "capture_base": "abc-123",
+      "language": "en",
+      "theme": "light",
+      "logo": "data:image/png;base64,&lt;...base64code....&gt;",
+      "primary_background_color": "#FF5733",
+      "primary_field": "Demo purpose for {{given_name}} {{family_name}}"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification_authorization_request.json: |
+{
+  "client_metadata": {
+    "client_name": "Reference Demo Verifier",
+    "logo_uri": "data:image/png;base64,&lt;...base64code....&gt;",
+  }
+}
+</code></pre></div></div>
+
+<h2 id="multilanguage">Multilanguage</h2>
+
+<p>The swiyu Wallet supports the following languages: DE, FR, IT, RM, EN.
+If none of the languages supported by the app are declared in the visualisation metadata, the app selects a suitable default locale based on the device settings and the general range of locales declared in the visualisation metadata.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+
+"locale": "en-GB"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+
+"language": "en-GB"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification_authorization_request.json: |
+{
+  "client_name#en-GB": "Reference Demo Verifier",
+  "client_name": "Reference Demo Verifier (Base)",
+  "logo_uri#en-GB": "data:image/png;base64,&lt;...base64code....&gt;",
+  "logo_uri": "data:image/png;base64,&lt;...base64code....&gt;"
+}
+</code></pre></div></div>
+
+<div class="notice--info">
+  <h3 class="no_toc">Good to know:</h3>
+  
+<p><b>Definition per Language (Localisation)</b>
+Background colour, logos, name and description can be set per language.</p>
+
+<p><b>Locale region</b>
+Be aware that the app preferred language selection mechanism tries to exactly match the locale. A language with additional region information like “de-CH” will not be the same language as just “de”.</p>
+
+<p>It is recommended to always use region information when declaring visualisation metadata.</p>
+
+
+</div>
+
+<h2 id="background-color">Background Color</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "display": [
+          {
+            "background_color": "#FF5733"
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "aries/overlays/branding/1.1",
+      "primary_background_color": "#FF5733"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>The background color is a solid HEX color value (e.g., #FFFFFF, #000000, #FF5733, etc.)</p>
+
+<p>Background images are not supported.</p>
+
+<p>No transparency/alpha channels are supported.</p>
+
+<div class="notice--info">
+  <h3 class="no_toc">Good to know:</h3>
+  
+<p><strong>Readability</strong></p>
+
+<p>To ensure proper contrast and legibility of the information displayed on the card (such as the VC name, description, and logo/icon), a gradient overlay is applied. This helps text and icons stand out clearly against the chosen background colour, improving readability and overall user experience.</p>
+
+<p>Furthermore, the swiyu Wallet will automatically adjust the colour of the text and the logo to black or white, depending on the brightness or darkness of the defined colour.</p>
+
+<p><strong>Darkmode</strong></p>
+
+<p>Although the swiyu Wallet supports dark mode, the VC’s color scheme remains unaffected by this setting. Consequently, its background color stays the same in both light and dark modes.</p>
+
+<p><strong>Demo-Watermark</strong></p>
+
+<p>All the credentials which are issued within the swiyu Sandbox Wallet are applied with a DEMO watermark to differentiate those credentials to the productive ones.</p>
+
+
+</div>
+
+<h2 id="logoicon-for-issuer-verifier--credential">Logo/Icon for Issuer, Verifier &amp; Credential</h2>
+
+<p>The logo or icon dimensions must not exceed 512×512 pixels and will be displayed at 24×24 pixels at any zoom level.</p>
+
+<p>The logo or icon must be a transparent PNG (excluding the background).</p>
+
+<p>No alpha channels or transparency for solid elements.</p>
+
+<p>The Logo must be provided as image Data-URI, https URL are not supported.</p>
+
+<p>Multi-colored logos and gradients are automatically converted to a monochrome version to foster readability and ease of use.</p>
+
+<p>The swiyu Wallet will automatically tint the logo to black or white, depending on the brightness or darkness of the background colour.</p>
+
+<p><a href="../../assets/images/vc_logo_conversion.png"><img src="../../assets/images/vc_logo_conversion.png" alt="logo conversion" /></a>
+<a href="../../assets/images/vc_logo_scaling.png"><img src="../../assets/images/vc_logo_scaling.png" alt="logo scaling" /></a></p>
+
+<div class="notice--info">
+  <h3 class="no_toc">Good to know:</h3>
+  
+<p><strong>Downscaling</strong></p>
+
+<p>The logo/icon is automatically scaled down to a maximum size of 24×24 px. Extreme landscape or portrait logos/icons will be scaled such that the longest side is reduced to 24 px.</p>
+
+<p>Recommendation:</p>
+
+<ul>
+  <li>Use a square format whenever possible so it scales evenly across various layouts.</li>
+  <li>Work with simplified icons/logos so they are readable even when small.</li>
+</ul>
+
+<p><strong>Plurilingualism</strong></p>
+
+<p>The VC supports multilingual visualisation metadata. This means the logo/icon can be defined per language.</p>
+
+</div>
+
+<h3 id="credential-logo">Credential Logo</h3>
+
+<p>The credential’s logo is shown in any screen the credential is displayed.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "display": [
+          {
+            "logo": {
+              "uri": "data:image/png;base64,&lt;...base64code....&gt;"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "aries/overlays/branding/1.1",
+      "logo": "data:image/png;base64,&lt;...base64code....&gt;"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h3 id="issuer-logo">Issuer Logo</h3>
+
+<p>The issuer’s logo is part of the OID Credential Issuer Metadata and will be used for the credential offer screen and in the detail view of the credential.</p>
+
+<p><a href="../../assets/images/vc_issuer_logo.png"><img src="../../assets/images/vc_issuer_logo.png" alt="issuer logo" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "display": [
+    {
+      "logo": {
+        "uri": "data:image/png;base64,&lt;...base64code....&gt;"
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h3 id="verifier-logo">Verifier Logo</h3>
+
+<p>The verifier’s logo is only part of the OID4VP Authorization Request and will be used in the VC presentation screen.</p>
+
+<p><a href="../../assets/images/vc_verifier_name_logo.png"><img src="../../assets/images/vc_verifier_name_logo.png" alt="verifier logo" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification_authorization_request.json: |
+{
+  "client_metadata": {
+    "logo_uri": "data:image/png;base64,&lt;...base64code....&gt;",
+  }
+}
+</code></pre></div></div>
+
+<h2 id="name">Name</h2>
+
+<p>Care to use a self-explanatory credential name that is of reasonable length.</p>
+
+<p>Think to set the various language versions of it, so that name is displayed in the app language of the user.</p>
+
+<div class="notice--info">
+  <h4 class="no_toc">Recommendation:</h4>
+  
+<p>If you issue a family of diverse credentials (like e.g. entry pass spa, entry pass fitness &amp; spa) try to integrate the difference already in the name and/or the color so that it is easier for a user to distinguish them.</p>
+
+<p><a href="../../assets/images/oca-name.png"><img src="../../assets/images/oca-name.png" alt="name" /></a></p>
+
+
+</div>
+
+<h3 id="credential-name">Credential Name</h3>
+
+<p>The credential’s name will be used for the credential offer screen, credential preview and in the detail view of the credential.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "display": [
+          {
+            "name": "Title of credential",
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "spec/overlays/meta/1.0",
+      "name": "Title of credential"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h3 id="attribute-name">Attribute Name</h3>
+<p>Each credential’s attribute can be named. This avoids that the technical name like <code class="language-plaintext highlighter-rouge">given_name</code> is displayed for an attribute.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "claims": [
+          {
+            "path": ["family_name"],
+            "display": [
+              {
+                "name": "Lastname",
+                "locale": "en"
+              }
+            ]
+          },
+          {
+            "path": ["given_name"],
+            "display": [
+              {
+                "name": "Firstname",
+                "locale": "en"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "spec/overlays/label/1.1",
+      "language": "en",
+      "attribute_labels": {
+        "given_name": "Firstname",
+        "family_name": "Lastname"
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<div class="notice--info">
+  <h3 class="no_toc">Good to know:</h3>
+  
+<p><strong>Templating support</strong></p>
+
+<p>The Label Overlay supports templating. The placeholders in double brackets get replaced by the attribute value of the credential. This is especially useful for cluster headlines or object attributes in lists.</p>
+
+
+</div>
+
+<h3 id="issuer-name">Issuer Name</h3>
+<p>The issuer’s name is only part of the OID Credential Issuer Metadata and will be used for the credential offer screen and in the detail view of the credential.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "display": [
+    {
+      "name": "Issuer title"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h3 id="verifier-name">Verifier Name</h3>
+<p>The verifier’s name is only part of the OID4VP Authorization Request and will be used in the presentation request screen.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>verification_authorization_request.json: |
+{
+  "client_metadata": {
+    "client_name": "Verifier title"
+  }
+}
+</code></pre></div></div>
+
+<h2 id="description">Description</h2>
+
+<p>Carefully chose which metadata should come as complementary information on the credential preview right under the credential’s name.</p>
+
+<p>Keep metadata concise and relevant to avoid overwhelming the user with unnecessary information.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+      "credential_metadata": {
+        "display": [
+          {
+            "description": "Demo purpose"
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "spec/overlays/meta/1.0",
+      "description": "Demo purpose"
+    },
+    {
+      "type": "aries/overlays/branding/1.1",
+      "primary_field": "Demo purpose for {{given_name}} {{family_name}}"
+    }
+  ]
+}
+</code></pre></div></div>
+<p>With an OCA Bundle, the description is taken in first priority from the Branding Overlay and if not declared, the description is used from the Meta Overlay.</p>
+
+<div class="notice--info">
+  <h4 class="no_toc">Recommendation:</h4>
+  
+<p><strong>Templating support</strong>
+The Branding Overlay’s <code class="language-plaintext highlighter-rouge">primary_field</code> supports templating. The placeholders in double brackets get replaced by the attribute value of the credential.</p>
+
+</div>
+
+<h2 id="order-of-attributes">Order of Attributes</h2>
+
+<p>The display-order of attributes for a credential will be applied in the credential offer screen, in the detail view of the credential and in the credential presentation screen (verification).</p>
+
+<p><a href="../../assets/images/oca-vc-ordering.png"><img src="../../assets/images/oca-vc-ordering.png" alt="Ordering" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential_issuer_metadata.json: |
+{
+  "credential_configurations_supported": {
+    "demo-credential": {
+        "claims": [
+          {
+            "path": ["family_name"]
+          },
+          {
+            "path": ["given_name"]
+          },
+		  {
+            "path": ["social_security_number"]
+          },
+ 		  {
+            "path": ["over_16"]
+          },
+  		  {
+            "path": ["over_18"]
+          },
+  		  {
+            "path": ["birth_year"]
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+<p>The order of claims description objects in the <code class="language-plaintext highlighter-rouge">claims</code> array is used to determine the order in which the attributes are displayed to the user.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "extend/overlays/order/1.0",
+      "attribute_orders": {
+        "given_name": 2,
+        "family_name": 1,
+		"social_security_number": 3,
+ 		"over_18": 5, 
+ 		"over_16": 4,
+ 		"birth_year": 6
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>The order of attributes displayed to the user is determined by the attribute order number ascending.</p>
+
+<div class="notice--info">
+  <h4 class="no_toc">Good to know:</h4>
+  
+<p><strong>Unknown order</strong></p>
+
+<p>If an attribute is not defined with a specific order, it is placed after the last known attribute order.</p>
+
+</div>
+
+<h2 id="sensitive-attributes">Sensitive Attributes</h2>
+
+<p>Sensitive attributes can be marked as such, indicating attributes that require protection against unauthorized or unwarranted disclosure. A visual indicator is displayed for these attributes.</p>
+
+<p><a href="../../assets/images/oca-sensitive-attributes.png"><img src="../../assets/images/oca-sensitive-attributes.png" alt="Sensitive Attributes" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "spec/overlays/sensitive/1.0",
+      "attributes": ["family_name", "given_name"]
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>Sensitive attributes can only be defined within an OCA Bundle by declaring a Sensitive Overlay.</p>
+
+<div class="notice--info">
+  <h4 class="no_toc">Good to know</h4>
+  
+<p><strong>Sensitive Data</strong></p>
+
+<p>The Sensitive Overlay does just flag attributes as sensitive with a visual indicator. No further protection or privacy mechanism is applied by the swiyu Wallet based on these information. It’s up to the credential issuer to preserve user’s privacy.</p>
+
+</div>
+
+<h2 id="clustering-of-attributes">Clustering of Attributes</h2>
+
+<p>Clustering enables you to organise credential attributes into groups. Within each cluster, three headlines (H1, H2 and H3) can be used to organise and categorise the credential attributes, making them easier for users to scan. Headline 1 for the cluster itself is optional, as are all other headlines.</p>
+
+<p><a href="../../assets/images/oca-vc-clustering.png"><img src="../../assets/images/oca-vc-clustering.png" alt="Clustering of Attributes" /></a></p>
+
+<p>Clustering can only be defined within an OCA Bundle by declaring Capture Bases. Headlines are taken from the respective OCA Label Overlay.</p>
+
+<p>As an example, the below OCA Bundle defines two clusters, “base” and “additional”, with each a H1 headline “Basis Data” and “Additional data”. Cluster “base” contains the attributes “given_name”, “family_name” and each nationality as a sub-cluster H2 with headline from attribute “country”. Cluster “additional” contains attributes “birthday”, “over_18” and the subcluster “address” with H2 headline “Address”. Further, subcluster “address” contains itself again a subcluster “billaddress” with H3 headline “Billing address”.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>credential.json: |
+{
+  "given_name": "Seraina",
+  "family_name": "Muster",
+  "birth_year": "1988",
+  "over_18": true,
+  "nationalities": [
+    {
+      "country": "Switzerland",
+      "code": "CH"
+    },
+    {
+      "country": "France",
+      "code": "FR"
+    }
+  ],
+  "address": {
+    "city": "Berne"
+  },
+  "billing_address": {
+    "city": "Lausanne"
+  }
+}
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "capture_bases": [
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "root",
+      "attributes": {
+        "basis": "refs:base",
+        "additional": "refs:additional"
+      }
+    },
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "base",
+      "attributes": {
+        "given_name": "Text",
+        "family_name": "Text",
+        "nationalities": "Array[refs:nat]"
+      }
+    },
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "additional",
+      "attributes": {
+        "birth_year": "DateTime",
+        "over_18": "Boolean",
+		"address": "refs:address"
+      }
+    },
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "nat",
+      "attributes": {
+        "country": "Text",
+        "code": "Text"
+      }
+    },
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "address",
+      "attributes": {
+        "city": "Text",
+		"billing_address": "refs:billaddress"
+      }
+    },
+     {
+      "type": "spec/capture_base/1.0",
+      "digest": "billaddress",
+      "attributes": {
+        "city": "Text"
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "capture_base": "root",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "basis": "Basis Data",
+        "additional": "Additional data"
+      }
+    },
+    {
+      "capture_base": "base",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "given_name": "Firstname",
+        "family_name": "Lastname",
+        "nationalities": "{{refs:nat:country}}"
+      }
+    },
+    {
+      "capture_base": "additional",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "birth_year": "Year of birth",
+        "over_18": "Age over 18 years",
+        "address": "Address"
+      }
+    },
+    {
+      "capture_base": "nat",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "country": "Country",
+        "code": "Code"
+      }
+    },
+    {
+      "capture_base": "address",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "city": "City",
+        "billing_address": "Billing address"
+      }
+    },
+    {
+      "capture_base": "billaddress",
+      "type": "spec/overlays/label/1.1",
+      "attribute_labels": {
+        "city": "City"
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<div class="notice--info">
+  <h3 class="no_toc">Good to know:</h3>
+  
+<p><strong>Default clustering</strong><br />
+For Credential Issuer Metadata, a single cluster is displayed without a headline. This is the same as for an OCA Bundle, which declares a single Capture Base containing attributes not only of type Reference.</p>
+
+<p><strong>Single cluster with headline</strong><br />
+A single cluster with a given headline is created by declaring a root Capture Base that contains a single Reference attribute pointing to another Capture Base that holds the attributes of this cluster. The H1 headline is taken from the Label Overlay corresponding to the root Capture Base.</p>
+
+<p><strong>Subclusters and headlines H2-H3</strong><br />
+Clusters can be nested. For example, a Capture Base “CB1” may contain an attribute of type Reference to another Capture Base “CB2”. The cluster “CB2” is then a subcluster of the cluster “CB1” with the headline “H2”. The swiyu Wallet will display up to three levels; any further nested clusters will be displayed as if they were on level three.</p>
+
+<p><strong>Array object clusters</strong></p>
+
+<p>For array of objects, in a Capture Base with an attribute of type <code class="language-plaintext highlighter-rouge">Array[Reference]</code>, each object in the array is displayed as an individual cluster with the hierarchy level of it’s Capture Base.</p>
+
+
+</div>
+
+<h2 id="data-types">Data Types</h2>
+
+<p>The swiyu Wallet visualises attribute values according to their data type.</p>
+
+<p>For Credential Issuer Metadata, the data type of an attribute is determined by the value type of the attribute’s JSON field.</p>
+
+<p>In an OCA Bundle, the data type for an attribute is declared in the Capture Base within the attributes key-value pairs where the key is the attribute name and the value is the attribute type.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "capture_bases": [
+    {
+      "type": "spec/capture_base/1.0",
+      "digest": "abc-123",
+      "attributes": {
+        "family_name": "Text"
+      }
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p>The swiyu Wallet displays the various data type as following:</p>
+
+<table>
+ <thead>
+	  <tr>
+	    <th>Data Type</th>
+	    <th>Credential Issuer Metadata (JSON value_type)</th>
+      <th>OCA Bundle</th>
+	    <th>Sample Attribute Value</th>
+	  	<th>Displayed Value</th>  
+		  <th>Localizable Display</th>  
+		  <th>Comment</th>  
+    </tr>
+  </thead>
+  <tbody>
+	  <tr>
+	    <td>string</td>
+	    <td>string</td>
+	    <td>Text</td>
+	    <td>"a value 1234"</td>
+		  <td>a value 1234</td>
+	    <td>no<a href="#footnote-1">[1]</a></td>
+	    <td>Is displayed the same as input.</td>  
+	  </tr>
+	  <tr>
+	    <td>boolean</td>
+	    <td>boolean</td>
+	    <td>Boolean</td>
+	    <td>true</td>
+		  <td>true</td>
+	    <td>no<a href="#footnote-1">[1]</a></td>
+	    <td></td>
+	  </tr>
+	  <tr>
+	    <td>integer</td>
+	    <td>number</td>
+	    <td>Numeric</td>
+	    <td>1000</td>
+		  <td>1'000</td>
+	    <td>yes<a href="#footnote-1">[1]</a></td>
+	    <td>OCA with grouping separator</td>
+	  </tr>
+	  <tr>
+	    <td>float/double</td>
+	    <td>number</td>
+	    <td>Numeric</td>
+	    <td>1234.56</td>
+		  <td>1,234.56</td>  
+	    <td>yes<a href="#footnote-1">[1]</a></td>
+	    <td>OCA with grouping separator</td>
+	  </tr>
+	  <tr>
+	    <td>date</td>
+	    <td>string<a href="#footnote-2">[2]</a> or number<a href="#footnote-2">[2]</a></td>
+	    <td>DateTime</td>	  
+	    <td>2007-04-05T14:30:40Z</td>
+		  <td>05.04.2007, 16:30:40</td>
+	    <td>yes<a href="#footnote-1">[1]</a></td>
+	    <td>Date formats ISO8601 or Unix Epoch Time are supported. OCA display of dates depends on the precision of the input date &amp; time and on the platform specific formatting. Date format is declared in Standard Overlay for the attribute.</td>
+	  </tr>
+	  <tr>
+	    <td>images</td>
+		  <td>string<a href="#footnote-2">[2]</a></td>
+		  <td>Binary</td>
+		  <td>&#60;base64code&#62;</td>  
+	    <td>&#60;image&#62;</td>
+	    <td>no</td>	
+	    <td>Base64 encoded image binary data. OCA requires the attribute to be declared as base64 in CharacterEncoding Overlay and the image media type in Format Overlay. Media types image/png and image/jpeg are supported.</td>
+	  </tr>
+	  <tr>
+      <td>images</td>
+		  <td>string<a href="#footnote-2">[2]</a></td>
+	    <td>Text</td>
+		  <td>data:image/png;base64,&#60;base64code&#62;</td>
+	    <td>&#60;image&#62;</td>
+		  <td>no</td>	
+	    <td>Data URL images. OCA requires Standard Overlay to match Data URL from "Text" type attributes.</td>
+	  </tr>
+	  <tr>
+	    <td>object</td>
+	    <td>object</td>
+	    <td>Reference</td>
+	    <td>{"attribute": "value"}</td>
+	    <td></td>
+		  <td>yes</td>	
+	    <td>Data is a JSON object containing attributes of one of the supported data type.</td>
+	  </tr>
+	  <tr>
+	    <td>array</td>
+	    <td>array</td>
+	    <td>Array[]</td>
+	    <td>["a", "b", "c"]</td>
+	    <td>a,b,c</td>
+		  <td>yes</td>	
+	    <td>Data is a JSON array containing values of one of the supported data type.</td>
+	  </tr>
+  </tbody>
+</table>
+
+<p id="footnote-1">[1] Can be mapped to a localized string with OCA Entry &amp; Entry Code Overlay</p>
+<p id="footnote-2">[2] The data value is matched to the respective data type</p>
+
+<h2 id="fallback-visualisation">Fallback Visualisation</h2>
+
+<p>If an OCA Bundle is present and valid, it takes priority over the Credential Issuer Metadata. If neither is declared, a fallback visualisation takes place. There is no mix of visualisation information between OCA Bundle and Credential Issuer Metadata, either one or the other is applied.</p>
+
+<p>Similarly, generally missing visualisation information is covered by an adequate fallback.</p>
+
+<p>For missing assets like background colour and logos, a standard visual presentation is used.</p>
+
+<p><a href="../../assets/images/oca-vc-fallback.png"><img src="../../assets/images/oca-vc-fallback.png" alt="Fallback Version" /></a></p>
+
+<h2 id="theming">Theming</h2>
+
+<p>With an OCA Bundle, the appearance of a credential can be themed. This allows you to declare a background colour, credential logo and description, depending on whether the swiyu Wallet is in dark or light mode.</p>
+
+<p>The Branding Overlay supports the <code class="language-plaintext highlighter-rouge">theme</code> property. If a Branding Overlay is declared with “dark” theme, the visualisation information is only considered when the swiyu Wallet is in dark mode. Any other theme is considered to be used in light mode.</p>
+
+<p><a href="../../assets/images/oca-theming.png"><img src="../../assets/images/oca-theming.png" alt="Theming" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oca_bundle.json: |
+{
+  "overlays": [
+    {
+      "type": "aries/overlays/branding/1.1",
+      "theme": "dark"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h2 id="general-questions">General questions</h2>
+
+<p><strong>What happens if I upload a multi-colored logo?</strong>
+The logo is automatically converted to a single-color (monochrome) version. It is not possible to preserve color nuances.</p>
+
+<p><strong>Can I use an SVG for the logo?</strong>
+Only PNG and JPEG files are currently supported. SVG or other vector formats are not accepted.</p>
+
+<p><strong>Can I submit a logo larger than 512×512 pixels?</strong>
+For the swiyu Wallet, no. The maximum supported size for logos/icons is 512×512 pixels. If the logo exceeds this size, it will be automatically resized.</p>
+
+<p><strong>Can I use different background and logo colors for different languages?</strong>
+Yes. The system supports localization. You can define a background color and a logo/icon for each language.</p>
+
+<p><strong>Can I use an image instead of a background color?</strong>
+No. To ensure contrast and legibility, images are not supported.</p>
+
+<h2 id="further-assistance">Further assistance</h2>
+
+<p>Thank you for following these guidelines. By doing so, you help to ensure that your credentials are displayed correctly in the swiyu Wallet and are easily recognisable to users. If you have any questions or require further assistance, please feel free to open an issue in this <a href="https://github.com/swiyu-admin-ch/swiyu-admin-ch.github.io/issues">GitHub repository</a>.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-09-04T07:32:11+02:00">September 4, 2026</time></p>
+
+
+      </footer>
+
+      
+
+      
+
+  <nav class="pagination" aria-label="Post pagination">
+    
+      <a href="/cookbooks/vc-migration/" class="pagination--pager" title="Verifiable Credential Migration">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        
+<div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/swiyu-admin-ch/swiyu-admin-ch.github.io" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Feedback and Contributions</a></li>
+        
+      
+        
+          <li><a href="/release-announcements/" rel="nofollow noopener noreferrer"><i class="fas fa-link" aria-hidden="true"></i> Release Announcements</a></li>
+        
+      
+        
+          <li><a href="/change-dossiers/" rel="nofollow noopener noreferrer"><i class="fas fa-link" aria-hidden="true"></i> Change Dossiers</a></li>
+        
+      
+        
+          <li><a href="https://github.com/swiyu-admin-ch/community" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Community</a></li>
+        
+      
+        
+          <li><a href="/archive/" rel="nofollow noopener noreferrer"><i class="fas fa-link" aria-hidden="true"></i> Archive</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-square-rss" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://www.eid.admin.ch/en/rechtliches-e">Swiss Confederation</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
