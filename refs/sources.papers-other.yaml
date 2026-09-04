@@ -1,0 +1,188 @@
+# Source records for audit stream 1F-d (Daniel Hardman's papers: trust architecture, evidence, and the remainder).
+# Covers the residual bucket of papers/*.md not claimed by sources.papers-{core,identity,intent}.yaml.
+# Only papers found relevant carry records here; the full eleven-paper triage (including the six
+# ruled not relevant) is in ../docs/research/prior-art/papers-other.md.
+# Format documented at the top of sources.yaml.
+
+sources:
+  - key: cfa-edges-are-typed-assertions
+    title: "Cross-File Associations (CFAs): A Lightweight, Decentralized Model for Expressing File Relationships"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/cfa-paper.html"
+    version: "1.0"
+    revision_date: "2025-12-18"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/cfa-paper.md"
+    status: primary
+    supports: "arcviz's DAG edges (ACDC chain links) should be modeled as first-class, typed, directional relationships — not plain lines — and binding/assertion of a relationship is distinct from its being validated or authoritative."
+    quote: "A CFA is a relationship, not a container. Conceptually, CFAs form edges in a graph whose nodes are files. Treating relationships as first-class in this sense means that they are explicitly representable and inspectable, rather than inferred indirectly from structure."
+    locator: "cfa-paper.md:63-65"
+
+  - key: cfa-directed-vs-common
+    title: "Cross-File Associations (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/cfa-paper.html"
+    version: "1.0"
+    revision_date: "2025-12-18"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/cfa-paper.md"
+    status: primary
+    supports: "A two-way taxonomy for edge directionality — directed (asymmetric, pre-file/co-file dependency) versus common (symmetric, peer) — is a reusable vocabulary for classifying ACDC chain-link semantics before arcviz decides how to draw each kind."
+    quote: "Some CFAs distinguish between files that provide a logical foundation for the relationship and files whose interpretation depends on that foundation. These are called directed CFAs. Files that provide the logical foundation for a directed CFA are called pre files. Files whose interpretation depends on a pre file within a directed CFA are called co files. ... Other CFAs treat all bound files as peers; these are called common CFAs."
+    locator: "cfa-paper.md:45-47"
+
+  - key: cfa-assertion-not-authority
+    title: "Cross-File Associations (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/cfa-paper.html"
+    version: "1.0"
+    revision_date: "2025-12-18"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/cfa-paper.md"
+    status: primary
+    supports: "Declaring a relationship (an ACDC chain edge) is not the same act as that relationship being cryptographically validated; arcviz must not let a drawn edge imply verification it hasn't performed. Identifier form alone does not confer authority — that comes from cryptographic control or content addressing."
+    quote: "Binding a CFA is a statement that a relationship is asserted to exist, independent of whether that assertion is accepted, validated, or contested. It is not a claim about ownership, authorship, correctness, or legitimacy. ... The identifier does not, by itself, confer authority. Authority, where it exists, arises from the properties of the identifier scheme—such as cryptographic control or content addressing—not from CFAs as such."
+    locator: "cfa-paper.md:67, cfa-paper.md:159"
+
+  - key: cfa-surface-dont-adjudicate
+    title: "Cross-File Associations (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/cfa-paper.html"
+    version: "1.0"
+    revision_date: "2025-12-18"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/cfa-paper.md"
+    status: primary
+    supports: "Conflicting or contested claims about a relationship should be shown, not silently resolved or hidden — directly applicable to how arcviz should render a chain edge whose two ends disagree (e.g. a redaction that doesn't match its stated source SAID)."
+    quote: "CFAs do not attempt to resolve such disputes. They make no claims about correctness, ownership, or legitimacy. Instead, they expose assertions so that tools and users can evaluate them in context. The design deliberately favors visibility of contested assertions over implicit silence, on the assumption that inspectable disagreement is preferable to unexamined inference. ... Conflicts among CFAs ... are expected. ... CFAs provide a vocabulary for surfacing these disagreements without imposing a resolution model."
+    locator: "cfa-paper.md:191-197"
+
+  - key: ev-life-dossier-is-a-credential-dag
+    title: "The Evidence Lifecycle in Telco"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/ev-life.html"
+    version: "1.0"
+    revision_date: "2025-08-07"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/ev-life.md"
+    status: primary
+    supports: "A dossier is a real, already-deployed example of exactly the structure arcviz must render: a signed root artifact linking to multiple independently issued, independently revocable credentials, each traceable to its own source of truth."
+    quote: "At this point, the business collects all the evidence that it has received or created, and connects the artifacts to each other, making them a definitive embodiment of its intentions ... by placing them in a dossier. This dossier is tiny. It snapshots a collection of tamper-evident hyperlinks to tamper-evident credentials."
+    locator: "ev-life.md:71-73"
+
+  - key: ev-life-verifier-checklist
+    title: "The Evidence Lifecycle in Telco (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/ev-life.html"
+    version: "1.0"
+    revision_date: "2025-08-07"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/ev-life.md"
+    status: primary
+    supports: "Each linked credential in a chain carries its own independent revocation state, and a verifier must check every one, not just the root — arcviz's per-node status rendering must therefore be per-edge/per-node, not a single verdict for the whole chain."
+    quote: "The business has not revoked its intention to make verifiable phone calls with this combination of characteristics. None of the other issuers of credentials have revoked their credentials due to changes in phone number or brand usage rights, etc."
+    locator: "ev-life.md:85-86"
+
+  - key: telco-delegation-is-a-weighted-graph
+    title: "What Does Telco Need? Requirements for Organizational Identity Evidence"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/telco-ev-reqs.html"
+    version: "1.0"
+    revision_date: "2026-03-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/telco-ev-reqs.md"
+    status: primary
+    supports: "Real-world delegation/authority relationships that ACDC chains must be able to express are not a simple tree — they are a graph with weighted, constrained edges (purpose, geography, time, spend limits), which arcviz's chain-edge model needs to accommodate rather than assuming strict hierarchy."
+    quote: "This is not a hierarchy. It's a graph with weighted edges, conditional logic, time windows, geographic constraints, and spend limits. The authorization semantics are rich because real-world authority is rich."
+    locator: "telco-ev-reqs.md:74"
+
+  - key: telco-historical-vs-present-validity
+    title: "What Does Telco Need? (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/telco-ev-reqs.html"
+    version: "1.0"
+    revision_date: "2026-03-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/telco-ev-reqs.md"
+    status: primary
+    supports: "A verification badge that only answers 'is this valid now?' is insufficient; arcviz's unverified/verified states need a time dimension, since evidence must remain checkable against what was true at the time of use, not only at render time."
+    quote: "The system must support verifiable reconstruction of evidence and authority relationships that were valid at an arbitrary point in the past. It must be possible to distinguish what was valid then from what is valid now."
+    locator: "telco-ev-reqs.md:154 (Appendix requirement 7, restating the body's framing at telco-ev-reqs.md:58)"
+
+  - key: telco-revocation-freshness-explicit
+    title: "What Does Telco Need? (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/telco-ev-reqs.html"
+    version: "1.0"
+    revision_date: "2026-03-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/telco-ev-reqs.md"
+    status: primary
+    supports: "Revocation checks carry a freshness assumption (how recently was this checked, and against what latency guarantee) that a verifier needs to see explicitly rather than infer from a static badge — relevant to how arcviz labels a 'verified' state's staleness."
+    quote: "The system must support revocation or invalidation of evidence and authority relationships with freshness properties appropriate to real-time communications. Freshness assumptions must be explicit so verifiers can determine whether the system meets their operational risk thresholds."
+    locator: "telco-ev-reqs.md:164-166 (requirement 10)"
+
+  - key: x509prob-acdc-links-weighted-semantic
+    title: "Why X509 Certs Should Be Secondary Evidence of Org Identity"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/x509-prob.html"
+    version: "1.3"
+    revision_date: "2026-06-08"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/x509-prob.md"
+    status: primary
+    supports: "A direct, if terse, claim that ACDC chain links themselves carry weights and a variety of semantic meanings — arcviz's edge rendering should expose both, not draw a uniform arrow between every linked credential."
+    quote: "The chaining in ACDCs is like X509 chaining on steroids. It is safer, more efficient, and more cacheable. It doesn't depend on certificate authorities. It eliminates the need for trust registries. Links in a chain can be weighted, and they can have a variety of semantic meanings."
+    locator: "x509-prob.md:168"
+
+  - key: x509prob-graduated-disclosure-named
+    title: "Why X509 Certs Should Be Secondary Evidence of Org Identity (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/x509-prob.html"
+    version: "1.3"
+    revision_date: "2026-06-08"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/x509-prob.md"
+    status: primary
+    supports: "ACDC's graduated disclosure is named as a distinguishing privacy feature versus the VC data model, corroborating that arcviz's redaction-state rendering is addressing a real, load-bearing ACDC capability rather than an edge case."
+    quote: "ACDCs can represent everything that fits in the VC data model, and many things that don't. And ACDCs come with a graduated disclosure feature that achieves important privacy objectives."
+    locator: "x509-prob.md:170"
+
+  - key: x509prob-certs-no-audit-trail
+    title: "Why X509 Certs Should Be Secondary Evidence of Org Identity (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/x509-prob.html"
+    version: "1.3"
+    revision_date: "2026-06-08"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/x509-prob.md"
+    status: primary
+    supports: "Contrast case for why ACDC's sequenced-signature chain matters to arcviz's historical-provability rendering: an X.509-style binding that cannot be time-ordered against revocation/rotation can only ever be evaluated in real time, not audited after the fact."
+    quote: "The binding between a private key, its public complement, and an X509 certificate is inherently subject to retrograde attacks, because there is only a crude, unreliable way to guess at the timing of the event relative to the timing of a revocation or key rotation. This means that certificate-based identity solutions cannot provide a solid audit trail or answer historical questions; they can only be evaluated in real-time."
+    locator: "x509-prob.md:111-112 (section 'Signatures aren't sequenced')"
+
+  - key: wtbo-duplicity-evident-not-resistant
+    title: "Where Trust Bottoms Out: X.509, Certificate Transparency, and KERI's DPKI Architecture"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wtbo.html"
+    version: "1.8"
+    revision_date: "2026-08-20"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/wtbo.md"
+    status: primary
+    supports: "The precise claim a 'verified issuer' badge in arcviz is allowed to make: cryptographic verification against an AID's KEL establishes that no fraud has been detected by consulted witnesses/watchers, not that fraud is impossible. This bounds what any arcviz trust-status affordance may honestly assert."
+    quote: "This is why KERI's security posture is best described as duplicity-evident rather than duplicity-resistant. It doesn't try to make duplicity impossible — that would require global consensus, with all the costs that entails. It makes duplicity provable and attributable, which is sufficient for a system built around reputation, accountability, and recovery rather than prevention."
+    locator: "wtbo.md:113"
+
+  - key: wtbo-watcher-detects-not-prevents
+    title: "Where Trust Bottoms Out (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wtbo.html"
+    version: "1.8"
+    revision_date: "2026-08-20"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/wtbo.md"
+    status: primary
+    supports: "Detection of fraud in a KERI-rooted chain depends on which witnesses/watchers were actually consulted; a passive watcher's silence is not proof of honesty. arcviz's verification-status affordance should not imply completeness of the check it displays."
+    quote: "If a watcher asks two witnesses for the head of the same identifier and gets different hash values, it has detected duplicity: evidence that the controller signed two conflicting events at the same sequence number. ... The worst a dishonest watcher can do is stay silent about duplicity it has seen — a risk addressed by running your own watcher or consulting multiple independent ones."
+    locator: "wtbo.md:109, wtbo.md:111"
