@@ -1,0 +1,601 @@
+# arcviz source records for stream 1F-c (Daniel Hardman's papers: intent, assurance, privacy).
+# Same schema as refs/sources.yaml; see docs/research/EVIDENCE.md for the rules this file is held to.
+# This file is owned by stream 1F-c; do not merge it into sources.yaml from another stream — a later
+# synthesis pass can do that deliberately, with the merge itself reviewed.
+#
+# CAPTURE NOTE, and an open question for Daniel. Every source below is one of Daniel Hardman's own
+# essays, read from the sibling working tree `~/code/me/papers` that AGENTS.md names as a sibling
+# project. They are published open-access at dhh1128.github.io/papers and are not paywalled,
+# proprietary, or third-party — so nothing here trips EVIDENCE.md rule 4. But they were NOT copied
+# into `refs/captures/`, because this stream owns only two files and vendoring eleven markdown
+# essays into the repo is a decision for the project, not for one audit stream. The `capture` field
+# therefore names the local working-tree path actually read. Locators are `file.md:line` against
+# that working tree AS OF 2026-09-04, paired with the section number, which is stable across edits;
+# prefer the section number if a line number ever fails to resolve. If the project later decides to
+# vendor these, the capture paths here should be rewritten to `refs/captures/papers/<file>.md` and
+# the line numbers re-verified against the captured revision.
+
+sources:
+
+  # --- syntelos.md — the intent taxonomy (version 1.1, revision_date 2026-07-11) ---
+
+  - key: hardman-syntelos-domains
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "Syntelos proposes eight top-level domains of intent, each named for the telos (shared raison d'etre) of an interaction rather than for an actor, an object, or a message type."
+    quote: "By structuring intent into relate, share, care, serve, align, trade, operate, and govern, and differentiating between the Activity (Ultimate Intent) and the Action (Proximate Means), we provide the stable scaffolding necessary for AI agents to reason, filter, and negotiate on our behalf."
+    locator: "syntelos.md:662, section 8 (Conclusion); the domains themselves are defined with their child categories in sections 5.1-5.8, syntelos.md:282-509"
+
+  - key: hardman-syntelos-telos
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "The discriminating test that decides what a Syntelos category is named for: the telos is the one potential outcome all rational stakeholders would agree embodies the category's reason for existing, pushed as far toward ultimate intent as consensus allows and stated as specifically as possible."
+    quote: "we define the ***telos*** of an interaction as *the potential outcome that all rational stakeholders should agree embodies the interaction category's raison d'être, imagined as far toward ultimate intent as consensus allows, and framed with maximum specificity.*"
+    locator: "syntelos.md:217, section 3.8 (Telos)"
+
+  - key: hardman-syntelos-scope
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "Syntelos scopes itself with a refusal test: it covers interactions between actors with potentially unaligned motives who can reject, delay, or negotiate — and explicitly excludes direct manipulation of a deterministic tool."
+    quote: "**Counterparty volition (the refusal test):** The interaction category must involve at least two actors with potentially unaligned motives that are not inherently knowable to others. Counterparties must be able to **reject, delay, or negotiate** the proposed interaction based on their agentic intent, not just on logistical constraints."
+    locator: "syntelos.md:137, section 3.1 (Scope: agentic interaction), criterion 1 of 3"
+
+  - key: hardman-syntelos-boundaries
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "The taxonomy is deliberately cut at intent boundaries, because those are the right places to put a consent or policy decision. This is the explicit join between Syntelos and the intent-boundary framework."
+    quote: "Our taxonomy should therefore *draw lines at likely intent boundaries*, because they represent ideal points for consent and policy enforcement."
+    locator: "syntelos.md:207, section 3.7 (Intent boundaries and trust)"
+
+  - key: hardman-syntelos-consent-test
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "The consent distinguishability test separates agreeing to enter a category of interaction from agreeing to the specific terms inside it — 'I agree to start a verification process' is not 'I agree to share my passport number right now.'"
+    quote: "Consent to a /gov/Identity.Verify interaction means \"I agree to start a verification process.\" It does not mean \"I agree to share my passport number right now.\" [...] The taxonomy defines the \"room\" we are entering; the subsequent protocol negotiation defines what happens inside that room, and whether the parties remain there."
+    locator: "syntelos.md:251-253, section 3.10 (The consent distinguishability test)"
+
+  - key: hardman-syntelos-cascade
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "The hierarchy is load-bearing rather than decorative: a policy stated at an interior node cascades to everything beneath it unless overridden, which is what makes broad-then-specific consent expressible."
+    quote: "top-down taxonomies have a compelling advantage with respect to processing intent: *they allow confident generalization*. If we know that a policy exists for intent /x/y/*, then we know it also applies to intent /x/y/z (unless overridden). This facilitates cascading models of consent."
+    locator: "syntelos.md:153, section 3.2 (General to specific)"
+
+  - key: hardman-syntelos-parameterization
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "Syntelos deliberately keeps the tree small by pushing the 'who', 'what', 'where' and 'how' out into parameters carried alongside the telos path, rather than multiplying leaf categories."
+    quote: "Given human limits on attention, decision-making, and configuration ability, a massive hierarchy is an antipattern, especially if all the leaf nodes are identical except for a specific attribute that changes decision criteria but nothing about the nature of an interaction."
+    locator: "syntelos.md:235, section 3.9 (Parameterization)"
+
+  - key: hardman-syntelos-perspective
+    title: "Syntelos: A Hierarchical Taxonomy of Intent in Digital Interactions"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/syntelos.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/syntelos.md"
+    status: primary
+    supports: "A category must be recognizable as applicable by every stakeholder despite their different roles and perspectives — buyer and seller meet at one node, and role is a parameter rather than a separate branch."
+    quote: "The taxonomy must *map an interaction to a category in such a way that all stakeholders recognize the category's applicability in a given context, despite their different perspectives*."
+    locator: "syntelos.md:201, section 3.6 (Multiple perspectives)"
+
+  # --- prog-a.md — assurance in degrees (version 0.9.3, revision_date 2026-07-13) ---
+
+  - key: hardman-proga-axes
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "Assurance is not one scalar. Reference assurance (how confidently the identifier is tied to a legal entity and its reference data) and control assurance (how strongly control of the identifier is bound to the entity or an accountable human) are separate axes to be evaluated independently."
+    quote: "**Control assurance** asks: how strongly is *control* of the identifier bound to the entity, an accountable human, or a governed program? This is the axis the rest of this paper develops, in four levels (LoA 0 through LoA 3)."
+    locator: "prog-a.md:98, section 2.1 (Multiple axes of assurance); reference assurance is defined at prog-a.md:87 and the independence claim at prog-a.md:83"
+
+  - key: hardman-proga-loa0
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "The lowest level of the progressive model is an affidavit, not a credential: it asserts that an entity exists and is referred to unambiguously, and proves nothing about who controls the identifier. Anyone at all can make this assertion about anyone else."
+    quote: "LoA 0 provides zero proof of *control*. It is an affidavit — an assertion of fact for the existence of the entity and certain reference data about it — not a credential conferring entitlement. Anyone can use it to refer to the entity, including competitors, critics, or attackers"
+    locator: "prog-a.md:108, section 2.2 (LoA 0: Unambiguous reference affidavit), under Limitations"
+
+  - key: hardman-proga-loa1-limit
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "Each level of the model states what it does NOT establish, in its own words, immediately beside what it does. LoA 1 proves that some agent of the organization wanted the identifier; it does not prove which agent, or that they were authorized."
+    quote: "LoA 1 proves *some* agent associated with the organization wants the identifier; it does not prove which agent, or whether they are authorized to act for the organization."
+    locator: "prog-a.md:121, section 2.3 (LoA 1: Foundational control), under Limitations"
+
+  - key: hardman-proga-loa3-limit
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "Even the top level of the model refuses to present itself as certainty; it claims transparency, auditability, and resilience, not security."
+    quote: "No system is perfectly secure. Even at LoA 3, a zero-day exploit or a sophisticated social engineering attack can succeed. What LoA 3 guarantees is that the system is as transparent, auditable, and resilient as current technology and governance allow."
+    locator: "prog-a.md:141, section 2.5 (LoA 3: Robust governance), under Limitations"
+
+  - key: hardman-proga-lapsed
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "Assurance decays with time as well as varying by level: the LEI's LAPSED registration status means the data has not been reconfirmed within a specified period, so some of it may no longer be current or accurate."
+    quote: "This is reflected in the registration status of an LEI of LAPSED. This status indicates that the data has not been reconfirmed within a specified period of time, with the implication that some of the data may or may not be the most current or accurate."
+    locator: "prog-a.md:94, section 2.1 (Multiple axes of assurance)"
+
+  - key: hardman-proga-phonehome
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "Verification that contacts a third party at check time both creates a point of failure and leaks the verifier's behavior; the progressive model's credentials carry what a verifier needs so that no such call is made."
+    quote: "The OCSP responder is a centralized point of failure. It can be blocked by a network attacker to force soft-fail acceptance of a revoked certificate [8]. It also leaks browsing behavior to the CA: every OCSP query reveals which sites a user is visiting."
+    locator: "prog-a.md:165, section 3.2 (Independent verification versus phoning home)"
+
+  - key: hardman-proga-uielement
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "A checkmark rendered by an application, with no underlying cryptographic proof a third party could check, is a UI element rather than a credential — the paper's own words for the failure mode a credential viewer must not reproduce."
+    quote: "In RCS or A2C SMS, the user trusts a checkmark rendered by a messaging app, controlled by the carrier or platform [b]. There is no underlying cryptographic proof a third party could verify if they wanted to. The verification is a UI element, not a credential."
+    locator: "prog-a.md:167, section 3.2 (Independent verification versus phoning home)"
+
+  - key: hardman-proga-derivative
+    title: "Progressive Assurance: Flexible Organizational Identity in the Digital Economy"
+    author: "Daniel Hardman and Karla McKenna"
+    url: "https://dhh1128.github.io/papers/prog-a.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/prog-a.md"
+    status: primary
+    supports: "The model treats the ACDC as the archival source of truth and other credential formats as lossy presentations derived from it, using an explicit RAW-versus-JPEG analogy."
+    quote: "The analogy is photographic. A RAW file is the archival source, lossless and reusable; a JPEG is exported for a specific use [15]. You don't archive in JPEG. You don't anchor durable identity in a credential format that cannot reproduce its own history."
+    locator: "prog-a.md:211, section 4.2 (Derivative evidence: SD-JWTs and others)"
+
+  # --- intent-monograph.md — the academic successor to intent-boundaries.md (version 1.1, revision_date 2026-07-11) ---
+
+  - key: hardman-intent-monograph-def
+    title: "Intent and Boundaries: A Framework for Digital Agency"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-monograph.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-monograph.md"
+    status: primary
+    supports: "An intent boundary is relative to the observer, not a fixed line in the code — it is a function of the observer's ignorance, so two parties looking at the same interaction can face the boundary in different places or not at all."
+    quote: "It is vital to understand that this boundary is **relative**. It is not a fixed line in the code; it is a function of the observer's ignorance."
+    locator: "intent-monograph.md:57, section 3 (Intent boundaries)"
+
+  - key: hardman-intent-monograph-substitute
+    title: "Intent and Boundaries: A Framework for Digital Agency"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-monograph.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-monograph.md"
+    status: primary
+    supports: "The characteristic violation is substituting a guess about intent for knowledge of it, and then acting on the guess at the user's expense."
+    quote: "When the system charges him anyway, it violates the boundary. It substitutes a guess (\"he clicked, so he must want to pay\") for knowledge."
+    locator: "intent-monograph.md:62, section 3 (Intent boundaries)"
+
+  - key: hardman-intent-monograph-peek
+    title: "Intent and Boundaries: A Framework for Digital Agency"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-monograph.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-monograph.md"
+    status: primary
+    supports: "Peeking across a boundary is legitimate when the crossing is made reversible and low-risk: the proximate intent proceeds while the ultimate intent is provisionally verified."
+    quote: "This approach allows the user's proximate intent (watching) to proceed while provisionally verifying their ultimate intent (paying). It respects the boundary by making the crossing reversible and low-risk."
+    locator: "intent-monograph.md:85, section 4 (Principle 3: Peek across the boundary)"
+
+  # --- intent-boundaries.md — the original essay (version 1.1, revision_date 2026-06-02) ---
+
+  - key: hardman-intent-boundaries-relative
+    title: "Intent and Boundaries"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "Different observers face intent boundaries in different places, and a 'place' may be a point in time, a step in a workflow, or a location in a UI — which is what makes an affordance-by-affordance inventory the right granularity."
+    quote: "Each external party may have different knowledge, and each decides what is \"adequate\" on the basis of context plus practical, financial, legal, ethical, and technical considerations. Thus, different parties may face intent boundaries in different places. [...] Places may be points in time, steps in a workflow, locations in a UI, physical locations, conditions, circumstances, or similar."
+    locator: "intent-boundaries.md:69-70, section Boundaries"
+
+  - key: hardman-intent-boundaries-noboundary
+    title: "Intent and Boundaries"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "Inventing a boundary where none exists is also an error, not a safe default — confirming what is already known adds friction and annoyance, and the essay names re-confirmed unsubscribes as an example of an illegitimate boundary."
+    quote: "A corollary to this principle is also worth mentioning: *Don't imagine boundaries where they don't actually exist.* Pretending that we don't know the user's intent can add annoying and unnessary friction. If we know, let's make it so, ASAP."
+    locator: "intent-boundaries.md:84, section 1 (Recognize boundaries); the unsubscribe example is at intent-boundaries.md:86"
+
+  - key: hardman-intent-boundaries-logs
+    title: "Intent and Boundaries"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "Describing a user's intent more strongly than the evidence supports — in a log, a label, or a record — is itself a form of sneaking across a boundary, as is keeping no audit trail of the crossing."
+    quote: "Describing user intent inaccurately in logs (\"User chose to upgrade to premium service\" instead of \"User clicked *Watch* button\"), or preserving no audit trail when a boundary is crossed, undermining accountability for the boundary violation."
+    locator: "intent-boundaries.md:127, section 4 (Never sneak across boundaries)"
+
+  - key: hardman-intent-boundaries-stakeholders
+    title: "Intent and Boundaries"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "Software has multiple stakeholders with competing intents, and concealing that the software optimizes for some at others' expense is named as a form of sneaking across a boundary."
+    quote: "Failing to disclose that software has multiple stakeholders, and that the software is optimizing for some stakeholders' intents at the expense of other stakeholders."
+    locator: "intent-boundaries.md:121, section 4 (Never sneak across boundaries)"
+
+  # --- wbca.md — correlation harm (version 1.0, revision_date 2020-04-05) ---
+
+  - key: hardman-wbca-questions
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Whether correlation happens is the wrong question. The five that matter are how expensive it is, who can do it, when it happens, how completely it links contexts, and how much control the subject retains."
+    quote: "How expensive will the correlation be? / Exactly who is going to correlate you? / When are they going to correlate you? / How completely are they going to correlate you? / How much control will you retain?"
+    locator: "wbca.md:39-43, immediately following the statement of the 'we'll be correlated anyway' argument at wbca.md:35"
+
+  - key: hardman-wbca-expense
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Making correlation cheaper and more accurate is itself the harm, independent of whether any particular correlation was going to happen: it changes the economics and therefore the incentives of surveillance."
+    quote: "So, what happens if we make correlation far easier, far more accurate, and far cheaper to maintain? [...] What if all the false positives can be erased with one simple test for identifier or signature equality? That's the effect of correlating credentials. They shift the economics of correlation, trivializing the assembly of rich profiles on those who use them."
+    locator: "wbca.md:48, section 'How expensive will the correlation be?'"
+
+  - key: hardman-wbca-who
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Cheap correlation hands the lookup power of an HR department to any stranger who collects a credential, regardless of how little was selectively disclosed to them."
+    quote: "If Alice is using correlating credentials tomorrow, the shifty guy who begs for Alice's verifiable business card at the bar has access to the same lookup power as the HR department where Alice applies for a job. It doesn't matter that Alice only discloses her first name at the bar; the shifty guy gets a perfect correlator anyway."
+    locator: "wbca.md:61, section 'Exactly who is going to correlate you?'"
+
+  - key: hardman-wbca-scope
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "With a credential that exposes the same perfect correlator on every use, the scope of correlation and the scope of credential use are the same thing by construction, and the resulting picture is complete rather than partial."
+    quote: "In fact, it is impossible for Alice to use her driver's license, ever, anywhere, without adding to the overall correlatable context. The scope of correlation and the scope of her credential use are co-equal by design. It is true that not all of this correlatable context may be visible to a given party, but once it's all known, it glues together into a complete, not partial, picture."
+    locator: "wbca.md:81, section 'How completely are they going to correlate you?'"
+
+  - key: hardman-wbca-negative
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Perfect correlation makes NEGATIVE facts provable, not just positive ones — the ability to prove that someone did not appear somewhere is what converts today's probabilities into certainties, and it is the harm Hardman illustrates with a whistleblower and a repressive state."
+    quote: "it's now possible to search for Alice's correlators and know with perfect accuracy whether she used a credential in a given context, even if the answer is no. This lets parties with a wealth of data prove facts that are only probabilities today. Do we want a world where an impeached president can identify a whistleblower by quickly and perfectly disproving all other candidates? Or where a repressive government can prove you skipped three Party rallies in a row?"
+    locator: "wbca.md:83, section 'How completely are they going to correlate you?'"
+
+  - key: hardman-wbca-control
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Knowledge and proof are different things, and the difference is what makes onward resharing a distinct harm — an adversary who can prove a claim can dox, bully, or blackmail in a way that one who merely knows it cannot."
+    quote: "It could be argued that Bob knows Alice's HIV status regardless of what proving technique she follows, and that he can therefore reshare his knowledge no matter what. This is true, but it conflates knowledge with proof. If Bob wants to dox or bully or blackmail Alice, there's a world of difference between making unsubstantiated assertions about her, and being able to prove them."
+    locator: "wbca.md:94, section 'How much control will you retain?'"
+
+  - key: hardman-wbca-privacy-def
+    title: "The Dangerous Half-Truth of \"We'll Be Correlated Anyway\""
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/wbca.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/wbca.md"
+    status: primary
+    supports: "Hardman's working definition of privacy: not constant anonymity, but the ability to create a few genuinely separate spaces — so a design that eliminates the last separable space fails even if most of life is already public."
+    quote: "This is the real meaning of privacy — not that we have constant anonymity, but that we can create a few private spaces. 99% of the space in our lives might be public, but protecting the remaining 1% is really important."
+    locator: "wbca.md:77, section 'How completely are they going to correlate you?'"
+
+  # --- if.md — identity facets; read as the modern restatement of the correlation argument (version 0.11, revision_date 2026-07-11) ---
+
+  - key: hardman-if-owner
+    title: "Identity Facets"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/if.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/if.md"
+    status: primary
+    supports: "Linking two facets of one person is the owner's decision to make, one relationship at a time — and explicitly never a default, never an inference a stranger is meant to draw, and never a leak software condones on the owner's behalf."
+    quote: "Revealing that two facets are one person is Cecilia's call to make, one relationship at a time. In a system that works as designed, this is never a default, never an inference a stranger is meant to draw, never a leak the software condones behind her back."
+    locator: "if.md:63, section 'Only the owner sees the whole stone'"
+
+  - key: hardman-if-anchors
+    title: "Identity Facets"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/if.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/if.md"
+    status: primary
+    supports: "Each facet is anchored by its own opaque high-entropy identifier precisely because a single identifier worn across facets would be the correlation handle that isolation exists to deny."
+    quote: "A single identifier worn across facets would be exactly the correlation handle that isolation exists to deny: any two parties holding it could compare notes and collapse the faces back into one person."
+    locator: "if.md:121, section 'Living with the anchors'"
+
+  - key: hardman-if-affinity
+    title: "Identity Facets"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/if.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/if.md"
+    status: primary
+    supports: "A credential tends to belong to one facet rather than to a whole person, but the pull is an affinity and not a law: some credentials legitimately span facets, and forcing them into one discards information the credential never committed to."
+    quote: "But *affinity* is the right word, not *ownership* — because the pull is a tendency, not a law. [...] To pin it to one facet by fiat would discard information the credential never committed to."
+    locator: "if.md:99-101, section 'Credentials have an affinity for a facet'"
+
+  # --- sda.md — act coordinates and derived gates (version 1.2, revision_date 2026-07-14) ---
+
+  - key: hardman-sda-effect
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "Telos is one axis of an act; effect is a second, closed set of five transformations, and the separation of the two buys defense in depth because purpose and power are locked separately."
+    quote: "Five suffice: `observe` (read, no change), `create` (bring into being), `modify` (change what exists), `preserve` (actively maintain, renew, or discharge), and `destroy` (remove or terminate). [...] One axis contains the purpose; the other contains the power."
+    locator: "sda.md:69, section 4 (Giving the act a shape)"
+
+  - key: hardman-sda-statekind
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "An act is located over a NAMED kind of state — information, record, commitment, authority, resource, relationship — because the same effect over different state kinds warrants different governance, and one line of work walks across kinds without the telos ever changing."
+    quote: "The state-kind is *named*, not inferred from the telos, because a single line of work walks across kinds: a marketing draft is `information`, its publication a `record`, and a specific factual claim inside it — \"40% faster than the competitor\" — a `commitment` that can create liability. The telos never changed; the kind of state did."
+    locator: "sda.md:71, section 4 (Giving the act a shape)"
+
+  - key: hardman-sda-gate
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "A gate is not a signal of distrust. Most gates exist because of what the act does — it enters an authoritative record, creates a commitment, crosses a domain, or touches a shared resource — not because of a judgment about who is doing it."
+    quote: "A gate is usually read as a signal of distrust: *we make you stop and ask because we do not trust you to proceed*. But most gates in this model exist for other reasons entirely [...] Untangling \"you are gated\" from \"you are distrusted\" is one of the quiet benefits of deriving gates from what an act *does* rather than from a judgment about who is doing it."
+    locator: "sda.md:79, section 4 (Giving the act a shape)"
+
+  - key: hardman-sda-outbound
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "The outbound disclosure axis — what may be revealed about a principal, to whom, and unlinkably — is named by Hardman as an OPEN axis his model does not specify. This is the axis arcviz sits on, so arcviz cannot inherit a settled answer here."
+    quote: "But there is an *outbound* mirror: what a delegate may *reveal about its principal*, to whom, and unlinkably. An assistant, a marketer, and a triager can all leak the principal's data. This attribute-disclosure axis — the agent-and-attribute plane of the identity model — is the natural home for purpose-limitation, and this paper names it without claiming to have specified it."
+    locator: "sda.md:107, section 6 (Who is acting), final paragraph"
+
+  - key: hardman-sda-openloop
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "Open-loop verification — the property that makes a stranger able to check a credential without asking its issuer — FORCES full disclosure of every constraint, because there is no one to ask for more. Graduated, ask-as-you-go disclosure is unavailable in that architecture."
+    quote: "Choosing open-loop *forces* full disclosure: a stranger deciding whether to honor an act must see *every* constraint on it, because it cannot ask the issuer what was meant — there is no graduated, ask-as-you-go disclosure when there is no one to ask."
+    locator: "sda.md:117, section 7 (Open loop, not closed)"
+
+  - key: hardman-sda-syntelos-limit
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "Hardman states directly why Syntelos alone is insufficient for authorization work: its refusal test excludes tool manipulation, which is most of what a working agent — or an interactive viewer — actually does."
+    quote: "This is a sound boundary for an intent-negotiation grammar. It is the wrong boundary for a delegation. The acts a delegation most needs to authorize or forbid — deploy to production, merge the branch, file the return, actuate the device, send the wire — are exactly the tool-manipulation acts the refusal test excludes."
+    locator: "sda.md:61, section 3 (Why a grammar of intent is not enough)"
+
+  - key: hardman-sda-sincerity
+    title: "The Shape of Delegated Authority"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sda.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sda.md"
+    status: primary
+    supports: "The honest bound on any intent model: a system can make an act's CATEGORY machine-checkable, gate the crossings that warrant a human decision, and audit the rest — but it cannot check whether the intent is sincere."
+    quote: "What it can do is make an act's *category* machine-checkable: name the kind of thing being attempted, decide whether that kind is permitted here, gate the few crossings that warrant a fresh human decision, and audit the rest. [...] Name the category, gate the boundary, audit the remainder — and do not pretend to check the heart."
+    locator: "sda.md:35, section 1 (A model simpler than the problem)"
+
+  # --- svce.md — four metaphors, and the interop argument (version 1.0, revision_date 2023-01-18) ---
+
+  - key: hardman-svce-caveat
+    title: "Sentries, Confessionals, Vaults, and Envelopes"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/svce.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/svce.md"
+    status: primary
+    supports: "The four metaphors are offered with an explicit warning against literal or broad application; the author himself flags that they can imply unintended color and asks that they be approached tentatively."
+    quote: "*Metaphors are a two-edged sword.* They can demystify the unknown, and simplify the complex. However, they may also be applied too literally or too broadly, and they can imply color that is unintended. [...] Please approach the following metaphor thoughtfully and tentatively; the intent is insight, not dogma or dissing."
+    locator: "svce.md:31, section following the TL;DR"
+
+  - key: hardman-svce-xeno
+    title: "Sentries, Confessionals, Vaults, and Envelopes"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/svce.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/svce.md"
+    status: primary
+    supports: "Xeno-interop is the discipline of drawing crisp boundaries between adjacent tools that solve genuinely different problems, rather than merging them — the question is how to be differentiated and collaborative across a boundary."
+    quote: "*Xeno-interop* happens when parties DON'T agree on goals and priorities, because they are attacking different problems. There, interop is driven by the question: *\"How do we recognize and delineate boundaries between our problem domain and a neighbor's as crisply as possible, so we are differentiated and collaborative across the boundary rather than creating competitive chaos?\"*"
+    locator: "svce.md:150, section 'Stepping Back'"
+
+  - key: hardman-svce-mistarget
+    title: "Sentries, Confessionals, Vaults, and Envelopes"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/svce.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/svce.md"
+    status: primary
+    supports: "Overlap between adjacent tools is inevitable and not a defect; the actual failure is misunderstanding, misdescribing, undervaluing, or mistargeting each tool's sweet spot."
+    quote: "There is, *and always will be*, some overlap. It will always be possible to put confessions in an envelope, or to store love letters in a vault. This is not a bad thing, and it is not evidence of maverick intransigence, stupidity, or wasteful reinvention. What IS a bad thing is to misunderstand, misdescribe, undervalue, or mistarget the sweet spot of each."
+    locator: "svce.md:141, section 'Stepping Back', point 3"
+
+  # --- sss.md — portable trust context (version 1.0, revision_date 2021-03-12) ---
+
+  - key: hardman-sss-portable
+    title: "Security, Silos, and Sovereignty"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sss.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sss.md"
+    status: primary
+    supports: "The headline benefit of DIDs is not the encrypted channel but that a trust context becomes portable rather than owned by whoever supplies the channel."
+    quote: "*DIDs make a trust context portable.* Sure, without DIDs, secure communication is still pretty cheap and easy to come by. But it's also *siloed* — owned by whoever provides the channel, not by you."
+    locator: "sss.md:53, section 'Why I Should Have Been Smarter'"
+
+  - key: hardman-sss-uncorrelated
+    title: "Security, Silos, and Sovereignty"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/sss.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/sss.md"
+    status: primary
+    supports: "Self-sovereign security is stated to include, as a requirement rather than a bonus, that no other entity can correlate the two parties by the identifiers they use."
+    quote: "And I want to do it without paying a company for the privilege, without accepting obnoxious terms and conditions, without having to be a technogeek, without running afoul of government regulations, and in a way that no other entity on the face of the planet can correlate the two of us by the identifiers we're using."
+    locator: "sss.md:68, section 'Portable (= Self-Sovereign) Security'"
+
+  # --- bdlp.md — power asymmetry (version 1.0, revision_date 2023-05-01) ---
+
+  - key: hardman-bdlp-acp
+    title: "Big Desks and Little People"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bdlp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/bdlp.md"
+    status: primary
+    supports: "Solving authenticity, confidentiality, and privacy is not sufficient for trust: a sufficiently large power differential lets ACP be exploited, and the imbalance undermines trust even where ACP is handled well."
+    quote: "When this happens, obnoxious effects follow, and these effects undermine trust, *even if we solve pretty well for authenticity, confidentiality, and privacy. ACP can (and will) be exploited, given enough distortion in power.*"
+    locator: "bdlp.md:39, section 'Abuse follows…'"
+
+  - key: hardman-bdlp-questions
+    title: "Big Desks and Little People"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bdlp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/bdlp.md"
+    status: primary
+    supports: "Four diagnostic questions expose the power asymmetry baked into an interaction pattern: which direction terms flow, who may report errors, whose view of state is authoritative, and who defines the interface."
+    quote: "*Which direction do terms and conditions always flow, in a client-server approach?* / *Who gets to report errors?* [...] *Whose view of interaction state is considered authoritative?* / *Who defines the interface for these interactions?*"
+    locator: "bdlp.md:79-82, section 'The case for danger, part 1'"
+
+  - key: hardman-bdlp-holders
+    title: "Big Desks and Little People"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bdlp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/bdlp.md"
+    status: primary
+    supports: "Standardizing credential exchange as a client-server interaction is named as an act that marginalizes people as mere holders and makes institutions more powerful — a direct claim about credential tooling, not a general complaint about architecture."
+    quote: "Standardizing credential exchange as a client-server interaction marginalizes people as mere holders, and makes big desks bigger. Standardizing how people log in to orgs while ignoring how orgs log in to people marginalizes people and makes big desks bigger."
+    locator: "bdlp.md:151, section 'What to do?'"
+
+  - key: hardman-bdlp-assumption
+    title: "Big Desks and Little People"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/bdlp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/bdlp.md"
+    status: primary
+    supports: "Hardman names, as an example of institutions and people playing by different rules, the assumption that digital credentials are held by people for the purpose of satisfying issuers and verifiers."
+    quote: "we assume that digital credentials are held by people with the goal of making issuers and verifiers happy"
+    locator: "bdlp.md:64, section 'Big desks and little people in tech'"
+
+  # --- acp.md — consumer security advice (version 1.0, revision_date 2023-06-06) ---
+
+  - key: hardman-acp-readtext
+    title: "Advice About Cybersecurity and Privacy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/acp.md"
+    status: primary
+    supports: "Reading text is safe; anything beyond reading requires strong confidence about context. Stated as consumer advice, but it is a clean statement of the escalation threshold a viewer of untrusted content should respect."
+    quote: "It's safe to read text. Anything more should require very strong confidence about context."
+    locator: "acp.md:70, blockquote in section 'Follow the \"don't call me, I'll call you\" rule'"
+
+  - key: hardman-acp-dontcallme
+    title: "Advice About Cybersecurity and Privacy"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/acp.html"
+    retrieved: "2026-09-04"
+    capture: "~/code/me/papers/acp.md"
+    status: primary
+    supports: "The 'don't call me, I'll call you' rule: it should always be possible to reconnect to a legitimate counterparty by starting the interaction on your own side, using something other than a link they supplied."
+    quote: "If you are dealing with someone legitimate, it should ALWAYS be possible for you to reconnect to them by starting the interaction on your side, using something OTHER than a special link they give you."
+    locator: "acp.md:68, section 'Follow the \"don't call me, I'll call you\" rule'"
