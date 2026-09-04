@@ -1,0 +1,190 @@
+# arcviz source records for stream 1E (academic/practitioner literature).
+# Same schema as refs/sources.yaml; see docs/research/EVIDENCE.md for the rules this file is held to.
+# This file is owned by stream 1E; do not merge it into sources.yaml from another stream — a later
+# synthesis pass can do that deliberately, with the merge itself reviewed.
+
+sources:
+
+  # --- Cluster 2: security indicators and their failure ---
+
+  - key: schechter2007emperor
+    title: "The Emperor's New Security Indicators: An evaluation of website authentication and the effect of role playing on usability studies"
+    author: "Stuart E. Schechter, Rachna Dhamija, Andy Ozment, Ian Fischer"
+    url: "https://stuartschechter.org/papers/emperor.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/schechter-dhamija-ozment-fischer-emperors-new-security-indicators-2007.pdf"
+    status: primary
+    supports: "Removing a security indicator (HTTPS lock, then a customer-chosen site-authentication image) does not stop most users from proceeding to enter credentials; the indicator's absence goes unnoticed or unheeded in a realistic banking task."
+    quote: "We confirm prior findings that users ignore HTTPS indicators: no participants withheld their passwords when these indicators were removed. We present the first empirical investigation of site-authentication images, and we find them to be ineffective: even when we removed them, 23 of the 25 (92%) participants who used their own accounts entered their passwords."
+    locator: "Abstract, p. 51 (2007 IEEE Symposium on Security and Privacy, pp. 51-65)"
+
+  - key: dhamija2006phishing
+    title: "Why Phishing Works"
+    author: "Rachna Dhamija, J. D. Tygar, Marti Hearst"
+    url: "https://people.ischool.berkeley.edu/~hearst/papers/why_phishing_works.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/dhamija-tygar-hearst-why-phishing-works-2006.pdf"
+    status: primary
+    supports: "A substantial fraction of users do not look at the browser chrome (address bar, status bar, padlock/security indicators) at all when judging site legitimacy, and standard security indicators fail even for sophisticated users against visual deception."
+    quote: "We found that 23% of the participants did not look at browser-based cues such as the address bar, status bar and the security indicators, leading to incorrect choices 40% of the time. We also found that some visual deception attacks can fool even the most sophisticated users. These results illustrate that standard security indicators are not effective for a substantial fraction of users, and suggest that alternative approaches are needed."
+    locator: "Abstract, p. 581 (CHI 2006, pp. 581-590)"
+
+  - key: akhawe2013warningland
+    title: "Alice in Warningland: A Large-Scale Field Study of Browser Security Warning Effectiveness"
+    author: "Devdatta Akhawe, Adrienne Porter Felt"
+    url: "https://devd.me/papers/alice-in-warningland.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/akhawe-felt-alice-in-warningland-2013.pdf"
+    status: primary
+    supports: "Complicates a blanket 'users ignore warnings' claim: click-through rates vary enormously by warning design (a tenth of Firefox malware/phishing warnings bypassed vs. 70.2% of Chrome SSL warnings), so warning effectiveness is a design variable, not a fixed fact about users. Directly qualifies how much weight the earlier (2006-2007) indicator-failure studies can bear, since those evaluated warning UIs since deprecated."
+    quote: "During our field study, users continued through a tenth of Mozilla Firefox's malware and phishing warnings, a quarter of Google Chrome's malware and phishing warnings, and a third of Mozilla Firefox's SSL warnings. This demonstrates that security warnings can be effective in practice; security experts and system architects should not dismiss the goal of communicating security information to end users. We also find that user behavior varies across warnings. In contrast to the other warnings, users continued through 70.2% of Google Chrome's SSL warnings."
+    locator: "Abstract, p. 257 (22nd USENIX Security Symposium, pp. 257-272)"
+
+  - key: felt2015sslwarnings
+    title: "Improving SSL Warnings: Comprehension and Adherence"
+    author: "Adrienne Porter Felt, Alex Ainslie, Robert W. Reeder, Sunny Consolvo, Somas Thyagaraja, Alan Bettes, Helen Harris, Jeff Grimes"
+    url: "https://adrifelt.github.io/sslinterstitial-chi.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/felt-et-al-improving-ssl-warnings-2015.pdf"
+    status: primary
+    supports: "Even a warning purpose-redesigned against warning-literature best practice, and A/B tested at scale, could not get most users to correctly identify the threat source or what data was at risk — comprehension and adherence are separable goals, and comprehension is the harder one to move. Directly disciplines any claim that adding a plainly-worded warning label will make users understand what is unverified."
+    quote: "We ultimately failed at our goal of a well-understood warning. However, nearly 30% more total users chose to remain safe after seeing our warning. We attribute this success to opinionated design, which promotes safety with visual cues. [...] Our proposed text slightly improved one aspect of comprehension (the threat source), but overall comprehension rates remained low for all warning texts."
+    locator: "Abstract / Introduction, p. 2893 (CHI 2015, pp. 2893-2902)"
+
+  # --- Cluster 3: graph and DAG readability ---
+
+  - key: ghoniem2005readability
+    title: "On the Readability of Graphs Using Node-Link and Matrix-Based Representations: A Controlled Experiment and Statistical Analysis"
+    author: "Mohammad Ghoniem, Jean-Daniel Fekete, Philippe Castagliola"
+    url: "http://www-sop.inria.fr/orion/COGC/teams/INSITUghoniem-fivj05-final.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/ghoniem-fekete-castagliola-node-link-matrix-readability-2005.pdf"
+    status: primary
+    supports: "Node-link diagrams lose to matrix representations on most generic graph tasks once a graph exceeds about twenty vertices, EXCEPT path-finding (following a chain from one node to another), which node-link wins throughout the evaluation, with matrix performance improving only as graphs get large and dense. Directly constrains the arcviz layout choice: since 'follow an edge / trace a chain' is close to the central task for a credential DAG, this is evidence for node-link over a matrix/adjacency view, not a general endorsement of node-link for every task (e.g. counting links, or finding a specific node, may favor matrix at scale)."
+    quote: "Only for “findPath” task did node-link diagrams prove superior to matrix-based representations, although their performance deteriorates on large and dense graphs. [...] As seen earlier, node-links perform far better than matrices on this task with regard to small sparse graphs. However, matrices outperform them about large and dense graphs."
+    locator: "§4 Discussion, PDF p. 12 (extended version; journal version: Information Visualization 4(2), pp. 114-135, 2005)"
+
+  - key: maceachren2012semiotics
+    title: "Visual Semiotics & Uncertainty Visualization: An Empirical Study"
+    author: "Alan M. MacEachren, Robert E. Roth, James O'Brien, Bonan Li, Derek Swingley, Mark Gahegan"
+    url: "https://geography.wisc.edu/cartography/projects/publications/MacEachrenEtAl_2012_TVCG.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/maceachren-et-al-visual-semiotics-uncertainty-visualization-2012.pdf"
+    status: primary
+    supports: "The nearest direct analogue found for 'a node known to exist but whose contents are unknown': this is empirical work on signifying discrete categories of uncertainty (including a 'trustworthiness' / 'credibility' category, distinct from 'completeness') with discrete point symbols, finding that abstract and iconic symbol sets differ in intuitiveness per uncertainty type and that no single visual variable serves all uncertainty categories equally well. It does not address graph-structural uncertainty (a DAG node present-but-opaque) directly — the graph/DAG-specific literature search in this stream did not surface a paper that does; this is offered as the nearest analogue, not a direct answer."
+    quote: "MacEachren, et al [1] match nine types of uncertainty to these three components of information: (1) accuracy/error, (2) precision, (3) completeness, (4) consistency, (5) lineage, (6) currency, (7) credibility, (8) subjectivity, and (9) interrelatedness. [...] there is a clear difference in intuitiveness for representing uncertainty among abstract sign-vehicles based upon individual visual variables. [...] iconic sign-vehicles can be more intuitive and more accurately judged when aggregated (than are abstract sign-vehicles), the abstract sign-vehicles can lead to quicker judgments."
+    locator: "§2.1 Conceptualizing Uncertainty and §5 Conclusions & Discussion (IEEE TVCG 18(12), 2012; page numbers not confirmed against the published journal pagination — this is the authors' self-archived PDF)"
+
+  - key: purchase1997aesthetic
+    title: "Which Aesthetic Has the Greatest Effect on Human Understanding?"
+    author: "Helen C. Purchase"
+    url: "https://doi.org/10.1007/3-540-63938-1_67"
+    retrieved: "2026-09-04"
+    capture: ""
+    status: lead
+    supports: "(unverified) Widely cited as establishing that minimizing edge crossings has the largest effect on graph-reading task performance among the standard graph-drawing aesthetics, ahead of minimizing bends or maximizing symmetry."
+    quote: ""
+    locator: "Graph Drawing 1997 (LNCS 1353), pp. 248-261 — paywalled at the publisher (Springer); a free full text was not located during this survey. Treat as a lead. What this stream can verify instead is Ghoniem, Fekete & Castagliola's own characterization of Purchase's method and finding in their introduction (see ghoniem2005readability capture, PDF p. 1-2), which is a secondary report, not a read of Purchase's own text."
+
+  # --- Cluster 1: credential and consent UX ---
+
+  - key: korir2022wallet
+    title: "An Empirical Study of a Decentralized Identity Wallet: Usability, Security, and Perspectives on User Control"
+    author: "Maina Korir, Simon Parkin, Paul Dunphy"
+    url: "https://www.usenix.org/system/files/soups2022-korir.pdf"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/korir-parkin-dunphy-decentralized-identity-wallet-2022.pdf"
+    status: primary
+    supports: "Directly on point for arcviz's provenance-honesty and unverified-vs-verified problem: study participants misread the mere presence of a cryptographic-looking identifier (a DID's random alphanumeric string) as itself being the security mechanism ('secure encoding or encryption'), and derived comfort from that misunderstanding rather than from any verification step. Also: users given fine-grained selective-disclosure control described feeling at fault ('personal failure') when they disclosed more than necessary, and several participants believed they could not decline to share a requested field at all, undercutting the premise that offering a disclosure control is the same as users being able to use it correctly."
+    quote: "we noted multiple assertions that the randomized alphanumeric composition of the Decentralized Identifier (DID) represents the secure encoding or encryption of personal information. Of course, this was not true, yet the perceived presence of cryptography provided a sense of confidence and comfort. [...] Nadon et al. also noticed the potential for users to feel personal failure if they over-shared once given control."
+    locator: "§7.1 Security Perceptions Enhanced by Trust, p. 205; §6 (participant P16 discussion), p. 203 (SOUPS 2022 / Proceedings of the Eighteenth Symposium on Usable Privacy and Security)"
+
+  - key: sartor2022loveatfirstsight
+    title: "Love at First Sight? A User Experience Study of Self-Sovereign Identity Wallets"
+    author: "Sebastian Sartor, Johannes Sedlmeir, Alexander Rieger, Tamara Roth"
+    url: "https://aisel.aisnet.org/ecis2022_rp/46/"
+    retrieved: "2026-09-04"
+    capture: ""
+    status: lead
+    supports: "(unverified) Reported by secondary summary as a UEQ-based usability evaluation of four SSI wallets finding decent baseline UX but that the wallets 'do not make their novelty and benefits sufficiently apparent to users.' Attempted retrieval failed (AISeL's PDF endpoint returned an HTML page, not the paper) during this survey; not read."
+    quote: ""
+    locator: "ECIS 2022 Research Papers, paper 46 — not fetched; do not cite in prose beyond noting its existence as a lead."
+
+  - key: doet_revised_2013
+    title: "The Design of Everyday Things, Revised and Expanded Edition"
+    author: "Don Norman"
+    url: "https://www.google.com/search?q=%22The+Design+of+Everyday+Things%22+Norman+2013+revised"
+    retrieved: "2026-09-04"
+    capture: ""
+    status: lead
+    supports: "(unverified, not read directly this pass) The book itself, as opposed to Norman's own site essays about it (see norman2008signifiers and norman_jnd_preface_doet2013 below, which were read and are quoted from directly). Anything attributed to the book with a page locator in docs/research/prior-art/literature.md beyond what those two essays state in their own words should be treated as unverified until someone reads the actual 2013 text."
+    quote: ""
+    locator: "Basic Books, 2013 — not obtained; a copy would go to .ignored/private-refs/papers/ per AGENTS.md if captured in a later pass."
+
+  # --- Cluster 4: design theory ---
+
+  - key: norman2008signifiers
+    title: "Signifiers, Not Affordances"
+    author: "Don Norman"
+    url: "https://jnd.org/signifiers-not-affordances/"
+    retrieved: "2026-09-04"
+    capture: ".ignored/private-refs/papers/norman-signifiers-not-affordances-2008-jnd.html"
+    status: primary
+    supports: "Norman's own account, in his own words, of why he moved from 'affordance' to 'signifier' as the term design should center — the essay that motivates the 2013 DoET revision. Establishes that a signifier can work by absence, not just by presence, which is directly relevant to how arcviz should treat an undisclosed/absent node: absence itself can be a legitimate, designed signal rather than a rendering failure."
+    quote: "The perceivable part of an affordance is a signifier, and if deliberately placed by a designer, it is a social signifier. Designers of the world: Forget affordances provide signifiers. [...] Social signifiers replace affordances, for they are broader and richer, allowing for accidental signifiers as well as deliberate ones, and even for items that signify by their absence, as the lack of crowds on a train platform."
+    locator: "Originally published in ACM Interactions, vol. 15, issue 6, 2008; self-archived by the author at jnd.org, posted 2008-11-17. Capture note: the page states it is posted 'by permission of ACM for your personal use,' a narrower grant than jnd.org's site-wide CC BY-NC license, so per AGENTS.md's publication-hygiene rule this capture is treated as not-for-republication and lives in .ignored/private-refs/ even though the page itself is public."
+
+  - key: norman_jnd_preface_doet2013
+    title: "Preface, Design of Everyday Things, Revised Edition"
+    author: "Don Norman"
+    url: "https://jnd.org/preface-design-of-everyday-things-revised-edition/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/norman-preface-doet-revised-edition-jnd.html"
+    status: primary
+    supports: "Norman's own summary, in his own words, of the single biggest conceptual change in the 2013 revision: the affordance/signifier split, and why signifiers matter more to a designer than affordances do. This is the vocabulary the task asked us to get right; note this is Norman's preface essay on his own site (CC BY-NC licensed per the page footer), not a verified read of the book chapter itself."
+    quote: "Affordances define what actions are possible. Signifiers specify how people discover those possibilities: signifiers are signs, perceptible signals of what can be done. [...] The first edition had a focus upon affordances, but although affordances make sense for interaction with physical objects, they are confusing when dealing with virtual ones. As a result, affordances have created much confusion in the world of design. Signifiers are of far more importance to designers than are affordances."
+    locator: "jnd.org, preface essay for the 2013 revised edition of The Design of Everyday Things; page carries a site-wide CC BY-NC 4.0 license per its footer"
+
+  - key: norman_affordances_and_design
+    title: "Affordances and Design"
+    author: "Don Norman"
+    url: "https://jnd.org/affordances-and-design/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/norman-affordances-and-design-jnd.html"
+    status: primary
+    supports: "Norman's own clarification, in his own words, that the term 'affordance' properly names an actor-independent relationship (Gibson's original sense), and that what design actually needs is the narrower, perception-dependent concept he later renamed 'perceived affordance' / 'signifier.' Directly forbids the loose usage where 'affordance' is used to mean 'a UI element that looks clickable' — that is a perceived affordance / signifier, and conflating the two is exactly the misuse the task flagged."
+    quote: "The word “affordance” was originally invented by the perceptual psychologist J. J. Gibson (1977, 1979) to refer to the actionable properties between the world and an actor (a person or animal). To Gibson, affordances are a relationship. [...] I should have used the term ‘perceived affordance,’ for in design, we care much more about what the user perceives than what is actually true. [...] What the designer cares about is whether the user perceives that some action is possible (or in the case of perceived non-affordances, not possible)."
+    locator: "jnd.org essay; page carries a site-wide CC BY-NC 4.0 license per its footer"
+
+  - key: nielsen1994heuristics
+    title: "10 Usability Heuristics for User Interface Design"
+    author: "Jakob Nielsen (Nielsen Norman Group)"
+    url: "https://www.nngroup.com/articles/ten-usability-heuristics/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/nielsen-ten-usability-heuristics-nngroup.html"
+    status: primary
+    supports: "The canonical statement of 'visibility of system status' and 'match between system and the real world,' the two heuristics most directly load-bearing for arcviz: a viewer must always be able to tell which of absent/undisclosed/redacted/unverified/verified state a node is in (visibility of status), and the visual vocabulary for that must not require the user to learn arcviz-internal jargon to read it (match with the real world)."
+    quote: "The design should always keep users informed about what is going on, through appropriate feedback within a reasonable amount of time. [...] The design should speak the users' language. Use words, phrases, and concepts familiar to the user, rather than internal jargon. [...] They are called \"heuristics\" because they are broad rules of thumb and not specific usability guidelines."
+    locator: "nngroup.com/articles/ten-usability-heuristics/ (heuristics #1 and #2; originally Nielsen & Molich 1990, refined Nielsen 1994, page last updated by NN/g in 2020)"
+
+  - key: nngroup_progressive_disclosure
+    title: "Progressive Disclosure"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/progressive-disclosure/"
+    retrieved: "2026-09-04"
+    capture: "refs/captures/lit/nngroup-progressive-disclosure.html"
+    status: primary
+    supports: "The definition of progressive disclosure arcviz's expand-a-card / toggle-raw-vs-pretty affordances are an instance of, plus NN/g's stated failure mode when it is used past two levels."
+    quote: "Progressive disclosure defers advanced or rarely used features to a secondary screen, making applications easier to learn and less error-prone."
+    locator: "nngroup.com/articles/progressive-disclosure/"
+
+  - key: tufte1983vdqi
+    title: "The Visual Display of Quantitative Information"
+    author: "Edward R. Tufte"
+    url: "https://www.edwardtufte.com/tufte/books_vdqi"
+    retrieved: "2026-09-04"
+    capture: ""
+    status: lead
+    supports: "(unverified) Not read this pass. Quote-aggregator sites attribute 'graphical excellence is that which gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space' and 'above all else show the data' to this book, but no two aggregator gave the same page number, which is itself evidence none of them are working from a read of the primary text. Per EVIDENCE.md rule 6, this is left as a lead with no quote rather than laundering a quote-site's citation into this record."
+    quote: ""
+    locator: "Graphics Press, 1983 (2nd ed. 2001) — not obtained; would go to .ignored/private-refs/papers/ per AGENTS.md if captured in a later pass"

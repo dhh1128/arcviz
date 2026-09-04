@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<title>Affordances and Design &#8211; Don Norman&#039;s JND.org</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//0.gravatar.com' />
+<link rel='dns-prefetch' href='//1.gravatar.com' />
+<link rel='dns-prefetch' href='//2.gravatar.com' />
+<link rel='preconnect' href='//i0.wp.com' />
+<link rel='preconnect' href='//c0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Don Norman&#039;s JND.org &raquo; Feed" href="https://jnd.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Don Norman&#039;s JND.org &raquo; Comments Feed" href="https://jnd.org/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Don Norman&#039;s JND.org &raquo; Affordances and Design Comments Feed" href="https://jnd.org/affordances-and-design/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://jnd.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjnd.org%2Faffordances-and-design%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://jnd.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjnd.org%2Faffordances-and-design%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='all-css-9933afddf2f1faf6ea39e41ea233b4f2' href='https://jnd.org/wp-content/plugins/jetpack/modules/related-posts/related-posts.css?m=1771329624' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=https://jnd.org/wp-content/plugins/gutenberg/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://jnd.org/wp-content/plugins/gutenberg/build/styles/block-library/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://jnd.org/wp-content/plugins/gutenberg/build/styles/block-library/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://jnd.org/wp-content/plugins/gutenberg/build/styles/block-library/paragraph/style.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=https://jnd.org/wp-content/plugins/gutenberg/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<style id="jetpack-stats-inline-css">
+img#wpstats{display:none}
+/*# sourceURL=jetpack-stats-inline-css */
+</style>
+<link rel='stylesheet' id='all-css-3d6113c1a00da0096420f809ef089526' href='https://jnd.org/wp-content/themes/jnd-org-donnorman/style.css?m=1681476560' type='text/css' media='all' />
+<style id="jetpack_likes-inline-css">
+#jp-post-flair{padding-top:.5em}#content div.sharedaddy,#main div.sharedaddy,div.sharedaddy{clear:both}div.sharedaddy h3.sd-title{display:inline-block;font-size:9pt;font-weight:700;line-height:1.2;margin:0 0 1em}div.sharedaddy h3.sd-title:before{border-top:1px solid #dcdcde;content:"";display:block;margin-bottom:1em;min-width:30px;width:100%}div.jetpack-likes-widget-wrapper{min-height:50px;position:relative;width:100%}div.jetpack-likes-widget-wrapper .sd-link-color{font-size:12px}div.jetpack-comment-likes-widget-wrapper{min-height:31px;position:relative;width:100%}div.jetpack-comment-likes-widget-wrapper iframe{margin-bottom:0}#likes-other-gravatars{background-color:#fff;border:1px solid #dcdcde;border-radius:4px;box-shadow:none;display:none;height:auto;max-height:240px;min-width:220px;overflow:auto;padding:9px 12px 10px;position:absolute;z-index:1000}#likes-other-gravatars *{line-height:normal}#likes-other-gravatars .likes-text{color:#101517;font-size:12px;font-weight:500;padding-bottom:8px}#likes-other-gravatars :is(li,ul){list-style-type:none;margin:0;padding:0;text-indent:0}#likes-other-gravatars li:before{content:""}#likes-other-gravatars ul.wpl-avatars{display:block;max-height:190px;overflow:auto}#likes-other-gravatars ul.wpl-avatars li{float:none;height:28px;margin:0 0 4px;width:196px}#likes-other-gravatars ul.wpl-avatars li a{align-items:center;border-bottom:none!important;display:flex;gap:8px;margin:0 2px 0 0;text-decoration:none}#likes-other-gravatars ul.wpl-avatars li a span{color:#2c3338;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#likes-other-gravatars ul.wpl-avatars li a img{background:none;border:none;border-radius:50%;box-sizing:border-box;margin:0!important;padding:1px!important;position:static}div.sd-box{border-top:1px solid #00000021}.jetpack-likes-widget-loaded iframe,.jetpack-likes-widget-loading .likes-widget-placeholder,.jetpack-likes-widget-unloaded .likes-widget-placeholder{display:block}.jetpack-likes-widget-loaded .likes-widget-placeholder,.jetpack-likes-widget-loading iframe,.jetpack-likes-widget-unloaded iframe{display:none}.comment-likes-widget,.entry-content .post-likes-widget,.post-likes-widget{border-width:0;margin:0}.comment-likes-widget-placeholder,.post-likes-widget-placeholder{border-width:0;margin:0;position:relative}.comment-likes-widget-placeholder{display:flex;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;height:18px;position:absolute}.comment-likes-widget-placeholder:before{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath fill='%232ea2cc' d='m12 2 2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:16px 16px;color:#2ea2cc;content:"";display:inline-block;height:16px;padding-right:5px;position:relative;top:3px;width:16px}.post-likes-widget-placeholder .button{display:none}:is(.comment-likes-widget-placeholder,.post-likes-widget-placeholder) .loading{color:#999;font-size:12px}.comment-likes-widget-placeholder .loading{align-self:center;color:#4e4e4e;margin-top:4px;padding-left:5px}div.sharedaddy.sd-like-enabled .sd-like h3{display:none}div.sharedaddy.sd-like-enabled .sd-like .post-likes-widget{float:none;position:absolute;top:0;width:100%}.comment-likes-widget{width:100%}.cs-rating,.pd-rating{display:block!important}.sd-gplus .sd-title{display:none}@media print{.jetpack-likes-widget-wrapper{display:none}}
+/*# sourceURL=https://jnd.org/wp-content/plugins/jetpack/_inc/build/likes/style.min.css */
+</style>
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script type='text/javascript'  src='https://jnd.org/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?m=1764003632'></script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://jnd.org/wp-content/mu-plugins/wpcomsh/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script id="jquery-core-js" src="https://jnd.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script type='text/javascript'  src='https://jnd.org/wp-includes/js/jquery/jquery-migrate.min.js?m=1686289764'></script>
+
+<!-- Google tag (gtag.js) snippet added by Site Kit -->
+<!-- Google Analytics snippet added by Site Kit -->
+<script id="google_gtagjs-js" src="https://www.googletagmanager.com/gtag/js?id=G-KN9QKF8X5V" async></script>
+<script id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag("set","linker",{"domains":["jnd.org"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "G-KN9QKF8X5V");
+ window._googlesitekit = window._googlesitekit || {}; window._googlesitekit.throttledEvents = []; window._googlesitekit.gtagEvent = (name, data) => { var key = JSON.stringify( { name, data } ); if ( !! window._googlesitekit.throttledEvents[ key ] ) { return; } window._googlesitekit.throttledEvents[ key ] = true; setTimeout( () => { delete window._googlesitekit.throttledEvents[ key ]; }, 5 ); gtag( "event", name, { ...data, event_source: "site-kit" } ); }; 
+//# sourceURL=google_gtagjs-js-after
+</script>
+<link rel="https://api.w.org/" href="https://jnd.org/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://jnd.org/wp-json/wp/v2/posts/13" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jnd.org/xmlrpc.php?rsd" />
+
+<link rel="canonical" href="https://jnd.org/affordances-and-design/" />
+<link rel='shortlink' href='https://wp.me/peyy2v-d' />
+<meta name="generator" content="Site Kit by Google 1.186.0" /><link rel="pingback" href="https://jnd.org/xmlrpc.php"><meta name="description" content="In the world of design, the term &quot;affordance&quot; has taken on a life far beyond the original meaning. It might help if we return to the original definition. Let me try to clarify the definition of the term and its many uses...." />
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Affordances and Design" />
+<meta property="og:url" content="https://jnd.org/affordances-and-design/" />
+<meta property="og:description" content="In the world of design, the term &#8220;affordance&#8221; has taken on a life far beyond the original meaning. It might help if we return to the original definition. Let me try to clarify the defin…" />
+<meta property="article:published_time" content="2008-11-17T11:18:00+00:00" />
+<meta property="article:modified_time" content="2023-02-15T23:41:08+00:00" />
+<meta property="og:site_name" content="Don Norman&#039;s JND.org" />
+<meta property="og:image" content="https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvaTAud3AuY29tXC9qbmQub3JnXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDIzXC8wM1wvY3JvcHBlZC1VTklURS0yMy1Eb24tMS5qcGc_Zml0PTY5NCUyQzY5NCZzc2w9MSIsInR4dCI6IkRvbiBOb3JtYW4mIzAzOTtzIEpORC5vcmciLCJ0ZW1wbGF0ZSI6ImVkZ2UiLCJmb250IjoiIiwiYmxvZ19pZCI6MjE1MTAyNzA3fQ.tkn1MkDB9qSB2p2HmduJhZ0cbYeHanNPIAoLQtM3V9wMQ" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="Affordances and Design" />
+<meta name="twitter:image" content="https://i0.wp.com/jnd.org/wp-content/uploads/2023/03/cropped-UNITE-23-Don-1.jpg?fit=240%2C240&amp;ssl=1" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://i0.wp.com/jnd.org/wp-content/uploads/2023/03/cropped-UNITE-23-Don-1.jpg?fit=32%2C32&#038;ssl=1" sizes="32x32" />
+<link rel="icon" href="https://i0.wp.com/jnd.org/wp-content/uploads/2023/03/cropped-UNITE-23-Don-1.jpg?fit=192%2C192&#038;ssl=1" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://i0.wp.com/jnd.org/wp-content/uploads/2023/03/cropped-UNITE-23-Don-1.jpg?fit=180%2C180&#038;ssl=1" />
+<meta name="msapplication-TileImage" content="https://i0.wp.com/jnd.org/wp-content/uploads/2023/03/cropped-UNITE-23-Don-1.jpg?fit=270%2C270&#038;ssl=1" />
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-13 single-format-standard wp-theme-jnd-org-donnorman no-sidebar">
+<script id='jetpack-search-theme-token-sampler'>(function(){try{var c=getComputedStyle(document.body),r=document.documentElement,ink=c.color,bg=c.backgroundColor;if(ink){r.style.setProperty('--jp-search-page-ink',ink);}if(bg&&bg!==ink&&bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent'){r.style.setProperty('--jp-search-page-surface',bg);}}catch(e){}})();</script><div id="page" class="site">
+	<header class="header_container">
+		<div class="header_wrapper">
+			<button class="header_menu_btn btn-nostyle">
+				<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/menu-icon.svg" alt="menu icon">
+			</button>
+
+			<button class="close_header_menu_btn btn-nostyle">
+				<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/x-icon.svg" alt="menu icon">
+			</button>
+
+			<div class="jnd-logo">
+				<h1><a href="/">jnd.org</a></h1>
+			</div>
+
+			<div class="header-desktop-wrapper">
+				<nav class="header_container_nav_links">
+					<div class="menu-top-nav-container"><ul id="menu-top-nav" class="top-bar"><li id="menu-item-838" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-838"><a href="https://jnd.org/essay-articles/">Essay &#038; Articles</a></li>
+<li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837"><a href="https://jnd.org/books/">Books</a></li>
+<li id="menu-item-1661" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1661"><a href="https://jnd.org/videos/">Videos</a></li>
+<li id="menu-item-804" class="menu-item menu-item-type-post_type menu-item-object-about-don-norman menu-item-804"><a href="https://jnd.org/about-don-norman/latest-updates/">About Don Norman</a></li>
+</ul></div>				</nav>
+
+				<div class="search-menu-nav">
+					<div class="search">
+						<form method="GET" action="/">
+							<input id="s" name="s" type="text" placeholder="Search" class="search-input" required value="">
+							<button class="search-submit search-btn" type="submit" title="search">
+								<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/magnifying-glass-white.svg" alt="search">
+							</button>
+						</form>
+						<img class="search-underline" src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-underline-sm-white.svg" alt="presentational-underline">
+					</div>
+				</div>
+			</div>
+
+			<div class="search-menu-nav-mobile">
+				<div class="search search-header search-minimised">
+					<form method="GET" action="/">
+						<input id="s" name="s" type="text" placeholder="Search" class="search-input" required value="">
+						<button class="search-submit search-btn btn-nostyle" type="submit" title="search">
+							<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/magnifying-glass-white.svg" alt="search">
+						</button>
+						<button class="toggle-search close-search btn-nostyle" type="button">
+							<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/x-icon.svg" alt="search">
+						</button>
+					</form>
+					<button class="toggle-search open-search btn-nostyle" type="button">
+						<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/magnifying-glass-white.svg" alt="search">
+					</button>
+					<img class="search-underline" src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-underline-sm-white.svg" alt="presentational-underline">
+				</div>
+			</div>
+
+			<div class="menu-container">
+				<div class="menu">
+					<div class="menu-nav-links">
+						<nav>
+							<div class="menu-top-nav-container"><ul id="menu-top-nav-1" class="top-bar"><li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-838"><a href="https://jnd.org/essay-articles/">Essay &#038; Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837"><a href="https://jnd.org/books/">Books</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1661"><a href="https://jnd.org/videos/">Videos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-about-don-norman menu-item-804"><a href="https://jnd.org/about-don-norman/latest-updates/">About Don Norman</a></li>
+</ul></div>						</nav>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div class="search-menu-opacity"></div>
+
+	<main id="primary" class="site-main single-article">
+		<div class="non-homepage-container">
+			<div class="heading-with-underline single-article-heading">
+				<h2>Essays & Articles</h2>
+				<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-underline-lg-red.svg" alt="presentational-underline">
+			</div>
+
+			<div class="single-article-top-back-link">
+				<div class="back-link">
+					<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-left-chevron.svg" alt="presentational-left-arrow">
+					<a class="link-md" onclick="history.back()">Back</a> 
+				</div>
+			</div>
+			<div class="category-tab-container">
+				<ul class="category-tab-sidebar">
+					<li class='cat-item-all current-cat'><a href='https://jnd.org/essay-articles/'>All</a></li>	<li class="cat-item cat-item-786"><a href="https://jnd.org/category/essays/">Essays</a>
+<ul class='children'>
+	<li class="cat-item cat-item-759629367"><a href="https://jnd.org/category/essays/ask-don/">Ask Don</a>
+</li>
+	<li class="cat-item cat-item-759629368"><a href="https://jnd.org/category/essays/automobiles/">Automobiles</a>
+</li>
+	<li class="cat-item cat-item-2280523"><a href="https://jnd.org/category/essays/core77/">Core77</a>
+</li>
+	<li class="cat-item cat-item-759629369"><a href="https://jnd.org/category/essays/dbw/">DBW</a>
+	<ul class='children'>
+	<li class="cat-item cat-item-759629390"><a href="https://jnd.org/category/essays/dbw/action/">Action</a>
+</li>
+	<li class="cat-item cat-item-759629387"><a href="https://jnd.org/category/essays/dbw/artificial/">Artificial</a>
+</li>
+	<li class="cat-item cat-item-759629388"><a href="https://jnd.org/category/essays/dbw/books-and-other-general-readings/">Books And Other General Readings</a>
+</li>
+	<li class="cat-item cat-item-759629385"><a href="https://jnd.org/category/essays/dbw/human-behavior/">Human Behavior</a>
+</li>
+	<li class="cat-item cat-item-759629386"><a href="https://jnd.org/category/essays/dbw/humanity-centered/">Humanity Centered</a>
+</li>
+	<li class="cat-item cat-item-759629389"><a href="https://jnd.org/category/essays/dbw/meaning/">Meaning</a>
+</li>
+	<li class="cat-item cat-item-759629383"><a href="https://jnd.org/category/essays/dbw/sustainability/">Sustainability</a>
+</li>
+	<li class="cat-item cat-item-759629384"><a href="https://jnd.org/category/essays/dbw/sustainable/">Sustainable</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-148"><a href="https://jnd.org/category/essays/design/">Design</a>
+</li>
+	<li class="cat-item cat-item-759629370"><a href="https://jnd.org/category/essays/education/">Education</a>
+</li>
+	<li class="cat-item cat-item-759629371"><a href="https://jnd.org/category/essays/emotion-design/">Emotion &amp; Design</a>
+</li>
+	<li class="cat-item cat-item-759629355"><a href="https://jnd.org/category/essays/good-design/">Good Design</a>
+</li>
+	<li class="cat-item cat-item-759629372"><a href="https://jnd.org/category/essays/inspiration/">Inspiration</a>
+</li>
+	<li class="cat-item cat-item-759629373"><a href="https://jnd.org/category/essays/interaction-articles/">Interaction Articles</a>
+</li>
+	<li class="cat-item cat-item-831"><a href="https://jnd.org/category/essays/interviews/">Interviews</a>
+</li>
+	<li class="cat-item cat-item-759629374"><a href="https://jnd.org/category/essays/linkedin-articles/">LinkedIn Articles</a>
+</li>
+	<li class="cat-item cat-item-759629375"><a href="https://jnd.org/category/essays/people/">People</a>
+</li>
+	<li class="cat-item cat-item-759629361"><a href="https://jnd.org/category/essays/recommended-reading/">Recommended reading</a>
+</li>
+	<li class="cat-item cat-item-759629377"><a href="https://jnd.org/category/essays/technology-society/">Technology &amp; Society</a>
+</li>
+	<li class="cat-item cat-item-759629378"><a href="https://jnd.org/category/essays/television/">Television</a>
+</li>
+	<li class="cat-item cat-item-759629379"><a href="https://jnd.org/category/essays/video/">Video</a>
+</li>
+</ul>
+</li>
+		
+				</ul>
+
+				<select class="mobile-tab-dropdown">
+                    <option value="" hidden>SELECT CATEGORY</option> 
+                    <option value="https://jnd.org/essay-articles/">All</option><option value="https://jnd.org/category/Essays">Essays</option><option value="https://jnd.org/category/Ask Don">Ask Don</option><option value="https://jnd.org/category/Automobiles">Automobiles</option><option value="https://jnd.org/category/Core77">Core77</option><option value="https://jnd.org/category/DBW">DBW</option><option value="https://jnd.org/category/Design">Design</option><option value="https://jnd.org/category/Education">Education</option><option value="https://jnd.org/category/Emotion &amp; Design">Emotion &amp; Design</option><option value="https://jnd.org/category/Good Design">Good Design</option><option value="https://jnd.org/category/Inspiration">Inspiration</option><option value="https://jnd.org/category/Interaction Articles">Interaction Articles</option><option value="https://jnd.org/category/Interviews">Interviews</option><option value="https://jnd.org/category/LinkedIn Articles">LinkedIn Articles</option><option value="https://jnd.org/category/People">People</option><option value="https://jnd.org/category/Recommended reading">Recommended reading</option><option value="https://jnd.org/category/Technology &amp; Society">Technology &amp; Society</option><option value="https://jnd.org/category/Television">Television</option><option value="https://jnd.org/category/Video">Video</option>                </select>
+				
+				<div class="category-tab-content essay-tab-content">
+					<div class="essay-tab-content-heading">
+						<time>November 17, 2008</time>
+						<h3>Affordances and Design</h3>
+					</div>
+					
+					<div class="editor-content">
+						
+<p class="wp-block-paragraph">In the world of design, the term &#8220;affordance&#8221; has taken on a life far beyond the original meaning. It might help if we return to the original definition.Let me try to clarify the definition of the term and its many uses.</p>
+
+
+
+<h3 class="wp-block-heading"><em>AFFORDANCE</em></h3>
+
+
+
+<p class="wp-block-paragraph">The word &#8220;affordance&#8221; was originally invented by the perceptual psychologist J. J. Gibson (1977, 1979) to refer to the actionable properties between the world and an actor (a person or animal). To Gibson, affordances are a relationship. They are a part of nature: they do not have to be visible, known, or desirable. Some affordances are yet to be discovered. Some are dangerous. I suspect that none of us know all the affordances of even everyday objects.</p>
+
+
+
+<h3 class="wp-block-heading">PERCEIVED AFFORDANCE</h3>
+
+
+
+<p class="wp-block-paragraph">I introduced the term affordance to design in my book, &#8220;The Psychology of Everyday Things&#8221; (POET: also published as &#8220;The Design of &#8230;&#8221;). The concept has caught on, but not always with true understanding. Part of the blame lies with me: I should have used the term &#8220;perceived affordance,&#8221; for in design, we care much more about what the user perceives than what is actually true. What the designer cares about is whether the userperceives that some action is possible (or in the case of perceived non-affordances, not possible).</p>
+
+
+
+<p class="wp-block-paragraph">In product design, where one deals with real, physical objects, there can be both real and perceived affordances, and the two need not be the same. In graphical, screen-based interfaces, all that the designer has available is control over perceived affordances. The computer system, with its keyboard, display screen, pointing device (e.g., mouse) and selection buttons (e.g., mouse buttons) affords pointing, touching, looking, and clicking on every pixel of the display screen. Most of this affordance is of no value. Thus, if the display does not have a touch-sensitive screen, the screen still affords touching, but it has no result on the computer system. Mind you, the affordance still has impact: it is useful in multiple-person communication, and it helps aid the sale of screen-cleaning tissues and fluids. All screens afford touching: only some detect the touch and are capable of responding. But the affordance of touchability is the same in all cases. Touch sensitive screens often make their affordance visibly perceivable by displaying a cursor under the pointing spot. The cursor is not an affordance; it is visual feedback.</p>
+
+
+
+<p class="wp-block-paragraph">In similar vein, because I can click anytime I want, it is wrong to argue whether a graphical object on the screen &#8220;affords clicking.&#8221; It does. The real question is about the perceived affordance: Does the user perceive that clicking on that location is a meaningful, useful action to perform?</p>
+
+
+
+<h3 class="wp-block-heading">CULTURAL CONSTRAINTS, CULTURAL CONVENTIONS</h3>
+
+
+
+<p class="wp-block-paragraph">In graphical design, one is really talking about conventions, or what I called logical and cultural &#8220;constraints&#8221; in POET. Physical constraints are closely related to real affordances: Thus, it is not possible to move the cursor outside the screen: this is a physical constraint.</p>
+
+
+
+<p class="wp-block-paragraph">Logical constraints use reasoning to determine the alternatives. Thus, if we ask the user to click on 5 locations and only 4 are immediately visible; the person knows, logically, that there is still location left.</p>
+
+
+
+<p class="wp-block-paragraph">Cultural constraints are learned conventions that are shared by a cultural group. The fact that the graphic on the right hand side of a display is a &#8220;scroll bar&#8221; and that one should move the cursor to it, hold down a mouse button, and &#8220;drag&#8221; it downward in order to see objects located below the current visible set (thus causing the image itself to appear to move upwards) &#8212; all this is a cultural, learned convention. The choice of action is arbitrary: there is nothing inherent in the devices or design that requires the system to act in this way. (The word &#8220;arbitrary&#8221; does not mean that any random depiction would do equally well: the current choice is an intelligent fit to human cognition, but this is a different topic, for another day.)</p>
+
+
+
+<p class="wp-block-paragraph">In all scrolling bars I have seen, there is a physical constraint as well: the vertical scroll bar only moves vertically, not horizontally. Once again, these cultural constraints are arbitrary. The scroll bar could have been designed very differently. It could have been located on the left, or the top, or as a button. Today, its action follows the &#8220;outside-in&#8221; convention, but in the early days, a number of designs used the &#8220;inside-out&#8221; convention, so that moving the scroll bar down caused the text to move downwards, exposing the new text at the top of the screen. Today if we were to use that convention, it would be confusing, but only because the convention has already been established. (Some drawing programs still follow that earlier convention and they have adopted the convention of a &#8220;hand&#8221; graphic to signal that moving the cursor upwards &#8220;grabs the text&#8221; and moves it upward as well. )</p>
+
+
+
+<p class="wp-block-paragraph">All this is cultural convention, not affordances.</p>
+
+
+
+<p class="wp-block-paragraph">In the world of design, what matters is:</p>
+
+
+
+<ol class="wp-block-list">
+<li>If the desired controls can be perceived1.a. In an easy to use design, if they can both readily be perceived and interpreted</li>
+
+
+
+<li>If the desired actions can be discovered2.a. Whether standard conventions are obeyed</li>
+</ol>
+
+
+
+<p class="wp-block-paragraph">In a game, the designer may deliberately violate the A principles (1A and 2A). Sometimes, even in effective, mass-consumer designs, it is useful to violate these principles. Thus, sometimes there are &#8220;back doors&#8221; for those who maintain the system, and it is not desirable that the average user know of their existence. But if the user is to be effective at, these principles should be followed.</p>
+
+
+
+<h3 class="wp-block-heading">How new users understand what to do: Four principles for screen interfaces</h3>
+
+
+
+<p class="wp-block-paragraph">There are several ways of getting a new user to understand what actions are possible. This was a major theme of POET, but there, the emphasis was on physical products, so perceived physical affordances were extremely important. In graphical design (e.g., screen displays), physical affordances play only a minor role, so other principles must be invoked. Here are four, but like most design conventions, each has both virtues and drawbacks:</p>
+
+
+
+<h3 class="wp-block-heading">1. Follow conventional usage, both in the choice of images and the allowable interactions.</h3>
+
+
+
+<p class="wp-block-paragraph">Convention severely constrains creativity. Following convention may also violate intellectual property laws. Sometimes we wish to introduce a new kind of action for which there are, as yet, no accepted conventions. On the whole, however, unless we follow the major conventions, we are doomed to fail. Those who violate conventions, even when they are convinced that their new method is superior, are doomed to fail. (You cannot successfully introduce a non-qwerty keyboard today, or reverse the window scroll bar convention, or suddenly require double-clicking on web links. For better or for worse, human culture changes slowly, if at all.)</p>
+
+
+
+<h3 class="wp-block-heading">2. Use words to describe the desired action (e.g., &#8220;click here&#8221; or use labels in front of perceived objects).</h3>
+
+
+
+<p class="wp-block-paragraph">This is, of course, why menus can be relatively easy to understand: the resulting action is described verbally. (Of course, the method of using the menu has to be learned, and the text still has to be chosen with care &#8212; and user tested.)</p>
+
+
+
+<p class="wp-block-paragraph">Words alone cannot solve the problem, for there still must be some way of knowing what action and where it is to be done. This requires a convention of highlighting, or outlining, or depiction of a actionable object. It is also well known that single word labels fail for most people &#8212; everyone has a favorite word, but the variety of preferred words is overwhelming. Words also cause problems with international adoption. Thus, road signs often use graphics &#8212; an international standard on road sign graphics exists. Alas, most people do not understand those standards. It is also the case that words are understood more quickly than graphics &#8212; even a well known, understood graphic. Words plus graphics are even more readily understood.</p>
+
+
+
+<h3 class="wp-block-heading">3. Use metaphor.</h3>
+
+
+
+<p class="wp-block-paragraph">Metaphor is both useful and harmful. I personally believe that metaphors are more harmful than useful, but this is a different topic for a different day. For today&#8217;s topic, the problem with metaphor is that not all users may understand the point. Worse, they may take the metaphor too literally and try to do actions that were not intended. Still, this is one way of training users.</p>
+
+
+
+<h3 class="wp-block-heading">4. Follow a coherent conceptual model so that once part of the interface is learned, the same principles apply to other parts.</h3>
+
+
+
+<p class="wp-block-paragraph">Coherent conceptual models are valuable and, in my opinion, necessary, but there still remains the bootstrapping problem; how does one learn the model in the first place? &#8212; why by conventions, words, and metaphors.</p>
+
+
+
+<h3 class="wp-block-heading">References</h3>
+
+
+
+<p class="wp-block-paragraph">The primary reference to affordances in perception is Gibson, 1979, but also see Gibson, 1977.</p>
+
+
+
+<p class="wp-block-paragraph">Gibson, J. J. (1977). The theory of affordances. In R. E. Shaw &amp; J. Bransford (Eds.), <em>Perceiving, Acting, and Knowing.</em> Hillsdale, NJ: Lawrence Erlbaum Associates.</p>
+
+
+
+<p class="wp-block-paragraph">Gibson, J. J. (1979). <em>The Ecological Approach to Visual Perception</em>. Boston: Houghton Mifflin.</p>
+
+
+
+<p class="wp-block-paragraph">Norman, D. A. (1988). <em>The psychology of everyday things</em>. New York: Basic Books.</p>
+
+
+
+<p class="wp-block-paragraph">Norman, D. A. (2013). <em>The design of everyday things:Revised and expanded edition</em>. New York: Doubleday.</p>
+
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>					</div>
+
+					<div class="back-link">
+						<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-left-chevron.svg" alt="presentational-left-arrow">
+						<a class="link-md" onclick="history.back()">Back</a> 
+					</div>
+				</div>
+			</div>
+
+			
+<section class="suggested-links-container">	
+    <div class="heading-with-underline">
+        <h2 class="like-books-desktop">You may also like books</h2>
+        <h2 class="like-books-mobile">books</h2>
+        <img class="underline-desktop" src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-underline-lg-red.svg" alt="presentational-underline">
+        <img class="underline-mobile" src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-underline-sm-red.svg" alt="presentational-underline">
+    </div>
+
+    <div class="suggested-books swiper">
+        <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                        <div class="featured-book">
+                            <a class="book" href="https://jnd.org/books/design-for-a-better-world/">
+                                                                                                    <img src='https://jnd.org/wp-content/uploads/2023/03/norman.world_-1.png' alt="">
+                                    <p>Design for a Better World</p>
+                                   
+                            </a>
+                        </div>   
+                    </div>
+                                    <div class="swiper-slide">
+                        <div class="">
+                            <a class="book" href="https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/">
+                                                                                                    <img src='https://jnd.org/wp-content/uploads/2023/02/the-design-of-everyday-things-6-1.png' alt="">
+                                    <p>The Design of Everyday Things, Revised and Expanded Edition</p>
+                                   
+                            </a>
+                        </div>   
+                    </div>
+                                    <div class="swiper-slide">
+                        <div class="">
+                            <a class="book" href="https://jnd.org/books/living-with-complexity/">
+                                                                                                    <img src='https://jnd.org/wp-content/uploads/2023/02/Rectangle-26.png' alt="">
+                                    <p>Living with Complexity</p>
+                                   
+                            </a>
+                        </div>   
+                    </div>
+                                    <div class="swiper-slide">
+                        <div class="">
+                            <a class="book" href="https://jnd.org/books/emotional-design-why-we-love-or-hate-everyday-things/">
+                                                                                                    <img src='https://jnd.org/wp-content/uploads/2023/02/Rectangle-24-2.png' alt="">
+                                    <p>Emotional Design: Why We Love (or Hate) Everyday Things</p>
+                                   
+                            </a>
+                        </div>   
+                    </div>
+                                    </div>
+    </div>
+
+    <div class="view-more-link">
+        <a class="link-md" href="/books">View more books</a> 
+        <img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/drawing-right-chevron.svg" alt="presentational-right-arrow">
+    </div>
+</section>
+		</div>
+	</main><!-- #main -->
+
+
+	<footer id="colophon" class="site-footer">
+		<div class="footer-content">
+			<div class="footer-logo">
+				<h1><a href="/">jnd.org</a></h1>
+			</div>
+			<nav>
+				<div class="menu-footer-nav-container"><ul id="menu-footer-nav" class="menu"><li id="menu-item-808" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-808"><a href="#">Menu Item</a>
+<ul class="sub-menu">
+	<li id="menu-item-805" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-805"><a href="https://jnd.org/about-don-norman/consulting-and-talks/">Contact information</a></li>
+	<li id="menu-item-806" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-806"><a href="https://jnd.org/about-don-norman/consulting-and-talks/">Schedule an appearance</a></li>
+</ul>
+</li>
+<li id="menu-item-809" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-809"><a href="#">Menu Item</a>
+<ul class="sub-menu">
+	<li id="menu-item-933" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-933"><a href="https://jnd.org/about-don-norman/latest-updates/">About Don Norman</a></li>
+	<li id="menu-item-840" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-840"><a href="https://jnd.org/what-does-jnd-mean/">What does jnd mean?</a></li>
+	<li id="menu-item-811" class="menu-item menu-item-type-post_type menu-item-object-about-don-norman menu-item-811"><a href="https://jnd.org/about-don-norman/about-nng-nielsen-norman-group/">About Nielsen Norman Group (NNg)</a></li>
+</ul>
+</li>
+<li id="menu-item-810" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-810"><a href="#">Menu Item</a>
+<ul class="sub-menu">
+	<li id="menu-item-807" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-807"><a href="/cdn-cgi/l/email-protection#ed9a888f808c9e99889fad878389c3829f8a">Report a problem with the site</a></li>
+</ul>
+</li>
+</ul></div>			</nav>
+		</div>
+		
+		<div class="footer-licensed">
+			<p>jnd.org © 2023. Licensed under the Creative Commons Attribution, Non Commercial 4.0 International License.</p>
+			<div class="footer-site-designed-by">
+				<img src="https://jnd.org/wp-content/themes/jnd-org-donnorman/images/icons/UXC_logo.svg" alt="UXC logo">
+				<p>Website designed by UX Consultancy Ltd</p>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<!--  -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/jnd-org-donnorman/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<meta id="bilmur" property="bilmur:data" content="" data-customproperties="{&quot;woo_active&quot;:&quot;0&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;jnd-org-donnorman&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}" data-provider="wordpress.com" data-service="atomic"  data-site-tz="America/Los_Angeles"  >
+<script defer src="https://s0.wp.com/wp-content/js/bilmur.min.js?m=202636"></script>
+<script type='text/javascript'  src='https://jnd.org/wp-content/themes/jnd-org-donnorman/js/app.js?m=1681476560'></script>
+<script id="googlesitekit-events-provider-content-events-js-before">
+window._googlesitekit = window._googlesitekit || {};
+window._googlesitekit.contentEvents = {"postID":13,"isSinglePost":true};
+//# sourceURL=googlesitekit-events-provider-content-events-js-before
+</script>
+<script id="googlesitekit-events-provider-content-events-js" src="https://jnd.org/wp-content/plugins/google-site-kit/dist/assets/js/googlesitekit-events-provider-content-events-33078016c5e1e9f07c35.js" defer></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"215102707","post":"13","tz":"-7","srv":"jnd.org","hp":"atomic","ac":"2","amp":"0","j":"1:16.2-a.5"} ]);
+_stq.push([ "clickTrackerInit", "215102707", "13" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202636.js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://jnd.org/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://jnd.org/wp-includes/js/wp-emoji-loader.min.js
+</script>
+</body>
+</html>
+<!--
+	generated in 0.444 seconds
+	71806 bytes batcached for 300 seconds
+-->
