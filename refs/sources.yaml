@@ -1,0 +1,20 @@
+# arcviz source record.
+#
+# One entry per cited source. See ../docs/research/EVIDENCE.md for the rules.
+#
+# Required fields:
+#   key:        stable citation key, referenced from docs/research/*.md as [key]
+#   title:      exact title of the document
+#   author:     author or issuing body
+#   url:        canonical public URL
+#   retrieved:  ISO date the capture was taken
+#   capture:    path to the local capture, relative to repo root, or
+#               ".ignored/private-refs/..." when it may not be republished
+#   status:     primary | secondary | lead   (a "lead" has not been fetched yet)
+#   supports:   the claim this source is being used to support
+#   quote:      the sentence actually relied upon
+#   locator:    section, page, or line where the quote appears
+#
+# A record with status "lead" carries no quote and may not be cited in prose.
+
+sources: []
