@@ -1,0 +1,161 @@
+# Source records for the three Codecraft papers read in full by the orchestrator.
+# The rest of the papers corpus is covered by sources.papers-{acdc,identity,intent,other}.yaml.
+# Format documented at the top of sources.yaml.
+
+sources:
+  - key: amp-diff
+    title: "Amplifying Difference: Perceptual Design and Verification of Human-Centric Entropy Visualizations"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    doi: "10.2139/ssrn.6979798"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "A glance at an entviz is worth only a few bits to the low teens against an adversary, so a pill may support rule-out but must never imply verification."
+    quote: "Under every one of these estimates, an adversary who has ground offline against a habituated glance wins for an affordable amount of compute. Casual comparison is not marginally weak against such an adversary; it is broken."
+    locator: "amp-diff.md:324 (§4.3.9)"
+
+  - key: amp-diff-walk-required
+    title: "Amplifying Difference (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "Where an adversary is in scope, a comparison ceremony is mandatory, not an upgrade — so arcviz must make one reachable rather than letting a pill stand in for it."
+    quote: "It remains the right instruction for the honest-error case of §5, and it leaves the careful reader untouched: the text channel is lossless either way. But wherever an adversary is in scope, the seeded walk of §5.2 is a requirement, not an enhancement for high-assurance settings."
+    locator: "amp-diff.md:324 (§4.3.9)"
+
+  - key: amp-diff-principle-5
+    title: "Amplifying Difference (as above), Design Principle 5"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "Security-relevant state must ride on discrete-symbol channels; color, size and shape are difference-detectors, not load-bearing bits."
+    quote: "A discrete symbol is read without tolerance and certifies its bits exactly; an analog quantity is recognized with tolerance, saturates near a few bits per dimension (Miller [25]), and offers an adversary a margin to hide in. Spend the security budget on channels the viewer decodes symbol by symbol — text above all — and treat color, size, and shape as fast difference-detectors, not as load-bearing bits."
+    locator: "amp-diff.md:390 (§6.2, Principle 5)"
+
+  - key: amp-diff-accessibility
+    title: "Amplifying Difference (as above), §5.4"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "Accessibility and adversarial robustness are the same design move, not competing constraints — which is why arcviz's print, monochrome and CVD requirements reinforce its security posture."
+    quote: "The property that makes the walk secure against a habituated attacker — that its hard bits ride on discrete symbols — is the same property that makes it accessible."
+    locator: "amp-diff.md:372 (§5.4)"
+
+  - key: amp-diff-no-color-alone
+    title: "Amplifying Difference (as above), §4.3.4"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "Redundant encoding is an entviz invariant arcviz inherits: no channel may depend on color alone. The palette is spaced by CIELAB lightness (white 100, gold ~78, red ~57, blue ~34, black 0) with a design floor of dL* >= 20."
+    quote: "Because color alone cannot be trusted under severe CVD, no entviz channel depends on color alone. The color bar carries letters (§4.3.5); quartile rank is carried by orientation, not color (§4.3.7); blank landmarks are carried by position; and the surround is a luminance task."
+    locator: "amp-diff.md:231 (§4.3.4)"
+
+  - key: amp-diff-de76-trap
+    title: "Amplifying Difference (as above), §4.3.4"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/amp-diff.html"
+    version: "1.3"
+    revision_date: "2026-07-30"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/amp-diff.md"
+    status: primary
+    supports: "If arcviz color-codes anything, it must optimize palette separation on lightness, not on dE76 — a warning that generalizes beyond entviz."
+    quote: "An obvious approach is to maximize pairwise ΔE76 (Euclidean distance in CIELAB) under CVD simulation. That is the wrong target: ΔE76 rewards chroma, and chroma is the very channel that collapses under CVD. Optimizing ΔE76 optimizes the least robust dimension; a higher ΔE76 is not a safer palette."
+    locator: "amp-diff.md:218 (§4.3.4)"
+
+  - key: oia-proved-vs-guessed
+    title: "Opaque Identifier Aliases"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/oia.html"
+    version: "0.10"
+    revision_date: "2026-07-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/oia.md"
+    status: primary
+    supports: "The display layer must distinguish a proved association between identifier and party from a guessed one; rendering a guess with the confidence of a proof invites the viewer to trust an impostor."
+    quote: "Either you have proved it — confirmed, over a trusted channel, that the identifier really is controlled by the party you think — or you have merely guessed it, accepting a claim that arrived with the identifier and has not been checked. The gap between proved and guessed is the gap a man-in-the-middle attacker lives in... if your software renders that guess with the same confidence it renders a proof, it has invited you to trust an impostor."
+    locator: "oia.md:66"
+
+  - key: oia-never-automate-verification
+    title: "Opaque Identifier Aliases (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/oia.html"
+    version: "0.10"
+    revision_date: "2026-07-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/oia.md"
+    status: primary
+    supports: "A component that renders a verdict has taken the one step that must stay human. arcviz may assemble and present evidence; it may not conclude."
+    quote: "What a machine must not do is take the last step — the moment a human weighs that evidence and decides it is good enough to trust this party, for this purpose, now. That step is the verification of the proof, and it is the part that has to stay human. Automate the introduction. Automate the proof where you can. But never automate the verification of the proof."
+    locator: "oia.md:86"
+
+  - key: oia-alias-not-evidence
+    title: "Opaque Identifier Aliases (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/oia.html"
+    version: "0.10"
+    revision_date: "2026-07-11"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/oia.md"
+    status: primary
+    supports: "An alias resolved for display is a memory aid, never evidence; arcviz must not let a resolved label read as a claim about the party behind the identifier."
+    quote: "An alias must never be parsed for meaning by anyone but its creator. This is the rule that, broken, plants the subtlest bugs. If my software reads your alias and concludes something about the party behind it — treats the string as data — it has trusted a private note it had no business trusting. The name is a memory aid, not evidence."
+    locator: "oia.md:46"
+
+  - key: intent-boundaries-definition
+    title: "Intent and Boundaries"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    version: "1.1"
+    revision_date: "2026-06-02"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "The definition the Phase 4 affordance inventory is written against."
+    quote: "An intent boundary is a place where what is known about an intender's intent by an external party becomes inadequate. It is a boundary to the external party, because it prevents them from confidently characterizing the intent on the other side."
+    locator: "intent-boundaries.md:67"
+
+  - key: intent-boundaries-never-sneak
+    title: "Intent and Boundaries (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    version: "1.1"
+    revision_date: "2026-06-02"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "An arcviz interaction that silently triggers a network fetch, or that bundles disclosure with an innocuous-looking action, crosses a boundary without asking. The paper rules this out categorically, not on a cost-benefit basis."
+    quote: "Intent boundaries are lines beyond which it's inappropriate to assume what someone wants. By definition, sneaking across boundaries is therefore unethical in all cases — not just if you assume incorrectly."
+    locator: "intent-boundaries.md:115"
+
+  - key: intent-boundaries-dont-imagine
+    title: "Intent and Boundaries (as above)"
+    author: "Daniel Hardman"
+    url: "https://dhh1128.github.io/papers/intent-boundaries.html"
+    version: "1.1"
+    revision_date: "2026-06-02"
+    retrieved: "2026-09-04"
+    capture: "local: ~/code/me/papers/intent-boundaries.md"
+    status: primary
+    supports: "The corollary that disciplines over-confirmation: arcviz must not put a dialog in front of an action whose intent is already unambiguous."
+    quote: "A corollary to this principle is also worth mentioning: Don't imagine boundaries where they don't actually exist. Pretending that we don't know the user's intent can add annoying and unnessary friction. If we know, let's make it so, ASAP."
+    locator: "intent-boundaries.md:84"

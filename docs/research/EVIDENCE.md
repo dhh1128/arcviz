@@ -31,3 +31,13 @@ Distinguish, explicitly and in the text: what a primary source establishes; what
 ## 6. Recollection is not a source
 
 Nothing enters `docs/research/` on the strength of a model's memory. If a document is believed to exist, it is a *lead* until someone has fetched it.
+
+### A worked example, from this repository's first day
+
+Rule 6 was broken by the author of rule 6, in the commit that created rule 6.
+
+The first draft of `PLAN.md` cited `~/code/me/papers/amp-diff.md` in support of the principle that every SAID and AID should render as an entviz pill so that substitution becomes visible. The paper had not been read — only its line count had been checked. The citation rested on a general impression of what entviz is for.
+
+Reading it produced the opposite of what had been asserted. The paper measures the glance regime that a pill occupies and concludes that against an adversary who has ground offline, "casual comparison is not marginally weak against such an adversary; it is broken" (`amp-diff.md:324`), and that a seeded comparison walk is therefore "a requirement, not an enhancement." The plan had recruited the paper as support for a design the paper argues is insufficient on its own.
+
+Two things are worth extracting. First, the failure was not laziness about a marginal citation — it was the *most* load-bearing source in the section, and its unread state was invisible because the surrounding sentence sounded right. A citation that confirms your prior is the one least likely to get checked, which is exactly why it needs checking. Second, a whole category of source was skipped without anyone noticing: the papers corpus had no records at all until it was audited as its own stream, because it had been treated as a few files that happened to be named rather than as a body of prior work. Ask what category you have not looked at, not only whether each claim has a key.
