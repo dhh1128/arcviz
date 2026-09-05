@@ -1,0 +1,15 @@
+{
+  "title": "Same-schema-twice DAG: Bob's identity credential",
+  "summary": "Instantiates the SAME schema SAID as 'same_schema_alice', different content and SAID; referenced by 'same_schema_household'.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "same_schema_bob",
+  "files": {
+    "sad": "same_schema_bob.json",
+    "cesr": "same_schema_bob.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.685439+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Blinded Edge-Group",
+  "summary": "The presenting node's entire 'e' section is one bare SAID, computed over an edge-group carrying its own `u`. A viewer cannot tell there are two edges, an OR operator, or anything else -- only that *some* edge-group is committed to.",
+  "matrix_cells": [
+    "H8"
+  ],
+  "rules_exercised": [
+    "RULE 1"
+  ],
+  "notes": "Blinding at the edge-GROUP level, distinct from compact_private_edge (a single Edge).",
+  "name": "blinded_edge_group",
+  "files": {
+    "sad": "blinded_edge_group.json",
+    "cesr": "blinded_edge_group.cesr",
+    "expanded": "blinded_edge_group.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.537895+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

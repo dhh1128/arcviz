@@ -1,0 +1,21 @@
+{
+  "title": "vLEI-equivalent chain: ECR credential (leaf, depth 4 of 4)",
+  "summary": "The individual holder's own credential. Carries the chain's ONLY top-level `u` (anti-correlation salt on a small, guessable attribute space -- LEI + role), matching corpus-vlei-chain.md sec.4 exactly. Edge 'auth' writes o=I2I EXPLICITLY, unlike 'qvi' and 'le' upstream, which leave it at the default -- render these identically (RULE 9).",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [
+    "RULE 9"
+  ],
+  "depends_on": [
+    "vlei_ecr_auth"
+  ],
+  "notes": "Also satisfies corpus-keripy-examples.md's 'depth-3-or-more chain' missing-shape (this chain is depth 4) -- no separate generic deep-chain fixture is built to avoid duplicating it.",
+  "name": "vlei_ecr",
+  "files": {
+    "sad": "vlei_ecr.json",
+    "cesr": "vlei_ecr.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.924331+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

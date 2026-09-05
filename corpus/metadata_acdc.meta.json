@@ -1,0 +1,22 @@
+{
+  "title": "Metadata ACDC (top-level u present but empty)",
+  "summary": "A Discloser's pre-contractual commitment to the metadata (issuer, schema, edges, rules) of a not-yet-disclosed private ACDC. The attribute section is present but empty. The edge's far node (evidence) is a placeholder digest, not a resolvable fixture -- by design, nothing about the real ACDC's identity is discoverable from this artifact.",
+  "matrix_cells": [
+    "H6"
+  ],
+  "rules_exercised": [
+    "RULE 12"
+  ],
+  "spec_refs": [
+    "spec-body.md:166-172 (Metadata Disclosure)",
+    "spec-body.md:1763 (Metadata Disclosure, Graduated Disclosure enumeration)"
+  ],
+  "notes": "The real ACDC this would be a decoy for does not exist in this corpus -- by construction, a Metadata ACDC's whole point is that its d cannot be correlated to any other ACDC's d.",
+  "name": "metadata_acdc",
+  "files": {
+    "sad": "metadata_acdc.json",
+    "cesr": "metadata_acdc.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.503295+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

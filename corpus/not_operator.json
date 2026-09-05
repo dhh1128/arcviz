@@ -1,0 +1,21 @@
+{
+  "v": "ACDCCAACAAJSONAAIz.",
+  "t": "acm",
+  "d": "EKNi7Z7Zc90rU3xg643hxoCx8cGTeS2GPy8PVshAJK9L",
+  "i": "EO7SfW_aM6YgC4n18MQedtTevnTx50G65Q6dHJkC4Out",
+  "s": "EHl-SvVK11C0OTrb_HM28bV4x2E1FjfVAKJRgdzlSI4V",
+  "a": {
+    "d": "EEuSn4IKPFPt38F8uG2O3UmoasjxJMInXKVR8xo8wtCs",
+    "u": "0ABpckN1mcD9FRxQSiOmirWy",
+    "label": "valid unless the exclusion node is valid"
+  },
+  "e": {
+    "d": "EN8PfG88z4S33fnAUhRCg3X8QjSuBH9Qv4UNlfG23v-d",
+    "exclusion": {
+      "d": "EOljf99wDzN3ghfrryJ8sS0PA8qDcw6PoXjJfGvbpW-R",
+      "n": "EAh40M_wIpkevQ-CakZHWxFUdPQ03TsJyEov9vDhkqJt",
+      "s": "EIagmVTTUGgpX-mbA8MPy1p3b6PMpFfMwa9cec8w4lWi",
+      "o": "NOT"
+    }
+  }
+}

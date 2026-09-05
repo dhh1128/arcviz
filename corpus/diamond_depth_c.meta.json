@@ -1,0 +1,18 @@
+{
+  "title": "Diamond-with-depth: long-path node C (depth 1 from origin, depth 2 from ancestor)",
+  "summary": "Origin's long-path neighbor; reaches the shared ancestor via F.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "depends_on": [
+    "diamond_depth_f"
+  ],
+  "name": "diamond_depth_c",
+  "files": {
+    "sad": "diamond_depth_c.json",
+    "cesr": "diamond_depth_c.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.793959+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

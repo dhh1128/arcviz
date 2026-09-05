@@ -1,0 +1,51 @@
+[project]
+name = "arcviz-fixtures"
+version = "0.1.0"
+description = "Dev-time ACDC fixture generator for arcviz. Depends on keripy (the reference KERI/ACDC implementation) to compute real SAIDs; NOT a dependency of the arcviz renderer itself -- see README.md."
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Daniel Hardman", email = "daniel.hardman@gmail.com" }]
+keywords = ["acdc", "keri", "cesr", "said", "fixtures", "test-corpus"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Security :: Cryptography",
+]
+dependencies = [
+    "keri",
+    "jsonschema>=4.26",
+]
+
+[tool.uv.sources]
+# Path dependency on the locally checked-out keripy reference implementation.
+# This is why arcviz-fixtures is its own uv project under tools/fixtures/ rather
+# than a dependency group of any future top-level arcviz package: the renderer
+# must never inherit keripy (a large, native-extension-heavy KERI node
+# implementation) just to draw a picture of an already-issued ACDC.
+keri = { path = "/home/daniel/code/wot/keripy", editable = true }
+
+[project.scripts]
+arcviz-fixtures = "arcviz_fixtures.generate:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arcviz_fixtures"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

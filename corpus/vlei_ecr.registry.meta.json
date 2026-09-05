@@ -1,0 +1,14 @@
+{
+  "name": "vlei_ecr.registry",
+  "title": "Registry inception ('rip') for vlei_ecr",
+  "summary": "The registry vlei_ecr's `rd` field points at (via its SAID).",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "parent_fixture": "vlei_ecr",
+  "files": {
+    "sad": "vlei_ecr.registry.json",
+    "cesr": "vlei_ecr.registry.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.939466+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,20 @@
+{
+  "v": "ACDCCAACAAJSONAAIl.",
+  "t": "acm",
+  "d": "EGHUpSJN58sd9fuZqVoMLvT-Khqz6HWC_jC1n1EbKVTD",
+  "i": "EF7IEE2tXWiLM52cci9PIf0xCvnGKvL1VrTsk-GQPsst",
+  "s": "ECCZBQhed57-rvAS_IyDt1bWEoBpqqQ5xZSKeY5ntjAe",
+  "a": {
+    "d": "EIRR0gYGuxH1BGruC6FP8vwPkpFm_CEhZyW8pnb5oysh",
+    "u": "0ACdesjTwhUf6qV9Jvd-Kp6B",
+    "scope": "short path, one hop from the ancestor"
+  },
+  "e": {
+    "d": "ENkj_sx2Qt1tanoRHLTJ6t4iIlHFHX2fOc8VBl4C_egT",
+    "baseline": {
+      "d": "EL94FmuIilopEIIOykzZyFnnmJVOiJQeLtkBKTDcPWbF",
+      "n": "ELBmpHyX1IOY0x2uOhpPrtwAhesHXtn65EFdhX40FJIL",
+      "s": "EAow76Ee1eiu3_0rSLl1cdlgMZPN5sMeWZ4B6h0K-b2f"
+    }
+  }
+}

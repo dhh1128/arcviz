@@ -1,0 +1,20 @@
+{
+  "title": "vLEI-equivalent chain: ECR-AUTH credential (depth 3 of 4)",
+  "summary": "Issuer is the LE credential's issuee; issuee flips back to the QVI org AID -- the 'chain alternates who is speaking' (corpus-vlei-chain.md sec.1). Edge 'le' at the default operator.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [
+    "RULE 9"
+  ],
+  "depends_on": [
+    "vlei_le"
+  ],
+  "name": "vlei_ecr_auth",
+  "files": {
+    "sad": "vlei_ecr_auth.json",
+    "cesr": "vlei_ecr_auth.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.889762+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

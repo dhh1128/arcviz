@@ -1,0 +1,15 @@
+{
+  "title": "Diamond-with-depth: shared ancestor (leaf)",
+  "summary": "The reconvergence point both DAG paths reach.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "diamond_depth_a",
+  "files": {
+    "sad": "diamond_depth_a.json",
+    "cesr": "diamond_depth_a.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.741404+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

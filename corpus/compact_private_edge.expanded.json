@@ -1,0 +1,16 @@
+{
+  "far_node": {
+    "v": "ACDCCAACAAJSONAAFp.",
+    "t": "acm",
+    "d": "EAlizqK3QoWs-TZlbIuC4dDCrwnb0eBpV7RZ57BcUGoS",
+    "i": "ELKf3ciNmMClsjX49K1nYNtHPXQKrtknEniFnNHsiLtL",
+    "s": "EElRctsEGrigmm1X_2X2E2eCcdk6yw7HTTogncLRyEUI",
+    "a": {
+      "d": "EJwoA-iGp4t-O-pBZS6dPmoMwK4t9f2e_y6YNhEMNwTQ",
+      "u": "0AADdLXbzBKHE_e8FiT2sBvi",
+      "i": "EGjFAIi06EKt-F5X8uE61HGY1h5Nm25aRiFBzEhACw1y",
+      "label": "the withheld far node"
+    }
+  },
+  "note": "far_node is included for test verification only -- a real presenter using this mechanism never discloses it."
+}

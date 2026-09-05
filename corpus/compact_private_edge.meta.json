@@ -1,0 +1,22 @@
+{
+  "title": "Compact Private Edge",
+  "summary": "The near node's 'source' edge is a bare SAID computed over an edge block that itself carries a `u`. Unlike a plain compact edge (H2-shaped, guessable if the far-node universe is small), this SAID is a genuine blind: the far node's own SAID never appears.",
+  "matrix_cells": [
+    "H8"
+  ],
+  "rules_exercised": [
+    "RULE 1"
+  ],
+  "spec_refs": [
+    "spec-body.md:1165",
+    "spec-body.md:1164"
+  ],
+  "name": "compact_private_edge",
+  "files": {
+    "sad": "compact_private_edge.json",
+    "cesr": "compact_private_edge.cesr",
+    "expanded": "compact_private_edge.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.521945+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

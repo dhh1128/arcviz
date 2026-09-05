@@ -1,0 +1,19 @@
+{
+  "title": "DI2I edge operator",
+  "summary": "Near issuer claims to be a delegate of the far node's issuee. No KEL is modeled -- this fixture exercises the field-level shape of the claim, not delegation proof.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "spec_refs": [
+    "spec-body.md:1190-1195 (unary operators)"
+  ],
+  "name": "di2i_operator",
+  "files": {
+    "sad": "di2i_operator.json",
+    "cesr": "di2i_operator.cesr",
+    "expanded": "di2i_operator.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.574133+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

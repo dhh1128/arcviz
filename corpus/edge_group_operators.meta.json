@@ -1,0 +1,19 @@
+{
+  "title": "Edge-group operators: AND / OR / AVG / WAVG, plus edge weights",
+  "summary": "Four sibling edge-groups on one ACDC, one per m-ary operator. The WAVG group's two edges carry `w` (0.7/0.3). Far nodes are placeholder AIDs (no resolvable fixture behind them) -- see 'working_edge_group' for a scenario with real, resolvable co-endorser credentials.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "spec_refs": [
+    "spec-body.md:1101-1108 (m-ary operators)",
+    "spec-body.md:1215-1217 (edge weight)"
+  ],
+  "name": "edge_group_operators",
+  "files": {
+    "sad": "edge_group_operators.json",
+    "cesr": "edge_group_operators.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.616526+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

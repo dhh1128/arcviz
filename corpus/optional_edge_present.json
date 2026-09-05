@@ -1,0 +1,20 @@
+{
+  "v": "ACDCCAACAAJSONAAIn.",
+  "t": "acm",
+  "d": "ENoIY4BgAtgtdGCnhuq_xnlYhsOoeazUvNXh19LbppUX",
+  "i": "EAlYzHkuF0wNrllErRXdhR7oDePvn21mTqeGwlgHPh7r",
+  "s": "EHRrOGr_9GRlqLJH18RqDXvbnNToIpM5QRgMSgH1NOqs",
+  "a": {
+    "d": "EPVar2O-mPZQhKqFehuvXOtoHqY7mhSbDjirP-X2PucB",
+    "u": "0ACbYmGvJWYiFk1aVkFefZW7",
+    "claim": "a claim with an attached endorsement"
+  },
+  "e": {
+    "d": "EI-kGD7Qva6OaRZB0YnkNyaZHvY2NzGQ1RfwDzd9XGAT",
+    "endorsement": {
+      "d": "EGfgIrpXvTlT18-RO9HzfWEdqqV7TkAjIJYDWCTtthG3",
+      "n": "EFPKD1olrLbgwxNVmD_14XybxA9frv0lL5ZzaaSvqXGq",
+      "s": "EL6_t_FDlDDFMiew1Av7vFM0W29Q9bT9IOKy1yOQ88QS"
+    }
+  }
+}

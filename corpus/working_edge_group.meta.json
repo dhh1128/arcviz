@@ -1,0 +1,20 @@
+{
+  "title": "Working edge-group (AND, two real co-endorsers)",
+  "summary": "A joint certification valid only when both inspectorA and inspectorB's edges resolve -- both are real, separately issued, resolvable ACDCs in this corpus (see depends_on), not synthetic literal SAID strings.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "depends_on": [
+    "working_edge_group_endorser_a",
+    "working_edge_group_endorser_b"
+  ],
+  "notes": "Generated via keri.acdc.messaging.acdcmap + Compactor directly; not round-tripped through keripy's Reger.sources/Verifier.processCredential, which cannot traverse edge-groups (documented keripy gap, see summary docstring).",
+  "name": "working_edge_group",
+  "files": {
+    "sad": "working_edge_group.json",
+    "cesr": "working_edge_group.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.660315+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Diamond-with-depth: origin (presented node)",
+  "summary": "origin -> B -> A (depth 2) and origin -> C -> F -> A (depth 3) reconverge at the shared ancestor A. Diamond convergence plus depth greater than keripy's existing (depth-2) diamond, neither of which the production vLEI chain (pure depth, no branching) exercises.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "depends_on": [
+    "diamond_depth_b",
+    "diamond_depth_c"
+  ],
+  "name": "diamond_depth_origin",
+  "files": {
+    "sad": "diamond_depth_origin.json",
+    "cesr": "diamond_depth_origin.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.814629+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Working edge-group: endorser B's independent inspection credential",
+  "summary": "The other of two real, independently-issued inspection credentials endorsing the same facility, referenced by 'working_edge_group'.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "working_edge_group_endorser_b",
+  "files": {
+    "sad": "working_edge_group_endorser_b.json",
+    "cesr": "working_edge_group_endorser_b.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.647532+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

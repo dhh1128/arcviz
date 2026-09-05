@@ -1,0 +1,19 @@
+{
+  "title": "Same-schema-twice DAG (household presentation)",
+  "summary": "One presentation with two edges, both pointing at ACDCs that instantiate the identical Person Identity schema SAID -- 'same_schema_alice' and 'same_schema_bob' -- with different content, issuees, and SAIDs. Corpus gap named but never built in test_cp_disclosure.py's docstring.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "depends_on": [
+    "same_schema_alice",
+    "same_schema_bob"
+  ],
+  "name": "same_schema_household",
+  "files": {
+    "sad": "same_schema_household.json",
+    "cesr": "same_schema_household.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.699068+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

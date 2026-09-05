@@ -1,0 +1,15 @@
+{
+  "title": "Same-schema-twice DAG: Alice's identity credential",
+  "summary": "Instantiates the shared Person Identity schema; referenced by 'same_schema_household'.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "same_schema_alice",
+  "files": {
+    "sad": "same_schema_alice.json",
+    "cesr": "same_schema_alice.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.672610+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

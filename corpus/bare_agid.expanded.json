@@ -1,0 +1,21 @@
+{
+  "aggregate_elements": [
+    "ELSF-pMKeAzhSvOIe7B-JHZwcyCYSMRb3MU3pz-yJxyN",
+    {
+      "d": "EJdwtjS1TDcXYmj6vvI03V5nGXkuywJFfZl42XNaleAQ",
+      "u": "0ABrvmJQ7HPBuN8CLCOSHray",
+      "i": "EFy--5tbnhl5b7o_lAUQyRKa5xSodLgE6liEHE6phTxj"
+    },
+    {
+      "d": "EDKSmUWsircqEBvFzjIza3ZNGc1p5_qfTE8IKvOtfuI8",
+      "u": "0ABSZskNOA3SnYc4GiWpN7G7",
+      "overAge": true
+    },
+    {
+      "d": "EKtgGRzl7T6JC8FVPTiKftzlFBGavhN3nIMo8dWZd2NE",
+      "u": "0AA25ntmUw83f6WjVX6jLKiZ",
+      "tier": "gold"
+    }
+  ],
+  "agid": "ELSF-pMKeAzhSvOIe7B-JHZwcyCYSMRb3MU3pz-yJxyN"
+}

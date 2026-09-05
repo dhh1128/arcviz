@@ -1,0 +1,16 @@
+{
+  "title": "Optional edge section, present",
+  "summary": "Instantiates a schema whose 'e' field is optional (edge_required=false), WITH an edge populated. Pair with 'optional_edge_absent', which shares the identical schema SAID but omits 'e' entirely.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "optional_edge_present",
+  "files": {
+    "sad": "optional_edge_present.json",
+    "cesr": "optional_edge_present.cesr",
+    "expanded": "optional_edge_present.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.712563+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

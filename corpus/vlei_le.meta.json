@@ -1,0 +1,20 @@
+{
+  "title": "vLEI-equivalent chain: LE credential (depth 2 of 4)",
+  "summary": "Issuer is the QVI credential's issuee (issuer/subject alternation begins here). Edge 'qvi' left at the default I2I operator (no 'o' written).",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [
+    "RULE 9"
+  ],
+  "depends_on": [
+    "vlei_qvi"
+  ],
+  "name": "vlei_le",
+  "files": {
+    "sad": "vlei_le.json",
+    "cesr": "vlei_le.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.861904+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

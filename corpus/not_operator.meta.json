@@ -1,0 +1,19 @@
+{
+  "title": "NOT edge operator",
+  "summary": "The near node is valid iff the far ('exclusion') node is NOT valid.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "spec_refs": [
+    "spec-body.md:1190-1195 (unary operators)"
+  ],
+  "name": "not_operator",
+  "files": {
+    "sad": "not_operator.json",
+    "cesr": "not_operator.cesr",
+    "expanded": "not_operator.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.592618+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Bare AGID (Aggregate fully compact)",
+  "summary": "An 'A' (Attribute Aggregate) section reduced to only its AGID -- no element count, no labels, no values recoverable. corpus/bare_agid.expanded.json shows the 3-element aggregate that hashes to this AGID; a real disclosure of this fixture would never include that file. `rd` (Registry Digest) is OMITTED, not present-and-empty: this fixture is not registry-bound, and an empty-string `rd` would assert a distinct, real state (H2/H3-shaped: a registry commitment exists but is unguessable/blinded) that doesn't apply here. Omitting rather than emptying keeps it consistent with every other standalone (non-registry) fixture in this corpus; only the vLEI-chain fixtures, which narratively need a registry, carry a real `rd`.",
+  "matrix_cells": [
+    "H5"
+  ],
+  "rules_exercised": [
+    "RULE 7"
+  ],
+  "spec_refs": [
+    "spec-body.md:661 (AGID is not a SAID)",
+    "spec-body.md:712-720 (AGID computation)"
+  ],
+  "notes": "AGID composition into the enclosing top-level SAID is an open spec question (acdc-inventory.md OQ5); this fixture uses keripy's Aggor + acdcmap (the flexible 'acm' map form, which omits an absent field rather than acdcagg's fixed-field empty-string sentinels) as the reference behavior.",
+  "name": "bare_agid",
+  "files": {
+    "sad": "bare_agid.json",
+    "cesr": "bare_agid.cesr",
+    "expanded": "bare_agid.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.482351+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

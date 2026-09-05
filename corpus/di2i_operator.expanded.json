@@ -1,0 +1,15 @@
+{
+  "far_node": {
+    "v": "ACDCCAACAAJSONAAFu.",
+    "t": "acm",
+    "d": "EILVFZNRJJrpKY3AWx6fNeU3OQKmOXPm6HcXMOL4v2Hr",
+    "i": "EDHBJQ1qxReRehNEwclsFbX9pUHF1jcPHtCq-yRItBL0",
+    "s": "EN_-KkToSH9y9k0-ojHN3QBMxjkrMDKRTVbeOjF305BG",
+    "a": {
+      "d": "ECTvXl0KPKg2Bzh2F9DkVCUDsfSrdb59QoAsx5XVs7rF",
+      "u": "0ABkV1laaYNEsaPfHp5p-yQ1",
+      "i": "EKGw2CPtJFcEYBNQZ2bezQYfhoE7AY61UFKaXR5i80eK",
+      "label": "the delegator's credential"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Optional edge section, absent (the visible gap)",
+  "summary": "Same schema SAID as 'optional_edge_present' -- 'e' is legal to omit under that schema, and this instance omits it. H9 at section granularity: issuance-time absence, committed by the top-level SAID, not a rendering error.",
+  "matrix_cells": [
+    "H9"
+  ],
+  "rules_exercised": [
+    "RULE 1",
+    "RULE 13"
+  ],
+  "notes": "corpus-keripy-examples.md 'Shapes still missing': every schema there makes edges required; this pair does not.",
+  "name": "optional_edge_absent",
+  "files": {
+    "sad": "optional_edge_absent.json",
+    "cesr": "optional_edge_absent.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.726519+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

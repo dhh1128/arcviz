@@ -1,0 +1,20 @@
+{
+  "title": "Blinded Rule-Group (and nested blinded Rule)",
+  "summary": "The 'r' section is one bare SAID over a Rule-group that itself carries `u`, whose one member ('confidentialTerm') is a leaf Rule that ALSO carries its own `u`. Two blinding levels in one fixture.",
+  "matrix_cells": [
+    "H3",
+    "H8"
+  ],
+  "rules_exercised": [
+    "RULE 1"
+  ],
+  "notes": "Rule-group and Rule blinding use the same u-in-a-SAIDed-map mechanism as Edge blinding (spec-body.md:1313).",
+  "name": "blinded_rule_group",
+  "files": {
+    "sad": "blinded_rule_group.json",
+    "cesr": "blinded_rule_group.cesr",
+    "expanded": "blinded_rule_group.expanded.json"
+  },
+  "generated_at": "2026-09-05T22:19:01.553238+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

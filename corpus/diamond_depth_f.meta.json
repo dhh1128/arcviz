@@ -1,0 +1,18 @@
+{
+  "title": "Diamond-with-depth: long-path waypoint F (depth 1 from A, depth 2 from origin)",
+  "summary": "Intermediate node on the longer of the two reconverging paths.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "depends_on": [
+    "diamond_depth_a"
+  ],
+  "name": "diamond_depth_f",
+  "files": {
+    "sad": "diamond_depth_f.json",
+    "cesr": "diamond_depth_f.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.775046+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}

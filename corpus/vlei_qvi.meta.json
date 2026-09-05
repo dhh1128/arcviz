@@ -1,0 +1,16 @@
+{
+  "title": "vLEI-equivalent chain: QVI credential (root, depth 1 of 4)",
+  "summary": "Root of the chain; no edges. Issuer stands in for the real chain's delegate-of-the-absent-root; issuee stands in for the QVI's own AID.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "notes": "See fx_vlei.py module docstring for what is and is not reproduced from corpus-vlei-chain.md.",
+  "name": "vlei_qvi",
+  "files": {
+    "sad": "vlei_qvi.json",
+    "cesr": "vlei_qvi.cesr"
+  },
+  "generated_at": "2026-09-05T22:19:01.830013+00:00",
+  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+}
