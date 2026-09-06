@@ -14,7 +14,7 @@ The project is in its research phase. Read [docs/research/PLAN.md](docs/research
 2. **Publication hygiene.** This repository is public. Proprietary UI captures, third-party wallet screenshots, and paywalled papers go in `.ignored/private-refs/`, which is gitignored, and are cited by public URL only. This is not recoverable after the fact.
 3. **Markdown is never hard-wrapped.** One line per paragraph, however long.
 4. **Sign off every commit** (`git commit -s`). No `Co-Authored-By` trailers.
-5. **Nothing is asserted about ACDC semantics without checking the specification.** The vendored spec is at `~/code/me/kswg-acdc-specification`; real credentials live in the keripy and keria test corpora and in the vLEI family.
+5. **Nothing is asserted about ACDC semantics without checking the specification — and "the specification" is two branches, not one.** `trustoverip/kswg-acdc-specification` maintains a live `main` and a live `v1.1` whose **normative operator tables differ**: `E1E` is in `v1.1` and absent from `main` (see [reviews/2026-09-06-operator-semantics-adjudication.md](reviews/2026-09-06-operator-semantics-adjudication.md)). Checking one branch is not checking the spec. The vendored copy at `~/code/me/kswg-acdc-specification` goes stale — confirm its date before relying on it, and cite the branch and commit you read. Real credentials live in the keripy and keria test corpora and in the vLEI family.
 
 ## Layout
 
