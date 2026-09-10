@@ -45,3 +45,23 @@ Practical consequence for the rendering rule: classify the operator against the 
 - **The vendored spec is six weeks stale** (`651df33`, 2026-07-21) and `AGENTS.md` points every agent at it as the source of truth. Phase 2A's inventory was built on it. The 2A agent did cross-check against `trustoverip/*@main`, which is why nothing worse resulted — but checking one branch of a two-branch repository is not a cross-check.
 - **A panel that verifies its own findings can still be wrong in a way verification will not catch**, when the error is in the choice of source rather than in the reading of it. SEC-F1's verification pass re-anchored the citation at `f0bd097` and confirmed the quoted text. Both were correct. The branch was not.
 - **Recency was assumed rather than checked.** Every claim in this project's corpus that cites the ACDC spec should be re-checked against both live branches, not only `main`.
+
+---
+
+## Correction (2026-09-10): there is no version fork, and the profile input was invented
+
+Daniel Hardman asked the obvious question this document failed to ask: if every ACDC declares the spec version it conforms to, how can the operator question be undefined? Checking it properly overturns this document's central framing.
+
+**Both branches declare the same version.** `spec-head.md` on `main` and on `v1.1` both read "**Specification Status**: v1.1", and both bodies describe ACDC protocol 2.x. Our fixtures decode to `pvrsn: 2.0, gvrsn: 2.0`. There is one declared specification version in play, not two.
+
+**The branches have diverged editorially, not versioned apart.** Neither is an ancestor of the other: 22 commits sit on `v1.1` and not on `main`, 11 on `main` and not on `v1.1`. The substantive divergence is entirely on `v1.1`, and it is Daniel's own merged PRs — #197 (`E1E`), #203 (the `dp` disclosure-paths construct), #202 (field-label restrictions), #194 (renaming the `u` field's term from "UUID" to "unique entropy"). What `main` carries that `v1.1` lacks is tooling and boilerplate.
+
+So `v1.1` is **ahead on content**, and this document's earlier characterisation — `main` as the current line, `v1.1` as a maintenance branch — was backwards.
+
+**The consequence: the profile input does not exist and should be retracted.** The finding that "the effective operator set is a property of the deployment rather than the artifact, so the governing profile is a host-supplied input" was built on the premise that two versions define different operator tables. They do not. One version defines one table; one git branch has not yet received an additive operator its sibling merged. That is an unreconciled repository state, not a protocol ambiguity, and designing a governance input around it would be building permanent machinery for a temporary editorial condition.
+
+`E1E` is part of ACDC as specified at status v1.1, merged deliberately under a PR titled "Add E1E identity edge operator to the unary Operator table", with the default-injection clause amended in the same change to include it. `main` is simply behind. arcviz should implement the operator table as `v1.1` states it.
+
+**A second panel finding falls to the same cause.** SPC-F4 held that pair 3's separator "rests on `dp`, an unresolvable reference: an unmerged construct from a keripy discussion, mis-tiered as worked-example-attested." But `dp` is in the specification — 16 occurrences and four section headings on `v1.1`, merged as PR #203. The panel read `main`, where it appears zero times. The finding is withdrawn.
+
+**The generalisable lesson, which is now the important part.** Two independent HIGH/MEDIUM findings from a panel that verifies its own work were both wrong, by the same mechanism: `main` was taken to be the specification. Verification caught neither, because both quoted `main` accurately — the error was in which artifact to read, and a verification step that re-checks a quotation cannot see it. Any process that resolves "the spec says X" against a single default branch will keep producing this class of error silently.
