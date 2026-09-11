@@ -114,7 +114,7 @@ Phase 3. Adversaries and what each can do against a *renderer* — not against K
 
 **Goal.** Assemble cross-context profiles cheaply; establish negative facts ("this AID appears nowhere else I've seen"); defeat holder-side protections — blinded blocks, bulk instances, per-facet AIDs — viewer-side, where the evidence lives only on the verifier's disk (PRV-F4's failure scenario).
 
-**Surface.** Cross-presentation joins; the join log; retention; exports carrying `a.i`; any empty state readable as exhaustive.
+**Surface.** Correlators within one presentation; exports carrying `a.i` and their lifetime; any empty state readable as exhaustive. *Cross-presentation joins and the join log were this threat's largest surface and are gone by scope (2026-09-11) — arcviz loads one presentation at a time.*
 
 **Defence.** P13, strengthened by scope: arcviz loads one presentation at a time and draws no edge between presentations at all (Rule 14 as amended 2026-09-11; [affordances.md](affordances.md) AF14, retired), so the join is eliminated rather than governed; no corpus-level negatives (Rule 13); "unlinkable"/"anonymous" never rendered as absolutes; The papers corpus supplies the reasoning: making correlation cheap *is* the harm ([hardman-wbca-expense]), negative facts are its sharpest form ([hardman-wbca-negative]), and linking facets is "never a default, never an inference a stranger is meant to draw" ([hardman-if-owner]).
 
