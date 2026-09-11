@@ -1,0 +1,77 @@
+# Source records for docs/research/presenter-control.md (Phase 2D-c: presenter control).
+# Format matches ../refs/sources.yaml — see ../docs/research/EVIDENCE.md for the rules.
+# Owned by the presenter-control stream. Do not merge into sources.yaml; do not edit sources.yaml from here.
+#
+# Note on scope: local repository reads (keripy, keria, signify-ts source, at path:line) are cited
+# inline in presenter-control.md by path:line, following the convention already established by
+# keria-signify-surface.md and disclosure-matrix.md, neither of which carries keripy/keria/signify-ts
+# entries in any refs/sources*.yaml file either. Only externally-published sources are recorded here.
+
+sources:
+
+  - key: rfc9901-key-binding
+    title: "Selective Disclosure for JWTs (SD-JWT)"
+    author: "D. Fett, K. Yasuda, B. Campbell (IETF)"
+    url: https://www.rfc-editor.org/rfc/rfc9901.html
+    retrieved: "2026-09-11"
+    capture: "NOT CAPTURED — this task's file ownership for this pass was scoped to docs/research/presenter-control.md and refs/sources.presenter.yaml only, excluding refs/captures/. This is a deviation from EVIDENCE.md rule 3 and is flagged as such in presenter-control.md §(e)'s epistemic note. The quotes below were extracted via a single fetch-and-read pass against the URL above and read as direct extraction of RFC-defined terms, not a summary, but were not independently re-verified against a second retrieval."
+    status: primary
+    supports: "The definition of 'Key Binding' and 'Key Binding JWT' as the SD-JWT ecosystem's term of art for presenter-control/holder-binding, and the three replay-protection fields (iat, aud, nonce) a Key Binding JWT carries, used in presenter-control.md §(e) to contrast against IPEX's self-generated (not verifier-issued) exchange-id nonce."
+    quote: "Key Binding: Ability of the Holder to prove possession of an SD-JWT by proving control over a private key during the presentation. [...] A Key Binding JWT is said to 'be tied to' a particular SD-JWT when its payload is signed using the key included in the SD-JWT payload, and the KB-JWT contains a hash of the SD-JWT in its sd_hash claim."
+    locator: "§1.2 (Terms and Definitions), 'Key Binding' and 'Key Binding JWT' entries"
+
+  - key: rfc9901-kbjwt-replay-fields
+    title: "Selective Disclosure for JWTs (SD-JWT)"
+    author: "D. Fett, K. Yasuda, B. Campbell (IETF)"
+    url: https://www.rfc-editor.org/rfc/rfc9901.html
+    retrieved: "2026-09-11"
+    capture: "NOT CAPTURED — see rfc9901-key-binding record above for the reason; same retrieval pass."
+    status: primary
+    supports: "The three specific Key Binding JWT claims (iat, aud, nonce) that together bind a presentation signature to a specific transaction, verifier, and moment in time — cited in presenter-control.md §(e) and §(b) as the concrete replay-protection design IPEX's exchange-id (xid) field does not fully match, since xid is sender-generated rather than a verifier-issued challenge."
+    quote: "iat: The value of this claim MUST be the time at which the Key Binding JWT was issued. [...] aud: The value MUST be a single string that identifies the intended receiver of the Key Binding JWT. [...] nonce: [...] Ensures the freshness of the signature or its binding to the given transaction."
+    locator: "§4.3 (Key Binding JWT), payload claims iat / aud / nonce"
+
+  - key: aamva-mdl-session-transcript
+    title: "Mobile Driver's License Implementation Guidelines, r1.6"
+    author: American Association of Motor Vehicle Administrators (AAMVA)
+    url: https://www.aamva.org/getmedia/1bc1f2b3-bc7b-4e44-8112-127a4110ad94/mDLImplementationGuidelines-16.pdf
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/iso-mdl/aamva-mdl-implementation-guidelines-v1.6-2026-09-04.pdf
+    status: primary
+    supports: "That ISO 18013-5/18013-7's device-retrieval encryption scheme derives its key material from a per-session 'session transcript', the closest confirmable-without-the-paywalled-ISO-text evidence that mDL presentation is bound to a specific live session rather than to a bare copy of credential data — used in presenter-control.md §(e) as the one directly-quotable primary passage supporting the (unread-in-full) ISO device-authentication mechanism."
+    quote: "The encryption scheme uses an asymmetric key algorithm to derive an ephemeral symmetric key that is used to encrypt the response. The session transcript as defined in 18013-7/18013-5 is used as part of key derivation."
+    locator: "section 4.3-adjacent requirements list on communication interfaces (page containing 'ACTIVITY LOG' heading immediately following), re-retrieved via local pdftotext extraction of the capture already made for the wallets stream"
+
+  - key: aamva-mdl-flash-pass
+    title: "Mobile Driver's License Implementation Guidelines, r1.6"
+    author: American Association of Motor Vehicle Administrators (AAMVA)
+    url: https://www.aamva.org/getmedia/1bc1f2b3-bc7b-4e44-8112-127a4110ad94/mDLImplementationGuidelines-16.pdf
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/iso-mdl/aamva-mdl-implementation-guidelines-v1.6-2026-09-04.pdf
+    status: primary
+    supports: "That the mDL ecosystem explicitly names and forbids exactly the static-replay failure mode this document's presenter-control gap enables — showing a captured image of credential data to a verifier, detached from any live proof of current key control — used in presenter-control.md §(e) and to motivate RULE P5's historical-not-live treatment of static renderings."
+    quote: "Note 1: This requirement prohibits the sharing of mDL data using the mDL as a \"flash pass\" (i.e. by showing an image of a credential to a verifier); also see section 8."
+    locator: "Note 1, same page as aamva-mdl-session-transcript's quote"
+
+  - key: aamva-mdl-mso-definition
+    title: "Mobile Driver's License Implementation Guidelines, r1.6"
+    author: American Association of Motor Vehicle Administrators (AAMVA)
+    url: https://www.aamva.org/getmedia/1bc1f2b3-bc7b-4e44-8112-127a4110ad94/mDLImplementationGuidelines-16.pdf
+    retrieved: "2026-09-04"
+    capture: refs/captures/wallets/iso-mdl/aamva-mdl-implementation-guidelines-v1.6-2026-09-04.pdf
+    status: primary
+    supports: "The definition of the mobile security object (MSO), used in presenter-control.md to distinguish issuer-side data-origin authentication (which the MSO provides, and which is the mDL analogue of ACDC's own nine issuer-side V checks) from presenter/device-side authentication (which the MSO alone does not provide)."
+    quote: "mobile security object (MSO): structured data set that enables an mDL verifier to authenticate (for both accuracy and origin) other mDL data elements received during an mDL transaction"
+    locator: "glossary, 'mobile security object' entry"
+
+  - key: rfc9901-key-binding
+    title: "Selective Disclosure for JSON Web Tokens (SD-JWT)"
+    author: "D. Fett, K. Yasuda, B. Campbell (IETF)"
+    url: "https://www.rfc-editor.org/rfc/rfc9901.txt"
+    retrieved: "2026-09-11"
+    capture: "refs/captures/lit/rfc9901-sd-jwt.txt"
+    status: primary
+    supports: "The ecosystem's term of art for presenter control is Key Binding, and the standard that defines it makes it OPTIONAL - so even where the concept is named, its presence cannot be assumed by a renderer."
+    quote: "3.3.  Optional Key Binding"
+    locator: "RFC 9901, table of contents; mechanism at sections 4.3 (Key Binding JWT) and 4.3.2 (Validating the Key Binding JWT)"
+    note: "Standards Track, November 2025. Verified present and on-topic before citing: 90 occurrences of 'Key Binding'."
