@@ -4,55 +4,81 @@
 # Owned exclusively by the Phase 2A ACDC-inventory stream. Do not merge into sources.yaml
 # without checking for key collisions first.
 #
-# Capture note: these three specs are vendored as local git checkouts under ~/code/me/
-# (per AGENTS.md item 5: "The vendored spec is at ~/code/me/kswg-acdc-specification"), which
-# already satisfies EVIDENCE.md rule 3 ("capture it locally") — they are persistent, version-
-# controlled local copies, not fetched-and-discarded web pages. The `capture` field below points
-# at the vendored file path plus the exact commit read, which is the durable local artifact.
-# Where the vendored checkout was found to be stale or diverged from trustoverip/main on a
-# cited passage (see acdc-inventory.md "Sources read"), the quote is instead sourced from a
-# `main`-branch capture and that is noted explicitly in the record.
+# Capture note: all three specs live as local git checkouts under ~/code/me/, which already
+# satisfies EVIDENCE.md rule 3 ("capture it locally") — persistent, version-controlled local
+# copies, not fetched-and-discarded web pages. As of the 2026-09-11 rebase, the ACDC spec's
+# primary source is read via the `toip` remote directly (branch v1.1, not the vendored repo's
+# checked-out branch) per AGENTS.md rule 5: "the specification" is two diverged branches of
+# `trustoverip/kswg-acdc-specification`, and `v1.1` — not the locally-checked-out branch, not
+# `main` — is ahead on content. The vendored ACDC checkout is retained only as a historical
+# record of what the prior revision was built from (see acdc-spec-vendored-superseded below).
+# CESR and dossier are still read from their vendored checkouts, cross-checked against their
+# respective `main` branches, per the original convention. Where a vendored checkout was found
+# stale or diverged from `main`/`v1.1` on a cited passage (see acdc-inventory.md "Sources read"),
+# the quote is instead sourced from that branch's own capture and that is noted explicitly.
 
 sources:
-  - key: acdc-spec-vendored
-    title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md"
+  - key: acdc-spec-v11
+    title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md (trustoverip/kswg-acdc-specification@v1.1)"
     author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Samuel M. Smith et al.)"
-    url: "https://trustoverip.github.io/kswg-acdc-specification/"
-    retrieved: "2026-09-04"
-    capture: "vendored at ~/code/me/kswg-acdc-specification/spec/spec-body.md, branch fix-worked-examples-schema-1520, commit 651df33e14396d5a79e1b1abf419111a97a97f42 (2026-07-21)"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-acdc-specification/v1.1/spec/spec-body.md"
+    retrieved: "2026-09-11"
+    capture: "read via the `toip` remote in ~/code/me/kswg-acdc-specification (`git fetch toip`, `git show toip/v1.1:spec/spec-body.md`), not persisted as a separate file in this repo; commit 910c74afce07e29c308015dabad9a576cc542f4d (2026-08-27). Primary source for all ACDC content in acdc-inventory.md as of this revision — see that document's 'Sources read' and 'Corrections from the 2026-09-05 revision' for why this replaces the previously-vendored checkout as primary."
     status: primary
-    supports: "All top-level ACDC field definitions and ordering; the a-vs-A (Attribute vs Aggregate) selective/partial-disclosure distinction; the complete Edge section (Edge-group, Edge, unary/m-ary operators); the complete Rule section; the seven named Graduated Disclosure mechanisms (Compact/Metadata/Partial/Nested Partial/Full/Selective/Bulk-issued Instance Disclosure); Contractually Protected Disclosure (Chain-link Confidentiality, Contingent Disclosure); blinding/UUID mechanics at every nesting level; TEL registry message types and the Blinded Attribute Block; ACDC Protocol Message Types and top-level field ordering for CESR-native forms"
+    supports: "All top-level ACDC field definitions and ordering including the UE (unique entropy) rename and the new `_` DAG-hop reserved label; the new Field Label Restrictions subsection; the a-vs-A (Attribute vs Aggregate) selective/partial-disclosure distinction; the complete Edge section (Edge-group, Edge, unary/m-ary operators) including the normative `E1E` operator and its amended default-injection clause; the complete Rule section; the seven named Graduated Disclosure mechanisms; Contractually Protected Disclosure; blinding/unique-entropy mechanics at every nesting level; the new Disclosure Paths (`dp`) construct in full (DAG/path syntax, closures, Aggregate Section Pathing, IPEX binding); TEL registry message types and the Blinded Attribute Block; ACDC Protocol Message Types and top-level field ordering for CESR-native forms"
     quote: "When present, the top-level fields MUST appear in the following order: `[v, t, d, u, i, rd, s, a, A, e, r]`."
-    locator: "spec/spec-body.md:32 (Field Ordering); see docs/research/acdc-inventory.md for the full set of ~40 quoted passages with individual line locators across this file"
+    locator: "spec/spec-body.md:32 (Field Ordering, unchanged position on v1.1); see docs/research/acdc-inventory.md for the full set of quoted passages with individual line locators across this file"
 
   - key: acdc-spec-main-crosscheck
     title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md (trustoverip/kswg-acdc-specification@main)"
     author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Samuel M. Smith et al.)"
     url: "https://raw.githubusercontent.com/trustoverip/kswg-acdc-specification/main/spec/spec-body.md"
-    retrieved: "2026-09-04"
-    capture: "fetched to /tmp for diff verification only, not persisted in-repo (ephemeral cross-check artifact, not a citation source in its own right); commit f0bd097de318fbbe2d069a2b46cecd42550762e3"
-    status: primary
-    supports: "Confirms the vendored checkout (acdc-spec-vendored) is byte-identical to published main on every section cited in acdc-inventory.md (top-level field table, Attribute/Aggregate/Edge/Rule sections, disclosure-mechanism enumeration, Registry/blinding fields); identifies the vendored checkout's only divergences as additive worked-examples/lifecycle prose not cited here"
-    quote: "diff acdc-upstream.md spec/spec-body.md: 0 differences in lines 1095-1215 (Edge/Rule operator tables); differences elsewhere confined to added worked-examples sections (Registry-Dependent Issuance Lifecycle) and minor wording (dt field precision, bulk-derivation hex-vs-decimal path rendering) not relied upon by any claim in acdc-inventory.md"
-    locator: "diff performed 2026-09-04 between the two full files; see acdc-inventory.md 'Sources read' for summary"
-
-  - key: acdc-spec-e1e-proposal
-    title: "Add E1E identity edge operator to the unary Operator table (proposed, unmerged)"
-    author: "Daniel Hardman (proposal), against the ACDC specification"
-    url: "https://github.com/dhh1128/kswg-acdc-specification (local branch add-e1e-edge-operator, not a public PR URL confirmed in this session)"
-    retrieved: "2026-09-04"
-    capture: "vendored worktree ~/code/me/kswg-acdc-specification/.worktrees/e1e, branch add-e1e-edge-operator, commit 0b28b50c3fb53a2d53bc219605151a59785dca64 (2026-07-28)"
+    retrieved: "2026-09-11"
+    capture: "fetched via `toip` remote for diff verification only, not persisted in-repo (ephemeral cross-check artifact, not a citation source in its own right); commit f0bd097de318fbbe2d069a2b46cecd42550762e3 (2026-08-28)"
     status: secondary
-    supports: "Existence of a proposed but not-yet-normative fifth unary Edge operator (E1E), flagged as an open question in acdc-inventory.md rather than treated as part of the spec"
+    supports: "Cross-check only, per AGENTS.md rule 5 — main is NOT authoritative for content and is behind v1.1 on every substantive point (E1E, dp, field-label restrictions, UE rename). Diffing main against v1.1 (92 hunks, 338 insertions/386 deletions on spec/spec-body.md) is what surfaced every correction listed in acdc-inventory.md's 'Corrections from the 2026-09-05 revision' section. Also the source for the main-only 'Registry-Dependent Issuance Lifecycle' worked-examples content that v1.1 lacks (flagged as an open question, not drawn upon for any normative claim)."
+    quote: "the value of either or both the `a` and `A` field MUST be empty. To clarify, both the `a` and `A` field values MUST not be non-empty, one or the other or both MUST be empty."
+    locator: "diff performed 2026-09-11 between the two full files (git diff toip/main toip/v1.1 -- spec/spec-body.md); this quote itself is identical on both branches (spec/spec-body.md:3179 on v1.1); see acdc-inventory.md 'Sources read' and 'Corrections' for the diff summary"
+
+  - key: acdc-spec-vendored-superseded
+    title: "Authentic Chained Data Container (ACDC) Specification — spec/spec-body.md (vendored local checkout, superseded as a source)"
+    author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Samuel M. Smith et al.)"
+    url: "https://trustoverip.github.io/kswg-acdc-specification/"
+    retrieved: "2026-07-21"
+    capture: "vendored at ~/code/me/kswg-acdc-specification/spec/spec-body.md, branch fix-worked-examples-schema-1520, commit 651df33e14396d5a79e1b1abf419111a97a97f42 (2026-07-21). This branch remains checked out in the vendored repo as of 2026-09-11 — deliberately left untouched by this revision, per instructions not to change the checked-out branch or modify that repository."
+    status: secondary
+    supports: "Recorded ONLY to document what the prior (2026-09-05) revision of acdc-inventory.md was built from, and why it missed E1E, dp, field-label restrictions, and the UE rename: this checkout predates v1.1's substantive PRs (#197, #202, #203, #191/194) and was never on the v1.1 branch to begin with. No longer cited as a source for any claim in acdc-inventory.md; acdc-spec-v11 is used instead throughout."
+    quote: "A UUID, `u` field, MAY optionally appear in any block (field map) at any level of an ACDC."
+    locator: "spec/spec-body.md:91 (vendored checkout, commit 651df33) — compare toip/v1.1:spec/spec-body.md:102, same rule, renamed to unique entropy"
+
+  - key: acdc-spec-e1e-normative
+    title: "E1E identity edge operator — normative on v1.1 (was: proposed, unmerged)"
+    author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (merged from Daniel Hardman's proposal)"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-acdc-specification/v1.1/spec/spec-body.md"
+    retrieved: "2026-09-11"
+    capture: "same capture as acdc-spec-v11 (commit 910c74a); recorded as its own record because the prior revision of acdc-inventory.md carried a now-superseded record (acdc-spec-e1e-proposal, retired) treating E1E as an unmerged proposal on a local branch, and this correction should be traceable"
+    status: primary
+    supports: "E1E is part of the normative unary Edge-operator table on v1.1, with the default-injection clause amended to name it, per PR 'Add E1E identity edge operator to the unary Operator table' merged into v1.1 (not main) 2026-08-11"
     quote: "`E1E`| IssueE-To-IssueE, The Issuee AID of this ACDC MUST be the Issuee AID of the node this Edge points to. This is an identity relation on the two ACDCs' Issuees and places no constraint on either ACDC's Issuer."
-    locator: "spec/spec-body.md:1195 on branch add-e1e-edge-operator"
+    locator: "toip/v1.1:spec/spec-body.md:1206 (table row); full semantics at :1223; amended default-injection clause at :1209"
+
+  - key: acdc-spec-dp-construct
+    title: "Disclosure Paths (dp) — normative on v1.1, absent from main"
+    author: "ToIP KERI/ACDC/CESR Kantara/KSWG Task Force (Daniel Hardman, PR #203)"
+    url: "https://raw.githubusercontent.com/trustoverip/kswg-acdc-specification/v1.1/spec/spec-body.md"
+    retrieved: "2026-09-11"
+    capture: "same capture as acdc-spec-v11 (commit 910c74a)"
+    status: primary
+    supports: "The complete Disclosure Paths construct: DAG-of-ACDCs framing, path syntax (labeled/indexed components, DAG-absolute vs ACDC-relative, the `_` Edge-hop component), node vs. leaf paths, closures, the `dp` field's three-element-tuple structure and Path Prefix rules, breadth-first tuple ordering, Solicited Response semantics, Aggregate Section Pathing, and binding into the IPEX `apply`/`offer` messages — all documented in acdc-inventory.md §9"
+    quote: "The value of the Disclosure Paths, `dp`, field is a list of tuples. Each tuple represents one ACDC in the DAG that is the object of the exchange and is of the form `(ACDCSchemaSAID, PathPrefix, [paths])`."
+    locator: "toip/v1.1:spec/spec-body.md:1881 (dp field definition); section spans :1809-1994 across four headings"
 
   - key: dossier-spec-main
     title: "Verifiable Dossier Specification — spec/dossier-spec-body.md (trustoverip/kswg-dossier-specification@main)"
     author: "Daniel Hardman et al., ToIP KSWG"
     url: "https://raw.githubusercontent.com/trustoverip/kswg-dossier-specification/main/spec/dossier-spec-body.md"
-    retrieved: "2026-09-04"
-    capture: "fetched to /tmp for this reading, not persisted in-repo; commit b9227753cc1bbb92ed237970fc3b89bf1d0c904f. Used in preference to the vendored checkout (see dossier-spec-vendored-stale below) because main corrects a substantive terminology error present in the vendored copy."
+    retrieved: "2026-09-04, re-verified unchanged 2026-09-11"
+    capture: "fetched to /tmp for this reading, not persisted in-repo; commit b9227753cc1bbb92ed237970fc3b89bf1d0c904f, still current as of 2026-09-11. Used in preference to the vendored checkout (see dossier-spec-vendored-stale below) because main corrects a substantive terminology error present in the vendored copy."
     status: primary
     supports: "Dossier-as-ACDC structure; edges-as-primary-payload vs a-section-as-proximate-metadata; anchoring (not signing) as the authentication mechanism, with the narrow ephemeral-attached-signature exception; the four joint-issuance threshold operators MxN/RMxN/MxQ/RMxQ and their slot-disposition mechanics (Pending/Endorsed/Declined); finalization via the `fi` field; independently configurable revocation thresholds; Annotation Edges as the mechanism for mutable-looking state over immutable ACDCs"
     quote: "A dossier is not a signed document. The issuer does not compute a signature over the dossier ACDC and attach that signature to it as proof of authenticity, which is what \"signing a credential\" means in most other verifiable credential ecosystems. Instead: 1. The assembled dossier ACDC is saidified, yielding its SAID. 2. The issuer constructs a seal containing that SAID. 3. The issuer anchors the seal in an append-only verifiable log..."
@@ -84,8 +110,8 @@ sources:
     title: "CESR Specification — spec/spec-body.md (trustoverip/kswg-cesr-specification@main)"
     author: "Samuel M. Smith et al., ToIP KSWG"
     url: "https://raw.githubusercontent.com/trustoverip/kswg-cesr-specification/main/spec/spec-body.md"
-    retrieved: "2026-09-04"
-    capture: "fetched to /tmp for diff verification only, not persisted in-repo; commit bad6edd84f928fe1e77a722edbdd829e0878377f"
+    retrieved: "2026-09-04, re-verified unchanged 2026-09-11"
+    capture: "fetched to /tmp for diff verification only, not persisted in-repo; commit bad6edd84f928fe1e77a722edbdd829e0878377f as of 2026-08-28, still current as of 2026-09-11"
     status: primary
     supports: "Confirms the vendored checkout (cesr-spec-vendored) is identical to published main on the Version String field and SAID sections cited in acdc-inventory.md; identifies the vendored checkout's only divergence as an unmerged post-quantum signature-code table addition, irrelevant to what is cited"
     quote: "diff cesr-upstream.md spec/spec-body.md: differences confined to Annex A post-quantum code-table entries and one Annex prose section ('Post-Quantum Cryptographic Primitives'), not present in either version's Version String or SAID sections"
