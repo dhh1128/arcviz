@@ -291,7 +291,7 @@ wheels = [
 
 [[package]]
 name = "keri"
-version = "2.0.0.dev6"
+version = "2.1.0.dev0"
 source = { editable = "/home/daniel/code/wot/keripy" }
 dependencies = [
     { name = "apispec" },

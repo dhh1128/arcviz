@@ -87,7 +87,7 @@ What we want from this stream is specific, not general: how do shipped wallets h
 
 Read, screenshot, and characterize the four implementations we already own:
 
-- `~/code/provenant/origin-voice` — the accordion view. Entry points: `src/components/organisms/credential-details.tsx`, `credential-card.tsx`, `dossier-credentials.tsx`, `credential-badges.tsx`, `credential-details-modal.tsx`. Run it if it runs cheaply; otherwise read plus any Storybook. Screenshots are proprietary.
+- `~/code/provenant/origin-voice` — a proprietary accordion-style credential view. **Not republished:** the entry points, the analysis and any screenshots are Provenant's, and live under `.ignored/private-refs/origin-voice/`. This repository carries only the generalizable lessons, unattributed.
 - `~/code/me/veridian-wallet` — credential card and detail views; a real KERI/ACDC wallet, so its handling of chained credentials is directly on point.
 - `~/code/me/entviz-js` — the existing React surface we intend to consume: `packages/react/src/EntvizPill.ts` and the event model in `events.ts` (`DisclosureState`, `Provenance`, `Medium`, `VerdictState`, `EntvizSensitivity`). This vocabulary already anticipates most of what we need; the report should say where it fits and where it is short.
 - `~/code/me/coia` — the alias convention, its flag registry (notably the unverified flag), and the six reference implementations. This defines the interface we need for AID → alias resolution.
