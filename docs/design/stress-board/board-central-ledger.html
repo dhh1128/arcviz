@@ -1,0 +1,349 @@
+<!doctype html>
+<!-- arcviz SC13 stress board / variant B: verification rendered ONCE, as a centralized ledger inside the gate.
+     Identical presentation, host stubs, and graph geometry as board-per-card.html; only the V surface moves.
+     Hand-authored, no build step, no external resources, no JS, no hover-carried meaning. Greyscale only.
+     All SAIDs/AIDs are real corpus values truncated to 10 characters; no credential data is invented.
+     ANNOTATION DISCIPLINE: nothing inside the phone frame names a fixture or states a withheld fact. -->
+<html lang="en"><head><meta charset="utf-8"><title>SC13 stress board — variant B (centralized ledger)</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:860px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:15px;margin:28px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:820px}
+  .phone{width:360px;margin:14px 0;outline:1px solid #bbb}
+  .gate{border:5px double #111;background:#fff}
+  .gatehead{background:#111;color:#fff;padding:8px 10px;font-size:11px;line-height:1.4}
+  .gatehead b{font-size:13px;letter-spacing:.04em}
+  .gatefoot{background:#111;color:#fff;padding:4px 10px;font-size:9px}
+  .board{position:relative;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .fband{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:5px 8px;font-size:9px;color:#333;line-height:1.35}
+  .fgut{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
+  .fgut .rot{position:absolute;left:2px;writing-mode:vertical-rl;font-size:8px;letter-spacing:.14em;color:#555}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .x{font-size:7.5px;vertical-align:super;color:#333}
+  .card{border:1.5px solid #111;background:#fff;padding:7px 9px;font-size:10px;line-height:1.3}
+  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .hole{border:4px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:7px 9px;font-size:10px;line-height:1.3}
+  .hole .hdr{font-weight:700;letter-spacing:.1em;font-size:9.5px}
+  .kel{border:3px double #111;border-radius:12px;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:6px 9px;font-size:9.5px;line-height:1.3}
+  .aid{border:1.5px solid #111;border-radius:12px;background:#fff;padding:6px 9px;font-size:9.5px;line-height:1.3}
+  .elabel{font-size:9px;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3}
+  .opchip{display:inline-block;border:1px solid #333;background:#fff;font-family:ui-monospace,Menlo,monospace;font-size:9px;padding:0 3px}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:9px;padding:0 4px;background:#fafafa}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:2px;font-size:9px}
+  .cap{font-size:9px;color:#333;background:#fff;border:1px solid #999;padding:3px 6px;line-height:1.35}
+  .stale{border-top:none!important}
+  .stale-top{display:flex;align-items:center;margin:-7px -9px 4px}
+  .stale-top .ln{flex:1;border-top:1.5px solid #111}
+  .stale-top .tx{font-size:8.5px;padding:0 4px;letter-spacing:.02em;white-space:nowrap}
+  .h6p{border:none!important;position:relative}
+  .h6p .ck{position:absolute;width:14px;height:14px;border:0 solid #111}
+  .h6p .tl{left:0;top:0;border-left-width:1.5px;border-top-width:1.5px}
+  .h6p .tr{right:0;top:0;border-right-width:1.5px;border-top-width:1.5px}
+  .h6p .bl{left:0;bottom:0;border-left-width:1.5px;border-bottom-width:1.5px}
+  .h6p .br{right:0;bottom:0;border-right-width:1.5px;border-bottom-width:1.5px}
+  .h6line{font-size:9px;border-left:3px solid #111;padding-left:5px;margin-top:4px}
+  .guess{border:1px solid #555;background:transparent;padding:5px 7px;font-size:9.5px;min-height:52px;margin-top:4px}
+  .tline{font-size:9px;color:#333;margin-top:3px}
+  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .dock{border:1.5px solid #111;background:#fafafa;padding:6px 8px;font-size:9px;line-height:1.5}
+  /* the centralized ledger */
+  .wall{border-bottom:1.5px solid #111;padding:6px 8px;font-size:9px;line-height:1.35}
+  .wall table{border-collapse:collapse;width:100%;table-layout:fixed}
+  .wall th,.wall td{border:1px solid #ccc;padding:1px 0;text-align:center;font-size:8.5px;overflow:hidden}
+  .wall th{font-weight:600;background:#f6f6f6}
+  .wall td.lbl,.wall th.lbl{width:64px;text-align:left;padding-left:3px;font-weight:400}
+  .wall sup{font-size:6.5px}
+  .fn{font-size:8px;color:#333;line-height:1.45;margin-top:4px}
+  .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;max-width:820px;margin:18px 0}
+  .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+</style></head><body>
+
+<h1>SC13 stress board — variant B: verification centralized inside the gate</h1>
+<p class="note">The identical presentation, host stubs, and graph geometry as <a href="board-per-card.html">variant A</a>; the only change is that the per-(check, subject) verification surface renders once, as a matrix behind the gate, and the cards below carry no V rows at all. Built honestly, not favourably — the footnote apparatus this variant needs is part of the evidence. Falsifier results and the recommendation: <a href="README.md">README.md</a>.</p>
+
+<div class="phone">
+<div class="gate">
+  <div class="gatehead">
+    <b>P — PRESENTER: UNKNOWN</b><br>
+    No evidence binds the party presenting this material to any holder AID named below. A replayed copy would satisfy every check on this board identically.<br>
+    <span style="color:#ccc">This enclosure is standing verifier-facing structure; it never toggles on problems. The double rail at left and right below is this same enclosure, continued. Render as-of 2026-09-14T12:00Z (host clock).</span>
+  </div>
+
+  <!-- ============ THE CENTRALIZED LEDGER (one V surface for the whole render) ============ -->
+  <div class="wall">
+    <b style="font-size:9.5px;letter-spacing:.06em">V — 0 OF 101 CELLS PERFORMED BY THIS VIEWER</b> · one column per item, one row per (check, subject) · outcomes {○ unperformed · ⊘ unperformable · — no subject (committed absence) · <span style="color:#666">·</span> no such subject} · fail not offered: no host declaration
+    <table style="margin-top:4px">
+      <tr><th class="lbl"></th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th><th>07</th><th>08</th><th>09</th><th>10</th><th>11</th></tr>
+      <tr><td class="lbl">1 SAID</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td></tr>
+      <tr><td class="lbl">2 schema</td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>⊘<sup>a</sup></td><td>○<sup>g</sup></td></tr>
+      <tr><td class="lbl">3 sigs</td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td><td>⊘<sup>h</sup></td></tr>
+      <tr><td class="lbl">4 KEL anchor</td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td></tr>
+      <tr><td class="lbl">5 delegation</td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td><td>⊘<sup>b</sup></td></tr>
+      <tr><td class="lbl">6·i edge</td><td>—</td><td>○</td><td>⊘<sup>c</sup></td><td>○</td><td>○</td><td>○</td><td>○</td><td>—</td><td>⊘<sup>d</sup></td><td>⊘<sup>e</sup></td><td>—</td></tr>
+      <tr><td class="lbl">6·ii edge</td><td>·</td><td>·</td><td>·</td><td>○</td><td>·</td><td>·</td><td>·</td><td>·</td><td>⊘<sup>d</sup></td><td>·</td><td>·</td></tr>
+      <tr><td class="lbl">7 bona fides</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td></tr>
+      <tr><td class="lbl">8 revocation</td><td>⊘<sup>f</sup></td><td>⊘<sup>f</sup></td><td>⊘<sup>f</sup></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td class="lbl">9 duplicity</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td></tr>
+    </table>
+    <div class="fn">
+      Column key (item → its d): 01 <span class="pill">EHOTOsgWoV…</span> 02 <span class="pill">ENKSmFLrpu…</span> 03 <span class="pill">EGDKB8m5pt…</span> 04 <span class="pill">EDQ6zCH2Xs…</span> 05 <span class="pill">EGHUpSJN58…</span> 06 <span class="pill">ELZEWuSVWm…</span> 07 <span class="pill">EPJBkGOiB1…</span> 08 <span class="pill">ELBmpHyX1I…</span> 09 <span class="pill">EHZGkyDF43…</span> 10 <span class="pill">EC9jOzkasO…</span> 11 <span class="pill">EM29GVeQIJ…</span><br>
+      a — no schema document in hand; blocked at the committed schema SAID: 01 <span class="pill">EKCowGkbg1…</span> 02 <span class="pill">EC53kuutIE…</span> 03 <span class="pill">EDyt0FijsX…</span> 04 <span class="pill">EHcf0NoVnE…</span> 05 <span class="pill">ECCZBQhed5…</span> 06 <span class="pill">EEBs1kT527…</span> 07 <span class="pill">EM4ULPZglp…</span> 08 <span class="pill">EAow76Ee1e…</span> 09 <span class="pill">EJAzSzltDU…</span> 10 <span class="pill">EPJ0dhOe4W…</span><br>
+      b — no signature or KEL material in hand; rows 4 and 5 blocked at each item's issuer AID / that AID's own KEL (delegation reach: zero tiers everywhere): 01 <span class="pill">ELTGvn2Zme…</span> 02 <span class="pill">EOvbsyiKJg…</span> 03 <span class="pill">EOvbsyiKJg…</span> 04 <span class="pill">ELAx3p7vFr…</span> 05 <span class="pill">EF7IEE2tXW…</span> 06 <span class="pill">EEm3vJpdre…</span> 07 <span class="pill">EMvEWKT94Q…</span> 08 <span class="pill">EAS6m0KAnZ…</span> 09 <span class="pill">EJfO7Ijqmi…</span> 10 <span class="pill">EOQiABHbHh…</span> 11 <span class="pill">ECQeGDh4Ir…</span><br>
+      c — edge <b>auth</b>: blocked at <span class="pill">EM7gTDXqvy…</span> (the drawn hole below) &nbsp; d — destinations withheld: blocked at edge blocks <span class="pill">EJye2IohGv…</span> / <span class="pill">EMiUl2HbLp…</span> &nbsp; e — edge <b>evidence</b>: blocked at <span class="pill">EDSm-SsfXZ…</span> (the drawn hole below) &nbsp; f — registry inception not in hand: 01 <span class="pill">EEZAG3AUc0…</span> 02 <span class="pill">EDCOPdr8xJ…</span> 03 <span class="pill">EFiZI0ixQl…</span> &nbsp; g — schema in hand (host-supplied, SAID-verified); computable on demand &nbsp; h — no signature or KEL material in hand<br>
+      7 is a labeled roll-up of an item's row-6 cells · arcviz default AND, host-overridable. 9 — watchers consulted: zero (scoped to this material). Revocation horizon everywhere: none.
+    </div>
+  </div>
+
+  <div class="board" style="height:4110px;width:350px">
+    <svg width="350" height="4110">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="oarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <line x1="86" y1="84" x2="86" y2="62" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="126" y1="84" x2="126" y2="62" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="166" y1="84" x2="166" y2="62" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="86" y1="318" x2="86" y2="246" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <line x1="86" y1="710" x2="86" y2="698" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="120" y1="826" x2="120" y2="780" stroke="#111" stroke-width="0.7" stroke-dasharray="3 4"/>
+      <line x1="86" y1="1108" x2="86" y2="1065" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <line x1="86" y1="1530" x2="86" y2="1606" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <path d="M46,1480 L34,1480 L34,1900 L42,1900" fill="none" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <path d="M46,1750 L24,1750 L24,2420 L42,2420" fill="none" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <line x1="86" y1="1979" x2="86" y2="2049" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <line x1="86" y1="2248" x2="86" y2="2322" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+      <line x1="46" y1="2640" x2="20" y2="2640" stroke="#111" stroke-width="1.4" marker-end="url(#oarr)"/>
+      <line x1="46" y1="2680" x2="20" y2="2680" stroke="#111" stroke-width="1.4" marker-end="url(#oarr)"/>
+      <line x1="46" y1="2932" x2="22" y2="2932" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="46" y1="2962" x2="22" y2="2962" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="46" y1="2992" x2="22" y2="2992" stroke="#111" stroke-width="1.1" marker-end="url(#oarr)"/>
+      <line x1="86" y1="3178" x2="86" y2="3066" stroke="#111" stroke-width="1.4" marker-end="url(#arr)"/>
+    </svg>
+
+    <div class="el fband" style="left:0;top:0;width:100%;height:58px">
+      <b>UNMAPPED — COMMITTED STRUCTURE, TOPOLOGY UNKNOWABLE FROM MATERIAL IN HAND</b><br>
+      This region continues down the left margin. Nothing inside it has a position; entry points below are properties of near nodes, never of destinations.
+    </div>
+    <div class="el fgut" style="left:0;top:58px;width:16px;height:4052px">
+      <span class="rot" style="top:560px">UNMAPPED — NO POSITIONS</span>
+      <span class="rot" style="top:1900px">UNMAPPED — NO POSITIONS</span>
+      <span class="rot" style="top:3300px">UNMAPPED — NO POSITIONS</span>
+    </div>
+
+    <div class="el hole" style="left:46px;top:84px;width:288px;height:158px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EM7gTDXqvy…</span><span class="x">×2</span>
+      <div style="margin-top:3px">identity: known (this SAID) · content: <b>unknown</b> · out-edges: <b>unknown</b> — fringe above<br>
+      expected schema (stated by the referencing edge): <span class="pill">EIvYqH6Kbf…</span><br>
+      cause: unknown — no attestation supplied · no retrieval attempted<br>
+      <span style="font-size:9px">every check through this node: ⊘ unperformable — ledger column of the referencing item, note c</span></div>
+    </div>
+    <div class="el elabel" style="left:120px;top:250px;width:212px">
+      <b>auth</b> · <span class="opchip">I2I · declared</span> — operator read from the disclosed edge block in hand (<code>o</code> present, so no injected default arises).<br>
+      constraint check: ⊘ unperformable — see ledger, note c
+    </div>
+    <div class="el card stale" style="left:46px;top:318px;width:288px;height:218px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT72H</span><span class="ln"></span></div>
+      <div class="role">ITEM 03 · host load label (opaque)</div>
+      <div>d <span class="pill">EGDKB8m5pt…</span> · u: present (blinding entropy in hand)</div>
+      <div style="margin-top:2px">issuer <span class="pill">EOvbsyiKJg…</span><span class="x">×3</span> · issuee <span class="pill">ELiFwqI6jH…</span></div>
+      <div style="margin-top:2px">registry <span class="pill">EFiZI0ixQl…</span> <span style="font-size:8.5px">(inception not in hand)</span> · schema <span class="pill">EDyt0FijsX…</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (auth) · r none as issued · V: ledger col 03</div>
+      <div style="margin-top:3px"><b>a</b> — LEI 984500ARCV1Z0000FIX01 · personLegalName: Jordan Q. Fixture · engagementContextRole: Compliance Analyst · dt 2026-01-15T12:00Z · a.u present</div>
+      <div class="tline">T — policy PT72H (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:4px"><span class="port">auth ↑</span></div>
+    </div>
+    <div class="el cap" style="left:46px;top:544px;width:288px">
+      Two drawn components meet nowhere on this board segment. Any connection between them is content of the artifact not in hand — a drawn bridge would manufacture topology.
+    </div>
+
+    <div class="el kel" style="left:46px;top:602px;width:288px;height:92px">
+      <div style="font-size:8.5px;letter-spacing:.08em;color:#333">KEL NOT IN HAND — AID TIER (not a credential)</div>
+      <span class="pill">EDYl3N_TuK…</span>
+      <div style="margin-top:2px">Root delegator — named by load context, not by any ACDC in hand. No KEL of any tier is in hand; delegation reach everywhere on this board: zero tiers.</div>
+    </div>
+    <div class="el aid" style="left:46px;top:710px;width:288px;height:68px">
+      <div style="font-size:8.5px;letter-spacing:.08em;color:#333">IDENTITY STRATUM — AID (not a credential)</div>
+      <span class="pill">ELTGvn2Zme…</span>
+      <div style="margin-top:2px">Issuer of ITEM 01. Inception delegated (<code>dip</code>) per load context. Its own KEL: not in hand.</div>
+    </div>
+    <div class="el cap" style="left:136px;top:786px;width:198px;border-style:dashed">
+      identity reference — inferred by equality (ITEM 01's issuer pill = the AID above); not an ACDC edge (third stroke class)
+    </div>
+    <div class="el card stale" style="left:46px;top:826px;width:288px;height:235px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <div class="role">ITEM 01 · host load label (opaque)</div>
+      <div>d <span class="pill">EHOTOsgWoV…</span><span class="x">×2</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">ELTGvn2Zme…</span> · issuee <span class="pill">EOvbsyiKJg…</span><span class="x">×3</span></div>
+      <div style="margin-top:2px">registry <span class="pill">EEZAG3AUc0…</span> <span style="font-size:8.5px">(inception not in hand)</span> · schema <span class="pill">EKCowGkbg1…</span><span class="x">×2</span></div>
+      <div class="manif">s committed · a disclosed · e none as issued · r none as issued · V: ledger col 01</div>
+      <div style="margin-top:3px"><b>a</b> — LEI 984500ARCV1Z0000FIX01 · dt 2026-01-16T12:00Z · a.u present</div>
+      <div class="tline">T — policy P30D (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:5px"><span class="seal">e — none · sealed at issuance</span></div>
+      <div style="font-size:8.5px;color:#444;margin-top:2px">This artifact, as issued, has no edge section — committed by its own SAID.</div>
+    </div>
+    <div class="el elabel" style="left:120px;top:1069px;width:200px">
+      <b>qvi</b> · <span class="opchip">I2I — derived</span> (far node in hand, targeted)
+    </div>
+    <div class="el card stale" style="left:46px;top:1108px;width:288px;height:205px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <div class="role">ITEM 02 · host load label (opaque)</div>
+      <div>d <span class="pill">ENKSmFLrpu…</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EOvbsyiKJg…</span><span class="x">×3</span> · issuee <span class="pill">EErZ90n2jH…</span></div>
+      <div style="margin-top:2px">registry <span class="pill">EDCOPdr8xJ…</span> <span style="font-size:8.5px">(inception not in hand)</span> · schema <span class="pill">EC53kuutIE…</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (qvi) · r none as issued · V: ledger col 02</div>
+      <div style="margin-top:3px"><b>a</b> — LEI 984500ARCV1Z0000FIX01 · dt 2026-01-18T12:00Z · a.u present</div>
+      <div class="tline">T — policy P30D (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:4px"><span class="port">qvi ↑</span></div>
+    </div>
+
+    <div class="el card stale" style="left:46px;top:1341px;width:288px;height:189px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <div class="role">ITEM 04 · host load label (opaque)</div>
+      <div>d <span class="pill">EDQ6zCH2Xs…</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">ELAx3p7vFr…</span> · no issuee field in a</div>
+      <div style="margin-top:2px">schema <span class="pill">EHcf0NoVnE…</span></div>
+      <div class="manif">s committed · a disclosed · e 2 edges · r none as issued · V: ledger col 04</div>
+      <div style="margin-top:3px"><b>a</b> — claim: "reachable via two paths of unequal length" · a.u present</div>
+      <div class="tline">T — policy PT12H (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:4px"><span class="port">shortPath ↓</span> <span class="port">longPath ↙</span></div>
+    </div>
+    <div class="el elabel" style="left:46px;top:1538px;width:138px">
+      <b>shortPath</b> · <span class="opchip">NI2I — derived</span> (far node in hand, untargeted)
+    </div>
+    <div class="el elabel" style="left:196px;top:1538px;width:138px">
+      <b>longPath</b> · <span class="opchip">NI2I — derived</span> (far node in hand, untargeted) — left lane
+    </div>
+    <div class="el card" style="left:46px;top:1610px;width:288px;height:195px">
+      <div class="role">ITEM 05 · host load label (opaque)</div>
+      <div>d <span class="pill">EGHUpSJN58…</span><span class="x">×2</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EF7IEE2tXW…</span> · schema <span class="pill">ECCZBQhed5…</span><span class="x">×2</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (baseline) · r none as issued · V: ledger col 05</div>
+      <div style="margin-top:3px"><b>a</b> — scope: "short path, one hop from the ancestor" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px">e-section <span class="pill">ENkj_sx2Qt…</span><span class="x">×2</span> · edge block <span class="pill">EL94FmuIil…</span><span class="x">×2</span> — byte-identical to ITEM 07's (equality of committed bytes, not a similarity judgment)</div>
+      <div class="tline">T — freshness: <b>no policy supplied</b></div>
+      <div style="margin-top:4px"><span class="port">baseline ↙</span> <span style="font-size:8.5px;color:#444">(left lane, two ranks down)</span></div>
+    </div>
+    <div class="el card" style="left:46px;top:1829px;width:288px;height:150px">
+      <div class="role">ITEM 06 · host load label (opaque)</div>
+      <div>d <span class="pill">ELZEWuSVWm…</span><span class="x">×2</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EEm3vJpdre…</span> · schema <span class="pill">EEBs1kT527…</span><span class="x">×2</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (waypoint) · r none as issued · V: ledger col 06</div>
+      <div style="margin-top:3px"><b>a</b> — scope: "long path, two hops from the ancestor" · a.u present</div>
+      <div class="tline">T — freshness: <b>no policy supplied</b></div>
+      <div style="margin-top:4px"><span class="port">waypoint ↓</span></div>
+    </div>
+    <div class="el elabel" style="left:120px;top:1987px;width:200px">
+      <b>waypoint</b> · <span class="opchip">NI2I — derived</span> (far node in hand, untargeted)
+    </div>
+    <div class="el card" style="left:46px;top:2053px;width:288px;height:195px">
+      <div class="role">ITEM 07 · host load label (opaque)</div>
+      <div>d <span class="pill">EPJBkGOiB1…</span><span class="x">×2</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EMvEWKT94Q…</span> · schema <span class="pill">EM4ULPZglp…</span><span class="x">×2</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (baseline) · r none as issued · V: ledger col 07</div>
+      <div style="margin-top:3px"><b>a</b> — scope: "long path, one hop from the ancestor" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px">e-section <span class="pill">ENkj_sx2Qt…</span><span class="x">×2</span> · edge block <span class="pill">EL94FmuIil…</span><span class="x">×2</span> — byte-identical to ITEM 05's (equality of committed bytes, not a similarity judgment)</div>
+      <div class="tline">T — freshness: <b>no policy supplied</b></div>
+      <div style="margin-top:4px"><span class="port">baseline ↓</span></div>
+    </div>
+    <div class="el elabel" style="left:46px;top:2256px;width:138px">
+      <b>baseline</b> (from ITEM 05, left lane) · <span class="opchip">NI2I — derived</span> (far node in hand, untargeted)
+    </div>
+    <div class="el elabel" style="left:196px;top:2256px;width:138px">
+      <b>baseline</b> (from ITEM 07) · <span class="opchip">NI2I — derived</span> (far node in hand, untargeted)
+    </div>
+    <div class="el card stale" style="left:46px;top:2326px;width:288px;height:190px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <div class="role">ITEM 08 · host load label (opaque)</div>
+      <div>d <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EAS6m0KAnZ…</span> · schema <span class="pill">EAow76Ee1e…</span><span class="x">×3</span></div>
+      <div class="manif">s committed · a disclosed · e none as issued · r none as issued · V: ledger col 08</div>
+      <div style="margin-top:3px"><b>a</b> — standard: "ISO-9001-ish Baseline" · a.u present</div>
+      <div class="tline">T — policy PT12H (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:5px"><span class="seal">e — none · sealed at issuance</span></div>
+      <div style="font-size:8.5px;color:#444;margin-top:2px">This artifact, as issued, has no edge section — committed by its own SAID.</div>
+    </div>
+    <div class="el cap" style="left:46px;top:2524px;width:288px">
+      The left-lane edge above spans two ranks: its near node also reaches this node through the longer drawn path. Ranks sit at longest committed path; path length is read by counting cards, never by geometric distance.
+    </div>
+
+    <div class="el" style="left:20px;top:2628px;width:14px;height:64px;border:1.5px solid #111;border-left:none;z-index:2;background:transparent"></div>
+    <div class="el card" style="left:46px;top:2596px;width:288px;height:221px">
+      <div class="role">ITEM 09 · host load label (opaque)</div>
+      <div>d <span class="pill">EHZGkyDF43…</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EJfO7Ijqmi…</span> · schema <span class="pill">EJAzSzltDU…</span></div>
+      <div class="manif">s committed · a disclosed · e 2 edges · r none as issued · V: ledger col 09</div>
+      <div style="margin-top:3px"><b>a</b> — label: "presenting node with two independently blinded edges" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px"><b>sourceA</b>: edge block <span class="pill">EJye2IohGv…</span> · <b>sourceB</b>: edge block <span class="pill">EMiUl2HbLp…</span> — each pill is the SAID of the edge block itself, never of any destination · <span class="opchip">operator UNDETERMINED</span> ×2 (whether either block even carries an <code>o</code> is itself withheld)</div>
+      <div class="tline">T — freshness: <b>no policy supplied</b> · cause of withholding: unknown — no attestation supplied</div>
+      <div style="margin-top:4px"><span class="port">sourceA ←</span> <span class="port">sourceB ←</span></div>
+    </div>
+    <div class="el cap" style="left:46px;top:2825px;width:288px">
+      Committed destinations of the 2 bracketed edges at left: <b>between 1 and 2</b>. Coincidence with each other, or with any node drawn anywhere on this board, is unknowable from material in hand. The two entry points belong to this card's ports — counting them counts ports, not destinations.
+    </div>
+
+    <div class="el hole" style="left:46px;top:2912px;width:288px;height:150px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EDSm-SsfXZ…</span><span class="x">×2</span>
+      <div style="margin-top:3px">identity: known (this SAID) · content: <b>unknown</b> · out-edges: <b>unknown</b> — fringe at left<br>
+      expected schema (stated by the referencing edge): <span class="pill">EAu0-QTlMD…</span><br>
+      cause: unknown — no attestation supplied · no retrieval attempted<br>
+      <span style="font-size:9px">every check through this node: ⊘ unperformable — ledger column of the referencing item, note e</span></div>
+    </div>
+    <div class="el elabel" style="left:120px;top:3074px;width:212px">
+      <b>evidence</b> · <span class="opchip">operator UNDETERMINED</span> — no <code>o</code> in the disclosed block; the default the spec would inject depends on the far node's content, which is not in hand.<br>
+      constraint check: ⊘ unperformable — see ledger, note e
+    </div>
+    <div class="el card h6p" style="left:46px;top:3178px;width:288px;height:280px">
+      <span class="ck tl"></span><span class="ck tr"></span><span class="ck bl"></span><span class="ck br"></span>
+      <div class="role">ITEM 10 · host load label (opaque)</div>
+      <div>d <span class="pill">EC9jOzkasO…</span> · u: <b>present and EMPTY</b></div>
+      <div class="h6line"><b>possibly a metadata ACDC</b> — top-level u present-and-empty; issuer-commitment evidence: none supplied either way. The full issuer-uncommitted marker does not fire on the discriminator alone; the resolved frame withdraws to its corners until evidence arrives.</div>
+      <div style="margin-top:3px">issuer field <span class="pill">EOQiABHbHh…</span> · schema <span class="pill">EPJ0dhOe4W…</span></div>
+      <div class="manif">s committed · a committed — carries only d and u: no attribute values as disclosed · e 1 edge (evidence) · r terms committed · V: ledger col 10</div>
+      <div style="margin-top:3px"><b>r</b> — terms <span class="pill">EJ8D_ukDNz…</span> · l: "This metadata commitment does not itself constitute an issued credential; the Issuer has made no commitment to the attribute content of the private ACDC this metadata describes." <span style="font-size:8.5px;color:#444">(disclosed content of this artifact — displayed, not adopted as a host judgment)</span></div>
+      <div class="tline">T — freshness: <b>no policy supplied</b></div>
+      <div style="margin-top:4px"><span class="port">evidence ↑</span></div>
+    </div>
+
+    <div class="el card" style="left:46px;top:3482px;width:288px;height:233px">
+      <div class="role">ITEM 11 · host load label (opaque)</div>
+      <div>d <span class="pill">EM29GVeQIJ…</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">ECQeGDh4Ir…</span> · schema <span class="pill">EB7GeZZUO6…</span> <span style="font-size:8.5px">(document in hand — host-supplied, SAID-verified)</span></div>
+      <div class="manif">s committed · a collapsed — see below · e none as issued · r none as issued · V: ledger col 11</div>
+      <div class="guess">
+        <b>a</b> — collapsed: <span class="pill">EEjGZMTbGN…</span><br>
+        contents <b>recoverable/guessable</b> — the verified schema reserves no <code>u</code> for this block: no blinding entropy protects the commitment. Not private, and not rendered as private. This region holds the space the disclosed block would occupy.
+      </div>
+      <div class="tline">T — freshness: <b>no policy supplied</b></div>
+      <div style="margin-top:5px"><span class="seal">e — none · sealed at issuance</span></div>
+    </div>
+
+    <div class="el dock" style="left:46px;top:3739px;width:288px;height:346px">
+      <b style="font-size:9.5px;letter-spacing:.06em">RESIDUAL CORRELATORS IN THIS PRESENTATION</b> — identical values render identically everywhere above; ×N chips are these counts.<br>
+      <span class="pill">EOvbsyiKJg…</span>×3 — 01 issuee · 02 issuer · 03 issuer<br>
+      LEI 984500ARCV1Z0000FIX01 ×3 — a of 01 · 02 · 03<br>
+      <span class="pill">EHOTOsgWoV…</span>×2 — 01 d · 02 edge n &nbsp; <span class="pill">EKCowGkbg1…</span>×2 — 01 s · 02 edge s<br>
+      <span class="pill">EM7gTDXqvy…</span>×2 — 03 edge n · the drawn hole it names<br>
+      <span class="pill">ELBmpHyX1I…</span>×3 — 08 d · 05 edge n · 07 edge n &nbsp; <span class="pill">EAow76Ee1e…</span>×3 — 08 s · 05 edge s · 07 edge s<br>
+      <span class="pill">EGHUpSJN58…</span>×2 · <span class="pill">ECCZBQhed5…</span>×2 — 05 d/s · 04 shortPath n/s<br>
+      <span class="pill">ELZEWuSVWm…</span>×2 · <span class="pill">EEBs1kT527…</span>×2 — 06 d/s · 04 longPath n/s<br>
+      <span class="pill">EPJBkGOiB1…</span>×2 · <span class="pill">EM4ULPZglp…</span>×2 — 07 d/s · 06 waypoint n/s<br>
+      <span class="pill">EL94FmuIil…</span>×2 · <span class="pill">ENkj_sx2Qt…</span>×2 — edge block / e-section d in 05 and 07 (byte-identical)<br>
+      <span class="pill">EDSm-SsfXZ…</span>×2 — 10 edge n · the drawn hole it names<br>
+      <span style="font-size:8.5px;color:#444">Scope: the material in hand and nothing else. No fact about the world is asserted, and selective disclosure is never rendered as achieved privacy while these values correlate.</span>
+    </div>
+  </div>
+  <div class="gatefoot">P — presenter: unknown · this rail is the same enclosure that opened this render</div>
+</div>
+</div>
+
+<div class="comm">
+  <h3>COMMENTARY — OUTSIDE THE RENDER</h3>
+  <p>Same host stubs as variant A (declared in that file's commentary and in README.md). What moving the ledger bought and cost, measured on this pair of files: the graph column shrinks from 6,710&nbsp;px to 4,110&nbsp;px and the whole render from 6,884&nbsp;px to 4,858&nbsp;px (measured headlessly), with the 573&nbsp;px matrix block compressing all 101 (check,&nbsp;subject) cells into less than one phone screen without collapsing arity. What it costs: every Rule&nbsp;10 blocking identifier moved out of the cell into footnotes a–f, so "why is this cell ⊘" is now a three-hop read (card → column → footnote list) where variant A answers it in place; the hole elements can no longer name their blocked checks directly and point at ledger notes instead; and once the viewer scrolls past the matrix, no V state of any kind is co-visible with any card — the manifest's "V: ledger col NN" mark is the only surviving trace, and it is a pointer, not a state.</p>
+  <p>Honest observation in the other direction: at the all-unperformed default the per-card ledgers of variant A are eleven near-identical blocks whose card-specific content is only the blocker pills — the matrix makes the uniformity visible as a fact (three text-heavy footnotes carry everything that actually differs), where variant A makes the viewer discover it by reading eleven times.</p>
+</div>
+
+</body></html>

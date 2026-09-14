@@ -1,0 +1,317 @@
+<!doctype html>
+<!-- arcviz SC13 stress board / focus-in-place sequence and compact-chip floor gauge.
+     Static frames only — no interaction is implemented; each frame is one drawn moment.
+     Same presentation, items, and host stubs as board-per-card.html. Greyscale only.
+     ANNOTATION DISCIPLINE: frames 1-2 are renders (nothing in them names a fixture or a withheld fact);
+     the gauges are authoring apparatus and are styled as commentary. -->
+<html lang="en"><head><meta charset="utf-8"><title>SC13 stress board — focus-in-place frames and the floor gauge</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:860px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:15px;margin:28px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:820px}
+  .phone{width:360px;margin:14px 0;outline:1px solid #bbb}
+  .gate{border:5px double #111;background:#fff}
+  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
+  .board{position:relative;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .fband{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:8px;color:#333}
+  .fgut{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .x{font-size:7.5px;vertical-align:super;color:#333}
+  .chip{border:1.5px solid #111;background:#fff;padding:4px 6px;font-size:9px;line-height:1.25}
+  .chip .role{font-size:7.5px;letter-spacing:.08em;color:#555}
+  .card{border:1.5px solid #111;background:#fff;padding:7px 9px;font-size:10px;line-height:1.3}
+  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:8px;padding:0 3px;background:#fafafa}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:8px}
+  .stale{border-top:none!important}
+  .stale-top{display:flex;align-items:center;margin:-4px -6px 2px}
+  .card.stale .stale-top{margin:-7px -9px 4px}
+  .stale-top .ln{flex:1;border-top:1.5px solid #111}
+  .stale-top .tx{font-size:7px;padding:0 3px;white-space:nowrap}
+  /* floor form */
+  .fl{border:1.5px solid #111;background:#fff;padding:2px 4px;font-size:8px;line-height:1.2;width:76px;height:44px}
+  .fl .role{font-size:6.5px;letter-spacing:.06em;color:#555}
+  .fl .pill{font-size:8px;padding:0 3px}
+  .fl .port{font-size:7px;padding:0 2px;border-bottom-width:2px}
+  .fl .seal{border-top-width:3px;font-size:6.5px}
+  .flhole{border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:2px 4px;font-size:8px;line-height:1.2;width:76px;height:44px}
+  .flhole .hdr{font-weight:700;font-size:6.5px;letter-spacing:.06em}
+  .flhole .pill{font-size:8px;padding:0 3px}
+  .fl.stale{border-top:none!important}
+  .fl .stale-top{margin:-2px -4px 1px}
+  .fl .stale-top .tx{font-size:6px;padding:0 2px}
+  .ledger{font-size:9px;color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
+  .ledger .lh{color:#444;border-bottom:1px solid #ddd;margin-bottom:2px;padding-bottom:1px}
+  .ledger .r{display:flex;gap:4px}
+  .ledger .g{width:11px;flex:none;text-align:center}
+  .tline{font-size:9px;color:#333;margin-top:3px}
+  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .cap{font-size:9px;color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3}
+  .opchip{display:inline-block;border:1px solid #333;background:#fff;font-family:ui-monospace,Menlo,monospace;font-size:9px;padding:0 3px}
+  .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;max-width:820px;margin:18px 0}
+  .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+  .gzrow{display:flex;align-items:flex-start;gap:18px;margin:10px 0}
+  .gz{transform-origin:top left}
+</style></head><body>
+
+<h1>Focus-in-place, drawn at its two moments, and the compact-chip floor</h1>
+<p class="note">The composite replaced the refuted pile with in-place expansion: the focused node grows where it stands, the graph reflows but never reorders, everything else compresses toward a fixed legibility floor, and nothing disappears. These are static frames of that mechanism at 360&nbsp;px, on the same presentation as the boards, followed by the gauge that measures the floor itself. Results as results: <a href="README.md">README.md</a>.</p>
+
+<h2>Frame 1 — rest: the five-card component in the compact register</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:560px;width:350px">
+    <svg width="350" height="560">
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+      <line x1="150" y1="112" x2="100" y2="166" stroke="#111" stroke-width="1.3" marker-end="url(#a1)"/>
+      <line x1="230" y1="112" x2="262" y2="166" stroke="#111" stroke-width="1.3" marker-end="url(#a1)"/>
+      <line x1="262" y1="242" x2="262" y2="296" stroke="#111" stroke-width="1.3" marker-end="url(#a1)"/>
+      <line x1="240" y1="372" x2="205" y2="432" stroke="#111" stroke-width="1.3" marker-end="url(#a1)"/>
+      <line x1="72" y1="242" x2="140" y2="432" stroke="#111" stroke-width="1.3" marker-end="url(#a1)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — no committed edge of this component enters the region; it is standing architecture, not an alarm</div>
+    <div class="el chip stale" style="left:100px;top:40px;width:150px;height:72px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 04</div>
+      <span class="pill">EDQ6zCH2Xs…</span>
+      <div style="margin-top:3px"><span class="port">shortPath ↙</span> <span class="port">longPath ↘</span></div>
+      <div style="font-size:7px;color:#444">V·T detail at expanded scale</div>
+    </div>
+    <div class="el chip" style="left:20px;top:170px;width:150px;height:72px">
+      <div class="role">ITEM 05</div>
+      <span class="pill">EGHUpSJN58…</span><span class="x">×2</span>
+      <div style="margin-top:3px"><span class="port">baseline ↘</span></div>
+      <div style="font-size:7px;color:#444">V·T detail at expanded scale</div>
+    </div>
+    <div class="el chip" style="left:190px;top:170px;width:150px;height:72px">
+      <div class="role">ITEM 06</div>
+      <span class="pill">ELZEWuSVWm…</span><span class="x">×2</span>
+      <div style="margin-top:3px"><span class="port">waypoint ↓</span></div>
+      <div style="font-size:7px;color:#444">V·T detail at expanded scale</div>
+    </div>
+    <div class="el chip" style="left:190px;top:300px;width:150px;height:72px">
+      <div class="role">ITEM 07</div>
+      <span class="pill">EPJBkGOiB1…</span><span class="x">×2</span>
+      <div style="margin-top:3px"><span class="port">baseline ↙</span></div>
+      <div style="font-size:7px;color:#444">V·T detail at expanded scale</div>
+    </div>
+    <div class="el cap" style="left:8px;top:330px;width:104px">
+      the long edge at left spans two ranks — the same destination is also reached via the drawn two-hop path
+    </div>
+    <div class="el chip stale" style="left:95px;top:436px;width:170px;height:88px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 08</div>
+      <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span>
+      <div style="margin-top:3px"><span class="seal">e — none · sealed at issuance</span></div>
+      <div style="font-size:7px;color:#444">V·T detail at expanded scale</div>
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">The compact chip carries: identity (SAID pill with its ×N correlator mark), the port strip or seal (the manifest's e-slot), and its budgeted card-state (the stale frame-break). It does not carry: the ledger, the policy horizon detail, the a-section, the manifest's other slots. Those live at expanded scale — the chip says a budgeted state exists and which kind; the parameters wait for focus.</p>
+
+<h2>Frame 2 — focus-in-place: ITEM 08 expanded, all ten other objects at the floor</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:716px;width:350px">
+    <svg width="350" height="716">
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="o2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <!-- row 1: H1 fringe up into band -->
+      <line x1="38" y1="46" x2="38" y2="40" stroke="#111" stroke-width="1" marker-end="url(#o2)"/>
+      <line x1="56" y1="46" x2="56" y2="40" stroke="#111" stroke-width="1" marker-end="url(#o2)"/>
+      <line x1="74" y1="46" x2="74" y2="40" stroke="#111" stroke-width="1" marker-end="url(#o2)"/>
+      <!-- 03 -> H1 -->
+      <line x1="106" y1="68" x2="98" y2="68" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <!-- 02 -> 01 -->
+      <line x1="274" y1="68" x2="266" y2="68" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <!-- row 2: 04 -> 05 (left), 04 -> 06 (right), 06 -> 07 -->
+      <line x1="106" y1="132" x2="98" y2="132" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <line x1="182" y1="132" x2="190" y2="132" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <line x1="266" y1="132" x2="274" y2="132" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <!-- 05 -> A expanded, 07 -> A expanded: both parents stay attached -->
+      <line x1="56" y1="154" x2="56" y2="182" stroke="#111" stroke-width="1.3" marker-end="url(#a2)"/>
+      <line x1="308" y1="154" x2="308" y2="182" stroke="#111" stroke-width="1.3" marker-end="url(#a2)"/>
+      <!-- row 3: 09 -> frontier gutter (two committed edges, destinations withheld) -->
+      <line x1="24" y1="632" x2="16" y2="632" stroke="#111" stroke-width="1.2" marker-end="url(#o2)"/>
+      <line x1="24" y1="646" x2="16" y2="646" stroke="#111" stroke-width="1.2" marker-end="url(#o2)"/>
+      <!-- 10 -> H2 -->
+      <line x1="190" y1="638" x2="182" y2="638" stroke="#111" stroke-width="1.2" marker-end="url(#a2)"/>
+      <!-- H2 fringe up (toward the region: band and gutter are one object) -->
+      <line x1="200" y1="616" x2="200" y2="610" stroke="#111" stroke-width="1" marker-end="url(#o2)"/>
+      <line x1="216" y1="616" x2="216" y2="610" stroke="#111" stroke-width="1" marker-end="url(#o2)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts</div>
+    <div class="el fgut" style="left:0;top:26px;width:14px;height:690px"></div>
+
+    <!-- row 1: the severed pair + chain heads, at the floor -->
+    <div class="el flhole" style="left:22px;top:46px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EM7gTDXqvy…</span>
+      <div style="font-size:6px">unknown · fringe ↑</div>
+    </div>
+    <div class="el fl stale" style="left:106px;top:46px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+      <div class="role">03</div>
+      <span class="pill">EGDKB8m5pt…</span>
+      <div><span class="port">auth ←</span></div>
+    </div>
+    <div class="el fl stale" style="left:190px;top:46px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+      <div class="role">01</div>
+      <span class="pill">EHOTOsgWoV…</span>
+      <div><span class="seal">e none</span></div>
+    </div>
+    <div class="el fl stale" style="left:274px;top:46px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+      <div class="role">02</div>
+      <span class="pill">ENKSmFLrpu…</span>
+      <div><span class="port">qvi ←</span></div>
+    </div>
+
+    <!-- row 2: the diamond's other four, at the floor -->
+    <div class="el fl" style="left:22px;top:110px">
+      <div class="role">05</div>
+      <span class="pill">EGHUpSJN58…</span>
+      <div><span class="port">baseline ↓</span></div>
+    </div>
+    <div class="el fl stale" style="left:106px;top:110px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+      <div class="role">04</div>
+      <span class="pill">EDQ6zCH2Xs…</span>
+      <div><span class="port">←</span> <span class="port">→</span></div>
+    </div>
+    <div class="el fl" style="left:190px;top:110px">
+      <div class="role">06</div>
+      <span class="pill">ELZEWuSVWm…</span>
+      <div><span class="port">waypoint →</span></div>
+    </div>
+    <div class="el fl" style="left:274px;top:110px">
+      <div class="role">07</div>
+      <span class="pill">EPJBkGOiB1…</span>
+      <div><span class="port">baseline ↓</span></div>
+    </div>
+
+    <!-- ITEM 08, expanded in place: full card, full ledger, both parents attached above -->
+    <div class="el card stale" style="left:22px;top:186px;width:314px;height:410px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <div class="role">ITEM 08 · host load label (opaque) · FOCUSED — expanded in place</div>
+      <div>d <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EAS6m0KAnZ…</span> · schema <span class="pill">EAow76Ee1e…</span><span class="x">×3</span></div>
+      <div class="manif">s committed · a disclosed · e none as issued · r none as issued</div>
+      <div style="margin-top:3px"><b>a</b> — standard: "ISO-9001-ish Baseline" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px">in-edges: <b>baseline</b> from ITEM 05 · <b>baseline</b> from ITEM 07 — both attached above, both visible while focused</div>
+      <div class="ledger">
+        <div class="lh">V — 0 of 9 performed by this viewer · outcomes {○ · ⊘ · —} · fail not offered: no host declaration</div>
+        <div class="r"><div class="g">○</div><div>1 SAID self-consistency — computable on demand</div></div>
+        <div class="r"><div class="g">⊘</div><div>2 schema — no schema document in hand · blocked at <span class="pill">EAow76Ee1e…</span><span class="x">×3</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>3 signatures — no signature or KEL material in hand</div></div>
+        <div class="r"><div class="g">⊘</div><div>4 KEL anchoring — blocked at <span class="pill">EAS6m0KAnZ…</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>5 delegation — reach 0 tiers · blocked at issuer KEL <span class="pill">EAS6m0KAnZ…</span></div></div>
+        <div class="r"><div class="g">—</div><div>6 edge constraints — no subjects: no edge section as issued (sealed below)</div></div>
+        <div class="r"><div class="g">○</div><div>7 issuer bona fides — labeled roll-up of 6 · arcviz default AND, host-overridable</div></div>
+        <div class="r"><div class="g">—</div><div>8 revocation — no registry committed (rd absent as issued)</div></div>
+        <div class="r"><div class="g">○</div><div>9 duplicity — watchers consulted: zero (scoped to this material)</div></div>
+      </div>
+      <div class="tline">T — policy PT12H (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:5px"><span class="seal">e — none · sealed at issuance</span></div>
+      <div style="font-size:8.5px;color:#444;margin-top:2px">This artifact, as issued, has no edge section — committed by its own SAID.</div>
+    </div>
+
+    <!-- row 3: the remaining component heads, at the floor -->
+    <div class="el fl" style="left:24px;top:610px">
+      <div class="role">09</div>
+      <span class="pill">EHZGkyDF43…</span>
+      <div><span class="port">←</span> <span class="port">←</span> <span style="font-size:6px">1–2 dest.</span></div>
+    </div>
+    <div class="el fl" style="left:106px;top:616px">
+      <div class="role">10</div>
+      <span class="pill">EC9jOzkasO…</span>
+      <div><span class="port">evidence →</span></div>
+    </div>
+    <div class="el flhole" style="left:190px;top:616px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EDSm-SsfXZ…</span>
+      <div style="font-size:6px">unknown · fringe ↑</div>
+    </div>
+    <div class="el fl" style="left:274px;top:616px">
+      <div class="role">11</div>
+      <span class="pill">EM29GVeQIJ…</span>
+      <div><span class="seal">e none</span> <span style="font-size:6px">a guessable</span></div>
+    </div>
+    <div class="el cap" style="left:106px;top:672px;width:230px;font-size:7.5px">
+      floor note: item 10's withdrawn-corner frame and item 11's transparent a-region do not survive at this size — carried here by the words at right of each pill only
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">What frame 2 demonstrates and what it concedes, measured: both parents of the focused card stay attached (the pile's impossible condition); no object disappears; every stale card still shows its break. What died at the floor is itemized in the gauge below and in <a href="README.md">README.md</a> — most seriously, item 09's grouping bracket and cardinality sentence are gone (two open arrowheads with a six-point footnote are all that remains between the viewer and the "two destinations" misread), and items 10 and 11 keep their states only as words.</p>
+
+<div class="comm">
+  <h3>GAUGE A — THE FLOOR FORM, ANATOMIZED (authoring apparatus, not a render)</h3>
+  <div class="gzrow">
+    <div>
+      <div style="font-size:11px;margin-bottom:4px">floor card, 76×44 actual</div>
+      <div class="fl stale" style="position:static">
+        <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+        <div class="role">04</div><span class="pill">EDQ6zCH2Xs…</span>
+        <div><span class="port">←</span> <span class="port">→</span></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;margin-bottom:4px">floor hole, 76×44 actual</div>
+      <div class="flhole" style="position:static">
+        <div class="hdr">NOT IN HAND</div><span class="pill">EM7gTDXqvy…</span>
+        <div style="font-size:6px">unknown · fringe ↑</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;margin-bottom:4px">floor sealed card, 76×44 actual</div>
+      <div class="fl" style="position:static">
+        <div class="role">01</div><span class="pill">EHOTOsgWoV…</span>
+        <div><span class="seal">e none</span></div>
+      </div>
+    </div>
+    <div style="width:120px">
+      <div style="font-size:11px;margin-bottom:4px">frontier fragment (region, for the pairwise test)</div>
+      <div style="width:76px;height:44px;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111"></div>
+    </div>
+  </div>
+  <div class="gzrow" style="height:200px">
+    <div class="gz" style="transform:scale(3.4)">
+      <div class="fl stale" style="position:static">
+        <div class="stale-top"><span class="ln"></span><span class="tx">stale</span><span class="ln"></span></div>
+        <div class="role">04</div><span class="pill">EDQ6zCH2Xs…</span>
+        <div><span class="port">←</span> <span class="port">→</span></div>
+      </div>
+    </div>
+    <div style="margin-left:200px;font-size:12px;max-width:380px">The same floor card at 3.4× so its anatomy can be discussed: an 8&nbsp;px SAID pill (the smallest size at which the ten-character prefix stays character-legible on a 1× display), a 6.5&nbsp;px item tag, glyph-only ports, and the stale frame-break whose in-gap text has shrunk to the bare state word. Present: identity, e-slot state, budgeted-state <i>kind</i>. Gone: policy value, horizon, role provenance line, manifest, ledger, cause words, operator chips.</div>
+  </div>
+</div>
+
+<div class="comm">
+  <h3>GAUGE B — NAIVE UNIFORM COMPRESSION vs THE FLOOR (authoring apparatus, not a render)</h3>
+  <p>The rest-register chip from frame 1, uniformly scaled. Effective pill font: 9.5&nbsp;px → 6.8 → 5.2 → 4.0. Character legibility on a 1× display dies between the first and second steps — uniform scaling exhausts its budget at roughly 0.85×, which is why the floor is a reflowed form (fields shed, fonts held at 8&nbsp;px), never a scaled one.</p>
+  <div class="gzrow" style="height:110px">
+    <div class="gz" style="transform:scale(1)"><div class="chip stale" style="position:static;width:150px"><div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div><div class="role">ITEM 04</div><span class="pill">EDQ6zCH2Xs…</span><div style="margin-top:3px"><span class="port">shortPath ↙</span> <span class="port">longPath ↘</span></div></div></div>
+    <div class="gz" style="transform:scale(.72);margin-left:20px"><div class="chip stale" style="position:static;width:150px"><div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div><div class="role">ITEM 04</div><span class="pill">EDQ6zCH2Xs…</span><div style="margin-top:3px"><span class="port">shortPath ↙</span> <span class="port">longPath ↘</span></div></div></div>
+    <div class="gz" style="transform:scale(.55);margin-left:0"><div class="chip stale" style="position:static;width:150px"><div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div><div class="role">ITEM 04</div><span class="pill">EDQ6zCH2Xs…</span><div style="margin-top:3px"><span class="port">shortPath ↙</span> <span class="port">longPath ↘</span></div></div></div>
+    <div class="gz" style="transform:scale(.42);margin-left:-20px"><div class="chip stale" style="position:static;width:150px"><div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div><div class="role">ITEM 04</div><span class="pill">EDQ6zCH2Xs…</span><div style="margin-top:3px"><span class="port">shortPath ↙</span> <span class="port">longPath ↘</span></div></div></div>
+  </div>
+  <p>Hole versus frontier at the same four scales — the pairwise test of the recorded contingency (synthesis §2.1):</p>
+  <div class="gzrow" style="height:110px">
+    <div class="gz" style="transform:scale(1)"><div style="display:flex;gap:10px"><div class="flhole" style="position:static;width:110px;height:64px"><div class="hdr">NOT IN HAND</div><span class="pill">EM7gTDXqvy…</span></div><div style="width:70px;height:64px;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111"></div></div></div>
+    <div class="gz" style="transform:scale(.72);margin-left:40px"><div style="display:flex;gap:10px"><div class="flhole" style="position:static;width:110px;height:64px"><div class="hdr">NOT IN HAND</div><span class="pill">EM7gTDXqvy…</span></div><div style="width:70px;height:64px;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111"></div></div></div>
+    <div class="gz" style="transform:scale(.55);margin-left:0"><div style="display:flex;gap:10px"><div class="flhole" style="position:static;width:110px;height:64px"><div class="hdr">NOT IN HAND</div><span class="pill">EM7gTDXqvy…</span></div><div style="width:70px;height:64px;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111"></div></div></div>
+    <div class="gz" style="transform:scale(.42);margin-left:-30px"><div style="display:flex;gap:10px"><div class="flhole" style="position:static;width:110px;height:64px"><div class="hdr">NOT IN HAND</div><span class="pill">EM7gTDXqvy…</span></div><div style="width:70px;height:64px;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111"></div></div></div>
+  </div>
+  <p>Reading: the double border survives every step. The hatch degrades <i>asymmetrically</i>, because texture legibility depends on area: by 0.55 the hole's small interior reads as flat grey while the larger frontier swatch still reads visibly striped — so the "one texture, one concept" link between hole interior and frontier is broken at chip scale even before the texture itself disappears, and a viewer comparing a chip-sized hole against the region has no texture match to find. From that point the hole/frontier distinction is carried entirely by <i>bordered-and-pilled vs unbordered</i>, plus position. The slab fallback is therefore not triggered, but the hatch's job description shrinks to "large-scale texture only", and the pill inside the hole is illegible below 0.72 even though the border is not.</p>
+</div>
+
+</body></html>
