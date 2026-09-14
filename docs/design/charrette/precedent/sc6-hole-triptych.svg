@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1290" viewBox="0 0 1560 1290" font-family="Helvetica, Arial, sans-serif">
+  <title>SC6 — the hole triptych, precedent-led treatment (monochrome-native)</title>
+  <defs>
+    <!-- tratteggio: fine discrete vertical strokes, visibly non-continuous on inspection -->
+    <pattern id="trat" width="5" height="9" patternUnits="userSpaceOnUse">
+      <line x1="2.5" y1="1" x2="2.5" y2="8" stroke="#b0b0b0" stroke-width="1"/>
+    </pattern>
+    <!-- unsurveyed-area hatch (hydrographic) -->
+    <pattern id="unsurv" width="9" height="9" patternUnits="userSpaceOnUse">
+      <path d="M0,9 L9,0" stroke="#8a8a8a" stroke-width="1" fill="none"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111"/>
+    </marker>
+    <!-- unperformed cell -->
+    <symbol id="cellU" viewBox="0 0 12 12">
+      <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#888" stroke-width="1"/>
+      <circle cx="6" cy="6" r="1.1" fill="#888"/>
+    </symbol>
+    <!-- unperformable cell -->
+    <symbol id="cellX" viewBox="0 0 12 12">
+      <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#555" stroke-width="1"/>
+      <line x1="1.5" y1="10.5" x2="10.5" y2="1.5" stroke="#555" stroke-width="1.4"/>
+    </symbol>
+  </defs>
+
+  <rect width="1560" height="1290" fill="#ffffff"/>
+
+  <!-- ======== render-level apparatus band (mandatory; CATZOC: ungraded is not a state) ======== -->
+  <rect x="0" y="0" width="1560" height="34" fill="#161616"/>
+  <text x="16" y="22" fill="#fff" font-size="13" font-weight="bold">RENDER APPARATUS</text>
+  <text x="180" y="22" fill="#fff" font-size="13">P (presenter control): UNKNOWN — no provenance evidence supplied&#160;&#160;·&#160;&#160;T: no freshness policy supplied&#160;&#160;·&#160;&#160;scope: this presentation only — nothing below claims exhaustiveness</text>
+
+  <text x="16" y="62" font-size="19" font-weight="bold" fill="#111">SC6 — the hole triptych: three absences that must not share a face</text>
+  <text x="16" y="82" font-size="12.5" fill="#333" font-style="italic" font-family="Georgia, serif">Treatments adapted from: Leiden lacuna-with-counted-extent (H7), the hydrographic unsurveyed area + Glomar non-answer (H8), the Leiden vacat (H9). Authored monochrome; every distinction is structural.</text>
+
+  <!-- =============================== PANEL A : H7 =============================== -->
+  <g>
+    <rect x="16" y="100" width="756" height="560" fill="none" stroke="#ccc" stroke-width="1"/>
+    <text x="30" y="126" font-size="14.5" font-weight="bold" fill="#111">A. H7 — missing referent: a lacuna with an identity</text>
+    <text x="30" y="143" font-size="11.5" fill="#555">load: corpus/loads/h7_missing_credential.json — vlei_ecr_auth withheld; qvi, le, ecr served</text>
+
+    <!-- served fragment 1: le -> qvi (left) -->
+    <g>
+      <rect x="46" y="180" width="270" height="86" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="58" y="200" font-size="12" font-weight="bold" fill="#111">ACDC</text>
+      <rect x="104" y="188" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="112" y="200" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EHOTOsgW…</text>
+      <text x="58" y="220" font-size="11" fill="#333">QVI-role claim · LEI 984500ARCV1Z0000FIX01</text>
+      <text x="58" y="236" font-size="10.5" fill="#333">e: <tspan font-style="italic" font-family="Georgia, serif">vacat</tspan> — none in this credential as issued</text>
+      <g><use href="#cellU" x="58" y="245" width="10" height="10"/><use href="#cellU" x="70" y="245" width="10" height="10"/><use href="#cellU" x="82" y="245" width="10" height="10"/><use href="#cellU" x="94" y="245" width="10" height="10"/><use href="#cellX" x="106" y="245" width="10" height="10"/><use href="#cellU" x="118" y="245" width="10" height="10"/><use href="#cellU" x="130" y="245" width="10" height="10"/><use href="#cellU" x="142" y="245" width="10" height="10"/><use href="#cellU" x="154" y="245" width="10" height="10"/><text x="170" y="254" font-size="9.5" fill="#666">V: 0/9 performed</text></g>
+    </g>
+    <line x1="181" y1="360" x2="181" y2="266" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="60" y="300" width="242" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+    <text x="68" y="312" font-size="10" fill="#111">e.qvi → n: <tspan font-family="Menlo, monospace">EHOTOsgW…</tspan></text>
+    <text x="68" y="324" font-size="10" fill="#111">op I2I — derived (far node in hand, targeted)</text>
+    <g>
+      <rect x="46" y="360" width="270" height="86" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="58" y="380" font-size="12" font-weight="bold" fill="#111">ACDC</text>
+      <rect x="104" y="368" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="112" y="380" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ENKSmFLr…</text>
+      <text x="58" y="400" font-size="11" fill="#333">LE-role claim · LEI 984500ARCV1Z0000FIX01</text>
+      <g><use href="#cellU" x="58" y="411" width="10" height="10"/><use href="#cellU" x="70" y="411" width="10" height="10"/><use href="#cellU" x="82" y="411" width="10" height="10"/><use href="#cellU" x="94" y="411" width="10" height="10"/><use href="#cellX" x="106" y="411" width="10" height="10"/><use href="#cellU" x="118" y="411" width="10" height="10"/><use href="#cellU" x="130" y="411" width="10" height="10"/><use href="#cellU" x="142" y="411" width="10" height="10"/><use href="#cellU" x="154" y="411" width="10" height="10"/><text x="170" y="420" font-size="9.5" fill="#666">V: 0/9 performed</text></g>
+      <text x="58" y="440" font-size="9.5" fill="#666">served fragment — nothing served references this card</text>
+    </g>
+
+    <!-- fragment separation note -->
+    <line x1="356" y1="200" x2="356" y2="620" stroke="#bbb" stroke-width="0.8" stroke-dasharray="1 4"/>
+    <text x="352" y="640" font-size="10" fill="#777" text-anchor="middle">two fragments — the connection, if any, is inside the lacuna; drawing a bridge would manufacture an edge</text>
+
+    <!-- served fragment 2: ecr -> LACUNA -->
+    <g>
+      <rect x="420" y="480" width="300" height="104" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="432" y="500" font-size="12" font-weight="bold" fill="#111">ACDC <tspan font-size="9.5" font-weight="normal" fill="#555">◂ presented leaf</tspan></text>
+      <rect x="432" y="507" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="440" y="519" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EGDKB8m5…</text>
+      <text x="432" y="540" font-size="11" fill="#333">ECR-role claim · Jordan Q. Fixture · Compliance Analyst</text>
+      <g><use href="#cellU" x="432" y="550" width="10" height="10"/><use href="#cellU" x="444" y="550" width="10" height="10"/><use href="#cellU" x="456" y="550" width="10" height="10"/><use href="#cellU" x="468" y="550" width="10" height="10"/><use href="#cellX" x="480" y="550" width="10" height="10"/><use href="#cellX" x="492" y="550" width="10" height="10"/><use href="#cellU" x="504" y="550" width="10" height="10"/><use href="#cellU" x="516" y="550" width="10" height="10"/><use href="#cellU" x="528" y="550" width="10" height="10"/><text x="544" y="559" font-size="9.5" fill="#666">6 (edge auth): unperformable †</text></g>
+      <text x="432" y="576" font-size="9.5" fill="#666">† blocked by <tspan font-family="Menlo, monospace">EM7gTDXq…</tspan> — named, per Rule 10</text>
+    </g>
+    <line x1="570" y1="480" x2="570" y2="320" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="446" y="392" width="252" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+    <text x="454" y="404" font-size="10" fill="#111">e.auth → n: <tspan font-family="Menlo, monospace">EM7gTDXq…</tspan></text>
+    <text x="454" y="416" font-size="10" fill="#111">op I2I — stated in edge (explicit)</text>
+
+    <!-- THE LACUNA NODE -->
+    <g>
+      <rect x="428" y="180" width="284" height="140" fill="url(#trat)" stroke="none"/>
+      <!-- Leiden brackets as the frame -->
+      <path d="M446,180 L428,180 L428,320 L446,320" fill="none" stroke="#111" stroke-width="3"/>
+      <path d="M694,180 L712,180 L712,320 L694,320" fill="none" stroke="#111" stroke-width="3"/>
+      <rect x="470" y="196" width="200" height="20" rx="9" fill="#ffffff" stroke="#333" stroke-width="1"/>
+      <text x="480" y="210" font-size="11" font-family="Menlo, monospace" fill="#111">SAID EM7gTDXq…-BXgm</text>
+      <rect x="452" y="226" width="236" height="66" fill="#ffffff" stroke="#aaa" stroke-width="0.6"/>
+      <text x="460" y="241" font-size="10.5" fill="#111" font-weight="bold">referent named; artifact not in this presentation</text>
+      <text x="460" y="256" font-size="10" fill="#333">cause: unknown — no attestation supplied (Rule 5)</text>
+      <text x="460" y="270" font-size="10" fill="#333">no fetch occurs or is pending (Rule 17); not an error</text>
+      <text x="460" y="284" font-size="10" fill="#333">checks that depend on it: unperformable, † as marked</text>
+    </g>
+    <!-- unknown out-edges fringe -->
+    <line x1="500" y1="180" x2="500" y2="164" stroke="#555" stroke-width="1.2" stroke-dasharray="2 5"/>
+    <line x1="640" y1="180" x2="640" y2="164" stroke="#555" stroke-width="1.2" stroke-dasharray="2 5"/>
+    <text x="570" y="159" font-size="9.5" fill="#666" text-anchor="middle">its own edges: unknown — the artifact that would declare them is the thing missing</text>
+  </g>
+
+  <!-- =============================== PANEL B : H8 =============================== -->
+  <g>
+    <rect x="788" y="100" width="756" height="560" fill="none" stroke="#ccc" stroke-width="1"/>
+    <text x="802" y="126" font-size="14.5" font-weight="bold" fill="#111">B. H8 — hidden destination: a Glomar answer, drawn as unsurveyed margin</text>
+    <text x="802" y="143" font-size="11.5" fill="#555">fixtures: compact_private_edge (one named slot), blinded_edge_group (whole section compact)</text>
+
+    <!-- the unsurveyed band -->
+    <rect x="1420" y="160" width="100" height="470" fill="url(#unsurv)" stroke="#555" stroke-width="1.4"/>
+    <text x="1470" y="400" font-size="12" font-weight="bold" fill="#111" text-anchor="middle" transform="rotate(-90 1470 400)">UNSURVEYED — destinations committed, not shown; coincidences unknowable</text>
+
+    <!-- card 1: compact_private_edge -->
+    <g>
+      <rect x="812" y="190" width="300" height="120" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="824" y="210" font-size="12" font-weight="bold" fill="#111">ACDC</text>
+      <rect x="870" y="198" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="878" y="210" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EHTnmmo4…</text>
+      <text x="824" y="230" font-size="11" fill="#333">a.label: "the presenting node"</text>
+      <text x="824" y="248" font-size="10.5" fill="#333">e: 1 edge · slot "source" · edge block compact</text>
+      <g><use href="#cellU" x="824" y="258" width="10" height="10"/><use href="#cellU" x="836" y="258" width="10" height="10"/><use href="#cellU" x="848" y="258" width="10" height="10"/><use href="#cellU" x="860" y="258" width="10" height="10"/><use href="#cellX" x="872" y="258" width="10" height="10"/><use href="#cellX" x="884" y="258" width="10" height="10"/><use href="#cellU" x="896" y="258" width="10" height="10"/><use href="#cellU" x="908" y="258" width="10" height="10"/><use href="#cellU" x="920" y="258" width="10" height="10"/><text x="936" y="267" font-size="9.5" fill="#666">6 (source): unperformable ‡</text></g>
+      <text x="824" y="292" font-size="9.5" fill="#666">‡ destination withheld — there is no SAID to name (contrast †, panel A)</text>
+    </g>
+    <!-- blinded edge: solid, then Leiden spaced dashes, into the band; fixed-size gate glyph -->
+    <line x1="1112" y1="250" x2="1240" y2="250" stroke="#111" stroke-width="1.5"/>
+    <line x1="1240" y1="250" x2="1404" y2="250" stroke="#111" stroke-width="1.5" stroke-dasharray="3 9"/>
+    <path d="M1408,240 L1408,260 M1414,240 L1414,260" stroke="#111" stroke-width="2"/>
+    <rect x="1128" y="216" width="252" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+    <text x="1136" y="228" font-size="10" fill="#111">slot "source" · edge d: <tspan font-family="Menlo, monospace">EEn6lzlz…</tspan></text>
+    <text x="1136" y="240" font-size="10" fill="#111">destination: not in this presentation · op: undetermined</text>
+
+    <!-- card 2: blinded_edge_group -->
+    <g>
+      <rect x="812" y="420" width="300" height="130" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="824" y="440" font-size="12" font-weight="bold" fill="#111">ACDC</text>
+      <rect x="870" y="428" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="878" y="440" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ELYivUkz…</text>
+      <text x="824" y="460" font-size="11" fill="#333">a.label: "presenting node with a wholly hidden edge-group"</text>
+      <rect x="824" y="470" width="276" height="26" fill="url(#trat)" stroke="#555" stroke-width="1"/>
+      <text x="832" y="487" font-size="9.5" fill="#111">e — section compact: <tspan font-family="Menlo, monospace">ECoh63QG…</tspan> · edge count unknown</text>
+      <g><use href="#cellU" x="824" y="504" width="10" height="10"/><use href="#cellU" x="836" y="504" width="10" height="10"/><use href="#cellU" x="848" y="504" width="10" height="10"/><use href="#cellU" x="860" y="504" width="10" height="10"/><use href="#cellX" x="872" y="504" width="10" height="10"/><use href="#cellX" x="884" y="504" width="10" height="10"/><use href="#cellU" x="896" y="504" width="10" height="10"/><use href="#cellU" x="908" y="504" width="10" height="10"/><use href="#cellU" x="920" y="504" width="10" height="10"/><text x="936" y="513" font-size="9.5" fill="#666">6: unperformable ‡ (n = ?)</text></g>
+      <text x="824" y="536" font-size="9.5" fill="#666">one stub for the whole section — its size says nothing about how many edges hide</text>
+    </g>
+    <line x1="1112" y1="484" x2="1240" y2="484" stroke="#111" stroke-width="1.5"/>
+    <line x1="1240" y1="484" x2="1404" y2="484" stroke="#111" stroke-width="1.5" stroke-dasharray="3 9"/>
+    <path d="M1408,474 L1408,494 M1414,474 L1414,494" stroke="#111" stroke-width="2"/>
+    <text x="1128" y="466" font-size="10" fill="#111">edge-group hidden · {count: ?} · destinations not shown</text>
+
+    <text x="802" y="592" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">The edge is never dropped and no far node is ever drawn: a committed relationship terminates in a region, not a place.</text>
+    <text x="802" y="608" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">The entry gate is fixed-size regardless of what hides behind it (Lopresti–Spitz: a marker's geometry must not leak).</text>
+  </g>
+
+  <!-- =============================== PANEL C : H9 + control =============================== -->
+  <g>
+    <rect x="16" y="690" width="756" height="430" fill="none" stroke="#ccc" stroke-width="1"/>
+    <text x="30" y="716" font-size="14.5" font-weight="bold" fill="#111">C. H9 — committed no-edge: a vacat, sealed and measured — beside its control</text>
+    <text x="30" y="733" font-size="11.5" fill="#555">fixtures: optional_edge_absent (H9) · optional_edge_present (control; its far node is out of hand → a lacuna, so H9 and H7 sit side by side)</text>
+
+    <!-- H9 card -->
+    <g>
+      <rect x="46" y="760" width="330" height="180" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="58" y="782" font-size="12" font-weight="bold" fill="#111">ACDC</text>
+      <rect x="104" y="770" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="112" y="782" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EFD8--Eg…</text>
+      <text x="58" y="804" font-size="11" fill="#333">a.claim: "a claim issued with no endorsement attached"</text>
+      <!-- the vacat strip: sealed, double-ruled, deliberately blank -->
+      <rect x="58" y="816" width="306" height="52" fill="#ffffff" stroke="#111" stroke-width="1.8"/>
+      <rect x="62" y="820" width="298" height="44" fill="none" stroke="#111" stroke-width="0.6"/>
+      <text x="211" y="838" font-size="12" text-anchor="middle" font-style="italic" font-family="Georgia, serif" fill="#111">vacat — no edge section in this credential, as issued</text>
+      <text x="211" y="855" font-size="9.5" text-anchor="middle" fill="#333">committed by <tspan font-family="Menlo, monospace">d</tspan> · not a claim about the world (Rule 13)</text>
+      <g><use href="#cellU" x="58" y="882" width="10" height="10"/><use href="#cellU" x="70" y="882" width="10" height="10"/><use href="#cellU" x="82" y="882" width="10" height="10"/><use href="#cellU" x="94" y="882" width="10" height="10"/><use href="#cellX" x="106" y="882" width="10" height="10"/><rect x="118.5" y="882.5" width="10" height="10" fill="#eee" stroke="#888" stroke-width="1"/><text x="121" y="891" font-size="8" fill="#333">–</text><use href="#cellU" x="130" y="882" width="10" height="10"/><use href="#cellU" x="142" y="882" width="10" height="10"/><use href="#cellU" x="154" y="882" width="10" height="10"/><text x="170" y="891" font-size="9.5" fill="#666">6: no subject — no edge exists to check</text></g>
+      <text x="58" y="922" font-size="9.5" fill="#666">nothing dangles in graph space: there is no hole to draw, and drawing one would lie</text>
+    </g>
+
+    <!-- control card -->
+    <g>
+      <rect x="420" y="760" width="330" height="128" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <text x="432" y="782" font-size="12" font-weight="bold" fill="#111">ACDC <tspan font-size="9.5" font-weight="normal" fill="#555">(control)</tspan></text>
+      <rect x="522" y="770" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="530" y="782" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ENoIY4Bg…</text>
+      <text x="432" y="804" font-size="11" fill="#333">a.claim: "a claim with an attached endorsement"</text>
+      <text x="432" y="822" font-size="10.5" fill="#333">e: 1 edge · slot "endorsement"</text>
+      <g><use href="#cellU" x="432" y="834" width="10" height="10"/><use href="#cellU" x="444" y="834" width="10" height="10"/><use href="#cellU" x="456" y="834" width="10" height="10"/><use href="#cellU" x="468" y="834" width="10" height="10"/><use href="#cellX" x="480" y="834" width="10" height="10"/><use href="#cellX" x="492" y="834" width="10" height="10"/><use href="#cellU" x="504" y="834" width="10" height="10"/><use href="#cellU" x="516" y="834" width="10" height="10"/><use href="#cellU" x="528" y="834" width="10" height="10"/><text x="544" y="843" font-size="9.5" fill="#666">6 (endorsement): unperformable †</text></g>
+      <text x="432" y="874" font-size="9.5" fill="#666">† blocked by <tspan font-family="Menlo, monospace">EFPKD1ol…</tspan></text>
+    </g>
+    <line x1="585" y1="888" x2="585" y2="1006" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="452" y="928" width="266" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+    <text x="460" y="940" font-size="10" fill="#111">e.endorsement → n: <tspan font-family="Menlo, monospace">EFPKD1ol…</tspan></text>
+    <text x="460" y="952" font-size="10" fill="#111">op: undetermined — o unspecified, far node unresolved (Rule 9b)</text>
+    <!-- small lacuna for the control's far node -->
+    <g>
+      <rect x="470" y="1010" width="230" height="84" fill="url(#trat)" stroke="none"/>
+      <path d="M484,1010 L470,1010 L470,1094 L484,1094" fill="none" stroke="#111" stroke-width="2.6"/>
+      <path d="M686,1010 L700,1010 L700,1094 L686,1094" fill="none" stroke="#111" stroke-width="2.6"/>
+      <rect x="500" y="1022" width="170" height="18" rx="8" fill="#fff" stroke="#333" stroke-width="0.9"/>
+      <text x="508" y="1035" font-size="10.5" font-family="Menlo, monospace" fill="#111">SAID EFPKD1ol…</text>
+      <text x="585" y="1058" font-size="9.5" fill="#111" text-anchor="middle">referent named; artifact not in this presentation</text>
+      <text x="585" y="1072" font-size="9.5" fill="#333" text-anchor="middle">cause: unknown · no fetch occurs (Rule 17)</text>
+    </g>
+    <text x="211" y="1000" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">The pair Leiden was built for: "nothing was ever</text>
+    <text x="211" y="1016" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">here" (vacat, sealed blank, inside the card) can</text>
+    <text x="211" y="1032" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">never share a face with "something is here and is</text>
+    <text x="211" y="1048" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">not in hand" (lacuna, bracketed hatch, in graph space).</text>
+  </g>
+
+  <!-- =============================== PANEL D : composition =============================== -->
+  <g>
+    <rect x="788" y="690" width="756" height="430" fill="none" stroke="#ccc" stroke-width="1"/>
+    <text x="802" y="716" font-size="14.5" font-weight="bold" fill="#111">D. Two blinded edges — convergence itself unknowable</text>
+    <text x="802" y="733" font-size="11.5" fill="#555">fixtures: two_blinded_edges_converge / two_blinded_edges_diverge — structurally identical by design</text>
+
+    <!-- converge render -->
+    <g>
+      <text x="820" y="762" font-size="11.5" font-weight="bold" fill="#111">two_blinded_edges_converge</text>
+      <rect x="820" y="772" width="180" height="96" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <rect x="832" y="782" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="840" y="794" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EHZGkyDF…</text>
+      <text x="832" y="814" font-size="10" fill="#333">e: 2 edges</text>
+      <text x="832" y="828" font-size="10" fill="#333">sourceA, sourceB compact</text>
+      <text x="832" y="852" font-size="9" font-family="Menlo, monospace" fill="#555">A EJye2Ioh… B EMiUl2Hb…</text>
+      <rect x="1074" y="742" width="60" height="150" fill="url(#unsurv)" stroke="#555" stroke-width="1.2"/>
+      <line x1="1000" y1="796" x2="1032" y2="796" stroke="#111" stroke-width="1.4"/>
+      <line x1="1032" y1="796" x2="1058" y2="796" stroke="#111" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <path d="M1062,788 L1062,804 M1068,788 L1068,804" stroke="#111" stroke-width="1.8"/>
+      <line x1="1000" y1="844" x2="1032" y2="844" stroke="#111" stroke-width="1.4"/>
+      <line x1="1032" y1="844" x2="1058" y2="844" stroke="#111" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <path d="M1062,836 L1062,852 M1068,836 L1068,852" stroke="#111" stroke-width="1.8"/>
+      <text x="1010" y="790" font-size="9" fill="#555">sourceA</text>
+      <text x="1010" y="838" font-size="9" fill="#555">sourceB</text>
+      <text x="1104" y="822" font-size="9" fill="#111" text-anchor="middle" transform="rotate(-90 1104 822)">unsurveyed</text>
+    </g>
+
+    <!-- diverge render -->
+    <g>
+      <text x="1180" y="762" font-size="11.5" font-weight="bold" fill="#111">two_blinded_edges_diverge</text>
+      <rect x="1180" y="772" width="180" height="96" fill="#fff" stroke="#222" stroke-width="1.4" rx="2"/>
+      <rect x="1192" y="782" width="118" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+      <text x="1200" y="794" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EPkMaYHR…</text>
+      <text x="1192" y="814" font-size="10" fill="#333">e: 2 edges</text>
+      <text x="1192" y="828" font-size="10" fill="#333">sourceA, sourceB compact</text>
+      <text x="1192" y="852" font-size="9" font-family="Menlo, monospace" fill="#555">A ECUJuvZc… B EPXku6ct…</text>
+      <rect x="1434" y="742" width="60" height="150" fill="url(#unsurv)" stroke="#555" stroke-width="1.2"/>
+      <line x1="1360" y1="796" x2="1392" y2="796" stroke="#111" stroke-width="1.4"/>
+      <line x1="1392" y1="796" x2="1418" y2="796" stroke="#111" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <path d="M1422,788 L1422,804 M1428,788 L1428,804" stroke="#111" stroke-width="1.8"/>
+      <line x1="1360" y1="844" x2="1392" y2="844" stroke="#111" stroke-width="1.4"/>
+      <line x1="1392" y1="844" x2="1418" y2="844" stroke="#111" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <path d="M1422,836 L1422,852 M1428,836 L1428,852" stroke="#111" stroke-width="1.8"/>
+      <text x="1370" y="790" font-size="9" fill="#555">sourceA</text>
+      <text x="1370" y="838" font-size="9" fill="#555">sourceB</text>
+      <text x="1464" y="822" font-size="9" fill="#111" text-anchor="middle" transform="rotate(-90 1464 822)">unsurveyed</text>
+    </g>
+
+    <rect x="820" y="920" width="670" height="76" fill="#f7f7f7" stroke="#999" stroke-width="0.8"/>
+    <text x="834" y="940" font-size="11" font-weight="bold" fill="#111">The two renders above are the same drawing.</text>
+    <text x="834" y="957" font-size="10.5" fill="#333">Each blinded edge ends at its own fixed-size gate into one shared unsurveyed region, inside which nothing is drawn.</text>
+    <text x="834" y="972" font-size="10.5" fill="#333">Whether the two destinations coincide is neither depicted nor deniable: the region carries the question, unanswered.</text>
+    <text x="834" y="987" font-size="10.5" fill="#333">Ground truth (converge vs diverge) is not renderable information — H8's "cannot know" column — so it does not render.</text>
+
+    <text x="802" y="1030" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">Precedent crossed here, stated plainly: no surveyed discipline grades the destination of a relationship. The unsurveyed</text>
+    <text x="802" y="1046" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">area is a region-of-space convention; this panel reuses it as a region-of-topology. The band is not a place, and the</text>
+    <text x="802" y="1062" font-size="10.5" fill="#555" font-style="italic" font-family="Georgia, serif">label must carry that weight — this is adaptation past the edge of the evidence, per precedent-for-absence.md §"what does not transfer".</text>
+  </g>
+
+  <!-- =============================== legend =============================== -->
+  <g>
+    <rect x="16" y="1140" width="1528" height="130" fill="#fbfbfb" stroke="#ccc" stroke-width="1"/>
+    <text x="30" y="1164" font-size="12.5" font-weight="bold" fill="#111">Legend — three absences, three structures (pairwise distinct in shape, position, and prose; no colour used anywhere)</text>
+    <g>
+      <rect x="34" y="1180" width="64" height="40" fill="url(#trat)"/>
+      <path d="M42,1180 L34,1180 L34,1220 L42,1220 M90,1180 L98,1180 L98,1220 L90,1220" fill="none" stroke="#111" stroke-width="2.4"/>
+      <text x="112" y="1196" font-size="11" fill="#111" font-weight="bold">H7 — lacuna:</text>
+      <text x="112" y="1211" font-size="10.5" fill="#333">bracketed, hatched, a place in the graph; blocking SAID named.</text>
+    </g>
+    <g>
+      <rect x="560" y="1180" width="64" height="40" fill="url(#unsurv)" stroke="#555" stroke-width="1"/>
+      <path d="M548,1192 L548,1208 M553,1192 L553,1208" stroke="#111" stroke-width="1.8"/>
+      <line x1="520" y1="1200" x2="546" y2="1200" stroke="#111" stroke-width="1.4" stroke-dasharray="3 7"/>
+      <text x="640" y="1196" font-size="11" fill="#111" font-weight="bold">H8 — unsurveyed margin:</text>
+      <text x="640" y="1211" font-size="10.5" fill="#333">the edge ends in a region, not a place; fixed gate, empty interior.</text>
+    </g>
+    <g>
+      <rect x="1130" y="1180" width="64" height="40" fill="#fff" stroke="#111" stroke-width="1.8"/>
+      <rect x="1134" y="1184" width="56" height="32" fill="none" stroke="#111" stroke-width="0.6"/>
+      <text x="1162" y="1204" font-size="9" font-style="italic" font-family="Georgia, serif" fill="#111" text-anchor="middle">vacat</text>
+      <text x="1208" y="1196" font-size="11" fill="#111" font-weight="bold">H9 — vacat:</text>
+      <text x="1208" y="1211" font-size="10.5" fill="#333">sealed blank inside the card; the enclosing SAID commits to it.</text>
+    </g>
+    <text x="30" y="1248" font-size="10.5" fill="#555">V-cell key: <tspan font-family="Menlo, monospace">▫·</tspan> unperformed (drawn, never blank) · <tspan font-family="Menlo, monospace">▫/</tspan> unperformable (dagger names the blocker) · no fail glyph exists in this render — no host declared a fail-capable check (Rule 2c). Checks 1–9: SAID, schema, signature, KEL-anchor, delegation, edge-constraint (per edge), issuer bona fides, revocation, duplicity.</text>
+  </g>
+</svg>

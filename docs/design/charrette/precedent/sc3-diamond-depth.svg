@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1210" viewBox="0 0 1000 1210" font-family="Helvetica, Arial, sans-serif">
+  <title>SC3 — diamond with depth, precedent-led treatment (monochrome-native)</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111"/>
+    </marker>
+    <symbol id="cellU" viewBox="0 0 12 12">
+      <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#888" stroke-width="1"/>
+      <circle cx="6" cy="6" r="1.1" fill="#888"/>
+    </symbol>
+  </defs>
+
+  <rect width="1000" height="1210" fill="#ffffff"/>
+
+  <!-- render-level apparatus band -->
+  <rect x="0" y="0" width="1000" height="34" fill="#161616"/>
+  <text x="16" y="22" fill="#fff" font-size="12.5" font-weight="bold">RENDER APPARATUS</text>
+  <text x="172" y="22" fill="#fff" font-size="12.5">P (presenter control): UNKNOWN · T: no freshness policy supplied · scope: this presentation only</text>
+
+  <text x="16" y="62" font-size="19" font-weight="bold" fill="#111">SC3 — diamond with depth: one ancestor, two path lengths, one node</text>
+  <text x="16" y="82" font-size="12.5" fill="#333" font-style="italic" font-family="Georgia, serif">fixtures: diamond_depth_origin / _b / _c / _f / _a · A is one committed artifact and is drawn once (anastylosis, not reconstruction)</text>
+
+  <!-- ============ ORIGIN (tier 0) ============ -->
+  <g>
+    <rect x="350" y="110" width="300" height="112" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="364" y="132" font-size="12.5" font-weight="bold" fill="#111">ACDC <tspan font-size="9.5" font-weight="normal" fill="#555">◂ presented</tspan></text>
+    <rect x="494" y="119" width="130" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="502" y="132" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EDQ6zCH2…</text>
+    <text x="364" y="154" font-size="10.5" fill="#333">a.claim: "reachable via two paths of unequal length"</text>
+    <text x="364" y="170" font-size="10.5" fill="#333">e: 2 edges (shortPath, longPath)</text>
+    <g>
+      <text x="364" y="200" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="378" y="190" width="12" height="12"/><use href="#cellU" x="392" y="190" width="12" height="12"/><use href="#cellU" x="406" y="190" width="12" height="12"/><use href="#cellU" x="420" y="190" width="12" height="12"/><use href="#cellU" x="434" y="190" width="12" height="12"/><use href="#cellU" x="448" y="190" width="12" height="12"/><use href="#cellU" x="462" y="190" width="12" height="12"/><use href="#cellU" x="476" y="190" width="12" height="12"/><use href="#cellU" x="490" y="190" width="12" height="12"/>
+      <text x="510" y="200" font-size="10" fill="#666">0/9 performed</text>
+    </g>
+  </g>
+
+  <!-- origin -> B -->
+  <line x1="380" y1="222" x2="250" y2="320" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="140" y="246" width="252" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="148" y="258" font-size="9.5" fill="#111">e.shortPath → n: <tspan font-family="Menlo, monospace">EGHUpSJN…</tspan> · edge d <tspan font-family="Menlo, monospace">EGh2LHkD…</tspan></text>
+  <text x="148" y="270" font-size="9.5" fill="#111">op NI2I — derived (far node in hand, untargeted)</text>
+
+  <!-- origin -> C -->
+  <line x1="620" y1="222" x2="750" y2="320" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="612" y="246" width="252" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="620" y="258" font-size="9.5" fill="#111">e.longPath → n: <tspan font-family="Menlo, monospace">ELZEWuSV…</tspan> · edge d <tspan font-family="Menlo, monospace">EBTPMPXf…</tspan></text>
+  <text x="620" y="270" font-size="9.5" fill="#111">op NI2I — derived (far node in hand, untargeted)</text>
+
+  <!-- ============ B (tier 1) ============ -->
+  <g>
+    <rect x="100" y="320" width="300" height="112" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="114" y="342" font-size="12.5" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="170" y="329" width="130" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="178" y="342" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EGHUpSJN…</text>
+    <text x="114" y="364" font-size="10.5" fill="#333">a.scope: "short path, one hop from the ancestor"</text>
+    <text x="114" y="380" font-size="10.5" fill="#333">e: 1 edge (baseline)</text>
+    <g>
+      <text x="114" y="410" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="128" y="400" width="12" height="12"/><use href="#cellU" x="142" y="400" width="12" height="12"/><use href="#cellU" x="156" y="400" width="12" height="12"/><use href="#cellU" x="170" y="400" width="12" height="12"/><use href="#cellU" x="184" y="400" width="12" height="12"/><use href="#cellU" x="198" y="400" width="12" height="12"/><use href="#cellU" x="212" y="400" width="12" height="12"/><use href="#cellU" x="226" y="400" width="12" height="12"/><use href="#cellU" x="240" y="400" width="12" height="12"/>
+      <text x="260" y="410" font-size="10" fill="#666">0/9 performed</text>
+    </g>
+  </g>
+
+  <!-- ============ C (tier 1) ============ -->
+  <g>
+    <rect x="600" y="320" width="300" height="112" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="614" y="342" font-size="12.5" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="670" y="329" width="130" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="678" y="342" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ELZEWuSV…</text>
+    <text x="614" y="364" font-size="10.5" fill="#333">a.scope: "long path, two hops from the ancestor"</text>
+    <text x="614" y="380" font-size="10.5" fill="#333">e: 1 edge (waypoint)</text>
+    <g>
+      <text x="614" y="410" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="628" y="400" width="12" height="12"/><use href="#cellU" x="642" y="400" width="12" height="12"/><use href="#cellU" x="656" y="400" width="12" height="12"/><use href="#cellU" x="670" y="400" width="12" height="12"/><use href="#cellU" x="684" y="400" width="12" height="12"/><use href="#cellU" x="698" y="400" width="12" height="12"/><use href="#cellU" x="712" y="400" width="12" height="12"/><use href="#cellU" x="726" y="400" width="12" height="12"/><use href="#cellU" x="740" y="400" width="12" height="12"/>
+      <text x="760" y="410" font-size="10" fill="#666">0/9 performed</text>
+    </g>
+  </g>
+
+  <!-- C -> F -->
+  <line x1="750" y1="432" x2="750" y2="550" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="770" y="474" width="220" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="778" y="486" font-size="9.5" fill="#111">e.waypoint → n: <tspan font-family="Menlo, monospace">EPJBkGOi…</tspan></text>
+  <text x="778" y="498" font-size="9.5" fill="#111">op NI2I — derived · edge d <tspan font-family="Menlo, monospace">EDd1DayJ…</tspan></text>
+
+  <!-- ============ F (tier 2) ============ -->
+  <g>
+    <rect x="600" y="550" width="300" height="112" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="614" y="572" font-size="12.5" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="670" y="559" width="130" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="678" y="572" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EPJBkGOi…</text>
+    <text x="614" y="594" font-size="10.5" fill="#333">a.scope: "long path, one hop from the ancestor"</text>
+    <text x="614" y="610" font-size="10.5" fill="#333">e: 1 edge (baseline)</text>
+    <g>
+      <text x="614" y="640" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="628" y="630" width="12" height="12"/><use href="#cellU" x="642" y="630" width="12" height="12"/><use href="#cellU" x="656" y="630" width="12" height="12"/><use href="#cellU" x="670" y="630" width="12" height="12"/><use href="#cellU" x="684" y="630" width="12" height="12"/><use href="#cellU" x="698" y="630" width="12" height="12"/><use href="#cellU" x="712" y="630" width="12" height="12"/><use href="#cellU" x="726" y="630" width="12" height="12"/><use href="#cellU" x="740" y="630" width="12" height="12"/>
+      <text x="760" y="640" font-size="10" fill="#666">0/9 performed</text>
+    </g>
+  </g>
+
+  <!-- B -> A : spans two tiers; the edge is drawn at whatever length the truth requires -->
+  <line x1="250" y1="432" x2="440" y2="770" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="60" y="580" width="252" height="42" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="68" y="592" font-size="9.5" fill="#111">e.baseline → n: <tspan font-family="Menlo, monospace">ELBmpHyX…</tspan></text>
+  <text x="68" y="604" font-size="9.5" fill="#111">op NI2I — derived (far node in hand, untargeted)</text>
+  <text x="68" y="616" font-size="9.5" fill="#111">edge d <tspan font-family="Menlo, monospace">EL94FmuI…</tspan></text>
+
+  <!-- F -> A -->
+  <line x1="740" y1="662" x2="560" y2="770" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="640" y="700" width="252" height="42" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="648" y="712" font-size="9.5" fill="#111">e.baseline → n: <tspan font-family="Menlo, monospace">ELBmpHyX…</tspan></text>
+  <text x="648" y="724" font-size="9.5" fill="#111">op NI2I — derived (far node in hand, untargeted)</text>
+  <text x="648" y="736" font-size="9.5" fill="#111">edge d <tspan font-family="Menlo, monospace">EL94FmuI…</tspan></text>
+
+  <!-- ============ A (tier 3, drawn once) ============ -->
+  <g>
+    <rect x="350" y="770" width="300" height="140" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="364" y="792" font-size="12.5" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="420" y="779" width="130" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="428" y="792" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ELBmpHyX…</text>
+    <text x="364" y="814" font-size="10.5" fill="#333">a.standard: "ISO-9001-ish Baseline"</text>
+    <rect x="364" y="824" width="272" height="24" fill="#fff" stroke="#111" stroke-width="1.4"/>
+    <rect x="367" y="827" width="266" height="18" fill="none" stroke="#111" stroke-width="0.5"/>
+    <text x="500" y="840" font-size="10" text-anchor="middle" fill="#111"><tspan font-style="italic" font-family="Georgia, serif">vacat</tspan> — no edge section, as issued</text>
+    <g>
+      <text x="364" y="878" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="378" y="868" width="12" height="12"/><use href="#cellU" x="392" y="868" width="12" height="12"/><use href="#cellU" x="406" y="868" width="12" height="12"/><use href="#cellU" x="420" y="868" width="12" height="12"/><use href="#cellU" x="434" y="868" width="12" height="12"/><rect x="448.5" y="868.5" width="12" height="12" fill="#eee" stroke="#888" stroke-width="1"/><text x="452" y="878" font-size="9" fill="#333">–</text><use href="#cellU" x="462" y="868" width="12" height="12"/><use href="#cellU" x="476" y="868" width="12" height="12"/><use href="#cellU" x="490" y="868" width="12" height="12"/>
+      <text x="510" y="878" font-size="10" fill="#666">0/9 performed · 6: no edge</text>
+    </g>
+    <text x="364" y="900" font-size="10" fill="#666">T: no freshness policy supplied</text>
+  </g>
+
+  <!-- footer -->
+  <g>
+    <rect x="16" y="940" width="968" height="250" fill="#fbfbfb" stroke="#ccc" stroke-width="1"/>
+    <text x="30" y="966" font-size="13" font-weight="bold" fill="#111">One artifact, one node — the layout bends; the topology does not.</text>
+    <text x="30" y="988" font-size="10.5" fill="#333">A (<tspan font-family="Menlo, monospace">d ELBmpHyX…</tspan>) is reached at depth 2 via B and depth 3 via C→F. Both escapes from this layout problem are epistemic lies:</text>
+    <text x="30" y="1003" font-size="10.5" fill="#333">duplicating A would draw one committed artifact as two nodes, misstating what the SAIDs commit to; dropping either edge is H8's naive lie applied</text>
+    <text x="30" y="1018" font-size="10.5" fill="#333">to a disclosed edge. So the B→A edge simply runs longer. Edge length is a layout artifact and carries no meaning; the apparatus never grades it.</text>
+    <text x="30" y="1043" font-size="10.5" fill="#333">The three occurrences of A's SAID — as A's own <tspan font-family="Menlo, monospace">d</tspan> and as the <tspan font-family="Menlo, monospace">n</tspan> value in B's and F's baseline edges — wear one identical pill face (Rule 14, P13.1).</text>
+    <text x="30" y="1058" font-size="10.5" fill="#333">B's and F's edge blocks are, in fact, byte-identical (same edge <tspan font-family="Menlo, monospace">d EL94FmuI…</tspan>): the chips render identically because the values are identical.</text>
+    <text x="30" y="1073" font-size="10.5" fill="#333">No line, box, or glow connects the matching pills: identical rendering surfaces the correlation; anything more would imply a comparison ceremony</text>
+    <text x="30" y="1088" font-size="10.5" fill="#333">that never ran (P8, AF10). The route to a real comparison walk stays reachable from any pill; it is never implied to have happened.</text>
+    <text x="30" y="1113" font-size="10" fill="#555">precedent spent here: Venice Charter Art. 15 — anastylosis only: reassemble original parts, never fabricate a second original. CATZOC — every card</text>
+    <text x="30" y="1127" font-size="10" fill="#555">graded even when all-quiet: the V wall and T line appear on every card, so "graded, nothing performed" can never be confused with "ungraded".</text>
+    <text x="30" y="1151" font-size="10" fill="#777" font-style="italic" font-family="Georgia, serif">mock annotation, not render chrome: depth-2-vs-depth-3 is stated in this caption for the judge's benefit; the render itself carries the fact purely</text>
+    <text x="30" y="1165" font-size="10" fill="#777" font-style="italic" font-family="Georgia, serif">structurally, as edge routing — a derived quantity gets no badge (pair-2 logic: derivable facts are not decorated as if they were disclosures).</text>
+  </g>
+</svg>

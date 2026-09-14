@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1640" viewBox="0 0 900 1640" font-family="Helvetica, Arial, sans-serif">
+  <title>SC2 — the production chain, precedent-led treatment (monochrome-native)</title>
+  <defs>
+    <pattern id="trat" width="5" height="9" patternUnits="userSpaceOnUse">
+      <line x1="2.5" y1="1" x2="2.5" y2="8" stroke="#b0b0b0" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111"/>
+    </marker>
+    <symbol id="cellU" viewBox="0 0 12 12">
+      <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#888" stroke-width="1"/>
+      <circle cx="6" cy="6" r="1.1" fill="#888"/>
+    </symbol>
+    <symbol id="cellX" viewBox="0 0 12 12">
+      <rect x="0.5" y="0.5" width="11" height="11" fill="none" stroke="#555" stroke-width="1"/>
+      <line x1="1.5" y1="10.5" x2="10.5" y2="1.5" stroke="#555" stroke-width="1.4"/>
+    </symbol>
+  </defs>
+
+  <rect width="900" height="1640" fill="#ffffff"/>
+
+  <!-- render-level apparatus band -->
+  <rect x="0" y="0" width="900" height="34" fill="#161616"/>
+  <text x="16" y="22" fill="#fff" font-size="12.5" font-weight="bold">RENDER APPARATUS</text>
+  <text x="168" y="22" fill="#fff" font-size="12.5">scope: this presentation only — nothing below claims exhaustiveness (Rule 13)</text>
+
+  <text x="16" y="62" font-size="19" font-weight="bold" fill="#111">SC2 — the production chain: deep, fully disclosed, and still incomplete</text>
+  <text x="16" y="82" font-size="12.5" fill="#333" font-style="italic" font-family="Georgia, serif">fixtures: vlei_qvi → vlei_le → vlei_ecr_auth → vlei_ecr · load: corpus/loads/h7_missing_delegator_kel.json</text>
+
+  <!-- P banner: structural, before and larger than any V content (Rule 18; radiology's mandatory limitations section) -->
+  <g>
+    <rect x="16" y="98" width="868" height="66" fill="#ffffff" stroke="#111" stroke-width="2.6"/>
+    <rect x="21" y="103" width="858" height="56" fill="none" stroke="#111" stroke-width="0.7"/>
+    <text x="34" y="128" font-size="18" font-weight="bold" fill="#111" letter-spacing="1">PRESENTER CONTROL: UNKNOWN</text>
+    <text x="34" y="149" font-size="10.5" fill="#333">No evidence supplied that the presenter controls the holder AID. The checks below concern the artifact, not the presenter (axis P — placed before the vector, by design).</text>
+  </g>
+
+  <!-- delegator KEL lacuna -->
+  <g>
+    <rect x="180" y="196" width="540" height="112" fill="url(#trat)" stroke="none"/>
+    <path d="M198,196 L180,196 L180,308 L198,308" fill="none" stroke="#111" stroke-width="3"/>
+    <path d="M702,196 L720,196 L720,308 L702,308" fill="none" stroke="#111" stroke-width="3"/>
+    <rect x="210" y="208" width="196" height="20" rx="9" fill="#fff" stroke="#333" stroke-width="1"/>
+    <text x="219" y="222" font-size="11" font-family="Menlo, monospace" fill="#111">AID EDYl3N_T…bK8-</text>
+    <text x="416" y="222" font-size="10.5" fill="#111" font-weight="bold">root delegator — KEL referenced, not in this presentation</text>
+    <rect x="210" y="238" width="480" height="58" fill="#fff" stroke="#aaa" stroke-width="0.6"/>
+    <text x="219" y="253" font-size="10" fill="#333">The chain's authority claims run through this identifier's key-event log, which is not in hand.</text>
+    <text x="219" y="267" font-size="10" fill="#333">Delegation (check 5) is unperformable past the KELs held — marked † on every card below.</text>
+    <text x="219" y="281" font-size="10" fill="#333">cause: unknown (Rule 5) · no fetch occurs or is pending (Rule 17) · incomplete evidence is a normal state</text>
+  </g>
+
+  <!-- host-context connector (not an ACDC edge) -->
+  <line x1="450" y1="368" x2="450" y2="308" stroke="#555" stroke-width="1.3" stroke-dasharray="1.5 4.5"/>
+  <rect x="200" y="322" width="500" height="30" fill="#fbfbfb" stroke="#999" stroke-width="0.8"/>
+  <text x="208" y="334" font-size="9.5" fill="#111">delegation context — KEL-level fact, host-supplied: issuer <tspan font-family="Menlo, monospace">ELTGvn2Z…</tspan>'s inception is delegated (dip)</text>
+  <text x="208" y="346" font-size="9.5" fill="#555">reported-by-context stroke (dotted, no arrowhead): this is not a committed ACDC edge and must not look like one (Rule 14)</text>
+
+  <!-- ===================== QVI card ===================== -->
+  <g>
+    <rect x="170" y="368" width="560" height="196" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="184" y="390" font-size="13" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="234" y="377" width="126" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="242" y="390" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EHOTOsgW…</text>
+    <text x="374" y="390" font-size="10" fill="#777">QVI-role fixture · registry rd <tspan font-family="Menlo, monospace">EEZAG3AU…</tspan></text>
+    <text x="184" y="414" font-size="11" fill="#333">issuer i</text>
+    <rect x="238" y="403" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="246" y="415" font-size="10.5" font-family="Menlo, monospace" fill="#111">ELTGvn2Z…r40</text>
+    <text x="380" y="414" font-size="11" fill="#333">issuee a.i</text>
+    <rect x="444" y="403" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="452" y="415" font-size="10.5" font-family="Menlo, monospace" fill="#111">EOvbsyiK…48S</text>
+    <text x="184" y="438" font-size="11" fill="#333">LEI 984500ARCV1Z0000FIX01 · dt 2026-01-16T12:00Z</text>
+    <rect x="184" y="450" width="532" height="26" fill="#fff" stroke="#111" stroke-width="1.4"/>
+    <rect x="187" y="453" width="526" height="20" fill="none" stroke="#111" stroke-width="0.5"/>
+    <text x="450" y="467" font-size="10.5" text-anchor="middle" fill="#111"><tspan font-style="italic" font-family="Georgia, serif">vacat</tspan> — no edge section in this credential, as issued (committed by d; a fact about this artifact, not the world)</text>
+    <g>
+      <text x="184" y="498" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="198" y="488" width="12" height="12"/><use href="#cellU" x="212" y="488" width="12" height="12"/><use href="#cellU" x="226" y="488" width="12" height="12"/><use href="#cellU" x="240" y="488" width="12" height="12"/><use href="#cellX" x="254" y="488" width="12" height="12"/><rect x="268.5" y="488.5" width="12" height="12" fill="#eee" stroke="#888" stroke-width="1"/><text x="272" y="498" font-size="9" fill="#333">–</text><use href="#cellU" x="282" y="488" width="12" height="12"/><use href="#cellU" x="296" y="488" width="12" height="12"/><use href="#cellU" x="310" y="488" width="12" height="12"/>
+      <text x="332" y="498" font-size="10" fill="#666">0/9 performed · 5 unperformable † root delegator KEL <tspan font-family="Menlo, monospace">EDYl3N_T…</tspan> · 6: no edge exists</text>
+    </g>
+    <text x="184" y="522" font-size="10" fill="#666">T: no freshness policy supplied — its own state, not a silent default (Rule 4)</text>
+    <text x="184" y="544" font-size="10" fill="#666">revocation: no events in the material in hand — says nothing beyond this presentation</text>
+  </g>
+
+  <!-- edge chip + arrow: le -> qvi -->
+  <line x1="450" y1="628" x2="450" y2="564" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="240" y="576" width="420" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="248" y="588" font-size="10" fill="#111">e.qvi → n: <tspan font-family="Menlo, monospace">EHOTOsgW…</tspan> · edge d <tspan font-family="Menlo, monospace">EPdwso6V…</tspan></text>
+  <text x="248" y="600" font-size="10" fill="#111">op I2I — derived (far node in hand, targeted)</text>
+
+  <!-- ===================== LE card ===================== -->
+  <g>
+    <rect x="170" y="628" width="560" height="170" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="184" y="650" font-size="13" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="234" y="637" width="126" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="242" y="650" font-size="10.5" font-family="Menlo, monospace" fill="#111">d ENKSmFLr…</text>
+    <text x="374" y="650" font-size="10" fill="#777">LE-role fixture · registry rd <tspan font-family="Menlo, monospace">EDCOPdr8…</tspan></text>
+    <text x="184" y="674" font-size="11" fill="#333">issuer i</text>
+    <rect x="238" y="663" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="246" y="675" font-size="10.5" font-family="Menlo, monospace" fill="#111">EOvbsyiK…48S</text>
+    <text x="380" y="674" font-size="11" fill="#333">issuee a.i</text>
+    <rect x="444" y="663" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="452" y="675" font-size="10.5" font-family="Menlo, monospace" fill="#111">EErZ90n2…_RZ</text>
+    <text x="184" y="698" font-size="11" fill="#333">LEI 984500ARCV1Z0000FIX01 · dt 2026-01-18T12:00Z · e: 1 edge (qvi)</text>
+    <g>
+      <text x="184" y="730" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="198" y="720" width="12" height="12"/><use href="#cellU" x="212" y="720" width="12" height="12"/><use href="#cellU" x="226" y="720" width="12" height="12"/><use href="#cellU" x="240" y="720" width="12" height="12"/><use href="#cellX" x="254" y="720" width="12" height="12"/><use href="#cellU" x="268" y="720" width="12" height="12"/><use href="#cellU" x="282" y="720" width="12" height="12"/><use href="#cellU" x="296" y="720" width="12" height="12"/><use href="#cellU" x="310" y="720" width="12" height="12"/>
+      <text x="332" y="730" font-size="10" fill="#666">0/9 performed · 5 unperformable † (no KEL material in hand)</text>
+    </g>
+    <text x="184" y="754" font-size="10" fill="#666">T: no freshness policy supplied</text>
+    <text x="184" y="776" font-size="10" fill="#666">revocation: no events in the material in hand</text>
+  </g>
+
+  <!-- edge chip + arrow: ecr_auth -> le -->
+  <line x1="450" y1="862" x2="450" y2="798" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="240" y="810" width="420" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="248" y="822" font-size="10" fill="#111">e.le → n: <tspan font-family="Menlo, monospace">ENKSmFLr…</tspan> · edge d <tspan font-family="Menlo, monospace">EBWnnNn1…</tspan></text>
+  <text x="248" y="834" font-size="10" fill="#111">op I2I — derived (far node in hand, targeted)</text>
+
+  <!-- ===================== ECR-AUTH card ===================== -->
+  <g>
+    <rect x="170" y="862" width="560" height="186" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="184" y="884" font-size="13" font-weight="bold" fill="#111">ACDC</text>
+    <rect x="234" y="871" width="126" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="242" y="884" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EM7gTDXq…</text>
+    <text x="374" y="884" font-size="10" fill="#777">ECR-AUTH-role fixture · registry rd <tspan font-family="Menlo, monospace">EIz-db8y…</tspan></text>
+    <text x="184" y="908" font-size="11" fill="#333">issuer i</text>
+    <rect x="238" y="897" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="246" y="909" font-size="10.5" font-family="Menlo, monospace" fill="#111">EErZ90n2…_RZ</text>
+    <text x="380" y="908" font-size="11" fill="#333">issuee a.i</text>
+    <rect x="444" y="897" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="452" y="909" font-size="10.5" font-family="Menlo, monospace" fill="#111">EOvbsyiK…48S</text>
+    <text x="184" y="932" font-size="11" fill="#333">Jordan Q. Fixture · Compliance Analyst · a.AID <tspan font-family="Menlo, monospace">ELiFwqI6…TVD</tspan></text>
+    <text x="184" y="950" font-size="11" fill="#333">LEI 984500ARCV1Z0000FIX01 · dt 2026-01-17T12:00Z · e: 1 edge (le)</text>
+    <g>
+      <text x="184" y="982" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="198" y="972" width="12" height="12"/><use href="#cellU" x="212" y="972" width="12" height="12"/><use href="#cellU" x="226" y="972" width="12" height="12"/><use href="#cellU" x="240" y="972" width="12" height="12"/><use href="#cellX" x="254" y="972" width="12" height="12"/><use href="#cellU" x="268" y="972" width="12" height="12"/><use href="#cellU" x="282" y="972" width="12" height="12"/><use href="#cellU" x="296" y="972" width="12" height="12"/><use href="#cellU" x="310" y="972" width="12" height="12"/>
+      <text x="332" y="982" font-size="10" fill="#666">0/9 performed · 5 unperformable † (no KEL material in hand)</text>
+    </g>
+    <text x="184" y="1006" font-size="10" fill="#666">T: no freshness policy supplied</text>
+    <text x="184" y="1028" font-size="10" fill="#666">revocation: no events in the material in hand</text>
+  </g>
+
+  <!-- edge chip + arrow: ecr -> ecr_auth -->
+  <line x1="450" y1="1112" x2="450" y2="1048" stroke="#111" stroke-width="1.6" marker-end="url(#arr)"/>
+  <rect x="240" y="1060" width="420" height="30" fill="#fafafa" stroke="#999" stroke-width="0.8"/>
+  <text x="248" y="1072" font-size="10" fill="#111">e.auth → n: <tspan font-family="Menlo, monospace">EM7gTDXq…</tspan> · edge d <tspan font-family="Menlo, monospace">EOUF7Zbj…</tspan></text>
+  <text x="248" y="1084" font-size="10" fill="#111">op I2I — derived (far node in hand, targeted)</text>
+
+  <!-- ===================== ECR card (presented leaf) ===================== -->
+  <g>
+    <rect x="170" y="1112" width="560" height="200" fill="#fff" stroke="#222" stroke-width="1.5" rx="2"/>
+    <text x="184" y="1134" font-size="13" font-weight="bold" fill="#111">ACDC <tspan font-size="10" font-weight="normal" fill="#555">◂ presented leaf</tspan></text>
+    <rect x="330" y="1121" width="126" height="18" rx="9" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="338" y="1134" font-size="10.5" font-family="Menlo, monospace" fill="#111">d EGDKB8m5…</text>
+    <text x="470" y="1134" font-size="10" fill="#777">ECR-role fixture · rd <tspan font-family="Menlo, monospace">EFiZI0ix…</tspan></text>
+    <text x="184" y="1158" font-size="11" fill="#333">issuer i</text>
+    <rect x="238" y="1147" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="246" y="1159" font-size="10.5" font-family="Menlo, monospace" fill="#111">EOvbsyiK…48S</text>
+    <text x="380" y="1158" font-size="11" fill="#333">issuee a.i</text>
+    <rect x="444" y="1147" width="126" height="17" rx="8" fill="#f3f3f3" stroke="#666" stroke-width="0.8"/>
+    <text x="452" y="1159" font-size="10.5" font-family="Menlo, monospace" fill="#111">ELiFwqI6…TVD</text>
+    <text x="184" y="1182" font-size="11" fill="#333">Jordan Q. Fixture · Compliance Analyst</text>
+    <text x="184" y="1200" font-size="11" fill="#333">LEI 984500ARCV1Z0000FIX01 · dt 2026-01-15T12:00Z · e: 1 edge (auth)</text>
+    <g>
+      <text x="184" y="1232" font-size="10" fill="#333">V</text>
+      <use href="#cellU" x="198" y="1222" width="12" height="12"/><use href="#cellU" x="212" y="1222" width="12" height="12"/><use href="#cellU" x="226" y="1222" width="12" height="12"/><use href="#cellU" x="240" y="1222" width="12" height="12"/><use href="#cellX" x="254" y="1222" width="12" height="12"/><use href="#cellU" x="268" y="1222" width="12" height="12"/><use href="#cellU" x="282" y="1222" width="12" height="12"/><use href="#cellU" x="296" y="1222" width="12" height="12"/><use href="#cellU" x="310" y="1222" width="12" height="12"/>
+      <text x="332" y="1232" font-size="10" fill="#666">0/9 performed · 5 unperformable † (no KEL material in hand)</text>
+    </g>
+    <text x="184" y="1256" font-size="10" fill="#666">T: no freshness policy supplied</text>
+    <text x="184" y="1278" font-size="10" fill="#666">revocation: no events in the material in hand</text>
+  </g>
+
+
+  <!-- footer -->
+  <g>
+    <rect x="16" y="1332" width="868" height="288" fill="#fbfbfb" stroke="#ccc" stroke-width="1"/>
+    <text x="30" y="1358" font-size="13" font-weight="bold" fill="#111">This render is normal, and it says so by saying nothing special.</text>
+    <text x="30" y="1378" font-size="11" fill="#333">Four tiers of maximal available disclosure — and still: 0 of 36 verification cells performed, the root delegator's KEL absent,</text>
+    <text x="30" y="1393" font-size="11" fill="#333">the presenter unknown. No warning chrome, no degraded framing: this is what every store-fed production credential looks like (R1, P3).</text>
+    <text x="30" y="1418" font-size="10.5" fill="#333">The V wall is drawn, never blank: a quiet dotted cell is "unperformed" — the honest steady state, not a countdown to green. A slashed cell is</text>
+    <text x="30" y="1432" font-size="10.5" fill="#333">"unperformable with material in hand", its blocker named at the †. No fail glyph exists anywhere in this render: no host declared a fail-capable check (Rule 2c).</text>
+    <text x="30" y="1456" font-size="10.5" fill="#333">Identical identifiers render as identical pills wherever they recur — <tspan font-family="Menlo, monospace">EOvbsyiK…48S</tspan> is qvi's issuee, le's issuer and ecr's issuer, one party,</text>
+    <text x="30" y="1470" font-size="10.5" fill="#333">one pill face (Rule 14, P13.1). The pill rules out; it never rules in — no pill here implies a comparison was performed (P8).</text>
+    <text x="30" y="1494" font-size="10" fill="#555">checks 1–9: SAID · schema · signature · KEL-anchor · delegation · edge-constraint (per edge) · issuer bona fides · revocation · duplicity</text>
+    <text x="30" y="1514" font-size="10" fill="#555">precedent spent here: CATZOC (every card graded, "unassessed" is a grade, no blank default) · SRTM NUM (value channel and provenance channel never merge)</text>
+    <text x="30" y="1528" font-size="10" fill="#555">· Leiden lacuna (the root hole drawn, bracketed, named — never trimmed) · vacat (qvi's committed no-edge) · ACR limitations section (the mandatory P banner)</text>
+    <text x="30" y="1552" font-size="10" fill="#555">scope: everything above is a statement about this presentation, never about the world (Rule 13).</text>
+    <text x="30" y="1580" font-size="10" fill="#777" font-style="italic" font-family="Georgia, serif">mock annotation, not render chrome: e.auth carries a syntactic o:"I2I" while e.le and e.qvi omit o — semantically identical with far nodes in hand,</text>
+    <text x="30" y="1594" font-size="10" fill="#777" font-style="italic" font-family="Georgia, serif">so the three edge chips are worded identically; the syntactic difference exists only in the raw-bytes view (Rule 9a, pair 2).</text>
+  </g>
+</svg>
