@@ -1,0 +1,165 @@
+# arcviz source records for the focus+context / fisheye / degree-of-interest survey
+# (docs/research/prior-art/focus-context.md), filling the gap in cluster 3 of literature.md.
+# Same schema as refs/sources.yaml; see docs/research/EVIDENCE.md for the rules this file is held to.
+# This file is owned by the focus-context stream; do not merge it into sources.yaml or sources.lit.yaml
+# from another stream — a later synthesis pass can do that deliberately, with the merge itself reviewed.
+#
+# Captures for every "primary" record below live in refs/captures/focus-context/.
+# Retrieval date for everything below is 2026-09-14/15 unless noted otherwise.
+
+sources:
+
+  # --- The DOI formulation, primary ---
+
+  - key: furnas1986fisheye
+    title: "Generalized Fisheye Views"
+    author: "George W. Furnas"
+    url: "https://cspages.ucalgary.ca/~saul/581/exer.eps/4furnas86.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/furnas-generalized-fisheye-views-1986.pdf"
+    status: primary
+    supports: "The original degree-of-interest (DOI) formulation for fisheye/focus+context views: DOI(x|focus=y) = API(x) - D(x,y), with a worked tree instantiation, its formal properties, and the first (20-subject) evaluation against flat views."
+    quote: "Generalized fisheye views arise by decomposing the DOI into two components: a priori importance and distance. In its simplest, additive form the generalized fisheye Degree of Interest function is, DOIfisheye (x|.=y) = API(x) – D(x,y) where DOIfisheye is, according to the fisheye model, the user's Degree of Interest in a point, x, given that the current point of focus is y, API(x) is the global A Priori Importance of x and D(x,y) is the Distance between x and the current point y."
+    locator: "§3 'Formalizing generalized fisheye views', p.17-18 (Proc. ACM CHI'86, pp. 16-23)"
+
+  - key: furnas2006followup
+    title: "A Fisheye Follow-up: Further Reflections on Focus + Context"
+    author: "George W. Furnas"
+    url: "https://graphics.stanford.edu/~maneesh/files/chi06/Furnas_p999.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/furnas-fisheye-followup-2006.pdf"
+    status: primary
+    supports: "Furnas's own twenty-years-later restatement of the DOI formula in its most general (non-additive) form, the what-vs-how (selection vs. distortion) distinction, the formal equivalence of distortion fisheyes and concentric zoom, and several untested design-rationale hypotheses for why FE-DOI subsets matter (Spheres of Influence, Nearly Decomposable Systems, Meaning from Context, Navigational Support)."
+    quote: "In its most general form [10], the Generalized Fisheye Degree of Interest function at some point, x, given the current focal point, '.', was defined to be DOIFE ( x | . ) = F ( API( x ), D( ., x ) ), Eqn.1, where F is some combining function that is monotone increasing in the first argument, and decreasing in the second."
+    locator: "Introduction, p.1000 (CHI 2006 Proceedings, pp. 999-1008)"
+
+  # --- The lineage: DOI trees (primary), hyperbolic browser and SpaceTree (secondary via Cockburn et al. 2007 and Card & Nation 2002) ---
+
+  - key: cardnation2002doitree
+    title: "Degree-of-Interest Trees: A Component of an Attention-Reactive User Interface"
+    author: "Stuart K. Card, David Nation"
+    url: "https://courses.ischool.berkeley.edu/i247/f05/readings/Card_DOITrees_AVI02.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/card-nation-doi-trees-2002.pdf"
+    status: primary
+    supports: "DOI trees extend Furnas's tree DOI with fractional sibling offsets, bounded-space compression/expansion, semantic zooming within nodes, and animated transitions between DOI-driven layouts; explicitly a fisheye/geometric-distortion/semantic-zoom/clustering hybrid, not a pure Furnas filter. Also supplies the paper's own survey of prior focus+context tree techniques (logical filtering, geometric distortion incl. hyperbolic tree and cone trees, semantic zooming, clustering)."
+    quote: "The estimated DOI of a node = Intrinsic Importance – Distance from a focus node. [...] Whereas Furnas's calculation assigns all siblings the same distance from the focus node and hence the same DOI value, our calculation treats the children of a parent node as ordered and assigns fractional DOI offsets to the children based on order distance from the focus node."
+    locator: "§2.5 and §3.1, pp.2-3 (Proc. AVI 2002, pp. 231-245)"
+
+  - key: lampingrao1995hyperbolic
+    title: "A Focus+Context Technique Based on Hyperbolic Geometry for Visualizing Large Hierarchies"
+    author: "John Lamping, Ramana Rao, Peter Pirolli"
+    url: "https://dl.acm.org/doi/10.1145/223904.223956"
+    retrieved: "2026-09-14"
+    capture: ""
+    status: lead
+    supports: "LEAD, not independently fetched — ACM-paywalled. Characterized here via two sources we did read in full: (1) cardnation2002doitree §2.5, which summarizes it as a geometric-distortion focus+context technique using a visual transfer function on hyperbolic space, selecting a node moves it to the display center, and only a limited number of links out from the focus can be seen; and (2) cockburn2007review §5.1, Figure 7, which reproduces a screenshot and cites Lamping/Rao/Pirolli 1995 CHI, pp. 401-408. Do not upgrade to a cited primary quote without reading the paper itself."
+    quote: ""
+    locator: "Proc. ACM CHI'95, pp. 401-408 (per secondary characterization only)"
+
+  - key: plaisant2002spacetree
+    title: "SpaceTree: Supporting Exploration in Large Node Link Tree, Design Evolution and Empirical Evaluation"
+    author: "Catherine Plaisant, Jesse Grosjean, Benjamin B. Bederson"
+    url: "https://apps.dtic.mil/sti/tr/pdf/ADA440723.pdf"
+    retrieved: "2026-09-14"
+    capture: ""
+    status: lead
+    supports: "LEAD, not independently fetched — the DTIC mirror returned an HTML error page, not a PDF, on this attempt. Characterized here via cockburn2007review §5.1 and §7.2.6, which describes it as using extensive zooming animation to keep users oriented within its focus+context tree presentation, and reports that in Plaisant/Grosjean/Bederson's own comparison against Windows Explorer and the hyperbolic tree browser (using the CHI'97 browse-off dataset), Explorer won on tasks needing multiple open branches while SpaceTree won on topological-overview tasks (e.g. viewing ancestors)."
+    quote: ""
+    locator: "IEEE InfoVis 2002, pp. 57-64 (per secondary characterization only); received the IEEE VIS 'Test of Time' award in 2022 per HCIL's own announcement, https://hcil.umd.edu/posts/test-of-time-award-2022/"
+
+  # --- Visual Thesaurus, primary (patent) ---
+
+  - key: thinkmap2005patent
+    title: "Visual thesaurus (US Patent Application US20050171760A1)"
+    author: "Marc Tinkler (inventor); Plumb Design, Inc. (assignee)"
+    url: "https://patents.google.com/patent/US20050171760A1/en"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/thinkmap-visual-thesaurus-patent-us20050171760a1.html"
+    status: primary
+    supports: "The Visual Thesaurus's actual mechanism: results as a directed graph, re-organized around a new focus on selection with animated movement, and a force-directed ('physical law') layout algorithm — position entities repel like magnets, edges act as elastic springs — built on the Thinkmap application platform. This is NOT a Furnas DOI filter; it is a force-directed layout with animated re-focus, closer in kind to a spring/energy-minimization graph drawing (cf. misue1994mentalmap's 'spring algorithm') than to fisheye DOI filtering or hyperbolic-geometry distortion."
+    quote: "An example information module determines the position and motion of the position entities according to a 'physical law' algorithm whereby the position entities move as if they have a magnetic repulsion with respect to one another, and the edges between them have an elasticity. [...] When a result is selected, it may move first quickly and then more gradually into place in the center of the screen, allowing the user to more easily track the movement with the eye."
+    locator: "Description, filed 2004-10-08, published 2005-08-04"
+
+  # --- The empirical record: negative and mixed findings ---
+
+  - key: cockburn2007review
+    title: "A Review of Overview+Detail, Zooming, and Focus+Context Interfaces"
+    author: "Andy Cockburn, Amy Karlson, Benjamin B. Bederson"
+    url: "https://worrydream.com/refs/Cockburn_2007_-_A_Review_of_Overview+Detail,_Zooming,_and_Focus+Context_Interfaces.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/cockburn-karlson-bederson-review-overview-zoom-focuscontext-2007.pdf"
+    status: primary
+    supports: "Comprehensive, citation-dense review (ACM Computing Surveys-style) of the whole field as of 2007, with two tables (low-level target-acquisition studies, high-level comprehension/search studies) summarizing dozens of empirical comparisons. Read in full; used here BOTH as a primary source for its own synthesis claims (the summary section) AND, explicitly flagged inline wherever used, as a secondary report of studies we did not independently fetch (Gutwin 2002, Hornbaek & Hertzum 2007's own numbers aside, Pirolli/Card/Van Der Wege 2001/2003, Nekrasovski et al. 2006, Donskoy & Kaptelinin 1997, Hornbaek & Frokjaer 2003, Baudisch et al. 2002/2004)."
+    quote: "Finally, many focus+context systems distort the information space, which is likely to damage the user's ability to correctly assess spatial properties such as directions, distances and scales. Even in non-spatial domains, evaluations of distortion-based techniques have largely failed to provide evidence of performance enhancements, and several studies have shown that fisheye views can damage fundamental components of interaction such as target acquisition."
+    locator: "§8 Summary, p.32"
+
+  - key: hornbaekhertzum2007fisheyemenus
+    title: "Untangling the Usability of Fisheye Menus"
+    author: "Kasper Hornbæk, Morten Hertzum"
+    url: "http://mortenhertzum.dk/publ/TOCHI2007.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/hornbaek-hertzum-untangling-fisheye-menus-2007.pdf"
+    status: primary
+    supports: "A controlled 12-participant eye-tracking study comparing Bederson's fisheye menus against hierarchical and multi-focus alternatives for known-item and browsing tasks. Direct primary negative finding: hierarchical (non-fisheye) menus were the fastest and most accurate, and eye-movement data showed participants barely used the non-focal (fisheye-distorted) region of the menu at all despite it being the fisheye's defining feature."
+    quote: "The results show that for finding known items, conventional hierarchical menus are the most accurate and by far the fastest. [...] Eye-movement data show that participants make little use of the non-focal regions of the fisheye menu, though they are a defining feature of fisheye interfaces. [...] We conclude by discussing why fisheye menus were inferior to the hierarchical menu and how both may be improved."
+    locator: "Abstract, p.1 (ACM TOCHI 14(2), Article 6, 2007)"
+
+  - key: gutwin2002targeting
+    title: "Improving Focus Targeting in Interactive Fisheye Views"
+    author: "Carl Gutwin"
+    url: "https://dl.acm.org/doi/10.1145/503376.503424"
+    retrieved: "2026-09-14"
+    capture: ""
+    status: lead
+    supports: "LEAD, not independently fetched — ACM-paywalled, and no free-standing author copy was located on hci.usask.ca in this pass (its publications listing loaded empty on fetch). Characterized here via two sources read in full: cockburn2007review §7.1.2 ('Gutwin (2002) also studied the impact of item movement with fisheyes, demonstrating that the problem can be eased through speed-coupled flattening') and hornbaekhertzum2007fisheyemenus §2 ('Gutwin (2002) found that participants' target-acquisition times and error rates in fisheye interfaces increase with the level of magnification. In fact, a non-magnifying lens performed better than the magnifying ones'). Do not upgrade to a cited primary quote without reading the paper itself."
+    quote: ""
+    locator: "CHI Letters 4(1), 2002, pp. 267-274 (per secondary characterization only)"
+
+  - key: schaffer1996fisheyefullzoom
+    title: "Navigating Hierarchically Clustered Networks through Fisheye and Full-Zoom Methods"
+    author: "Doug Schaffer, Zhengping Zuo, Saul Greenberg, Lyn Bartram, John Dill, Shelli Dubs, Mark Roseman"
+    url: "https://grouplab.cpsc.ucalgary.ca/grouplab/uploads/Publications/Publications/1996-Fisheye.TOCHI.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/schaffer-et-al-fisheye-fullzoom-1996.pdf"
+    status: primary
+    supports: "A 20-subject controlled experiment (plus 2 informal expert control-room operators) comparing a hierarchical-clustering fisheye ('variable-zoom') to full-zoom for a simulated telephone-network repair task. This is the field's founding POSITIVE result for fisheye views specifically for navigation efficiency — cited here for the numbers, and for its own caveats (30% task failure rate regardless of view; abrupt non-animated transitions flagged as a 'distraction'; operators wanted familiar full-size bottom-level detail the fisheye could not give without extra tricks)."
+    quote: "An analysis of variance revealed that running time was significantly affected by the view factor used in the task (F = 9.91, p = 0.01), with people completing the task much faster when using fisheye views (102 seconds versus 161 seconds). [...] Neither view level (F = 2.32, p = 0.15) nor order (F = 1.12, p = 0.30) had a statistically significant effect [on % of tasks completed correctly]. Although most subjects did complete the task successfully, 30% of them did not."
+    locator: "§4 Results, pp.176-177 (ACM TOCHI 3(2), June 1996, pp. 162-188)"
+
+  # --- Layout stability and the mental map, primary ---
+
+  - key: misue1994mentalmap
+    title: "Layout Adjustment and the Mental Map (ISIS Research Report ISIS-RR-94-6E; preprint of the 1995 JVLC journal article)"
+    author: "Kazuo Misue, Peter Eades, Wei Lai, Kozo Sugiyama"
+    url: "https://www.cs.tsukuba.ac.jp/~misue/misue-publications/techreport/isis-rr-94-6e.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/misue-eades-lai-sugiyama-layout-adjustment-mental-map-1994.pdf"
+    status: primary
+    supports: "The classical formalization of 'preserving the mental map' as three distinct, formally-defined properties (orthogonal ordering, proximity-graph preservation, topology/dual-graph preservation) that a layout-adjustment transform can hold or break; the force-scan algorithm that provably preserves orthogonal ordering while removing node overlap; and the paper's own admission that proximity/topology preservation is NOT solved in general. Note: this is the ISIS technical-report/preprint version (May 1994), not the final peer-reviewed Journal of Visual Languages and Computing 6(2):183-210 (1995) text — the two are described elsewhere as substantively the same paper, but only the preprint was read here; cite the preprint, not the JVLC pagination, unless someone reads the published version directly."
+    quote: "The most critical issue is that of preserving the mental map of a diagram. We have proposed three models of the mental map: orthogonal ordering, proximity graphs, and topology. [...] In each case, we are able to present methods which preserve orthogonal ordering and (to some extent) topology. However, we feel that the preservation of topology and proximity graphs needs significant further work. [...] The force scan algorithm ... tends to preserve some proximity graphs. This is important for the email visualizer ... However, we have been unable to formalize this experience with a mathematical proof."
+    locator: "§6 Conclusions, p.27-28, and §5.1, p.24"
+
+  # --- Animation and accessibility, primary ---
+
+  - key: bedersonboltman1999animation
+    title: "Does Animation Help Users Build Mental Maps of Spatial Information?"
+    author: "Benjamin B. Bederson, Angela Boltman"
+    url: "https://www.cs.umd.edu/projects/hcil/jazz/learn/papers/CS-TR-3964.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/bederson-boltman-animation-mental-maps-1999.pdf"
+    status: primary
+    supports: "A 20-subject controlled experiment (Pad++, animated vs. instant viewpoint transitions over a 9-node family-tree hyperlink space) finding animation significantly reduced spatial-reconstruction errors (0.4 vs. 1.8 unweighted errors, p=.001) with NO significant effect — positive or negative — on navigation speed, recall accuracy, or subjective preference. The null results matter as much as the positive one: animation helped one specific task (reconstructing spatial layout from memory) and did nothing measurable for two others (navigation time, relational recall)."
+    quote: "We observed a statistically significant improvement in accuracy of the reconstruction task by navigation type with both the unweighted count (F1,19 = 16.165, p=.001) and the weighted count (F1,19 = 16.816, p=.001). [...] There was no statistically significant difference in any of the other tasks or subjective satisfaction by animation. [...] Animation had no significant effect on the first task of navigating the family tree in order to learn the relationships between family members. [...] no performance improvement was seen for the animated condition [on the recall-from-memory task]."
+    locator: "Results and Analysis, pp.5-6 (HCIL Technical Report 98-11 / IEEE InfoVis'99, pp. 28-35)"
+
+  - key: wcag233animation
+    title: "Understanding Success Criterion 2.3.3: Animation from Interactions"
+    author: "W3C Web Accessibility Initiative (WAI)"
+    url: "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/focus-context/wcag-2.3.3-animation-from-interactions.html"
+    status: primary
+    supports: "The normative accessibility obligation for any animated focus-change/re-layout transition: motion animation triggered by interaction must be disableable unless essential, because of vestibular-disorder reactions (dizziness, nausea, headaches, and in severe cases needing bed rest). This is WCAG 2.1 Level AAA, not A/AA — a stricter bar than baseline conformance, worth naming explicitly rather than assuming."
+    quote: "Motion animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed. [...] Vestibular (inner ear) disorder reactions include dizziness, nausea and headaches. [...] the impact of animation on people with vestibular disorders can be quite severe. Triggered reactions include nausea, migraine headaches, and potentially needing bed rest to recover."
+    locator: "Success Criterion 2.3.3 (Level AAA), Intent section"
