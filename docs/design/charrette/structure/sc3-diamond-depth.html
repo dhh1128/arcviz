@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC3 — diamond with depth (structure-led mock)</title>
+<style>
+  :root{--ink:#111;--mid:#555;--faint:#8a8a8a;--line:#bdbdbd;--paper:#fff}
+  *{box-sizing:border-box}
+  body{font:14px/1.45 system-ui,sans-serif;color:var(--ink);background:var(--paper);margin:28px}
+  h1{font-size:17px;margin:0 0 2px}
+  .sub{color:var(--mid);font-size:12px;margin:0 0 18px;max-width:80ch}
+  .anno{border-left:3px solid var(--line);color:var(--mid);font-style:italic;font-size:11.5px;padding:2px 10px;margin:14px 0 0;max-width:78ch}
+  .pill{font:10.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #4a4a4a;border-radius:9px;padding:0 5px;background:#fff;color:#111;white-space:nowrap;display:inline-block}
+  .k{font-size:8.5px;letter-spacing:.07em;color:var(--mid);text-transform:uppercase;margin-right:2px}
+
+  .board{display:grid;grid-template-columns:300px 60px 300px;width:660px}
+  .span{grid-column:1 / 4}
+  .card{border:2px solid var(--ink);background:#fff}
+  .hd{padding:7px 10px 6px;border-bottom:1px solid var(--line)}
+  .ttl{font-weight:650;font-size:12.5px;margin-bottom:3px}
+  .ids{display:flex;flex-wrap:wrap;gap:3px 8px;align-items:baseline}
+  .ablock{margin:6px 9px;border:1px solid var(--faint);padding:4px 7px;font-size:11.5px}
+  .ablock .bh{font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--mid);margin-bottom:2px}
+  .fld{display:flex;gap:6px;margin:1px 0}
+  .fld b{font-weight:600}
+  .ledger{width:100%;border-collapse:collapse;border-top:1px solid var(--line);font-size:8.8px;color:#3d3d3d}
+  .ledger th{font-weight:600;text-align:left;padding:3px 9px 2px;color:var(--mid);border-bottom:1px solid #e2e2e2;font-size:8.2px}
+  .ledger td{padding:1px 9px;vertical-align:top;border-bottom:1px solid #f0f0f0}
+  .ledger td:first-child{width:44%;color:#555}
+  .ledger .st{font-variant:small-caps}
+  .eband{border-top:2px solid var(--ink);padding:3px 9px;font-size:9px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em}
+  .seam{background:var(--ink);color:#fff;padding:6px 9px;font-size:9.8px;letter-spacing:.03em;text-align:center}
+  .seam .pill{background:#fff}
+
+  .conn{display:flex;flex-direction:column;align-items:center;min-height:70px}
+  .conn .seg{width:0;border-left:2px solid var(--ink);flex:1;min-height:14px}
+  .arrow{width:0;height:0;border:7px solid transparent;border-top-color:var(--ink);margin-top:-1px}
+  .wire{border:1px solid var(--faint);background:#fbfbfb;padding:5px 8px;font-size:10px;width:272px;margin:0}
+  .wire .en{font-weight:650;font-size:10.5px}
+  .wire .row{margin:1px 0}
+  .through{display:flex;justify-content:center}
+  .through .seg{width:0;border-left:2px solid var(--ink);height:100%}
+
+  .inmark{font-size:9px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+
+  .thumbrow{margin-top:30px;border-top:1px solid var(--line);padding-top:10px}
+  .thumbrow .tl{font-size:11px;color:var(--mid);margin-bottom:6px}
+  #thumb{zoom:0.3}
+  @media print{.thumbrow{display:none}}
+</style>
+</head>
+<body>
+<h1>SC3 — one ancestor, two path lengths: the layout merges what the SAIDs merge</h1>
+<p class="sub">Structure-led mock. Fixtures: <code>diamond_depth_origin / _b / _c / _f / _a</code> (real corpus SAIDs). The shared ancestor A is one committed artifact and appears exactly once, spanning both descent columns at the depth of its longest path; the short path's edge simply travels further — path length is read by counting cards along a route, never by geometric distance. All five edges drawn; edge plaques are threaded onto the wires they describe. Greyscale-native; nothing rides hover.</p>
+
+<div id="board" class="board">
+
+  <!-- origin -->
+  <div class="card span">
+    <div class="hd">
+      <div class="ttl">Origin credential <span style="font-weight:400;color:var(--mid)">(presented)</span></div>
+      <div class="ids">
+        <span><span class="k">d</span><span class="pill">EDQ6zCH2&hellip;xbnh</span></span>
+        <span><span class="k">i&nbsp;issuer</span><span class="pill">ELAx3p7v&hellip;1xQa</span></span>
+        <span><span class="k">s&nbsp;schema</span><span class="pill">EHcf0NoV&hellip;uY7o</span></span>
+      </div>
+    </div>
+    <div class="ablock">
+      <div class="bh">a — attributes · d <span class="pill">EAuO5PfR&hellip;IyEr</span> · u <span class="pill">0ABhfbwy&hellip;7O1_</span></div>
+      <div class="fld"><b>claim</b><span>reachable via two paths of unequal length</span></div>
+    </div>
+    <table class="ledger">
+      <tr><th colspan="2">verification — no host vector supplied · outcome space {pass, unperformed, unperformable} · fail not offered</th></tr>
+      <tr><td>SAID self-consistency</td><td><span class="st">unperformed</span></td></tr>
+      <tr><td>schema conformance</td><td><span class="st">unperformed</span></td></tr>
+      <tr><td>signature validity</td><td><span class="st">unperformed</span></td></tr>
+      <tr><td>KEL anchoring</td><td><span class="st">unperformable</span> — no KEL in hand for <span class="pill">ELAx3p7v&hellip;1xQa</span></td></tr>
+      <tr><td>delegation · issuer KEL tier</td><td><span class="st">unperformable</span> — no KEL material in hand</td></tr>
+      <tr><td>edge constraint · edge &lsquo;shortPath&rsquo;</td><td><span class="st">unperformed</span> — far node in hand, not evaluated</td></tr>
+      <tr><td>edge constraint · edge &lsquo;longPath&rsquo;</td><td><span class="st">unperformed</span> — far node in hand, not evaluated</td></tr>
+      <tr><td>issuer bona fides</td><td><span class="st">unperformed</span></td></tr>
+      <tr><td>revocation</td><td>no registry committed (rd absent as issued) — no TEL to reconcile</td></tr>
+      <tr><td>duplicity</td><td><span class="st">unperformed</span> — no watchers consulted</td></tr>
+      <tr><td>freshness</td><td><span class="st">no policy supplied</span> (a visible state, not a default)</td></tr>
+    </table>
+    <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EODt2rmv&hellip;rW15</span> · 2 edges depart ↓ (left: &lsquo;shortPath&rsquo; · right: &lsquo;longPath&rsquo;)</div>
+  </div>
+
+  <!-- connectors origin -> B, C -->
+  <div class="conn" style="min-height:110px">
+    <div class="seg"></div>
+    <div class="wire"><div class="en">edge &lsquo;shortPath&rsquo;</div>
+      <div class="row"><span class="k">edge d</span><span class="pill">EGh2LHkD&hellip;Pehx</span> <span class="k">n</span><span class="pill">EGHUpSJN&hellip;KVTD</span></div>
+      <div class="row"><span class="k">s</span><span class="pill">ECCZBQhe&hellip;tjAe</span> · <span class="k">operator</span> NI2I — derived (far node in hand, untargeted)</div>
+    </div>
+    <div class="seg"></div><div class="arrow"></div>
+  </div>
+  <div></div>
+  <div class="conn" style="min-height:110px">
+    <div class="seg"></div>
+    <div class="wire"><div class="en">edge &lsquo;longPath&rsquo;</div>
+      <div class="row"><span class="k">edge d</span><span class="pill">EBTPMPXf&hellip;e_os</span> <span class="k">n</span><span class="pill">ELZEWuSV&hellip;XdL1</span></div>
+      <div class="row"><span class="k">s</span><span class="pill">EEBs1kT5&hellip;26E_</span> · <span class="k">operator</span> NI2I — derived (far node in hand, untargeted)</div>
+    </div>
+    <div class="seg"></div><div class="arrow"></div>
+  </div>
+
+  <!-- tier 1: B | C -->
+  <div class="card">
+    <div class="hd">
+      <div class="ttl">Node B <span style="font-weight:400;color:var(--mid)">(short path)</span></div>
+      <div class="ids">
+        <span><span class="k">d</span><span class="pill">EGHUpSJN&hellip;KVTD</span></span>
+        <span><span class="k">i</span><span class="pill">EF7IEE2t&hellip;Psst</span></span>
+        <span><span class="k">s</span><span class="pill">ECCZBQhe&hellip;tjAe</span></span>
+      </div>
+    </div>
+    <div class="ablock">
+      <div class="bh">a · d <span class="pill">EIRR0gYG&hellip;oysh</span></div>
+      <div class="fld"><b>scope</b><span>short path, one hop from the ancestor</span></div>
+    </div>
+    <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">ENkj_sx2&hellip;_egT</span> · 1 edge departs ↓</div>
+  </div>
+  <div></div>
+  <div class="card">
+    <div class="hd">
+      <div class="ttl">Node C <span style="font-weight:400;color:var(--mid)">(long path)</span></div>
+      <div class="ids">
+        <span><span class="k">d</span><span class="pill">ELZEWuSV&hellip;XdL1</span></span>
+        <span><span class="k">i</span><span class="pill">EEm3vJpd&hellip;P0_a</span></span>
+        <span><span class="k">s</span><span class="pill">EEBs1kT5&hellip;26E_</span></span>
+      </div>
+    </div>
+    <div class="ablock">
+      <div class="bh">a · d <span class="pill">EHtNTfu6&hellip;h59K</span></div>
+      <div class="fld"><b>scope</b><span>long path, two hops from the ancestor</span></div>
+    </div>
+    <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">ELbDRlSr&hellip;Tzpx</span> · 1 edge departs ↓</div>
+  </div>
+
+  <!-- connectors: B->A (starts its long run) | C->F -->
+  <div class="conn" style="min-height:110px">
+    <div class="seg"></div>
+    <div class="wire"><div class="en">edge &lsquo;baseline&rsquo; (from B)</div>
+      <div class="row"><span class="k">edge d</span><span class="pill">EL94FmuI&hellip;PWbF</span> <span class="k">n</span><span class="pill">ELBmpHyX&hellip;FJIL</span></div>
+      <div class="row"><span class="k">s</span><span class="pill">EAow76Ee&hellip;-b2f</span> · <span class="k">operator</span> NI2I — derived (far node in hand, untargeted)</div>
+    </div>
+    <div class="seg"></div>
+  </div>
+  <div></div>
+  <div class="conn" style="min-height:110px">
+    <div class="seg"></div>
+    <div class="wire"><div class="en">edge &lsquo;waypoint&rsquo;</div>
+      <div class="row"><span class="k">edge d</span><span class="pill">EDd1DayJ&hellip;2osb</span> <span class="k">n</span><span class="pill">EPJBkGOi&hellip;8RVA</span></div>
+      <div class="row"><span class="k">s</span><span class="pill">EM4ULPZg&hellip;-UHF</span> · <span class="k">operator</span> NI2I — derived (far node in hand, untargeted)</div>
+    </div>
+    <div class="seg"></div><div class="arrow"></div>
+  </div>
+
+  <!-- tier 2: B's wire passes through | F -->
+  <div class="through"><div class="seg"></div></div>
+  <div></div>
+  <div class="card">
+    <div class="hd">
+      <div class="ttl">Node F <span style="font-weight:400;color:var(--mid)">(long-path waypoint)</span></div>
+      <div class="ids">
+        <span><span class="k">d</span><span class="pill">EPJBkGOi&hellip;8RVA</span></span>
+        <span><span class="k">i</span><span class="pill">EMvEWKT9&hellip;qqCK</span></span>
+        <span><span class="k">s</span><span class="pill">EM4ULPZg&hellip;-UHF</span></span>
+      </div>
+    </div>
+    <div class="ablock">
+      <div class="bh">a · d <span class="pill">EEeQKh-l&hellip;nRz4</span></div>
+      <div class="fld"><b>scope</b><span>long path, one hop from the ancestor</span></div>
+    </div>
+    <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">ENkj_sx2&hellip;_egT</span> · 1 edge departs ↓</div>
+  </div>
+
+  <!-- connectors into A -->
+  <div class="conn" style="min-height:96px">
+    <div class="seg"></div><div class="arrow"></div>
+  </div>
+  <div></div>
+  <div class="conn" style="min-height:96px">
+    <div class="seg"></div>
+    <div class="wire"><div class="en">edge &lsquo;baseline&rsquo; (from F)</div>
+      <div class="row"><span class="k">edge d</span><span class="pill">EL94FmuI&hellip;PWbF</span> <span class="k">n</span><span class="pill">ELBmpHyX&hellip;FJIL</span></div>
+      <div class="row"><span class="k">s</span><span class="pill">EAow76Ee&hellip;-b2f</span> · <span class="k">operator</span> NI2I — derived (far node in hand, untargeted)</div>
+    </div>
+    <div class="seg"></div><div class="arrow"></div>
+  </div>
+
+  <!-- A : one artifact, spanning both columns -->
+  <div class="card span">
+    <div class="inmark"><span>◂ arrives: &lsquo;baseline&rsquo; from B — 2 cards along this route</span><span>arrives: &lsquo;baseline&rsquo; from F — 3 cards along this route ▸</span></div>
+    <div class="hd">
+      <div class="ttl">Shared ancestor A — one committed artifact, one node</div>
+      <div class="ids">
+        <span><span class="k">d</span><span class="pill">ELBmpHyX&hellip;FJIL</span></span>
+        <span><span class="k">i&nbsp;issuer</span><span class="pill">EAS6m0KA&hellip;ncZw</span></span>
+        <span><span class="k">s&nbsp;schema</span><span class="pill">EAow76Ee&hellip;-b2f</span></span>
+      </div>
+    </div>
+    <div class="ablock">
+      <div class="bh">a — attributes · d <span class="pill">EJ9qvngb&hellip;P33U</span></div>
+      <div class="fld"><b>standard</b><span>ISO-9001-ish Baseline</span></div>
+    </div>
+    <div class="seam">E — NO EDGE SECTION IN THIS CREDENTIAL AS ISSUED · committed by <span class="pill">ELBmpHyX&hellip;FJIL</span> · the DAG ends here by issuance-time fact</div>
+  </div>
+</div>
+
+<p class="anno">Both referencing edge blocks carry the identical <span class="k">n</span> value <span class="pill" style="font-style:normal">ELBmpHyX&hellip;FJIL</span> — and are in fact the identical committed edge block (<span class="k">edge d</span> <span class="pill" style="font-style:normal">EL94FmuI&hellip;PWbF</span> in both B and F). Identical values render identically, everywhere; the identical pills assert only that these <em>are</em> two occurrences of one value — no comparison ceremony is implied or performed, and the route to a real comparison walk stays with the pill component. Verification ledgers are shown on the origin card only in this page to keep the topology legible; every card in a shipping render carries the same wall (see the SC2 mock).</p>
+
+<p class="anno">Focus behaviour this layout commits to (static statement of AF1's constraint): raising any card brings it forward without detaching either of A's two docked wires, and a card occluded by a raised sibling keeps its seam/band/socket visible at its edge — the wires are load-bearing structure, not decoration to be dropped in a focus mode.</p>
+
+<div class="thumbrow">
+  <div class="tl">Small-size self-test — the same render at 30% (one A, five wires, and the through-wire passing F's tier must all survive):</div>
+  <div id="thumb"></div>
+</div>
+<script>
+  document.getElementById('thumb').appendChild(document.getElementById('board').cloneNode(true));
+</script>
+</body>
+</html>

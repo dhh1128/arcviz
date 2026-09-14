@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC2 — production chain (structure-led mock)</title>
+<style>
+  :root{--ink:#111;--mid:#555;--faint:#8a8a8a;--line:#bdbdbd;--paper:#fff;--slab:#1c1c1c;--quiet:#f6f6f6}
+  *{box-sizing:border-box}
+  body{font:14px/1.45 system-ui,sans-serif;color:var(--ink);background:var(--paper);margin:28px}
+  h1{font-size:17px;margin:0 0 2px}
+  .sub{color:var(--mid);font-size:12px;margin:0 0 18px;max-width:78ch}
+  .anno{border-left:3px solid var(--line);color:var(--mid);font-style:italic;font-size:11.5px;padding:2px 10px;margin:14px 0;max-width:72ch}
+  .pill{font:11px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #4a4a4a;border-radius:9px;padding:0 6px;background:#fff;color:#111;white-space:nowrap;display:inline-block}
+  .k{font-size:8.5px;letter-spacing:.07em;color:var(--mid);text-transform:uppercase;margin-right:2px}
+
+  .chain{position:relative;width:380px;display:flex;flex-direction:column;align-items:center;margin-top:10px}
+
+  /* the presenter gate: render-level structure, one per render */
+  .gate{width:760px;border:4px double var(--ink);background:var(--quiet);padding:12px 16px;margin-bottom:0}
+  .gate .glabel{font-weight:700;font-size:14px;letter-spacing:.05em}
+  .gate p{margin:5px 0 0;font-size:12px;max-width:100%}
+
+  .card{width:380px;border:2px solid var(--ink);background:#fff}
+  .hd{padding:7px 10px 6px;border-bottom:1px solid var(--line)}
+  .ttl{font-weight:650;font-size:13px;margin-bottom:3px}
+  .ids{display:flex;flex-wrap:wrap;gap:3px 8px;align-items:baseline}
+  .ablock{margin:7px 10px;border:1px solid var(--faint);padding:5px 8px;font-size:12px}
+  .ablock .bh{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--mid);margin-bottom:3px}
+  .fld{display:flex;gap:6px;margin:1px 0}
+  .fld b{font-weight:600;min-width:60px}
+  .ledger{width:100%;border-collapse:collapse;border-top:1px solid var(--line);font-size:9.5px;color:#3d3d3d}
+  .ledger th{font-weight:600;text-align:left;padding:4px 10px 3px;color:var(--mid);border-bottom:1px solid #e2e2e2;font-size:9px;letter-spacing:.03em}
+  .ledger td{padding:1.5px 10px;vertical-align:top;border-bottom:1px solid #efefef}
+  .ledger td:first-child{width:41%;color:#555}
+  .ledger .st{font-variant:small-caps;letter-spacing:.03em}
+  .eband{border-top:2px solid var(--ink);padding:4px 10px;font-size:9.5px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em;display:flex;gap:8px;align-items:center}
+  .seam{background:var(--ink);color:#fff;padding:7px 10px;font-size:10.5px;letter-spacing:.03em;text-align:center}
+  .seam .pill{background:#fff}
+
+  .conn{position:relative;height:118px;width:100%;display:flex;flex-direction:column;align-items:center}
+  .vline{flex:1;width:0;border-left:2px solid var(--ink)}
+  .arrow{width:0;height:0;border:7px solid transparent;border-top-color:var(--ink);margin-top:-1px}
+  .plaque{position:absolute;left:calc(100% + 14px);top:8px;width:352px;border:1px solid var(--faint);background:#fbfbfb;padding:6px 9px;font-size:10.5px}
+  .plaque .en{font-weight:650;font-size:11px}
+  .plaque .row{margin:1px 0}
+
+  .slab{width:380px;background:var(--slab);color:#e8e8e8;border:2px solid #000;padding:11px 14px;font-size:11px}
+  .slab .sh{font-weight:700;font-size:12px;letter-spacing:.06em;color:#fff;margin-bottom:5px}
+  .slab .pill{background:#fff;color:#111}
+  .slab .row{margin:3px 0}
+
+  .thumbrow{margin-top:34px;border-top:1px solid var(--line);padding-top:10px}
+  .thumbrow .tl{font-size:11px;color:var(--mid);margin-bottom:6px}
+  #thumb{zoom:0.28}
+  @media print{.thumbrow{display:none}}
+</style>
+</head>
+<body>
+<h1>SC2 — the production chain, rendered as the normal case</h1>
+<p class="sub">Structure-led mock. Fixtures: <code>vlei_qvi → vlei_le → vlei_ecr_auth → vlei_ecr</code> (real corpus SAIDs). Verifier-facing render, P&nbsp;=&nbsp;unknown, bare-store V default, no freshness policy supplied, no KEL material in hand. Authored entirely in greyscale — this page is its own greyscale variant. No hover carries anything.</p>
+
+<div id="board">
+
+  <div class="gate" role="group" aria-label="presenter state">
+    <div class="glabel">PRESENTER OF THIS MATERIAL — UNKNOWN</div>
+    <p>No evidence binds these bytes to any party controlling the holder AID they name. A replayed copy would satisfy every check below identically. Everything beneath this gate concerns issuance history, never the presenter. <span class="k">scope</span> this render, as loaded.</p>
+  </div>
+
+  <div class="chain">
+    <div class="conn" style="height:44px"><div class="vline"></div><div class="arrow"></div></div>
+
+    <!-- vlei_ecr : presented leaf -->
+    <div class="card">
+      <div class="hd">
+        <div class="ttl">Engagement Context Role credential <span style="font-weight:400;color:var(--mid)">(presented leaf · depth 4 of 4)</span></div>
+        <div class="ids">
+          <span><span class="k">d</span><span class="pill">EGDKB8m5&hellip;H_Wq</span></span>
+          <span><span class="k">u</span><span class="pill">0AB3xFKg&hellip;zZ0C</span></span>
+          <span><span class="k">i&nbsp;issuer</span><span class="pill">EOvbsyiK&hellip;b48S</span></span>
+          <span><span class="k">s&nbsp;schema</span><span class="pill">EDyt0Fij&hellip;6W9k</span></span>
+          <span><span class="k">rd&nbsp;registry</span><span class="pill">EFiZI0ix&hellip;udxW</span></span>
+        </div>
+      </div>
+      <div class="ablock">
+        <div class="bh">a — attributes &nbsp;·&nbsp; d <span class="pill">EBj_z1EG&hellip;pi7z</span> · u <span class="pill">0ADtJH6E&hellip;aN7a</span></div>
+        <div class="fld"><b>i (issuee)</b><span class="pill">ELiFwqI6&hellip;3TVD</span></div>
+        <div class="fld"><b>LEI</b><span>984500ARCV1Z0000FIX01</span></div>
+        <div class="fld"><b>personLegalName</b><span>Jordan Q. Fixture</span></div>
+        <div class="fld"><b>engagementContextRole</b><span>Compliance Analyst</span></div>
+        <div class="fld"><b>dt</b><span>2026-01-15T12:00:00+00:00</span></div>
+      </div>
+      <table class="ledger">
+        <tr><th colspan="2">verification — no host vector supplied · outcome space {pass, unperformed, unperformable} · fail not offered (no host declaration)</th></tr>
+        <tr><td>SAID self-consistency</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>schema conformance</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>signature validity</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>KEL anchoring</td><td><span class="st">unperformable</span> — no KEL in hand for <span class="pill">EOvbsyiK&hellip;b48S</span></td></tr>
+        <tr><td>delegation · issuer KEL tier</td><td><span class="st">unperformable</span> — root delegator <span class="pill">EDYl3N_T&hellip;bK8-</span> KEL absent</td></tr>
+        <tr><td>edge constraint · edge &lsquo;auth&rsquo;</td><td><span class="st">unperformed</span> — far node in hand, not evaluated</td></tr>
+        <tr><td>issuer bona fides</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>revocation · registry <span class="pill">EFiZI0ix&hellip;udxW</span></td><td><span class="st">unperformed</span> — no TEL events in hand; no as-of exists</td></tr>
+        <tr><td>duplicity</td><td><span class="st">unperformed</span> — no watchers consulted</td></tr>
+        <tr><td>freshness</td><td><span class="st">no policy supplied</span> (a visible state, not a default)</td></tr>
+      </table>
+      <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EGnm0R3R&hellip;g9Jw</span> · 1 edge departs ↓</div>
+    </div>
+
+    <div class="conn"><div class="vline"></div><div class="arrow"></div>
+      <div class="plaque">
+        <div class="en">edge &lsquo;auth&rsquo;</div>
+        <div class="row"><span class="k">edge d</span><span class="pill">EOUF7Zbj&hellip;DKFM</span> <span class="k">n</span><span class="pill">EM7gTDXq&hellip;BXgm</span> <span class="k">s</span><span class="pill">EIvYqH6K&hellip;IACK</span></div>
+        <div class="row"><span class="k">operator</span> I2I — derived (far node <span class="pill">EM7gTDXq&hellip;BXgm</span> in hand, targeted)</div>
+      </div>
+    </div>
+
+    <!-- vlei_ecr_auth -->
+    <div class="card">
+      <div class="hd">
+        <div class="ttl">ECR Authorization credential <span style="font-weight:400;color:var(--mid)">(depth 3 of 4)</span></div>
+        <div class="ids">
+          <span><span class="k">d</span><span class="pill">EM7gTDXq&hellip;BXgm</span></span>
+          <span><span class="k">i&nbsp;issuer</span><span class="pill">EErZ90n2&hellip;p_RZ</span></span>
+          <span><span class="k">s&nbsp;schema</span><span class="pill">EIvYqH6K&hellip;IACK</span></span>
+          <span><span class="k">rd&nbsp;registry</span><span class="pill">EIz-db8y&hellip;PjZZ</span></span>
+        </div>
+      </div>
+      <div class="ablock">
+        <div class="bh">a — attributes · d <span class="pill">EC0x8xag&hellip;PZGM</span> · u <span class="pill">0ADV56Sp&hellip;IA6E</span></div>
+        <div class="fld"><b>i (issuee)</b><span class="pill">EOvbsyiK&hellip;b48S</span></div>
+        <div class="fld"><b>AID</b><span class="pill">ELiFwqI6&hellip;3TVD</span></div>
+        <div class="fld"><b>LEI</b><span>984500ARCV1Z0000FIX01</span></div>
+        <div class="fld"><b>personLegalName</b><span>Jordan Q. Fixture</span></div>
+        <div class="fld"><b>engagementContextRole</b><span>Compliance Analyst</span></div>
+        <div class="fld"><b>dt</b><span>2026-01-17T12:00:00+00:00</span></div>
+      </div>
+      <table class="ledger">
+        <tr><th colspan="2">verification — no host vector supplied · outcome space {pass, unperformed, unperformable} · fail not offered</th></tr>
+        <tr><td>SAID self-consistency</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>schema conformance</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>signature validity</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>KEL anchoring</td><td><span class="st">unperformable</span> — no KEL in hand for <span class="pill">EErZ90n2&hellip;p_RZ</span></td></tr>
+        <tr><td>delegation · issuer KEL tier</td><td><span class="st">unperformable</span> — root delegator <span class="pill">EDYl3N_T&hellip;bK8-</span> KEL absent</td></tr>
+        <tr><td>edge constraint · edge &lsquo;le&rsquo;</td><td><span class="st">unperformed</span> — far node in hand, not evaluated</td></tr>
+        <tr><td>issuer bona fides</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>revocation · registry <span class="pill">EIz-db8y&hellip;PjZZ</span></td><td><span class="st">unperformed</span> — no TEL events in hand; no as-of exists</td></tr>
+        <tr><td>duplicity</td><td><span class="st">unperformed</span> — no watchers consulted</td></tr>
+        <tr><td>freshness</td><td><span class="st">no policy supplied</span> (a visible state, not a default)</td></tr>
+      </table>
+      <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EPMxAbLc&hellip;-ohN</span> · 1 edge departs ↓</div>
+    </div>
+
+    <div class="conn"><div class="vline"></div><div class="arrow"></div>
+      <div class="plaque">
+        <div class="en">edge &lsquo;le&rsquo;</div>
+        <div class="row"><span class="k">edge d</span><span class="pill">EBWnnNn1&hellip;wZnJ</span> <span class="k">n</span><span class="pill">ENKSmFLr&hellip;-Im0</span> <span class="k">s</span><span class="pill">EC53kuut&hellip;CDga</span></div>
+        <div class="row"><span class="k">operator</span> I2I — derived (far node <span class="pill">ENKSmFLr&hellip;-Im0</span> in hand, targeted)</div>
+      </div>
+    </div>
+
+    <!-- vlei_le -->
+    <div class="card">
+      <div class="hd">
+        <div class="ttl">Legal Entity credential <span style="font-weight:400;color:var(--mid)">(depth 2 of 4)</span></div>
+        <div class="ids">
+          <span><span class="k">d</span><span class="pill">ENKSmFLr&hellip;-Im0</span></span>
+          <span><span class="k">i&nbsp;issuer</span><span class="pill">EOvbsyiK&hellip;b48S</span></span>
+          <span><span class="k">s&nbsp;schema</span><span class="pill">EC53kuut&hellip;CDga</span></span>
+          <span><span class="k">rd&nbsp;registry</span><span class="pill">EDCOPdr8&hellip;ZAiT</span></span>
+        </div>
+      </div>
+      <div class="ablock">
+        <div class="bh">a — attributes · d <span class="pill">EMN0fVsv&hellip;HvQY</span> · u <span class="pill">0AAwdDl-&hellip;ZMaj</span></div>
+        <div class="fld"><b>i (issuee)</b><span class="pill">EErZ90n2&hellip;p_RZ</span></div>
+        <div class="fld"><b>LEI</b><span>984500ARCV1Z0000FIX01</span></div>
+        <div class="fld"><b>dt</b><span>2026-01-18T12:00:00+00:00</span></div>
+      </div>
+      <table class="ledger">
+        <tr><th colspan="2">verification — no host vector supplied · outcome space {pass, unperformed, unperformable} · fail not offered</th></tr>
+        <tr><td>SAID self-consistency</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>schema conformance</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>signature validity</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>KEL anchoring</td><td><span class="st">unperformable</span> — no KEL in hand for <span class="pill">EOvbsyiK&hellip;b48S</span></td></tr>
+        <tr><td>delegation · issuer KEL tier</td><td><span class="st">unperformable</span> — root delegator <span class="pill">EDYl3N_T&hellip;bK8-</span> KEL absent</td></tr>
+        <tr><td>edge constraint · edge &lsquo;qvi&rsquo;</td><td><span class="st">unperformed</span> — far node in hand, not evaluated</td></tr>
+        <tr><td>issuer bona fides</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>revocation · registry <span class="pill">EDCOPdr8&hellip;ZAiT</span></td><td><span class="st">unperformed</span> — no TEL events in hand; no as-of exists</td></tr>
+        <tr><td>duplicity</td><td><span class="st">unperformed</span> — no watchers consulted</td></tr>
+        <tr><td>freshness</td><td><span class="st">no policy supplied</span> (a visible state, not a default)</td></tr>
+      </table>
+      <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EC5Jfmty&hellip;7Lyu</span> · 1 edge departs ↓</div>
+    </div>
+
+    <div class="conn"><div class="vline"></div><div class="arrow"></div>
+      <div class="plaque">
+        <div class="en">edge &lsquo;qvi&rsquo;</div>
+        <div class="row"><span class="k">edge d</span><span class="pill">EPdwso6V&hellip;7lFF</span> <span class="k">n</span><span class="pill">EHOTOsgW&hellip;_CnG</span> <span class="k">s</span><span class="pill">EKCowGkb&hellip;qER3</span></div>
+        <div class="row"><span class="k">operator</span> I2I — derived (far node <span class="pill">EHOTOsgW&hellip;_CnG</span> in hand, targeted)</div>
+      </div>
+    </div>
+
+    <!-- vlei_qvi -->
+    <div class="card">
+      <div class="hd">
+        <div class="ttl">Qualified vLEI Issuer credential <span style="font-weight:400;color:var(--mid)">(root of the ACDC chain · depth 1 of 4)</span></div>
+        <div class="ids">
+          <span><span class="k">d</span><span class="pill">EHOTOsgW&hellip;_CnG</span></span>
+          <span><span class="k">i&nbsp;issuer</span><span class="pill">ELTGvn2Z&hellip;Kr40</span></span>
+          <span><span class="k">s&nbsp;schema</span><span class="pill">EKCowGkb&hellip;qER3</span></span>
+          <span><span class="k">rd&nbsp;registry</span><span class="pill">EEZAG3AU&hellip;mf26</span></span>
+        </div>
+      </div>
+      <div class="ablock">
+        <div class="bh">a — attributes · d <span class="pill">EPLY_49R&hellip;JQoL</span> · u <span class="pill">0ABKCYKz&hellip;s4cM</span></div>
+        <div class="fld"><b>i (issuee)</b><span class="pill">EOvbsyiK&hellip;b48S</span></div>
+        <div class="fld"><b>LEI</b><span>984500ARCV1Z0000FIX01</span></div>
+        <div class="fld"><b>dt</b><span>2026-01-16T12:00:00+00:00</span></div>
+      </div>
+      <table class="ledger">
+        <tr><th colspan="2">verification — no host vector supplied · outcome space {pass, unperformed, unperformable} · fail not offered</th></tr>
+        <tr><td>SAID self-consistency</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>schema conformance</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>signature validity</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>KEL anchoring</td><td><span class="st">unperformable</span> — no KEL in hand for <span class="pill">ELTGvn2Z&hellip;Kr40</span></td></tr>
+        <tr><td>delegation · issuer KEL tier</td><td><span class="st">unperformable</span> — root delegator <span class="pill">EDYl3N_T&hellip;bK8-</span> KEL absent</td></tr>
+        <tr><td>issuer bona fides</td><td><span class="st">unperformed</span></td></tr>
+        <tr><td>revocation · registry <span class="pill">EEZAG3AU&hellip;mf26</span></td><td><span class="st">unperformed</span> — no TEL events in hand; no as-of exists</td></tr>
+        <tr><td>duplicity</td><td><span class="st">unperformed</span> — no watchers consulted</td></tr>
+        <tr><td>freshness</td><td><span class="st">no policy supplied</span> (a visible state, not a default)</td></tr>
+      </table>
+      <div class="seam">E — NO EDGE SECTION IN THIS CREDENTIAL AS ISSUED · committed by <span class="pill">EHOTOsgW&hellip;_CnG</span> · the ACDC chain ends here by issuance-time fact, not by omission</div>
+    </div>
+
+    <div class="conn" style="height:96px"><div class="vline" style="border-left-style:solid"></div><div class="arrow"></div>
+      <div class="plaque">
+        <div class="en">below the ACDC chain: key state</div>
+        <div class="row">Authority past this point is a KEL-level fact (delegation), not an ACDC edge. Issuer of the root credential: <span class="pill">ELTGvn2Z&hellip;Kr40</span>.</div>
+      </div>
+    </div>
+
+    <!-- the foundation hole: H7 at the AID tier -->
+    <div class="slab">
+      <div class="sh">KEY-STATE FOUNDATION — ABSENT FROM THIS MATERIAL</div>
+      <div class="row">KEL of issuer <span class="pill">ELTGvn2Z&hellip;Kr40</span> : not in hand. Its inception is, in the chain this corpus mirrors, itself delegated.</div>
+      <div class="row">Root delegator <span class="pill">EDYl3N_T&hellip;bK8-</span> : referenced, with no KEL anywhere in this material — a named absence, not nothing.</div>
+      <div class="row">Blocks: KEL anchoring and delegation on every card above (reported <em>unperformable</em> in each ledger, with this identifier named).</div>
+      <div class="row">Why absent: unknown. No retrieval was attempted — rendering performs no network acts.</div>
+    </div>
+  </div>
+
+  <p class="anno">Designer's note (not part of the render): this is the honest render of every store-fed production chain — the gate, the wall of unperformed, and the dark foundation are the steady state, not an error condition. A holder-facing render of the same material has no gate and nothing in its place. Load recipe for the foundation hole: <code>corpus/loads/h7_missing_delegator_kel.json</code>.</p>
+</div>
+
+<div class="thumbrow">
+  <div class="tl">Small-size self-test — the same render at 28% (the gate, the seam, the dark foundation, and the grey wall must still be tellable apart):</div>
+  <div id="thumb"></div>
+</div>
+<script>
+  document.getElementById('thumb').appendChild(document.getElementById('board').cloneNode(true));
+</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC6 — the hole triptych (structure-led mock)</title>
+<style>
+  :root{--ink:#111;--mid:#555;--faint:#8a8a8a;--line:#bdbdbd;--paper:#fff;--slab:#1c1c1c;--quiet:#f6f6f6}
+  *{box-sizing:border-box}
+  body{font:14px/1.45 system-ui,sans-serif;color:var(--ink);background:var(--paper);margin:28px}
+  h1{font-size:17px;margin:0 0 2px}
+  h2{font-size:13.5px;margin:0 0 10px;letter-spacing:.02em}
+  .sub{color:var(--mid);font-size:12px;margin:0 0 18px;max-width:80ch}
+  .anno{border-left:3px solid var(--line);color:var(--mid);font-style:italic;font-size:11.5px;padding:2px 10px;margin:12px 0 0;max-width:76ch}
+  .panel{border:1px solid var(--line);padding:16px 18px 18px;margin:0 0 26px;max-width:1050px}
+  .pill{font:11px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #4a4a4a;border-radius:9px;padding:0 6px;background:#fff;color:#111;white-space:nowrap;display:inline-block}
+  .k{font-size:8.5px;letter-spacing:.07em;color:var(--mid);text-transform:uppercase;margin-right:2px}
+
+  .card{width:340px;border:2px solid var(--ink);background:#fff}
+  .hd{padding:7px 10px 6px;border-bottom:1px solid var(--line)}
+  .ttl{font-weight:650;font-size:13px;margin-bottom:3px}
+  .ids{display:flex;flex-wrap:wrap;gap:3px 8px;align-items:baseline}
+  .ablock{margin:7px 10px;border:1px solid var(--faint);padding:5px 8px;font-size:12px}
+  .ablock .bh{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--mid);margin-bottom:3px}
+  .fld{display:flex;gap:6px;margin:1px 0}
+  .fld b{font-weight:600}
+  .eband{border-top:2px solid var(--ink);padding:4px 10px;font-size:9.5px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em}
+  .seam{background:var(--ink);color:#fff;padding:7px 10px;font-size:10.5px;letter-spacing:.03em;text-align:center}
+  .seam .pill{background:#fff}
+
+  .col{display:flex;flex-direction:column;align-items:center;width:340px}
+  .conn{position:relative;height:104px;width:100%;display:flex;flex-direction:column;align-items:center}
+  .vline{flex:1;width:0;border-left:2px solid var(--ink)}
+  .arrow{width:0;height:0;border:7px solid transparent;border-top-color:var(--ink);margin-top:-1px}
+  .plaque{position:absolute;left:calc(100% + 12px);top:6px;width:330px;border:1px solid var(--faint);background:#fbfbfb;padding:6px 9px;font-size:10.5px;text-align:left}
+  .plaque .en{font-weight:650;font-size:11px}
+  .plaque .row{margin:1px 0}
+
+  /* H7: the socket — a named absence that consumes a full place in the layout */
+  .slab{width:340px;background:var(--slab);color:#e8e8e8;border:2px solid #000;padding:11px 14px;font-size:11px;min-height:120px}
+  .slab .sh{font-weight:700;font-size:12px;letter-spacing:.06em;color:#fff;margin-bottom:5px}
+  .slab .pill{background:#fff;color:#111}
+  .slab .row{margin:3px 0}
+
+  /* H8: the non-place band — no place is allocated; the edge leaves the map */
+  .band{margin-top:0;border-top:6px double var(--ink);background:repeating-linear-gradient(45deg,#fff 0 5px,#dcdcdc 5px 10px);padding:14px 16px 16px;min-height:96px}
+  .band .bh{display:inline-block;background:#fff;border:1px solid var(--ink);padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.08em}
+  .band p{display:inline-block;background:#fff;border:1px solid var(--line);padding:3px 8px;margin:6px 0 0;font-size:10.5px;max-width:64ch}
+  .drop{position:relative;height:64px;display:flex;flex-direction:column;align-items:center;width:340px}
+  .endstop{width:30px;border-top:5px solid var(--ink)}
+  .estack{display:flex;gap:120px;justify-content:center}
+  .estack .drop{width:auto;min-width:60px}
+  .eplaque{background:#fff;border:1px solid var(--ink);padding:4px 8px;font-size:10px;margin-top:4px;max-width:250px;text-align:left}
+
+  .duo{display:flex;gap:36px;align-items:flex-start}
+  .grp{border:1px solid var(--line);padding:12px 14px}
+  .grp .gh{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+
+  .thumbrow{margin-top:30px;border-top:1px solid var(--line);padding-top:10px}
+  .thumbrow .tl{font-size:11px;color:var(--mid);margin-bottom:6px}
+  #thumb{zoom:0.26}
+  @media print{.thumbrow{display:none}}
+</style>
+</head>
+<body>
+<h1>SC6 — three absences that must not share a face</h1>
+<p class="sub">Structure-led mock. Each absence deforms the layout at the level where the fact lives, in a different geometric genus: H7 is a <em>place without a thing</em> (a full-size dark socket the layout pays for), H8 is a <em>path without a place</em> (an edge that leaves the map into a band where position has no meaning), H9 is <em>no path at all, by commitment</em> (a sealed seam inside the card). Fixtures: <code>loads/h7_missing_credential</code>, <code>compact_private_edge</code>, <code>optional_edge_absent</code>/<code>_present</code>, <code>two_blinded_edges_converge</code>/<code>_diverge</code> — real corpus SAIDs throughout. Greyscale-native; nothing rides hover; no network act occurs (the page loads nothing).</p>
+
+<!-- ============ PANEL 1 : H7 ============ -->
+<div class="panel" id="p1">
+  <h2>H7 — referent named, artifact absent: a hole with an identity, and it costs space</h2>
+  <div style="display:flex;gap:56px;align-items:flex-start">
+    <div>
+      <div class="col">
+        <div class="card">
+          <div class="hd">
+            <div class="ttl">Engagement Context Role credential <span style="font-weight:400;color:var(--mid)">(presented)</span></div>
+            <div class="ids">
+              <span><span class="k">d</span><span class="pill">EGDKB8m5&hellip;H_Wq</span></span>
+              <span><span class="k">i</span><span class="pill">EOvbsyiK&hellip;b48S</span></span>
+              <span><span class="k">s</span><span class="pill">EDyt0Fij&hellip;6W9k</span></span>
+            </div>
+          </div>
+          <div class="ablock">
+            <div class="bh">a — attributes · d <span class="pill">EBj_z1EG&hellip;pi7z</span></div>
+            <div class="fld"><b>personLegalName</b><span>Jordan Q. Fixture</span></div>
+            <div class="fld"><b>engagementContextRole</b><span>Compliance Analyst</span></div>
+          </div>
+          <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EGnm0R3R&hellip;g9Jw</span> · 1 edge departs ↓</div>
+        </div>
+        <div class="conn" style="height:120px"><div class="vline"></div><div class="arrow"></div>
+          <div class="plaque">
+            <div class="en">edge &lsquo;auth&rsquo;</div>
+            <div class="row"><span class="k">edge d</span><span class="pill">EOUF7Zbj&hellip;DKFM</span> <span class="k">n</span><span class="pill">EM7gTDXq&hellip;BXgm</span> <span class="k">s</span><span class="pill">EIvYqH6K&hellip;IACK</span></div>
+            <div class="row"><span class="k">operator</span> I2I — specified in the artifact; relation <em>unverifiable</em>: far node absent</div>
+            <div class="row"><span class="k">constraint check</span> unperformable — blocked by <span class="pill">EM7gTDXq&hellip;BXgm</span></div>
+          </div>
+        </div>
+        <div class="slab">
+          <div class="sh">REFERENT ABSENT FROM THIS MATERIAL</div>
+          <div class="row"><span class="k" style="color:#bbb">said</span><span class="pill">EM7gTDXq&hellip;BXgm</span> — named by the edge above; not served.</div>
+          <div class="row">Expected schema, per the edge: <span class="pill">EIvYqH6K&hellip;IACK</span>. Its contents, its own edges, and everything beneath it: not in hand.</div>
+          <div class="row">Blocks: edge-constraint check for &lsquo;auth&rsquo;; issuer bona fides beyond this point (both unperformable).</div>
+          <div class="row">Why absent: unknown. No retrieval attempted — rendering performs no network acts.</div>
+        </div>
+      </div>
+    </div>
+    <div class="grp" style="margin-top:36px">
+      <div class="gh">also served in this material — reachable by no disclosed edge from above</div>
+      <div class="col" style="width:300px">
+        <div class="card" style="width:300px">
+          <div class="hd"><div class="ttl">Legal Entity credential</div>
+            <div class="ids"><span><span class="k">d</span><span class="pill">ENKSmFLr&hellip;-Im0</span></span><span><span class="k">i</span><span class="pill">EOvbsyiK&hellip;b48S</span></span></div>
+          </div>
+          <div class="eband">e · 1 edge departs ↓</div>
+        </div>
+        <div class="conn" style="height:78px"><div class="vline"></div><div class="arrow"></div>
+          <div class="plaque" style="width:250px"><div class="en">edge &lsquo;qvi&rsquo;</div>
+            <div class="row"><span class="k">n</span><span class="pill">EHOTOsgW&hellip;_CnG</span> · I2I — derived (far node in hand, targeted)</div>
+          </div>
+        </div>
+        <div class="card" style="width:300px">
+          <div class="hd"><div class="ttl">Qualified vLEI Issuer credential</div>
+            <div class="ids"><span><span class="k">d</span><span class="pill">EHOTOsgW&hellip;_CnG</span></span><span><span class="k">i</span><span class="pill">ELTGvn2Z&hellip;Kr40</span></span></div>
+          </div>
+          <div class="seam" style="font-size:9.5px">E — NO EDGE SECTION AS ISSUED · committed by <span class="pill">EHOTOsgW&hellip;_CnG</span></div>
+        </div>
+      </div>
+      <p class="anno" style="margin-top:10px;max-width:40ch">The absent artifact's edges are not in hand, so whether it links to these two is unknown — in <em>what was presented</em>, no disclosed edge reaches them, and none is drawn. The gap between the socket and this group is the honest rendering of that ignorance.</p>
+    </div>
+  </div>
+  <p class="anno">The socket is not an error, a spinner, or an empty slot awaiting content: it is a full-size dark mass that displaces the layout exactly as the artifact would, carries the referent's real SAID, and names every check it blocks. Load: <code>corpus/loads/h7_missing_credential.json</code> (chain served with <code>vlei_ecr_auth</code> withheld).</p>
+</div>
+
+<!-- ============ PANEL 2 : H8 ============ -->
+<div class="panel" id="p2">
+  <h2>H8 — edge committed, destination withheld: a path to which the layout gives no place</h2>
+  <div class="col" style="margin:0 auto">
+    <div class="card">
+      <div class="hd">
+        <div class="ttl">Presenting credential</div>
+        <div class="ids">
+          <span><span class="k">d</span><span class="pill">EHTnmmo4&hellip;_5Cw</span></span>
+          <span><span class="k">i</span><span class="pill">EIj-Thbq&hellip;I3EF</span></span>
+          <span><span class="k">s</span><span class="pill">EFO8gf8d&hellip;BBrN</span></span>
+        </div>
+      </div>
+      <div class="ablock">
+        <div class="bh">a — attributes · d <span class="pill">EO32tVu2&hellip;9NFM</span> · u <span class="pill">0AC14kcq&hellip;2epm</span></div>
+        <div class="fld"><b>label</b><span>the presenting node</span></div>
+      </div>
+      <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EDGVb9ez&hellip;avS6</span> · 1 edge departs ↓</div>
+    </div>
+    <div class="drop"><div class="vline"></div></div>
+  </div>
+  <div class="band">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-top:-14px">
+      <div class="endstop"></div>
+      <div class="eplaque">
+        <b>edge &lsquo;source&rsquo; — content withheld.</b> In hand: only the edge block's own digest <span class="pill">EEn6lzlz&hellip;MFvS</span> (a commitment to the edge, <em>not</em> the destination's identity). Destination: no place — not drawn, not absent. Operator: undetermined (edge content withheld). Cause: unknown — no attested cause supplied. Constraint check: unperformable.
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:10px"><span class="bh">NON-PLACE</span> <p>Beyond the double line, position carries no meaning. An edge ending here is committed, but its far end is given no coordinates — drawing one would manufacture a fact the artifact withholds.</p></div>
+  </div>
+  <p class="anno">Fixture: <code>compact_private_edge</code>. Contrast with the socket above: H7 allocates a full place (we know <em>which</em> artifact belongs there); H8 allocates none (we do not even know which artifact is meant — the digest in hand identifies the edge, not the destination).</p>
+</div>
+
+<!-- ============ PANEL 3 : H9 ============ -->
+<div class="panel" id="p3">
+  <h2>H9 — committed no-edge: not a hole, a wall the issuer built</h2>
+  <div class="duo">
+    <div class="col">
+      <div class="card">
+        <div class="hd">
+          <div class="ttl">Claim credential — twin A</div>
+          <div class="ids">
+            <span><span class="k">d</span><span class="pill">EFD8--Eg&hellip;faIo</span></span>
+            <span><span class="k">i</span><span class="pill">EHbpCXLE&hellip;PnsN</span></span>
+            <span><span class="k">s</span><span class="pill">EHRrOGr_&hellip;NOqs</span></span>
+          </div>
+        </div>
+        <div class="ablock">
+          <div class="bh">a — attributes · d <span class="pill">EG4ACQDr&hellip;siTi</span></div>
+          <div class="fld"><b>claim</b><span>a claim issued with no endorsement attached</span></div>
+        </div>
+        <div class="seam">E — NO EDGE SECTION IN THIS CREDENTIAL AS ISSUED · committed by <span class="pill">EFD8--Eg&hellip;faIo</span></div>
+      </div>
+      <p class="anno" style="max-width:44ch">A fact about this credential as issued — never "no linked credentials exist." The seam is a solid built wall at the exact position where the other twin has a departure band: same place, opposite structure.</p>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="hd">
+          <div class="ttl">Claim credential — twin B (control)</div>
+          <div class="ids">
+            <span><span class="k">d</span><span class="pill">ENoIY4Bg&hellip;ppUX</span></span>
+            <span><span class="k">i</span><span class="pill">EAlYzHku&hellip;Ph7r</span></span>
+            <span><span class="k">s</span><span class="pill">EHRrOGr_&hellip;NOqs</span></span>
+          </div>
+        </div>
+        <div class="ablock">
+          <div class="bh">a — attributes · d <span class="pill">EPVar2O-&hellip;PucB</span></div>
+          <div class="fld"><b>claim</b><span>a claim with an attached endorsement</span></div>
+        </div>
+        <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EI-kGD7Q&hellip;XGAT</span> · 1 edge departs ↓</div>
+      </div>
+      <div class="conn" style="height:96px"><div class="vline"></div><div class="arrow"></div>
+        <div class="plaque" style="width:290px">
+          <div class="en">edge &lsquo;endorsement&rsquo;</div>
+          <div class="row"><span class="k">n</span><span class="pill">EFPKD1ol&hellip;qXGq</span> <span class="k">s</span><span class="pill">EL6_t_FD&hellip;88QS</span></div>
+          <div class="row"><span class="k">operator</span> undetermined — no &lsquo;o&rsquo; specified and far node absent (Rule&nbsp;9(b): never &ldquo;I2I (default)&rdquo;)</div>
+          <div class="row"><span class="k">constraint check</span> unperformable — blocked by <span class="pill">EFPKD1ol&hellip;qXGq</span></div>
+        </div>
+      </div>
+      <div class="slab" style="min-height:64px;padding:9px 12px">
+        <div class="sh" style="font-size:11px">REFERENT ABSENT FROM THIS MATERIAL</div>
+        <div class="row"><span class="pill">EFPKD1ol&hellip;qXGq</span> — named by the edge above; not served. Why absent: unknown; no retrieval attempted.</div>
+      </div>
+      <p class="anno" style="max-width:44ch">The control twin's far node is not in this corpus, so it honestly renders as another H7 socket — which puts H9's sealed seam and H7's dark socket side by side: a wall the issuer built versus a place the presentation failed to fill. Same schema <span class="pill" style="font-style:normal">EHRrOGr_&hellip;NOqs</span> on both twins; different committed structure, visibly different card shape.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PANEL 4 : two blinded edges ============ -->
+<div class="panel" id="p4">
+  <h2>Composition — two blinded edges: convergence is unknowable, so the drawing owns no geometry that could assert it</h2>
+  <div class="duo">
+    <div>
+      <div class="gh" style="font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">fixture: two_blinded_edges_converge (ground truth withheld from the renderer)</div>
+      <div class="col" style="width:420px">
+        <div class="card" style="width:420px">
+          <div class="hd">
+            <div class="ttl">Presenting credential</div>
+            <div class="ids">
+              <span><span class="k">d</span><span class="pill">EHZGkyDF&hellip;T2Ol</span></span>
+              <span><span class="k">i</span><span class="pill">EJfO7Ijq&hellip;-oMk</span></span>
+              <span><span class="k">s</span><span class="pill">EJAzSzlt&hellip;LeYP</span></span>
+            </div>
+          </div>
+          <div class="ablock"><div class="bh">a · d <span class="pill">ELw7cdZr&hellip;tbGB</span></div>
+            <div class="fld"><b>label</b><span>presenting node with two independently blinded edges</span></div></div>
+          <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EJN6Z-a_&hellip;58UI</span> · 2 edges depart ↓</div>
+        </div>
+        <div class="estack">
+          <div class="drop"><div class="vline"></div></div>
+          <div class="drop"><div class="vline"></div></div>
+        </div>
+      </div>
+      <div class="band" style="width:420px">
+        <div class="estack" style="margin-top:-14px;gap:26px;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;align-items:center"><div class="endstop"></div>
+            <div class="eplaque" style="max-width:170px"><b>&lsquo;sourceA&rsquo;</b> — withheld. edge digest <span class="pill">EJye2Ioh&hellip;4pqy</span>. cause: unknown.</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center"><div class="endstop"></div>
+            <div class="eplaque" style="max-width:170px"><b>&lsquo;sourceB&rsquo;</b> — withheld. edge digest <span class="pill">EMiUl2Hb&hellip;n14t</span>. cause: unknown.</div></div>
+        </div>
+        <div style="text-align:center;margin-top:8px"><span class="bh">NON-PLACE</span> <p style="max-width:44ch">Two committed edges. Whether their destinations are one node or two is exactly what was withheld — the band has no positions, so neither answer is drawable.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="gh" style="font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">fixture: two_blinded_edges_diverge (ground truth withheld from the renderer)</div>
+      <div class="col" style="width:420px">
+        <div class="card" style="width:420px">
+          <div class="hd">
+            <div class="ttl">Presenting credential</div>
+            <div class="ids">
+              <span><span class="k">d</span><span class="pill">EPkMaYHR&hellip;VEBa</span></span>
+              <span><span class="k">i</span><span class="pill">EHvCQ1sq&hellip;V5LZ</span></span>
+              <span><span class="k">s</span><span class="pill">ED1CSZYl&hellip;Spcz</span></span>
+            </div>
+          </div>
+          <div class="ablock"><div class="bh">a · d <span class="pill">EKagAZFd&hellip;saSN</span></div>
+            <div class="fld"><b>label</b><span>presenting node with two independently blinded edges</span></div></div>
+          <div class="eband">e — edge section · d <span class="pill" style="text-transform:none">EEqASf8W&hellip;Y75O</span> · 2 edges depart ↓</div>
+        </div>
+        <div class="estack">
+          <div class="drop"><div class="vline"></div></div>
+          <div class="drop"><div class="vline"></div></div>
+        </div>
+      </div>
+      <div class="band" style="width:420px">
+        <div class="estack" style="margin-top:-14px;gap:26px;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;align-items:center"><div class="endstop"></div>
+            <div class="eplaque" style="max-width:170px"><b>&lsquo;sourceA&rsquo;</b> — withheld. edge digest <span class="pill">ECUJuvZc&hellip;6Iqn</span>. cause: unknown.</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center"><div class="endstop"></div>
+            <div class="eplaque" style="max-width:170px"><b>&lsquo;sourceB&rsquo;</b> — withheld. edge digest <span class="pill">EPXku6ct&hellip;eADo</span>. cause: unknown.</div></div>
+        </div>
+        <div style="text-align:center;margin-top:8px"><span class="bh">NON-PLACE</span> <p style="max-width:44ch">Structurally identical to the render on the left. Only the digests differ — as they do in the artifacts themselves.</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="anno">The two fixtures are structurally identical by design; their renders are structurally identical by construction — the end-stops are the termini of the <em>edges</em> (two known, distinct commitments), never destinations, and the band offers no point two edges could visibly meet at or avoid. No information is manufactured in either direction.</p>
+</div>
+
+<div class="thumbrow">
+  <div class="tl">Small-size self-test — the same panels at 26% (socket, band exit, and seam must remain pairwise tellable):</div>
+  <div id="thumb"></div>
+</div>
+<script>
+  var t=document.getElementById('thumb');
+  ['p1','p2','p3','p4'].forEach(function(id){t.appendChild(document.getElementById(id).cloneNode(true));});
+</script>
+</body>
+</html>
