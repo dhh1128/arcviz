@@ -1,0 +1,196 @@
+<!doctype html>
+<!-- arcviz charrette / graph-led designer / SC2: the production chain — deep, fully disclosed, still incomplete, and NORMAL.
+     Hand-authored throwaway mock. No build step, no external resources, no JS, no hover-carried meaning.
+     Authored entirely in greyscale: this file IS its own greyscale variant (see README, "Greyscale").
+     Fixtures: corpus/vlei_qvi, vlei_le, vlei_ecr_auth, vlei_ecr, their four registry inception files,
+     and corpus/loads/h7_missing_delegator_kel (the absent root delegator).
+     All SAIDs/AIDs are real fixture values, truncated to 10 chars. -->
+<html lang="en"><head><meta charset="utf-8"><title>SC2 — production chain (graph-led)</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:1080px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:16px;margin:30px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:920px}
+  .pbanner{border:3px solid #111;background:#111;color:#fff;padding:12px 16px;font-size:15px;margin-bottom:0}
+  .pbanner b{font-size:17px;letter-spacing:.04em}
+  .pbanner .sub{font-size:12px;color:#ddd;margin-top:4px}
+  .board{position:relative;border:3px solid #111;border-top:none;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;border:1px solid #333;border-radius:999px;padding:0 7px;background:#fff;white-space:nowrap;display:inline-block}
+  .x{font-size:9px;vertical-align:super;color:#333}
+  .card{border:1.5px solid #111;background:#fff;padding:9px 11px;font-size:12px}
+  .card .role{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .aid{border:1.5px solid #111;border-radius:14px;background:#fff;padding:8px 11px;font-size:12px}
+  .hole{border:4px double #111;border-radius:14px;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:8px 11px;font-size:12px}
+  .hole .hdr{font-weight:700;letter-spacing:.1em;font-size:11px}
+  .elabel{font-size:11px;background:#fff;border:1px solid #999;padding:2px 6px;line-height:1.3}
+  .opchip{display:inline-block;border:1px solid #333;background:#fff;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;padding:0 4px}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:10px;padding:0 5px;background:#fafafa}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:2px;font-size:10px}
+  .ledger{font-size:10.5px;color:#222;border-top:1px solid #bbb;margin-top:7px;padding-top:4px}
+  .ledger .row{display:flex;gap:6px}
+  .ledger .g{width:14px;flex:none;text-align:center}
+  .ledger .sum{font-weight:600;border-bottom:1px solid #ddd;margin-bottom:3px;padding-bottom:2px}
+  .tline{font-size:10.5px;color:#333;margin-top:4px}
+  .dock{border:1.5px solid #111;background:#fafafa;padding:10px 12px;font-size:12px;margin-top:0}
+  .cap{font-size:12px;color:#333;margin:8px 0 0}
+</style></head><body>
+
+<h1>SC2 — the production chain: depth 4, everything disclosed, and still incomplete — rendered as the normal case it is</h1>
+<p class="note">Four credentials (<code>vlei_qvi ← vlei_le ← vlei_ecr_auth ← vlei_ecr</code>), four registry inceptions, one absent root delegator's KEL (<code>loads/h7_missing_delegator_kel</code>). Every ACDC section is H1; the incompleteness lives above the chain (a KEL hole) and inside every ledger (the all-unperformed wall). Nothing below wears warning chrome, because nothing below is exceptional: <b>this render is what every honestly-rendered production credential looks like.</b></p>
+
+<div class="pbanner">
+  <b>P — PRESENTER: UNKNOWN</b>
+  <div class="sub">Nothing binds the party who presented this material to any holder AID below. Every check in the ledgers concerns the artifacts' issuance history; none concerns the presenter. This banner precedes the vector because the presenter question comes first (Rule 18). No evidence channel supplied.</div>
+</div>
+<div class="board" style="height:2120px">
+  <svg width="1080" height="2120">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+      <marker id="oarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/></marker>
+    </defs>
+    <!-- delegate AID -> root hole (unverifiable delegation reference) -->
+    <line x1="255" y1="290" x2="255" y2="202" stroke="#111" stroke-width="1.2" marker-end="url(#oarr)"/>
+    <!-- identity reference: qvi card issuer equals delegate AID node (inferred-by-equality class: thin dashed) -->
+    <line x1="472" y1="345" x2="560" y2="180" stroke="#111" stroke-width="0.75" stroke-dasharray="3 4"/>
+    <!-- chain edges -->
+    <line x1="790" y1="590" x2="790" y2="512" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="790" y1="1120" x2="790" y2="1042" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="790" y1="1680" x2="790" y2="1602" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+  </svg>
+
+  <!-- identity stratum -->
+  <div class="el hole" style="left:40px;top:40px;width:430px;height:160px">
+    <div class="hdr">KEL NOT IN HAND</div>
+    <span class="pill">EDYl3N_TuK…</span> <span style="font-size:10px">(an AID — the root delegator)</span>
+    <div style="margin-top:5px;font-size:11px">Referenced as the root of the delegation chain (load context <code>h7_missing_delegator_kel</code>). Its key-event log is absent from everything presented.<br>
+    <b>Delegation verification cannot reach past this point.</b> Blocking identifier named; cause: unknown — no attestation supplied.</div>
+  </div>
+  <div class="el elabel" style="left:270px;top:225px;width:200px">delegated by (<code>dip</code>) — a KEL-level fact from load context, not from any ACDC · verification: ⊘ unperformable</div>
+  <div class="el aid" style="left:40px;top:290px;width:430px;height:110px">
+    <div style="font-size:10px;letter-spacing:.08em;color:#555">IDENTITY STRATUM — AID (not a credential)</div>
+    <span class="pill">ELTGvn2Zme…</span>
+    <div style="margin-top:4px;font-size:11px">QVI issuer AID. Its inception is delegated (per load context). Its own KEL: also not in hand — the corpus carries no KEL events at all.</div>
+  </div>
+  <div class="el elabel" style="left:300px;top:430px;width:240px;border-style:dashed">identity reference — <i>inferred by equality</i> (this AID appears as the QVI credential's issuer). Not an ACDC edge; drawn in its own stroke class (Rule 14).</div>
+  <div class="el" style="left:40px;top:470px;width:430px;font-size:11px;color:#444">
+    The identity stratum is deliberately quiet: thinner strokes, rounded geometry, no card chrome. It exists because Rule 10 requires the root delegator drawn, not because arcviz renders KELs — one hole and one AID node are the whole stratum.
+  </div>
+
+  <!-- QVI -->
+  <div class="el card" style="left:560px;top:40px;width:460px;height:472px">
+    <div class="role">QVI credential — root, depth 1 of 4 (vlei_qvi)</div>
+    <div style="margin-top:2px">d <span class="pill">EHOTOsgWoV…</span></div>
+    <div style="margin-top:3px">issuer <span class="pill">ELTGvn2Zme…</span> · issuee <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span></div>
+    <div style="margin-top:3px">registry <span class="pill">EEZAG3AUc0…</span> <span style="font-size:10px">inception in hand · 0 TEL events</span> · schema <span class="pill">EKCowGkbg1…</span><span class="x">×2</span></div>
+    <div style="margin-top:6px;font-size:12px"><b>a</b> — LEI: 984500ARCV1Z0000FIX01 · dt: 2026-01-16T12:00:00+00:00</div>
+    <div class="ledger">
+      <div class="row sum"><div class="g"></div><div>V — this viewer: 0 of 9 performed · the honest default of a store-fed render, not a degraded state</div></div>
+      <div class="row"><div class="g">○</div><div>1 SAID self-consistency — unperformed (material in hand; computable on demand)</div></div>
+      <div class="row"><div class="g">○</div><div>2 schema conformance — unperformed (schema in hand, SAID-verified route required first)</div></div>
+      <div class="row"><div class="g">⊘</div><div>3 signature validity — unperformable: no signature or KEL material in what was presented</div></div>
+      <div class="row"><div class="g">⊘</div><div>4 KEL anchoring — unperformable: no KEL material · blocked at <span class="pill">ELTGvn2Zme…</span></div></div>
+      <div class="row"><div class="g">⊘</div><div>5 delegation — unperformable past deepest KEL in hand (none) · root blocked at <span class="pill">EDYl3N_TuK…</span></div></div>
+      <div class="row"><div class="g">—</div><div>6 edge constraints — no subjects: this credential, as issued, has no edges (sealed below)</div></div>
+      <div class="row"><div class="g">○</div><div>7 issuer bona fides — unperformed · a labeled roll-up of check 6 under arcviz's default EGF rule (AND), host-overridable (Rule 11)</div></div>
+      <div class="row"><div class="g">⊘</div><div>8 revocation — unperformable: registry inception only, no TEL events · as-of horizon: none</div></div>
+      <div class="row"><div class="g">○</div><div>9 duplicity — unperformed · watchers consulted: zero (a scoped claim, never a universal)</div></div>
+    </div>
+    <div class="tline">T — freshness: <b>no policy supplied</b> (its own visible state, never a silent default)</div>
+    <div style="margin-top:7px"><span class="seal">e — none · sealed at issuance</span></div>
+  </div>
+
+  <!-- LE -->
+  <div class="el elabel" style="left:815px;top:530px;width:205px"><b>qvi</b> · <span class="opchip">I2I · derived</span> — far node <span class="pill">EHOTOsgWoV…</span> in hand, targeted</div>
+  <div class="el card" style="left:560px;top:590px;width:460px;height:452px">
+    <div class="role">LE credential — depth 2 of 4 (vlei_le)</div>
+    <div style="margin-top:2px">d <span class="pill">ENKSmFLrpu…</span></div>
+    <div style="margin-top:3px">issuer <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span> · issuee <span class="pill">EErZ90n2jH…</span><span class="x">×2</span></div>
+    <div style="margin-top:3px">registry <span class="pill">EDCOPdr8xJ…</span> <span style="font-size:10px">inception in hand · 0 TEL events</span> · schema <span class="pill">EC53kuutIE…</span><span class="x">×2</span></div>
+    <div style="margin-top:6px;font-size:12px"><b>a</b> — LEI: 984500ARCV1Z0000FIX01 · dt: 2026-01-18T12:00:00+00:00</div>
+    <div class="ledger">
+      <div class="row sum"><div class="g"></div><div>V — this viewer: 0 of 9 performed</div></div>
+      <div class="row"><div class="g">○</div><div>1 SAID self-consistency — unperformed</div></div>
+      <div class="row"><div class="g">○</div><div>2 schema conformance — unperformed</div></div>
+      <div class="row"><div class="g">⊘</div><div>3 signature validity — unperformable: no KEL material in hand</div></div>
+      <div class="row"><div class="g">⊘</div><div>4 KEL anchoring — unperformable · blocked at <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span></div></div>
+      <div class="row"><div class="g">⊘</div><div>5 delegation — unperformable: no KELs in hand</div></div>
+      <div class="row"><div class="g">○</div><div>6 edge constraint · subject: <b>qvi</b> edge — unperformed (far node in hand; computable on demand)</div></div>
+      <div class="row"><div class="g">○</div><div>7 issuer bona fides — unperformed · labeled roll-up of check 6, arcviz-default AND, host-overridable</div></div>
+      <div class="row"><div class="g">⊘</div><div>8 revocation — unperformable: no TEL events · horizon: none</div></div>
+      <div class="row"><div class="g">○</div><div>9 duplicity — unperformed · watchers consulted: zero</div></div>
+    </div>
+    <div class="tline">T — freshness: <b>no policy supplied</b></div>
+    <div style="margin-top:7px"><span class="port">qvi ↑</span></div>
+  </div>
+
+  <!-- ECR-AUTH -->
+  <div class="el elabel" style="left:815px;top:1060px;width:205px"><b>le</b> · <span class="opchip">I2I · derived</span> — far node <span class="pill">ENKSmFLrpu…</span> in hand, targeted</div>
+  <div class="el card" style="left:560px;top:1120px;width:460px;height:482px">
+    <div class="role">ECR-AUTH credential — depth 3 of 4 (vlei_ecr_auth)</div>
+    <div style="margin-top:2px">d <span class="pill">EM7gTDXqvy…</span></div>
+    <div style="margin-top:3px">issuer <span class="pill">EErZ90n2jH…</span><span class="x">×2</span> · issuee <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span></div>
+    <div style="margin-top:3px">registry <span class="pill">EIz-db8yaH…</span> <span style="font-size:10px">inception in hand · 0 TEL events</span> · schema <span class="pill">EIvYqH6Kbf…</span><span class="x">×2</span></div>
+    <div style="margin-top:6px;font-size:12px"><b>a</b> — LEI: 984500ARCV1Z0000FIX01 · dt: 2026-01-17T12:00:00+00:00<br>
+    AID <span class="pill">ELiFwqI6jH…</span><span class="x">×2</span> · personLegalName: Jordan Q. Fixture · engagementContextRole: Compliance Analyst</div>
+    <div class="ledger">
+      <div class="row sum"><div class="g"></div><div>V — this viewer: 0 of 9 performed</div></div>
+      <div class="row"><div class="g">○</div><div>1 SAID self-consistency — unperformed</div></div>
+      <div class="row"><div class="g">○</div><div>2 schema conformance — unperformed</div></div>
+      <div class="row"><div class="g">⊘</div><div>3 signature validity — unperformable: no KEL material in hand</div></div>
+      <div class="row"><div class="g">⊘</div><div>4 KEL anchoring — unperformable · blocked at <span class="pill">EErZ90n2jH…</span><span class="x">×2</span></div></div>
+      <div class="row"><div class="g">⊘</div><div>5 delegation — unperformable: no KELs in hand</div></div>
+      <div class="row"><div class="g">○</div><div>6 edge constraint · subject: <b>le</b> edge — unperformed (far node in hand; computable on demand)</div></div>
+      <div class="row"><div class="g">○</div><div>7 issuer bona fides — unperformed · labeled roll-up of check 6, arcviz-default AND, host-overridable</div></div>
+      <div class="row"><div class="g">⊘</div><div>8 revocation — unperformable: no TEL events · horizon: none</div></div>
+      <div class="row"><div class="g">○</div><div>9 duplicity — unperformed · watchers consulted: zero</div></div>
+    </div>
+    <div class="tline">T — freshness: <b>no policy supplied</b></div>
+    <div style="margin-top:7px"><span class="port">le ↑</span></div>
+  </div>
+
+  <!-- ECR -->
+  <div class="el elabel" style="left:815px;top:1620px;width:205px"><b>auth</b> · <span class="opchip">I2I · derived</span> — far node <span class="pill">EM7gTDXqvy…</span> in hand, targeted</div>
+  <div class="el card" style="left:560px;top:1680px;width:460px;height:482px">
+    <div class="role">ECR credential — presented leaf, depth 4 of 4 (vlei_ecr)</div>
+    <div style="margin-top:2px">d <span class="pill">EGDKB8m5pt…</span> <span style="font-size:10px">(top-level u present: blinding entropy in hand)</span></div>
+    <div style="margin-top:3px">issuer <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span> · issuee <span class="pill">ELiFwqI6jH…</span><span class="x">×2</span></div>
+    <div style="margin-top:3px">registry <span class="pill">EFiZI0ixQl…</span> <span style="font-size:10px">inception in hand · 0 TEL events</span> · schema <span class="pill">EDyt0FijsX…</span></div>
+    <div style="margin-top:6px;font-size:12px"><b>a</b> — LEI: 984500ARCV1Z0000FIX01 · dt: 2026-01-15T12:00:00+00:00<br>
+    personLegalName: Jordan Q. Fixture · engagementContextRole: Compliance Analyst</div>
+    <div class="ledger">
+      <div class="row sum"><div class="g"></div><div>V — this viewer: 0 of 9 performed</div></div>
+      <div class="row"><div class="g">○</div><div>1 SAID self-consistency — unperformed</div></div>
+      <div class="row"><div class="g">○</div><div>2 schema conformance — unperformed</div></div>
+      <div class="row"><div class="g">⊘</div><div>3 signature validity — unperformable: no KEL material in hand</div></div>
+      <div class="row"><div class="g">⊘</div><div>4 KEL anchoring — unperformable · blocked at <span class="pill">EOvbsyiKJg…</span><span class="x">×4</span></div></div>
+      <div class="row"><div class="g">⊘</div><div>5 delegation — unperformable: no KELs in hand</div></div>
+      <div class="row"><div class="g">○</div><div>6 edge constraint · subject: <b>auth</b> edge — unperformed (far node in hand; computable on demand)</div></div>
+      <div class="row"><div class="g">○</div><div>7 issuer bona fides — unperformed · labeled roll-up of check 6, arcviz-default AND, host-overridable</div></div>
+      <div class="row"><div class="g">⊘</div><div>8 revocation — unperformable: no TEL events · horizon: none</div></div>
+      <div class="row"><div class="g">○</div><div>9 duplicity — unperformed · watchers consulted: zero</div></div>
+    </div>
+    <div class="tline">T — freshness: <b>no policy supplied</b></div>
+    <div style="margin-top:7px"><span class="port">auth ↑</span></div>
+  </div>
+</div>
+
+<div class="dock">
+  <b>Residual correlators in this presentation</b> — the on-demand enumeration (AF13), drawn open for this mock. Identical values render identically everywhere above; the <sup>×N</sup> chips on pills are these counts.<br>
+  <div style="margin-top:6px;line-height:1.7">
+    <span class="pill">EOvbsyiKJg…</span> ×4 — qvi issuee · le issuer · ecr-auth issuee · ecr issuer &nbsp;|&nbsp;
+    <span class="pill">EErZ90n2jH…</span> ×2 — le issuee · ecr-auth issuer &nbsp;|&nbsp;
+    <span class="pill">ELiFwqI6jH…</span> ×2 — ecr-auth a.AID · ecr issuee &nbsp;|&nbsp;
+    LEI <code>984500ARCV1Z0000FIX01</code> ×4 — every a section<br>
+    <span class="pill">EHOTOsgWoV…</span> ×2 — qvi d · le's edge n &nbsp;|&nbsp;
+    <span class="pill">ENKSmFLrpu…</span> ×2 — le d · ecr-auth's edge n &nbsp;|&nbsp;
+    <span class="pill">EM7gTDXqvy…</span> ×2 — ecr-auth d · ecr's edge n &nbsp;|&nbsp;
+    schemas <span class="pill">EKCowGkbg1…</span> <span class="pill">EC53kuutIE…</span> <span class="pill">EIvYqH6Kbf…</span> ×2 each — as s and as the child edge's s
+  </div>
+  <div style="margin-top:6px;font-size:11px;color:#444">Scope: this enumeration covers the material in hand and nothing else. It asserts no fact about the world, and "selective disclosure" is never rendered as achieved privacy while these values correlate perfectly (Rule 13, §B5).</div>
+</div>
+
+<p class="cap"><b>Annotation, not part of the render:</b> in raw bytes the <code>le</code> edge omits <code>o</code> and the <code>auth</code> edge declares <code>o: "I2I"</code>. Both far nodes are in hand and targeted, so both effective operators derive to I2I and the render suppresses the syntactic difference everywhere outside the raw view (Rule 9a, pair 2) — which is why the three operator chips above are deliberately indistinguishable.</p>
+<p class="cap"><b>Annotation:</b> the four registry inception messages are in hand, so each card names its registry with "inception in hand · 0 TEL events" — which is exactly why every revocation cell reads unperformable with horizon "none" rather than "not revoked" (Rule 3).</p>
+
+</body></html>

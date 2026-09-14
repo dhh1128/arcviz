@@ -1,0 +1,246 @@
+<!doctype html>
+<!-- arcviz charrette / graph-led designer / SC6: the hole triptych.
+     Hand-authored throwaway mock. No build step, no external resources, no JS, no hover-carried meaning.
+     Authored entirely in greyscale: this file IS its own greyscale variant (see README, "Greyscale").
+     Fixtures: corpus/loads/h7_missing_credential (H7), corpus/compact_private_edge (H8),
+     corpus/optional_edge_absent + _present (H9), corpus/two_blinded_edges_converge / _diverge (composition).
+     All SAIDs below are the real fixture values, truncated to 10 chars for display. -->
+<html lang="en"><head><meta charset="utf-8"><title>SC6 — the hole triptych (graph-led)</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:1060px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:16px;margin:36px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:900px}
+  .pframe{border:1.5px solid #111;border-bottom:none;background:#111;color:#fff;padding:6px 12px;font-size:13px;letter-spacing:.02em}
+  .pframe b{font-size:14px}
+  .board{position:relative;border:1.5px solid #111;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;border:1px solid #333;border-radius:999px;padding:0 7px;background:#fff;white-space:nowrap;display:inline-block}
+  .card{border:1.5px solid #111;background:#fff;padding:8px 10px;font-size:12px}
+  .card .role{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .hole{border:1.5px double #111;border-width:4px;border-style:double;background:
+        repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:8px 10px;font-size:12px}
+  .hole .hdr{font-weight:700;letter-spacing:.1em;font-size:11px}
+  .frontier{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:6px 12px;font-size:11.5px;color:#333}
+  .frontier b{letter-spacing:.1em;font-size:11px}
+  .elabel{font-size:11px;background:#fff;border:1px solid #999;padding:2px 6px;line-height:1.3}
+  .opchip{display:inline-block;border:1px solid #333;background:#fff;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;padding:0 4px}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:10px;padding:0 5px;background:#fafafa}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:2px;font-size:10px;letter-spacing:.02em}
+  .callout{border:1px solid #777;background:#fafafa;padding:8px 10px;font-size:12px}
+  .ledger{font-size:10.5px;color:#333;border-top:1px solid #ccc;margin-top:6px;padding-top:4px}
+  .cap{font-size:12px;color:#333;margin:8px 0 0}
+  table.legend{border-collapse:collapse;font-size:12px;margin-top:8px}
+  table.legend td,table.legend th{border:1px solid #999;padding:6px 8px;text-align:left;vertical-align:top}
+</style></head><body>
+
+<h1>SC6 — three absences that must not share a face (graph-led treatment)</h1>
+<p class="note">Vocabulary used throughout: a <b>place</b> is a node whose content is in hand (a card). A <b>hole</b> (H7) is a <i>named</i> place whose content is not in hand — it has an address, so it gets node geometry. The <b>frontier</b> (H8 and every other region of unknowable topology) is a <i>region, not a point</i>: a blinded edge has no known far end, so nothing point-like may terminate it. A <b>seal</b> (H9) is a committed no-edge fact on a node's port strip — no hole, no frontier, no absence at all: a positive issuance-time fact. Cause is "unknown" everywhere below because no attestation channel is supplied (Rule&nbsp;5). Nothing here fetches anything (Rule&nbsp;17: static file).</p>
+
+<!-- ================= PANEL 1 : H7 ================= -->
+<h2>Panel 1 — H7: referent named, artifact absent</h2>
+<p class="note">Load recipe <code>corpus/loads/h7_missing_credential</code>: served <code>vlei_qvi</code>, <code>vlei_le</code>, <code>vlei_ecr</code>; withheld <code>vlei_ecr_auth</code> (SAID <code>EM7gTDXqvy…</code>). Withholding one <i>interior</i> node does more than puncture the chain: the hole's own out-edges are unknown, so the known graph falls into two components whose connection — if any — is inside the hole.</p>
+<div class="pframe"><b>P — presenter: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below (Rule 18) &nbsp;·&nbsp; V — 0 checks performed by this viewer</div>
+<div class="board" style="height:620px">
+  <svg width="1060" height="620">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+      <marker id="oarr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/></marker>
+    </defs>
+    <!-- ecr -> hole -->
+    <line x1="210" y1="420" x2="210" y2="312" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- hole egress fringe into frontier -->
+    <line x1="150" y1="160" x2="150" y2="96" stroke="#111" stroke-width="1.2" marker-end="url(#oarr)"/>
+    <line x1="210" y1="160" x2="210" y2="96" stroke="#111" stroke-width="1.2" marker-end="url(#oarr)"/>
+    <line x1="270" y1="160" x2="270" y2="96" stroke="#111" stroke-width="1.2" marker-end="url(#oarr)"/>
+    <!-- le -> qvi -->
+    <line x1="800" y1="420" x2="800" y2="282" stroke="#111" stroke-width="1.5" marker-end="url(#arr)"/>
+  </svg>
+  <div class="el frontier" style="left:0;top:0;width:100%;height:88px">
+    <b>UNMAPPED — COMMITTED STRUCTURE, TOPOLOGY UNKNOWABLE FROM MATERIAL IN HAND</b><br>
+    The withheld artifact's edges, if it has any, live here. Whether they reach the component at right — or anywhere — cannot be known. This band is a region, never a node: nothing in it has a position.
+  </div>
+  <div class="el hole" style="left:60px;top:160px;width:310px;height:150px">
+    <div class="hdr">NOT IN HAND</div>
+    <span class="pill">EM7gTDXqvy…</span>
+    <div style="margin-top:5px">identity: known (this SAID) · content: <b>unknown</b><br>
+    out-edges: <b>unknown</b> — see fringe above<br>
+    cause: unknown — no attestation supplied<br>
+    <span style="font-size:10.5px;color:#333">every check through this node: ⊘ unperformable, blocked by <b>EM7gTDXqvy…</b></span></div>
+  </div>
+  <div class="el elabel" style="left:225px;top:340px;width:200px">
+    <b>auth</b> · <span class="opchip">I2I · declared</span><br>
+    edge disclosed; operator read from the edge block in hand.<br>
+    constraint check: ⊘ unperformable — far node not in hand
+  </div>
+  <div class="el card" style="left:60px;top:420px;width:310px;height:150px">
+    <div class="role">ECR — presented leaf (vlei_ecr)</div>
+    <span class="pill">EGDKB8m5pt…</span>
+    <div style="margin-top:4px">issuer <span class="pill">EOvbsyiKJg…</span> · issuee <span class="pill">ELiFwqI6jH…</span></div>
+    <div class="ledger">V: 0 of 9 performed by this viewer · freshness: no policy supplied</div>
+    <div style="margin-top:6px"><span class="port">auth ↑</span></div>
+  </div>
+  <div class="el card" style="left:650px;top:160px;width:300px;height:110px">
+    <div class="role">QVI — root (vlei_qvi)</div>
+    <span class="pill">EHOTOsgWoV…</span>
+    <div style="margin-top:4px">issuer <span class="pill">ELTGvn2Zme…</span></div>
+    <div style="margin-top:6px"><span class="seal">e — none · sealed at issuance</span></div>
+  </div>
+  <div class="el elabel" style="left:815px;top:335px;width:180px">
+    <b>qvi</b> · <span class="opchip">I2I · derived</span><br>far node in hand and targeted; syntactic <code>o</code>-presence suppressed (Rule 9a)
+  </div>
+  <div class="el card" style="left:650px;top:420px;width:300px;height:110px">
+    <div class="role">LE (vlei_le)</div>
+    <span class="pill">ENKSmFLrpu…</span>
+    <div style="margin-top:4px">issuer <span class="pill">EOvbsyiKJg…</span></div>
+    <div style="margin-top:6px"><span class="port">qvi ↑</span></div>
+  </div>
+  <div class="el callout" style="left:410px;top:470px;width:210px">
+    <b>Two components, one unknown join.</b> The renderer may not bridge them: the bridge, if it exists, is content of the hole. Drawing these as one connected chain would manufacture topology.
+  </div>
+</div>
+<p class="cap">The hole has node geometry <i>because it has an identity</i> — it is a place we can name but not enter. Its interior wears the same unmapped hatch as the frontier band; its border and SAID pill are what distinguish "a named window onto unmapped territory" from "unmapped territory". Static text, no spinner geometry, no animation: nothing is loading, and nothing says error — incomplete evidence is a normal state.</p>
+
+<h2 style="font-size:14px">Panel 1a — the o-less edge into a hole (Rule 9b), same recipe pattern on the diamond</h2>
+<p class="note">Load variant (same documented withholding mechanism, applied to the diamond family): serve <code>diamond_depth_b</code>, withhold <code>diamond_depth_a</code>. B's <code>baseline</code> edge carries no <code>o</code>. The injected default depends on the far node's targetedness — content not in hand — so the effective operator is <b>undetermined</b>, and printing "I2I (default)" or "NI2I (default)" would manufacture a fact.</p>
+<div class="board" style="height:230px">
+  <svg width="1060" height="230">
+    <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+    <line x1="370" y1="105" x2="638" y2="105" stroke="#111" stroke-width="1.5" marker-end="url(#arr2)"/>
+  </svg>
+  <div class="el card" style="left:60px;top:50px;width:310px;height:110px">
+    <div class="role">B — short-path node (diamond_depth_b)</div>
+    <span class="pill">EGHUpSJN58…</span>
+    <div style="margin-top:6px"><span class="port">baseline →</span></div>
+  </div>
+  <div class="el elabel" style="left:390px;top:118px;width:230px">
+    <b>baseline</b> · <span class="opchip">operator UNDETERMINED</span><br>
+    no <code>o</code> field; the default the spec would inject depends on the far node's content, which is not in hand (Rule 9b)
+  </div>
+  <div class="el hole" style="left:640px;top:30px;width:330px;height:160px">
+    <div class="hdr">NOT IN HAND</div>
+    <span class="pill">ELBmpHyX1I…</span>
+    <div style="margin-top:5px">identity: known · content: unknown · out-edges: unknown<br>cause: unknown — no attestation supplied<br>
+    <span style="font-size:10.5px;color:#333">edge-constraint check: ⊘ unperformable, blocked by <b>ELBmpHyX1I…</b></span></div>
+  </div>
+</div>
+
+<!-- ================= PANEL 2 : H8 ================= -->
+<h2>Panel 2 — H8: edge committed, destination withheld</h2>
+<p class="note">Fixture <code>compact_private_edge</code>: the edge slot <code>source</code> holds a bare SAID — the SAID of the <i>edge block itself</i>, blinded by its own <code>u</code>. Even the far node's identity is withheld. There is no place to draw at the far end, so the edge terminates on the frontier: an open arrowhead at the boundary of a region, never a node — dropping the edge, or minting a phantom node for it, are the two halves of H8's naive lie.</p>
+<div class="pframe"><b>P — presenter: UNKNOWN</b> (Rule 18) &nbsp;·&nbsp; V — 0 checks performed by this viewer</div>
+<div class="board" style="height:430px">
+  <svg width="1060" height="430">
+    <defs><marker id="oarr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/></marker></defs>
+    <line x1="520" y1="255" x2="520" y2="96" stroke="#111" stroke-width="1.5" marker-end="url(#oarr3)"/>
+  </svg>
+  <div class="el frontier" style="left:0;top:0;width:100%;height:88px">
+    <b>UNMAPPED — COMMITTED STRUCTURE, TOPOLOGY UNKNOWABLE FROM MATERIAL IN HAND</b><br>
+    One committed destination lies in here. It may be a node drawn nowhere — or the same artifact as some node drawn elsewhere. Unknowable either way.
+  </div>
+  <div class="el elabel" style="left:545px;top:130px;width:290px">
+    <b>source</b> · edge committed, block compact<br>
+    <span class="pill">EEn6lzlzA3…</span> <span style="font-size:10px">(SAID of the edge block — never of any destination)</span><br>
+    destination identity: <b>withheld</b> · <span class="opchip">operator UNDETERMINED</span> (whether the block even carries an <code>o</code> is itself withheld)<br>
+    cause: unknown — no attestation supplied
+  </div>
+  <div class="el card" style="left:360px;top:255px;width:320px;height:140px">
+    <div class="role">presenting node (compact_private_edge)</div>
+    <span class="pill">EHTnmmo4Lx…</span>
+    <div style="margin-top:4px">issuer <span class="pill">EIj-Thbqfa…</span> · a.label: "the presenting node"</div>
+    <div class="ledger">V: 0 of 9 performed by this viewer · freshness: no policy supplied</div>
+    <div style="margin-top:6px"><span class="port">source ↑</span></div>
+  </div>
+</div>
+<p class="cap">H7 vs H8, side by side: the hole is <i>bordered and named</i> (a pill, node geometry, a fringe of unknown egress); the blinded edge reaches <i>no geometry at all</i> — an open arrowhead dying on the boundary of a hatched region that is explicitly not a place. The edge-block SAID pill rides the <b>edge label</b>, not a far node, so nothing implies the destination has been identified.</p>
+
+<!-- ================= PANEL 3 : H9 ================= -->
+<h2>Panel 3 — H9: committed no-edge (with its control)</h2>
+<p class="note">Fixtures <code>optional_edge_absent</code> / <code>optional_edge_present</code> — same schema SAID, one committed structural difference. Absence here is not a hole and not the frontier: it is a positive fact sealed by the enclosing SAID. It renders as a <b>seal</b> on the port strip — a closed, flat terminal where edges would otherwise depart — plus the committed-fact sentence, phrased about the artifact, never the world (Rule 13).</p>
+<div class="pframe"><b>P — presenter: UNKNOWN</b> (Rule 18) &nbsp;·&nbsp; V — 0 checks performed by this viewer</div>
+<div class="board" style="height:440px">
+  <svg width="1060" height="440">
+    <defs><marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+    <line x1="760" y1="250" x2="760" y2="172" stroke="#111" stroke-width="1.5" marker-end="url(#arr4)"/>
+  </svg>
+  <div class="el card" style="left:50px;top:120px;width:420px;height:190px">
+    <div class="role">optional_edge_absent</div>
+    <span class="pill">EFD8--Eg-g…</span>
+    <div style="margin-top:4px">issuer <span class="pill">EHbpCXLELi…</span> · a.claim: "a claim issued with no endorsement attached"</div>
+    <div class="ledger">V: 0 of 9 performed by this viewer · freshness: no policy supplied</div>
+    <div style="margin-top:10px"><span class="seal" style="border-top-width:5px;padding-right:26px">e — none · <b>sealed at issuance</b></span></div>
+    <div style="margin-top:6px;font-size:11px;border-left:3px solid #111;padding-left:6px">
+      This credential, <b>as issued</b>, has no edge section — committed by <span class="pill">EFD8--Eg-g…</span>.<br>
+      <span style="color:#444">A fact about this artifact. Not a fact about the world: nothing here says no related credential exists elsewhere.</span></div>
+  </div>
+  <div class="el hole" style="left:610px;top:40px;width:310px;height:130px">
+    <div class="hdr">NOT IN HAND</div>
+    <span class="pill">EFPKD1olrL…</span>
+    <div style="margin-top:4px;font-size:11px">identity: known · content: unknown · out-edges: unknown<br>cause: unknown — no attestation supplied</div>
+  </div>
+  <div class="el elabel" style="left:778px;top:195px;width:190px">
+    <b>endorsement</b> · <span class="opchip">operator UNDETERMINED</span> — no <code>o</code>, far node not in hand (Rule 9b)
+  </div>
+  <div class="el card" style="left:550px;top:250px;width:420px;height:150px">
+    <div class="role">optional_edge_present (control)</div>
+    <span class="pill">ENoIY4BgAt…</span>
+    <div style="margin-top:4px">issuer <span class="pill">EAlYzHkuF0…</span> · a.claim: "a claim with an attached endorsement"</div>
+    <div style="margin-top:6px"><span class="port">endorsement ↑</span></div>
+    <div style="margin-top:4px;font-size:10.5px;color:#444">Honest incidental: the endorsement's far node is in no corpus fixture, so the control itself renders an H7 hole above — H9 and H7 sit side by side in one board and share nothing.</div>
+  </div>
+</div>
+<p class="cap">The twins differ at a glance in a committed structural fact: sealed port vs departing edge. The seal is a mark that is <i>present</i> — absence rendered as a positive glyph — so "no edge" can never be mistaken for "haven't looked", "still loading", or the frontier's "cannot know".</p>
+
+<!-- ================= PANEL 4 : composition ================= -->
+<h2>Panel 4 — two blinded edges: convergence is unknowable, so it is undrawable</h2>
+<p class="note">Fixtures <code>two_blinded_edges_converge</code> and <code>two_blinded_edges_diverge</code> are structurally identical by design — the ground truth differs, the disclosed bytes' shape does not. Rendering them differently would manufacture information. Under this design they render identically <b>by construction</b>: a blinded edge's far end is a region, not a point, so there is no coordinate at which convergence could be drawn or denied. The region's cardinality statement carries what is actually known.</p>
+<div class="pframe"><b>P — presenter: UNKNOWN</b> (Rule 18) &nbsp;·&nbsp; V — 0 checks performed by this viewer</div>
+<div style="display:flex;gap:20px">
+  <div class="board" style="height:420px;flex:1">
+    <svg width="520" height="420">
+      <defs><marker id="oarr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/></marker></defs>
+      <line x1="180" y1="250" x2="140" y2="118" stroke="#111" stroke-width="1.5" marker-end="url(#oarr5)"/>
+      <line x1="320" y1="250" x2="370" y2="118" stroke="#111" stroke-width="1.5" marker-end="url(#oarr5)"/>
+    </svg>
+    <div class="el frontier" style="left:0;top:0;width:100%;height:110px">
+      <b>UNMAPPED</b> — committed destinations of the 2 edges below: <b>some number between 1 and 2</b>.<br>
+      Whether the two edges meet — and whether either destination coincides with any node rendered anywhere — is unknowable from material in hand.
+    </div>
+    <div class="el card" style="left:90px;top:250px;width:330px;height:140px">
+      <div class="role">two_blinded_edges_converge</div>
+      <span class="pill">EHZGkyDF43…</span>
+      <div style="margin-top:4px;font-size:11px">sourceA: block <span class="pill">EJye2IohGv…</span><br>sourceB: block <span class="pill">EMiUl2HbLp…</span></div>
+      <div style="margin-top:6px"><span class="port">sourceA ↖</span> <span class="port">sourceB ↗</span></div>
+    </div>
+  </div>
+  <div class="board" style="height:420px;flex:1">
+    <svg width="520" height="420">
+      <defs><marker id="oarr6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/></marker></defs>
+      <line x1="180" y1="250" x2="140" y2="118" stroke="#111" stroke-width="1.5" marker-end="url(#oarr6)"/>
+      <line x1="320" y1="250" x2="370" y2="118" stroke="#111" stroke-width="1.5" marker-end="url(#oarr6)"/>
+    </svg>
+    <div class="el frontier" style="left:0;top:0;width:100%;height:110px">
+      <b>UNMAPPED</b> — committed destinations of the 2 edges below: <b>some number between 1 and 2</b>.<br>
+      Whether the two edges meet — and whether either destination coincides with any node rendered anywhere — is unknowable from material in hand.
+    </div>
+    <div class="el card" style="left:90px;top:250px;width:330px;height:140px">
+      <div class="role">two_blinded_edges_diverge</div>
+      <span class="pill">EPkMaYHR6u…</span>
+      <div style="margin-top:4px;font-size:11px">sourceA: block <span class="pill">ECUJuvZcIw…</span><br>sourceB: block <span class="pill">EPXku6ctaX…</span></div>
+      <div style="margin-top:6px"><span class="port">sourceA ↖</span> <span class="port">sourceB ↗</span></div>
+    </div>
+  </div>
+</div>
+<p class="cap">Same geometry, same terminals, same cardinality sentence; only the fixture's own SAIDs differ. The edges enter the frontier at separated points and no geometry joins them — but separation of <i>entry points</i> asserts nothing about destinations, because inside the band there are no positions. This is the layout answer to "you cannot lay out a graph whose edges have no known endpoints": you lay out only what is committed (the near ends and the edges' existence) and you give the rest a region whose declared property is that it has no layout.</p>
+
+<!-- ================= LEGEND ================= -->
+<h2>Pairwise distinctness (Rule 1 test, stated as a table)</h2>
+<table class="legend">
+  <tr><th></th><th>H7 hole</th><th>H8 blinded edge</th><th>H9 seal</th></tr>
+  <tr><th>geometry</th><td>node rectangle, double border, hatched interior</td><td>edge line ending in an <b>open</b> arrowhead at the frontier boundary; no far geometry</td><td>flat closed bar on the port strip; no edge, no far geometry, no hatch</td></tr>
+  <tr><th>identity shown</th><td>SAID pill of the missing artifact (it has an address)</td><td>SAID pill of the <i>edge block</i> only; destination deliberately unnamed</td><td>none needed — the enclosing card's own SAID commits the absence</td></tr>
+  <tr><th>reads as</th><td>"a named thing is not in hand; checks through it are unperformable"</td><td>"a relationship exists whose far end you may not know"</td><td>"as issued, no edge — a settled fact"</td></tr>
+  <tr><th>never reads as</th><td>loading, error, or fine — static text, no spinner geometry</td><td>nothing-here (the edge stays drawn) or a known destination (no far node minted)</td><td>a hole, a hidden thing, or a fact about the world</td></tr>
+</table>
+
+</body></html>
