@@ -1,0 +1,23 @@
+{
+  "title": "Two blinded edges, one node -- convergence unknowable (ground truth: diverge)",
+  "summary": "Structurally identical to two_blinded_edges_converge -- same shape, same two named H8 edge slots -- but this fixture's actual ground truth (documented only in the .expanded.json, never disclosed) is that sourceA and sourceB point at two DIFFERENT far nodes. A viewer cannot tell this fixture apart from its converging sibling from the disclosed sad alone, which is exactly the property under test: the render must be the same for both.",
+  "matrix_cells": [
+    "H8"
+  ],
+  "rules_exercised": [
+    "RULE 1"
+  ],
+  "spec_refs": [
+    "spec-body.md:1165",
+    "spec-body.md:1164"
+  ],
+  "notes": "Pair with two_blinded_edges_converge; see that fixture's notes.",
+  "name": "two_blinded_edges_diverge",
+  "files": {
+    "sad": "two_blinded_edges_diverge.json",
+    "cesr": "two_blinded_edges_diverge.cesr",
+    "expanded": "two_blinded_edges_diverge.expanded.json"
+  },
+  "generated_at": "2026-09-14T21:01:53.521887+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
+}

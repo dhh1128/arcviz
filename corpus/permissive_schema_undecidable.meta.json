@@ -1,0 +1,24 @@
+{
+  "title": "Permissive-schema undecidable (H2 vs H3, pair 11)",
+  "summary": "The `a` field is a bare SAID computed over a block whose resolved schema declares `u` as legal but not required. A viewer resolving the schema learns this instance MIGHT be genuinely blinded (H3) or might just be an unused-entropy compaction (H2) -- and cannot resolve that from the disclosed sad, the schema, or both together. The honest render is 'hidden; protection unknown', distinct from both H2's and H3's own treatments (Rule 8's third state).",
+  "matrix_cells": [
+    "H2",
+    "H3"
+  ],
+  "rules_exercised": [
+    "RULE 8"
+  ],
+  "spec_refs": [
+    "spec-body.md:160",
+    "spec-body.md:164"
+  ],
+  "notes": "docs/design/shape-catalog.md gap G7, disclosure-matrix.md (c) pair 5 (\"Blinded vs unblinded commitment (H3 vs H2) when the schema is not in hand\") generalized to the case where the schema IS in hand but is itself permissive.",
+  "name": "permissive_schema_undecidable",
+  "files": {
+    "sad": "permissive_schema_undecidable.json",
+    "cesr": "permissive_schema_undecidable.cesr",
+    "expanded": "permissive_schema_undecidable.expanded.json"
+  },
+  "generated_at": "2026-09-14T21:01:53.564435+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
+}

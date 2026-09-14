@@ -1,0 +1,28 @@
+{
+  "ground_truth": "diverge",
+  "far_node_a": {
+    "v": "ACDCCAACAAJSONAAEr.",
+    "t": "acm",
+    "d": "ENQWCETboJCJdrAak3JohEbPwX4SfqzXEe0uupZiSepC",
+    "i": "EIRs0GMfkAxHQAOUeelIH-9KBo5QfYlyWOFQFlk0aQ9L",
+    "s": "EGm5DC1XPuL7sGbGGWjSUHvVp5pkxLSN4BR1rwd9BNi8",
+    "a": {
+      "d": "EJpwiXxMerjBHriNZ4JTbKMq6JCtMlBknCgqBZoDFdCr",
+      "u": "0ADmJ-Fz2zaCkFHlRJtVf14I",
+      "label": "far node A"
+    }
+  },
+  "far_node_b": {
+    "v": "ACDCCAACAAJSONAAEr.",
+    "t": "acm",
+    "d": "EJ5tc9Q-Df-pI7Ny-_bDdP9BWl-qSnCwEnbS4TJ0NiLK",
+    "i": "ECH0p0TJw4ma7z2B6e6J5wYUxU8qxek3HeeyiY9BOigw",
+    "s": "EOLW46CYqJnBoL5FYCujZpBXtkRYiD3TxXVYD6Av9P6r",
+    "a": {
+      "d": "EJ-l3el655UKO6hDGMREIv146QJ13PIv5HAH8PIaApuK",
+      "u": "0ABQHisvp0-TeHUODWdd0pYZ",
+      "label": "far node B"
+    }
+  },
+  "note": "sourceA and sourceB point at two DIFFERENT far nodes. Dev-only verification content -- see the sibling fixture's note for why this must render identically to the converging case."
+}

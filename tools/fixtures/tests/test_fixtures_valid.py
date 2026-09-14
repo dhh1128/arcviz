@@ -8,6 +8,7 @@ edges naming another fixture as their far node actually resolve.
 """
 
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -16,6 +17,9 @@ from keri.core.coring import Diger
 from keri.core.serdering import SerderACDC
 
 CORPUS_DIR = Path(__file__).resolve().parents[3] / "corpus"
+LOADS_DIR = CORPUS_DIR / "loads"
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 
 def _all_fixture_names():
@@ -404,3 +408,188 @@ def test_vlei_ecr_schema_validates():
     ecr, _ = load("vlei_ecr")
     assert ecr["s"] == schema_said
     Draft202012Validator(schema_mad).validate(ecr)
+
+
+# --- shape-catalog.md gap G2: two blinded edges, convergence unknowable. ---
+
+def test_two_blinded_edges_disclosed_form_carries_no_convergence_signal():
+    """The two fixtures have opposite ground truths (documented only in
+    their .expanded.json, never disclosed) but must be indistinguishable
+    from their disclosed sad: in both, sourceA and sourceB are two
+    different-looking bare SAID strings, precisely because each edge's own
+    `u` differs -- string equality/inequality of the disclosed values
+    carries no information about whether the far nodes converge.
+    """
+    converge, _ = load("two_blinded_edges_converge")
+    diverge, _ = load("two_blinded_edges_diverge")
+
+    for sad, name in [(converge, "converge"), (diverge, "diverge")]:
+        a, b = sad["e"]["sourceA"], sad["e"]["sourceB"]
+        assert isinstance(a, str) and isinstance(b, str)
+        assert a != b, f"{name}: sourceA and sourceB happened to collide as strings -- not what's being tested"
+
+    # The two fixtures' own outer edge-group/ACDC SAIDs necessarily differ
+    # too (different u, different far nodes/schemas) -- that's expected and
+    # unrelated to the convergence question; not asserted here.
+
+
+def test_two_blinded_edges_ground_truth_actually_differs():
+    """The fixtures are only meaningful if their internal ground truths
+    really are opposite -- confirm that via the dev-only .expanded.json,
+    which a renderer would never see.
+    """
+    converge_exp = json.loads((CORPUS_DIR / "two_blinded_edges_converge.expanded.json").read_text())
+    diverge_exp = json.loads((CORPUS_DIR / "two_blinded_edges_diverge.expanded.json").read_text())
+
+    assert converge_exp["ground_truth"] == "converge"
+    assert diverge_exp["ground_truth"] == "diverge"
+    assert "far_node" in converge_exp and "far_node_a" not in converge_exp
+    assert diverge_exp["far_node_a"]["d"] != diverge_exp["far_node_b"]["d"]
+
+
+# --- shape-catalog.md gaps G6/G7: Rule 8's H2 and undecidable treatments. ---
+
+def test_unblinded_commitment_h2_schema_reserves_no_u():
+    from arcviz_fixtures import schemas
+
+    schema_said, schema_mad = schemas.attr_schema(
+        title="Unblinded Commitment (H2) Demo Schema",
+        credential_type="ArcvizFixture_UnblindedH2",
+        attr_props={"overThreshold": {"type": "boolean"}},
+        attr_required=["overThreshold"],
+        require_issuee=True, reserve_u=False)
+    Draft202012Validator.check_schema(schema_mad)
+
+    sad, _ = load("unblinded_commitment_h2")
+    assert sad["s"] == schema_said
+    assert isinstance(sad["a"], str), "the a field must be a bare (compact) SAID"
+
+    a_object_schema = schema_mad["properties"]["a"]["oneOf"][1]
+    assert "u" not in a_object_schema["properties"], "schema must not declare u as a property at all"
+
+    exp = json.loads((CORPUS_DIR / "unblinded_commitment_h2.expanded.json").read_text())
+    block = exp["attribute_block"]
+    assert "u" not in block
+    assert block["d"] == sad["a"]
+    Draft202012Validator(a_object_schema).validate(block)
+
+
+def test_permissive_schema_undecidable_disclosed_form_matches_h2_shape():
+    from arcviz_fixtures import schemas
+
+    schema_said, schema_mad = schemas.attr_schema(
+        title="Permissive-Schema Undecidable Demo Schema",
+        credential_type="ArcvizFixture_PermissiveUndecidable",
+        attr_props={"overThreshold": {"type": "boolean"}},
+        attr_required=["overThreshold"],
+        require_issuee=True, reserve_u=True)
+    Draft202012Validator.check_schema(schema_mad)
+
+    sad, _ = load("permissive_schema_undecidable")
+    assert sad["s"] == schema_said
+    assert isinstance(sad["a"], str)
+
+    a_object_schema = schema_mad["properties"]["a"]["oneOf"][1]
+    assert "u" in a_object_schema["properties"], "u must be a legal property"
+    assert "u" not in a_object_schema.get("required", []), "u must not be mandatory -- that's the undecidability"
+
+    # Ground truth: this instance DID use u. Disclosed shape is nonetheless
+    # identical in kind (a bare string) to unblinded_commitment_h2's -- only
+    # the referenced schema SAID differs, which is what a viewer would have
+    # to resolve to tell H2 from "undecidable" apart in the first place.
+    exp = json.loads((CORPUS_DIR / "permissive_schema_undecidable.expanded.json").read_text())
+    assert exp["ground_truth_u_was_used"] is True
+    assert "u" in exp["attribute_block"]
+    assert exp["attribute_block"]["d"] == sad["a"]
+
+    h2_sad, _ = load("unblinded_commitment_h2")
+    assert type(sad["a"]) is type(h2_sad["a"]) is str
+    assert sad["s"] != h2_sad["s"], "the two fixtures must reference DIFFERENT schemas"
+
+
+# --- shape-catalog.md gap G1: withhold-a-dependency load recipes. ---
+
+def _all_load_recipe_names():
+    if not LOADS_DIR.exists():
+        return []
+    return sorted(p.name.removesuffix(".meta.json") for p in LOADS_DIR.glob("*.meta.json"))
+
+
+LOAD_RECIPE_NAMES = _all_load_recipe_names()
+
+
+def load_recipe(name):
+    manifest = json.loads((LOADS_DIR / f"{name}.json").read_text())
+    meta = json.loads((LOADS_DIR / f"{name}.meta.json").read_text())
+    return manifest, meta
+
+
+def test_load_recipes_exist():
+    assert set(LOAD_RECIPE_NAMES) == {"h7_missing_credential", "h7_missing_delegator_kel"}
+
+
+@pytest.mark.parametrize("name", LOAD_RECIPE_NAMES)
+def test_load_recipe_meta_is_well_formed(name):
+    manifest, meta = load_recipe(name)
+    assert meta["name"] == name
+    assert meta["matrix_cells"] == ["H7"]
+    assert meta["kind"] == manifest["kind"]
+
+
+def test_h7_missing_credential_recipe_resolves_to_nothing_present():
+    manifest, _ = load_recipe("h7_missing_credential")
+    assert manifest["withheld"]["fixture"] not in manifest["served"]
+
+    withheld_said = manifest["withheld"]["said"]
+    assert withheld_said != ""
+    Diger(qb64=withheld_said)  # well-formed digest -- raises if not
+
+    # The withheld fixture's file still physically exists in corpus/ (this is
+    # a static file corpus, not a running server) -- what makes it "withheld"
+    # is that it is excluded from `served`. Confirm the SAID really is that
+    # fixture's real, correctly-computed SAID (not a stand-in placeholder),
+    # and that it does NOT belong to any of the fixtures actually served.
+    withheld_sad, _ = load(manifest["withheld"]["fixture"])
+    assert withheld_sad["d"] == withheld_said
+
+    served_saids = {load(n)[0]["d"] for n in manifest["served"]}
+    assert withheld_said not in served_saids, "withheld SAID must resolve to nothing among the served set"
+
+    for ref in manifest["referencing"]:
+        assert ref["said"] == withheld_said
+        sad, _ = load(ref["fixture"])
+        node = sad
+        for part in ref["path"].split("."):
+            node = node[part]
+        assert node == withheld_said
+
+
+def test_h7_missing_delegator_kel_recipe_names_a_genuinely_absent_aid():
+    manifest, _ = load_recipe("h7_missing_delegator_kel")
+    withheld_aid = manifest["withheld"]["aid"]
+    assert withheld_aid != ""
+    Diger(qb64=withheld_aid)  # well-formed CESR identifier -- raises if not
+
+    referenced = manifest["withheld"]["referenced_by"]
+    referencing_sad, _ = load(referenced["fixture"])
+    actual_value = referencing_sad[referenced["field"]]
+    assert actual_value != withheld_aid, (
+        "the delegate's own AID (what's actually in the fixture) must be a "
+        "DIFFERENT identifier from the delegator AID being named as absent")
+
+    # Scan every top-level fixture in the corpus (not just the chain) and
+    # confirm this AID corresponds to no artifact anywhere -- the same check
+    # withhold.py performs at generation time, repeated here independently
+    # so a future edit to withhold.py can't silently stop checking this.
+    hits = []
+    for path in sorted(CORPUS_DIR.glob("*.json")):
+        sad = json.loads(path.read_text())
+        if not isinstance(sad, dict):
+            continue
+        if sad.get("d") == withheld_aid or sad.get("i") == withheld_aid:
+            hits.append(path.name)
+    assert not hits, f"withheld AID unexpectedly matches real corpus artifacts: {hits}"
+
+    # Since the "served" set for this flavour is the whole chain unchanged
+    # (nothing was ever there to remove), that should be reflected honestly.
+    assert manifest["served"] == manifest["chain"]

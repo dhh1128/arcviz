@@ -23,9 +23,13 @@ Each `<name>.json` is the disclosed field map (what a renderer would receive); `
 | `not_operator` | NOT edge operator | H1 | — | — |
 | `optional_edge_absent` | Optional edge section, absent (the visible gap) | H9 | RULE 1, RULE 13 | — |
 | `optional_edge_present` | Optional edge section, present | H1 | — | — |
+| `permissive_schema_undecidable` | Permissive-schema undecidable (H2 vs H3, pair 11) | H2, H3 | RULE 8 | — |
 | `same_schema_alice` | Same-schema-twice DAG: Alice's identity credential | H1 | — | — |
 | `same_schema_bob` | Same-schema-twice DAG: Bob's identity credential | H1 | — | — |
 | `same_schema_household` | Same-schema-twice DAG (household presentation) | H1 | — | same_schema_alice, same_schema_bob |
+| `two_blinded_edges_converge` | Two blinded edges, one node -- convergence unknowable (ground truth: converge) | H8 | RULE 1 | — |
+| `two_blinded_edges_diverge` | Two blinded edges, one node -- convergence unknowable (ground truth: diverge) | H8 | RULE 1 | — |
+| `unblinded_commitment_h2` | Unblinded commitment (H2): schema reserves no u | H2 | RULE 8 | — |
 | `vlei_ecr` | vLEI-equivalent chain: ECR credential (leaf, depth 4 of 4) | H1 | RULE 9 | vlei_ecr_auth |
 | `vlei_ecr_auth` | vLEI-equivalent chain: ECR-AUTH credential (depth 3 of 4) | H1 | RULE 9 | vlei_le |
 | `vlei_le` | vLEI-equivalent chain: LE credential (depth 2 of 4) | H1 | RULE 9 | vlei_qvi |
@@ -45,9 +49,18 @@ Registry-inception (`rip`) messages, one per vLEI-equivalent-chain credential's 
 | `vlei_le.registry` | `vlei_le` |
 | `vlei_qvi.registry` | `vlei_qvi` |
 
+## Load recipes (`loads/`)
+
+Gap G1 (docs/design/shape-catalog.md (d)): a documented "withhold this dependency" load mode, so H7 (missing referent) is producible on demand. Each recipe under `corpus/loads/` is a plain JSON manifest -- not an ACDC -- naming which of an existing chain's members to serve and which one to withhold (or, for the `delegator_kel` kind, which AID is referenced with no KEL artifact anywhere in this corpus). The withheld SAID/AID is always the real, correctly-computed value: the point is that it resolves to nothing present, never to garbage.
+
+| Recipe | Kind | Matrix cell |
+|---|---|---|
+| `loads/h7_missing_credential` | credential | H7 |
+| `loads/h7_missing_delegator_kel` | delegator_kel | H7 |
+
 ## Known limitations
 
-- No KEL/TEL event simulation (no `icp`/`dip`/`drt`/`ixn`, no signing, no witnesses). Every AID here is a deterministic blake3-digest placeholder, not one anchored in any inception event. See `tools/fixtures/README.md` "What this does not model" and `fx_vlei.py`'s module docstring for exactly which corpus-vlei-chain.md facts (weighted multisig, the one asymmetric key rotation, the absent root delegator's KEL) this does NOT reproduce.
+- No KEL/TEL event simulation (no `icp`/`dip`/`drt`/`ixn`, no signing, no witnesses). Every AID here is a deterministic blake3-digest placeholder, not one anchored in any inception event. See `tools/fixtures/README.md` "What this does not model" and `fx_vlei.py`'s module docstring for exactly which corpus-vlei-chain.md facts (weighted multisig, the one asymmetric key rotation) this does NOT reproduce. The absent root delegator's KEL specifically is now named, as a documented hole rather than an accident of scope, by `loads/h7_missing_delegator_kel.json` -- but that recipe still cannot show a `dip` event pointing at the hole, only assert the hole exists, because no KEL event of any kind is modeled here.
 - `working_edge_group` is generated directly via `acdcmap` + `Compactor`, not round-tripped through keripy's own `Reger.sources`/`Verifier.processCredential`, which is documented as unable to traverse edge-groups at all. Its SAIDs and structure are real and correct; it has not been proven to survive keripy's own verifier.
 - No separate generic "depth-3-or-more chain" fixture: the `vlei_qvi -> vlei_le -> vlei_ecr_auth -> vlei_ecr` chain (depth 4) satisfies that corpus-keripy-examples.md gap already.
 - Edge (`e`) and Rule (`r`) sections are schema-typed loosely (`oneOf` [string, object], no nested property schema) rather than elaborated to the ACDC spec's own worked-example fidelity. See `tools/fixtures/src/arcviz_fixtures/schemas.py`'s module docstring.

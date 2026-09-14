@@ -1,0 +1,17 @@
+{
+  "v": "ACDCCAACAAJSONAAIA.",
+  "t": "acm",
+  "d": "EHZGkyDF43kjtMjH2oe-W0hV1vS_9kAv3EtWLjDHT2Ol",
+  "i": "EJfO7IjqmipCdHha9nhR0WSzcFPRJyLRow5-4dij-oMk",
+  "s": "EJAzSzltDUFpTFYdFpKkOz46-SF5lzXgQSJS7jSWLeYP",
+  "a": {
+    "d": "ELw7cdZrWn6lxIi0MYlX-U1vsZfeTTZpOBkF2VExtbGB",
+    "u": "0ACAEpNYFRXq7c1MaJ3JdoEu",
+    "label": "presenting node with two independently blinded edges"
+  },
+  "e": {
+    "d": "EJN6Z-a_9VkKlbvlO6Cc3GRrtulPVyXsZgBxxHpZ58UI",
+    "sourceA": "EJye2IohGvZxJXxWN0wED7iIAlCe2pDwVt6gCyT94pqy",
+    "sourceB": "EMiUl2HbLpOeJYw_yxhWilva7rhFOA0xdbXjnWMKn14t"
+  }
+}

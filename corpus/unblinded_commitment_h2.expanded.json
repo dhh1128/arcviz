@@ -1,0 +1,8 @@
+{
+  "attribute_block": {
+    "d": "EEjGZMTbGNsQk0ey2d44TLQks2X-rfxEOAIei_s8ab-4",
+    "i": "ELgFusi1DniJF0JwPGtDIgbk2L8SjVTcQhtz9E4881I-",
+    "overThreshold": true
+  },
+  "note": "Shown for test verification only. In a real presentation this content is never disclosed as a block -- but unlike H3, it doesn't need to be: with the schema resolved (one boolean field, no `u`), the value space is {True, False} and a verifier holding just the schema and this SAID can brute-force which one it is."
+}

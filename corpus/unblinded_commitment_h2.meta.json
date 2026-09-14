@@ -1,0 +1,22 @@
+{
+  "title": "Unblinded commitment (H2): schema reserves no u",
+  "summary": "The `a` field is a bare SAID computed over a block whose resolved schema declares only {d, i, overThreshold} -- no `u` property at all. This is unconditionally H2: the commitment is guessable in principle from schema + SAID alone, not merely undecided (contrast 'permissive_schema_undecidable', gap G7, whose schema allows but does not mandate `u`).",
+  "matrix_cells": [
+    "H2"
+  ],
+  "rules_exercised": [
+    "RULE 8"
+  ],
+  "spec_refs": [
+    "spec-body.md:160"
+  ],
+  "notes": "docs/design/shape-catalog.md gap G6. Pairs with 'permissive_schema_undecidable' (G7) to give Rule 8's test two of its remaining three named treatments; G8 (schema-unresolved) is not attempted -- see this module's docstring.",
+  "name": "unblinded_commitment_h2",
+  "files": {
+    "sad": "unblinded_commitment_h2.json",
+    "cesr": "unblinded_commitment_h2.cesr",
+    "expanded": "unblinded_commitment_h2.expanded.json"
+  },
+  "generated_at": "2026-09-14T21:01:53.542789+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
+}

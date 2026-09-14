@@ -10,6 +10,6 @@
     "sad": "same_schema_alice.json",
     "cesr": "same_schema_alice.cesr"
   },
-  "generated_at": "2026-09-05T22:19:01.672610+00:00",
-  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+  "generated_at": "2026-09-14T21:01:53.144328+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
 }

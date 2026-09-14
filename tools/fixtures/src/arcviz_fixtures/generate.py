@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from . import fixtures  # noqa: F401  (import registers every @fixture)
+from . import withhold
 from .corpus_io import write_fixture
 from .registry import FixtureBlocked, all_fixtures
 
@@ -89,19 +90,33 @@ def main(argv=None):
         ok.append(spec.name)
         print(f"[{spec.name}] OK -> {spec.name}.json (said={serder.said})", file=sys.stderr)
 
-    _write_corpus_readme(corpus_dir, ok, blocked, failed)
+    # Load recipes (gap G1) read real SAIDs back from disk, so they must run
+    # after every fixture they reference is already written.
+    recipe_names = []
+    recipe_error = None
+    try:
+        recipe_names = withhold.write_load_recipes(corpus_dir)
+        for n in recipe_names:
+            print(f"[loads/{n}] OK", file=sys.stderr)
+    except Exception as exc:  # noqa: BLE001
+        recipe_error = repr(exc)
+        print(f"[loads] FAILED: {exc!r}", file=sys.stderr)
 
-    print(f"\n{len(ok)} generated, {len(blocked)} blocked, {len(failed)} failed.",
-          file=sys.stderr)
+    _write_corpus_readme(corpus_dir, ok, blocked, failed, recipe_names, recipe_error)
+
+    print(f"\n{len(ok)} generated, {len(blocked)} blocked, {len(failed)} failed, "
+          f"{len(recipe_names)} load recipes written.", file=sys.stderr)
     for name, reason in blocked:
         print(f"  BLOCKED {name}: {reason}", file=sys.stderr)
     for name, reason in failed:
         print(f"  FAILED  {name}: {reason}", file=sys.stderr)
+    if recipe_error:
+        print(f"  FAILED  loads: {recipe_error}", file=sys.stderr)
 
-    return 1 if failed else 0
+    return 1 if (failed or recipe_error) else 0
 
 
-def _write_corpus_readme(corpus_dir: Path, ok, blocked, failed):
+def _write_corpus_readme(corpus_dir: Path, ok, blocked, failed, recipe_names=(), recipe_error=None):
     import json
 
     lines = [
@@ -154,6 +169,34 @@ def _write_corpus_readme(corpus_dir: Path, ok, blocked, failed):
             reg_name = meta_path.name.removesuffix(".meta.json")
             lines.append(f"| `{reg_name}` | `{meta.get('parent_fixture', '')}` |")
 
+    if recipe_names:
+        lines += [
+            "",
+            "## Load recipes (`loads/`)",
+            "",
+            "Gap G1 (docs/design/shape-catalog.md (d)): a documented "
+            "\"withhold this dependency\" load mode, so H7 (missing "
+            "referent) is producible on demand. Each recipe under "
+            "`corpus/loads/` is a plain JSON manifest -- not an ACDC -- "
+            "naming which of an existing chain's members to serve and which "
+            "one to withhold (or, for the `delegator_kel` kind, which AID "
+            "is referenced with no KEL artifact anywhere in this corpus). "
+            "The withheld SAID/AID is always the real, correctly-computed "
+            "value: the point is that it resolves to nothing present, never "
+            "to garbage.",
+            "",
+            "| Recipe | Kind | Matrix cell |",
+            "|---|---|---|",
+        ]
+        for n in sorted(recipe_names):
+            meta_path = corpus_dir / "loads" / f"{n}.meta.json"
+            meta = json.loads(meta_path.read_text())
+            lines.append(f"| `loads/{n}` | {meta.get('kind', '')} | "
+                          f"{', '.join(meta.get('matrix_cells', [])) or '—'} |")
+
+    if recipe_error:
+        lines += ["", "## Load recipe generation errors", "", f"- {recipe_error}"]
+
     if blocked:
         lines += ["", "## Targeted but not generated", ""]
         for name, reason in blocked:
@@ -173,8 +216,12 @@ def _write_corpus_readme(corpus_dir: Path, ok, blocked, failed):
         "placeholder, not one anchored in any inception event. See "
         "`tools/fixtures/README.md` \"What this does not model\" and "
         "`fx_vlei.py`'s module docstring for exactly which corpus-vlei-chain.md "
-        "facts (weighted multisig, the one asymmetric key rotation, the "
-        "absent root delegator's KEL) this does NOT reproduce.",
+        "facts (weighted multisig, the one asymmetric key rotation) this does "
+        "NOT reproduce. The absent root delegator's KEL specifically is now "
+        "named, as a documented hole rather than an accident of scope, by "
+        "`loads/h7_missing_delegator_kel.json` -- but that recipe still "
+        "cannot show a `dip` event pointing at the hole, only assert the "
+        "hole exists, because no KEL event of any kind is modeled here.",
         "- `working_edge_group` is generated directly via `acdcmap` + "
         "`Compactor`, not round-tripped through keripy's own "
         "`Reger.sources`/`Verifier.processCredential`, which is documented as "

@@ -14,6 +14,6 @@
     "sad": "optional_edge_absent.json",
     "cesr": "optional_edge_absent.cesr"
   },
-  "generated_at": "2026-09-05T22:19:01.726519+00:00",
-  "keripy_commit": "bccea786095d7ae014988afb6c174ab679ad1719-dirty (branch feat-indep-registry-bulk-issuance)"
+  "generated_at": "2026-09-14T21:01:53.231293+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
 }

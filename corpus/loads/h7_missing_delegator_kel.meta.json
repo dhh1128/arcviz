@@ -1,0 +1,16 @@
+{
+  "name": "h7_missing_delegator_kel",
+  "title": "Load recipe: missing referent via absent delegator KEL",
+  "summary": "The vLEI-equivalent chain, served in full (nothing is removed, because no KEL fixture for this AID has ever existed -- see 'referenced_by'). Names the second way shape-catalog.md SC6 reaches H7: an absent root DELEGATOR's KEL, not an absent credential. Rule 10's 'name the blocking SAID/AID' requirement applies identically to this flavour; the blocking identifier here is an AID, not a credential SAID.",
+  "matrix_cells": [
+    "H7"
+  ],
+  "rules_exercised": [
+    "RULE 10",
+    "RULE 9"
+  ],
+  "kind": "delegator_kel",
+  "files": {
+    "sad": "h7_missing_delegator_kel.json"
+  }
+}

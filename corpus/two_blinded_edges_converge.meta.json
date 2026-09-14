@@ -1,0 +1,23 @@
+{
+  "title": "Two blinded edges, one node -- convergence unknowable (ground truth: converge)",
+  "summary": "A near node with two Compact Private Edges, sourceA and sourceB, each an independent bare SAID computed with its own `u`. A viewer KNOWS: two committed edges exist, in named slots, each hiding its destination. A viewer CANNOT KNOW: whether sourceA and sourceB point at the same far node or two different ones -- the two disclosed SAID strings differ from each other regardless, because each edge's own `u` differs, so string comparison carries no signal. This fixture's actual ground truth (documented only in two_blinded_edges_converge.expanded.json, never disclosed) is that they converge; the sibling fixture two_blinded_edges_diverge has the opposite ground truth and is byte-for-byte the same SHAPE -- a renderer that treats the two fixtures differently is inferring information the format does not carry.",
+  "matrix_cells": [
+    "H8"
+  ],
+  "rules_exercised": [
+    "RULE 1"
+  ],
+  "spec_refs": [
+    "spec-body.md:1165",
+    "spec-body.md:1164"
+  ],
+  "notes": "Instantiates disclosure-matrix.md (b) I2's inference: 'two H8 edges in one graph may or may not share a far node... the layout must be able to draw uncertain convergence' -- see docs/design/shape-catalog.md SC6 and gap G2.",
+  "name": "two_blinded_edges_converge",
+  "files": {
+    "sad": "two_blinded_edges_converge.json",
+    "cesr": "two_blinded_edges_converge.cesr",
+    "expanded": "two_blinded_edges_converge.expanded.json"
+  },
+  "generated_at": "2026-09-14T21:01:53.494245+00:00",
+  "keripy_commit": "563f3de31217b248737d9652c9c06074ed296d1e-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -1,0 +1,10 @@
+{
+  "attribute_block": {
+    "d": "EMmInJR-OVMZUQb1wM6AUs-xSknSHezIaCdW01t9siZw",
+    "u": "0AC1qhvGQ3p5Cb33V1rurDYW",
+    "i": "EIWAmTtsSYbNX0nch7p7Ztlc2VQNYYqKhi7NYfQxRDIl",
+    "overThreshold": true
+  },
+  "ground_truth_u_was_used": true,
+  "note": "This instance actually included `u` (genuine entropy), but a schema-only reader cannot tell: the same schema equally permits an instance that omitted it (compare 'unblinded_commitment_h2', which uses a DIFFERENT schema that forbids u outright and is thus unconditionally H2)."
+}

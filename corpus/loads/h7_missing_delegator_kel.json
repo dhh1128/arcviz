@@ -1,0 +1,25 @@
+{
+  "name": "h7_missing_delegator_kel",
+  "kind": "delegator_kel",
+  "description": "The vLEI-equivalent chain, served in full (nothing is removed, because no KEL fixture for this AID has ever existed -- see 'referenced_by'). Names the second way shape-catalog.md SC6 reaches H7: an absent root DELEGATOR's KEL, not an absent credential. Rule 10's 'name the blocking SAID/AID' requirement applies identically to this flavour; the blocking identifier here is an AID, not a credential SAID.",
+  "chain": [
+    "vlei_qvi",
+    "vlei_le",
+    "vlei_ecr_auth",
+    "vlei_ecr"
+  ],
+  "served": [
+    "vlei_qvi",
+    "vlei_le",
+    "vlei_ecr_auth",
+    "vlei_ecr"
+  ],
+  "withheld": {
+    "aid": "EDYl3N_TuKmwF2zjrdd1pJS8IjvidaWu6js7egVXbK8-",
+    "referenced_by": {
+      "fixture": "vlei_qvi",
+      "field": "i",
+      "role": "vlei_qvi's issuer AID stands in for the real chain's first-tier delegate (corpus-vlei-chain.md sec.1's EINmHd5g7iV...). That AID's own inception is, in the real chain, itself delegated (a dip event naming a root delegator, corpus-vlei-chain.md sec.3's EDP1vHcw_wc4M...); this corpus does not model KEL events at all, so that delegation fact cannot live inside vlei_qvi.json (no ACDC field carries it -- delegation is a KEL-level fact a real verifier gets from walking the issuer's own KEL, never from the credential). It is recorded HERE, in this load recipe, which is the closest honest analogue to how a renderer actually receives it: as context from a KEL-resolution component that is not the ACDC itself."
+    }
+  }
+}

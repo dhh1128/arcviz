@@ -134,6 +134,53 @@ def agg_credential(label, *, issuer, schema_said, aggregate, issuee=None,
     return acdcmap(**kwargs)
 
 
+def compact_block(fields, *, u=None, issuee=None):
+    """Build a flat field-map block (e.g. an attribute block) and return
+    (bare_said, full_mad) -- the block's own real digest, plus the full
+    content that digest commits to. Used when a fixture's whole point is
+    that the ACDC's `a` (or similar) field is a BARE SAID STRING in the
+    disclosed sad, not an expanded object -- credential()/agg_credential()
+    always build an expanded dict, so Rule-8-family fixtures (H2, permissive-
+    schema-undecidable) that need a compact attribute go through this
+    instead, then pass the bare SAID directly as attribute=... to acdcmap
+    (see credential_with_compact_attribute below).
+
+    Field order is (d, u, i, ...fields) when u/issuee are given, matching
+    every other block-shaped helper here -- but note this is the schema's
+    choice whether `u` is even a legal key at all (see
+    schemas.attr_schema's reserve_u); passing u=... against a reserve_u=False
+    schema would silently produce a block that fails its own schema, so
+    callers must keep the two in sync (Rule8 fixtures do this explicitly).
+    """
+    block = {'d': ''}
+    if u is not None:
+        block['u'] = u
+    if issuee is not None:
+        block['i'] = issuee
+    block.update(fields)
+    block = fully_expand(block)
+    return block['d'], block
+
+
+def credential_with_compact_attribute(label, *, issuer, schema_said,
+                                       bare_attribute_said, edge=None,
+                                       rule=None, top_uuid=None, registry=None):
+    """An 'acm' ACDC whose `a` field is a bare SAID string (compact form),
+    for fixtures whose point is exactly that -- see compact_block above.
+    """
+    kwargs = dict(israid=issuer, schema=schema_said, attribute=bare_attribute_said,
+                  kind=Kinds.json)
+    if edge is not None:
+        kwargs['edge'] = fully_expand(edge) if isinstance(edge, dict) else edge
+    if rule is not None:
+        kwargs['rule'] = fully_expand(rule) if isinstance(rule, dict) else rule
+    if top_uuid is not None:
+        kwargs['uuid'] = top_uuid
+    if registry is not None:
+        kwargs['regid'] = registry
+    return acdcmap(**kwargs)
+
+
 def simple_edge(label, *, n, s, o=None, u=None, w=None):
     """A single (non-group) Edge block, order [d, u, n, s, o, w]."""
     e = {'d': ''}

@@ -62,7 +62,8 @@ def _mapper_said(mad, kind=Kinds.json):
 
 def attr_schema(*, title, credential_type, attr_props, attr_required,
                  has_edge=True, has_rule=True, edge_required=False,
-                 rule_required=False, require_issuee=False, kind=Kinds.json):
+                 rule_required=False, require_issuee=False, reserve_u=True,
+                 kind=Kinds.json):
     """Schema for an ACDC carrying an `a` (Attribute) section.
 
     attr_props/attr_required describe the fields of the *expanded* `a` block
@@ -73,12 +74,24 @@ def attr_schema(*, title, credential_type, attr_props, attr_required,
     *mandatory*. Defaults to False -- most fixtures here are untargeted or
     only incidentally carry an issuee, and passing `i` in `attrs` when the
     schema doesn't require it is not a validation conflict either way.
+
+    reserve_u controls the H2/H3 distinction (disclosure-matrix.md sec.
+    "H2 ... unblinded commitment ... bare SAID in hand for a block whose
+    schema reserves no `u`" vs H3's genuine blind):
+      - True (the default, and every schema built before this parameter
+        existed): `u` is a DECLARED-but-not-required property of the `a`
+        object -- a compact instance under this schema MAY be genuinely
+        blinded (H3) or may simply not have used the entropy (an
+        undecidable case from schema+SAID alone -- pair 11, gap G7).
+      - False: `u` is not a property of the `a` object AT ALL. A compact
+        block under this schema can never carry entropy, so it is
+        unconditionally H2 -- "guessable in principle... given the schema's
+        value space" (spec-body.md:160) -- never merely undecided (gap G6).
     """
-    a_object_props = {
-        "d": {"description": "Attribute Section SAID", "type": "string"},
-        "u": {"description": "Attribute Section UUID", "type": "string"},
-        "i": {"description": "Issuee AID", "type": "string"},
-    }
+    a_object_props = {"d": {"description": "Attribute Section SAID", "type": "string"}}
+    if reserve_u:
+        a_object_props["u"] = {"description": "Attribute Section UUID", "type": "string"}
+    a_object_props["i"] = {"description": "Issuee AID", "type": "string"}
     a_object_props.update(attr_props)
     a_required = ["d"] + (["i"] if require_issuee else []) + list(attr_required)
 

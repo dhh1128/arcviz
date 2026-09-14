@@ -1,0 +1,16 @@
+{
+  "ground_truth": "converge",
+  "far_node": {
+    "v": "ACDCCAACAAJSONAAFF.",
+    "t": "acm",
+    "d": "EJUc1ax23MgFo-zzbre5ljg6_zMkd5_K7mpR_1n1oNuc",
+    "i": "EF9ubf3vXzkBKcdJC86lxUY6XLdpL_Aut9vkpwQjA2nq",
+    "s": "EA83BHI08z04hORMEcGtzOonl6isGKvoPTy8NrQBvQZE",
+    "a": {
+      "d": "EArAQusjOb9ksNsm9sPbdSiGAIJq0MDZLg5NA7De8kU6",
+      "u": "0ABnVCZKZsx4WMa-IzQokp29",
+      "label": "the one far node both edges point at"
+    }
+  },
+  "note": "Both sourceA and sourceB actually point at this SAME far node. This file is dev-only verification content -- a real presenter using this mechanism discloses none of it, and a renderer must not treat the two disclosed SAID strings (which differ from each other, since each edge has its own u) as any kind of signal either way."
+}
