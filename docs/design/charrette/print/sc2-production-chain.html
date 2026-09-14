@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC2 — the production chain, print-first mock (A4, 3 sheets)</title>
+<style>
+/* ============================================================
+   arcviz charrette — PRINT-FIRST premise
+   SC2: depth-4, fully disclosed, still incomplete — and normal.
+   Designed for A4 portrait (210 x 297 mm), 14 mm margins.
+   Prints unscaled on US Letter. Greyscale only. No interaction.
+   A chain of four credentials is a three-sheet artifact;
+   anything shorter is hiding something.
+   ============================================================ */
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #888; }
+body { font-family: Georgia, "Times New Roman", serif; color: #000; }
+.sheet { width: 210mm; height: 296mm; padding: 14mm; background: #fff; margin: 6mm auto; position: relative; overflow: hidden; page-break-after: always; }
+@media print { html { background: #fff; } .sheet { margin: 0; box-shadow: none; } }
+@media screen { .sheet { box-shadow: 0 2mm 6mm rgba(0,0,0,.5); } }
+
+h1 { font-size: 12pt; font-weight: bold; letter-spacing: .02em; }
+h2 { font-size: 9.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1.2mm; }
+p, td, th, li { font-size: 8.5pt; line-height: 1.35; }
+.small { font-size: 7.5pt; line-height: 1.3; }
+.tiny { font-size: 6.8pt; line-height: 1.25; }
+.mono, .said { font-family: "Cascadia Mono", Consolas, "Courier New", monospace; }
+.said { font-size: 6.8pt; word-break: break-all; }
+.caps { text-transform: uppercase; letter-spacing: .07em; }
+
+.strip { border-top: 1.1mm double #000; border-bottom: 0.3mm solid #000; padding: 1.5mm 0 1.2mm 0; margin-bottom: 2.5mm; }
+.strip h1 { margin-bottom: 1mm; }
+.strip p { margin-bottom: 0.8mm; }
+.handfill { display: inline-block; border-bottom: 0.25mm solid #000; min-width: 42mm; height: 3.2mm; vertical-align: bottom; }
+
+.panel { border: 0.25mm solid #999; padding: 2.5mm; margin-bottom: 3.5mm; }
+.panel > .panel-title { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; border-bottom: 0.2mm solid #999; padding-bottom: 1mm; margin-bottom: 2mm; }
+.caption { font-size: 7.5pt; line-height: 1.3; margin-top: 1.6mm; }
+
+.card { border: 0.45mm solid #000; background: #fff; padding: 1.3mm; width: 140mm; }
+.card .card-kind { font-size: 6.5pt; text-transform: uppercase; letter-spacing: .08em; color: #333; display: flex; justify-content: space-between; }
+.card .card-said-label { font-size: 6pt; text-transform: uppercase; letter-spacing: .05em; color: #333; margin-top: 0.8mm; }
+.card table.kv { border-collapse: collapse; margin-top: 0.6mm; width: 100%; }
+.card table.kv td { font-size: 6.6pt; padding: 0.2mm 1mm 0.2mm 0; vertical-align: top; line-height: 1.2; }
+.card table.kv td.k { color: #333; white-space: nowrap; font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.3pt; }
+
+.manifest { display: flex; border: 0.25mm solid #000; margin-top: 1.1mm; }
+.manifest .slot { flex: 1; border-right: 0.25mm solid #000; padding: 0.35mm 0.8mm; }
+.manifest .slot:last-child { border-right: none; }
+.manifest .slot .sn { font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.2pt; font-weight: bold; }
+.manifest .slot .sv { font-size: 5.6pt; text-transform: uppercase; display: block; }
+.manifest .slot.absent .sv { font-weight: bold; }
+
+.chaincol { display: flex; flex-direction: column; align-items: center; }
+.vconn { display: flex; align-items: center; gap: 2.5mm; height: 8mm; }
+.edgelabel { font-size: 6.5pt; line-height: 1.2; }
+
+.hole { border: 0.5mm dashed #000; padding: 1.3mm; width: 140mm; }
+.hole .hole-title { font-size: 7.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; }
+
+.pbanner { border: 0.9mm solid #000; padding: 2.5mm; margin-bottom: 3.5mm; }
+.pbanner h2 { font-size: 11pt; text-transform: none; letter-spacing: 0; }
+
+.wall { border-collapse: collapse; width: 100%; margin-top: 1mm; }
+.wall th, .wall td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.wall th { background: #eee; font-size: 6.4pt; text-transform: uppercase; letter-spacing: .03em; }
+.glyph { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.5pt; }
+
+.idx { border-collapse: collapse; width: 100%; }
+.idx th, .idx td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.idx th { background: #eee; text-transform: uppercase; font-size: 6.4pt; }
+.mark { display: inline-block; border: 0.25mm solid #000; border-radius: 50%; width: 3.4mm; height: 3.4mm; text-align: center; font-size: 6.5pt; line-height: 3.2mm; font-family: Georgia, serif; }
+
+.rulesband { border: 0.35mm solid #000; padding: 2mm; margin-top: 1.5mm; }
+.rulesband p { font-size: 6.8pt; }
+
+.footer { position: absolute; bottom: 8mm; left: 14mm; right: 14mm; border-top: 0.25mm solid #000; padding-top: 1.2mm; }
+.footer p { font-size: 6.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ================= SHEET 1 : the chain ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 1 of 3</h1>
+    <p class="small">Printed reading of a four-credential chain, produced by arcviz. Paper cannot check anything: every statement here records at most what was in hand when the sheets were produced. <b>Do not accept these sheets as a presentation of the credentials they depict.</b> Possession of this paper proves nothing about the person holding it.</p>
+    <p class="small">Viewing context: <b>verifier-facing</b>. Who presented this material is stated on sheet 2, before the verification record it governs. <b>Nothing on these sheets is exceptional</b>: a fully-disclosed chain that still cannot be verified to its root from what was presented is what production credential traffic looks like.</p>
+    <p class="tiny">Produced from: <span class="mono">vlei_qvi, vlei_le, vlei_ecr_auth, vlei_ecr</span> (+ four registry-inception messages), delegation context from <span class="mono">corpus/loads/h7_missing_delegator_kel.json</span>. &nbsp; Printed on: <span class="handfill"></span> by: <span class="handfill"></span> <em>(in the printer's hand — this artifact cannot know when it is printed)</em></p>
+  </div>
+
+  <div class="chaincol">
+
+    <!-- ECR -->
+    <div class="card">
+      <div class="card-kind"><span>Credential · depth 4 of 4 · presented leaf</span><span class="mono" style="text-transform:none;">host label “vlei_ecr” (file name, not credential content)</span></div>
+      <div class="card-said-label">SAID</div>
+      <div class="said">EGDKB8m5ptYtwBdot1qUEmsu2nD_r_7k8sFOha8DH_Wq</div>
+      <table class="kv">
+        <tr><td class="k">i</td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S <span class="mark">2</span></td></tr>
+        <tr><td class="k">a.i</td><td class="said">ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD <span class="mark">4</span></td></tr>
+        <tr><td class="k">a</td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span> <span class="mark">5</span> · Jordan Q. Fixture · Compliance Analyst · 2026-01-15 · top-level <span class="mono">u</span>: present (salted)</td></tr>
+        <tr><td class="k">rd</td><td class="said" style="font-size:6.2pt;">EFiZI0ixQlk4sxMbZdeWy4UpRmiOP_fS1ZCTZFRgudxW &nbsp;<span style="font-family:Georgia,serif;font-size:6.4pt;">— registry inception in hand; no later TEL events</span></td></tr>
+      </table>
+      <div class="manifest">
+        <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+        <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+        <div class="slot"><span class="sn">e</span><span class="sv">disclosed (1 edge)</span></div>
+        <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+      </div>
+    </div>
+
+    <div class="vconn">
+      <svg width="12" height="28" viewBox="0 0 3.2 7.4" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="4.4" refY="2" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L5,2 L0,4 z" fill="#000"/></marker></defs>
+        <line x1="1.6" y1="0.4" x2="1.6" y2="6.2" stroke="#000" stroke-width="0.5" marker-end="url(#a1)"/>
+      </svg>
+      <div class="edgelabel">edge <b>auth</b> · operator (effective): <b>I2I</b> † · relation in hand at both ends; <b>not checked</b> (no host vector — see sheet 2)</div>
+    </div>
+
+    <!-- ECR-AUTH -->
+    <div class="card">
+      <div class="card-kind"><span>Credential · depth 3 of 4</span><span class="mono" style="text-transform:none;">host label “vlei_ecr_auth”</span></div>
+      <div class="card-said-label">SAID</div>
+      <div class="said">EM7gTDXqvy458gohO_yof2TYxcGB2jv2PW2WsLM-BXgm</div>
+      <table class="kv">
+        <tr><td class="k">i</td><td class="said">EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ <span class="mark">3</span></td></tr>
+        <tr><td class="k">a.i</td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S <span class="mark">2</span></td></tr>
+        <tr><td class="k">a</td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span> <span class="mark">5</span> · AID <span class="said" style="font-size:6.2pt;">ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD</span> <span class="mark">4</span> · Jordan Q. Fixture · Compliance Analyst · 2026-01-17 · top-level <span class="mono">u</span>: none as issued</td></tr>
+        <tr><td class="k">rd</td><td class="said" style="font-size:6.2pt;">EIz-db8yaHMfgXfP76cfWqRMgrIhq9ILRqEDIFN2PjZZ &nbsp;<span style="font-family:Georgia,serif;font-size:6.4pt;">— registry inception in hand; no later TEL events</span></td></tr>
+      </table>
+      <div class="manifest">
+        <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+        <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+        <div class="slot"><span class="sn">e</span><span class="sv">disclosed (1 edge)</span></div>
+        <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+      </div>
+    </div>
+
+    <div class="vconn">
+      <svg width="12" height="28" viewBox="0 0 3.2 7.4" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="4.4" refY="2" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L5,2 L0,4 z" fill="#000"/></marker></defs>
+        <line x1="1.6" y1="0.4" x2="1.6" y2="6.2" stroke="#000" stroke-width="0.5" marker-end="url(#a2)"/>
+      </svg>
+      <div class="edgelabel">edge <b>le</b> · operator (effective): <b>I2I</b> † · relation in hand at both ends; <b>not checked</b> (no host vector)</div>
+    </div>
+
+    <!-- LE -->
+    <div class="card">
+      <div class="card-kind"><span>Credential · depth 2 of 4</span><span class="mono" style="text-transform:none;">host label “vlei_le”</span></div>
+      <div class="card-said-label">SAID</div>
+      <div class="said">ENKSmFLrpu8mZ4g7bVjhXmpQbQTsic6uEZpeKg4U-Im0</div>
+      <table class="kv">
+        <tr><td class="k">i</td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S <span class="mark">2</span></td></tr>
+        <tr><td class="k">a.i</td><td class="said">EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ <span class="mark">3</span></td></tr>
+        <tr><td class="k">a</td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span> <span class="mark">5</span> · 2026-01-18 · top-level <span class="mono">u</span>: none as issued</td></tr>
+        <tr><td class="k">rd</td><td class="said" style="font-size:6.2pt;">EDCOPdr8xJtPW7YqEu3nN4xs9ILxpF83yhQ-wDffZAiT &nbsp;<span style="font-family:Georgia,serif;font-size:6.4pt;">— registry inception in hand; no later TEL events</span></td></tr>
+      </table>
+      <div class="manifest">
+        <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+        <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+        <div class="slot"><span class="sn">e</span><span class="sv">disclosed (1 edge)</span></div>
+        <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+      </div>
+    </div>
+
+    <div class="vconn">
+      <svg width="12" height="28" viewBox="0 0 3.2 7.4" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="a3" markerWidth="6" markerHeight="6" refX="4.4" refY="2" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L5,2 L0,4 z" fill="#000"/></marker></defs>
+        <line x1="1.6" y1="0.4" x2="1.6" y2="6.2" stroke="#000" stroke-width="0.5" marker-end="url(#a3)"/>
+      </svg>
+      <div class="edgelabel">edge <b>qvi</b> · operator (effective): <b>I2I</b> † · relation in hand at both ends; <b>not checked</b> (no host vector)</div>
+    </div>
+
+    <!-- QVI -->
+    <div class="card">
+      <div class="card-kind"><span>Credential · depth 1 of 4 · chain root as presented</span><span class="mono" style="text-transform:none;">host label “vlei_qvi”</span></div>
+      <div class="card-said-label">SAID</div>
+      <div class="said">EHOTOsgWoVT5SBK5vL1H4Pj5nHWQotdzeO7lM3_T_CnG</div>
+      <table class="kv">
+        <tr><td class="k">i</td><td class="said">ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40 <span class="mark">1</span></td></tr>
+        <tr><td class="k">a.i</td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S <span class="mark">2</span></td></tr>
+        <tr><td class="k">a</td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span> <span class="mark">5</span> · 2026-01-16 · top-level <span class="mono">u</span>: none as issued</td></tr>
+        <tr><td class="k">rd</td><td class="said" style="font-size:6.2pt;">EEZAG3AUc0NbevvbRPcW5EkX6gpxMW1sHxgfiyShmf26 &nbsp;<span style="font-family:Georgia,serif;font-size:6.4pt;">— registry inception in hand; no later TEL events</span></td></tr>
+      </table>
+      <div class="manifest">
+        <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+        <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+        <div class="slot absent"><span class="sn">e</span><span class="sv">none as issued — committed</span></div>
+        <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+      </div>
+    </div>
+
+    <div class="vconn">
+      <svg width="12" height="24" viewBox="0 0 3.2 6.4" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1.6" y1="0.4" x2="1.6" y2="6.0" stroke="#000" stroke-width="0.4" stroke-dasharray="0.4 1.0"/>
+      </svg>
+      <div class="edgelabel"><b>delegation context — host-declared, not an ACDC edge.</b> Drawn dotted because it is a different kind of claim: it comes from the host's load manifest, not from any credential in hand.</div>
+    </div>
+
+    <div class="hole">
+      <div class="hole-title">Not in this material — key event log of the delegation root</div>
+      <table class="kv">
+        <tr><td class="k">AID</td><td class="said">EDYl3N_TuKmwF2zjrdd1pJS8IjvidaWu6js7egVXbK8- <span class="mark">6</span></td></tr>
+      </table>
+      <p class="tiny" style="margin-top:0.8mm;">Per the host, the QVI issuer's AID <span class="mark">1</span> is a delegated identifier whose root delegator is the AID above. No key event log for it — nor for any AID on this sheet — was presented. Delegation can be checked only as far as the KELs in hand reach; here that reach is <b>zero tiers</b>. This position is drawn because omitting it would print the chain as more complete than it is.</p>
+    </div>
+
+  </div>
+
+  <p class="tiny" style="margin-top:1.2mm;">† Effective operators are computed from the committed edge and its far node per the specification's default-injection rule. Whether an operator was written explicitly or injected by default is a raw-bytes fact deliberately not shown (matrix Rule 9): all three edges print identically because the difference carries no meaning at this level.</p>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC2 “the production chain” · sheet 1 of 3 · greyscale by design. Identifier marks <span class="mark">n</span> assert byte-equality only; the index on sheet 3 enumerates them. Fixtures verbatim from <span class="mono">corpus/</span>; no credential data invented.</p></div>
+</section>
+
+<!-- ================= SHEET 2 : presenter + the wall ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 2 of 3</h1>
+    <p class="small">The verification record for sheet 1's chain. Read the frame first; the frame is the finding.</p>
+  </div>
+
+  <div class="pbanner">
+    <h2>Who presented this material? — Unknown.</h2>
+    <p class="small" style="margin:1mm 0 2mm 0;">Nothing in what was received shows that whoever handed it over controls <span class="said" style="font-size:6.4pt;">ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD</span> <span class="mark">4</span>, the identifier the leaf credential names as its subject. Every row below concerns the credentials' issuance history; an exact copy of these bytes, in anyone's hands, would produce an identical table. That is why this table is printed <em>inside</em> this frame: there is no honest route to the checks that does not pass this question.</p>
+
+    <h2 style="font-size:8pt;">Verification record, per check and subject — as of production of these sheets</h2>
+    <table class="wall">
+      <tr><th style="width:29mm;">check</th><th style="width:47mm;">subject</th><th style="width:41mm;">outcome</th><th>blocked by / horizon</th></tr>
+      <tr><td>SAID self-consistency</td><td>each of the 4 credentials; each of the 4 registry inceptions</td><td><span class="glyph">☐</span> not performed</td><td>recomputable from bytes in hand; no host vector was supplied</td></tr>
+      <tr><td>schema conformance</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no schema document in hand for any committed schema SAID</td></tr>
+      <tr><td>signature validity</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no signature attachments were presented</td></tr>
+      <tr><td>KEL anchoring</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no key event logs were presented, for any AID</td></tr>
+      <tr><td>delegation chain</td><td>tier 1: issuer of QVI, <span class="mark">1</span></td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no KEL in hand for <span class="mark">1</span></td></tr>
+      <tr><td>delegation chain</td><td>root tier: delegator <span class="mark">6</span></td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>the hole on sheet 1 — <span class="said" style="font-size:6.2pt;">EDYl3N_TuKmwF2zjrdd1pJS8IjvidaWu6js7egVXbK8-</span></td></tr>
+      <tr><td>edge constraint (I2I)</td><td>edge <b>auth</b> (ECR → ECR-AUTH)</td><td><span class="glyph">☐</span> not performed</td><td>both ends in hand; no host vector supplied</td></tr>
+      <tr><td>edge constraint (I2I)</td><td>edge <b>le</b> (ECR-AUTH → LE)</td><td><span class="glyph">☐</span> not performed</td><td>both ends in hand; no host vector supplied</td></tr>
+      <tr><td>edge constraint (I2I)</td><td>edge <b>qvi</b> (LE → QVI)</td><td><span class="glyph">☐</span> not performed</td><td>both ends in hand; no host vector supplied</td></tr>
+      <tr><td>issuer bona fides</td><td>the chain behind the presented leaf</td><td><span class="glyph">☐</span> not performed</td><td>aggregate of the three edge rows under rule <b>ALL-EDGES</b> (arcviz's own default, host-overridable — not a spec-derived verdict); its inputs were not performed</td></tr>
+      <tr><td>revocation reconciliation</td><td>registry of ECR</td><td><span class="glyph">☐</span> not performed</td><td>TEL in hand = inception only; no later horizon exists in this material</td></tr>
+      <tr><td>revocation reconciliation</td><td>registry of ECR-AUTH</td><td><span class="glyph">☐</span> not performed</td><td>TEL in hand = inception only</td></tr>
+      <tr><td>revocation reconciliation</td><td>registry of LE</td><td><span class="glyph">☐</span> not performed</td><td>TEL in hand = inception only</td></tr>
+      <tr><td>revocation reconciliation</td><td>registry of QVI</td><td><span class="glyph">☐</span> not performed</td><td>TEL in hand = inception only</td></tr>
+      <tr><td>duplicity</td><td>each issuer AID (<span class="mark">1</span> <span class="mark">2</span> <span class="mark">3</span>)</td><td><span class="glyph">☐</span> not performed</td><td>no watchers consulted; any future answer is scoped to the watchers consulted, never absolute</td></tr>
+    </table>
+
+    <p class="tiny" style="margin-top:1.5mm;"><span class="glyph">☐</span> not performed — possible, but no result exists; the box is yours to fill with live tooling, never from this page. &nbsp; <span class="glyph">▨</span> cannot be performed from what was presented — a fact about the material, not a failure. &nbsp; No ✓ appears anywhere on these sheets because no check was performed; a ✓ would carry its as-of horizon and the tool that produced it. No ✗ appears because no host declared it can distinguish failure from absence. <b>Freshness:</b> no freshness policy was supplied for any of the four credentials — each would carry its own; the absence is a visible state, not a silent default.</p>
+  </div>
+
+  <p class="small"><b>This wall of empty boxes is the point, and it is permanent.</b> A credential retrieved from a store arrives with almost nothing checked and almost nothing checkable; the reference substrate keeps no record of the checks it ran at ingestion. The table above is therefore the steady state of honest rendering, not a transient awaiting completion — the layout reserves no space for these boxes to “fill in.” A rendering of this same chain that showed you a single green check would not have more information than this page; it would have less honesty.</p>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC2 · sheet 2 of 3.</p></div>
+</section>
+
+<!-- ================= SHEET 3 : rules band, index, vocabulary ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 3 of 3</h1>
+    <p class="small">The rules band, the identifier index, and the printed vocabulary for all three sheets.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Terms of use — and the space the truth would take</div>
+    <p class="small">Each card on sheet 1 prints <span class="mono">r: none as issued — committed</span> in its manifest: these four credentials carry no rules section, and their SAIDs commit to that. That absence is a fact about these fixtures, not about the credential family they model. Production vLEI credentials each carry two or three legal-language clauses of 341–480 characters — against data fields of 12–44 characters — and terms encumber every reader of the render, so a card that hides them to save space is where the confidentiality chain silently breaks. The band below is a <b>sizing specimen only</b> — it is not credential content and says so, twice, because a specimen that could be mistaken for terms would be its own lie:</p>
+    <div class="rulesband">
+      <p class="tiny caps" style="font-weight:bold; margin-bottom:0.8mm;">Sizing specimen — not credential content</p>
+      <p>This paragraph is a sizing specimen, not terms of use. It is set at data-field size and sized to the production band of three hundred forty-one to four hundred eighty characters, because a printed card must plan for prose of this length as the normal case, not the exception. On paper there is no toggle to collapse it behind, and that is the honest arrangement: a reader bound by terms must be able to read the terms on the same surface as the data they encumber. Specimen ends.</p>
+    </div>
+    <p class="caption">Layout consequence, stated plainly: the rules band wins its space and the data fields keep theirs — the band sits full-width <em>below</em> the fields it encumbers, so 44-character facts are never squeezed by 480-character boilerplate, and the boilerplate is never truncated. A persistent “terms attach” line with the <span class="mono">r</span> section's SAID would ride the manifest strip; the full prose prints here, once per credential, in full.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Identifier index — byte-equal values across all three sheets</div>
+    <p class="tiny" style="margin-bottom:1mm;">A shared <span class="mark">n</span> mark means the printed strings are byte-identical — an equality of what is on the page, nothing more. Different marks mean only “not byte-equal.” No similarity judgment is made or implied; near-identical strings are deliberately not flagged as near-identical. Comparing an identifier against something you trust is your ceremony, with your tools; this page only guarantees it has not hidden a repetition from you.</p>
+    <table class="idx">
+      <tr><th style="width:8mm;">mark</th><th style="width:76mm;">value</th><th>appears as</th></tr>
+      <tr><td><span class="mark">1</span></td><td class="said">ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40</td><td>issuer of QVI; named by host context as a delegated AID under <span class="mark">6</span></td></tr>
+      <tr><td><span class="mark">2</span></td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S</td><td>subject of QVI · issuer of LE · subject of ECR-AUTH · issuer of ECR — 4 occurrences; the issuer/subject alternation of this chain rides one identifier</td></tr>
+      <tr><td><span class="mark">3</span></td><td class="said">EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ</td><td>subject of LE · issuer of ECR-AUTH</td></tr>
+      <tr><td><span class="mark">4</span></td><td class="said">ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD</td><td>subject of ECR · named in ECR-AUTH's attributes (<span class="mono">a.AID</span>) · the presenter question on sheet 2 is about control of this identifier</td></tr>
+      <tr><td><span class="mark">5</span></td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span></td><td>identical attribute value in all four credentials — a perfect correlator carried in the clear; whoever holds any one of these sheets can link all four</td></tr>
+      <tr><td><span class="mark">6</span></td><td class="said">EDYl3N_TuKmwF2zjrdd1pJS8IjvidaWu6js7egVXbK8-</td><td>the delegation root whose KEL is the hole on sheet 1; source: host load manifest, not any credential</td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Printed vocabulary — every distinction on these sheets, in one place</div>
+    <table class="idx">
+      <tr><th style="width:44mm;">ink</th><th>meaning</th></tr>
+      <tr><td>solid border box</td><td>credential in hand; its SAID printed in full at the top</td></tr>
+      <tr><td>dashed border box</td><td>a named thing that is not in this material — a real position, standing empty, with the blocking identifier printed inside it</td></tr>
+      <tr><td>solid line, closed arrowhead</td><td>an edge disclosed in the material, label and effective operator printed at point of use</td></tr>
+      <tr><td>dotted line, no arrowhead</td><td>host-declared context (e.g. delegation) — a different kind of claim than a committed edge, so a different line</td></tr>
+      <tr><td>manifest strip (on every card)</td><td>the per-section holdings statement; there is no unmarked state — absence is a filled-in slot reading “none as issued — committed”</td></tr>
+      <tr><td><span class="glyph">☐</span> / <span class="glyph">▨</span> in the record</td><td>not performed / not performable from this material — different facts, different marks, both loud</td></tr>
+      <tr><td><span class="mark">n</span> after an identifier</td><td>byte-equal to every other identifier carrying the same mark; enumerated in the index above</td></tr>
+      <tr><td>heavy-bordered frame (sheet 2)</td><td>the presenter question; the verification record exists only inside it</td></tr>
+    </table>
+    <p class="tiny" style="margin-top:1.5mm;">Nothing on these sheets is carried by colour, and nothing is carried by this vocabulary table alone: every mark above is also captioned in words at its point of use. The table is a recap, not a decoder ring.</p>
+  </div>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC2 · sheet 3 of 3.</p></div>
+</section>
+
+</body>
+</html>

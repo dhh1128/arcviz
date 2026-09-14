@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC6 — the hole triptych, print-first mock (A4)</title>
+<style>
+/* ============================================================
+   arcviz charrette — PRINT-FIRST premise
+   SC6: three absences that must not share a face.
+   Designed for A4 portrait (210 x 297 mm), 14 mm margins.
+   Prints unscaled on US Letter (content box 182 x 269 mm fits both).
+   Greyscale only. No hover, no interaction, no external resources.
+   ============================================================ */
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #888; }
+body { font-family: Georgia, "Times New Roman", serif; color: #000; }
+.sheet {
+  width: 210mm; height: 296mm; padding: 14mm; background: #fff;
+  margin: 6mm auto; position: relative; overflow: hidden;
+  page-break-after: always;
+}
+@media print {
+  html { background: #fff; }
+  .sheet { margin: 0; box-shadow: none; }
+}
+@media screen { .sheet { box-shadow: 0 2mm 6mm rgba(0,0,0,.5); } }
+
+/* --- type scale (print points) --- */
+h1 { font-size: 12pt; font-weight: bold; letter-spacing: .02em; }
+h2 { font-size: 9.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1.2mm; }
+p, td, th, li { font-size: 8.5pt; line-height: 1.35; }
+.small { font-size: 7.5pt; line-height: 1.3; }
+.tiny { font-size: 6.8pt; line-height: 1.25; }
+.mono, .said { font-family: "Cascadia Mono", Consolas, "Courier New", monospace; }
+.said { font-size: 6.8pt; word-break: break-all; letter-spacing: -0.01em; }
+.caps { text-transform: uppercase; letter-spacing: .07em; }
+
+/* --- the static-record strip (every sheet, top) --- */
+.strip {
+  border-top: 1.1mm double #000; border-bottom: 0.3mm solid #000;
+  padding: 1.6mm 0 1.3mm 0; margin-bottom: 3mm;
+}
+.strip h1 { margin-bottom: 1mm; }
+.strip p { margin-bottom: 0.8mm; }
+.handfill { display: inline-block; border-bottom: 0.25mm solid #000; min-width: 42mm; height: 3.2mm; vertical-align: bottom; }
+
+/* --- panels --- */
+.panel { border: 0.25mm solid #999; padding: 2mm; margin-bottom: 2.5mm; }
+.panel > .panel-title { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; border-bottom: 0.2mm solid #999; padding-bottom: 1mm; margin-bottom: 2mm; }
+.caption { font-size: 7.3pt; line-height: 1.28; margin-top: 1.2mm; color: #000; }
+.caption b { font-variant: small-caps; }
+
+/* --- credential cards --- */
+.card { border: 0.45mm solid #000; background: #fff; padding: 1.8mm; }
+.card-kind { font-size: 6.5pt; text-transform: uppercase; letter-spacing: .08em; color: #333; }
+.card-said-label { font-size: 6pt; text-transform: uppercase; letter-spacing: .05em; color: #333; margin-top: 1mm; }
+table.kv { border-collapse: collapse; margin-top: 1.2mm; width: 100%; }
+table.kv td { font-size: 7pt; padding: 0.3mm 1mm 0.3mm 0; vertical-align: top; }
+table.kv td.k { color: #333; white-space: nowrap; font-family: "Cascadia Mono", Consolas, "Courier New", monospace; font-size: 6.5pt; }
+
+/* section manifest: the mandatory, never-unmarked row (the CATZOC move).
+   Every card prints all five slots; an absent section is a FILLED-IN slot,
+   never missing ink. */
+.manifest { display: flex; border: 0.25mm solid #000; margin-top: 1.4mm; }
+.manifest .slot { flex: 1; border-right: 0.25mm solid #000; padding: 0.6mm 0.8mm; }
+.manifest .slot:last-child { border-right: none; }
+.manifest .slot .sn { font-family: "Cascadia Mono", Consolas, monospace; font-size: 6.5pt; font-weight: bold; }
+.manifest .slot .sv { font-size: 5.8pt; text-transform: uppercase; letter-spacing: .03em; display: block; }
+.manifest .slot.absent { background: #fff; }
+.manifest .slot.absent .sv { font-weight: bold; }
+.manifest .slot.compact { background: repeating-linear-gradient(45deg,#fff 0,#fff 1mm,#e2e2e2 1mm,#e2e2e2 1.9mm); }
+
+/* --- graph pieces --- */
+.row { display: flex; align-items: stretch; gap: 0; }
+.connector { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.edgelabel { font-size: 6.5pt; line-height: 1.25; text-align: center; }
+
+/* H7: a hole WITH an identity — a real node position, dashed border,
+   carrying the blocking SAID and the words. */
+.hole { border: 0.5mm dashed #000; padding: 1.8mm; background: #fff; }
+.hole .hole-title { font-size: 7.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; }
+
+/* H8 terminus: an edge to NO place. No box exists to draw. */
+.terminus-note { border-left: 0.7mm solid #000; padding-left: 1.6mm; }
+
+svg { display: block; }
+.wall { border-collapse: collapse; width: 100%; margin-top: 1mm; }
+.wall th, .wall td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.wall th { background: #eee; font-size: 6.4pt; text-transform: uppercase; letter-spacing: .03em; }
+.glyph { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.5pt; }
+
+.idx { border-collapse: collapse; width: 100%; }
+.idx th, .idx td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.idx th { background: #eee; text-transform: uppercase; letter-spacing: .03em; font-size: 6.4pt; }
+.mark { display: inline-block; border: 0.25mm solid #000; border-radius: 50%; width: 3.4mm; height: 3.4mm; text-align: center; font-size: 6.5pt; line-height: 3.2mm; font-family: Georgia, serif; }
+
+.footer { position: absolute; bottom: 8mm; left: 14mm; right: 14mm; border-top: 0.25mm solid #000; padding-top: 1.2mm; }
+.footer p { font-size: 6.5pt; color: #000; }
+
+/* P banner: the one budgeted structural spend on this document.
+   The verification record is printed INSIDE it — there is no route to the
+   vector that does not pass through this frame (Rule 18). */
+.pbanner { border: 0.9mm solid #000; padding: 2.5mm; margin-bottom: 3.5mm; }
+.pbanner h2 { font-size: 11pt; text-transform: none; letter-spacing: 0; }
+</style>
+</head>
+<body>
+
+<!-- ================= SHEET 1 of 2 ================= -->
+<section class="sheet">
+
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 1 of 2</h1>
+    <p class="small">This page is a printed reading of credential material, produced by arcviz. Paper cannot check anything: every statement below records at most what was in hand when this page was produced, and none of it can be re-checked from this page. <b>Do not accept this page as a presentation of the credentials it depicts.</b> Possession of this paper proves nothing about the person holding it.</p>
+    <p class="small">Viewing context: <b>verifier-facing</b> — this material was received as a disclosure. Who presented it is addressed, before any verification detail, on sheet 2.</p>
+    <p class="tiny">Produced from: <span class="mono">corpus/loads/h7_missing_credential.json</span> (serving <span class="mono">vlei_qvi, vlei_le, vlei_ecr</span>; one referenced credential not served), <span class="mono">compact_private_edge.json</span>, <span class="mono">optional_edge_absent.json</span>, <span class="mono">two_blinded_edges_converge.json</span>, <span class="mono">two_blinded_edges_diverge.json</span>. &nbsp; Printed on: <span class="handfill"></span> by: <span class="handfill"></span> <em>(in the printer's hand — this artifact cannot know when or for whom it is printed)</em></p>
+  </div>
+
+  <h2>Three absences. Each is a different fact, and each is printed as a different thing.</h2>
+  <p class="small" style="margin-bottom:2mm;">A: a named thing that is not here (a place is drawn, and named). &nbsp;B: a committed edge whose destination is withheld (no place exists to draw). &nbsp;C: a committed no-edge (nothing is absent; the absence is the fact). None of these is an error, and none of them is “fine.”</p>
+
+  <!-- ============ PANEL A : H7 ============ -->
+  <div class="panel">
+    <div class="panel-title">A &nbsp;·&nbsp; Referenced, and not in this material — a hole with an identity</div>
+    <div class="row">
+      <div class="card" style="width:76mm;">
+        <div class="card-kind">Credential — in hand, disclosed in full</div>
+        <div class="card-said-label">SAID (identifies these bytes; asserts nothing else)</div>
+        <div class="said">EGDKB8m5ptYtwBdot1qUEmsu2nD_r_7k8sFOha8DH_Wq</div>
+        <table class="kv">
+          <tr><td class="k">i</td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S <span class="mark">2</span></td></tr>
+          <tr><td class="k">a.i</td><td class="said">ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD</td></tr>
+          <tr><td class="k">a</td><td>LEI 984500ARCV1Z0000FIX01 · Jordan&nbsp;Q.&nbsp;Fixture · Compliance&nbsp;Analyst · 2026-01-15</td></tr>
+        </table>
+        <div class="manifest">
+          <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+          <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+          <div class="slot"><span class="sn">e</span><span class="sv">disclosed (1 edge)</span></div>
+          <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+        </div>
+      </div>
+      <div class="connector" style="width:26mm;">
+        <svg width="98" height="16" viewBox="0 0 26 4.2" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="ah1" markerWidth="6" markerHeight="6" refX="4.6" refY="2" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L5,2 L0,4 z" fill="#000"/></marker></defs>
+          <line x1="1" y1="2.1" x2="24" y2="2.1" stroke="#000" stroke-width="0.5" marker-end="url(#ah1)"/>
+        </svg>
+        <div class="edgelabel">edge <b>auth</b><br>operator (effective): I2I&nbsp;†<br><span class="tiny">relation not checkable:<br>far node not in hand</span></div>
+      </div>
+      <div class="hole" style="width:76mm;">
+        <div class="hole-title">Not in this material</div>
+        <div class="card-said-label">Referenced as (the identity of what is missing)</div>
+        <div class="said">EM7gTDXqvy458gohO_yof2TYxcGB2jv2PW2WsLM-BXgm</div>
+        <table class="kv">
+          <tr><td class="k">schema</td><td class="said">EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK</td></tr>
+        </table>
+        <p class="tiny" style="margin-top:1.2mm;">A specific credential is named here and is required by the edge on the left. It was not in what was presented. Nothing about it can be checked from this page; every check that needs it is <b>blocked by</b> the identifier above. Why it is not in hand: <b>unknown</b> — no cause was attested.</p>
+      </div>
+    </div>
+    <p class="caption"><b>What this is:</b> a real position in the graph, drawn and named, standing empty. <b>What it is not:</b> the end of the chain. Two further credentials (LE, QVI) arrived in the same material, and the withheld credential is — per its own reference here — the only thing that could connect them to this one. The page therefore prints them as a <em>separate component</em> below, joined to nothing: any line drawn between the two components would be manufactured.</p>
+    <div class="row" style="margin-top:2mm; align-items:center;">
+      <div class="card" style="width:60mm; padding:1.2mm;">
+        <div class="card-kind">Credential — in hand (LE)</div>
+        <div class="said">ENKSmFLrpu8mZ4g7bVjhXmpQbQTsic6uEZpeKg4U-Im0</div>
+      </div>
+      <div class="connector" style="width:20mm;">
+        <svg width="76" height="12" viewBox="0 0 20 3.2" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="ah2" markerWidth="6" markerHeight="6" refX="4.6" refY="2" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L5,2 L0,4 z" fill="#000"/></marker></defs>
+          <line x1="1" y1="1.6" x2="18" y2="1.6" stroke="#000" stroke-width="0.5" marker-end="url(#ah2)"/>
+        </svg>
+        <div class="edgelabel">edge <b>qvi</b> · I2I&nbsp;†</div>
+      </div>
+      <div class="card" style="width:60mm; padding:1.2mm;">
+        <div class="card-kind">Credential — in hand (QVI)</div>
+        <div class="said">EHOTOsgWoVT5SBK5vL1H4Pj5nHWQotdzeO7lM3_T_CnG</div>
+      </div>
+      <div style="flex:1; padding-left:3mm;">
+        <p class="tiny">— in the same material, and <b>connected to nothing above</b>. The connection, if it exists, runs through the credential that was not served.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PANEL B : H8 ============ -->
+  <div class="panel">
+    <div class="panel-title">B &nbsp;·&nbsp; Edge committed, destination withheld — an edge to no place</div>
+    <div class="row">
+      <div class="card" style="width:76mm;">
+        <div class="card-kind">Credential — in hand</div>
+        <div class="card-said-label">SAID</div>
+        <div class="said">EHTnmmo4LxD1jANqF0ip2IGDyVMicrBO7PYDO7J5_5Cw</div>
+        <table class="kv">
+          <tr><td class="k">i</td><td class="said">EIj-Thbqfa6iXrjsBekox888JLwlPvXWJx3Ge55gI3EF</td></tr>
+          <tr><td class="k">a</td><td>“the presenting node”</td></tr>
+        </table>
+        <div class="manifest">
+          <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+          <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+          <div class="slot compact"><span class="sn">e</span><span class="sv">1 edge: content withheld</span></div>
+          <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+        </div>
+      </div>
+      <div class="connector" style="width:26mm;">
+        <svg width="98" height="16" viewBox="0 0 26 4.2" xmlns="http://www.w3.org/2000/svg">
+          <line x1="1" y1="2.1" x2="21" y2="2.1" stroke="#000" stroke-width="0.5"/>
+          <line x1="21" y1="0.4" x2="21" y2="3.8" stroke="#000" stroke-width="0.7"/>
+        </svg>
+        <div class="edgelabel">edge <b>source</b><br><span class="tiny">no arrowhead: there is<br>nothing to point at</span></div>
+      </div>
+      <div class="terminus-note" style="width:76mm;">
+        <p class="small"><b class="caps" style="font-size:7.5pt;">Destination withheld.</b> This edge exists and is committed — its own identifier is</p>
+        <div class="said" style="margin:0.8mm 0;">EEn6lzlzA39qULyAJzPhE5mLAMWrgc9lt6UAEkNRMFvS</div>
+        <p class="tiny">— but its content, <b>including where it points</b>, is not in this material. Unlike panel A, not even the identity of the far end is in hand, so no place is drawn: a box here, empty or otherwise, would be an invention. The destination could be any artifact, including one drawn elsewhere on a page like this. Why it is withheld: <b>unknown</b> — no cause was attested; “redacted,” “private,” and “deleted” are all claims this material does not carry.</p>
+      </div>
+    </div>
+    <p class="caption"><b>A against B:</b> in A the missing thing has a name and a drawn place; in B there is no name and no place — only the committed stub of a relationship. The bar at the line's end is a terminus, not a node.</p>
+  </div>
+
+  <!-- ============ PANEL C : H9 ============ -->
+  <div class="panel">
+    <div class="panel-title">C &nbsp;·&nbsp; No edge — a committed fact, not a gap</div>
+    <div class="row">
+      <div class="card" style="width:96mm;">
+        <div class="card-kind">Credential — in hand, disclosed in full</div>
+        <div class="card-said-label">SAID</div>
+        <div class="said">EFD8--Eg-ghiciiVPTtPwKT_Fc6p9VAmKL9Qx8W-faIo</div>
+        <table class="kv">
+          <tr><td class="k">i</td><td class="said">EHbpCXLELinjjrS8gYZZDD3oRZFa1ZG0dwqBkbhFPnsN</td></tr>
+          <tr><td class="k">a</td><td>“a claim issued with no endorsement attached”</td></tr>
+        </table>
+        <div class="manifest">
+          <div class="slot"><span class="sn">s</span><span class="sv">in hand·unverified</span></div>
+          <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+          <div class="slot absent"><span class="sn">e</span><span class="sv">none as issued — committed</span></div>
+          <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued — committed</span></div>
+        </div>
+      </div>
+      <div style="flex:1; padding-left:3mm;">
+        <p class="small">This credential, as issued, contains no edge section: its SAID commits to that. The statement is about <b>this credential</b>, not about the world — it does not mean “no related credentials exist.”</p>
+        <p class="tiny" style="margin-top:1mm;">No graph ink is spent here, and none is missing. The section-manifest row above is printed on <em>every</em> card on every arcviz sheet, so an absent section is always a filled-in slot — there is no unmarked state for absence to hide in, and no dangling stub for it to be confused with.</p>
+      </div>
+    </div>
+    <p class="caption"><b>C against A and B:</b> A is a lacuna with a name; B is a committed pointer into the dark; C is <em>vacat</em> — space that was never written on, and the issuance commits to exactly that.</p>
+  </div>
+
+  <p class="tiny">† Effective operators are computed from the committed edge and, where needed, its far node, per the specification's default-injection rule. Whether an operator was written explicitly or injected by default is a raw-bytes fact deliberately not shown (matrix Rule 9). Where the far node is not in hand, the relation the operator states is recorded as uncheckable, never as failed.</p>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC6 “the hole triptych” · sheet 1 of 2 · greyscale by design; nothing on this sheet is carried by colour, hover, or expansion. Fixtures verbatim from <span class="mono">corpus/</span>; no credential data invented.</p></div>
+</section>
+
+<!-- ================= SHEET 2 of 2 ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 2 of 2</h1>
+    <p class="small">Continuation. This sheet carries the two-blinded-edges composition, the presenter statement, the verification record, and the identifier index for both sheets.</p>
+  </div>
+
+  <!-- ============ PANEL D : composition ============ -->
+  <div class="panel">
+    <div class="panel-title">D &nbsp;·&nbsp; Two withheld destinations — whether they meet is itself unknowable</div>
+
+    <div class="row" style="gap:4mm;">
+      <!-- sub-panel 1 -->
+      <div style="width:86mm;">
+        <div class="card" style="padding:1.2mm;">
+          <div class="card-kind">Credential — in hand</div>
+          <div class="said">EHZGkyDF43kjtMjH2oe-W0hV1vS_9kAv3EtWLjDHT2Ol</div>
+          <div class="manifest" style="margin-top:1mm;">
+            <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+            <div class="slot compact"><span class="sn">e</span><span class="sv">2 edges: content withheld</span></div>
+            <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued</span></div>
+          </div>
+        </div>
+        <svg width="325" height="64" viewBox="0 0 86 17" xmlns="http://www.w3.org/2000/svg">
+          <line x1="24" y1="1" x2="24" y2="8" stroke="#000" stroke-width="0.5"/>
+          <line x1="20.5" y1="8" x2="27.5" y2="8" stroke="#000" stroke-width="0.7"/>
+          <line x1="62" y1="1" x2="62" y2="8" stroke="#000" stroke-width="0.5"/>
+          <line x1="58.5" y1="8" x2="65.5" y2="8" stroke="#000" stroke-width="0.7"/>
+          <text x="12" y="6.2" font-size="2.4" font-family="Georgia, serif">sourceA</text>
+          <text x="66.5" y="6.2" font-size="2.4" font-family="Georgia, serif">sourceB</text>
+          <path d="M 20 11 L 20 13.5 L 66 13.5 L 66 11" fill="none" stroke="#000" stroke-width="0.3"/>
+          <line x1="43" y1="13.5" x2="43" y2="15.5" stroke="#000" stroke-width="0.3"/>
+        </svg>
+        <p class="tiny" style="text-align:center;">destinations: <b>one or two distinct artifacts — unknowable from this material</b></p>
+      </div>
+      <!-- sub-panel 2 -->
+      <div style="width:86mm;">
+        <div class="card" style="padding:1.2mm;">
+          <div class="card-kind">Credential — in hand</div>
+          <div class="said">EPkMaYHR6uo7Q8yJ5ik9QJwo_naoI4ECZgVOPnIlVEBa</div>
+          <div class="manifest" style="margin-top:1mm;">
+            <div class="slot"><span class="sn">a</span><span class="sv">disclosed</span></div>
+            <div class="slot compact"><span class="sn">e</span><span class="sv">2 edges: content withheld</span></div>
+            <div class="slot absent"><span class="sn">r</span><span class="sv">none as issued</span></div>
+          </div>
+        </div>
+        <svg width="325" height="64" viewBox="0 0 86 17" xmlns="http://www.w3.org/2000/svg">
+          <line x1="24" y1="1" x2="24" y2="8" stroke="#000" stroke-width="0.5"/>
+          <line x1="20.5" y1="8" x2="27.5" y2="8" stroke="#000" stroke-width="0.7"/>
+          <line x1="62" y1="1" x2="62" y2="8" stroke="#000" stroke-width="0.5"/>
+          <line x1="58.5" y1="8" x2="65.5" y2="8" stroke="#000" stroke-width="0.7"/>
+          <text x="12" y="6.2" font-size="2.4" font-family="Georgia, serif">sourceA</text>
+          <text x="66.5" y="6.2" font-size="2.4" font-family="Georgia, serif">sourceB</text>
+          <path d="M 20 11 L 20 13.5 L 66 13.5 L 66 11" fill="none" stroke="#000" stroke-width="0.3"/>
+          <line x1="43" y1="13.5" x2="43" y2="15.5" stroke="#000" stroke-width="0.3"/>
+        </svg>
+        <p class="tiny" style="text-align:center;">destinations: <b>one or two distinct artifacts — unknowable from this material</b></p>
+      </div>
+    </div>
+    <p class="caption"><b>Two different credentials, one identical drawing — by design.</b> Each card above carries two committed edges whose contents, including their destinations, are withheld. In one of these credentials the two edges in fact meet at a single artifact; in the other they do not. The material in hand cannot distinguish those cases, so the page does not: the two renders differ only where their bytes differ. Drawing the terminus bars merged, or drawing them pointedly apart, would each manufacture a topology fact the disclosure withheld. The bracket under each pair states the honest span — one or two — and stops.</p>
+  </div>
+
+  <!-- ============ P banner + verification record ============ -->
+  <div class="pbanner">
+    <h2>Who presented this material? — Unknown.</h2>
+    <p class="small" style="margin:1mm 0 2mm 0;">Nothing in what was received shows that whoever handed it over controls any identifier named in it. Every row below concerns the credentials' issuance history only; an exact copy of these bytes, in anyone's hands, would produce an identical table. The verification record is printed inside this frame because no reading of it is honest outside this fact.</p>
+
+    <h2 style="font-size:8pt;">Verification record, per check and subject — as of production of this sheet</h2>
+    <table class="wall">
+      <tr><th style="width:30mm;">check</th><th>subject</th><th style="width:44mm;">outcome</th><th>blocked by / horizon</th></tr>
+      <tr><td>SAID self-consistency</td><td>each of the 7 credentials in hand</td><td><span class="glyph">☐</span> not performed</td><td>no host vector supplied; recomputable from bytes in hand</td></tr>
+      <tr><td>schema conformance</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no schema document in hand for any committed schema SAID</td></tr>
+      <tr><td>signature validity</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no key-state material (no KELs) was presented</td></tr>
+      <tr><td>KEL anchoring</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no KELs in hand</td></tr>
+      <tr><td>delegation chain</td><td>every issuer AID, every tier</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no KELs in hand</td></tr>
+      <tr><td>edge constraint (I2I)</td><td>edge <b>auth</b> (panel A)</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td><span class="said" style="font-size:6.2pt;">EM7gTDXqvy458gohO_yof2TYxcGB2jv2PW2WsLM-BXgm</span></td></tr>
+      <tr><td>edge constraint (I2I)</td><td>edge <b>qvi</b> (panel A, lower)</td><td><span class="glyph">☐</span> not performed</td><td>both ends in hand; no host vector supplied</td></tr>
+      <tr><td>edge constraint</td><td>edge <b>source</b> (panel B); edges <b>sourceA/B</b> ×2 (panel D)</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>edge content withheld — operator and destination not in hand</td></tr>
+      <tr><td>issuer bona fides</td><td>each chain head</td><td><span class="glyph">☐</span> not performed</td><td>aggregate of the edge-constraint rows under rule ALL-EDGES (arcviz default, host-overridable); its inputs were not performed</td></tr>
+      <tr><td>revocation reconciliation</td><td>each registry named by an <span class="mono">rd</span> field</td><td><span class="glyph">☐</span> not performed</td><td>no TEL events in hand beyond registry inception; no later horizon exists in this material</td></tr>
+      <tr><td>duplicity</td><td>each issuer AID</td><td><span class="glyph">☐</span> not performed</td><td>no watchers consulted</td></tr>
+    </table>
+    <p class="tiny" style="margin-top:1.5mm;"><span class="glyph">☐</span> not performed — the check is possible but no result exists; the empty box is yours to fill with live tooling, never from this page. &nbsp; <span class="glyph">▨</span> cannot be performed from what was presented — a fact about the material, not a failure. &nbsp; A ✓ would appear only with its as-of horizon and the tool that produced it; an ✗ only where a host declared it can distinguish failure from absence. Freshness: <b>no freshness policy was supplied</b> for any credential — that is a visible state, not a default. <b>This wall of empty boxes is the normal, honest state of stored credentials.</b> A page of this material with fewer empty boxes has decided something on your behalf.</p>
+  </div>
+
+  <!-- ============ identifier index ============ -->
+  <div class="panel">
+    <div class="panel-title">Identifier index — byte-equal values on these two sheets</div>
+    <p class="tiny" style="margin-bottom:1mm;">A shared <span class="mark">n</span> mark means the printed strings are byte-identical — an equality of what is on the page, nothing more. Different marks mean only “not byte-equal”: no similarity judgment is made or implied anywhere on this document, and near-identical strings are deliberately not flagged as near-identical.</p>
+    <table class="idx">
+      <tr><th style="width:8mm;">mark</th><th>value</th><th>appears as</th></tr>
+      <tr><td><span class="mark">1</span></td><td class="said">EM7gTDXqvy458gohO_yof2TYxcGB2jv2PW2WsLM-BXgm</td><td>the withheld credential's SAID: named by edge <b>auth</b> (panel A) and by the host's load manifest as the artifact not served</td></tr>
+      <tr><td><span class="mark">2</span></td><td class="said">EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S</td><td>issuer (<span class="mono">i</span>) of the panel-A leaf; also subject (<span class="mono">a.i</span>) of QVI and issuer of LE — 4 occurrences across the served chain</td></tr>
+      <tr><td>—</td><td>LEI <span class="mono">984500ARCV1Z0000FIX01</span></td><td>identical attribute value in the three served vLEI-chain credentials — a perfect correlator carried in the clear</td></tr>
+    </table>
+  </div>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC6 · sheet 2 of 2 · The fixture file names on sheet 1 record ground truth about panel D that the credential material itself does not carry; they are quoted once, as provenance, and deliberately not repeated beside the drawings they would resolve. See README self-assessment.</p></div>
+</section>
+
+</body>
+</html>

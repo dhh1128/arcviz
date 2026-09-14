@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SC3 — diamond with depth, print-first mock (A4, 2 sheets)</title>
+<style>
+/* ============================================================
+   arcviz charrette — PRINT-FIRST premise
+   SC3: one shared ancestor, two path lengths. The node prints once;
+   all five edges print; the long edge earns its length.
+   Designed for A4 portrait (210 x 297 mm), 14 mm margins.
+   Prints unscaled on US Letter. Greyscale only. No interaction.
+   ============================================================ */
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #888; }
+body { font-family: Georgia, "Times New Roman", serif; color: #000; }
+.sheet { width: 210mm; height: 296mm; padding: 14mm; background: #fff; margin: 6mm auto; position: relative; overflow: hidden; page-break-after: always; }
+@media print { html { background: #fff; } .sheet { margin: 0; box-shadow: none; } }
+@media screen { .sheet { box-shadow: 0 2mm 6mm rgba(0,0,0,.5); } }
+
+h1 { font-size: 12pt; font-weight: bold; }
+h2 { font-size: 9.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1.2mm; }
+p, td, th { font-size: 8.5pt; line-height: 1.35; }
+.small { font-size: 7.5pt; line-height: 1.3; }
+.tiny { font-size: 6.8pt; line-height: 1.25; }
+.mono, .said { font-family: "Cascadia Mono", Consolas, "Courier New", monospace; }
+.said { font-size: 6.6pt; word-break: break-all; }
+
+.strip { border-top: 1.1mm double #000; border-bottom: 0.3mm solid #000; padding: 2mm 0 1.6mm 0; margin-bottom: 3.5mm; }
+.strip h1 { margin-bottom: 1mm; }
+.strip p { margin-bottom: 0.8mm; }
+.handfill { display: inline-block; border-bottom: 0.25mm solid #000; min-width: 42mm; height: 3.2mm; vertical-align: bottom; }
+
+.panel { border: 0.25mm solid #999; padding: 2.5mm; margin-bottom: 3.5mm; }
+.panel > .panel-title { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: .05em; border-bottom: 0.2mm solid #999; padding-bottom: 1mm; margin-bottom: 2mm; }
+.caption { font-size: 7.5pt; line-height: 1.3; margin-top: 1.6mm; }
+
+.canvas { position: relative; width: 176mm; height: 158mm; }
+.canvas svg.edges { position: absolute; left: 0; top: 0; width: 176mm; height: 158mm; }
+.gcard { position: absolute; border: 0.45mm solid #000; background: #fff; padding: 1.4mm; width: 64mm; }
+.gcard .card-kind { font-size: 6.2pt; text-transform: uppercase; letter-spacing: .06em; color: #333; }
+.gcard .lbl { font-size: 5.8pt; text-transform: uppercase; letter-spacing: .04em; color: #333; margin-top: 0.6mm; }
+.gcard .claim { font-size: 6.6pt; margin-top: 0.6mm; }
+.gcard .mini { font-size: 5.8pt; text-transform: uppercase; border-top: 0.2mm solid #999; margin-top: 0.8mm; padding-top: 0.5mm; }
+
+.wall { border-collapse: collapse; width: 100%; margin-top: 1mm; }
+.wall th, .wall td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.wall th { background: #eee; font-size: 6.4pt; text-transform: uppercase; letter-spacing: .03em; }
+.glyph { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.5pt; }
+
+.idx { border-collapse: collapse; width: 100%; }
+.idx th, .idx td { border: 0.2mm solid #666; padding: 0.6mm 1mm; font-size: 6.8pt; text-align: left; vertical-align: top; }
+.idx th { background: #eee; text-transform: uppercase; font-size: 6.4pt; }
+.mark { display: inline-block; border: 0.25mm solid #000; border-radius: 50%; width: 3.4mm; height: 3.4mm; text-align: center; font-size: 6.5pt; line-height: 3.2mm; font-family: Georgia, serif; }
+
+.footer { position: absolute; bottom: 8mm; left: 14mm; right: 14mm; border-top: 0.25mm solid #000; padding-top: 1.2mm; }
+.footer p { font-size: 6.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ================= SHEET 1 : the diamond ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 1 of 2</h1>
+    <p class="small">Printed reading of five credentials from your own store, produced by arcviz. Paper cannot check anything: every statement records at most what was in hand when the sheets were produced. Possession of this paper proves nothing.</p>
+    <p class="small">Viewing context: <b>holder-facing</b> — your own store.</p>
+    <p class="tiny">Produced from: <span class="mono">diamond_depth_origin, diamond_depth_b, diamond_depth_c, diamond_depth_f, diamond_depth_a</span>. &nbsp; Printed on: <span class="handfill"></span> by: <span class="handfill"></span> <em>(in the printer's hand — this artifact cannot know when it is printed)</em></p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Five credentials, five edges, one shared ancestor — printed once, at two distances</div>
+
+    <div class="canvas">
+      <svg class="edges" viewBox="0 0 176 158" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah" markerWidth="4" markerHeight="4" refX="2.8" refY="1.25" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L3.2,1.25 L0,2.5 z" fill="#000"/></marker>
+        </defs>
+        <!-- origin -> B (shortPath) -->
+        <line x1="70" y1="27" x2="38" y2="50" stroke="#000" stroke-width="0.5" marker-end="url(#ah)"/>
+        <!-- origin -> C (longPath) -->
+        <line x1="104" y1="27" x2="138" y2="42" stroke="#000" stroke-width="0.5" marker-end="url(#ah)"/>
+        <!-- B -> A (baseline) : one edge spanning two ranks; its length is the fact -->
+        <line x1="30" y1="79" x2="72" y2="126" stroke="#000" stroke-width="0.5" marker-end="url(#ah)"/>
+        <!-- C -> F (waypoint) -->
+        <line x1="142" y1="71" x2="142" y2="88" stroke="#000" stroke-width="0.5" marker-end="url(#ah)"/>
+        <!-- F -> A (baseline) -->
+        <line x1="132" y1="117" x2="106" y2="127" stroke="#000" stroke-width="0.5" marker-end="url(#ah)"/>
+
+        <!-- edge labels -->
+        <text x="41" y="34" font-size="2.5" font-family="Georgia,serif">edge <tspan font-weight="bold">shortPath</tspan> · I2I †</text>
+        <text x="122" y="33.4" font-size="2.5" font-family="Georgia,serif">edge <tspan font-weight="bold">longPath</tspan> · I2I †</text>
+        <text x="28" y="105" font-size="2.5" font-family="Georgia,serif">edge <tspan font-weight="bold">baseline</tspan> · I2I † <tspan x="28" dy="3.4" font-style="italic">this line is long because the</tspan><tspan x="28" dy="3.2" font-style="italic">path is short — one hop,</tspan><tspan x="28" dy="3.2" font-style="italic">two ranks down</tspan></text>
+        <text x="145" y="81" font-size="2.5" font-family="Georgia,serif">edge <tspan font-weight="bold">waypoint</tspan> · I2I †</text>
+        <text x="103" y="118" font-size="2.5" font-family="Georgia,serif">edge <tspan font-weight="bold">baseline</tspan> · I2I †</text>
+      </svg>
+
+      <!-- ORIGIN -->
+      <div class="gcard" style="left:55mm; top:0mm;">
+        <div class="card-kind">Credential · presented / focal <span class="mono" style="text-transform:none;">(“diamond_depth_origin”)</span></div>
+        <div class="lbl">SAID</div>
+        <div class="said">EDQ6zCH2XsXktOh2VO6EfjVxzh1bV-dtNRUroXZjxbnh</div>
+        <div class="claim">a: “reachable via two paths of unequal length”</div>
+        <div class="mini">s in hand·unverified · a disclosed · e disclosed (2 edges) · r none as issued</div>
+      </div>
+
+      <!-- B -->
+      <div class="gcard" style="left:1mm; top:50mm;">
+        <div class="card-kind">Credential <span class="mono" style="text-transform:none;">(“diamond_depth_b”)</span></div>
+        <div class="lbl">SAID</div>
+        <div class="said">EGHUpSJN58sd9fuZqVoMLvT-Khqz6HWC_jC1n1EbKVTD</div>
+        <div class="claim">a: “short path, one hop from the ancestor”</div>
+        <div class="mini">s in hand·unverified · a disclosed · e disclosed (1 edge) · r none as issued</div>
+      </div>
+
+      <!-- C -->
+      <div class="gcard" style="left:110mm; top:42mm;">
+        <div class="card-kind">Credential <span class="mono" style="text-transform:none;">(“diamond_depth_c”)</span></div>
+        <div class="lbl">SAID</div>
+        <div class="said">ELZEWuSVWm0CpXnxY4rG9gmHHzt_R_6CZ_lyfw0jXdL1</div>
+        <div class="claim">a: “long path, two hops from the ancestor”</div>
+        <div class="mini">s in hand·unverified · a disclosed · e disclosed (1 edge) · r none as issued</div>
+      </div>
+
+      <!-- F -->
+      <div class="gcard" style="left:110mm; top:88mm;">
+        <div class="card-kind">Credential <span class="mono" style="text-transform:none;">(“diamond_depth_f”)</span></div>
+        <div class="lbl">SAID</div>
+        <div class="said">EPJBkGOiB11Pr27N08jlDhvix6rJBIDl78zoUZ3M8RVA</div>
+        <div class="claim">a: “long path, one hop from the ancestor”</div>
+        <div class="mini">s in hand·unverified · a disclosed · e disclosed (1 edge) · r none as issued</div>
+      </div>
+
+      <!-- A -->
+      <div class="gcard" style="left:55mm; top:126mm; border-width:0.45mm;">
+        <div class="card-kind">Credential · shared ancestor <span class="mono" style="text-transform:none;">(“diamond_depth_a”)</span></div>
+        <div class="lbl">SAID — printed once; referenced twice, identically <span class="mark" style="width:3mm;height:3mm;line-height:2.8mm;">1</span></div>
+        <div class="said">ELBmpHyX1IOY0x2uOhpPrtwAhesHXtn65EFdhX40FJIL</div>
+        <div class="claim">a: “ISO-9001-ish Baseline” &nbsp;·&nbsp; reached at <b>depth 2</b> (origin→B→A) and <b>depth 3</b> (origin→C→F→A)</div>
+        <div class="mini">s in hand·unverified · a disclosed · e none as issued — committed · r none as issued</div>
+      </div>
+    </div>
+
+    <p class="caption"><b>Why this drawing is the only honest one available.</b> One committed artifact sits at the bottom, and two disclosed edges arrive at it along paths of different lengths. The two tree-shaped escapes both misstate the material: printing A twice would print one artifact — one SAID, one issuance — as two things, and a reader tallying credentials, or comparing the “two,” would be counting an invention; dropping either arriving edge would print a committed relationship out of existence, which is the same lie the blinded-edge case forbids, applied to an edge that was actually disclosed. So A prints once, at its deeper rank, and the short path pays for it with a visibly long edge — annotated as such at the point where a reader would wonder. Paper has no “focus” to break this: nothing can be raised, so nothing can detach.</p>
+  </div>
+
+  <p class="tiny">† Effective operators are computed from the committed edge and its far node per the specification's default-injection rule; whether an operator was written explicitly or injected is a raw-bytes fact deliberately not shown (matrix Rule 9). All five far nodes are in hand; no relation was checked — see the record on sheet 2.</p>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC3 “diamond with depth” · sheet 1 of 2 · greyscale by design. Fixtures verbatim from <span class="mono">corpus/</span>; no credential data invented.</p></div>
+</section>
+
+<!-- ================= SHEET 2 : record + index ================= -->
+<section class="sheet">
+  <div class="strip">
+    <h1>STATIC RECORD — NOT A CREDENTIAL, NOT A VERIFICATION &nbsp;·&nbsp; sheet 2 of 2</h1>
+    <p class="small">The verification record and identifier index for sheet 1's five credentials. Holder-facing view — your own store.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Verification record, per check and subject — as of production of these sheets</div>
+    <table class="wall">
+      <tr><th style="width:29mm;">check</th><th style="width:47mm;">subject</th><th style="width:41mm;">outcome</th><th>blocked by / horizon</th></tr>
+      <tr><td>SAID self-consistency</td><td>each of the 5 credentials</td><td><span class="glyph">☐</span> not performed</td><td>recomputable from bytes in hand; no host vector supplied</td></tr>
+      <tr><td>schema conformance</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no schema document in hand for any committed schema SAID</td></tr>
+      <tr><td>signature validity</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no signature attachments in this material</td></tr>
+      <tr><td>KEL anchoring</td><td>each credential</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no key event logs in this material, for any AID</td></tr>
+      <tr><td>delegation chain</td><td>each issuer AID</td><td><span class="glyph">▨</span> cannot be performed from this material</td><td>no KELs in hand; no delegation context declared by the host</td></tr>
+      <tr><td>edge constraint (I2I)</td><td>each of the 5 edges, separately: <b>shortPath</b>, <b>longPath</b>, <b>waypoint</b>, <b>baseline</b> (in B), <b>baseline</b> (in F)</td><td><span class="glyph">☐</span> not performed ×5</td><td>both ends of every edge in hand; no host vector supplied. Five edges, five cells — the two arrivals at the shared ancestor are separate relations and get separate boxes</td></tr>
+      <tr><td>issuer bona fides</td><td>the DAG behind the focal credential</td><td><span class="glyph">☐</span> not performed</td><td>aggregate of the five edge cells under rule <b>ALL-EDGES</b> (arcviz's own default, host-overridable — not a spec-derived verdict); its inputs were not performed</td></tr>
+      <tr><td>revocation reconciliation</td><td>all five credentials</td><td>no object — <b>no registry named, as issued</b></td><td>none of these credentials names a registry (<span class="mono">rd</span> none as issued — committed); there is no revocation state for this check to reconcile, which is an issuance-time fact, not an assurance</td></tr>
+      <tr><td>duplicity</td><td>each issuer AID</td><td><span class="glyph">☐</span> not performed</td><td>no watchers consulted; any future answer is scoped to the watchers consulted</td></tr>
+    </table>
+    <p class="tiny" style="margin-top:1.5mm;"><span class="glyph">☐</span> not performed — possible, but no result exists; yours to fill with live tooling, never from this page. &nbsp; <span class="glyph">▨</span> cannot be performed from what is in hand — a fact about the material, not a failure. &nbsp; No ✓ appears because no check was performed; no ✗ appears because no host declared fail-capability. <b>Freshness:</b> no freshness policy was supplied for any credential — a visible state, not a silent default. This wall of empty boxes is the normal, honest state of stored credentials.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Identifier index — byte-equal values on these sheets</div>
+    <p class="tiny" style="margin-bottom:1mm;">A shared <span class="mark">n</span> mark means byte-identical printed strings — an equality of what is on the page, nothing more. Different marks mean only “not byte-equal”; no similarity judgment is made or implied.</p>
+    <table class="idx">
+      <tr><th style="width:8mm;">mark</th><th style="width:76mm;">value</th><th>appears as</th></tr>
+      <tr><td><span class="mark">1</span></td><td class="said">ELBmpHyX1IOY0x2uOhpPrtwAhesHXtn65EFdhX40FJIL</td><td>the shared ancestor's SAID: <span class="mono">d</span> of A · <span class="mono">n</span> of edge <b>baseline</b> in B · <span class="mono">n</span> of edge <b>baseline</b> in F — 3 occurrences. The two references are what makes the diamond a diamond; both are printed, identically, and resolve to the one card at the bottom of sheet 1</td></tr>
+      <tr><td><span class="mark">2</span></td><td class="said">ENkj_sx2Qt1tanoRHLTJ6t4iIlHFHX2fOc8VBl4C_egT</td><td>the SAID of the <b>baseline</b> edge block — byte-identical in B and in F: the two credentials carry the same committed edge object, and this index is where that fact surfaces rather than being averaged away or silently merged in the drawing</td></tr>
+      <tr><td><span class="mark">3</span></td><td class="said">EAow76Ee1eiu3_0rSLl1cdlgMZPN5sMeWZ4B6h0K-b2f</td><td>A's schema SAID: <span class="mono">s</span> of A · <span class="mono">s</span> inside both <b>baseline</b> edge blocks — 3 occurrences</td></tr>
+    </table>
+    <p class="tiny" style="margin-top:1mm;">All other identifiers on these sheets (five issuer AIDs, four other schema SAIDs, the remaining edge-block SAIDs) occur exactly once each and carry no mark.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">What a reader may and may not conclude from sheet 1</div>
+    <p class="small"><b>May:</b> the focal credential's two disclosed lineages converge on one committed artifact, two hops away on one side and three on the other; every edge shown was disclosed in the material; the two arrivals at A are references to the same bytes (mark <span class="mark">1</span>).<br><b>May not:</b> that any relation an edge states actually holds (nothing was checked — every edge-constraint box is empty); that the shared ancestor makes the two branches equally trustworthy, or trustworthy at all; that convergence here says anything about any credential not on these sheets.</p>
+  </div>
+
+  <div class="footer"><p>arcviz · print-first charrette · SC3 · sheet 2 of 2.</p></div>
+</section>
+
+</body>
+</html>
