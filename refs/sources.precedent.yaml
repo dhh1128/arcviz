@@ -1,0 +1,321 @@
+# arcviz source records for the precedent-for-absence sweep (docs/design/precedent-for-absence.md).
+# Same schema as refs/sources.yaml; see docs/research/EVIDENCE.md for the rules this file is held to.
+# This file is owned by the precedent-sweep stream; do not merge it into sources.yaml or sources.lit.yaml
+# from another stream — a later synthesis pass can do that deliberately, with the merge itself reviewed.
+#
+# Captures for every key below live in refs/captures/precedent/, prefixed by discipline
+# (leiden-, archaeo-, cartography-, redaction-, radiology-, conservation-, notation-).
+# Several captures record additional "lead" sources (unreachable primaries, paywalled originals,
+# search-synthesis-only claims) that are NOT promoted to records here per EVIDENCE.md rule 6 —
+# consult the capture files directly for the full lead inventory.
+
+sources:
+
+  # --- Textual scholarship / epigraphy: the Leiden Conventions ---
+
+  - key: dow1969leiden
+    title: "Conventions in Editing: A Suggested Reformulation of the Leiden System"
+    author: "Sterling Dow"
+    url: "https://grbs.library.duke.edu/public/journals/11/grbs-supplemental-files/Conventions.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/leiden-dow-conventions-in-editing-full-ocr.txt"
+    status: primary
+    supports: "The Leiden Conventions' symbol table and its stated design objective: that an editor's conjecture must never be typographically indistinguishable from what the source object actually preserves, enforced down to the single letter."
+    quote: "No detectable stroke of a letter should be enclosed within square brackets. [...] No letter between brackets, except doubtful letters in erasures... should be dotted. A dotted letter within square brackets would naturally be taken to mean not 'reading doubtful' but 'restoration doubtful.'"
+    locator: "Greek Roman and Byzantine Scholarly Aids no. 2 (Duke, 1969), OCR lines 412, 498-502 (see refs/captures/precedent/leiden-symbol-table.md for the full table with locators)"
+
+  - key: epidoc-guidelines-intro
+    title: "EpiDoc Guidelines, current release (9.8), Introduction"
+    author: "EpiDoc community (orig. Tom Elliott, Hugh Cayless, Amy Hawkins)"
+    url: "https://epidoc.stoa.org/gl/latest/intro-intro.html"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/leiden-epidoc-and-codification.md"
+    status: primary
+    supports: "EpiDoc is the live, TEI-XML-based, machine-checkable descendant of the Leiden Conventions, encoding the same distinctions (known extent lost, approximate extent, unknown extent) as structured attributes rather than typographic glyphs alone."
+    quote: "The EpiDoc Guidelines are intended to complement the Leiden Conventions (hereafter 'Leiden'), which have been in use in epigraphy and papyrology for over 80 years and are understood in many philological and documentary fields."
+    locator: "EpiDoc Guidelines 9.8, intro-intro.html, retrieved 2026-09-14"
+
+  - key: tei-mahoney-epigraphy
+    title: "Epigraphy (TEI Vault / Extension of TEI for Epigraphic documents preview)"
+    author: "Anne Mahoney / TEI"
+    url: "https://tei-c.org/Vault/ETE/Preview/mahoney.html"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/leiden-design-principle-and-critique.md"
+    status: secondary
+    supports: "The Leiden Conventions require a trained reader and a per-publication key; simplified editions for non-specialists strip the harder distinctions rather than preserve them."
+    quote: "the Leiden convention is neither universal nor flawless... any given book may or may not include a key to its particular markup system, so readers must become aware of different publishers' preferred styles. [...] because a fully-marked text can be cumbersome to read, some publications omit the more complicated markings — especially in texts intended for beginners and students."
+    locator: "tei-c.org/Vault/ETE/Preview/mahoney.html, retrieved 2026-09-14"
+
+  # --- Archaeology and architectural reconstruction ---
+
+  - key: venice-charter-1964
+    title: "International Charter for the Conservation and Restoration of Monuments and Sites (the Venice Charter)"
+    author: "IInd International Congress of Architects and Technicians of Historic Monuments / ICOMOS"
+    url: "https://www.icomos.org/images/DOCUMENTS/Charters/venice_e.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/archaeo-venice-charter.md"
+    status: primary
+    supports: "Reconstructed/added architectural fabric must remain permanently distinguishable from original material, on evidentiary-integrity grounds (falsification of the historic record), not aesthetic ones; restoration must stop where conjecture begins; only anastylosis (reassembly of the monument's own dismembered parts) is permitted, never invented reconstruction."
+    quote: "Replacements of missing parts must integrate harmoniously with the whole, but at the same time must be distinguishable from the original so that restoration does not falsify the artistic or historic evidence."
+    locator: "Venice Charter (1964), Article 12; see also Article 9 ('must stop at the point where conjecture begins') and Article 15 (anastylosis clause)"
+
+  - key: historic-england-2016-recording
+    title: "Understanding Historic Buildings: A Guide to Good Recording Practice (HEAG099)"
+    author: "Historic England"
+    url: "https://historicengland.org.uk/images-books/publications/understanding-historic-buildings/"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/archaeo-historic-england-drawing-conventions.md"
+    status: primary
+    supports: "A nationally codified UK drawing-convention standard distinguishing, for the same feature class, at least three evidential grades (original-in-situ / inferred-from-indirect-trace / modern-inserted), plus a distinct 'wall of unknown thickness' convention (existence asserted, a specific attribute explicitly marked unknown) and a 'Site of [feature]' labeling convention for a feature known to have existed but of which nothing survives."
+    quote: "Wall of unknown thickness (dashed outline where the plinth/thickness would be)"
+    locator: "Understanding Historic Buildings (2016), Table 2 (p.36) and §7.3-7.4 (pp.37-41); worked example legend p.41 (Original timber in situ / Timber deduced from peg evidence / Inserted timber)"
+
+  - key: ifa-hodgson2001-reconstruction
+    title: "Archaeological reconstruction: illustrating the past (IFA Paper No. 5)"
+    author: "John Hodgson, ed. Andrew Dutton; Institute of Field Archaeologists (now CIfA) with the Association of Archaeological Illustrators & Surveyors"
+    url: "https://www.archaeologists.net/sites/default/files/2024-11/CIfA-Archaeological-Reconstruction-Illustrating-the-past_2001.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/archaeo-ifa-reconstruction-paper.md"
+    status: primary
+    supports: "As of 2001, a professional archaeological-illustration body names the exact HP1 failure mode (illustrators default to rendering every surface as if fully known, hiding uncertainty behind occlusion) as real, named, and unsolved, and states that a standardized notation for grading reconstruction confidence did not yet exist."
+    quote: "It would be possible for these areas to be rendered grey, or even insubstantial, but it seems that artists usually render every surface as if full information were available. This may well give a false impression of the extent of the data."
+    locator: "IFA Paper No. 5 (2001), p.16, 'Monochrome (black and white) artwork'; see also p.17 on the absence of a 'recognised system of quantifying the reconstruction's level of probability'"
+
+  - key: norvic-romfa-drawing
+    title: "Prompt Sheet for Field Drawings (ROMFA System)"
+    author: "Giles Emery, Norvic Archaeology"
+    url: "http://www.norvicarchaeology.com/DrawingsPrompt.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/archaeo-norvic-field-drawing-conventions.md"
+    status: secondary
+    supports: "One UK archaeology unit's field-drawing convention distinguishes 'edge of excavation' (dash-dot; boundary of inquiry) from a dashed line for inferred/ephemeral/uncertain features — corroborating, as convergent practice rather than a national standard, the 'not investigated' vs. 'investigated' distinction."
+    quote: "Dash-dot: Edge of excavation, edge of baulks, sections and sondages [...] Dashed Line: use for ephemeral edges, suggested continuation, removed features, unclear relationships and diffuse boundaries"
+    locator: "Prompt Sheet for Field Drawings, p.1"
+
+  # --- Cartography ---
+
+  - key: iho-s68-catzoc
+    title: "Guidelines and Recommendations for HOs for the Allocations of CATZOC/QoBD Values from Survey Data (S-68, Ed. 1.1.0)"
+    author: "International Hydrographic Organization (IHO), Data Quality Working Group"
+    url: "https://iho.int/uploads/user/pubs/standards/S-68/S-68_Guidelines_for_Allocation_of_CATZOC_Ed_1.1.0.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-catzoc.md"
+    status: primary
+    supports: "CATZOC is a live, six-grade (A1/A2/B/C/D/U), mandatory confidence rating baked into the nautical-chart data model itself: every charted bathymetric area must carry one of the six values, partitioning coverage with no 'unmarked' default, and the S-101 successor further splits position/depth/coverage confidence into independent axes."
+    quote: "CATZOC for assessed data (A1, A2, B, C and D) and a sixth category (U) for data which has not been assessed... The attribute CATZOC is a mandatory attribute in the S-57 Meta Object class M_QUAL... CATZOC sectors may never overlap and/or have gaps between them."
+    locator: "S-68 Ed. 1.1.0 (March 2025), §5 p.2 and Annex A Table A-1 (pp.21-22), sourced there from IHO S-57 Ed 3.1 Supp 3 (Jun 2014) pp.13-14"
+
+  - key: iho-s67-mariners-guide
+    title: "Mariners' Guide to Accuracy of Depth Information in Electronic Navigational Charts (ENC) (S-67, Ed. 1.0.0)"
+    author: "International Hydrographic Organization (IHO)"
+    url: "https://iho.int/uploads/user/Services%20and%20Standards/HSSC/HSSC12/S-67%20Ed%20100%20Mariners%20Guide%20to%20Accuracy%20of%20Depth%20Information%20in%20ENC.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-catzoc.md"
+    status: primary
+    supports: "CATZOC's confidence grade is symbolized by a shape change (triangle vs. horizontal bar), not merely a count, at the 'full area search not achieved' threshold; and the IHO's own guide documents that this confidence layer is commonly switched off by mariners during real-time transit, surviving mainly at route-planning time — a documented instance of a graded-absence signal being ignored at the moment of highest stakes."
+    quote: "This kind of symbology tends to clutter the screen, therefore during execution of a voyage mariners will most likely de-activate this setting."
+    locator: "S-67 Ed. 1.0.0 (Oct 2020), §5 p.14"
+
+  - key: uschartno1
+    title: "U.S. Chart No. 1: Symbols, Abbreviations and Terms (13th ed.)"
+    author: "NOAA Office of Coast Survey / National Geospatial-Intelligence Agency (NGA)"
+    url: "https://nauticalcharts.noaa.gov/publications/us-chart-1.html"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-unsurveyed-chart-symbols.md"
+    status: primary
+    supports: "Nautical charts distinguish, as separate symbol classes in the same legend section, a measured-negative result ('no bottom found at depth shown'), a measured-but-low-confidence value (flagged by numeral slant alone), and a true data void ('unsurveyed or inadequately surveyed area') — three pairwise-distinguishable depth-knowledge states in one national symbol standard."
+    quote: "13 -- No bottom found at depth shown. [...] 14 -- Soundings which are unreliable or taken from a smaller scale source [...] 25 -- Unsurveyed or inadequately surveyed area; area with inadequate depth information."
+    locator: "U.S. Chart No. 1 (13th ed.), Section I 'Depths', entries 13/14/25 (fetched via third-party mirror after NOAA/NGA's own servers refused direct fetch; see capture file for caveat)"
+
+  - key: usgs-eros-srtm-void
+    title: "USGS EROS Archive - Digital Elevation - Shuttle Radar Topography Mission (SRTM) Void Filled"
+    author: "U.S. Geological Survey, Earth Resources Observation and Science (EROS) Center"
+    url: "https://www.usgs.gov/centers/eros/science/usgs-eros-archive-digital-elevation-shuttle-radar-topography-mission-srtm-void"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-srtm-voids.md"
+    status: primary
+    supports: "USGS ships two distinct, separately named products for the same survey — 'Non-Void Filled' (gaps left as gaps) and 'Void Filled' (gaps patched) — so a user must affirmatively opt into a filled value rather than receiving one by default."
+    quote: "The voids occur in areas where the initial processing did not meet quality specifications. [...] the NGA filled the voids using interpolation algorithms in conjunction with other sources of elevation data."
+    locator: "USGS EROS SRTM Void Filled overview page, retrieved 2026-09-14"
+
+  - key: lpdaac-srtm-userguide-v3
+    title: "The Shuttle Radar Topography Mission (SRTM) Collection User Guide (V3, revised Oct 2015)"
+    author: "NASA Land Processes Distributed Active Archive Center (LP DAAC), USGS EROS"
+    url: "https://lpdaac.usgs.gov/documents/179/SRTM_User_Guide_V3.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-srtm-voids.md"
+    status: primary
+    supports: "Every SRTM elevation pixel carries a companion, queryable provenance code (the 'NUM' file) naming which of roughly thirteen sources produced that specific value (genuine radar measurement vs. one of several named fill methods); displayed value and provenance/confidence are kept as separate channels, and a fill that fails an error check is reintroduced as an explicit void rather than allowed to stand as a bad guess."
+    quote: "Scientists produced an ancillary 1-byte (0 to 255) 'NUM' (number) file... The separate NUM file indicates the source of each DEM pixel... [Table 2 lists ~13 named fill-source codes, e.g.] 11 = NGA-interpolated SRTM (were very small voids in SRTMv1) [...] Using this threshold, voids were reintroduced to the ASTER GDEM2-filled SRTM DEM where the delta surface was equal to or outside +/-80 m."
+    locator: "SRTM Collection User Guide V3, §2.1.2, pp.5-7 (Table 2, and steps 4-7 of the Delta Surface Fill method)"
+
+  - key: unctad-map-disclaimer
+    title: "Map disclaimer"
+    author: "United Nations Trade and Development (UNCTAD)"
+    url: "https://unctad.org/map-disclaimer"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/cartography-disputed-boundaries.md"
+    status: primary
+    supports: "Disputed/undefined international boundaries are conventionally binary (solid = agreed, dashed = undefined), with a further sub-case (dotted) for a practically-followed line whose legal status is unsettled; this is a knowledge conflict between parties each claiming full knowledge, not a knowledge gap, and is the weakest of the cartographic analogues for arcviz's problem."
+    quote: "Dashed lines represent undefined borders. Dotted line represents approximately the Line of Control in Jammu and Kashmir agreed upon by India and Pakistan."
+    locator: "unctad.org/map-disclaimer, retrieved 2026-09-14"
+
+  # --- Legal / FOIA redaction practice ---
+
+  - key: foia-552b-cornell
+    title: "5 U.S. Code § 552 (Freedom of Information Act), subsections (a)(2) and (b)"
+    author: "U.S. Code, via Cornell Legal Information Institute"
+    url: "https://www.law.cornell.edu/uscode/text/5/552"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-foia-exemption-marking.md"
+    status: primary
+    supports: "FOIA requires, wherever technically feasible, that a redaction be marked in situ with both its extent and its specific statutory exemption category, not merely asserted once for the document as a whole — with an explicit statutory safety-valve allowing the marker itself to be omitted when it would leak the protected interest."
+    quote: "The amount of information deleted, and the exemption under which the deletion is made, shall be indicated on the released portion of the record, unless including that indication would harm an interest protected by the exemption in this subsection under which the deletion is made. If technically feasible, the amount of the information deleted, and the exemption under which the deletion is made, shall be indicated at the place in the record where such deletion is made."
+    locator: "5 U.S.C. § 552(b), closing paragraph (added by the Electronic Freedom of Information Act Amendments of 1996, Pub. L. 104-231); parallel clause at § 552(a)(2)"
+
+  - key: vaughn-v-rosen-1973
+    title: "Vaughn v. Rosen, 484 F.2d 820 (D.C. Cir. 1973)"
+    author: "United States Court of Appeals, D.C. Circuit"
+    url: "https://law.justia.com/cases/federal/appellate-courts/F2/484/820/195226/"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-vaughn-index.md"
+    status: primary
+    supports: "The Vaughn index: a court-mandated, itemized attestation correlating each withheld portion of a record with the specific exemption claimed for it, created because a requester who cannot see the withheld content otherwise has no way to contest a withholding, and a court would otherwise have to either trust the agency's say-so or personally inspect every document."
+    quote: "This could be achieved by formulating a system of itemizing and indexing that would correlate statements made in the Government's refusal justification with the actual portions of the document. [...] It seems probable that some portions may fit under one exemption, while other segments fall under another, while still other segments are not exempt at all and should be disclosed."
+    locator: "Vaughn v. Rosen, 484 F.2d 820, Part III.B ('Specificity, Separation, and Indexing')"
+
+  - key: phillippi-v-cia-1976
+    title: "Phillippi v. Central Intelligence Agency, 546 F.2d 1009 (D.C. Cir. 1976)"
+    author: "United States Court of Appeals, D.C. Circuit"
+    url: "https://www.courtlistener.com/opinion/341477/harriet-ann-phillippi-v-central-intelligence-agency-and-george-h-bush/"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-glomar.md"
+    status: primary
+    supports: "The Glomar ('neither confirm nor deny') response is a doctrinally distinct third state from both 'produced' and 'no responsive record': the agency refuses to assert either the existence or non-existence of records, because either answer would itself leak the protected fact; the same opinion explicitly holds this apart from the Vaughn-index tier, which applies only once existence is conceded."
+    quote: "the situation is as if appellant had requested and been refused permission to see a document which says either 'Yes, we have records related to contacts with the media concerning the Glomar Explorer' or 'No, we do not have any such records.' [...] we stress that we are not requiring, at this stage, the Vaughn index requested by appellant. If the District Court should decide on remand that the Agency's refusal to confirm or deny the existence of the requested records is unjustified, the standard Vaughn procedures... would then apply."
+    locator: "Phillippi v. CIA, 546 F.2d 1009, opinion body (Wright, J.)"
+
+  - key: yale-jreg-glomar-opaque
+    title: "Shhh, Don't Say Glomar Anymore"
+    author: "Yale Journal on Regulation, Notice & Comment blog (reporting the FOIA Advisory Committee 2020-2022 term)"
+    url: "https://www.yalejreg.com/nc/shhh-dont-say-glomar-anymore/"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-glomar.md"
+    status: secondary
+    supports: "An official U.S. government advisory body found the term 'Glomar' itself opaque to ordinary citizens and recommended plain-language 'neither confirm nor deny' instead — evidence that even the name of a well-established third epistemic state needs a plain-language gloss to be understood without training."
+    quote: "the term 'Glomar' is opaque to ordinary citizens. Moreover, 'Glomar' suggests that the response may only be used when invoking the (b)(1) exemption protecting classified information, despite its current use in conjunction with several other FOIA exemptions."
+    locator: "yalejreg.com/nc/shhh-dont-say-glomar-anymore, retrieved 2026-09-14"
+
+  - key: nsa-redacting-with-confidence
+    title: "Redacting with Confidence: How to Safely Publish Sanitized Reports Converted From Word to PDF"
+    author: "National Security Agency (NSA)"
+    url: "https://web.archive.org/web/2020/https://sgp.fas.org/othergov/dod/nsa-redact.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-failure-modes.md"
+    status: primary
+    supports: "Visual masking (a black box over text/images) is not redaction, because the underlying data is still recoverable; the only sound primitive is deletion of the sensitive content from the document itself, not visual concealment of it."
+    quote: "information hidden or covered in a computer document can almost always be recovered. The way to avoid exposure is to ensure that sensitive information is not just visually hidden or made illegible, but is actually removed from the original document. Thus any sensitive information must be removed from the document through deletion."
+    locator: "NSA, 'Redacting with Confidence' (2005/2006), p.2, 'Deletion not Redaction'"
+
+  - key: lopresti-spitz-2005
+    title: "Information Leakage Through Document Redaction: Attacks and Countermeasures"
+    author: "Daniel Lopresti, A. Lawrence Spitz"
+    url: "https://www.cse.lehigh.edu/~lopresti/Publications/2005/spie05a.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/redaction-failure-modes.md"
+    status: primary
+    supports: "The geometry of a redaction (the width of the gap left by a removed word) is itself a side channel leaking a proxy for the withheld content's length; even a proposed fixed-width countermeasure only hides length, not the fact that a redaction occurred at all."
+    quote: "the width of the gulf between the cleartext immediately adjacent to the redacted region reveals the length, in characters, of the missing word(s). [...] the above techniques will hide the length of a missing word, for example, but few will obscure the fact that it is [a word at all]."
+    locator: "SPIE Document Recognition and Retrieval XII (Jan. 2005), body text and countermeasures section"
+
+  # --- Medical / scientific imaging reporting vocabulary ---
+
+  - key: acr-birads-faq
+    title: "The American College of Radiology BI-RADS Atlas and MQSA: Frequently Asked Questions"
+    author: "American College of Radiology (ACR)"
+    url: "https://cs.acr.org/-/media/ACR/Files/RADS/BI-RADS/Mammography-FAQ.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/radiology-birads-categories.md"
+    status: primary
+    supports: "BI-RADS's category table is structurally split into 'Assessment is Incomplete' (Category 0 alone) and 'Assessment is Complete' (Categories 1-6); the FDA-approved wording for Category 0 always keeps 'Incomplete' so a radiologist cannot free-text an incomplete study to read as a negative one — but BI-RADS 0 itself conflates 'ambiguous finding, need another view' with 'technical failure' into a single code, an internal limit on how far the standard's distinctions go."
+    quote: "a. Assessment is Incomplete [Category 0: Need Additional Imaging Evaluation...] b. Assessment is Complete – Final Categories [1 through 6] [...] there is no official subcategory for technical errors in BI-RADS Category 0."
+    locator: "ACR BI-RADS Atlas and MQSA FAQ, category table (p.1-2) and 'Mammography' Q&A section (p.4-5)"
+
+  - key: acr-communication-practice-parameter-2025
+    title: "ACR Practice Parameter for Communication of Diagnostic Imaging Findings (Revised 2025)"
+    author: "American College of Radiology (ACR), Committee on Practice Parameters"
+    url: "https://gravitas.acr.org/PPTS/DownloadPreviewDocument?DocId=74"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/radiology-acr-communication-practice-parameter.md"
+    status: primary
+    supports: "ACR mandates 'Findings,' 'Potential limitations,' and 'Clinical issues' as separately labeled, mandatory report components, with a standing obligation to state explicitly when a factor prevents answering the clinical question — a professional-liability analogue of the requirement that 'could not determine' be surfaced in words distinguishable from a finding."
+    quote: "c. Potential limitations: The report should, when appropriate, identify factors that may compromise the sensitivity and specificity of the examination. d. Clinical issues: The report should address or answer any specific clinical questions. If there are factors that prevent answering the clinical question, these should be stated."
+    locator: "ACR Practice Parameter for Communication of Diagnostic Imaging Findings, Revised 2025, §II.B.3"
+
+  - key: berlin2000-vague-radiology-report
+    title: "Pitfalls of the Vague Radiology Report"
+    author: "Leonard Berlin, MD (quoted by Radiology Today's risk-management summary)"
+    url: "http://www.radiologytoday.net/risk-management-malpractice-defense-pitfalls-of-the-vague-radiology-report/"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/radiology-vague-report-liability-berlin.md"
+    status: secondary
+    supports: "Radiology's own malpractice-liability literature holds up BI-RADS's controlled vocabulary as the field's proof that standardized, unambiguous reporting language eliminates the specific hazard of a vague report reading as 'nothing to worry about' and thereby suppressing needed follow-up action."
+    quote: "By providing clear and succinct language for reports, BI-RADS has achieved its goal of making communication of mammographic findings more accurate and decisive. Ambiguity and vagueness have, for the most part, been eliminated in mammography."
+    locator: "Berlin, AJR 2000;174:1511-1518, as quoted by radiologytoday.net (AJR original paywalled, not independently fetched — see EVIDENCE note in capture file)"
+
+  # --- Conservation and music-notation restoration ---
+
+  - key: aic-code-ethics-art23
+    title: "Code of Ethics and Guidelines for Practice, Guideline 23 ('Compensation for Loss')"
+    author: "American Institute for Conservation of Historic and Artistic Works (AIC)"
+    url: "https://www.culturalheritage.org/conservation-at-work/uphold-professional-standards/code"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/conservation-aic-ethics.md"
+    status: primary
+    supports: "Conservation's professional code of ethics requires that any loss-compensation be detectable by common examination methods, reversible, and must not falsely modify what is actually known about the object — three obligations directly analogous to arcviz's requirement that a withheld/synthetic state never pass as known content."
+    quote: "Any intervention to compensate for loss should be documented in treatment records and reports and should be detectable by common examination methods. Such compensation should be reversible and should not falsely modify the known aesthetic, conceptual, and physical characteristics of the cultural property, especially by removing or obscuring original material."
+    locator: "AIC Code of Ethics and Guidelines for Practice, Guideline 23 ('Compensation for Loss')"
+
+  - key: brandi-occelli-tradition
+    title: "The tradition of Brandi"
+    author: "Chiara L. M. Occelli, trans. Mary Ann Macintosh (quoting Cesare Brandi's Teoria del Restauro, 1963, and earlier ICR bulletins)"
+    url: "https://www.iccrom.org/sites/default/files/publications/2020-05/the_tradition_of_brandi.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/conservation-brandi-principles.md"
+    status: secondary
+    supports: "Cesare Brandi's restoration theory (the doctrinal basis for tratteggio) requires that any reintegration remain recognizable as reintegration, never usurping the authenticity of the original; and separately recognizes a legitimate third path — leaving a lacuna visibly unfilled entirely — when evidence is too fragmentary or historical value outweighs aesthetic unity, i.e. a graded doctrine, not a fill/no-fill binary."
+    quote: "to keep any integration within the strictest limitations, with practical implementations that are recognizable to everyone, so as not to use the hypothetical reintegration to usurp the authenticity which belongs only to the ways in which it was created. [...] there are cases which, due to the extremely fragmentary state of the artwork, or to a prevalence for historical over aesthetic interest, the path chosen is not to complete anything."
+    locator: "Occelli, 'The tradition of Brandi' (ICCROM), citing Brandi 1949:698 and Brandi 1963a:23"
+
+  - key: brandi-barassi-2009
+    title: "Dreaming of a universal approach: Brandi's Theory of Restoration and the conservation of contemporary art"
+    author: "Sebastiano Barassi"
+    url: "https://www.icom-cc.org/dlfile.aspx?file=https://www.icom-cc.org/docs/content/Sebastiano-Barassi-paper.pdf"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/conservation-brandi-principles.md"
+    status: secondary
+    supports: "Brandi's theory, foundational to Italian conservation doctrine since 1972, forbids 'creative conservation' (a conservator substituting for the artist or interpreting the work subjectively when filling a lacuna) and requires complete reversibility of any conservation work."
+    quote: "The unacceptability of creative conservation. That is: a conservator must never attempt to substitute the artist, to imitate his/her style and to interpret the work subjectively, especially when it comes to filling in lacunas. [...] The complete reversibility of any conservation work."
+    locator: "Barassi, ICOM-CC seminar paper (London, 2009-09-24), p.1"
+
+  - key: henle-what-is-urtext
+    title: "What is Urtext"
+    author: "G. Henle Verlag"
+    url: "https://www.henle.de/us/navigation/4bce7ec22c714fe58b0d2c0ed21757ab"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/notation-urtext-brackets.md"
+    status: primary
+    supports: "A scholarly music publisher's own statement of the Urtext editorial principle: editorial decisions must be marked as such in the musical text itself, not silently blended into the transcribed source."
+    quote: "The most important observations and editorial decisions are elucidated in the preface, in the critical commentary, in footnotes, or by being marked as such in the musical text."
+    locator: "henle.de, 'What is Urtext' page body"
+
+  - key: grier-editing-grove
+    title: "Editing"
+    author: "James Grier"
+    url: "https://doi.org/10.1093/gmo/9781561592630.article.08550"
+    retrieved: "2026-09-14"
+    capture: "refs/captures/precedent/notation-urtext-brackets.md"
+    status: primary
+    supports: "A standard musicological reference states the same hazard Brandi names for painting restoration in editorial terms: an editor's conjectural improvement on a composer's text must not be allowed to pass as what the composer actually wrote."
+    quote: "the opposite extreme, the temptation to improve on the composer, holds equal danger. An editor should not be open to the charge of printing the piece the composer would have written had he or she known as much as the editor."
+    locator: "Grier, 'Editing,' Grove Music Online (2001, updated 2014)"

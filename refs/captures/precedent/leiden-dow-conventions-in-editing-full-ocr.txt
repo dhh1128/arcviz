@@ -1,0 +1,1944 @@
+GREEK 9 ROMAN 9 AND BYZANTINE
+SCHOLARLY 9 AIDS
+
+The series of SCHOLARLY AIDS is published by the Editors of GREEK,
+
+ROMAN AND BYZANTINE STUDIES as supplements to the quarterly
+journal. For the list of those currently available and of the GREEK, ROMAN
+AND BYZANTINE MONOGRAPHS still in print, see the inside back cover.
+Communications to the Editors may be addressed to the Senior Editor,
+
+WILLIAM
+H. W I L ~ ,
+BOX4715 Duke Station, Durham, North Carolina 27706,
+
+U.S.A. Orders for purchase and subscription should be placed directly with the
+Circulation Manager, Miss DOROTHY
+ROUNDS,
+at the address given on the
+inside back cover.
+
+CONVENTIONS I N EDITING
+A Suggested Reformulation of the
+Leiden System
+
+STERLING DOW
+Hudson Profssor of Archaeolopy
+Harvard University
+
+GREEK
+
+f
+
+ROMAN AND 9 BYZANTINE
+f
+
+SCHOLARLY AIDS NUMBER 2
+
+DUKE UNIVERSITY
+1969
+
+The John Simon Guggenheim Foundation has
+generously ~rovideda grant offunds in support
+of the publication of this Scholarly Aid.
+
+Dedicated to
+in admirationfor other things and because
+they have done mostfor good editorial usage
+
+Made and printed in Great Britain by
+William Clowes and Sons, Limited, London and Beccles
+
+CONTENTS
+
+I11 BIBLIOGRAPHY
+
+CONTENTS
+Foreword
+
+14
+
+Earlier Systems
+
+14
+
+The Leiden System
+
+14
+
+Official Publication
+
+'4
+
+Summaries of the Leiden System for the User
+
+I5
+
+Discussions of the Leiden System
+
+I6
+
+The Wingspread Convention
+I
+
+17
+
+INTRODUCTION
+IV RESTORATION IN EPIGRAPHICAL TEXTS
+
+Apologia
+General Definition of Objectives
+
+The Nature and Magnitude of the Problem
+The Two Extreme Conceptions
+
+I1 CONVENTIONS
+Above and Below the Preserved Text
+Numbering of Lines
+The Use of Editorial Signs
+[~ai] Restorations (see also IV infra)
+[...I,[---I
+YU,
+
+Da.
+
+Lacunae
+Spaces Left Blank by the Letterer
+
+~ a !Doubtful Readings
+
+1/1/11 Attrition
+
+The Kirchner Principle
+The Principle of Extreme Freedom
+Difficulties with the Principle of Extreme Freedom
+Examples of Free Restoration
+The Factors Involved in Restoration
+A Further Example
+Various Essential Considerations
+A Suggested Solution
+Proposed Rules
+
+[~ai] Rasurae
+
+ITEON Reading Clear, Interpretation Unknown
+
+k\I?\ Strokes Clear, Letters Unknown
+~ a i Parts Read Earlier, Now Missing
+( ) Additions by the Editor
+
+< ) Substitutions by the Editor
+< ) Letters Left Incomplete by the Letterer
+( ) Suppressions by the Editor
+( )
+
+Resolutions of Abbreviations and Ligatures
+Note on Pointed Brackets
+
+Editing of Earlier Modern Copies
+The Problems of Editing
+
+V ILLUSTRATIVE EXAMPLE: EPHEBOIIN NERONIAN
+ATHENS
+(IG 1 1 2 1989)
+
+32
+
+Previous Study, Provenience, Description
+
+32
+
+New Text
+
+34
+
+Plate
+
+facing 34
+
+Commentary
+
+34
+
+The Inscription as a Whole
+
+37
+
+INTRODUCTION
+
+Foreword
+EXPERIENCE
+has shown that organizational formulations easily result in unsatisfactory compromises, obscurities, and omissions. Doubtless one person, acting alone, is no less liable to error, but he can at least try to satisfy that one
+person's notions, such as they may be, of thoroughness and clarity. In much of
+what follows, the expression is unavoidably dogmatic, but like, the Leiden proposals, everything is recommendations, not laws; whatever authority inheres in
+the recommendations must derive from inherent reasonableness, if there is any,
+and from reasonableness alone. Or rather, since we are after all in the realm of
+convention, where ultimately it is usage which alone matters, and alone establishes law, I have understood "reasonable" to mean "reasonable in the light of
+present practice."
+For better or worse, I have sought no official backing. L. Robert and Z.
+Stewart have read the whole with discernment, but I wish not to involve them
+or any other person. E. L. Bennett Jr, H. Bloch, J. Chadwick, W. V. Clausen,
+K. M. Clinton, DeC. Fales Jr, E. W. Handley, J. H. Kroll, P. L. MacKendrick,
+G. Nagy, G. M. Quinn, R. S. Stroud, L. L. Threatte Jr, S. V. Tracy, L. B.
+Urdahl and J. C. Waldbaum also have given valuable assistance. If what is contained herein leads to useful discussion and agreement, in practice (one would
+hope) as well as in theory, and also, if it is needed, in organizational action, I
+for one shall be pleased to conform to the eventual decisions. All that matters is
+to serve clarity, simplicity, and adequacy-not to gratify any one person's feelings about any particular sign.
+Certain limitations of the present effort should be noted. Textual apparatus
+is not dealt with. There is nothing here on "style": my efforts in that direction,
+along with those of others in America, are set forth in the American Journal of
+Archaeology 69 (1965) 199-206 (with abbreviations). Nor have I attempted to
+deal with usages outside the classical sphere, e.g. cuneiform tablets and the like.
+The Leiden and other treatments of conventions have usually cited examples
+which were fabricated, and which consequently had (it seemed to me) an air of
+unreality. I have therefore been a t pains, except in a few brief instances, to cite
+instances from actual inscriptions in their context. Some of these are from my
+own publications: in searching for instances which are perfectly certain, one is
+driven to sclecting instances which are familiar.
+
+A$ologia
+1931 D m Leydener Klammer System (full references in the BIBLIOGRAPHY
+infra) came into being. Papyrologists had taken the lead, and initially a t
+least representatives of other disciplines were not as fully consulted as would
+ideally have been desirable. Nevertheless, during the next decade and a half the
+conventions agreed upon at Leiden came to be widely adopted for the editing
+of epigraphical and papyrological texts. Any Classically trained scholar who
+knows the usages in one of these fields can often interpret correctly, without recourse to tables of sigla and the like, the conventions now used in editing most
+of the texts in the other field. But palaeographical texts-the "authorsw--continued to be edited somewhat differently,and often differently from one another.
+I t may suffice to refer to 0. Staehlin's Editionrtechnik, 2nd ed. (Teubner, Leipzig
+1914) and P. Maas, Textkritik (Leipzig 1927; later editions, including the English translation [Oxford 19581 are wholly unaffected by Leiden).
+Several years ago the Leiden' system was put to a new test. I t was urged by
+the present writer that the Bronze Age texts from the Aegean area should also
+be edited in such a way that, with a minimum of usages necessarily peculiar to
+the editing of the Linear B and A tablets (etc.), the diacritical signs should be
+intelligible to all Classical scholars. Colleagueslearned in these writings willingly
+is the Leiden
+agreed, and the Wingspread Convention (infra, BIBLIOGRAPHY)
+system re-stated with a few, readily-intelligible additions necessary for the
+tablets.
+Apparently the Leiden System is here to stay. It has worked--can one not
+say?-reasonably well. No large alteration has been or is likely to be proposed.
+There is ample evidence, nevertheless, to show that the Leiden system was
+not perfect or final. Nearly everyone has his own pet notions, and no one, if he
+had to start again at the beginning, would devise a system precisely like that
+which has been adopted. In fact several minor changes have been suggested. In
+epigraphy there is no agreement in theory or in practice on the proper status of
+"restorations" within square brackets. On the use of dots, theory is clear,
+practice often delinquent. On several signs used less frequently, there is no clear
+statement anywhere, neither is there an up-to-date bibliography of what has
+been written about the conventions. Nor does any recent article attempt to
+cover the same ground critically. In addition, the latest official formulation,
+itself more than thirty years old, of the Leiden system is out of print and
+unobtainable. I t left much unsaid and some matters unclear.
+
+I
+
+N
+
+As hetween Leiden and Leyden in English, there is no decisive consideration orcept usage,
+which favors Leiden.
+r+
+
+I
+
+2
+
+CONVENTIONS I N EDITING
+
+Evidently therefore the time has come when some reconsideration and reformulation might be useful. The task, it seems to me, is one of canying out
+orders--orders interpreted as intelligently as possible-not of issuing commands.
+The legislators of Leiden, for instance, chose to alter the meaning of ) in
+Greek epigraphy so that, although in nearly all the past century of publications
+) regularly meant dele, in works after ca. 1932 ( ) usually mean adde. In itself
+the change is bad, but alas adde is not, in the Leiden code itself, always the
+meaning (infra, pp. I I , 12). Clarity was not obtained by the change. I n general,
+no sensible person, if it were possible at present to start ab initio, would advocate
+what we have (I assume) now to accept. Fortunately occasions for using ( )
+and { ) are rare, and in any case, whenever these unusual brackets are used, the
+editor's commentary must give an explanation which will obviate misunderstanding. In the second and third chapters I have sought in the main to clarify
+usage, and only to alter it in a few minor details, even though the effort to
+clarify only brought into sharper relief the mistakes (as some of them seem to
+me) made in the legislation that governs us.
+When it comes to the one really common set of brackets, [ 1, the question of
+what to put between them is not a matter of interpreting legislation, which in
+this instance is widely permissive, but rather of investigating what certain
+extreme doctrines of usage involve, and of trying to suggest more reasonable
+practice. I n Greek epigraphy of the Classical period, there is an increasing
+pressure of conviction that restorations should no longer be freely inserted in
+texts to express the editor's subjective, or largely subjective, conjectures; but
+rather that restorations should be rigidly controlled by specifiable evidence. In
+this at present somewhat chaotic sphere, the time may not be ripe for codification, but a t least positions can be clarified: in the hope that it may prove helpful, I devote the fourth chapter to an effort in this direction.
+Also with diffidence, and because correct practice ought to begin a t home, I
+have attempted in the fifth chapter a would-be model edition of a small noncontroversial inscription which may illustrate some frequently recurring features: physical indications of size, and spacing on the stele; an erasure with an
+erased letter visible; restorations both positive and conjectural.
+
+<
+
+<
+
+General DeJinition of Objectives
+Textual studies may or may not move toward it, but the aim of good editing
+is surely not difficult to conceive. The aim of good editing is to set forth in print, by
+use of regular, understood, agreed-upon conventions, which shall be as simple and clear as
+possible (so that non-specialist readers can comprehend with a minimum of
+difficulty), a clear and correct representation of the original text. I t will usually be
+necessary for any critical reader to have recourse both to photographs or diagrams of the original, and, for anything which may seem unclear, to the editor's
+subjoined commentary. But the text should be presented in such a manner as to
+reduce to a minimum all such efforts.
+In the following pages, the frequently used diacritical signs and other conventions are treated first; after them, the rare ones.
+
+CONVENTIONS
+Above and Below the Preserved Text
+
+T
+
+HE NEED often exists to inform the reader, as part of the edition itself of
+the text, how much is missing. This has never been discussed, but clearly
+the content of the missing parts can and often should be indicated.
+
+Examples: In the Athenian prytany inscriptions, Hesperia Suppl. I, the
+developed scheme being regular (p. 4) : indication of parts missing can
+sometimes usefully be given, as in nos. 20, 32, 47, etc.
+
+Fragments of alphabetized lists, with information about parts missing at
+the sides as well as above and below: AJA 67 (1963) 263.
+For certain exigencies in Bronze Age texts, Latin abbreviations are suggested
+(infra, p. 18).
+
+Numbering of Lines
+Usage varies, with resulting trouble, in respect to lines of letters which certainly once existed but are no longer preserved, or about which there is no
+positive knowledge, but which need to be referred to in dealing with the text.
+The longest Athenian list of contributors, IG IIZ2332, is damaged between the
+lines now numbered "310" and "315." In this area, Kirchner read parts offie
+lines, but apparently the first of these, the one following line 310, where all he
+could read was the sum A at the end, escaped notice and was not numbered.
+This was merely a careless error. The four other lines, viz. the lines inscribed in
+the area immediately preceding line 315, were counted as fines 311-314. By
+itself this was of course correct. But between line 3 Ioa (as we may call it) and
+line 31 I , he allowed room for yet an additional four lines, certainly once inscribed (as he thought), but of which nothing is now legible. In accord with
+practice which has always been more or less usual, but is surely wrong, these
+four lines also received no numbers. We may compare Kirchner's numbering
+with a proper sequence of numbers (edition i n preparation) :
+
+CONVENTIONS IN EDITING
+
+TEXT
+
+[ ~ a hi i p - - - 'H]~UKGVTOS
+[ ~ a-i - -1phov
+[------I
+oOc~10s
+[ ~ ahi i p - - -]ow
+[- -IT[- -1
+
+AAA
+
+n
+A
+A
+
+CONVENTIONS
+
+Kirchmr's
+n'umbering
+
+Proper
+numbering
+
+311
+312
+313
+314
+315
+
+383
+384
+385
+386
+387
+
+*
+
+Measurement shows that this "line" never existed, i.e. there was space only for
+lines 380, 381, 382.
+
+If the old system, viz. a number only for lines where letters are legible, had
+to be followed, then any reading made subsequently in the area after line
+(310a) would have to receive a new number, such as 31ob, together with
+an explanation to indicate where line 31ob is. But even if no new reading
+is made, still the line now numbered 382 may need to be referred to: it
+listed the donor of 30 dr., who contributed on behalf of himself and of the
+persons in lines 383 and 384. Further, all three missing lines, 380, 381, 382,
+ought to be accessible to a reference for their part in the total number of
+contributors or of contributions. Plainly, therefore, even if nothing in them
+can ever be read, they should have numbers.
+This is so obvious that we must ask how the erroneous practice ever came into
+existence. Evidently it arose from thinking that a "line" must be letters, and that
+a line-number must designate only letters. This is an unnecessary and often an
+unfortunate limitation. A line-number is only a symbol, not an indication of a
+reading or restoration. The line-number is used solely for convenience, to have
+something to refer to; and what it refers to is not necessarily letters, but an area
+in which letters may or may not have been inscribed. All areas which may have
+been inscribed, or which need to be referred to for any reason, may be numbered. The final number may or may not be an accurate figure for the total of
+lines in the original text. If it is, so much the better; if it cannot be, no matter.
+What matters is convenience and accuracy of reference.
+Convenience is not well served by the printing of line-numbers one for
+every five lines (5, 10, 15, 20. . .). Intervals of four (4,8, 12, 16,20. . .) are
+easier and the system is gaining adherents: REG 7 I (1958) 181. Intervals of
+three (3, 6, 9, 12, 15. . .) have been tried, and in short texts the numbering
+of all lines.
+
+5
+
+The Use of Editorial Signs
+Restorations: Square Brackets [ ]
+Square brackets enclose areas once inscribed, whether the stone is: (a) preserved
+but with the surface too worn or eroded to retain actual strokes of letters, so that
+letters arc seen vaguely but no stroke can be positively read,
+as in much of the water-worn Prytaneis (Hesperia Suppl. I) no. 76, and in
+much of the foot-worn Hesperia 3 (1934) 2 2 ;
+or (b) preserved behind the original front surface, itself now missing,
+as in some of Prytaneis no. I ;
+or (c) entirely broken away,
+as in Prytaneis no. I, most of lines 4-9.
+In any formal text, as distinct from short excerpts quoted in the midst of other
+matter, every square bracket should be answered by another square bracket.'
+Print U T S O ~ VTTP~UOEm A G v dry[- - - - - - -1
+not&[------n o r & - - - - ---.
+but print e.g. : Greek names in 'Epx- are rare.
+To indicate many lines missing, if there is no danger of misunderstanding,
+dashes alone may be used,
+as in much of I G I I Z 2325.
+No detectable stroke of a letter should be enclosed within square brackets.
+Print: AI EIIIII not A1 E[IIIII]
+For a proposal to designate restorations that are probable but not certain by a
+small interrogation point, see Chapter IV (codified on pp. 30-31).
+
+Lacunae: Dashes, Dots [- -1, [. . .]
+A dash or dashes should be used solely to indicate a lacuna of uncertain length.
+The lacuna should be marked also by square brackets.
+Do not print - - - or [- - -.
+Print [---I or, if an estimate, though inexact, would be useful, print
+en. 5
+
+[----I.
+The number of dashes is wholly a matter of convenience.
+[- - -1 can mean a few; or many; or an indefinite number. of letters rnissing. [- -'Ze- -1 can mean 40 letters, more or less, missing.
+Failure to reproduce any square bracket at all in quoting an e~igraphicaltext, however venal
+in some instances, is certainly to be stigmatized. One clear example will suffice. Writing on
+'EmusAqsal in PWK 6 (1909) 167 lines 61-68, J. Oehler quoted I G I11 1017 and 1018 without
+Y .thi Oehlerfollowed earlier restorations.
+brackets as reading aIps06vr~sh~uahqralB I K ~ U T ~ P ~ WIn
+Actually, the first word, except for the final sigma, was all a restoration made by R. Neubauer,
+and in I G I11 1017. W. Dittenberger, though cited by Oehler as supporting the restoration,
+explicitly rejected it. The space in question probably contained the Arkhon's demotic (Dittenberger; J. Kirchner in I G I I z 1733; S. Dow in edition forthcoming). The Cmunhrl~al
+6lxau~qplwv-that is their proper title--probably were elected (there is no specific evidence) but
+Oehler's unbracketed alpsehrrss is indefensible.
+
+6
+
+7
+
+CONVENTIONS IN EDITING
+
+CONVENTIONS
+
+Spaces Left Blank by the Letterer: Small superscript or or aaCaf
+A small superscript italic indicates one space intentionally left blank by the
+
+doubtful" or "letter positively identifiable although imperfectly preserved." This would destroy the value of the dot. If all imperfect letters had
+to be dotted, some inscriptions would have many dots. The cases which at
+first thought seem difficult are those in which only a little remains: e.g. to
+printgas 6 with no dot. Let it be remembered that the transcribed text as
+printed is a conventional representation, not a facsimile, of the inscribed
+letters.
+No letter between brackets, except doubtful letters in erasures and printed
+between [r and I], should be dotted.
+In the present, as in the past, some scholars would dot letters within square
+brackets. A particular proposal is to enclose in brackets, and to dot, letters
+of which some small part remains. The seeming advantage of this proposal
+is that it would create a category intermediate between letters of which
+some fair amount remains, and letters of which nothing at all remains.
+They propose:
+
+mason. If a small number of spaces are left blank, print one for each blank
+space :
+YMv
+four spaces left blank.
+nur* 13 spaces left blank.
+If the blank space is lengthy:
+nuat 20 where the space can be accurately measured.
+rnWf
+zo where the space can be approximately measured.
+where the space cannot be measured; or is indefinitely large; or for
+any reason an estimate would not be useful.
+Blank spaces can sometimes be restored :
+] one space is considered by the editor to have been left blank, but the
+surface is not preserved sufficiently so that the matter can be determined
+by the stone itself.
+part of the surface is preserved, but not enough to determine, positively,
+that a space was left blank.
+pa] or pf]or e.g. ["C"'ZO] where spaces are considered by the editor
+to have been left blank, the stone itself being non-committal.
+Usually the commentary should discuss fully all doubtful or unusual blank
+spaces; for restored blank spaces, authority should usually be specified.
+On spaces left blank for punctuation, see AJA 66 (1962) 365-367; HSCP
+67 (1963) 61; on flaws in the stone, HSCP 67 (1963) 64-65.
+
+Doubtful Readings: Subscript Dots
+
+Nothing remaining of the alpha:
+~[alf
+One bit remaining of the alpha: K.,I
+*~[a]i
+More remaining of the alpha: K/ I
+K ~ I
+Half remaining of the alpha: BI
+KU 1
+There are two objections, both fatal. (I) The editor should not take it upon
+himself to draw the line between what is more and what is less certain. No
+definition, no clarity, is possible in the almost i n h i t e possibilities. (2) A
+dotted letter within square brackets would naturally be taken to mean not
+"reading doubtful" but "restoration doubtful." (The problem of expressing doubt about restorations is dealt with infra.)
+
+A subscript dot should be placed under any letter which as a whole is so dim
+that, in isolation, neither the letter as a whole, nor any stroke of it, could be
+positively read.
+A subscript dot should be placed under any letter of which a stroke or
+strokes are clear, but do not suffice to determine what the letter would be in
+isolation.
+
+Attrition: Shading
+Where the surface is in a condition such that it appears to have been inscribed,
+but attrition has made the existence of inscribed letters doubtful, shading will
+convey a correct notion. Thus I G 12 843 line 5 (Hesperia 4 419351 32) should
+read :
+
+Examples: If middles of letters are gone, so that Q can = Q or 0, then for
+EAQZEN print ~ ~ O $ E VIf. A can = A, A, A; and E can = r, E, IT, then for
+AAEEANAPQZ print 'A?B<avSp?s.
+The context in which a letter occurs should not be considered in determining
+whether or not the letter should be dotted.
+Thii principle is often violated, but should not be. The editor should not
+take it upon himself to decide for the reader what contexts are decisive,
+but should give a true impression of the reading of each letter in isolation.
+See W. K. Pritchett, article cited infra.
+No letter between brackets, except doubtful letters in erasures and printed between [r and ], should be dotted.
+should be printed a with no dot. Thii is the only clear principle. The dot
+mut not be permitted to mean, ambiguously, either "identity of letter
+
+See the photograph, op.cit. p. 31. The designation of a sacrificial victim might
+well be inscribed after the deity.
+Theparagraphos sign, a short horizontal line extending into the margin, is fkequent in another Code inscription, Hesfieria 10 (1941) 32, Frag. 5 (see the photograph), and to show that the surface is gone, so that the presence or absence of
+the sign cannot be determined by reading, shadings do best:
+hGv KP~T~[V]
+Line 7
+1111111/11
+Line 8
+oiv: KPIT~V
+
+Rasurae: Double Square Brackets [r I] indicate a rasura :
+
+.I,[-],[
+
+[C.I],[. . 5 .
+- - - - I],[ - - - - """---I]
+Indicating
+erased
+areas
+of
+lengths
+- as shown, where no letter can be read and
+where the editor restores nothing.
+
+CONVENTIONS
+
+EDITING
+
+CONVENTIONS IN
+
+IG 1123278 (quoted entire) should be printed:
+air~o~pdrrop~
+[[NBpw]]
+vl Kaiaapl Z E ~ ~ O T G
+vBy 'A.rr6hhov1
+None of the last four letters of line I is said to be visible in the (deep)
+erasure.
+If some letters can be read and some are restored, print as supra for ZG
+1 1 2 3402 line 4.
+ZG 1121989 line I (infra p. 34) should be read:
+
+Thus ZG 1 1 2 3402 (quoted here entire) line I :
+
+I------]
+OeoG
+'Av~wvivov
+U~[~I~~[~.rllPll
+The commentary will state that in line I, an area subsequently erased,
+(ZG
+either UOnvm~ivaI](ZG 112 3398, by the same mason), or &XaP~ivaT]
+112 3401, also by the same mason) was inscribed; but as yet no determination has been made between them.
+[r 1 Indicating a n area containing the letters shown within the brackets,
+which were the only letters ever inscribed in the area, and which were evidently
+intended to be erased, but can still be positively read, as in ZG 112 3402, line 4
+supra. The commentary will have a full statement. If some letters are doubtfully
+read, print dots under them.
+
+since parts of the nus can be made out. Actually the end of the rasura is not
+preserved, but only the part which contained the first five letters. An
+explicit version would be:
+U~?[;P~IUII[U[OSI~I
+A photograph, and/or a sentence in the commentary, would make this
+monstrous solution unnecessary, but in addition, to make the text instantly
+intelligible, I suggest a broken line at the break:
+
+uSecond
+
+Indicating that the first inscription was entirely obliterated, and
+Twrt
+a second inscription, legible in whole or in part (scil. the letters shown) was incised in the area.
+Many erasures made for correction are in this category. Prytuneis (Hesp.
+Suppl. I) p. 188 line 36, clearly photographed on p. 187, should be printed:
+Second Text
+
+[~'E~TT~VE~K
+Z[-----]I]
+OS
+No trace of the previous inscription has been read. The commentary will
+have a full statement.
+Fint Text
+Indicating that the first inscription is still legible, in whole or in
+It _d,in I1 part, and that a second inscription is also legible in whole or in
+themargin,
+part. I t will not be possible always to print the other text in the
+
+F"-jI G I] 1043
+margin; it must be left for the commentary.
+line 105 ii, was first written
+Tut
+112
+
+[nlpataybpas ? K[apbmosl
+Evidently wishing to replace the sign 3 for a father of identical name with .the
+word itself, someone (Praxagoras himself?) "erased" the sign and presumably
+the whole demotic. The sign is still faintly visible, however, and a trace shows
+of the kappa. The whole word was then crudely inscribed, giving
+
+Accordingly print:
+Fint Text
+
+[[r ]] Indicating that the editor restores an erasure and the letters conjectured to have been erased.
+This should be kept as a possibility, however infrequent and cumbersome
+(see the next previous illustration).
+Erasures of Larze Areas. In ZG 112 3416, Kirchner tried large brackets, to enclose
+most of four lines. I t would have been better to enclose each line in double
+brackets separately.
+But larger erased areas have to be considered. I n some instances-more than
+have been recognized-especially statue bases of Late Roman date, whole surfaces have been erased, some surfaces more than once. Thus Corinth VIII, I ,
+no. 108, as will be shown elsewhere, was twice inscribed and twice erased. Almost
+the entire surface of one side of the opisthographic wall used for the Athenian Law Code of 41 1/1o-q00/3gg B.C. was inscribed, erased, and inscribed a
+second time (Hesperia 30 [1961] 63-64). In such instances, the entire second
+text need not be printed within double brackets; but a statement about the
+erasure(s) should be made prominent.
+The bronze Athenian dikasts' tickets were frequently reused, all the inscriptions being legible at least in part. For publishing such texts, a form "Use I,"
+"Use 2," etc., is suggested in BCH 87 (1963) 656ff.
+
+Reading Clear, Interpretation Unknown: Capital htters
+
+and, in the margin or elsewhere,
+Second Text
+
+m ~ a t a y 6 ~~ausp I ] ~ t u a y [ ~ I p o v
+YllarJ~m1os
+[r[ ]I] Indicating an erased area in which nothing can be read but in which
+the editor restores the letters shown.
+
+Whole capital letters are used, and certainly should continue to be used, at
+least in epigraphy, to designate letters which individually are legible (or partially legible and if so dotted) but which collectively do not appear to the editor
+to make sense.
+*X
+
+I0
+
+CONVENTIONS I N EDITING
+
+CONVENTIONS
+
+L. Robert, Les Gladiateurs dam 1'0rient grec (Paris 1940) 155, no. 124, lines
+5-6 :
+Tb yhp divoy o i m o ~ 'ih~tn[e]
+nahhpais ITEON ylwxfjs i-rri~owpov
+npiv I K T E ~ V ~ I
+
+Additions by the Editor: Pointed Brackets ( )
+Letters (or numerals, etc.) inserted by the editor to supply letters (etc.) considered by him to have been intended to be inscribed, but which were omitted
+by error.
+ZG IIZ3242 lines 5 (part) and 6:
+
+Prytamis no. 28: names of Athenian Bouleutai:
+Line 44 : EOA IllHz
+Line 46: M[.]YINOI
+Printing such letters in capitals has the advantage of calling attention to
+the problem: a n error in reading, or in inscribing, or the presence of a
+quite unusual name.
+
+Strokes Clear, Letters Unknown: Broken Capitals
+Partial, or broken, capital letters are used, and should continue to be used,
+where (as often a t a n edge of the stone) the context does not decide the identity
+of the (imperfectly preserved) letter. Despite difficulties of printing, it is usually
+easier and clearer to indicate typographically just what is legible than to express
+the situation in words; although usually verbal explanation ought to supplement the typographical.
+ZG 112 32-23, quoted entire, as copied by U. Koehler:
+
+No indication is given, and possibly the stone gave none, about how many
+letters are represented by the five upright strokes before the tau.
+A more accurate image can be conveyed by the use of shadings for lost
+parts of letters. Thus ZG IIZ 1357a line 2 should read:
+
+.
+
+[ . ]A[. ]FEE[-----I
+The fifth letter is thus shown to have had an upright stroke at the left, and
+no horizontal a t the bottom.
+Parts Read Earlier, now Missing: Underlining
+Not discussed anywhere, but regularly used e.g. in ZG IIz, is the use of underlining
+-to indicate letters read with certainty in earlier editions but now missing
+(usually because of the breaking-away of parts of the stone at the edges). This
+happens not infrequently, and the underlining is a valuable convention. The
+commentary should of course explain. Underlining is solely for this.
+For example, more of the right end of the dedicatory inscription I G 112
+2860 has been lost since U. Koehler's time. The text is now given (entire) :
+
+II
+
+&PXOVTO< 6;
+[Aiohiovos] TOG 'Av(~~)~~drrpow
+@ A w i [ o ~vl~o-ripow
+
+The commentary states that the stone has ANUATPOY. The man Aiohiwv
+'Avr~drrpow@Awnjsand his father are known from other inscriptions.
+
+Substitutions by the Editor: Pointed Brackets ( )
+Enclosing letters (or numerals, etc.) substituted by the editor for letters (etc).
+actually inscribed, but considered by him to have been inscribed by error, instead of the (correct) letters given within the pointed brackets.
+IG I I Z386
+EM 12564; new text, HSCP 67 (1963) (47-) 49, lines 3 and 4
+(parts) :
+[ - - - Ini ~ i j sA]
+[iy]~i(6)osZ K T ~ S~ [ p v r a v s i a-~- - ]
+The stone reads E I A 0 5 i.e. it has a clear A where A was intended.
+
++
+
+Letters Left Incomplete by the Letterer: Pointed Brackets ( )
+Especially in inscriptions where the mason had to change from one chisel to
+another, parts of letters were sometimes never cut. Most often, e.g. A was left as
+A. Editors disagree, but strictly (A) should be printed; certainly not, if the
+reading and intent are clear, A. The subscript dot should be used solely for
+doubtful readings, never for editorial corrections.
+Numerous omitted strokes, clearly read, Hesperia 7 (1938) 2-5, &g. Here
+there are so many instances that no effort is made to indicate them except
+in the commentary. This is allowable: the intent is usually indubitable.
+Suppressions by the Editor: Braces { }
+Enclosing letters (etc.) considered by the editor not to have been intended to be
+inscribed, but inscribed by error.
+IG IIZ 1990.4, part:
+In rare instances incomplete letters, which in the final intention of the scribe
+were not meant to be inscribed (or written) at all, were left unerased: the incompleteness was meant to signal the cancellation of the strokes inscribed:
+The predicament is illustrated in a papyrus, where the facts were detected
+and clarified by J. Schwartz and H. C. Youtie, TAPA 91 (1960) 256: an
+epsilon was left incomplete where an impulse to write 2m&was rejected.
+Print {s} and explain in the commentary that an epsilon was left incomplete.
+
+12
+
+CONVENTIONS IN EDITING
+
+Resolutions of Abbreviations and Ligatures: Parentheses ( )
+Indicating letters added by the editor to fill out an abbreviation to the full form
+of the word.
+Hesperia I I (1942) 67, no. 33, is correctly printed in lines 1-3 :
+'Ayaeijl
+[Tirxq~]
+[El-rri 3pxovro~Tip Kx A[ - - - - - ]
+MEA(~TBws)
+07p~T[Tl]
+YO~?V[TOS
+€2, K T ~ . ]
+The abbreviations for Tiberios and Klaudios are so familiar as not to need
+expansion; but the demotic might not be known to all readers. (Although
+the cognomen cannot be restored, the man's family is known and the
+demotic is indubitable.)
+Parentheses are used also to give the full form of an abbreviation inscribed as a
+ligature.
+The ligature should be specifically mentioned if it cannot be reproduced.
+Where the stone has TP preceded by a name, print -rrp(~oPir~~pos);
+or $
+in a date, print np(6), or, if the printer can do so, print fI ( 7 ~ ~ 6 ) .
+J. H. Oliver, Hesperia Suppl. VI (1941) 89, no. 7, line 15 (part):
+the inscribed characters are (Imcrs. Brit. Mus. 111, p. 150 no. 486) :
+
+EYTYXEITE-fi. E. K. OKTOBPIRN
+for which print
+&WXE~TE-TT
+E' P ( ~ )
+K(aAavFGv) 'OKTWPPLWV
+
+Note on Pointed Brackets
+The signs ) are ambiguous, and the Leiden convention (reference infra, p. 14)
+p. 20 proposes [ 1 for corrections, but these look too much like [ 1, and broken
+type or poor printing might easily change [ to 1. Hence in epigraphy this recommendation has not been accepted. Others (e.g. F. W. Schehl, infra) have proposed other signs. In all of the above instances except restorations and abbreviations, the critical apparatus ought to state the facts clearly. There is no other
+way to insure clarity of understanding. To multiply signs is to burden the editor
+and the reader without guaranteeing success. Instances are uncommon enough
+so that the critical apparatus will not be unduly lengthened.
+
+<
+
+Editing of Earlier Modern Copies
+A certain number of inscriptions survive only in the transcriptions made of
+them usually some decades ago. To a greater or less extent these copies are
+defective, and the modern editor, no matter how conservative (epigraphical
+editors are, or surely ought to be, the most conservative of all), must emend,
+often extensively. He must put into his text other letters, different from those he
+finds in the copy.
+
+CONVENTIONS
+
+I3
+
+For diacritical signs there are two choices, and practice is divided. One
+choice is to put a dot under the letter substituted by the new editor for the reading in the copy. In practice the dot used thus has sometimes come to mean nothing whatever, except "a letter, not having necessarily any resemblance to the
+letter now proposed, was read in this space." Editorial extremes of this sort in
+editing copies by Fauvel, Baumeister, and Vernon are cited by Pritchett, AJA
+59 ('955) 57.
+The alternative is to treat the copy as if it were an original text and to enclose
+in pointed brackets letters substituted by the editor. Pritchett has proposed that
+this be done whenever there is little or no coincidence of strokes. On the other
+hand, if the substituted letter is similar, the proposal is that it should be dotted.
+Thus iota for sigma would be printed <I), whereas theta for omicron would be
+dotted, 0.
+This would be an improvement, and yet it is far from being a perfect solution.
+( I ) It makes the editor the judge of whether the resemblance is close; he will
+tend to decide in favor of his own interpretation, and thus he will favor dots.
+(2) Pointed brackets occupy more horizontal space and do really mar the page
+(as Meritt urged) more than any other sign.
+There is only one solution, and that is to print the copy itself as near on the
+page as possible to the new edition of it. This can always be done: the copy is
+not like a photograph. Then the editor, if he wishes, can state that all letters
+altered by him are dotted. More important is to introduce a general statement,
+based on positive instances, if there is sufficient material, about the accuracy of
+the copyist; about which letters of the alphabet misled him, and how often.
+Depending on the style of lettering, this may vary from inscription to inscription
+(if there are several), and from inscriptions which evidently were well preserved
+to those which were not.
+
+The Problem of Editing
+The main problem, surely, is not to change the Leiden system, but to improve
+its working. More accurate realization, however, of what is involved, and
+sharper formulations, are only a part of the task, and the lesser part. The more
+important sphere of effort is not legislation but practice. We are all more or less
+at the mercy of editors. Photographs must always be printed, but they cannot
+always suffice. The very areas where difficulties arise are the areas where photographs are likely, especially when dimmed by reproduction on the printed page
+and reduced in size, to be inadequate.
+Avoidable editorial malpractice certainly ought to be stigmatized: no one
+who reads the astonishing instances collected by W. K. Pritchett in AJA 59
+(1955) 55-61 can doubt that. Discussion of editorial conventions may tend to
+make editorial practice more accurate. But lack of skill is also a factor, curable
+only in part by diligence and long practice, by better squeezes and greater
+patience.
+
+'5
+
+BIBLIOGRAPHY
+
+September. The object was to recommend usage that might become uniform
+for the editing of all Greek and Latin writings: i.e. for papyrolog-y, epigraphy,
+and texts of authors. A formidable list of scholars eventually contributed
+opinions. The present brochure, which was the result, records previous usages
+and pleads for uniformity on a basis of a few simple signs used with a minimum
+of change. The second half of the brochure is on textual apparatus. There are
+lists of signs, abbreviations, etc., and a full index.
+
+BIBLIOGRAPHY
+
+SUMMARIES OF THE LEIDEN SYSTEM FOR THE USER
+
+J. Kirchner, Inscriptiones Graecae, I1 iii 12 (Berlin 1935: Attica, Dedications)
+is intended to be complete, at least for
+epigraphy, and to be critical. Items no longer worth reading are included
+for their historical value. I hope they are sufficiently criticized; to be
+explicit, however, I give here the opinion that under D ~ s c u s s ~ o
+the
+~ sonly items
+of enduring value are the second half of the J./L. Robert passage, on publication, and the article by W. K. Pritchett, on dotting letters.
+
+T
+
+HE FOLLOWING BIBLIOGRAPHY
+
+Earlier Systems
+The Leiden System was not universally adopted at once. For summaries of
+earlier systems in epigraphy see e.g. Supplementum Epigraphicum Graecum 6 (1932)
+p. viii, and earlier volumes; J. Kirchner, Inscriptiones Graecae I1 iii I Z , page v.
+Other discordant systems, G. Klaffenbach, G~iechischeEpigraphikz (Gottingen
+1966) 103. For a more extensive treatment, with older bibliography (p. g), see
+the official publication of the Union Acadtmique Internationale (infra, ed z.,
+next section; hereinafter referred to as UAIZ). For a brief and convenient summary, see Chronique d'Egypte 7 (1932) 268. History of the use of dots to indicate
+uncertain readings, W. K. Pritchett, American Journal of Archaeology 59 (1955)
+55-57.
+
+Th Leiden System
+OFFICIAL PUBLICATION
+
+Union AcadCmique Internationale, "Emploi des signes critiques; disposition de l'apparat dans les tditions savantes de textes grecs et latins: Conseils
+et recommandations."
+1932: J. Bidez and A. B. Drachmann (Paris: E. Champion, 5 Quai
+Malaquais). 46 pages.
+1938: Same, tdition nouvelle by A. Delatte and A. Severyns (Brussels,
+Secrktariat administratif de 1'Union AcadCmique Internationale, Palais des AcadCmies; Paris, SocittC #Edition Les Belles
+Lettres, Boulevard Raspail, 95). 50 pages.
+Although the effort had been begun some years before, the main feature was
+an attempt to take into account the conventions adopted by the Papyrological
+Section of the 18th International Congress of Orientalists, which met in Leiden,
+7-12 September 1932; the measure in question was passed unanimously on 10
+14
+
+page v.
+The examples are clear, but the whole is compressed, and the "erased"
+letters under [r 1d), in EAOE E m A H M RI, should be printed in brackets,
+I~o<E
+[r~Gtl]6jl.IGX.
+The final entry, A in notandis litteris dubiis, should be altered to state that the
+letter is partially damaged, and that what remains is compatible with the
+proposed reading, but that the actual remains, independently of the context, do not make the reading mandatory. If e.g. the left stroke only of a p i
+is legible, the letter should be printed with a dot, T[; but if the two strokes
+forming the upper right corner of a p i are definitely preserved, even though
+only partially, print ll without a dot.
+Supplementum Epigraphicurn Graecum, ed. J. J. E. Hondius, 7 (Leiden 1934)
+p. viii (in line I 3 for %0(1read E ~ o ~ E
+and
+) , subsequentvolumes,e.g.ed. A. G.
+Woodhead, 18 (1962) p. xii.
+Same examples as in IG 112; the erasures are however properly treated, but
+correct the part on subscript dots as supra under J. Kirchner, IG IIZ.
+M. N. Tod, Greek Historical Imriptiow (12 [Oxford 19461 p. xx has the old
+system), I1 (1948) p. viii: Leiden system.
+Alter [r I] to read: enclose letters deliberately erased in ancient times but
+still legible; [r[ ]I] enclose letters believed by the editor to have stood in the
+erased area.
+Correct the part on subscript dots as supra under J. Kirchner, IG 112.
+B. D. Meritt, H. T. Wade-Gery, and M. F. McGregor, Athenian Tribute
+Lists, I1 (Princeton 1949) 7.
+The Leiden system, but with reversion to the rectangular enclosure
+for
+the second (most recent) inscription in a rasura. Apart from lack of sanction, this has the disadvantage of not being immediately intelligible: the
+reader might assume it surrounded letters read from the first inscribing.
+Dots under letters "epigraphically doubtful" is also a statement liable to
+misinterpretation.
+
+a
+
+G. Klaffenbach, Griechische Epigraphikz (Gottingen 1966) 102-103.
+Alter as supra on dots. On erasures note that a n erasure need not have been
+made by the original mason, or by any mason.
+
+16
+
+CONVENTIONS I N EDITING
+
+BIBLIOGRAPHY
+
+American Journal of Archaeology 69 ( I965) zoo.
+Expand to conform to IG IIz and SEG supra. The double brackets [[ 4
+enclosing erasures should not appear to be of two different kinds, but
+should all be the same.
+A. G. Woodhead, T k e Study of Greek Inscriptions (Cambridge 1959) 6-1 I .
+Page 9: the letters restored in the erasure should be printed not
+[I'ow~~hioll]
+but [~['OWEM~OI]~.
+Page 9: dots: alter to read assupra. Otherwise these pages are the best and fullest recent guide.
+
+G. Klaffenbach, Gnomon 27 (1955) 239240.
+This is a brief discussion at the end of a review of J./L. Robert, La Carie:
+departure from the Leiden system would be deplorable; the system adds no
+printing cost or difficulty; Teubner has adopted it.
+W. K. Pritchett, "Dotted Letters in Greek Epigraphy," AmericanJournal of
+Archaeology 59 (1955) 55-61.
+This should be read entire. Summary: see the following item, p. 371 n.13.
+W. K. Pritchett, "Ancient Athenian Calendars on Stone," University of
+California Publications in Classical Archaeology, vol. 4, no. 4 (Berkeley 1963) 267402.
+The section on restorations, pp. 373-382, is a strong statement, with
+examples drawn from one of the most difficult fields. This essay alone
+should suffice to alter practice. (But about one related aspect, stoikhedon,
+pp. 382-384, more consideration is needed of how masons work.)
+
+Unsigned, "Essai d'unification des mtthodes employees dans les editions
+de papyrus," Chmnique dYEgypte 7 (1932) 285187.
+The first announcement: a brief account of the procedure at Leiden, a brief
+and faulty summary of the signs, and some good recommendations for
+papyrological publications. (Program of the session of I I September, p.
+129; President, M. D. Cohen; his speech, pp. 131-133; seven additional
+papers on other subjects, after the first of which came the "Essai d'unification." The brochure had come before the session of the previous day, after
+four papers had been read, and along with three others bearing on publication. These three are the ones that are summarized next hereunder.)
+B. A. van Groningen, "Projet d'unification des systkmes de signes
+critiques," Chronique d'Egypte 7 (1932) 262-269.
+Papyrology has a central position, since it deals with documents, as does
+epigraphy, and texts of authors, as does palaeography. Discussion of
+signs: some of the views set forth have not been adopted.
+H. I. Bell, "Note on Methods of Publication," ibid. 270-271.
+Recommendations for ease of use, concerned with larger aspects than
+signs: see the official brochure, and L. Robert (infra).
+A. S. Hunt, "A Note on the Transliteration of Papyri," ibid. 272-274.
+Concerned with dots and underlinings to indicate doubtful readings. A
+sound discussion, but no absolutely precise formulation is offered. See
+Pritchett (infra), who, however, did not know Hunt's article.
+U. Wilcken, Archiv fiir Papymforschung 10 (1932) 2 I 1-2 12.
+Notes thirty years of uniformity within papyrology; contrasts epigraphy
+and texts of authors. Declares that the Greek Corplls will follow the Leiden
+system, despite difficulties and anxieties.
+B. A. van Groningen, Mnemosyne, N.S. 59 (1932) 362-365.
+Similar to the article noted above, but briefer.
+F. W. Schehl, AmricanJournal of Archaeology 58 (1954) 23 n.32.
+Urges ) for corrections by the editor to replace errors in the text; (< )) for
+additions by the editor to make up for omissions in the text. This has not been
+adopted, it is too elaborate.
+J./L. Robert, La Carie, I1 (Paris 1954) 9-13.
+Criticism of the Leiden system, in favor of keeping some of the old epigraphic conventions; and recommendations, all excellent, for larger
+aspects of publication. See also REG 68 (1955) 186.
+
+<
+
+'7
+
+The Wingspread Convention
+Institute for Research in the Humanities (Universityof Wisconsin, Madison, Wisconsin 53706, U.S.A.; 1962; two pages; obtainable on request).
+"Notae Diacriticae in Edendis Textibus Mycenaeis Minoicisque, a Tertio
+Colloquio Internationali Studiorum Mycenaeorum in 'Wingspread' convocato, editoribus commentatoribus commendata."
+After discussion in a session of the colloquium (7 September 1961), the
+Convention was drafted, in consultation with various scholars, by a committee consisting of J. Chadwick and S. Dow. The effort was directed (a)
+toward bringing editorial usage into conformity with the Leiden system,
+and (b) toward suggesting special usages, which might be uniformly
+adopted in this field, that would make for greater clarity in editions of
+Minoan and Mycenaean texts (Linear A, Linear B, and earlier scripts).
+(a) The Leiden system was adopted without change. The note on
+restorations between square brackets may be quoted: "The Leiden
+system makes no provision, and scholars have experimented but have
+never agreed on one, for indicating what restorations are positive and
+what are conjectural. Restorations of letters or individual signs which
+make normal spellings in words which are themselves indubitable, or
+of formulae which are amply attested in the given context, are positive; but where certainty is unattainable, the editor must be free to
+print other letters, signs, or words, which he feels should be restored
+to indicate the possible sense. In this situation the simplest courses are
+to insert a small interrogation point, and to comment in the apparatus;
+or to leave space blank and to give the suggested restoration wholly in
+the apparatus."
+(b) Certain exigencies recurring frequently in the tablets led to the
+adoption of the following, which is supplementary to the various
+Leiden usages :
+
+CONVENTIONS I N EDITING
+
+[- - ? - -1 Dashes and interrogation point to indicate doubt whether
+a sign or more than one sign was inscribed in the area.
+N.B. A space between a bracket and a sign, or a sign and
+a bracket, indicates that the sign is believed to be the
+beginning, or in the other case the end, of a word or sign
+group; if the bracket immediately precedes or follows the
+sign, this indicates that the word or sign group may or
+may not be complete, e.g. :
+means that no digits can have followed the numeral;
+50 [
+means that it is impossible to tell whether or not any digits
+50[
+followed.
+Similarly,
+--I te-ra means that there is enough space, or a divider, between
+the broken edge and the sign te to show that this is the
+beginning of the word.
+- -]te-ra
+means that there is insufficient evidence to show whether
+or not the word is complete.
+- -1-te-ra means that there is a trace of an unidentified sign preceding te, and there is reason to think that it is part of the
+same word. (In Classical epigraphy positive strokes of the
+unidentified sign would be shown with shading. This is
+not feasible for the syllabaries, with their more elaborate
+signs.)
+Areas broken away:
+sup. mut.
+(scil. supra mutila) above the first line, or
+inf. mut.
+(scil. infra mutila) below the last line, indicate that the
+beginning, or end, of the tablet is missing.
+If the missing part can be delimited, the text should
+state, e.g. :
+sup. mut. desunt 3 versus
+in$ mut. h n t ca. 3 versus
+
+I n the eight years that have elapsed since the Wingspread Colloquium,
+usage has still varied with regard to hyphens and commas. For illustrations
+of the most recent (and 1 think, most sensible) practice, see J. Chadwick,
+BSA 58 (1963) 68ff. There are still proposals that need study:
+for the divider; so that it shall not be overlooked, leave
+space on either side, as in pe-da , wa-tu. This is convenient
+for the editor and, if in fact it leads to no misunderstandings, harmless. But when one thii of scholars in other
+fields trying to use texts in which all the words are separated apparently by commas, one hesitates. I t is deplorable
+that the normal divider (at least) cannot be conveniently
+represented.
+
+BIBLIOGRAPHY
+
+'9
+
+Accent marks as in ra' in place of subscript figures as in ra, are favored
+by some. This usage, derived from a convention used in
+transcribing Hittite cuneiform, is another instance of
+willingness to risk misleading non-specialists. The subscript figure can hardly mislead.
+'Broad' transcriptions, as contrasted with transcriptions that use the
+highly accurate diacritical marks, e.g. hyphens, dividers.
+Broad transcriptions are to be used for a word or two
+quoted in the course of a sentence in a modern language.
+Good authorities sanction broad transcriptions, which in
+many contexts may be safe. In Classical epigraphy scholars
+have learned, however, that it is wise to make all quotations accurate: in the best usage, broad transcriptions are
+not found.
+
+RESTORATION I N E P I G R A P H I C A L TEXTS
+
+RESTORATION I N EPIGRAPHICAL
+TEXTS
+The Nature and Magnitude of the Problem
+N THE COURSE of the centuries, most Greek inscriptions on most sites have
+
+I
+
+been damaged. The principal causes of damage, never systematically
+studied, but informative in many instances, are: breakage, for various reasons; damage by traffic, as in the case of paving blocks and door-sills; erosion
+by water, and other damage by weathering, in the case of inscriptions long
+exposed; soil damage of various kinds when inscriptions are long buried; hard
+cement and other damage incurred when inscriptions are used for building;
+damage by direct human action, as in Attika by Philip V, Sulla, the Heruli, et
+al.; and accidental damage in modern museums. Small wonder that an inscription of more than a few lines preserving all its letters is a rarity; and that on an
+average, individual inscriptions (except columnar grave monuments, the largest
+class in Attika) survive to the extent of less than half. More letters are lost than
+survive.
+Next to providing a n accurate version ofwhat is preserved, the chief and hardest task of the epigraphical editor is usually to restore the letters that are not
+preserved. In its totality the task is enormous, never-ending, almost omnipresent. No one of the problems that arose at Leiden is remotely comparable in
+magnitude to that of clarifying usage in regard to restoration.
+In practically all instances, the sign for restorations long has been, and is, the
+pair of square brackets [ 1. About what sign to use, there could and can be no
+dispute. Leiden made no change, and no one proposes any different sign. But
+about what to put inside the square brackets-whether to put only what is virtually certain, or whether it is allowable to put also matter that may be entirely
+unsupported and conjectural-there has been much dispute, and practice
+varies extremely. In one aspect or another, restoration has been discussed, by
+L. Robert and others, time and again. Nevertheless I venture to think that there
+is room, and need, for a treatment which will attempt to be systematic.
+Extremists are few, perhaps, but they are entitled to a full and fair hearing.
+I have tried to quote opinions so fully that there will be no danger of misrepresentation by suppression of the context; and I have not made use of invidious
+italics mine. On the other hand, let lay readers keep firmly in mind the fact that
+once a restoration is launched, especially if it is made to appear "authoritative,"
+20
+
+2I
+
+it may be copied and utilized for years, pernicious in itself and setting an
+example for others.
+Certain fundamentals are notapen to dispute. Everyone would agree that for
+any restoration, either under conception ( I ) or ( z ) , infra, or under any conception in-between, the spatial and other physical requirements of the inscription
+must be observed; though some scholars have admitted far more manipulation
+of the apparent conditioning factors than other scholars would admit. I t should
+also be unnecessary to insist that any restoration must conform in style, orthography, etc., to the period, region, etc., of the inscription.
+
+The T w o Extreme Conceptions
+Without pausing to explore any middle ground, it will be convenient first to
+state clearly the two extreme conceptions, v i ~ (. I ) that in the text proper only
+positive, i.e. completely attested and assured, restorations should be made; in
+contrast to (2) which declares that in the text proper conjectures also should be
+admitted, the editor being free to place there anything he chooses, even including matter which certainly did not originally stand there.
+( I ) THEKIRCHNER
+PRINCIPLE.
+There are a host of small restorations which
+are universally accepted without comment. If in the clause of validation a
+decree has EAGEEN on the stone, the restoration i6[o]{w needs no defense.
+Many of the letters, or the whole word, could similarly be claimed as certain,
+[?~o(Ev]; but when the whole word is claimed, we are in the realm of phraseology. Whole words and phrases can be restored when there are ample numbers
+of supporting instances, and no relevant instances of difference or omission.
+Occasionally, but rarely, such restorations can be made on the strength of
+external literary or archaeological evidence; most such restorations belong in
+the conjectural or in-between class. Names and other proper nouns and terms
+offer special problems: if adequate evidence can be brought to bear, certainty
+can sometimes be attained. But according to conception (I), no element of uncertainty can be present. Detailed examples need not be given here: obviously
+conception ( I ) admits restorations on the largest scale in groups of inscriptions
+all on one subject, where there is multiple repetition of terms and phrases.
+With respect to persons, conception ( I ) places responsibility wholly on the
+editor. The motto is caveat restitutor. The reader understands that the editor puts
+his full authority behind the restoration, as being what undeniably stood in the
+original text; but the editor should specify what his evidence is, if it is not
+apparent. The day of unsupported ipse-dixit "authority" has passed. His practice was not perfect, but J. Kirchner is one editor who endeavored, on the
+whole, to follow the precepts of conception (I), and for convenience the conception may be named as hi,not because he was a theorist, but merely because he
+used conception ( I ) in as many instances as any editor. The mechanism must
+obviously be a store of cards or the equivalent giving the relevant data.
+It may be that the very strictness of (I) tends to defeat it. If there is a universal understanding that everything between square brackets is printed as being
+absolutely certain, then the less scrupulous editors will occasionally be tempted
+
+CONVENTIONS I N EDITING
+
+R E S T O R A T I O N I N E P I G R A P H I C A L TEXTS
+
+to try to impose their own restorations by putting them into square brackets.
+This malpractice cannot be obviated by any system-just as at present the less
+scrupulous editors do not dot enough lettersdtill, a cast-iron system invites
+abuse more than does a flexible system.
+In the second place, Kirchner's principle (I), if carried out rigidly, necessitates printing all suggestions for restorations that fall short of certainty in the
+commentary. Thus in some cases what is virtually a second text has to be
+printed in the commentary. The student finds himself pencilling the restorations into the text above, where they can be read and studied with ease.
+
+which purport to be verbally accurate and so to reproduce the original
+text, and (2) those in which verbal accuracy is not claimed but which
+attempt to reproduce the sense, at least, of the original. Meritt thinks
+that the second type of restoration should be encouraged, since it presents to the reader the epigraphist's "notes" and so documents his
+general determinations concerning the sense of the text and the length
+of lacunae. Thus he may prove that such a meaning as he has conjectured is at least not impossible on epigraphical grounds; in any case,
+argues Meritt, the intelligent reader is always protected by the brackets of the text and the red of the drawing. Such restorations, though
+not verbally accurate (and sometimes quite wrong), are based on the
+principle of trial and error and stimulate others, with the happy
+result that the supplements of fragmentary documents gradually
+approach more and more closely to the truth, and often reach it (see
+the excellent and convincing example, pp. I 19-1 29).
+
+22
+
+(2) THEPRINCIPLE
+OF EXTREME
+FREEDOM.
+Whether or not these objections
+are fatal, a radically different conception of restorations has been adopted by
+some scholars, and we owe to B. D. Meritt's Epigraphica Attica (Cambridge
+a statement, with
+[Mass.] 1940) ch. 4 (pp. 109-138, and notes pp. 148--I~I),
+illustrations, of such a view. I t was ably re-stated, with some expansion, by his
+collaborator (on ATL), M. F. McGregor, in a review of Epigraphica Attica, published in A j T 64 (1943) 245-246. This conception (2), which may be called the
+Meritt-McGregor one, is that the editor should consider himself bound by the
+space, etc., as supra, but by no other external, impersonal consideration.
+Along [the] sliding scale of certainty and uncertainty there comes also a
+time when the exact wording of a restoration may not be correct but
+when the general sense and tenor of the argument can be carried through
+approximately as in the original by means ofrestoration [Meritt, p. 1091.
+Such restorations [of decrees relating to the Sicilian expedition] do
+not need to claim verbal accuracy. Their purpose is to yield a consecutive text in a fragmentary document so that a probable, or even
+possible, meaning may be derived from it. It is much easier for a
+student to follow and control an interpretation given by the epigraphist if the interpretation is expanded into epigraphical language that
+might once have appeared upon the stone. Such restoration for the
+sake of interpretation is sometimes carried in the footnotes and not inserted in the text of the document proper. . . . But a good suggestion is
+most easily followed if inserted into the text, where the angular [i.e.
+square] brackets leave no doubt as to what is part of the original still
+preserved on the stone [Meritt, pp. 129-1301.
+
+. . . it would be rash indeed to claim verbal accuracy for many of the
+longer restored passages of [the tribute assessment decree of 425, IG I Z
+63, as edited by B. D. Meritt and A. B. West (Ann Arbor [Mich.]
+1g34)]. Nonetheless, the restorations do prove that the interpretation
+is epigraphically possible, and in some instances they have in my
+opinion sufficient weight even to condition the interpretation [Meritt,
+P 1311.
+The question of restoration is left until last and in a chapter that
+should be read by all the skeptics the author states his own guiding
+principles. He believes that restorations fall into two classes: (I) those
+
+The skeptic (who thinks of the epigraphist as a sort of detective
+fitting together puzzles), faced with a heavily restored text, may be
+amused. But the truth is, his amusement is based on a twofold ignorance: in the case of the tentative restoration, of modern epigraphic
+method (Meritt, pp. 129-130) ;in the case of certain restoration, in the
+criteria employed in reconstructing a text. My own advice to the skeptic is that he read the book.
+On the other hand, it must be admitted that the epigraphist himself is at fault when he uses his purely tentative restorations as a proved
+basis for detailed historical conjecture. What we really need,-I suppose, is a method of distinguishing between established and tentative
+restoration; yet one would hesitate to suggest that another type of
+bracket or another color ink be added to the already complicated epigraphic paraphernalia. As it is, the epigraphist must be reasonably
+conservative and the doubter must develop an intelligent tolerance
+[McGregor, pp. 245-2461.
+
+Dz@culties with the Princ+le of Extreme Freedom
+These, apart from illustrative matter, are the relevant passages: what it
+amounts to is, all restorations are to stand on an equal footing in print. The
+notion that restorations have value as illustrating the editor's determination of
+the mere length of space available has little weight, because the accepted conventions of dots or dashes with superscript figures and indications of blank
+spaces fulfill the same function with perfect adequacy. On the other hand, no
+one could reasonably dispute the proposition that restorations which provide
+continuous sense in a fragmentary passage have potential value. But potentially
+they have another quality: they tend often to exert a tyranny over the mindeven when printed in the commentary. Of course, that cannot be avoided.
+What is troublesome is that, if printed in the text proper, with no warning signal save the brackets, they are exactly on a par with restorations which are
+
+24
+
+CONVENTIONS I N EDITING
+
+indubitable. Upon the reader is placed the burden of determining where, in the
+"sliding scale" of certainty-uncertainty, any given restoration belongs. To
+Meritt and McGregor, this burden is evidently one which every reader of
+epigraphical texts must bear. Shall he, filled with "intelligent tolerance," tolerate the tyranny of mere conjecture, if he can determine that it is mere conjecture? Presumably not; for his task includes "controlling" the interpretation
+before him.
+Full rather of intelligent intolerance, the reader must stop, halted by the
+square brackets, a t every substantial restoration, and try to "control" the
+ensuing restoration. The motto isjoreat restitutor, pereat lector. Instead of accepting all restorations as presumably sound, the reader finds himself accepting
+none. This has happened. One contemporary historian-epigraphist declares of
+the texts in ATL that he accepts "only what is on the stone." Thus conception
+(2), though admitting (at least McGregor does, eschewing the "sliding scale") a
+distinction between certainties and uncertainties, runs the risk of destroying
+confidence even in the certainties.
+
+Examples of Free Restoration
+Meritt's examples (for which he gives references) help to clarify what is involved.
+(i) He comments upon a review by M. Feyel in which Feyel was troubled
+by Prytuneis 79, with its restoration of 14 whole lines. The restoration was made
+by me solely to determine the height of the stele, and the consequent number of
+slots in the Kleroterion on the other side. Feyel missed this aspect, and I judge
+that here my exposition was at fault in not making inescapable the fact that
+certainty was not claimed. The conjectural restoration should have been
+labeled "conjectural" more plainly. I had thought it was approximately correct;
+but fragments published subsequently by Meritt and W. K. Pritchett seemed to
+show that it was two lines too long. This was decisively confirmed in the summer
+of 1962, when I was able to find joins which linked all the fragments throughout
+61 lines. Some of the usual phrases were omitted (but the Kleroterion is not
+affected materially by the slight loss of height; a new text will be published to
+show exactly what the situation is). However hasty, Feyel's criticism illustrates
+the need for explicit statement about what is conjecture.
+(ii) Next we are asked to consider the history of A I L Ag, col. i, lines I I II 19. Throughout many of the earlier attempts, ignorance of spatial requirements and of names of small cities played the dominant part, and conjecture was
+often far afield. I have not tested the final result, but most of the restorations are
+merely parts of short lines, and there is a high probability that most if not all
+can be put down as certain. The history of this fragment is a history not of pure
+restoration but of increasingly correct knowledge of what is involved. I t is a
+splendid example of progress, but it is successful precisely because unfounded
+conjectures were replaced by solid knowledge.
+(iii) The next example concerns A I L 11, pp. 4 e 4 3 (A9 = IG I Z63), fragment 4. Meritt indicates the kind of argument for placing the fragment where
+
+RESTORATION I N E P I G R A P H I C A L TEXTS
+
+25
+
+it now is. I have not attempted to test the argument, but in any case the difficult
+point is that the restoration results in an extraordinary constitutional assumption. The placing and restoration give for line 16 the words hol 6i [voclo]ftha[~
+This
+Gi~ao~gptov]
+viov K ~ [ ~ ] ~ O T & T
+O Vis. presumably one of the chief instances
+which has "sufficient weight even to condition the interpretation," or rather to
+inform us that in 42514 B.C. there was a board of nomothetai, otherwise unknown, in existence, and that it could summon dikasteria. The second assumption is perhaps even more difficult than the first. Dikasteria are never known to
+have been summoned by any officers except the thesmothetai. The dikasteria
+had authority superior to that of the nomothetai not many years later, when
+Nikomakhos and his board, called anagrapheis, were functioning; after they
+had finished the work, in 400/399, Nikomakhos, so far from being able to summon a dikasterion to validate their code, was instead summoned to stand trial
+on grave charges in a dikasterion (Lysias 30), we do not know with what result.
+Possibly every reader should be expected to know this; all I urge here is that a
+major new hypothesis in fifth-century constitutional history is printed without
+any warning in the text except square brackets. I t is small wonder that critics
+have been uneasy and outspoken.
+(iv) The fourth example (actually given first in Epigraphica Attica, pp. 109-1I I)
+is A I L 11, p. 18 (List 12) lines 3-20, where in the quotaliit for 44312 B.c., the
+authors restore 18 lines of the Ionic panel, both the amounts and 'ihe cities,
+complete: not a single numeral or letter is preserved on the stone.
+The exact order of the names within the panel may not be precisely
+accurate, though we believe unlikely any considerable variation from
+the text of the original monument. But this does not destroy or impair
+in any way the value of the restorations for the student who wishes to
+know which cities of the Ionic province paid tribute in the spring of
+
+The Factors Involved in Restoration
+The problem of the status and form of restorations can perhaps be clarified
+by analysis into the factors involved, in the hope that one factor at least can
+somehow be altered. The factors involved in restoration appear to be five in
+number :
+(a) The stones as they have come down to us, with gaps where restorations will
+range through all degrees of certainty, probability, possibility, and uncertainty-from parts of letters, which can be restored with absolute certainty,
+to missing fragments which cannot be "restored" at all.
+(b) The external evidence, "literary" and epigraphical, monumental, etc.,
+which has come down to us and which, constituting the "tradition," throws
+whatever light can be had, apart from pure reason, on the problem of what
+to restore in a given lacuna.
+(c) The editor, a human being, also a scholar, i.e. well-intentioned, variable,
+unreliable in some instances, and refractory to regimentation; likely to have
+
+CONVENTIONS I N EDITING
+
+studied the document long enough to have authoritative views--or mere
+ide'es Jixes.
+(d) The reader, also a human being, etc. ; less likely to have special knowledge
+such as is involved in the interpretation of every inscription.
+(e) Print, usually letterpress; once set, rigid. Controlled in respect to form by
+the Leiden system; in respect to content, not at present controlled.
+If all readers (d) could be expected to have adequate knowledge, so that whoever read an epigraphical text knew instantly just what degree of reliance to
+place on every restoration, no problem would arise. Restorations of any kind
+could be printed freely, and no one would be misled. Conception (2) virtually
+presupposes just this state of affairs; or rather, it presupposes that every reader
+can be expected to inform himself adequately about whatever restorations concern him.
+There are of course, for some classes of inscriptions, a few readers more or less
+of this sort. They will wish, and they will often be able, to lay hands on the
+evidence without undue trouble, and they will be able to form a judgment satisfactory at least to themselves. But in a field where knowledge is so large and so
+special that usually only a small number of scholars is thus equipped, and where,
+even for such specialists, access to the relevant squeezes may be vital, the
+assumption of adequate potential knowledge is so unreal as to be nothing short
+of preposterous. Free restorations (2) shift a heavy, often an unbearable, burden
+to the reader. Free restorations are an act of ultra-specialist editors editing for
+ultra-specialist readers. If for these readers the burden is hard, for non-specialists it is impossible.
+
+A Further Example
+This could perhaps be illustrated by the last example given. The editors of
+A I L are willing to assume that all their readers can form a satisfactoryjudgment on the 18 cities-plus-payments. It may or may not seem a reasonable
+assumption: the judgment must rest in part on study of the proposition that
+payments, at least in the period in question, were in fact so regular that restoration of a long series of entries results in certainty. To establish that is a task
+which the reader may or may not reasonably be expected to perform.' See
+further infra.
+If it appears easy to criticize and reject as non-probative parts at least of these few illustrations in the "popularizing" book Epigrapkica Attica, let the reader turn to an essay which grapples
+with a much greater body of matter more technically handled: A I L I1 (rg4g), ch. I (pp. 3-6).
+Here the case is better put, and no one can doubt that it is based on long and arduous efforts to
+arrive at correct versions of the texts of the Tribute Lists. Equally it is undeniable that the argument leans over backward to justify the maximum, or more than the maximum, of allowable
+restoration. "If a regular quota is known from a single occurrence within a period, it may as a
+rule be safely supplied in the years for which the record is lost." "These restorations by analogy,
+however, are not always above suspicion. Further study of Lists 5, 7, and 8 has revealed many
+irregularities of payment and our confidence in some of the figures restored has been shaken"
+(p. 3). Comment would be superfluous; yet there are doubtless scores of instances where a high
+probability has been attained. The difficulty for the reader lies not in the authors' effort to restore,
+but in the fact that all the restorations alike-plausible and dubious--are presented in the same
+identical way.
+
+RESTORATION I N EPIGRAPHICAL TEXTS
+
+27
+
+A simpler illustration makes the situation clearer. In the dikast's pinakion
+I G 11-875, J. Kirchner left the second line unrestored:
+I ' ETTIK[' EPX[Earlier Kirchner himself had followed his predecessors in restoring ' Epx[ids],
+but some pinakia had a patronymic in this place. Had Kirchner discovered that
+there was an eligible Greek personal name in Epx-? Greek names in Epxbefore the Roman Empire are rare; but in the Index to Hesperia 1-10 (1946) p.
+56, A. E. Raubitschek completed Meritt's [. .]xI&~s, which was read in an
+~aubitschekkept the brackets
+inscription ofJin. s. V a., to give [' E p I x ~ ~ i v q ~ .
+(and dot) : he was within the scope of conception (2). But observe how costly in
+time his procedure is for the critical reader. Is there a known Greek name
+Erkhimenes? To find out, a whole series of books must be carefully consulted;
+and the usual ones, certainly, will reveal none. The only Greek name in Epxfound by me in a reasonably long search was ' Epxios or 'EpxLos, and this name
+dates from the Roman Empire. I n short, [' EpIx~pBvqsappears to have been a
+wild guess, unfounded. It took some time to find obt the facts, and so to determine
+that the pinakion should be restored, after all, with the demotic ' Epx[~~irs].Why
+Kirchner hesitated, we cannot be sure; but he was not sufficientlycareful in dealing with the pinakia.-The matter does not end there. Pushing the inquiry back
+to the original reading, I have found from a squeeze that Meritt's [. . ] X I V ~ V ~ Sis
+incorrect; no basis whatever exists for 'Erkhimenes', even as a guess. The
+and the correct restoration is ['AAIKIcorrect reading is clearly [. .]K~W~VT)$,
+~ 6 v q ~the
+, only such name which is well attested. Subsequently on two
+occasions J. H. Kroll has examined the pinakion in Basel. Inscribed at least
+I E P X I [ E q . Thesectionletter (I)ismissing.
+twice, thesecond text is EllIKI[----I
+I n this instance, therefore, and usually in all instances where the restoration
+is not at once and obviously certain, the reader must do what the editor ought
+to have done. Quite apart from the (minor) question about how the result
+ought to be presented, the editor ought normally to provide adequate data for
+judging his restorations.
+If then the reader (d) is not the solution to the problem, and if the editor (c)
+can only be influenced, if at all, by a consensus of sensible opinion, then the real
+basis of opinion, v i ~ .the inscription itself (a), is the right point of attack.
+
+Various Essential Conrideratiom
+The situation as a whole is really simple. Some restorations in inscriptions,
+ranging from such easy matters as the restoration of EA[.]EEN and other
+restorations of the same kind, usually brief, on to other, usually longer, restorations of words and phrases, are all merely clerical. To restore them is merely to
+restore a regular form. No historical act is assumed beyond the clerical acts-a
+copy assumed to have been in the regular form, given to the mason, who is
+assumed to have inscribed it correctly. Call this type of restoration Type A.
+Exceptions can have occurred, from various causes; but if an exception did occur
+
+28
+
+CONVENTIONS
+
+IN EDITING
+
+and cannot be detected, no great harm is done. No important historical fact has
+been foisted into the tradition.
+The restoration of facts is often recognized to be somehow a different matter,
+but epigraphists have been none too sharp in their realization of just what is
+involved. I t is only recently, for instance, that the perils involved in restoring
+the preambles of Athenian decrees have become vividly clear to some few
+scholars. But take the former illustration. To restore 18 lines of a tribute quota
+list may seem like a n innocent procedure: the gap is there, 18 lines long; from
+44211 and other years, 18 cities, more or less regular in order, can be found to
+fill the gap. Clerically it is easy and natural to put them in. There is a very real
+probability, moreover, that these cities did pay in 44312. But when the amounts
+also are restored, a large number of acts, viz. payments by thousands of persons,
+are "restored." This is anything but clerical. A season of drought or disease, of
+storms, of local disaffection, or whatever, can have reduced any or all of the
+payments. Whether any such thing happened, we simply do not know. Such
+restorations-call them Type B, the restoration of facts-are in a different
+sphere altogether from that of mere clerical copies and masons' regularity.
+Yet another special set of problems in restoration is present in dealing with
+documents which involve a complex series of interdependent items, such as the
+developed preambles of Athenian decrees. Here historical facts, in the aspect of
+dating by Arkhon and Grammateus, are mingled inextricably with more or less
+regular formulas. In H S C P 67 (1963) 56-75 I have tried to show that epigraphical facts should not be treated promiscuously in order to meet the demands of
+general theories--especially of theories which themselves are open to grave
+question.
+The restoration of personal names involves a great many slightly divergent
+situations, about which many pages could be written. O n the one hand, licence
+to print mere guesses should be denied altogether. O n the other hand, readings
+themselves can be justified often only by demonstration that a name exists, and
+is not unlikely in the given region and period. Such names usually belong in the
+commentary; but occasionally, when the choice is between one highly likely
+form and one highly unlikely, the likely form might well appear in the text, but
+marked (infra) as a suggestion. For an illustration of a prosopographical suggestion in a text, see, in the chapter which follows, IG I I Z1989.3.For recent discussions of actual free restorations, see W. K. Pritchett, AJA 56 (1952) 161-168,
+and S. Dow, Festschrift David Moore Robinson, I1 (St. Louis 1953) 358-360.
+Inscriptions in verse are in a class by themselves with respect to restorations.
+Restoration of verse is the restoration not of a mere clerical or formulaic expression, and not of historical facts involving many persons, but of words written by
+one versifier. To restore what is missing from his verses is bound always to be
+especially tempting, in that it is an act of re-creation; as in other restorations,
+but more so, it puts, or seems to put, a premium on special skill.
+Verses which are of low order, as in many epitaphs, will be likely to involve
+conventional phrases, so that the chance of being right is comparatively favorable. But even in the restoration of such verses, there are obvious hazards, one
+of which is the danger of actually improving on the original. When it comes to
+
+RESTORATION I N EPIGRAPHICAL TEXTS
+
+29
+
+the work of better poets, the chance that a modern scholar can duplicate the
+creative act of a (presumably) inspired Classical poet, as in the Marathon epigrams, is definitely minimal. The most that can reasonably be hoped for is to
+restore the general sense of the passage. To claim more is to violate probability
+quite grossly.
+The problem of restoration when historical facts are involved, or creative
+composition, is difficult but I think not insoluble. Agreement is surely attainable
+on some propositions. Thus restoration in the text itself of matter known to be
+impossible should be forbidden: suggestions which connect parts of broken
+passages, if such restorations are known to be verbally incorrect, belong in the
+commentary. So also most restorations of verse: they should be suggested (i.e.
+printed in the commentary) instead of being imposed (i.e. printed in the text).
+Restoration involving historical fact, including restorations of dates and names,
+$highly plausible though not certain, can be allowed to be printed in the text
+proper, provided, but only ~rovided,that they are clearly marked as uncertain.
+The problem is how to mark them.
+
+A Suggested Solution
+To add to the Leiden system any new form of bracket would be intolerable.
+To call for a different font of Greek, e.g. smaller letters, however easily intelligible when printed, is also not practicable: a small enough font might not be
+available, e.g. for quotations in foot-notes. Nor is the printing of letters widely
+spaced practicable. There remains the possibility of indicating doubt by the
+almost universal symbol of doubt, viz. the interrogation point. Already this has
+the sanction of occasional usage by J. Kirchner in the Corpus, and, also occasionally, by others. The interrogation point can be printed small and superscript.
+The one objection is in the realm of individual choice: the temptation is forever
+present to the editor to give himself the benefit of a doubt, and boldly to present
+a "complete" text and to claim it all as certain. But only the pressure of opinion
+can reverse this, substituting the ambition never to have claimed as certain any
+restoration which is not.
+Editors are familiar with the objection which some persons will raise: they
+will declare that they do not wish their texts to be marred by bristling question
+marks. In other words, they prefer probable deception of many readers to typographical infelicity. But, respecting this feeling, out of pure charity, the suggestion might be made that a n inscription which had conjectural restorations
+throughout could be headed plainly C O N J E C ~ R A L RESTORATION OF - - - -,
+without loss of typographical nicety and without misleading readers. Then the
+interrogation points could be omitted.'
+1 To go further, and to permit in the text restorations which are merely possible, marking
+them by a double interrogation point, e.g. restoring IG IIf rog4d, col. ii, line 2 I :
+
+[Aiovvula?? Aco]yvu[iov ITahhqv6ird?]
+
+might seem abstractly feasible, but it creates complications and would he unwise. If there were
+strong reason for such a restoration as that supra, then restoration and reason should he given in
+the commentary.
+
+3O
+
+CONVENTIONS I N EDITING
+
+If the reader please, let it be imagined, for the sake of exploring consequences, that the new principle is adopted, so that at last in Greek epigraphy
+we have a simple distinction-[certain] ; [not certain?]-in the contents of
+square brackets. The extremities represented by conceptions (I) and ( 2 ) are
+both avoided.
+For the reader, perpetual recourse to the commentary is reduced. The
+specialist (I) does not have to seek out in the commentary a text which may fit,
+nor (2) combat what he may regard as an extravagant claim of certainty trying
+to impose itself. The non-specialist can see at a glance what is definitely known
+and is acceptable for his purposes. For the reader, the use of the interEogation
+point in epigraphical texts makes everything easier.
+For the editor, or rather for some editors, life will be harder. No longer putting
+the burden on the reader, they must do enough work to decide whether or not
+their restorations are certain or highly probable (or mere conjectures, to be put
+in the commentary). No longer can the editor edit for specialists alone; no
+longer can he hide behind the square brackets, which hithkrto have meant all
+things to all men. Obligated now to distinguish in his text between what is certain and what is not, the editor may decide wrongly: many editors inevitably
+will decide wrongly. The important thing is that whereas hitherto no editor
+could be condemned for anything in square brackets, provided it fitted the
+space, etc., now the editor's every decision is recorded for all to see. This in turn
+will have the wholesome effect of inducing the editor to explain fully in his
+commentary what the basis for hi decision was. When no decision had to be
+made and everything could go into the square brackets, then no explanation
+was really demanded.
+
+Proposed Rules
+The scheme proposed herein provides four principal possibilities for the
+printing of restorations. Rules may be codified somewhat as follows:
+
+I. Square brackets, no interrogation point.
+SigniJcance: certainty or probability so great as to admit no reasonable
+doubt.
+Applicable to: formulae occurring often in the same place in the same
+class of documents; facts independently attested; also, with caution, to
+some other verbal and factual restorations.
+11. Square brackets, single interrogation point(s).
+Signijcance: definite probability.
+Applicable to: formulae with insufficient support in other documents,
+or containing variable elements, or supported only by strong abstract
+reasons; facts lacking sufficient independent support but reasonably
+likely.
+Form: a small superscript interrogation point at the end of the restoration; or after any doubtful word of a multi-word restoration; or at the
+beginning as well as at the end of a multi-word restoration which as a
+whole is less than certain.
+
+RESTORATION I N EPIGRAPHICAL TEXTS
+
+111. To avoid a multiplicity of interrogation points: a heading which
+states in some form that restorations are conjectures.
+N.B. In classes 1-111 the space must usually be closely determinable and
+must meet the requirements.
+
+IV. Suggestions offered in the commentary.
+Sign$cance: crude approximation, suggesting the general nature of the
+restoration.
+Applicable to: lacunae which cannot be measured, restorations which
+do not fit, but which may suggest the sense or the nature of the
+original.
+
+3'
+
+ILLUSTRATIVE EXAMPLE
+
+33
+
+figure in red. I t has a crude horse-shape; I am unable to say what it represents.
+In the (left) corner of the aetos is a much smaller object in black. On the ovolo
+there was doubtless a red and black egg-and-dart; it has vanished. Kirchner
+very observantly reported that the lines of the text were painted alternately red
+and black. Doubtless squeezes have removed much of the color, but clear traces
+
+I L L U S T R A T I V E EXAMPLE
+EPHEBOI
+IN NERONIAN
+ATHENS
+(IG 112 1989)
+Previous Study, Provenience, Description
+E(PIGRAPHIKON)
+M(OUSEION,
+Athens, inventory numberj 5288. First published
+by P. Graindor, BCH 51 (1927) 301-302, no. 75. In Athdnes de Tibdre ci Trajan
+(Cairo 1g31), Graindor refers to it five times (see index) but without adding.
+Kirchner had the BCHpublication and also a transcription by J. von Prott. The
+resulting text, IG 1 1 2 1989, has Graindor's error of spacing in line 3 and Graindor's wrong placing of col. ii; but omits line 8, which Graindor had indicated.
+The present edition is intended to supplant these (the only) earlier two.
+Graindor has nothing on the provenience, but Kirchner reports, from the EM
+inventory, that it was found at the church of Hag. Demetrios Kataphores. Many
+of the Ephebic inscriptions from the time of the Roman Empire, uiz. IG I12
+1963-~Z~IC
+were
+, found in the dismantling of this church. The church was
+built into the "Valerian" Wall, now called the Late Roman Fortification: it
+dates from A.D. 276-282 (Agora Guide2 [Athens 19621 29, 86-87, and bibliography on 2 13, no. 39). The inscriptions came from the Diogeneion, which was
+the gymnasium of the Epheboi (on which HSCP 63 [1g58] 424 and TAPA 91
+[1g60] 408). The church of Demetrios Kataphores was dismantled, and the inscriptions were extracted, in 1860. Like this one, many Ephebic inscriptions
+were omitted from IG 111, and still more from S. A. Koumanoudes, Philistor 1-4
+(Athens I 86 1-62), earlier.
+The monument is the upper left corner of a stele of Pentelic marble, preserving part of the original left side, and surmounted by a small ovolo-and-fascia
+moulding (height, 0.025+.027 m.; profile, Fig. I) and a pediment with the
+(small) left akroterion projected forward from a solid background.
+Traces of paint are extensively preserved. Thus there is a clear floral design
+on the akroterion, giving in black painted form a leaf and tendril; also clear are
+two vertical bars at the right end of the akroterion. Certainly the leaf and
+tendril are Graindor's "anthemion in black," and they are probably von Prott's
+"kneeling man." In the center of the pediment a simple incision outlines a
+shield: half or less remains. To the left of the (central) shield are remains of a
+32
+
+I
+
+INSCRIBED
+FACE
+OF STELE
+
+Figure I
+
+ZG 112 1989, CONTOUR
+AT THIRD LETTER OF LINE ONE
+Actual size
+are visible on both stone and photograph: in line I only a little red, but much
+black in 2 and 4. Alternating colors in the lines of Neronian inscriptions will be
+studied by me elsewhere; here I note that lines I, 3,5 (heading), 6-7 were red;
+2, 4, 8, 9-10 were black. The letters of many fine inscriptions were filled with
+color, and enough survives, especially in Egypt, to show that an alternating
+scheme was not infrequent.
+The original thickness is preserved: 0.053 m. through the moulding, 0.046 m.
+through the inscribed area. This is extraordinarily thin, and the stele should be
+grouped with the few very thin Athenian stelai mentioned in AJA 67 (1963) 261.
+
+34
+
+CONVENTIONS I N EDITING
+
+The back is level, finished however with closely spaced marks of the point all
+over: a curious treatment, not a quarry surface. The side too was not well
+smoothed; some plaster adheres. The height is 0.248 m., the width 0.246 m.
+The center being preserved, the original width can be reckoned as ca. 0.40 m. ;
+for so small a thickness, the stele was very wide, and the height can hardly have
+been much if any over ca. 0.80 m. There was probably room for no more than
+2 0 names (40 lines) in each column. It is natural to suspect, though I cannot
+prove, that the stele was re-cut after a former use.
+Letters of preamble and line 5 : average height of line plus interline, 0.0164 m. ;
+letters alone, full height, 0.013 m. Letters of list: height, 0.010 m. (as often, they
+were smaller, but it wasthese alone that Kirchner measured, whereas Graindor
+had both); interline 0.003 m. The photograph is adequate for the shapes of the
+letters. Most notable is the tail of the rho, small in line 4 (end), tiny in line 2
+(near end). Presumably this is an archaism.
+
+IG 112 1989, New Text
+53/4-6617
+Pediment partly preserved with shield in center, the center being directly over
+the nu of &pxov[ios]. Normally spaced line, 2, has 31 full letters.
+
+6
+
+[b'A]~bhq<~s
+
+9
+
+&[-----I
+
+nomen
+[ ---- - - -]
+
+patronymic
+
+7
+8
+
+<a. 3f
+
+10 [ - - - - - - - - ]
+
+60.5
+
+11 [ - - - - - - - - ]
+
+p----]'-\IOU
+[ W - - - - -
+
+patronymic
+[ - - -----1
+
+nomen
+
+I'! W 1- -1
+
+Uncertain number of lines missing in each column; not more, probably
+fewer, than 20.
+
+LINEI. Suppression of both final iotas, clear here in dry*
+njxq, appears to
+be uncommon a t this date, but evidently there was some looseness of usage. The
+earliest positive instances are IG 1121996 and 1998 ofjn. s. Ip.-Epigraphical
+conventions call for iota adscript when inscribed, subscript when suppressed.
+As in another Nero inscription, Hesperia 1 2 (1943) 6 6 7 1 , the erasure was
+made with unusual care: the chisel was a narrow one, driven over the area
+several times; the sides of the depression were made to slope in gently, and the
+surface curves evenly. In the area of the erasure, however, the (hitherto unread)
+two uprights and the slanting middle stroke of the first nu can be dimly made
+
+Figure 2
+EPHEBOI
+IN NERONIAN
+ATHENS
+(IG 112 1989)
+
+ILLUSTRATIVE E X A M P L E
+
+35
+
+out on the squeeze, and the photograph has revealed the left foot of the second
+nu. This confirmation of the emperor's name, restored by Graindor, is welcome,
+because it is not preserved beyond the fifth letter, where I have printed a dotted
+line (supra p. 9) to indicate the broken edge of the stone. (Graindor assumed
+that the alternative was TAlOI, which with 43 letters would barely fill the
+space, but the designation in IG 1 1 2 2292 is ~ & I O SKaiuap airro~pdcrwp-unerased).
+Nero was named in eight Athenian inscriptions, including the present, and
+his name was later erased in all. Only one of the eight, vit. Hesperia 28 (1959) 82
+no. 12, preserves a three-word designation, i.e. what must evidently be restored
+in the present inscription. Another, vit. Hesperia 12 ( I943) 6 6 7 I, should probably be restored in the same way. The rest are: IG 1I"ggo line I (note in line 3
+Nero is not erased), 3182, 3277, 3278, 3279 (restoration uncertain).
+In IG 112 1990 line I, 3182, and 3278, Nero's own name alone is erased,
+whereas in Hesperia 12 (1943) 66-71 and in Hesperia 28 (1959) 82 no. 12, all
+three names are erased. About the present inscription there is no other evidence,
+and there can be no certainty, as to whether more was erased than Nero's own
+name.
+Line I was inscribed with wider horizontal spacing, in the preserved part,
+than line 2 ; hence the final two words of line I were evidently crowded, to
+judge by the preserved center, by the length of line, and by the (restored)
+length of line 3. Nevertheless the crowding is not natural; it may suggest that
+different, shorter names were used, but since none is known, more likely the
+last two letters were smaller and were crowded.
+LINE2. NO other document dated by this Arkhon Diokles survives, and no
+precise year for his term can be given. For the list of Arkhontes, see J. H. Oliver,
+Hesperia I I (1942) 83-84; for the controlling cycles, J. A. Notopoulos, Hesperia
+18 (1949) 49. For the identity of the man Diokles, a common name to be sure,
+but less so than earlier, Graindor suggested, and Kirchner mentioned (i.e.
+approved), A ~ o d q s@ E ~ I ~ O K ~ ~' O
+A~
+VV
+S O~JIOS
+known
+, to us med. s. I P . as having been Dadoukhos, Exegetes, and Hoplite General (IG 1 1 2 4175 and 41 76 [of
+A.D. ca. 41 ?], 4042 @s daughter], 3283 [Epimeletes?-restored--of
+the
+Asklepieion]).-The Priesthood of Drusus in Athens is treated by P. Graindor,
+Ath. s. Aug. 157; Ath. de lib.116.
+
+LINE3. Following Graindor all too closely, Kirchner put [ - - - -': y - - - -1 I
+Kh6ows for the nomen only of the Kosmetes. No name has been suggested for the
+lacuna; there ir no name [- LO--]dijs. Actually line 3 is spaced very slightly
+more widely than line 2, and had ca. 30 letters $filled, so that the name would
+be [-%A -1dfi~.The longest name in -kles, viz. 'A-rrqpavrodii~,is known in
+begins with a 3-letter syllable, as much
+Athens, and would fit. But since 4 o w ~
+as two spaces at the end of the previous line (3) can have been left blank. We
+need fill only [- "..! -]Kh.r]~.The termination - K A ~ s is just about the commonest
+for names in Greek, but among such names, total lengths of lo letters or more
+
+36
+
+CONVENTIONS I N E D I T I N G
+
+are actually not numerous, and among the long names, one that is fairly frequent in Roman Athens, and has lo* letters, can be restored:
+3
+KOU~~~[TE~OVTO$
+@EYI~TO?]
+4 Kh60us TOG 3 Mapa[Boviou]
+In the list of Epheboi IG 1 1 2 1970 lines 42-45, special honors are signalized for
+I @EV~one person, named in a single central (painted) wreath, @El~lo70K?da
+~o~[KX~]OWS.
+The date is A.D. 4516. The honors were voted, doubtless, by his
+fellow-Epheboi, one of whom set up the stele. Presumably Themistokles had
+won some athletic victory: for such victors in Ephebic inscriptions, see e.g. IG
+I I Z 1992, and presumably the [four] names within crowns in IG IIZ1973-both
+inscriptions are of this same period. I t is notable that Themistokles was not
+named at all in two other lists of Epheboi of his year (elsewhere I shall publish
+studies of the three lists of A.D. 4516). In any case it seems altogether likely that
+the future Kosmetes, or, less likely, his father, was already prominent in A.D.
+4516. Moreover the name Themistokles is known in Marathon, though not
+until m d . s. I I I j . : IGZI1 3704 (for its importance, see J. H. Oliver, Hesjeria 5
+[1936] 92, who quotes it entire), line 8; which records a daughter, who is a
+Marathonian, of KA. OECLVJTOKA~~S,
+' Auiapxo~.Possibly he was a descendant.
+LINE5. A fairly short two-word heading is required for symmetry, and the
+forthcoming study mentioned supra will show that there is no likely alternative.
+W. Dittenberger had dated the expression piho~yopyoi to the reign of Claudius
+(comm. on IG IIz 1970) ; but it appears also, a t least once, under Nero. Various
+other terms, plho~alone, etc., are used of groups of friends. IG 1 1 2 1989 is now
+proved, with three colums clear, to have been one of the longer piho~inscriptions of this latter class, but not the longest. There are a few of intermediate
+size (e.g. ZG IIz 1984). Not much had been made of the cpiho~yopyol and the
+other cpihot-a sample is P. Graindor, Ath. & Tib. 86-until L. Robert collected
+its analogues in usage among the Epheboi, also ascertained its Roman equivalent, and improved the understanding of various texts: Hellenua I (1940) 127131. The Latin equivalents show that the translation of yopy6~should be
+i.e. 'athletic'. I suppose that this is right, and that the
+'agile, vigorous' ( I Z ~ ) ,
+adjective does not qualify the friendship specially: they are not 'agile as friends',
+but rather 'friends who are agile fellows'. Even so, one suspects that the words
+as used by the Epheboi of themselves had a slang flavor, and that the connotation was wider and vaguer, so that yopy6s meant 'livelyy-Robert himself
+translates one occurrence as brave (128 n. 10).
+LINES6ff: the list of Epheboi. Hitherto a uac has been printed after line 6, as
+if line g might be the patronymic of Apolexis. It has not been noticed that line g
+is half a space higher: it represents a new, central, column of names, deliberately spaced out of alignment with col. i, so as to avoid the very confusion which
+former texts have introduced. Inscribing columns out of alignment with each
+other was a common arrangement, see e.g. in the Bowdoin alphabetized l i t ,
+AJA 67 (1963) 2 6 2 ~ .There were three columns in all, the third being doubtless lower, and in alignment with col. i. Col. i was indented, as in IG I I Z1998.
+
+ILLUSTRATIVE EXAMPLE
+
+37
+
+Since the first Ephebos is given a patronymic, the question arises whether all
+the Epheboi were listed with patronymics. Most of the other first-century lists
+are made up without patronymics regularly given; but ZG IIZ 1967, and the
+first group, lines 10-14, of IG 112 1970, suffice to show that many of the names
+in the present list, and perhaps all, had patronymics. The resulting arrangement-three single-word columns, with nomen and patronymic in alternate
+lines-is unique. Any fragment should be easily recognizable; I have found
+none.
+LINE6. Listed first, Apolexis has the position of greatest dignity. The name
+is comparatively rare: most occur in Agora inscriptions, see the Hesperia Index
+1-10 S.U.Graindor conjectures that this Apolexis was a descendant of one or
+both of the Arkhons of 2514-1817 and 817-211 B.c., but the patronymic does not
+encourage it.
+LINE 7. Part of a (new) slanting stroke shows clearly at the break, and the
+letter was A, A, (A), or M.
+LINE8. Graindor read here K! but the first visible stroke, which slants, slants
+a bit more steeply than in K and thus belongs more likely to a Y (not to a Y).
+What follows, a tiny trace, is not certainly a stroke but is correctly placed for the
+upper left (serif'd?) corner of any one of many letters.
+LINE9. After EY a trace shows as of a serif and the end of an oblique stroke,
+also apparently of an upright stroke. The only letter which fits the traces is nu,
+but too little remains for certainty.
+
+The Inscription as a Whole
+From the proportions of the stele, and the care used in laying out the list in
+three columns, the total number of Epheboi listed can be estimated as at least
+20, a t most 60, with ca. 36 as probable. On numbers of Epheboi in this period
+there is little information and no up-to-date table: in general, John Day, An
+Economic History of A t h under Roman Domination (New York 1942) 275; Graindor, Ath2nes de Tib2re (i Trajan (Cairo 1931) 87. But the study of A.D. 4516 will
+show that almost certainly the present inscription did not list all the Epheboi of
+its year.
+With all its color and ornamentation, the original was a handsome monument, superior to most stelai. Patronymics doubtless were part of its style. The
+lettering is handsome too, but mannered, not really fine. And when the time
+came to obliterate Nero's nomen, the Athenians saw to it, in this instance as
+probably in all the other Neronian inscriptions, that the erasing was sufficiently
+thorough, and so neat as not to mar the whole.
+
+GREEK 7 ROMAN 7 ANDYBYZANTINE 7 MONOGRAPHS
+Number One
+GEORGE
+HUXLEY,
+Atlthemius of Trallcs:
+a Study in Later Greek Geometry. 1959
+Two dollars
+
+Number Two
+EMERSON
+BUCHANAN,
+Aristotle's Theory of Being. 1962
+Two dollars fifty cents
+
+Number Three
+JACK L. BENSON,
+Ancient Leros.
+
+1963
+
+Two dollars fifty cents
+
+Number Four
+
+M. CALI)ER ID,The Inscr@ion
+WILLIAM
+Porn Tentple G at Selinus. 1963
+Two dollars fifty cents
+
+GREEK v ROMAN 7 AND 1BYZANTINE 7 SCHOLARLY1AIDS
+Number One
+Index of Passages Cited in HERBERT
+WEIRSMYTHGreek Grammar.
+Compiled under the direction of WALTBR
+A. SCHUMANN.
+1961
+
+One dollar seventy-five cents
+
+Number Two
+STERLING
+DOW,Conventions in Editing.
+
+1969
+
+Two dollars
+Issues of these supplementary series published by GREEK, ROMAN, AND BYZANTINE
+STUDlES may be ordered directly from the Circulation Manager, Miss Dorothy Rounds,
+Box 144, Cambridge, Massachusetts 02138. Twenty per cent discount to subscribers to
+the jou rnal. The same discount applies to orders of ten or more copies of a ScholarlyAid.
+
+
