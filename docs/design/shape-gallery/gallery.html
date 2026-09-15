@@ -1,0 +1,232 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>arcviz — rough shape gallery</title>
+<style>
+  body { font: 13px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif; margin: 24px; color: #111; background: #fff; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .lede { max-width: 62em; color: #333; margin: 0 0 24px; }
+  .row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .panel { width: 360px; border: 1px solid #bbb; padding: 10px 10px 12px; box-sizing: border-box; }
+  .cap { font-size: 11px; font-weight: 600; margin: 0 0 2px; }
+  .sub { font-size: 10.5px; color: #555; margin: 0 0 8px; }
+  svg { display: block; }
+  .note { font-size: 10px; color: #666; margin: 6px 0 0; }
+</style>
+<h1>arcviz — rough shape gallery</h1>
+<p class="lede">Placeholders, not a design. One treatment (compression to a floor, budgeted states floored larger) applied to seven DAG shapes at 360&nbsp;px, so the shapes and densities can be compared by eye instead of by description. Identifier prefixes are real corpus values. Deliberately unfinished: no type hierarchy, no spacing refinement, no state vocabulary beyond what each shape needs to be legible as a shape.</p>
+
+<div class="row">
+
+<!-- 1. solitary -->
+<div class="panel">
+<p class="cap">1 · Solitary credential</p>
+<p class="sub">One card, expanded. No graph chrome earned.</p>
+<svg width="336" height="150" viewBox="0 0 336 150">
+  <rect x="1" y="1" width="334" height="130" fill="#fff" stroke="#111" stroke-width="1.5"/>
+  <rect x="1" y="1" width="334" height="18" fill="#eee" stroke="#111" stroke-width="1.5"/>
+  <text x="8" y="14" font-size="9" font-family="monospace">EHOTOsgWoV…</text>
+  <text x="8" y="36" font-size="10">issuer · EM7gTDXqvy…</text>
+  <text x="8" y="52" font-size="10">schema · qualified vLEI issuer</text>
+  <line x1="8" y1="62" x2="328" y2="62" stroke="#ccc"/>
+  <text x="8" y="78" font-size="10">attributes · 4 disclosed</text>
+  <text x="8" y="94" font-size="10">edges · none as issued ▪</text>
+  <text x="8" y="110" font-size="10">rules · 1</text>
+  <text x="8" y="124" font-size="9" fill="#555">verification · 9 checks, 0 performed</text>
+</svg>
+<p class="note">▪ = committed absence (a positive mark, not blank space)</p>
+</div>
+
+<!-- 2. short chain -->
+<div class="panel">
+<p class="cap">2 · Chain, depth 2</p>
+<p class="sub">Both at the floor; edge drawn between them.</p>
+<svg width="336" height="150" viewBox="0 0 336 150">
+  <g>
+    <rect x="130" y="8" width="76" height="44" fill="#fff" stroke="#111"/>
+    <rect x="130" y="8" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="16.5" font-size="6.5" font-family="monospace">ENKSmFLrpu…</text>
+    <text x="133" y="32" font-size="7">LE</text>
+    <rect x="133" y="38" width="30" height="9" fill="#fff" stroke="#111" stroke-width=".6"/>
+    <text x="135" y="45" font-size="6">edges 1</text>
+  </g>
+  <line x1="168" y1="52" x2="168" y2="86" stroke="#111"/>
+  <polygon points="168,92 164,84 172,84" fill="#111"/>
+  <text x="174" y="72" font-size="7">I2I (derived)</text>
+  <g>
+    <rect x="130" y="92" width="76" height="44" fill="#fff" stroke="#111"/>
+    <rect x="130" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="100.5" font-size="6.5" font-family="monospace">EHOTOsgWoV…</text>
+    <text x="133" y="116" font-size="7">QVI</text>
+  </g>
+</svg>
+<p class="note">Floor chip = 76×44. Carries identity and one state; not parameters.</p>
+</div>
+
+<!-- 3. production chain -->
+<div class="panel">
+<p class="cap">3 · Production chain, depth 4 — with a hole at the root</p>
+<p class="sub">The normal case: fully disclosed, still incomplete.</p>
+<svg width="336" height="290" viewBox="0 0 336 290">
+  <g font-family="monospace" font-size="6.5">
+    <rect x="130" y="6" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="6" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="14.5">EGDKB8m5pt…</text><text x="133" y="30" font-family="sans-serif" font-size="7">ECR (leaf)</text>
+    <line x1="168" y1="50" x2="168" y2="62" stroke="#111"/><polygon points="168,68 164,60 172,60" fill="#111"/>
+    <rect x="130" y="68" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="68" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="76.5">EM7gTDXqvy…</text><text x="133" y="92" font-family="sans-serif" font-size="7">ECR-AUTH</text>
+    <line x1="168" y1="112" x2="168" y2="124" stroke="#111"/><polygon points="168,130 164,122 172,122" fill="#111"/>
+    <rect x="130" y="130" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="130" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="138.5">ENKSmFLrpu…</text><text x="133" y="154" font-family="sans-serif" font-size="7">LE</text>
+    <line x1="168" y1="174" x2="168" y2="186" stroke="#111"/><polygon points="168,192 164,184 172,184" fill="#111"/>
+    <rect x="130" y="192" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="192" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="200.5">EHOTOsgWoV…</text><text x="133" y="216" font-family="sans-serif" font-size="7">QVI</text>
+    <line x1="168" y1="236" x2="168" y2="248" stroke="#111" stroke-dasharray="3 2"/><polygon points="168,254 164,246 172,246" fill="none" stroke="#111"/>
+  </g>
+  <defs><pattern id="h1" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="5" stroke="#999" stroke-width="1.2"/></pattern></defs>
+  <rect x="112" y="254" width="112" height="30" fill="url(#h1)" stroke="#111" stroke-width="2.5"/>
+  <rect x="114" y="256" width="108" height="26" fill="none" stroke="#111" stroke-width=".8"/>
+  <text x="120" y="267" font-size="7" font-family="sans-serif" font-weight="600">NOT IN HAND</text>
+  <text x="120" y="277" font-size="6" font-family="monospace">EDP1vHcw… (delegation root)</text>
+</svg>
+<p class="note">The hole has an <em>address</em> — it occupies a real position and names what is missing.</p>
+</div>
+
+<!-- 4. diamond -->
+<div class="panel">
+<p class="cap">4 · Diamond with depth</p>
+<p class="sub">One ancestor, two path lengths. Not a tree.</p>
+<svg width="336" height="260" viewBox="0 0 336 260">
+  <g font-family="monospace" font-size="6.5">
+    <rect x="130" y="6" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="6" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="14.5">EDQ6zCH2Xs…</text><text x="133" y="30" font-family="sans-serif" font-size="7">origin</text>
+
+    <rect x="40" y="86" width="76" height="44" fill="#fff" stroke="#111"/><rect x="40" y="86" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="43" y="94.5">EGHUpSJN58…</text><text x="43" y="110" font-family="sans-serif" font-size="7">B</text>
+
+    <rect x="220" y="86" width="76" height="44" fill="#fff" stroke="#111"/><rect x="220" y="86" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="223" y="94.5">EPJBkGOiB1…</text><text x="223" y="110" font-family="sans-serif" font-size="7">F</text>
+
+    <rect x="220" y="152" width="76" height="44" fill="#fff" stroke="#111"/><rect x="220" y="152" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="223" y="160.5">ELZEWuSVWm…</text><text x="223" y="176" font-family="sans-serif" font-size="7">C</text>
+
+    <rect x="130" y="210" width="76" height="44" fill="#fff" stroke="#111"/><rect x="130" y="210" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="133" y="218.5">ELBmpHyX1I…</text><text x="133" y="234" font-family="sans-serif" font-size="7">A (shared)</text>
+  </g>
+  <path d="M155 50 L 78 86" fill="none" stroke="#111"/><polygon points="78,86 84,80 86,88" fill="#111"/>
+  <path d="M182 50 L 258 86" fill="none" stroke="#111"/><polygon points="258,86 250,88 252,80" fill="#111"/>
+  <line x1="258" y1="130" x2="258" y2="152" stroke="#111"/><polygon points="258,152 254,144 262,144" fill="#111"/>
+  <path d="M78 130 L 152 210" fill="none" stroke="#111"/><polygon points="152,210 144,207 149,201" fill="#111"/>
+  <path d="M258 196 L 190 210" fill="none" stroke="#111"/><polygon points="190,210 197,205 199,213" fill="#111"/>
+  <text x="96" y="176" font-size="7" fill="#444">short path</text>
+  <text x="206" y="206" font-size="7" fill="#444">long path</text>
+</svg>
+<p class="note">Duplicating A or dropping either edge would both be lies; the path-length difference is the point.</p>
+</div>
+
+<!-- 5. fork / fan -->
+<div class="panel">
+<p class="cap">5 · Fan-out — one node, several children</p>
+<p class="sub">Width, not depth. Chips pack; the parent expands.</p>
+<svg width="336" height="200" viewBox="0 0 336 200">
+  <rect x="98" y="6" width="140" height="56" fill="#fff" stroke="#111" stroke-width="1.5"/>
+  <rect x="98" y="6" width="140" height="13" fill="#eee" stroke="#111" stroke-width="1.5"/>
+  <text x="102" y="15.5" font-size="7" font-family="monospace">EDQ6zCH2Xs…</text>
+  <text x="102" y="32" font-size="8">dossier root</text>
+  <text x="102" y="45" font-size="7" fill="#555">edges · 4 · AND (default)</text>
+  <text x="102" y="56" font-size="7" fill="#555">verification · 0 of 9 performed</text>
+  <g font-family="monospace" font-size="6.5">
+    <line x1="168" y1="62" x2="168" y2="76" stroke="#111"/>
+    <line x1="40" y1="76" x2="296" y2="76" stroke="#111"/>
+    <g>
+      <line x1="40" y1="76" x2="40" y2="92" stroke="#111"/><polygon points="40,92 36,84 44,84" fill="#111"/>
+      <rect x="2" y="92" width="76" height="44" fill="#fff" stroke="#111"/><rect x="2" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+      <text x="5" y="100.5">EGHUpSJN58…</text>
+    </g>
+    <g>
+      <line x1="125" y1="76" x2="125" y2="92" stroke="#111"/><polygon points="125,92 121,84 129,84" fill="#111"/>
+      <rect x="87" y="92" width="76" height="44" fill="#fff" stroke="#111"/><rect x="87" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+      <text x="90" y="100.5">ELZEWuSVWm…</text>
+    </g>
+    <g>
+      <line x1="211" y1="76" x2="211" y2="92" stroke="#111"/><polygon points="211,92 207,84 215,84" fill="#111"/>
+      <rect x="173" y="92" width="76" height="44" fill="#fff" stroke="#111"/><rect x="173" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+      <text x="176" y="100.5">EPJBkGOiB1…</text>
+    </g>
+    <g>
+      <line x1="296" y1="76" x2="296" y2="92" stroke="#111"/><polygon points="296,92 292,84 300,84" fill="#111"/>
+      <rect x="258" y="92" width="76" height="44" fill="#fff" stroke="#111"/><rect x="258" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+      <text x="261" y="100.5">ELBmpHyX1I…</text>
+    </g>
+  </g>
+</svg>
+<p class="note">Four chips fit the width; a fifth wraps. This is where the floor earns its keep.</p>
+</div>
+
+<!-- 6. blinded edges / frontier -->
+<div class="panel">
+<p class="cap">6 · Two blinded edges — destination unknowable</p>
+<p class="sub">The edges are committed; where they point is not.</p>
+<svg width="336" height="200" viewBox="0 0 336 200">
+  <defs><pattern id="h2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#aaa" stroke-width="1.4"/></pattern></defs>
+  <rect x="8" y="6" width="320" height="42" fill="url(#h2)" stroke="#111" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="14" y="20" font-size="8" font-weight="600">UNMAPPED</text>
+  <text x="14" y="32" font-size="7">destinations of the 2 edges below: between 1 and 2</text>
+  <text x="14" y="42" font-size="7">whether they meet is unknowable from material in hand</text>
+  <line x1="120" y1="48" x2="120" y2="96" stroke="#111"/><polygon points="120,48 116,56 124,56" fill="none" stroke="#111"/>
+  <line x1="216" y1="48" x2="216" y2="96" stroke="#111"/><polygon points="216,48 212,56 220,56" fill="none" stroke="#111"/>
+  <rect x="130" y="96" width="76" height="44" fill="#fff" stroke="#111"/>
+  <rect x="130" y="96" width="76" height="11" fill="#eee" stroke="#111"/>
+  <text x="133" y="104.5" font-size="6.5" font-family="monospace">EHZGkyDF43…</text>
+  <text x="133" y="120" font-size="7">2 blinded edges</text>
+  <text x="133" y="132" font-size="6.5" fill="#555">operator undetermined</text>
+  <text x="14" y="164" font-size="7.5" fill="#333">Open arrowheads: nothing to point at. The band is the same</text>
+  <text x="14" y="175" font-size="7.5" fill="#333">size whether the two converge or not — so the drawing cannot</text>
+  <text x="14" y="186" font-size="7.5" fill="#333">leak an answer it does not have.</text>
+</svg>
+</div>
+
+<!-- 7. budgeted states at the mid floor -->
+<div class="panel">
+<p class="cap">7 · Mixed states — the second floor</p>
+<p class="sub">Plain chips at 76×44; cards carrying a budgeted state at 150×72.</p>
+<svg width="336" height="200" viewBox="0 0 336 200">
+  <g font-family="monospace" font-size="6.5">
+    <rect x="2" y="6" width="76" height="44" fill="#fff" stroke="#111"/><rect x="2" y="6" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="5" y="14.5">EHOTOsgWoV…</text>
+    <rect x="87" y="6" width="76" height="44" fill="#fff" stroke="#111"/><rect x="87" y="6" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="90" y="14.5">ENKSmFLrpu…</text>
+  </g>
+  <g>
+    <rect x="178" y="6" width="150" height="72" fill="#fff" stroke="#111" stroke-width="1.2"/>
+    <rect x="178" y="6" width="150" height="12" fill="#eee" stroke="#111" stroke-width="1.2"/>
+    <line x1="178" y1="30" x2="328" y2="30" stroke="#111" stroke-dasharray="5 4" stroke-width="1.6"/>
+    <text x="182" y="15" font-size="7" font-family="monospace">EGDKB8m5pt…</text>
+    <text x="182" y="27" font-size="7.5" font-weight="600">STALE</text>
+    <text x="182" y="44" font-size="7">last reconciled 2026-03-02</text>
+    <text x="182" y="55" font-size="7">policy window · 90 days</text>
+    <text x="182" y="66" font-size="7">exceeded by · 107 days</text>
+    <text x="182" y="75" font-size="6.5" fill="#555">policy supplied by host</text>
+  </g>
+  <g font-family="monospace" font-size="6.5">
+    <rect x="2" y="92" width="76" height="44" fill="#fff" stroke="#111"/><rect x="2" y="92" width="76" height="11" fill="#eee" stroke="#111"/>
+    <text x="5" y="100.5">ELZEWuSVWm…</text>
+  </g>
+  <g>
+    <rect x="87" y="92" width="150" height="72" fill="#fff" stroke="#111" stroke-width="1.2"/>
+    <rect x="87" y="92" width="150" height="12" fill="#eee" stroke="#111" stroke-width="1.2"/>
+    <text x="91" y="101" font-size="7" font-family="monospace">EHTnmmo4Lx…</text>
+    <text x="91" y="114" font-size="7.5" font-weight="600">HIDDEN, PROTECTION UNKNOWN</text>
+    <text x="91" y="128" font-size="7">schema not resolved</text>
+    <text x="91" y="139" font-size="7">cannot tell blinded from guessable</text>
+    <text x="91" y="152" font-size="7" fill="#555">resolving it is itself a fetch</text>
+  </g>
+  <text x="246" y="104" font-size="7.5" fill="#333">A plain chip sheds</text>
+  <text x="246" y="115" font-size="7.5" fill="#333">everything but its</text>
+  <text x="246" y="126" font-size="7.5" fill="#333">identity. A card with</text>
+  <text x="246" y="137" font-size="7.5" fill="#333">something to say gets</text>
+  <text x="246" y="148" font-size="7.5" fill="#333">room to say it.</text>
+</svg>
+</div>
+
+</div>
