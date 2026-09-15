@@ -1,0 +1,592 @@
+<!doctype html>
+<!-- arcviz / ARM B REBUILT RESPONSIVELY.
+     DD-10 holds that 320 CSS px is a correctness floor and not a design target, and that the real defect
+     in every artifact built so far is fixed-width authoring. This file has no authoring width. Open it at
+     any viewport; the layout is a function of the width it is given, and the packing rules DD-5 needs
+     restated are expressed here as rules rather than as hand-set coordinates.
+
+     This file IS the component, not an exhibit of it. There is no phone frame, no gauge rail, no scaled
+     specimen: the gate is the outermost element and it fills whatever it is given. Measurements and the
+     width sweep live in RESPONSIVE.md; captures live in responsive-sweep/.
+
+     Same load as arm-b-compression.html and the stress board: eleven items, two drawn holes, one frontier,
+     identical host stubs (see ../stress-board/README.md for the manifest, which is deliberately outside
+     every render). Authored hue-free, so this file is its own greyscale exhibit.
+
+     ANNOTATION DISCIPLINE: nothing inside the gate names a fixture or states a fact the geometry withholds.
+     All commentary lives in the grey panels below the component.
+
+     URL PARAMETERS, so a capture can pin a state deterministically:
+       ?focus=08          expand one object in place (any item id; omit for the rest register)
+       ?packing=global    ignore the authored band boundaries when wrapping (default)
+       ?packing=band      force a row break at each authored band boundary
+       ?h6h2=glyph        perimeter-class floor glyphs for H6-possibly and H2-guessable (default)
+       ?h6h2=words        the words-only floor this file replaces, for A/B
+       ?banner=auto       stale banner sheds its as-of below a measured threshold (default)
+       ?banner=full       never shed, so the overflow behaviour can be observed
+       ?floor=one         one floor for every non-focused object, 76x44 — arm B as built (default)
+       ?floor=two         DD-5's amendment: budgeted carriers floor at 150x72 instead
+       ?hostw=280         pin the component's own width, independent of the viewport — the
+                          instrument DD-10's open "element floor is not the viewport floor" needs
+-->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arm B — compression, rebuilt responsively</title>
+<style>
+  :root{
+    /* The only fixed numbers in the layout. Both are DD-5's floor forms, which are fixed by definition:
+       a reflowed form carries the same content at any width, which is what makes it a floor. */
+    --chip-w:76px; --chip-h:44px;
+    --mid-w:150px; --mid-h:72px;
+    --gutter:14px;      /* the frontier continued down the left margin */
+    --pad:8px;          /* board inset right of the gutter */
+    --gap-x:8px; --gap-y:18px;
+  }
+  *{box-sizing:border-box}
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:0;font-size:14px;line-height:1.35}
+  .doc{padding:16px;max-width:860px;margin:0 auto}
+  h1{font-size:20px;margin:0 0 6px} h2{font-size:15px;margin:24px 0 6px}
+  .note{color:#444;font-size:12.5px}
+  .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;margin:18px 0}
+  .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+
+  /* ---- the component ------------------------------------------------------------------
+     .host is whatever box the embedder gives it. The gate fills it. Nothing below has a width. */
+  .host{width:100%}
+  .gate{border:5px double #111;background:#fff;width:100%}
+  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
+  .board{position:relative;background:#fff;width:100%;overflow:hidden;container-type:inline-size;container-name:board}
+  .edges{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
+  .band{position:relative;z-index:2;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:8px;color:#333}
+  .body{position:relative;z-index:2;display:flex;align-items:stretch}
+  .gutter{width:var(--gutter);flex:none;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
+  .rows{flex:1 1 auto;min-width:0;padding:var(--pad) 0 var(--pad) var(--pad);background:transparent;
+        display:flex;flex-wrap:wrap;gap:var(--gap-y) var(--gap-x);align-content:flex-start}
+  /* Band mode inserts a full-width break, so a band boundary forces a new row. The negative
+     margin cancels the second row-gap the zero-height line would otherwise introduce, which
+     keeps the row pitch identical in both packing modes. */
+  .rowbreak{flex-basis:100%;height:0;margin:0;display:none}
+  .rows.bands .rowbreak{display:block;margin-bottom:calc(-1 * var(--gap-y))}
+
+  /* ---- object forms ---- */
+  .obj{position:relative;background:#fff;flex:none}
+  .fl{width:var(--chip-w);height:var(--chip-h);border:1.5px solid #111;padding:2px 4px;font-size:8px;line-height:1.2;overflow:visible}
+  .flhole{width:var(--chip-w);height:var(--chip-h);border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:2px 4px;font-size:8px;line-height:1.2}
+  .flhole .hdr{font-weight:700;font-size:6.5px;letter-spacing:.06em}
+  .mid{width:var(--mid-w);height:var(--mid-h);border:1.5px solid #111;padding:3px 6px;font-size:8.5px;line-height:1.25}
+  .card{flex:1 1 100%;width:100%;border:1.5px solid #111;padding:7px 9px;font-size:10px;line-height:1.3;container-type:inline-size;container-name:card}
+
+  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .fl .role,.mid .role{font-size:6.5px;letter-spacing:.06em;color:#555}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .fl .pill,.flhole .pill,.mid .pill{font-size:8px;padding:0 3px}
+  .x{font-size:7.5px;vertical-align:super;color:#333}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:8px;padding:0 3px;background:#fafafa}
+  .fl .port,.mid .port{font-size:7px;padding:0 2px;border-bottom-width:2px}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:8px}
+  .fl .seal{border-top-width:3px;font-size:6.5px}
+  .w6{font-size:6px;color:#333}
+  .shed{font-size:7px;color:#111;border:1px dotted #333;padding:0 2px;display:inline-block;line-height:1.1}
+
+  /* ---- perimeter-class state carriers ----------------------------------------------------
+     Each state owns one channel of the box's own perimeter, so it survives at every tier down
+     to the floor. The channels are disjoint by construction; see RESPONSIVE.md §4. */
+
+  /* stale — the top edge is interrupted (existing, unchanged) */
+  .stale{border-top:none!important}
+  .stale-top{display:flex;align-items:center}
+  .stale-top .ln{flex:1;border-top:1.5px solid #111;min-width:4px}
+  .stale-top .tx{font-size:7px;padding:0 3px;white-space:nowrap}
+  .fl.stale .stale-top{margin:-2px -4px 1px}
+  .fl.stale .stale-top .tx{font-size:6px;padding:0 2px}
+  .mid.stale .stale-top{margin:-3px -6px 2px}
+  .card.stale .stale-top{margin:-7px -9px 4px}
+  /* The card-scale banner never clips: it wraps rather than overflow. DD-10's conformance floor
+     is met by the wrap; the shed below is the design behaviour above it. */
+  .card.stale .stale-top{align-items:stretch}
+  .card.stale .stale-top .tx{white-space:normal;overflow-wrap:anywhere;font-size:8.5px;padding:0 4px;text-align:center}
+  .card.stale .stale-top .ln{align-self:center}
+  /* Threshold is measured, not chosen: the full banner text renders at 239.0 px and the two rule
+     stubs floor at 4 px each, so the row needs 247 px. The row is the card's content box + 18 px
+     (the banner's negative side margins), so the full form needs a 229 px content box. Below that
+     the as-of sheds — and nothing is lost, because the T-line inside the card carries it. A card
+     with no T-line may not use the short form. See RESPONSIVE.md §6. */
+  @container card (max-width:230px){ .banner-auto .asof{display:none} }
+  .vt{font-size:7px;color:#555;margin-top:2px}
+  .mid .guessmini{border:1px solid #555;border-bottom-color:transparent;background:transparent;height:20px;margin-top:2px;position:relative}
+  .mid .guessmini>.porous{bottom:-1px;left:-1px;right:-1px;height:1px}
+
+  /* H6-possibly — the frame withdraws to its corners. Whole-artifact scope at every tier. */
+  .h6p{border-color:transparent!important}
+  .h6p>.ck{position:absolute;width:11px;height:11px;border:0 solid #111;pointer-events:none}
+  .h6p>.tl{left:-1.5px;top:-1.5px;border-left-width:1.5px;border-top-width:1.5px}
+  .h6p>.tr{right:-1.5px;top:-1.5px;border-right-width:1.5px;border-top-width:1.5px}
+  .h6p>.bl{left:-1.5px;bottom:-1.5px;border-left-width:1.5px;border-bottom-width:1.5px}
+  .h6p>.br{right:-1.5px;bottom:-1.5px;border-right-width:1.5px;border-bottom-width:1.5px}
+  .card.h6p>.ck{width:16px;height:16px}
+  .h6line{font-size:9px;border-left:3px solid #111;padding-left:5px;margin-top:4px}
+
+  /* H2-guessable — the boundary of the guessable unit has a porous bottom edge. Its contrast
+     partner H3-blinded would double that same edge; one channel, opposite values, which is what
+     Rule 1's "H2 vs H3 must be pairwise distinct" asks for, and it is not a lock, which Rule 8
+     forbids. SCOPE: H2 is a UNIT state, so above the floor it marks the unit's own region. Only
+     the 76x44 chip has no room for a region, so only there does the state move onto the whole
+     box — a declared widening of scope, recorded in RESPONSIVE.md §4 rather than glossed. */
+  .porous{position:absolute;left:-1.5px;right:-1.5px;bottom:-1.5px;height:1.5px;pointer-events:none;
+       background:repeating-linear-gradient(90deg,#111 0 3px,transparent 3px 7px)}
+  .h2g{border-bottom-color:transparent!important}
+  .guess{border:1px solid #555;border-bottom-color:transparent;background:transparent;padding:5px 7px;font-size:9.5px;min-height:52px;margin-top:4px;position:relative}
+  .guess>.porous{bottom:-1px;left:-1px;right:-1px;height:1px}
+
+  /* ---- expanded-card interior ---- */
+  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .ledger{font-size:9px;color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
+  .ledger .lh{color:#444;border-bottom:1px solid #ddd;margin-bottom:2px;padding-bottom:1px}
+  .ledger .r{display:flex;gap:4px}
+  .ledger .g{width:11px;flex:none;text-align:center}
+  .tline{font-size:9px;color:#333;margin-top:3px}
+  .cap{position:relative;z-index:2;font-size:7.5px;color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3;margin:0 var(--pad) var(--pad) calc(var(--gutter) + var(--pad))}
+
+  .focusable{cursor:pointer}
+  .focusable:focus-visible{outline:2px solid #111;outline-offset:2px}
+</style></head><body>
+
+<div class="doc">
+<h1>Arm B — compression, rebuilt responsively</h1>
+<p class="note">The same thirteen objects as <a href="arm-b-compression.html">arm-b-compression.html</a>, with the authoring width removed. Every position below is produced by a packing rule evaluated against the width this page was given; nothing is a coordinate. Resize the window and the board repacks, the edges re-route, and the port direction glyphs change to match the geometry they now describe. Click any object to focus it in place; click again to return to rest. Measurements: <a href="RESPONSIVE.md">RESPONSIVE.md</a>.</p>
+</div>
+
+<div class="host" id="host"></div>
+
+<div class="doc">
+<div class="comm">
+  <h3>COMMENTARY — OUTSIDE THE RENDER</h3>
+  <p>Host stubs, identical to the stress board and to all three arms: freshness policies P30D (items 01, 02), PT72H (03), PT12H (04, 08), none elsewhere; as-of 2026-06-14T00:00Z; render moment 2026-09-14T12:00Z; a SAID-verified schema document for item 11 only; no verification vectors, cause attestations, watchers, or presentation evidence. The load manifest is in <a href="../stress-board/README.md">../stress-board/README.md</a>, outside every render, per the host contract.</p>
+  <p><b>Determinism, restated for a responsive layout.</b> The layout is a pure function of (presentation bytes, host stubs, focus SAID, <i>available width</i>). The width is a new argument and it is a declared input, like the host clock: two runs at the same width produce byte-identical output, and the conformance corpus has to pin a width per expected rendering rather than pin one width for all of them. Ordering is fixed by the presentation — objects appear in (band, SAID) order and wrapping never reorders them — so the mental-map property that orthogonal ordering preserves is preserved across both focus changes and width changes.</p>
+  <p><b>What is drawn versus what is packed.</b> Only drawn edges connect anything. Row membership is a consequence of the width and carries no topology, which is why the same two objects can be adjacent at one width and in different rows at another; the caption inside the render says so at the point of use.</p>
+</div>
+</div>
+
+<script>
+//////////////////////////////////////////////////////////////////////////////////////////
+// THE LOAD. Thirteen objects in presentation order, with their bands. Bands are inherited
+// from the authored mock rather than recomputed here; they are used only by ?packing=band.
+//////////////////////////////////////////////////////////////////////////////////////////
+const OBJECTS = [
+  {id:'h1',  kind:'hole', band:0, pill:'EM7gTDXqvy…', note:'unknown'},
+  {id:'03',  kind:'item', band:0, pill:'EGDKB8m5pt…', stale:{policy:'PT72H', age:'92 d'}},
+  {id:'01',  kind:'item', band:0, pill:'EHOTOsgWoV…', stale:{policy:'P30D', age:'92 d'}, seal:'e none'},
+  {id:'02',  kind:'item', band:0, pill:'ENKSmFLrpu…', stale:{policy:'P30D', age:'92 d'}},
+  {id:'05',  kind:'item', band:1, pill:'EGHUpSJN58…'},
+  {id:'04',  kind:'item', band:1, pill:'EDQ6zCH2Xs…', stale:{policy:'PT12H', age:'92 d'}},
+  {id:'06',  kind:'item', band:1, pill:'ELZEWuSVWm…'},
+  {id:'07',  kind:'item', band:1, pill:'EPJBkGOiB1…'},
+  {id:'09',  kind:'item', band:2, pill:'EHZGkyDF43…', cardinality:'1–2 dest.'},
+  {id:'08',  kind:'item', band:2, pill:'ELBmpHyX1I…', stale:{policy:'PT12H', age:'92 d'}, seal:'e none', xn:3},
+  {id:'h2',  kind:'hole', band:3, pill:'EDSm-SsfXZ…', note:'unknown'},
+  {id:'10',  kind:'item', band:3, pill:'EC9jOzkasO…', state:'h6'},
+  {id:'11',  kind:'item', band:3, pill:'EM29GVeQIJ…', seal:'e none', state:'h2'},
+];
+
+// Drawn edges. `label` is the map key in the ACDC's e section — issuer-chosen text, so it renders
+// inside the issuer boundary (DD-3) and never on the connector.
+const EDGES = [
+  {from:'03', to:'h1', label:'auth'},
+  {from:'02', to:'01', label:'qvi'},
+  {from:'04', to:'05', label:'shortPath'},
+  {from:'04', to:'06', label:'longPath'},
+  {from:'06', to:'07', label:'waypoint'},
+  {from:'05', to:'08', label:'baseline'},
+  {from:'07', to:'08', label:'baseline'},
+  {from:'10', to:'h2', label:'evidence'},
+];
+// Edges whose destination is outside the layout's domain: blinded destinations and hole egress.
+const FRONTIER = [
+  {from:'09', to:'gutter', count:2, kind:'blinded'},
+  {from:'h1', to:'band',   count:3, kind:'fringe'},
+  {from:'h2', to:'gutter', count:2, kind:'fringe'},
+];
+
+const PARAMS = new URLSearchParams(location.search);
+const OPT = {
+  focus:   PARAMS.get('focus') || null,
+  packing: PARAMS.get('packing') || 'global',
+  h6h2:    PARAMS.get('h6h2') || 'glyph',
+  banner:  PARAMS.get('banner') || 'auto',
+  floor:   PARAMS.get('floor') || 'one',
+  // DD-10 records that the viewport floor and the ELEMENT floor are different numbers and that
+  // we have been using one word for both. ?hostw pins the element's width independently of the
+  // viewport, so the element floor can be exercised without pretending it is a viewport.
+  hostw:   PARAMS.get('hostw') ? +PARAMS.get('hostw') : null,
+};
+
+const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
+const corners = () => ['tl','tr','bl','br'].map(c => el('span','ck ' + c));
+
+function staleBanner(o, scale){
+  const wrap = el('div','stale-top');
+  wrap.append(el('span','ln'));
+  const tx = el('span','tx');
+  if (scale === 'card'){
+    if (OPT.banner === 'auto') tx.classList.add('banner-auto');
+    tx.append(document.createTextNode('STALE — '));
+    const asof = el('span','asof','as-of 2026-06-14 · ');
+    tx.append(asof, document.createTextNode('age ' + o.stale.age + ' exceeds policy ' + o.stale.policy));
+  } else if (scale === 'mid'){
+    tx.textContent = 'STALE · ' + o.stale.policy + ' exceeded';
+  } else {
+    tx.textContent = 'stale';
+  }
+  wrap.append(tx, el('span','ln'));
+  return wrap;
+}
+
+// Out-edge labels a floor form can carry. DD-3 is ratified: every drawn edge carries its label.
+// A 76x44 chip has one port row with about 65 px of content width, and one label plus its
+// direction glyph already spends most of it — so a node with more than one out-edge CANNOT
+// satisfy DD-3 at the floor, at any viewport width, because the floor form is fixed.
+// The shed is therefore MARKED rather than silent: the chip shows how many labels it is not
+// showing, and shows none of them rather than privileging one. Marking it is an inference, not
+// a finding — no source requires it; it follows from the matrix's refusal to let one kind of
+// not-showing pass for another, applied to a kind the matrix does not contain. RESPONSIVE.md §5.
+function portStrip(o, scale){
+  const outs = EDGES.filter(e => e.from === o.id);
+  const row = el('div','ports');
+  if (!outs.length) return row;
+  if (scale === 'chip' && outs.length > 1){
+    row.append(el('span','shed', '⋯' + outs.length + ' edges'));
+    return row;
+  }
+  outs.forEach(e => {
+    const p = el('span','port');
+    p.dataset.edge = e.from + '>' + e.to;
+    p.append(document.createTextNode(e.label + ' '), el('span','arrow','·'));
+    row.append(p, document.createTextNode(' '));
+  });
+  return row;
+}
+
+function buildFloor(o){
+  const n = el('div','obj ' + (o.kind === 'hole' ? 'flhole' : 'fl'));
+  n.dataset.id = o.id;
+  if (o.kind === 'hole'){
+    n.append(el('div','hdr','NOT IN HAND'), el('span','pill',o.pill), el('div','w6', o.note));
+    return n;
+  }
+  n.classList.add('focusable');
+  n.tabIndex = 0;
+  if (o.stale){ n.classList.add('stale'); n.append(staleBanner(o,'chip')); }
+  n.append(el('div','role', o.id));
+  n.append(el('span','pill', o.pill));
+  const foot = el('div','foot');
+  const ports = portStrip(o,'chip');
+  if (ports.childNodes.length) foot.append(ports);
+  if (o.seal) foot.append(el('span','seal', o.seal));
+  if (o.cardinality) foot.append(document.createTextNode(' '), el('span','w6', o.cardinality));
+  if (o.state === 'h6'){
+    if (OPT.h6h2 === 'glyph'){ n.classList.add('h6p'); n.append(...corners()); }
+    else foot.append(document.createTextNode(' '), el('span','w6','possibly meta'));
+  }
+  if (o.state === 'h2'){
+    if (OPT.h6h2 === 'glyph'){ n.classList.add('h2g'); n.append(el('span','porous')); }
+    else foot.append(document.createTextNode(' '), el('span','w6','a guessable'));
+  }
+  n.append(foot);
+  return n;
+}
+
+// DD-5's second floor. A budgeted carrier floors at 150x72 instead of 76x44, which is what
+// restores the parameters the chip sheds. Reached with ?floor=two.
+function isBudgeted(o){ return o.kind === 'item' && (o.stale || o.state === 'h6' || o.state === 'h2'); }
+
+function buildMid(o){
+  const n = el('div','obj mid focusable');
+  n.dataset.id = o.id; n.tabIndex = 0;
+  if (o.stale){ n.classList.add('stale'); n.append(staleBanner(o,'mid')); }
+  n.append(el('div','role','ITEM ' + o.id));
+  const pill = el('span','pill', o.pill); n.append(pill);
+  if (o.xn) n.append(el('span','x','×' + o.xn));
+  const foot = el('div'); foot.style.marginTop = '2px';
+  const ports = portStrip(o,'mid');
+  if (ports.childNodes.length) foot.append(ports);
+  if (o.seal) foot.append(el('span','seal', o.seal + ' · sealed'));
+  if (o.cardinality) foot.append(document.createTextNode(' '), el('span','w6', o.cardinality));
+  n.append(foot);
+  if (o.state === 'h6'){
+    if (OPT.h6h2 === 'glyph'){ n.classList.add('h6p'); n.append(...corners()); }
+    n.append(el('div','vt','possibly a metadata ACDC — u present-and-empty, no corroboration'));
+  } else if (o.state === 'h2'){
+    const g = el('div','guessmini');
+    g.append(el('div','role','a — committed, not disclosed'));
+    if (OPT.h6h2 === 'glyph') g.append(el('span','porous'));
+    n.append(g);
+  } else {
+    n.append(el('div','vt','V·T detail at expanded scale'));
+  }
+  return n;
+}
+
+function buildCard(o){
+  const n = el('div','obj card focusable');
+  n.dataset.id = o.id; n.tabIndex = 0;
+  if (o.stale){ n.classList.add('stale'); n.append(staleBanner(o,'card')); }
+  n.append(el('div','role','ITEM ' + o.id + ' · host load label (opaque) · FOCUSED — expanded in place'));
+  const d = el('div'); d.append(document.createTextNode('d '), el('span','pill',o.pill));
+  if (o.xn) d.append(el('span','x','×' + o.xn));
+  d.append(document.createTextNode(' · u: absent as issued'));
+  n.append(d);
+  const iss = el('div'); iss.style.marginTop = '2px';
+  iss.append(document.createTextNode('issuer '), el('span','pill','EAS6m0KAnZ…'), document.createTextNode(' · schema '), el('span','pill','EAow76Ee1e…'), el('span','x','×3'));
+  n.append(iss);
+  n.append(el('div','manif','s committed · a disclosed · e ' + (o.seal ? 'none as issued' : 'committed') + ' · r none as issued'));
+
+  const ins = EDGES.filter(e => e.to === o.id);
+  if (ins.length){
+    const inl = el('div'); inl.style.cssText = 'margin-top:3px;font-size:8.5px';
+    inl.append(document.createTextNode('in-edges: '));
+    ins.forEach((e,i) => { if (i) inl.append(document.createTextNode(' · ')); const b = el('b', null, e.label); inl.append(b, document.createTextNode(' from ITEM ' + e.from)); });
+    inl.append(document.createTextNode(' — attached above, visible while focused'));
+    n.append(inl);
+  }
+  const outs = EDGES.filter(e => e.from === o.id);
+  if (outs.length){ const po = el('div'); po.style.marginTop = '3px'; po.append(portStrip(o,'card')); n.append(po); }
+
+  if (o.state === 'h6'){
+    if (OPT.h6h2 === 'glyph'){ n.classList.add('h6p'); n.append(...corners()); }
+    n.append(el('div','h6line','possibly a metadata ACDC — top-level u present-and-empty; issuer-commitment evidence: none supplied either way. The full issuer-uncommitted marker does not fire on the discriminator alone; the resolved frame withdraws to its corners until evidence arrives.'));
+  }
+  if (o.state === 'h2'){
+    const g = el('div','guess');
+    g.append(el('div','role','a — unit committed, contents not disclosed'));
+    g.append(document.createTextNode('contents recoverable/guessable — the verified schema reserves no u for this block: no blinding entropy protects the commitment. Not private, and not rendered as private. This region holds the space the disclosed block would occupy.'));
+    if (OPT.h6h2 === 'glyph') g.append(el('span','porous'));
+    n.append(g);
+  }
+
+  const a = el('div'); a.style.marginTop = '3px';
+  a.append(el('b',null,'a'), document.createTextNode(' — standard: "ISO-9001-ish Baseline" · a.u present'));
+  n.append(a);
+
+  const led = el('div','ledger');
+  led.append(el('div','lh','V — 0 of 9 performed by this viewer · outcomes {○ · ⊘ · —} · fail not offered: no host declaration'));
+  [['○','1 SAID self-consistency — computable on demand'],
+   ['⊘','2 schema — no schema document in hand · blocked at ','EAow76Ee1e…',3],
+   ['⊘','3 signatures — no signature or KEL material in hand'],
+   ['⊘','4 KEL anchoring — blocked at ','EAS6m0KAnZ…'],
+   ['⊘','5 delegation — reach 0 tiers · blocked at issuer KEL ','EAS6m0KAnZ…'],
+   ['—','6 edge constraints — no subjects: no edge section as issued (sealed below)'],
+   ['○','7 issuer bona fides — labeled roll-up of 6 · arcviz default AND, host-overridable'],
+   ['—','8 revocation — no registry committed (rd absent as issued)'],
+   ['○','9 duplicity — watchers consulted: zero (scoped to this material)']
+  ].forEach(([g,t,pill,xn]) => {
+    const r = el('div','r'); const body = el('div',null,t);
+    if (pill){ body.append(el('span','pill',pill)); if (xn) body.append(el('span','x','×' + xn)); }
+    r.append(el('div','g',g), body); led.append(r);
+  });
+  n.append(led);
+
+  if (o.stale) n.append(el('div','tline','T — policy ' + o.stale.policy + ' (host) · as-of 2026-06-14T00:00Z · exceeded — stale'));
+  if (o.seal){
+    const sealRow = el('div'); sealRow.style.marginTop = '5px';
+    sealRow.append(el('span','seal','e — none · sealed at issuance'));
+    n.append(sealRow);
+    const s = el('div'); s.style.cssText = 'font-size:8.5px;color:#444;margin-top:2px';
+    s.textContent = 'This artifact, as issued, has no edge section — committed by its own SAID.';
+    n.append(s);
+  }
+  return n;
+}
+
+function render(){
+  const host = document.getElementById('host');
+  host.textContent = '';
+  if (OPT.hostw) host.style.width = Math.min(OPT.hostw, document.documentElement.clientWidth) + 'px';
+  const gate = el('div','gate');
+  const gh = el('div','gatehead');
+  gh.innerHTML = '<b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure';
+  gate.append(gh);
+  const board = el('div','board');
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','edges');
+  svg.innerHTML = '<defs>' +
+    '<marker id="arrowClosed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>' +
+    '<marker id="arrowOpen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>' +
+    '</defs>';
+  board.append(svg);
+  const band = el('div','band');
+  band.innerHTML = '<b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts';
+  board.append(band);
+  const body = el('div','body');
+  body.append(el('div','gutter'));
+  const rows = el('div','rows' + (OPT.packing === 'band' ? ' bands' : ''));
+  let lastBand = null;
+  OBJECTS.forEach(o => {
+    if (lastBand !== null && o.band !== lastBand) rows.append(el('div','rowbreak'));
+    lastBand = o.band;
+    rows.append(
+      o.id === OPT.focus && o.kind === 'item' ? buildCard(o)
+      : OPT.floor === 'two' && isBudgeted(o) ? buildMid(o)
+      : buildFloor(o));
+  });
+  body.append(rows);
+  board.append(body);
+  board.append(el('div','cap',
+    'row packing is viewport economy, not topology — only drawn edges connect anything, and two objects sharing a row at one width may not share one at another'));
+  gate.append(board);
+  host.append(gate);
+  wireFocus(host);
+  routeEdges(board, svg);
+}
+
+function wireFocus(host){
+  host.querySelectorAll('.focusable').forEach(n => {
+    const go = () => {
+      const u = new URL(location.href);
+      if (OPT.focus === n.dataset.id) u.searchParams.delete('focus');
+      else u.searchParams.set('focus', n.dataset.id);
+      location.href = u.toString();
+    };
+    n.addEventListener('click', go);
+    n.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); go(); } });
+  });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// EDGE ROUTING. Runs after layout, against measured geometry, so it holds at any packing.
+// Connectors carry no text: the label lives in the port inside the issuer boundary (DD-3).
+// The port's direction glyph is DERIVED from the routed geometry, never authored — at a
+// fixed width it could be written by hand, and that is exactly the fault DD-10 names.
+//////////////////////////////////////////////////////////////////////////////////////////
+function routeEdges(board, svg){
+  const B = board.getBoundingClientRect();
+  const boxCache = {};
+  const box = id => { if (id in boxCache) return boxCache[id];
+    const n = board.querySelector('[data-id="' + id + '"]');
+    if (!n) return (boxCache[id] = null);
+    const r = n.getBoundingClientRect();
+    return (boxCache[id] = {id:id, left:r.left-B.left, top:r.top-B.top, right:r.right-B.left, bottom:r.bottom-B.top,
+            w:r.width, h:r.height, cx:r.left-B.left+r.width/2, cy:r.top-B.top+r.height/2}); };
+  svg.setAttribute('width', board.clientWidth);
+  svg.setAttribute('height', board.clientHeight);
+  svg.setAttribute('viewBox', '0 0 ' + board.clientWidth + ' ' + board.clientHeight);
+  [...svg.querySelectorAll('.e')].forEach(n => n.remove());
+  const draw = (d, open) => {
+    const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('class','e'); p.setAttribute('d', d); p.setAttribute('fill','none');
+    p.setAttribute('stroke','#111'); p.setAttribute('stroke-width','1.2');
+    p.setAttribute('marker-end','url(#' + (open ? 'arrowOpen' : 'arrowClosed') + ')');
+    svg.append(p); };
+
+  // Visual rows, derived from measured tops. A connector may run horizontally only in the gap
+  // between two rows and vertically only in a lane free of objects in every row it crosses, so
+  // no segment is ever hidden behind an opaque node. A hidden connector would read as a
+  // connector that ends where it disappears, which is one more kind of absence passing for
+  // another — the thing this component exists to refuse.
+  const all = OBJECTS.map(o => box(o.id)).filter(Boolean);
+  const byTop = {};
+  all.forEach((r,i) => { const k = Math.round(r.top); (byTop[k] = byTop[k] || []).push(r); });
+  const ROWS = Object.keys(byTop).map(Number).sort((x,y) => x - y)
+    .map(k => ({top:Math.min(...byTop[k].map(r=>r.top)), bottom:Math.max(...byTop[k].map(r=>r.bottom)), items:byTop[k].slice().sort((p,q)=>p.left-q.left)}));
+  const rowOf = r => ROWS.findIndex(row => Math.abs(row.top - r.top) < 2 || (r.top >= row.top - 2 && r.bottom <= row.bottom + 2));
+  const rowsBox = board.querySelector('.rows').getBoundingClientRect();
+  const L = rowsBox.left - B.left + 2, R = rowsBox.right - B.left - 2;
+  const channelBelow = i => (i + 1 < ROWS.length) ? (ROWS[i].bottom + ROWS[i+1].top) / 2 : ROWS[i].bottom + 8;
+  const channelAbove = i => (i > 0) ? (ROWS[i-1].bottom + ROWS[i].top) / 2 : ROWS[i].top - 8;
+  const freeAt = (i, x) => !ROWS[i].items.some(r => x > r.left - 3 && x < r.right + 3);
+  // A lane must also clear the source and target boxes themselves where they are not the endpoints.
+  function lane(betweenRows, want){
+    if (!betweenRows.length) return want;
+    if (betweenRows.every(i => freeAt(i, want))) return want;
+    const cands = [L, R];
+    betweenRows.forEach(i => {
+      let prev = L;
+      ROWS[i].items.forEach(r => { cands.push((prev + r.left) / 2); prev = r.right; });
+      cands.push((prev + R) / 2);
+    });
+    const ok = cands.filter(x => x > L - 1 && x < R + 1 && betweenRows.every(i => freeAt(i, x)));
+    if (!ok.length) return want;
+    return ok.reduce((best,x) => Math.abs(x - want) < Math.abs(best - want) ? x : best, ok[0]);
+  }
+
+  const stats = {horizontal:0, descending:0, ascending:0, per:{}};
+  EDGES.forEach(e => {
+    const a = box(e.from), b = box(e.to);
+    if (!a || !b) return;
+    const ia = rowOf(a), ib = rowOf(b);
+    let glyph;
+    if (ia === ib){
+      const y = (Math.max(a.top,b.top) + Math.min(a.bottom,b.bottom)) / 2;
+      const lo = Math.min(a.right, b.right), hi = Math.max(a.left, b.left);
+      const blocked = ROWS[ia].items.some(r => r.id !== a.id && r.id !== b.id && r.left < hi && r.right > lo);
+      if (!blocked){
+        if (b.left >= a.right){ draw('M' + a.right + ',' + y + ' H' + (b.left - 1)); glyph = '→'; }
+        else { draw('M' + a.left + ',' + y + ' H' + (b.right + 1)); glyph = '←'; }
+      } else {
+        // Detour through the gap below the row rather than pass behind the objects between them.
+        const ym = channelBelow(ia);
+        draw('M' + a.cx + ',' + a.bottom + ' V' + ym + ' H' + b.cx + ' V' + (b.bottom + 1));
+        glyph = b.cx > a.cx ? '→' : '←';
+      }
+      stats.horizontal++;
+    } else if (ib > ia){
+      const yA = channelBelow(ia), yB = channelAbove(ib);
+      const between = []; for (let i = ia + 1; i < ib; i++) between.push(i);
+      const X = lane(between, b.cx);
+      draw('M' + a.cx + ',' + a.bottom + ' V' + yA + ' H' + X + ' V' + yB + ' H' + b.cx + ' V' + (b.top - 1));
+      glyph = b.cx > a.cx + 2 ? '↘' : b.cx < a.cx - 2 ? '↙' : '↓';
+      stats.descending++;
+    } else {
+      const yA = channelAbove(ia), yB = channelBelow(ib);
+      const between = []; for (let i = ib + 1; i < ia; i++) between.push(i);
+      const X = lane(between, b.cx);
+      draw('M' + a.cx + ',' + a.top + ' V' + yA + ' H' + X + ' V' + yB + ' H' + b.cx + ' V' + (b.bottom + 1));
+      glyph = b.cx > a.cx + 2 ? '↗' : b.cx < a.cx - 2 ? '↖' : '↑';
+      stats.ascending++;
+    }
+    stats.per[e.from + '>' + e.to] = glyph;
+    const port = board.querySelector('[data-edge="' + e.from + '>' + e.to + '"] .arrow');
+    if (port) port.textContent = glyph;
+  });
+
+  // The frontier. Its entry points are near-node facts, so an object adjacent to the gutter
+  // enters it directly; an object the packing has moved away from the gutter gets a near-node
+  // nub instead, because a stub drawn all the way across would either pass behind the objects
+  // in between or assert a path through them. NEW, and forced by responsiveness: at 360 every
+  // frontier-bearing object happened to sit in column one and the question never arose.
+  const gut = board.querySelector('.gutter').getBoundingClientRect().right - B.left;
+  const bandBottom = board.querySelector('.band').getBoundingClientRect().bottom - B.top;
+  stats.nubs = 0;
+  FRONTIER.forEach(f => {
+    const a = box(f.from); if (!a) return;
+    if (f.to === 'gutter'){
+      const adjacent = a.left - gut < 14;
+      if (!adjacent) stats.nubs += f.count;
+      const x2 = adjacent ? gut + 3 : a.left - 8;
+      for (let i = 0; i < f.count; i++){
+        const y = a.top + a.h * (i + 1) / (f.count + 1);
+        draw('M' + a.left + ',' + y + ' H' + x2, true);
+      }
+    } else {
+      const adjacent = a.top - bandBottom < 24;
+      if (!adjacent) stats.nubs += f.count;
+      const y2 = adjacent ? bandBottom + 3 : a.top - 8;
+      for (let i = 0; i < f.count; i++){
+        const x = a.left + a.w * (i + 1) / (f.count + 1);
+        draw('M' + x + ',' + a.top + ' V' + y2, true);
+      }
+    }
+  });
+  window.__arcvizEdgeStats = stats;
+}
+
+render();
+let raf = null;
+new ResizeObserver(() => {
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => {
+    const board = document.querySelector('.board');
+    if (board) routeEdges(board, board.querySelector('.edges'));
+  });
+}).observe(document.getElementById('host'));
+</script>
+</body></html>
