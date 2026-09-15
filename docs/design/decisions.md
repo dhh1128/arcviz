@@ -86,8 +86,37 @@ Non-focused cards reflow to a compact floor. Cards carrying one of the four budg
 
 ---
 
+---
+
+## DD-7 — The primary axis is vertical · **Ratified 2026-09-15**
+
+The graph lays out vertically. Fan-out wraps rather than extending horizontally.
+
+**Why.** Daniel Hardman's ruling: it is the only axis that works on a phone. DD-2 makes that concrete — at 320 CSS pixels there is no horizontal budget to spend, so a horizontal primary axis would require two-dimensional scrolling, which SC 1.4.10 forbids outright.
+
+**What it costs, recorded rather than glossed.** A wide fan-out becomes a long vertical run, so the widest graphs render as the tallest ones — the inverse of what their shape suggests. The corpus does not tell us how often that bites: production supplied depth without branching, keripy branching without depth.
+
+**Reversed if.** Nothing foreseeable at 320 px. A desktop-only or landscape-tablet variant could differ, but it would be a second layout rather than a reversal.
+
+---
+
+## DD-8 — Intra-card disclosure: collapse follows the artifact, and never resembles non-disclosure · **Proposed**
+
+A card needs to collapse and expand its own contents, because credentials carry more fields than a viewport holds, and a focused card may need internal scrolling. Four constraints govern it.
+
+**Collapsed is a distinct state from undisclosed, and must look it.** This is the sharpest point and the one most likely to be lost. The matrix exists to stop one kind of absence passing for another; UI collapse introduces a new kind — *present, disclosed, hidden by the viewer's own interface* — which is reversible by the viewer alone, where undisclosed is not reversible at all. A collapsed section that resembles a compact one would be a twelfth indistinguishable pair, created by us rather than inherited from the format. **Inference, flagged:** no source states this; it follows from applying the matrix's own commitment to a state the matrix does not contain.
+
+**Collapse follows the artifact's nesting, never a designer's grouping.** The ACDC supplies the tree: top-level sections, sub-blocks within `a`, elements of `A`. Grouping fields for tidiness can place two differently-disclosed things behind one toggle, and the toggle then asserts a relationship the credential never made. Veridian's `CardDetailsExpandAttributes` already does the structural version, recursing on object-valued attributes with a depth counter and opening the first level.
+
+**The prominence budget propagates upward through collapse.** A collapsed header carries the budgeted states of everything beneath it. This is the stress board's off-viewport finding at a different scale: if a stale marker or a guessable-but-looks-private field sits inside a collapsed section, collapsing hides exactly what must not be hidden.
+
+**Internal scroll is bounded.** Nested scroll regions capture the outer scroll on touch devices, so at most the focused card scrolls internally. And a card with internal scroll cannot print: under Rule 15 print expands everything, which means the rules section — 300 to 500 characters against data fields of 12 to 44 — renders in full on paper regardless of its screen treatment.
+
+**Reversed if.** A legibility probe shows that carrying propagated state on collapsed headers costs more than it saves, or that the artifact's own nesting produces a tree too deep to navigate at 320 px.
+
+**Unresolved.** The shape catalog's SC7 covers card-internal *disclosure states* and not card-internal *volume*; a case for "a card with more content than the viewport" does not exist and should be added.
+
 ## Open
 
 - **Who the primary viewer is.** Holder examining their own credential, or verifier auditing provenance. It swings DD-1 and the scaffolding question, and nothing in the research settles it.
-- **Whether the primary axis should be vertical at all.** Vertical suits depth; fan-out wants horizontal. Production gave us depth without branching, keripy branching without depth, so the corpus does not say which dominates in practice.
 - **The holder-facing presenter indicator.** The full-apparatus ruling and AF17's "no presenter indicator at all, positive or negative" collide on exactly one axis; see PLAN.md's 2026-09-14 entry.
