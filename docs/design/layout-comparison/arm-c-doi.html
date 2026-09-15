@@ -1,0 +1,371 @@
+<!doctype html>
+<!-- arcviz layout comparison / ARM C: degree-of-interest as importance-weighted space allocation.
+     Furnas's DOI is used for ONE thing only: deciding how much space a non-focused object keeps,
+     with the prominence budget supplying the a-priori-importance term. Scoped against the
+     focus+context literature audit (docs/research/prior-art/focus-context.md): no magnification-as-
+     navigation, no geometric distortion, no continuous shrink (reflow between three discrete tiers),
+     no force-directed layout, and NO claim that any of this aids comprehension.
+     Same presentation, items, and host stubs as docs/design/stress-board/ (see that README's manifest).
+     Static HTML+CSS, no build step, no JS, no external resources, no :hover, no animation.
+     Authored hue-free: this file IS its own greyscale exhibit.
+     ANNOTATION DISCIPLINE: nothing inside a phone frame names a fixture or states a fact the
+     geometry withholds; all commentary lives in grey panels outside the frames. -->
+<html lang="en"><head><meta charset="utf-8"><title>Layout comparison — arm C: degree-of-interest</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:860px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:15px;margin:28px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:820px}
+  .phone{width:360px;margin:14px 0;outline:1px solid #bbb}
+  .gate{border:5px double #111;background:#fff}
+  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
+  .board{position:relative;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .fband{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:8px;color:#333}
+  .fgut{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .x{font-size:7.5px;vertical-align:super;color:#333}
+  .card{border:1.5px solid #111;background:#fff;padding:7px 9px;font-size:10px;line-height:1.3}
+  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:8px;padding:0 3px;background:#fafafa}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:8px}
+  .stale{border-top:none!important}
+  .stale-top{display:flex;align-items:center}
+  .card.stale .stale-top{margin:-7px -9px 4px}
+  .stale-top .ln{flex:1;border-top:1.5px solid #111}
+  .stale-top .tx{font-size:7px;padding:0 3px;white-space:nowrap}
+  /* floor form (76x44), the low tier */
+  .fl{border:1.5px solid #111;background:#fff;padding:2px 4px;font-size:8px;line-height:1.2;width:76px;height:44px}
+  .fl .role{font-size:6.5px;letter-spacing:.06em;color:#555}
+  .fl .pill{font-size:8px;padding:0 3px}
+  .fl .port{font-size:7px;padding:0 2px;border-bottom-width:2px}
+  .fl .seal{border-top-width:3px;font-size:6.5px}
+  .flhole{border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:2px 4px;font-size:8px;line-height:1.2;width:76px;height:44px}
+  .flhole .hdr{font-weight:700;font-size:6.5px;letter-spacing:.06em}
+  .flhole .pill{font-size:8px;padding:0 3px}
+  /* mid form (150x72), the API floor for budgeted cards */
+  .md{border:1.5px solid #111;background:#fff;padding:4px 6px;font-size:9px;line-height:1.25;width:150px;height:72px}
+  .md .role{font-size:7.5px;letter-spacing:.08em;color:#555}
+  .md .pill{font-size:8.5px;padding:0 4px}
+  .md .port{font-size:8px}
+  .md .seal{font-size:8px;border-top-width:3px}
+  .md.stale{border-top:none!important}
+  .md .stale-top{margin:-4px -6px 2px}
+  .md .stale-top .tx{font-size:7px;padding:0 3px}
+  .md .vt{font-size:7px;color:#444}
+  .mdh6{border:none;background:#fff;position:relative;padding:4px 6px;font-size:9px;line-height:1.25;width:150px;height:72px}
+  .mdh6 .ck{position:absolute;width:14px;height:14px;border:0 solid #111}
+  .mdh6 .tl{left:0;top:0;border-left-width:1.5px;border-top-width:1.5px}
+  .mdh6 .tr{right:0;top:0;border-right-width:1.5px;border-top-width:1.5px}
+  .mdh6 .bl{left:0;bottom:0;border-left-width:1.5px;border-bottom-width:1.5px}
+  .mdh6 .br{right:0;bottom:0;border-right-width:1.5px;border-bottom-width:1.5px}
+  .mdh6 .role{font-size:7.5px;letter-spacing:.08em;color:#555}
+  .mdh6 .pill{font-size:8.5px;padding:0 4px}
+  .mdh6 .port{font-size:8px}
+  .mdh6 .h6l{font-size:6.5px;border-left:3px solid #111;padding-left:3px;margin-top:2px;line-height:1.3}
+  .md .gm{border:1px solid #555;background:transparent;padding:1px 3px;font-size:6.5px;margin-top:2px;line-height:1.3}
+  .w6{font-size:6px;color:#333}
+  .ledger{font-size:9px;color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
+  .ledger .lh{color:#444;border-bottom:1px solid #ddd;margin-bottom:2px;padding-bottom:1px}
+  .ledger .r{display:flex;gap:4px}
+  .ledger .g{width:11px;flex:none;text-align:center}
+  .tline{font-size:9px;color:#333;margin-top:3px}
+  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .cap{font-size:9px;color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3}
+  .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;max-width:820px;margin:18px 0}
+  .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+</style></head><body>
+
+<h1>Arm C — degree-of-interest: the prominence budget as the API term</h1>
+<p class="note">The mechanism, scoped to what the literature permits: every object's size is <code>tier(x) = max( state_floor(x), focus_tier − hops(x, focus) )</code> over three discrete tiers — expanded, mid (150×72), floor (76×44). This is Furnas's general form, a combining function monotone increasing in a-priori importance and decreasing in distance; the a-priori term is the prominence budget, entering as a per-object <i>floor</i> rather than an addend, so a card carrying a budgeted state (stale, metadata-possibly, guessable) never compresses below the mid form no matter how far from focus it sits. Positions never change with focus — tiers resize in place, ranks and orderings are fixed — so this is reflow, not distortion, and nothing here is navigation-by-magnification. Measurements and the seven-question table: <a href="README.md">README.md</a>.</p>
+
+<h2>Frame C1 — no focus: the API term alone (this is also the print form)</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:578px;width:350px">
+    <svg width="350" height="578">
+      <defs>
+        <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="oc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <!-- hole 1 fringe up into the band -->
+      <line x1="36" y1="33" x2="36" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc)"/>
+      <line x1="54" y1="33" x2="54" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc)"/>
+      <line x1="72" y1="33" x2="72" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc)"/>
+      <!-- 03 -> hole 1 -->
+      <line x1="106" y1="66" x2="100" y2="66" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 02 -> 01 -->
+      <line x1="190" y1="152" x2="178" y2="152" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 04 -> 05 -->
+      <line x1="174" y1="220" x2="184" y2="220" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 04 -> 06 (over the row, through the gap) -->
+      <path d="M120,198 L120,193 L306,193 L306,197" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 06 -> 07 (down, around the occupied row) -->
+      <path d="M306,242 L306,274 L66,274 L66,279" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 05 -> 08 -->
+      <line x1="228" y1="242" x2="228" y2="279" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 07 -> 08 -->
+      <line x1="98" y1="315" x2="105" y2="315" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- 09: two committed edges, destinations withheld -->
+      <line x1="22" y1="390" x2="15" y2="390" stroke="#111" stroke-width="1.2" marker-end="url(#oc)"/>
+      <line x1="22" y1="398" x2="15" y2="398" stroke="#111" stroke-width="1.2" marker-end="url(#oc)"/>
+      <!-- 10 -> hole 2 -->
+      <line x1="120" y1="444" x2="68" y2="452" stroke="#111" stroke-width="1.2" marker-end="url(#ac)"/>
+      <!-- hole 2 fringe -->
+      <line x1="22" y1="470" x2="15" y2="470" stroke="#111" stroke-width="1" marker-end="url(#oc)"/>
+      <line x1="22" y1="478" x2="15" y2="478" stroke="#111" stroke-width="1" marker-end="url(#oc)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts</div>
+    <div class="el fgut" style="left:0;top:26px;width:14px;height:552px"></div>
+
+    <div class="el flhole" style="left:22px;top:34px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EM7gTDXqvy…</span>
+      <div class="w6">unknown · fringe ↑</div>
+    </div>
+    <div class="el md stale" style="left:106px;top:34px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT72H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 03</div>
+      <span class="pill">EGDKB8m5pt…</span>
+      <div style="margin-top:2px"><span class="port">auth ←</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el md stale" style="left:22px;top:116px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · P30D exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 01</div>
+      <span class="pill">EHOTOsgWoV…</span><span class="x">×2</span>
+      <div style="margin-top:2px"><span class="seal">e none · sealed</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+    <div class="el md stale" style="left:190px;top:116px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · P30D exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 02</div>
+      <span class="pill">ENKSmFLrpu…</span>
+      <div style="margin-top:2px"><span class="port">qvi ←</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el md stale" style="left:22px;top:198px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 04</div>
+      <span class="pill">EDQ6zCH2Xs…</span>
+      <div style="margin-top:2px"><span class="port">shortPath →</span> <span class="port">longPath ↗</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+    <div class="el fl" style="left:190px;top:198px">
+      <div class="role">05</div>
+      <span class="pill">EGHUpSJN58…</span>
+      <div><span class="port">baseline ↓</span></div>
+    </div>
+    <div class="el fl" style="left:268px;top:198px">
+      <div class="role">06</div>
+      <span class="pill">ELZEWuSVWm…</span>
+      <div><span class="port">waypoint ↓</span></div>
+    </div>
+
+    <div class="el fl" style="left:22px;top:280px">
+      <div class="role">07</div>
+      <span class="pill">EPJBkGOiB1…</span>
+      <div><span class="port">baseline →</span></div>
+    </div>
+    <div class="el md stale" style="left:106px;top:280px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 08</div>
+      <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span>
+      <div style="margin-top:2px"><span class="seal">e none · sealed</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el fl" style="left:22px;top:372px">
+      <div class="role">09</div>
+      <span class="pill">EHZGkyDF43…</span>
+      <div><span class="port">←</span> <span class="port">←</span> <span class="w6">1–2 dest.</span></div>
+    </div>
+    <div class="el mdh6" style="left:106px;top:372px">
+      <span class="ck tl"></span><span class="ck tr"></span><span class="ck bl"></span><span class="ck br"></span>
+      <div class="role">ITEM 10</div>
+      <span class="pill">EC9jOzkasO…</span>
+      <div style="margin-top:2px"><span class="port">evidence ↙</span></div>
+      <div class="h6l"><b>possibly a metadata ACDC</b> — u present-and-empty · no commitment evidence either way</div>
+    </div>
+
+    <div class="el flhole" style="left:22px;top:454px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EDSm-SsfXZ…</span>
+      <div class="w6">unknown · fringe ←</div>
+    </div>
+    <div class="el md" style="left:106px;top:454px">
+      <div class="role">ITEM 11</div>
+      <span class="pill">EM29GVeQIJ…</span> <span class="seal">e none</span>
+      <div class="gm"><b>a</b> collapsed <span class="pill" style="font-size:7px">EEjGZMTbGN…</span> — <b>recoverable/guessable</b>: schema reserves no u</div>
+    </div>
+
+    <div class="el cap" style="left:22px;top:534px;width:314px;font-size:7.5px">
+      sizes are allocation, not verdicts — a larger card is one whose state the render refuses to shrink, never a better or worse credential · row packing is viewport economy; only drawn edges connect anything
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">No-focus register, measured: 578&nbsp;px (652&nbsp;px with gate chrome) — one and a bit viewports. The seven cards holding a budgeted card-state sit at the mid tier and keep their <i>parameters</i>: every stale card shows its policy kind and value (the two-policy distinction that dies between floor chips survives here at rest), item 10 keeps its four withdrawn corners plus the possibly-line, item 11 keeps a drawn transparent a-region, not just a word. The cost against arm B's all-floor rest is 578 vs 322&nbsp;px — the API term spends 80% more column at rest, and that space is exactly what it buys legibility with.</p>
+
+<h2>Frame C2 — the API-term test: focus on ITEM 05, which carries no budgeted state</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:1044px;width:350px">
+    <svg width="350" height="1044">
+      <defs>
+        <marker id="ac2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="oc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <line x1="36" y1="33" x2="36" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc2)"/>
+      <line x1="54" y1="33" x2="54" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc2)"/>
+      <line x1="72" y1="33" x2="72" y2="28" stroke="#111" stroke-width="1" marker-end="url(#oc2)"/>
+      <line x1="106" y1="66" x2="100" y2="66" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <line x1="190" y1="152" x2="178" y2="152" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <!-- 04 -> 05 (straight down into the focused card) -->
+      <line x1="120" y1="271" x2="120" y2="278" stroke="#111" stroke-width="1.3" marker-end="url(#ac2)"/>
+      <!-- 04 -> 06 -->
+      <line x1="174" y1="220" x2="188" y2="220" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <!-- 06 -> 07: down the free right lane beside the focused card -->
+      <path d="M228,242 L228,250 L316,250 L316,752 L60,752 L60,759" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <!-- 05 (focused) -> 08 -->
+      <line x1="160" y1="751" x2="160" y2="758" stroke="#111" stroke-width="1.3" marker-end="url(#ac2)"/>
+      <!-- 07 -> 08 -->
+      <line x1="98" y1="796" x2="105" y2="796" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <!-- 09 -->
+      <line x1="22" y1="860" x2="15" y2="860" stroke="#111" stroke-width="1.2" marker-end="url(#oc2)"/>
+      <line x1="22" y1="868" x2="15" y2="868" stroke="#111" stroke-width="1.2" marker-end="url(#oc2)"/>
+      <!-- 10 -> hole 2, hole 2 fringe -->
+      <line x1="120" y1="914" x2="68" y2="922" stroke="#111" stroke-width="1.2" marker-end="url(#ac2)"/>
+      <line x1="22" y1="940" x2="15" y2="940" stroke="#111" stroke-width="1" marker-end="url(#oc2)"/>
+      <line x1="22" y1="948" x2="15" y2="948" stroke="#111" stroke-width="1" marker-end="url(#oc2)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts</div>
+    <div class="el fgut" style="left:0;top:26px;width:14px;height:1018px"></div>
+
+    <div class="el flhole" style="left:22px;top:34px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EM7gTDXqvy…</span>
+      <div class="w6">unknown · fringe ↑</div>
+    </div>
+    <div class="el md stale" style="left:106px;top:34px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT72H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 03</div>
+      <span class="pill">EGDKB8m5pt…</span>
+      <div style="margin-top:2px"><span class="port">auth ←</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el md stale" style="left:22px;top:116px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · P30D exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 01</div>
+      <span class="pill">EHOTOsgWoV…</span><span class="x">×2</span>
+      <div style="margin-top:2px"><span class="seal">e none · sealed</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+    <div class="el md stale" style="left:190px;top:116px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · P30D exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 02</div>
+      <span class="pill">ENKSmFLrpu…</span>
+      <div style="margin-top:2px"><span class="port">qvi ←</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el md stale" style="left:22px;top:198px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 04</div>
+      <span class="pill">EDQ6zCH2Xs…</span>
+      <div style="margin-top:2px"><span class="port">shortPath ↓</span> <span class="port">longPath →</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+    <div class="el fl" style="left:190px;top:198px">
+      <div class="role">06</div>
+      <span class="pill">ELZEWuSVWm…</span>
+      <div><span class="port">waypoint ↘</span></div>
+    </div>
+
+    <!-- ITEM 05, expanded in place: one hop from focus would be mid, but focus itself is expanded -->
+    <div class="el card" style="left:22px;top:280px;width:278px;height:470px">
+      <div class="role">ITEM 05 · host load label (opaque) · FOCUSED — expanded in place</div>
+      <div>d <span class="pill">EGHUpSJN58…</span><span class="x">×2</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EF7IEE2tXW…</span> · no issuee field in a</div>
+      <div style="margin-top:2px">schema <span class="pill">ECCZBQhed5…</span><span class="x">×2</span></div>
+      <div class="manif">s committed · a disclosed · e 1 edge (baseline) · r none as issued</div>
+      <div style="margin-top:3px"><b>a</b> — scope: "short path, one hop from the ancestor" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px">e-section <span class="pill">ENkj_sx2Qt…</span><span class="x">×2</span> · edge block <span class="pill">EL94FmuIil…</span><span class="x">×2</span> — byte-identical to ITEM 07's (equality of committed bytes, not a similarity judgment)</div>
+      <div style="margin-top:2px;font-size:8.5px">out-edge: <b>baseline</b> → the card below · NI2I — derived (far node in hand, untargeted)</div>
+      <div class="ledger">
+        <div class="lh">V — 0 of 9 performed by this viewer · outcomes {○ · ⊘ · —} · fail not offered: no host declaration</div>
+        <div class="r"><div class="g">○</div><div>1 SAID self-consistency — computable on demand</div></div>
+        <div class="r"><div class="g">⊘</div><div>2 schema — no schema document in hand · blocked at <span class="pill">ECCZBQhed5…</span><span class="x">×2</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>3 signatures — no signature or KEL material in hand</div></div>
+        <div class="r"><div class="g">⊘</div><div>4 KEL anchoring — blocked at <span class="pill">EF7IEE2tXW…</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>5 delegation — reach 0 tiers · blocked at issuer KEL <span class="pill">EF7IEE2tXW…</span></div></div>
+        <div class="r"><div class="g">○</div><div>6 edge <b>baseline</b> — far node in hand; computable on demand</div></div>
+        <div class="r"><div class="g">○</div><div>7 issuer bona fides — labeled roll-up of 6 · arcviz default AND, host-overridable</div></div>
+        <div class="r"><div class="g">—</div><div>8 revocation — no registry committed (rd absent as issued)</div></div>
+        <div class="r"><div class="g">○</div><div>9 duplicity — watchers consulted: zero (scoped to this material)</div></div>
+      </div>
+      <div class="tline">T — freshness: <b>no policy supplied</b> (its own state, never a silent default)</div>
+      <div style="margin-top:4px"><span class="port">baseline ↓</span></div>
+    </div>
+
+    <div class="el fl" style="left:22px;top:760px">
+      <div class="role">07</div>
+      <span class="pill">EPJBkGOiB1…</span>
+      <div><span class="port">baseline →</span></div>
+    </div>
+    <div class="el md stale" style="left:106px;top:760px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE · PT12H exceeded</span><span class="ln"></span></div>
+      <div class="role">ITEM 08</div>
+      <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span>
+      <div style="margin-top:2px"><span class="seal">e none · sealed</span></div>
+      <div class="vt">V·T detail at expanded scale</div>
+    </div>
+
+    <div class="el fl" style="left:22px;top:842px">
+      <div class="role">09</div>
+      <span class="pill">EHZGkyDF43…</span>
+      <div><span class="port">←</span> <span class="port">←</span> <span class="w6">1–2 dest.</span></div>
+    </div>
+    <div class="el mdh6" style="left:106px;top:842px">
+      <span class="ck tl"></span><span class="ck tr"></span><span class="ck bl"></span><span class="ck br"></span>
+      <div class="role">ITEM 10</div>
+      <span class="pill">EC9jOzkasO…</span>
+      <div style="margin-top:2px"><span class="port">evidence ↙</span></div>
+      <div class="h6l"><b>possibly a metadata ACDC</b> — u present-and-empty · no commitment evidence either way</div>
+    </div>
+
+    <div class="el flhole" style="left:22px;top:924px">
+      <div class="hdr">NOT IN HAND</div>
+      <span class="pill">EDSm-SsfXZ…</span>
+      <div class="w6">unknown · fringe ←</div>
+    </div>
+    <div class="el md" style="left:106px;top:924px">
+      <div class="role">ITEM 11</div>
+      <span class="pill">EM29GVeQIJ…</span> <span class="seal">e none</span>
+      <div class="gm"><b>a</b> collapsed <span class="pill" style="font-size:7px">EEjGZMTbGN…</span> — <b>recoverable/guessable</b>: schema reserves no u</div>
+    </div>
+
+    <div class="el cap" style="left:22px;top:1004px;width:314px;font-size:7.5px">
+      sizes are allocation, not verdicts · positions did not move when focus was taken — tiers resize in place, and the unmapped region at top and left is the same size at every focus, because nothing about it may respond to what hides
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">The mechanism's whole claim, tested: focus sits on ITEM 05, which carries no budgeted state and is one to five hops from every card that does. Result — all five stale cards keep their frame-break <i>with the policy value</i> ("P30D exceeded" vs "PT12H exceeded" vs "PT72H exceeded" remain three visibly different facts), item 10 keeps four corners and its possibly-line, item 11 keeps a drawn transparent region. Under arm B the same focus position reduces every one of those to a bare word or nothing. Cost, measured: 1,044&nbsp;px against arm B's 716 for a focused register — the API floor spends ≈ 46% more column. What the API term does not cover: item 09's two blinded edges are graph-level state, not card-budgeted, so its cardinality bracket dies at the floor here exactly as in arm B — the count-the-terminals residual is untouched by this mechanism.</p>
+
+<div class="comm">
+  <h3>COMMENTARY — OUTSIDE THE RENDER</h3>
+  <p>Host stubs identical to the stress board and to arms A and B; load manifest in <a href="../stress-board/README.md">../stress-board/README.md</a>.</p>
+  <p><b>What of Furnas is used, and what is refused.</b> Used: the 2006 general form — DOI as some F(API(x), D(x, focus)) monotone in each argument — instantiated as <code>tier = max(state_floor, focus_tier − hops)</code> over three discrete tiers. The prominence budget is the API term, entering as a floor because a budgeted state is a commitment ("this may not shrink below legibility"), not a score to be traded off against proximity. Refused, on the audited record in <a href="../../research/prior-art/focus-context.md">../../research/prior-art/focus-context.md</a>: geometric distortion (the field's own review found distortion largely failed to show performance benefit and damages spatial assessment); magnification-as-navigation (target acquisition degrades with magnification precisely because focus movement moves targets — here positions never move, only tier); continuous shrink (the stress board measured uniform scaling dead at ≈0.85×, so tiers are discrete reflowed forms); force-directed re-centering (declined: it is what makes layouts non-deterministic and is the "spring algorithm" family the mental-map literature treats as the hard case — and the Visual Thesaurus, the pattern's popular exemplar, is force-directed re-centering, not DOI, so it is no precedent for any of this). No claim is made that this arm aids comprehension; the literature does not support one. The claim is narrower: state legibility under compression is preserved for budgeted cards, by construction, and that property is checkable in this static file.</p>
+  <p><b>Unknowable distance, the behaviour defined.</b> D(x, focus) is hop count over disclosed edges within a component. Three cases have no defined distance, and each gets a stated behaviour rather than a crash or a guess: (1) a blinded edge's destination is not in the domain at all — it has no position, so DOI is never evaluated for it; the edge is drawn to the frontier boundary at every tier of its near node. (2) The frontier region is not at any place: it is excluded from allocation by construction, drawn at fixed size and position at every focus — which the fixed-size anti-leak rule independently requires, since a region that grew or shrank with focus would let marker geometry respond to what hides. (3) Cross-component distance is undefined (no path exists, and none may be manufactured): the max form then has only its first argument, so an unfocused card in another component sits at exactly its state floor — budgeted cards at mid, others at the floor form. A hole has a position (its disclosed in-edge gives it one), so D to a hole is defined; no path is ever counted <i>through</i> a hole, because its out-edges are unknown and a hop count through unknown edges would be invented topology.</p>
+  <p><b>Re-layout and the mental map.</b> Focus change alters tiers only: ranks, row order within rank, and left-to-right order are fixed functions of the presentation, so orthogonal ordering is preserved across every focus change — which is the one mental-map property with a proof tradition behind it. Proximity and topology preservation are unsolved in that literature, so nothing in this arm lets proximity carry meaning: the caps say sizes are allocation and distances are packing, and path length is read by counting cards, never by measured distance. If a transition between these two frames is ever animated, the literature supports only a spatial-reconstruction claim, not a comprehension or speed claim, and WCAG 2.1 SC 2.3.3 (Level AAA) requires the motion to be disableable regardless.</p>
+  <p><b>Determinism:</b> tiers are a pure function of (presentation bytes, host stubs, focus SAID); hop counts are over committed edges only; orderings are rank then SAID. No seeds, no iteration, no simulation. Byte-identical output on identical input.</p>
+  <p><b>Print:</b> a static render has no focus, and the mechanism defines its own degradation: with y absent, F degenerates to its API argument, which is frame C1 — the prominence budget alone deciding size. That is arguably the most honest static form any arm offers: what the page refuses to shrink is exactly what the render-model marked as budgeted, with no interactive residue pretending otherwise. Parameters of non-budgeted cards still need per-card expanded sheets, as in every arm.</p>
+</div>
+
+</body></html>

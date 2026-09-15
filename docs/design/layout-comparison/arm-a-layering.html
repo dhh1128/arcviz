@@ -1,0 +1,311 @@
+<!doctype html>
+<!-- arcviz layout comparison / ARM A: layering (occlusion with visible slivers).
+     Daniel Hardman's original model, given the fair test the charrette skipped: cards overlap,
+     each occluded card showing only its top edge as a sliver, and a sliver is a visible
+     attachment point — so the charrette's edges-attach-to-hidden-geometry refutation does not apply.
+     The measured question here: what can a sliver carry, at what minimum, and what is shed first.
+     Same presentation, items, and host stubs as docs/design/stress-board/ (see that README's manifest).
+     Static HTML+CSS, no build step, no JS, no external resources, no :hover, no animation.
+     Authored hue-free: this file IS its own greyscale exhibit.
+     ANNOTATION DISCIPLINE: nothing inside a phone frame names a fixture or states a fact the
+     geometry withholds; all commentary lives in grey panels outside the frames. -->
+<html lang="en"><head><meta charset="utf-8"><title>Layout comparison — arm A: layering</title>
+<style>
+  body{background:#fff;color:#111;font-family:-apple-system,"Segoe UI",system-ui,sans-serif;margin:24px auto;max-width:860px;font-size:14px;line-height:1.35}
+  h1{font-size:20px} h2{font-size:15px;margin:28px 0 6px}
+  .note{color:#444;font-size:12.5px;max-width:820px}
+  .phone{width:360px;margin:14px 0;outline:1px solid #bbb}
+  .gate{border:5px double #111;background:#fff}
+  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
+  .board{position:relative;background:#fff;overflow:hidden}
+  .board svg{position:absolute;inset:0;z-index:1}
+  .el{position:absolute;z-index:2;box-sizing:border-box}
+  .fband{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:8px;color:#333}
+  .fgut{background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .x{font-size:7.5px;vertical-align:super;color:#333}
+  .card{border:1.5px solid #111;background:#fff;padding:7px 9px;font-size:10px;line-height:1.3}
+  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:8px}
+  .stale{border-top:none!important}
+  .stale-top{display:flex;align-items:center}
+  .card.stale .stale-top{margin:-7px -9px 4px}
+  .stale-top .ln{flex:1;border-top:1.5px solid #111}
+  .stale-top .tx{font-size:7px;padding:0 3px;white-space:nowrap}
+  .ledger{font-size:9px;color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
+  .ledger .lh{color:#444;border-bottom:1px solid #ddd;margin-bottom:2px;padding-bottom:1px}
+  .ledger .r{display:flex;gap:4px}
+  .ledger .g{width:11px;flex:none;text-align:center}
+  .tline{font-size:9px;color:#333;margin-top:3px}
+  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .cap{font-size:9px;color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3}
+  /* ============ the sliver: the top edge of an occluded card ============ */
+  .slv{box-sizing:border-box;border:1.5px solid #111;border-bottom:none;background:#fff;height:18px;font-size:8px;line-height:13px;padding:1px 5px 0;white-space:nowrap;overflow:hidden}
+  .slv.last{border-bottom:1.5px solid #111}
+  .slv .rl{font-size:6.5px;letter-spacing:.06em;color:#555}
+  .slv .pill{font-size:8px;padding:0 3px;line-height:10px}
+  .slv .x,.slvh6 .x{font-size:6px;vertical-align:text-top}
+  .slv .p7{display:inline-block;border:1px solid #333;border-bottom-width:2px;font-size:7px;padding:0 2px;background:#fafafa;line-height:9px}
+  .slv .sl7{display:inline-block;border-top:3px solid #111;padding-top:0;font-size:6.5px;vertical-align:middle;line-height:8px}
+  .w6{font-size:6px;color:#333}
+  .slv.stale{border-top:none;height:25px;padding-top:0}
+  .slv.stale .stale-top{margin:0 -5px 1px;height:8px}
+  .slv.stale .stale-top .tx{font-size:7px;padding:0 3px}
+  .slvhole{box-sizing:border-box;border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);height:21px;font-size:8px;line-height:13px;padding:0 5px;white-space:nowrap;overflow:hidden}
+  .slvhole .hdr{font-weight:700;font-size:6.5px;letter-spacing:.06em}
+  .slvhole .pill{font-size:8px;padding:0 3px;line-height:10px}
+  .slvh6{box-sizing:border-box;border:none;background:#fff;height:18px;font-size:8px;line-height:13px;padding:1px 5px 0;white-space:nowrap;overflow:hidden;position:relative}
+  .slvh6 .ck{position:absolute;width:12px;height:9px;border:0 solid #111}
+  .slvh6 .tl{left:0;top:0;border-left-width:1.5px;border-top-width:1.5px}
+  .slvh6 .tr{right:0;top:0;border-right-width:1.5px;border-top-width:1.5px}
+  .slvh6 .rl{font-size:6.5px;letter-spacing:.06em;color:#555}
+  .slvh6 .pill{font-size:8px;padding:0 3px;line-height:10px}
+  .slvh6 .p7{display:inline-block;border:1px solid #333;border-bottom-width:2px;font-size:7px;padding:0 2px;background:#fafafa;line-height:9px}
+  .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;max-width:820px;margin:18px 0}
+  .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+  .gzrow{display:flex;align-items:flex-start;gap:18px;margin:10px 0}
+  .gz{transform-origin:top left}
+</style></head><body>
+
+<h1>Arm A — layering: occluded cards keep a visible sliver</h1>
+<p class="note">Mechanics under test: each connected component is a pile; an occluded card shows exactly its top edge — a full-width strip tall enough for one line — and the focused card renders whole where it stands in the pile. Every edge is drawn in the left lanes and attaches to visible sliver geometry, never to hidden geometry, which is what survives of the original model once the charrette's occlusion objection is answered. Pile adjacency itself carries no meaning; the render's own cap says so. Measurements and the seven-question table: <a href="README.md">README.md</a>.</p>
+
+<h2>Frame A1 — rest: every card a sliver, six piles, all edges in the lanes</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:430px;width:350px">
+    <svg width="350" height="430">
+      <defs>
+        <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="oa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <!-- 03 -> hole 1 (lane) -->
+      <path d="M46,48 L40,48 L40,71 L44,71" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <!-- hole 1 egress fringe into the gutter -->
+      <line x1="45" y1="74" x2="16" y2="74" stroke="#111" stroke-width="1" marker-end="url(#oa)"/>
+      <line x1="45" y1="79" x2="16" y2="79" stroke="#111" stroke-width="1" marker-end="url(#oa)"/>
+      <!-- 02 -> 01 (lane) -->
+      <path d="M46,106 L40,106 L40,131 L44,131" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <!-- pile 3 edges: five edges, four lanes -->
+      <path d="M46,168 L40,168 L40,187 L44,187" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <path d="M46,163 L34,163 L34,208 L44,208" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <path d="M46,194 L28,194 L28,247 L44,247" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <path d="M46,211 L40,211 L40,226 L44,226" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <path d="M46,229 L36,229 L36,253 L44,253" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <!-- 09: two committed edges, destinations withheld -->
+      <line x1="46" y1="279" x2="16" y2="279" stroke="#111" stroke-width="1.2" marker-end="url(#oa)"/>
+      <line x1="46" y1="285" x2="16" y2="285" stroke="#111" stroke-width="1.2" marker-end="url(#oa)"/>
+      <!-- 10 -> hole 2 (lane), hole 2 fringe -->
+      <path d="M46,311 L40,311 L40,330 L44,330" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa)"/>
+      <line x1="45" y1="334" x2="16" y2="334" stroke="#111" stroke-width="1" marker-end="url(#oa)"/>
+      <line x1="45" y1="338" x2="16" y2="338" stroke="#111" stroke-width="1" marker-end="url(#oa)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts</div>
+    <div class="el fgut" style="left:0;top:26px;width:14px;height:404px"></div>
+
+    <!-- pile 1 -->
+    <div class="el slv stale" style="left:46px;top:36px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT72H</span><span class="ln"></span></div>
+      <span class="rl">03</span> <span class="pill">EGDKB8m5pt…</span> <span class="p7">auth ↓</span>
+    </div>
+    <div class="el slvhole" style="left:46px;top:61px;width:288px">
+      <span class="hdr">NOT IN HAND</span> <span class="pill">EM7gTDXqvy…</span><span class="x">×2</span> <span class="w6">out-edges unknown · fringe ←</span>
+    </div>
+
+    <!-- pile 2 -->
+    <div class="el slv stale" style="left:46px;top:94px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <span class="rl">02</span> <span class="pill">ENKSmFLrpu…</span> <span class="p7">qvi ↓</span>
+    </div>
+    <div class="el slv stale last" style="left:46px;top:119px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <span class="rl">01</span> <span class="pill">EHOTOsgWoV…</span><span class="x">×2</span> <span class="sl7">e none</span>
+    </div>
+
+    <!-- pile 3: items 04-08 -->
+    <div class="el slv stale" style="left:46px;top:156px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <span class="rl">04</span> <span class="pill">EDQ6zCH2Xs…</span> <span class="p7">shortPath ↓</span> <span class="p7">longPath ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:181px;width:288px">
+      <span class="rl">05</span> <span class="pill">EGHUpSJN58…</span><span class="x">×2</span> <span class="p7">baseline ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:199px;width:288px">
+      <span class="rl">06</span> <span class="pill">ELZEWuSVWm…</span><span class="x">×2</span> <span class="p7">waypoint ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:217px;width:288px">
+      <span class="rl">07</span> <span class="pill">EPJBkGOiB1…</span><span class="x">×2</span> <span class="p7">baseline ↓</span>
+    </div>
+    <div class="el slv stale last" style="left:46px;top:235px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <span class="rl">08</span> <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span> <span class="sl7">e none</span>
+    </div>
+
+    <!-- pile 4 -->
+    <div class="el slv last" style="left:46px;top:272px;width:288px">
+      <span class="rl">09</span> <span class="pill">EHZGkyDF43…</span> <span class="p7">←</span> <span class="p7">←</span> <span class="w6">committed dest.: 1–2 · coincidence unknowable</span>
+    </div>
+
+    <!-- pile 5 -->
+    <div class="el slvh6" style="left:46px;top:302px;width:288px">
+      <span class="ck tl"></span><span class="ck tr"></span>
+      <span class="rl">10</span> <span class="pill">EC9jOzkasO…</span> <span class="p7">evidence ↓</span> <span class="w6">u present-and-empty — possibly a metadata ACDC</span>
+    </div>
+    <div class="el slvhole" style="left:46px;top:320px;width:288px">
+      <span class="hdr">NOT IN HAND</span> <span class="pill">EDSm-SsfXZ…</span><span class="x">×2</span> <span class="w6">out-edges unknown · fringe ←</span>
+    </div>
+
+    <!-- pile 6 -->
+    <div class="el slv last" style="left:46px;top:353px;width:288px">
+      <span class="rl">11</span> <span class="pill">EM29GVeQIJ…</span> <span class="sl7">e none</span> <span class="w6">a collapsed — recoverable/guessable</span>
+    </div>
+
+    <div class="el cap" style="left:46px;top:381px;width:288px;font-size:7.5px">
+      a pile's stacking order is a layout choice, never an edge — only the drawn lane edges at left carry structure, and separate piles meet nowhere · path length is read by following lanes, not by counting neighbours
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">Rest register, measured: thirteen objects in a 430&nbsp;px column (504&nbsp;px with gate chrome) — one viewport, but 34% taller than arm B's 322&nbsp;px rest board for the identical load, because slivers stack one per row while floor chips pack four. Per-object column cost at rest: ≈ 19.8&nbsp;px marginal (18&nbsp;px plain, 25&nbsp;px when a perimeter state must break the frame, 21&nbsp;px for a hole's double border).</p>
+
+<h2>Frame A2 — focus: ITEM 08 whole in its pile, everything else slivered</h2>
+<div class="phone">
+<div class="gate">
+  <div class="gatehead"><b>P — PRESENTER: UNKNOWN</b> · no evidence binds the presenting party to any holder AID below · the rail is the enclosure</div>
+  <div class="board" style="height:822px;width:350px">
+    <svg width="350" height="822">
+      <defs>
+        <marker id="aa2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+        <marker id="oa2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.6"/></marker>
+      </defs>
+      <path d="M46,48 L40,48 L40,71 L44,71" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <line x1="45" y1="74" x2="16" y2="74" stroke="#111" stroke-width="1" marker-end="url(#oa2)"/>
+      <line x1="45" y1="79" x2="16" y2="79" stroke="#111" stroke-width="1" marker-end="url(#oa2)"/>
+      <path d="M46,106 L40,106 L40,131 L44,131" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <path d="M46,168 L40,168 L40,187 L44,187" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <path d="M46,163 L34,163 L34,208 L44,208" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <path d="M46,194 L28,194 L28,247 L44,247" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <path d="M46,211 L40,211 L40,226 L44,226" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <path d="M46,229 L36,229 L36,253 L44,253" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <line x1="46" y1="676" x2="16" y2="676" stroke="#111" stroke-width="1.2" marker-end="url(#oa2)"/>
+      <line x1="46" y1="682" x2="16" y2="682" stroke="#111" stroke-width="1.2" marker-end="url(#oa2)"/>
+      <path d="M46,706 L40,706 L40,725 L44,725" fill="none" stroke="#111" stroke-width="1.2" marker-end="url(#aa2)"/>
+      <line x1="45" y1="729" x2="16" y2="729" stroke="#111" stroke-width="1" marker-end="url(#oa2)"/>
+      <line x1="45" y1="733" x2="16" y2="733" stroke="#111" stroke-width="1" marker-end="url(#oa2)"/>
+    </svg>
+    <div class="el fband" style="left:0;top:0;width:100%;height:26px"><b>UNMAPPED</b> — committed structure, topology unknowable · continues down the left margin · entry points are near-node facts</div>
+    <div class="el fgut" style="left:0;top:26px;width:14px;height:796px"></div>
+
+    <div class="el slv stale" style="left:46px;top:36px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT72H</span><span class="ln"></span></div>
+      <span class="rl">03</span> <span class="pill">EGDKB8m5pt…</span> <span class="p7">auth ↓</span>
+    </div>
+    <div class="el slvhole" style="left:46px;top:61px;width:288px">
+      <span class="hdr">NOT IN HAND</span> <span class="pill">EM7gTDXqvy…</span><span class="x">×2</span> <span class="w6">out-edges unknown · fringe ←</span>
+    </div>
+
+    <div class="el slv stale" style="left:46px;top:94px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <span class="rl">02</span> <span class="pill">ENKSmFLrpu…</span> <span class="p7">qvi ↓</span>
+    </div>
+    <div class="el slv stale last" style="left:46px;top:119px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy P30D</span><span class="ln"></span></div>
+      <span class="rl">01</span> <span class="pill">EHOTOsgWoV…</span><span class="x">×2</span> <span class="sl7">e none</span>
+    </div>
+
+    <div class="el slv stale" style="left:46px;top:156px;width:288px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <span class="rl">04</span> <span class="pill">EDQ6zCH2Xs…</span> <span class="p7">shortPath ↓</span> <span class="p7">longPath ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:181px;width:288px">
+      <span class="rl">05</span> <span class="pill">EGHUpSJN58…</span><span class="x">×2</span> <span class="p7">baseline ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:199px;width:288px">
+      <span class="rl">06</span> <span class="pill">ELZEWuSVWm…</span><span class="x">×2</span> <span class="p7">waypoint ↓</span>
+    </div>
+    <div class="el slv" style="left:46px;top:217px;width:288px">
+      <span class="rl">07</span> <span class="pill">EPJBkGOiB1…</span><span class="x">×2</span> <span class="p7">baseline ↓</span>
+    </div>
+
+    <!-- ITEM 08, whole at its place in the pile: both in-edges attach at its visible left edge -->
+    <div class="el card stale" style="left:46px;top:235px;width:288px;height:420px">
+      <div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div>
+      <div class="role">ITEM 08 · host load label (opaque) · FOCUSED — whole in its pile</div>
+      <div>d <span class="pill">ELBmpHyX1I…</span><span class="x">×3</span> · u: absent as issued</div>
+      <div style="margin-top:2px">issuer <span class="pill">EAS6m0KAnZ…</span> · schema <span class="pill">EAow76Ee1e…</span><span class="x">×3</span></div>
+      <div class="manif">s committed · a disclosed · e none as issued · r none as issued</div>
+      <div style="margin-top:3px"><b>a</b> — standard: "ISO-9001-ish Baseline" · a.u present</div>
+      <div style="margin-top:2px;font-size:8.5px">in-edges: <b>baseline</b> from ITEM 05 · <b>baseline</b> from ITEM 07 — both arriving in the lanes at left, attached to this card's visible edge</div>
+      <div class="ledger">
+        <div class="lh">V — 0 of 9 performed by this viewer · outcomes {○ · ⊘ · —} · fail not offered: no host declaration</div>
+        <div class="r"><div class="g">○</div><div>1 SAID self-consistency — computable on demand</div></div>
+        <div class="r"><div class="g">⊘</div><div>2 schema — no schema document in hand · blocked at <span class="pill">EAow76Ee1e…</span><span class="x">×3</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>3 signatures — no signature or KEL material in hand</div></div>
+        <div class="r"><div class="g">⊘</div><div>4 KEL anchoring — blocked at <span class="pill">EAS6m0KAnZ…</span></div></div>
+        <div class="r"><div class="g">⊘</div><div>5 delegation — reach 0 tiers · blocked at issuer KEL <span class="pill">EAS6m0KAnZ…</span></div></div>
+        <div class="r"><div class="g">—</div><div>6 edge constraints — no subjects: no edge section as issued (sealed below)</div></div>
+        <div class="r"><div class="g">○</div><div>7 issuer bona fides — labeled roll-up of 6 · arcviz default AND, host-overridable</div></div>
+        <div class="r"><div class="g">—</div><div>8 revocation — no registry committed (rd absent as issued)</div></div>
+        <div class="r"><div class="g">○</div><div>9 duplicity — watchers consulted: zero (scoped to this material)</div></div>
+      </div>
+      <div class="tline">T — policy PT12H (host) · as-of 2026-06-14T00:00Z · <b>exceeded — stale</b></div>
+      <div style="margin-top:5px"><span class="seal">e — none · sealed at issuance</span></div>
+      <div style="font-size:8.5px;color:#444;margin-top:2px">This artifact, as issued, has no edge section — committed by its own SAID.</div>
+    </div>
+
+    <div class="el slv last" style="left:46px;top:667px;width:288px">
+      <span class="rl">09</span> <span class="pill">EHZGkyDF43…</span> <span class="p7">←</span> <span class="p7">←</span> <span class="w6">committed dest.: 1–2 · coincidence unknowable</span>
+    </div>
+
+    <div class="el slvh6" style="left:46px;top:697px;width:288px">
+      <span class="ck tl"></span><span class="ck tr"></span>
+      <span class="rl">10</span> <span class="pill">EC9jOzkasO…</span> <span class="p7">evidence ↓</span> <span class="w6">u present-and-empty — possibly a metadata ACDC</span>
+    </div>
+    <div class="el slvhole" style="left:46px;top:715px;width:288px">
+      <span class="hdr">NOT IN HAND</span> <span class="pill">EDSm-SsfXZ…</span><span class="x">×2</span> <span class="w6">out-edges unknown · fringe ←</span>
+    </div>
+
+    <div class="el slv last" style="left:46px;top:748px;width:288px">
+      <span class="rl">11</span> <span class="pill">EM29GVeQIJ…</span> <span class="sl7">e none</span> <span class="w6">a collapsed — recoverable/guessable</span>
+    </div>
+
+    <div class="el cap" style="left:46px;top:776px;width:288px;font-size:7.5px">
+      a pile's stacking order is a layout choice, never an edge — only the drawn lane edges at left carry structure, and separate piles meet nowhere
+    </div>
+  </div>
+</div>
+</div>
+<p class="note">Focused register, measured: 822&nbsp;px against arm B's 716&nbsp;px for the same focus on the same load — layering is 15% taller at the moment it exists to serve, and its slivers each carry one line where arm B's floor chips carry three. Both parents of the focused card stay attached to visible geometry, so the charrette's refutation of the pile indeed does not bite; what bites is the measurement.</p>
+
+<div class="comm">
+  <h3>GAUGE — THE SLIVER, ANATOMIZED (authoring apparatus, not a render)</h3>
+  <div class="gzrow">
+    <div style="width:300px">
+      <div style="font-size:11px;margin-bottom:4px">plain sliver, 288×18 actual</div>
+      <div class="slv last" style="width:288px"><span class="rl">05</span> <span class="pill">EGHUpSJN58…</span><span class="x">×2</span> <span class="p7">baseline ↓</span></div>
+      <div style="font-size:11px;margin:8px 0 4px">stale sliver, 288×25 actual (the break needs its own row)</div>
+      <div class="slv stale last" style="width:288px"><div class="stale-top"><span class="ln"></span><span class="tx">STALE — as-of 2026-06-14 · age 92 d exceeds policy PT12H</span><span class="ln"></span></div><span class="rl">04</span> <span class="pill">EDQ6zCH2Xs…</span> <span class="p7">shortPath ↓</span> <span class="p7">longPath ↓</span></div>
+      <div style="font-size:11px;margin:8px 0 4px">hole sliver, 288×21 actual · H6 sliver, 288×18 actual</div>
+      <div class="slvhole" style="width:288px"><span class="hdr">NOT IN HAND</span> <span class="pill">EM7gTDXqvy…</span></div>
+      <div class="slvh6" style="width:288px;margin-top:6px"><span class="ck tl"></span><span class="ck tr"></span><span class="rl">10</span> <span class="pill">EC9jOzkasO…</span> <span class="w6">u present-and-empty — possibly a metadata ACDC</span></div>
+    </div>
+    <div style="font-size:12px;max-width:400px">
+      <p style="margin-top:0"><b>The sliver floor is 18&nbsp;px</b>: an 8&nbsp;px pill (gauge A's legibility minimum, unchanged), a 6.5&nbsp;px tag, 1.5&nbsp;px of top border, and one line of run-room. Below ~16&nbsp;px the pill dies and the sliver carries nothing. A perimeter state raises the floor to 25&nbsp;px — the frame-break needs its own row — and a hole's double border to 21&nbsp;px.</p>
+      <p><b>What fits:</b> identity with its ×N mark; exactly one budgeted state, if it is perimeter-class (the stale break; the hole's double border; item 10's two top corner ticks — the only fragment of the withdrawn frame a top strip can show); an e-slot glyph relocated inline; and — the sliver's one genuine advantage — 288&nbsp;px of run-room, so the stale policy sentence survives verbatim at 7&nbsp;px where the 76-px-wide floor chip sheds it to the bare word. Item 09's cardinality bound also survives inline, abbreviated, at six-point ("committed dest.: 1–2 · coincidence unknowable") — the full sentence measured 352&nbsp;px of run and did not fit even here.</p>
+      <p><b>What is shed first:</b> everything below line one (ledger, manifest, a-content, T detail) — immediately and by construction; then the port strip's place-grammar: the seal survives only as an inline glyph, no longer at the place edges depart, so "same place, opposite structure" is lost; then the area-class deformations — item 11's transparent a-region has no area to spend and is words-only.</p>
+      <p><b>The cost accounting that kills the arm:</b> a plain sliver is 288×18 = 5,184&nbsp;px², a floor chip 76×44 = 3,344&nbsp;px². The sliver spends 1.55× the area to carry one line against the chip's three. Layering does not buy density with occlusion; at equal legibility it pays more per object than reflow does, because a card's width is indivisible while a chip's is not.</p>
+    </div>
+  </div>
+</div>
+
+<div class="comm">
+  <h3>COMMENTARY — OUTSIDE THE RENDER</h3>
+  <p>Host stubs identical to the stress board and to arms B and C; load manifest in <a href="../stress-board/README.md">../stress-board/README.md</a>.</p>
+  <p><b>Linearization, the arm's second wound.</b> A pile is a total order; the diamond is a partial one. Slivers 05, 06, 07 sit in some stacked sequence, and no stacking of them depicts "05 and 06 are siblings, 07 is below 06 only" — the two path lengths exist solely in the lane edges, and the render's cap must actively disclaim the adjacency the geometry can't help asserting. The five diamond edges needed four distinct lanes in a 30&nbsp;px margin; lane count grows with rank-skipping edges, and the lane margin competes for the same left edge the frontier gutter owns. The charrette refuted the pile on occluded attachment; slivers answer that and then lose on this — a pile can show a DAG's cards, but its geometry keeps asserting a chain.</p>
+  <p><b>Determinism:</b> pile membership is the component; stacking order is rank (longest committed path), ties by SAID lexicographically; lane assignment is by edge span, longest outermost. Pure function of (presentation, stubs, focus SAID); byte-identical on identical input.</p>
+  <p><b>Unknowable distance:</b> a pile position is a rank, so the same domain restriction as arm B applies — the hole stacks at the rank its disclosed in-edge gives it; a blinded edge's destination never joins a pile (it has no rank to stack at) and dies on the frontier boundary as everywhere else; the frontier is not at any place and is never stacked, sized, or reordered by focus.</p>
+  <p><b>Print:</b> the rest frame is the print form — an index of one-line entries. Every parameter that lives below line one is unreachable on paper, so a print artifact needs accompanying expanded sheets exactly as arm B does, except that the index page carries less than arm B's rest board does (no second and third chip lines). Nothing here depends on hover, animation, or focus to exist.</p>
+</div>
+
+</body></html>
