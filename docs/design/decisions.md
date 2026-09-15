@@ -22,7 +22,9 @@ It also forbids the inconsistency the first gallery contained: holes at the bott
 
 **Departure from existing practice, noted.** keripy's guardianship worked examples draw the presented node at the *bottom* with references ascending. That is the ecosystem's only extant convention and DD-1 contradicts it. The divergence is accepted because that ASCII addresses developers reading test docstrings rather than users reading a component, and because its implicit authority reading does not survive the operator table.
 
-**Reversed if.** The primary viewer turns out to be a verifier auditing provenance rather than someone examining a presented credential — burying the root is hostile to that use. Or if ecosystem consistency is judged to outweigh the reasoning, which is a legitimate call.
+**Amended 2026-09-15 by DD-9.** An earlier draft defended this partly by appeal to what "most viewers" see, and made its reversal conditional on the primary viewer turning out to be a verifier. DD-9 rejects that framing: there is no primary viewer. The decision is re-grounded on a property that holds for both — **each audience enters at the presented node.** A holder opens the credential they hold; a verifier examines the credential they were handed. Neither enters at the root. And what a verifier auditing provenance needs is that the chain be complete and its gaps visible, which DD-1 serves by putting the unknown at the far end of the walk rather than at its start; the root is frequently absent in any case, so reaching it quickly is often not available at any orientation.
+
+**Reversed if.** Ecosystem consistency is judged to outweigh the reasoning, which remains a legitimate call. The old reversal condition — a verifier-dominant audience — is void under DD-9.
 
 ---
 
@@ -116,7 +118,22 @@ A card needs to collapse and expand its own contents, because credentials carry 
 
 **Unresolved.** The shape catalog's SC7 covers card-internal *disclosure states* and not card-internal *volume*; a case for "a card with more content than the viewport" does not exist and should be added.
 
+---
+
+## DD-9 — Holder and verifier are both first-tier · **Ratified 2026-09-15**
+
+arcviz serves a credential holder and a credential verifier as co-equal audiences. Neither is a primary case to be optimized for, and neither is a secondary case to be accommodated afterwards.
+
+**Why.** Daniel Hardman's ruling, rejecting the framing rather than answering it: both are highly important and neither may become a second-tier requirement.
+
+**What it forbids.** Any argument of the form "most viewers are X, so optimize for X." That reasoning had already entered DD-1 and has been struck from it. It also forbids resolving a design tension by deciding which audience matters more — a tension between the two has to be resolved by finding something that serves both, or by rendering differently in the two contexts on a principled basis, never by ranking them.
+
+**What it does not forbid.** Rendering *differently* for the two, where the difference is grounded in something real rather than in priority. AF17's rule that a holder-facing view shows no presenter indicator at all is not a tiering decision: the presenter question is *foreclosed* when the viewer is the holder, not merely less important. That distinction survives DD-9 and is the model for any other divergence.
+
+**Consequences already absorbed.** DD-1's rationale is re-grounded on the property that both audiences enter at the presented node. The full-apparatus ruling (PLAN.md, 2026-09-14) is reinforced: scaffolding cannot be dialled by audience if neither audience is secondary.
+
+**Reversed if.** Nothing foreseeable. A deployment serving only one audience would be a configuration of the component, not a change to it.
+
 ## Open
 
-- **Who the primary viewer is.** Holder examining their own credential, or verifier auditing provenance. It swings DD-1 and the scaffolding question, and nothing in the research settles it.
 - **The holder-facing presenter indicator.** The full-apparatus ruling and AF17's "no presenter indicator at all, positive or negative" collide on exactly one axis; see PLAN.md's 2026-09-14 entry.
