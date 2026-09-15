@@ -20,6 +20,7 @@ The project is in its research phase. Read [docs/research/PLAN.md](docs/research
 
 | Path | Holds |
 |---|---|
+| `docs/design/decisions.md` | **The design constraint record.** Read before proposing any layout or treatment. |
 | `docs/research/` | Findings, principles, threat model, affordance inventory |
 | `docs/research/prior-art/` | One report per audited source of prior art |
 | `refs/sources.yaml` | The citation record |
