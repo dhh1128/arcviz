@@ -1,5 +1,7 @@
 # The 320 px retest — results
 
+> **Partly superseded, 2026-09-15.** Required changes 1, 2, 4 and 5 below have been carried out on a responsive rebuild of arm B — [../layout-comparison/RESPONSIVE.md](../layout-comparison/RESPONSIVE.md). That rebuild renders where this document reconstructs, and it corrects two figures here: the focus-register growth at 320 is +8.0%, not the +22–30% §3 predicts, and the 399–453 px range §3 gives for the rest register is not measurement uncertainty but an unmade decision about the packing rule (rendered: 379.8 px global, 495.8 px band). The §5 stale-banner overflow is confirmed as real but is stress-board geometry rather than a 320 px fact. Everything else here stands.
+
 DD-2 fixes the binding minimum at 320 CSS pixels (WCAG 2.1 SC 1.4.10 Reflow); every artifact in this repository was built and measured at 360. This directory holds the retest DD-2's "Consequence for work already done" paragraph called for: every claim re-measured at the width that actually binds. Three *Proposed* decisions — DD-4, DD-5, DD-6 — depend on the 360 numbers; the per-decision verdicts are below. Two of the 360 findings do not survive the retest, and one measured ordering reverses. That is the retest working, not a defect in it.
 
 ## Method, stated so the numbers can be audited
