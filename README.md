@@ -2,7 +2,7 @@
 
 *Visualizing ACDCs — chainable, selectively-disclosed credentials — honestly.*
 
-**Status: research. There is no implementation yet.** This repository currently holds a research corpus, a citation record, and a plan. See [docs/research/PLAN.md](docs/research/PLAN.md).
+**Status: design. There is no implementation yet.** Research is complete; design is in progress. If you are picking this up, start at **[HANDOFF.md](HANDOFF.md)** — it says what is settled, what is provisional, and what to do next. The decision record is [docs/design/decisions.md](docs/design/decisions.md); the research corpus and its rules of evidence are under [docs/research/](docs/research/).
 
 ## What this is for
 

@@ -134,6 +134,24 @@ arcviz serves a credential holder and a credential verifier as co-equal audience
 
 **Reversed if.** Nothing foreseeable. A deployment serving only one audience would be a configuration of the component, not a change to it.
 
+---
+
+## DD-10 — 320 px is a correctness floor, not a design target · **Ratified 2026-09-15**
+
+Nothing may break, clip, lose information, or require horizontal scrolling at 320 CSS pixels. That is conformance, it is non-negotiable, and it is testable in CI. But the layout is **not designed to 320**. Packing rules are width-dependent — three compact chips across at 320, four at 360, mid-floor cards sharing a row above some threshold and not below it — and the floor is the degenerate case rather than the design case.
+
+**Why the distinction is needed.** The 320 retest reported every artifact as failing, which read as "the design is wrong." It was not. **The real defect is that every artifact was authored at a fixed width** — gate rails plus a hard-coded 350 px board. A responsive component has no authoring width at all, and picking a different fixed number would reproduce the same fault. Conformance failure and layout suboptimality were being measured by one instrument and reported as one thing.
+
+**On the number itself, honestly.** 320 survives interrogation as a requirement and not as a rationale. WCAG 2.2 leaves SC 1.4.10 unchanged — same text, still AA — so it is not about to move. But its stated justification has expired: the Understanding document grounds it in "reported viewport width of small displays of common mobile devices that were available when this criterion was originally drafted," which was around 2016, and the smallest current iPhone is 375 with the common Android baseline at 360. The zoom justification has drifted too: 320 is 1280 ÷ 4, and a typical desktop is now 1920, which at 400% zoom yields 480. On the criterion's own logic the figure may be conservative by half. It is nonetheless the letter of an obligation we intend to meet.
+
+**What it forbids.** Invoking SC 1.4.10's exception for content that "require[s] two-dimensional layout for usage or meaning" to excuse the graph view. DD-7 chose a vertical axis *because* it works at narrow widths; we designed our way out of needing the exemption, and claiming it afterwards would be retrofitting a justification for a layout that does not need one.
+
+It also forbids reading the retest's failures as a verdict on the design. They are a verdict on fixed-width authoring.
+
+**Open, and newly visible.** *Viewport floor and element floor are different numbers and we have been using one word for both.* The sliver measures 248 px inside a 320 px viewport, so inner components already go narrower than the conformance width. The element floor has never been stated.
+
+**Reversed if.** The conformance target is deliberately set below AA, which would need saying out loud.
+
 ## Open
 
 - **The holder-facing presenter indicator.** The full-apparatus ruling and AF17's "no presenter indicator at all, positive or negative" collide on exactly one axis; see PLAN.md's 2026-09-14 entry.
