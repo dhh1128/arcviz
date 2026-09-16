@@ -5,9 +5,12 @@
      any viewport; the layout is a function of the width it is given, and the packing rules DD-5 needs
      restated are expressed here as rules rather than as hand-set coordinates.
 
-     This file IS the component, not an exhibit of it. There is no phone frame, no gauge rail, no scaled
-     specimen: the gate is the outermost element and it fills whatever it is given. Measurements and the
-     width sweep live in RESPONSIVE.md; captures live in responsive-sweep/.
+     The thing inside the gate IS the component. There is no phone frame, no gauge rail, no scaled
+     specimen: the gate is the component's outermost element and it fills whatever it is given, up to
+     a stated maximum. Everything outside the gate — the orientation, the reader's key, the width
+     readout, the commentary — is EXHIBIT APPARATUS, and it must not break the page's own width claim
+     any more than the component may. Measurements and findings live in RESPONSIVE.md; captures in
+     responsive-sweep/.
 
      Same load as arm-b-compression.html and the stress board: eleven items, two drawn holes, one frontier,
      identical host stubs (see ../stress-board/README.md for the manifest, which is deliberately outside
@@ -28,6 +31,10 @@
        ?floor=two         DD-5's amendment: budgeted carriers floor at 150x72 instead
        ?hostw=280         pin the component's own width, independent of the viewport — the
                           instrument DD-10's open "element floor is not the viewport floor" needs
+       ?maxw=480          the component's MAXIMUM width; surplus becomes margin (default 480)
+       ?maxw=none         no maximum — renders the degeneration into a single row at desktop
+                          widths, which is the axis DD-7 refused. RESPONSIVE.md §10.
+       ?maxw=360          pin the packing every earlier artifact was authored at
 -->
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,12 +54,36 @@
   .doc{padding:16px;max-width:860px;margin:0 auto}
   h1{font-size:20px;margin:0 0 6px} h2{font-size:15px;margin:24px 0 6px}
   .note{color:#444;font-size:12.5px}
+  .lede{font-size:14.5px;line-height:1.5;margin:10px 0}
+  .doing{font-size:14.5px;line-height:1.5;margin:10px 0;border-left:3px solid #111;padding-left:10px}
+  /* Apparatus must not break the page's own width claim. The retest's required change 6 is
+     precisely this fault in two older files — a gauge row and a commentary div that made their
+     documents overflow at widths the renders inside them passed. A nowrap readout here
+     overflowed 320 px by 61 px on the first attempt. It wraps. */
+  .readout{display:inline-block;max-width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:#111;border:1px solid #bbb;padding:1px 5px;white-space:normal;overflow-wrap:anywhere}
   .comm{background:#f2f2f2;border:1px solid #999;padding:10px 14px;font-size:12.5px;margin:18px 0}
   .comm h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+  .key{border:1px solid #999;padding:10px 14px;margin:18px 0;font-size:13px}
+  .key h3{font-size:12px;letter-spacing:.08em;margin:0 0 6px}
+  .keynote{color:#444;font-size:12.5px;margin:0 0 10px}
+  .key dl{margin:0;display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:7px 14px;align-items:start}
+  .key dt{font-weight:600}
+  .key dd{margin:0;color:#222}
+  @media (max-width:560px){ .key dl{grid-template-columns:1fr;gap:2px} .key dd{margin:0 0 8px} }
+  .fallback{border:2px solid #111;padding:10px 14px;font-size:13px}
 
   /* ---- the component ------------------------------------------------------------------
-     .host is whatever box the embedder gives it. The gate fills it. Nothing below has a width. */
-  .host{width:100%}
+     .host is whatever box the embedder gives it. The gate fills it. Nothing below has a width.
+
+     EXCEPT a maximum, which is not a retreat from responsiveness but what keeps DD-7 true.
+     DD-7 ratified a vertical primary axis because a horizontal one fails on a phone. Global
+     packing with no upper bound converges on precisely the axis DD-7 refused: at 1,280 px all
+     thirteen objects land in ONE row, the two descending edges have nowhere to descend to, and
+     the diamond and the shared ancestor stop being visible at all. Width a vertical stack does
+     not need becomes margin rather than fan-out. The number is a DESIGN CHOICE nobody has
+     ruled on yet — see RESPONSIVE.md §10 — so it is a parameter, and ?maxw=none renders the
+     degeneration for comparison. */
+  .host{width:100%;max-width:var(--maxw,480px);margin:0 auto}
   .gate{border:5px double #111;background:#fff;width:100%}
   .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
   .board{position:relative;background:#fff;width:100%;overflow:hidden;container-type:inline-size;container-name:board}
@@ -153,10 +184,38 @@
 
 <div class="doc">
 <h1>Arm B — compression, rebuilt responsively</h1>
-<p class="note">The same thirteen objects as <a href="arm-b-compression.html">arm-b-compression.html</a>, with the authoring width removed. Every position below is produced by a packing rule evaluated against the width this page was given; nothing is a coordinate. Resize the window and the board repacks, the edges re-route, and the port direction glyphs change to match the geometry they now describe. Click any object to focus it in place; click again to return to rest. Measurements: <a href="RESPONSIVE.md">RESPONSIVE.md</a>.</p>
+
+<p class="lede">The picture below is <b>one credential and the other credentials it points to</b> — eleven of them, plus two that are referenced and not in hand. Every box is one credential. Only one box is ever opened at a time; the rest compress to a fixed small form so that the whole chain stays on one screen, which is the mechanism this arm is testing.</p>
+
+<p class="lede">The reason any of it is drawn this way: a presented credential is full of <i>different kinds of missing</i> — absent, undisclosed, blinded, not in hand, unverified, stale — and the one thing a renderer must never do is let any of them look like each other, or like nothing being wrong. So the marks on the boxes are the point, not decoration. <b>What each mark means is in the key below the picture.</b></p>
+
+<p class="doing"><b>Try two things.</b> Click any box — it expands where it sits and everything else stays put. Then narrow the window: the boxes repack, the connectors re-route, and the little direction arrows inside the boxes change to match the geometry they now describe. Nothing here is a coordinate; it is all a rule evaluated against the width the component is given.</p>
+
+<p class="note">Same thirteen objects and same host stubs as <a href="arm-b-compression.html">arm-b-compression.html</a>, which was authored at a fixed 360 px. Measurements and findings: <a href="RESPONSIVE.md">RESPONSIVE.md</a>. <span id="readout" class="readout">—</span></p>
 </div>
 
-<div class="host" id="host"></div>
+<div class="host" id="host">
+  <noscript><p class="fallback"><b>This exhibit needs JavaScript.</b> The layout is computed from the width the component is given and the connectors are routed against measured geometry after layout, so there is nothing meaningful to show statically. The fixed-width original, which needs no script, is <a href="arm-b-compression.html">arm-b-compression.html</a>.</p></noscript>
+</div>
+
+<div class="doc">
+<div class="key">
+  <h3>READER'S KEY — exhibit apparatus, not part of the component</h3>
+  <p class="keynote">The component itself carries no legend, on purpose: the design uses point-of-use captions instead, so that nothing has to be looked up elsewhere while reading a credential. This key exists because <i>this page</i> is a working exhibit and its reader has not memorised the vocabulary. Do not read it as a reversal of that decision — and if the picture turns out to need it, that is a finding about the design, not about the page.</p>
+  <dl>
+    <dt>A plain box</dt><dd>One credential in the presentation. The small number on it (<code>03</code>, <code>07</code>…) is an opaque label supplied by the host — it is <i>not</i> anything from the credential, deliberately, so that nothing inside the render leaks which fixture it is.</dd>
+    <dt>The rounded pill</dt><dd>The credential's SAID — its self-certifying identifier — truncated. <code>×3</code> beside one means the same value occurs three times in this presentation.</dd>
+    <dt>Double border, hatched fill, <b>NOT IN HAND</b></dt><dd>A <i>hole</i>: something this presentation refers to that was not supplied. The chain is severed here and the render says so rather than drawing a gap.</dd>
+    <dt>Top edge broken by the word <i>stale</i></dt><dd>The host's freshness policy for that credential is exceeded. Expanded, the break carries the policy and the age; at the small form there is only room for the word.</dd>
+    <dt>No frame, four corner ticks</dt><dd>Possibly a metadata ACDC — a sketch of a credential that the issuer has committed to <i>nothing</i> of as presented. The frame withdraws to its corners because the evidence to resolve it either way was not supplied.</dd>
+    <dt>Porous (broken) bottom edge</dt><dd>A unit whose contents are committed but not disclosed, <i>and are guessable</i> — the schema reserves no blinding entropy, so the commitment protects nothing. It is drawn as leaky rather than locked on purpose: rendering this as "private" would assert a protection that does not exist.</dd>
+    <dt>Hatched strip along the top and down the left</dt><dd>The <i>frontier</i>: structure that is committed to exist but whose shape cannot be known. It is drawn at a fixed size and position always, so that its geometry can never respond to — and so leak — what it is hiding.</dd>
+    <dt>Solid arrowhead</dt><dd>A drawn reference to something that is in the layout. <b>Open arrowhead</b>: a reference whose destination is outside the layout's domain — it runs into the frontier.</dd>
+    <dt>A small tag like <code>auth →</code></dt><dd>The edge's own label, taken verbatim from the credential's <code>e</code> section. It is issuer-chosen text, so it sits inside the box rather than on the connector — otherwise an issuer could label an edge and have the component appear to be saying it. The arrow is computed from where the connector actually got drawn.</dd>
+    <dt><code>⋯2 edges</code></dt><dd>That box has two edges and no room for either label. The shed is marked rather than silent, because a box showing one of two labels would imply it has one edge.</dd>
+  </dl>
+</div>
+</div>
 
 <div class="doc">
 <div class="comm">
@@ -218,7 +277,9 @@ const OPT = {
   // we have been using one word for both. ?hostw pins the element's width independently of the
   // viewport, so the element floor can be exercised without pretending it is a viewport.
   hostw:   PARAMS.get('hostw') ? +PARAMS.get('hostw') : null,
+  maxw:    PARAMS.get('maxw') || null,
 };
+if (OPT.maxw) document.documentElement.style.setProperty('--maxw', OPT.maxw === 'none' ? '100%' : (+OPT.maxw + 'px'));
 
 const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
 const corners = () => ['tl','tr','bl','br'].map(c => el('span','ck ' + c));
@@ -579,13 +640,41 @@ function routeEdges(board, svg){
   window.__arcvizEdgeStats = stats;
 }
 
-render();
+// The width readout is exhibit apparatus and lives outside the gate. It exists so the thing
+// this file is demonstrating is visible without anyone having to take it on trust.
+function updateReadout(){
+  const out = document.getElementById('readout');
+  const board = document.querySelector('.board');
+  if (!out || !board) return;
+  const objs = [...board.querySelectorAll('.obj')];
+  const byTop = {};
+  objs.forEach(n => { const k = Math.round(n.getBoundingClientRect().top); byTop[k] = (byTop[k]||0) + 1; });
+  const across = Math.max(...Object.values(byTop));
+  const w = document.querySelector('.gate').getBoundingClientRect().width;
+  const capped = Math.round(w) < document.documentElement.clientWidth - 1;
+  out.textContent = 'component ' + Math.round(w) + ' px · '
+    + across + ' across · ' + Object.keys(byTop).length + ' rows · board ' + Math.round(board.getBoundingClientRect().height) + ' px'
+    + (capped ? ' · at max width' : '');
+}
+
+// A layout this file cannot draw must say so. A blank frame would be the silent failure the
+// whole project exists to refuse, and it would be indistinguishable from "nothing is wrong".
+try {
+  render();
+  updateReadout();
+} catch (err) {
+  const host = document.getElementById('host');
+  host.innerHTML = '<p class="fallback"><b>This exhibit failed to render.</b> The layout is computed at load time, so there is nothing to fall back to. Error: <code></code></p>';
+  host.querySelector('code').textContent = (err && err.message) || String(err);
+  throw err;
+}
+
 let raf = null;
 new ResizeObserver(() => {
   cancelAnimationFrame(raf);
   raf = requestAnimationFrame(() => {
     const board = document.querySelector('.board');
-    if (board) routeEdges(board, board.querySelector('.edges'));
+    if (board) { routeEdges(board, board.querySelector('.edges')); updateReadout(); }
   });
 }).observe(document.getElementById('host'));
 </script>

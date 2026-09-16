@@ -18,9 +18,11 @@ Where a number below differs from the retest's, the retest's was a reconstructio
 
 ## 2 · Conformance: the file passes, at every width tested
 
-Zero horizontal overflow from 300 px to 800 px, in every mode — rest and focus, both packing rules, one floor and two, glyphs and words. Nothing paints outside the gate. No object's content exceeds its box. The two reported `scrollWidth` excesses at items 10 and 11 are the new perimeter glyphs sitting *on* the border line at −1.5 px, which is where they are meant to be, not content escaping.
+Zero horizontal overflow from 300 px to 1,920 px, in every mode — rest and focus, both packing rules, one floor and two, glyphs and words, capped and uncapped. Nothing paints outside the gate. No object's content exceeds its box. The two reported `scrollWidth` excesses at items 10 and 11 are the new perimeter glyphs sitting *on* the border line at −1.5 px, which is where they are meant to be, not content escaping.
 
 This is the certification surface the retest's first required change asked for. **DD-2's "consequence for work already done" no longer applies to everything in the repository — it now applies to everything except this file.**
+
+**One correction, recorded because the mistake is the interesting part.** The first version of this file was swept from 300 px to 800 px only, and passed. It was never opened at a desktop width, where two separate things were wrong — §10. And when the reader's key and the width readout were added to fix the second of them, the readout was `white-space: nowrap` and overflowed a 320 px page by 61 px. That is the retest's own required change 6 — apparatus that makes a document's width claim false while the render inside it passes — reproduced in the file written to fix it, within a day. The audit now covers the whole page at nine widths in seven modes rather than the component alone, which is what should have been measured from the start.
 
 ## 3 · The packing rule, stated as a rule
 
@@ -44,7 +46,7 @@ For DD-5's second floor, measured the same way with `?floor=two`:
 | 480 | 5 | 246.1 | 168 | 12.4 | 0 |
 | 768 | 8 | 163.5 | 106 | 7.8 | 0 |
 
-Rest register, global packing. "Object extent" is first-row top to last-row bottom, which is the figure to compare across modes because it excludes the caption's own text reflow.
+Rest register, global packing. "Object extent" is first-row top to last-row bottom, which is the figure to compare across modes because it excludes the caption's own text reflow. **The 768 px row is the packing rule's behaviour, not the component's:** the component now caps at 480 px by default and turns surplus width into margin, for the reason in §10. Every figure in these tables is a property of the rule and remains true of it; what changed is which widths the rule is allowed to see.
 
 ## 4 · The registers, all four modes
 
@@ -169,8 +171,23 @@ Item 09's abbreviated cardinality line, which the retest measured clipping by ~1
 - **The two files that fail their own width claims at 360** — focus-sequence's gauge row and arm A's gauge commentary — are untouched.
 - **Nothing here is a legibility finding.** Every floor coordinate in this file is still a design choice embodied in a mock, exactly as the shape gallery's README records, and the new glyphs add two more. The small-n probe is the only instrument that can discharge any of it.
 
-## 10 · Open, and needing a ruling
+## 10 · The maximum width, and the two things that were wrong above 800 px
 
+The first version of this file had no upper bound, on the reasoning that a responsive component has no authoring width. That reasoning is right about the *floor* and wrong about the ceiling, and the error was caught the only way it could be — by opening the file at an ordinary desktop width, which the width sweep never did.
+
+**The layout degenerates into the axis DD-7 refused.** `n = ⌊(W − 24)/84⌋` keeps growing, so at 1,280 px and above all thirteen objects land in **one row**, 102 px tall. The diamond is gone, the shared ancestor is gone, both descending edges have nowhere to descend to, and the router's lane system has no channels because there are no inter-row gaps left. What remains is a horizontal strip of thirteen tokens.
+
+This is not merely ugly. DD-7 is *Ratified*, and it chose a vertical primary axis on the ground that a horizontal one cannot work at narrow widths; unbounded global packing converges on exactly that horizontal axis, and does so at every ordinary desktop width. **A responsive layout can violate a ratified decision by having no ceiling just as surely as by having no floor.** DD-7's own text anticipates the remedy — it says a desktop or landscape variant "would be a second layout rather than a reversal" — so the conservative move is to refuse the fan-out rather than to invent that second layout by accident.
+
+The component therefore caps at **480 px** and centres, turning surplus width into margin. At this load that gives five across and three rows, so the graph stays a vertical stack at every width from 300 px upward. **The number is a design choice nobody has ruled on**, which is why it is `?maxw=`: `?maxw=none` renders the degeneration, `?maxw=360` pins the packing every earlier artifact was authored at, `?maxw=443` is the widest value that still gives four across.
+
+**The second thing wrong above 800 px was that the exhibit was unreadable.** The component was a full-bleed sibling of an 860 px centred prose column, so it did not even align with the text; and nothing anywhere on the page said what a box was, what the hatched strip meant, or what any mark stood for. The page now opens with a plain-language orientation, states the two interactions, carries a live width readout, and has a reader's key — all outside the gate.
+
+**The key deserves a note, because it sits against a decision.** The design's own rule is point-of-use captions and no legend, inherited from the print charrette, and the component still carries none. A key on the *exhibit page* is not a reversal of that: the component is read by someone holding a credential, while this page is read by someone auditing a mechanism, and they need different things. But the distinction is worth stating rather than assuming, because there is a version of this where the key is evidence against the design — if a reader who knows the domain cannot tell what the marks mean, the vocabulary is failing, and no amount of apparatus fixes that. Which of the two it is, is exactly the small-n probe's question, and this file now renders `?h6h2=words` beside the glyphs so the probe has something to compare.
+
+## 11 · Open, and needing a ruling
+
+0. **The component's maximum width, and what to do with surplus width at all.** It is capped at 480 px so the graph stays a vertical stack, which is the conservative reading of DD-7; the alternatives are pinning it to 360 px so every artifact stays directly comparable, or spending desktop width on a genuinely different layout, which DD-7's own text calls a second layout rather than a reversal. `?maxw=` renders any of them. Nothing above the cap has been designed.
 1. **Which packing rule — global or band?** Global treats rows as pure viewport economy, which is what the caption inside the render says, and spends extra width; band preserves the authored bands so that a row means something, and ignores width above 360. It decides DD-4's height comparison (§6), and it decides whether a reader who infers meaning from rows is reading correctly or being misled.
 2. **DD-1 under wrap-packing.** Accept that a drawn edge may ascend, constrain packing so none does, or narrow DD-1 to govern rank rather than drawn direction.
 3. **The near-node nub** (F2) — a coinage with one exhibit.
