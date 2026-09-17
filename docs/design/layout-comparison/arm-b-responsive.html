@@ -81,9 +81,13 @@
      thirteen objects land in ONE row, the two descending edges have nowhere to descend to, and
      the diamond and the shared ancestor stop being visible at all. Width a vertical stack does
      not need becomes margin rather than fan-out. The number is a DESIGN CHOICE nobody has
-     ruled on yet — see RESPONSIVE.md §10 — so it is a parameter, and ?maxw=none renders the
-     degeneration for comparison. */
-  .host{width:100%;max-width:var(--maxw,480px);margin:0 auto}
+     ruled on yet — see RESPONSIVE.md §10 — so it is a parameter (?maxw=), and ?maxw=none
+     renders the degeneration for comparison.
+
+     The cap is applied in script rather than in this rule, because the exhibit's width control
+     has to be able to override it. The component's own width therefore arrives as an explicit
+     px value on .host, which is exactly how a real embedder would give it one. */
+  .host{flex:0 0 auto;width:100%;max-width:100%;min-width:0}
   .gate{border:5px double #111;background:#fff;width:100%}
   .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
   .board{position:relative;background:#fff;width:100%;overflow:hidden;container-type:inline-size;container-name:board}
@@ -180,6 +184,34 @@
 
   .focusable{cursor:pointer}
   .focusable:focus-visible{outline:2px solid #111;outline-offset:2px}
+
+  /* ---- the width control (exhibit apparatus) -----------------------------------------
+     The component caps its own width, which is correct for the component and made this file
+     useless as a demonstration: from 1,920 px down to 481 px nothing changes, and a desktop
+     browser will not let you drag a window narrow enough to see anything. So the exhibit
+     drives the component's width directly instead of borrowing the viewport's. On a narrow
+     viewport the control hides, because there the viewport IS the width and the demonstration
+     happens by itself. */
+  .wctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:14px 0 6px;font-size:12.5px}
+  .wctl .wlab{font-weight:600}
+  .wctl button{font:inherit;font-size:12px;padding:2px 8px;border:1px solid #333;background:#fff;color:#111;cursor:pointer;border-radius:0}
+  .wctl button:hover{background:#eee}
+  .wctl button[aria-pressed="true"]{background:#111;color:#fff}
+  .wctl .hint{color:#444}
+  .stage{display:flex;align-items:stretch;padding:0}
+  @media (min-width:620px){ .stage{max-width:860px;margin:0 auto;padding:0 16px} }
+  /* Asking for more width than the prose column has is a legitimate request here — it is how
+     the degeneration in RESPONSIVE.md §10 gets looked at — so the stage breaks out rather than
+     silently capping the answer at the column and making the failure look milder than it is. */
+  .stage.bleed{max-width:none}
+  .grip{flex:0 0 14px;align-self:stretch;cursor:ew-resize;position:relative;
+        background:repeating-linear-gradient(90deg,#111 0 1.5px,transparent 1.5px 5px);
+        background-position:center;background-repeat:no-repeat;background-size:9px 100%;
+        border-left:1px solid #bbb;touch-action:none}
+  .grip:hover{background-color:#f0f0f0}
+  .grip::after{content:"drag";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(90deg);
+        font-size:8px;letter-spacing:.1em;color:#111;background:#fff;padding:1px 2px;white-space:nowrap}
+  @media (max-width:619px){ .wctl,.grip{display:none} }
 </style></head><body>
 
 <div class="doc">
@@ -189,13 +221,32 @@
 
 <p class="lede">The reason any of it is drawn this way: a presented credential is full of <i>different kinds of missing</i> — absent, undisclosed, blinded, not in hand, unverified, stale — and the one thing a renderer must never do is let any of them look like each other, or like nothing being wrong. So the marks on the boxes are the point, not decoration. <b>What each mark means is in the key below the picture.</b></p>
 
-<p class="doing"><b>Try two things.</b> Click any box — it expands where it sits and everything else stays put. Then narrow the window: the boxes repack, the connectors re-route, and the little direction arrows inside the boxes change to match the geometry they now describe. Nothing here is a coordinate; it is all a rule evaluated against the width the component is given.</p>
+<p class="doing"><b>Try two things.</b> Click any box — it expands where it sits and everything else stays put. And <b>drag the ribbed handle on the right edge of the picture</b>, or use the width buttons below: the boxes repack, the connectors re-route, and the little direction arrows inside the boxes change to match the geometry they now describe. Nothing here is a coordinate; it is all a rule evaluated against the width the component is given.</p>
 
-<p class="note">Same thirteen objects and same host stubs as <a href="arm-b-compression.html">arm-b-compression.html</a>, which was authored at a fixed 360 px. Measurements and findings: <a href="RESPONSIVE.md">RESPONSIVE.md</a>. <span id="readout" class="readout">—</span></p>
+<p class="note"><b>Resizing the browser window will not do it</b>, and that is not a bug in the window. The component caps its own width at 480 px and turns anything beyond that into margin — otherwise at desktop widths the whole graph flattens into a single row, which is the failure <a href="RESPONSIVE.md">RESPONSIVE.md</a> §10 is about. So above 480 px the picture is deliberately width-indifferent, and the handle is how you see it move. Press <i>full width</i> to watch it flatten.</p>
+
+<p class="note">Same thirteen objects and same host stubs as <a href="arm-b-compression.html">arm-b-compression.html</a>, which was authored at a fixed 360 px. Measurements and findings: <a href="RESPONSIVE.md">RESPONSIVE.md</a>.</p>
+
+<div class="wctl" id="wctl">
+  <span class="wlab">Component width</span>
+  <button type="button" data-w="320">320</button>
+  <button type="button" data-w="359">359</button>
+  <button type="button" data-w="360">360</button>
+  <button type="button" data-w="443">443</button>
+  <button type="button" data-w="444">444</button>
+  <button type="button" data-w="480">480</button>
+  <button type="button" data-w="fill">full width</button>
+  <button type="button" data-w="sweep">sweep ▸</button>
+  <span class="readout" id="readout">—</span>
+  <span class="hint">359/360 and 443/444 straddle a packing breakpoint — one pixel changes the whole board.</span>
+</div>
 </div>
 
-<div class="host" id="host">
-  <noscript><p class="fallback"><b>This exhibit needs JavaScript.</b> The layout is computed from the width the component is given and the connectors are routed against measured geometry after layout, so there is nothing meaningful to show statically. The fixed-width original, which needs no script, is <a href="arm-b-compression.html">arm-b-compression.html</a>.</p></noscript>
+<div class="stage" id="stage">
+  <div class="host" id="host">
+    <noscript><p class="fallback"><b>This exhibit needs JavaScript.</b> The layout is computed from the width the component is given and the connectors are routed against measured geometry after layout, so there is nothing meaningful to show statically. The fixed-width original, which needs no script, is <a href="arm-b-compression.html">arm-b-compression.html</a>.</p></noscript>
+  </div>
+  <div class="grip" id="grip" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Drag to resize the component; arrow keys adjust by 1 px, shift by 10"></div>
 </div>
 
 <div class="doc">
@@ -279,7 +330,6 @@ const OPT = {
   hostw:   PARAMS.get('hostw') ? +PARAMS.get('hostw') : null,
   maxw:    PARAMS.get('maxw') || null,
 };
-if (OPT.maxw) document.documentElement.style.setProperty('--maxw', OPT.maxw === 'none' ? '100%' : (+OPT.maxw + 'px'));
 
 const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
 const corners = () => ['tl','tr','bl','br'].map(c => el('span','ck ' + c));
@@ -640,8 +690,86 @@ function routeEdges(board, svg){
   window.__arcvizEdgeStats = stats;
 }
 
-// The width readout is exhibit apparatus and lives outside the gate. It exists so the thing
-// this file is demonstrating is visible without anyone having to take it on trust.
+//////////////////////////////////////////////////////////////////////////////////////////
+// THE WIDTH CONTROL — exhibit apparatus, outside the gate.
+//
+// The component caps itself at 480 px, which is right for the component (RESPONSIVE.md §10)
+// and made this file mute as a demonstration: every viewport from 481 px to 1,920 px renders
+// identically, and desktop browsers will not go narrow enough to show otherwise. So the
+// exhibit owns a width and hands it to the component, instead of the component reading the
+// viewport. Below 620 px the control hides and the viewport takes over, because there the
+// demonstration happens on its own.
+//////////////////////////////////////////////////////////////////////////////////////////
+const CAP = OPT.maxw === 'none' ? Infinity : (OPT.maxw ? +OPT.maxw : 480);
+const MINW = 240;                       // below the conformance floor on purpose: it still holds
+let userW = OPT.hostw || null;          // null means "follow the cap"
+
+function gripWidth(){
+  const grip = document.getElementById('grip');
+  return getComputedStyle(grip).display === 'none' ? 0 : grip.getBoundingClientRect().width;
+}
+function stageAvail(){
+  return Math.max(MINW, document.getElementById('stage').clientWidth - gripWidth());
+}
+function applyWidth(){
+  const host = document.getElementById('host'), stage = document.getElementById('stage');
+  const want = userW === null ? CAP : userW;
+  // Measure the column first; break out of it only if more was actually asked for.
+  stage.classList.remove('bleed');
+  if (want > stageAvail()) stage.classList.add('bleed');
+  host.style.width = Math.round(Math.max(MINW, Math.min(want, stageAvail()))) + 'px';
+}
+function setWidth(w){ userW = w; applyWidth(); markPresets(); }
+function markPresets(){
+  const w = Math.round(document.getElementById('host').getBoundingClientRect().width);
+  document.querySelectorAll('.wctl button[data-w]').forEach(b => {
+    const v = b.dataset.w;
+    b.setAttribute('aria-pressed', String(v !== 'sweep' && (v === 'fill' ? userW === Infinity : +v === w)));
+  });
+}
+
+function wireWidthControl(){
+  document.querySelectorAll('.wctl button[data-w]').forEach(b => b.addEventListener('click', () => {
+    const v = b.dataset.w;
+    if (v === 'sweep') return sweep();
+    setWidth(v === 'fill' ? Infinity : +v);
+  }));
+  const grip = document.getElementById('grip');
+  let startX = 0, startW = 0, dragging = false;
+  grip.addEventListener('pointerdown', ev => {
+    dragging = true; startX = ev.clientX;
+    startW = document.getElementById('host').getBoundingClientRect().width;
+    grip.setPointerCapture(ev.pointerId); ev.preventDefault();
+  });
+  grip.addEventListener('pointermove', ev => { if (dragging) setWidth(startW + (ev.clientX - startX)); });
+  const stop = ev => { if (dragging){ dragging = false; try { grip.releasePointerCapture(ev.pointerId); } catch(e){} } };
+  grip.addEventListener('pointerup', stop);
+  grip.addEventListener('pointercancel', stop);
+  grip.addEventListener('keydown', ev => {
+    const step = ev.shiftKey ? 10 : 1;
+    if (ev.key === 'ArrowLeft'){ setWidth(document.getElementById('host').getBoundingClientRect().width - step); ev.preventDefault(); }
+    if (ev.key === 'ArrowRight'){ setWidth(document.getElementById('host').getBoundingClientRect().width + step); ev.preventDefault(); }
+  });
+}
+
+// Opt-in only, never on load: WCAG 2.1 SC 2.3.3 covers animation from interactions, and this
+// project does not get to auto-play motion in a file about not overstating things.
+let sweeping = null;
+function sweep(){
+  if (sweeping){ clearInterval(sweeping); sweeping = null; return; }
+  const lo = 300, hi = Math.min(560, stageAvail());
+  let w = lo, dir = 4;
+  setWidth(lo);
+  sweeping = setInterval(() => {
+    w += dir;
+    if (w >= hi) { w = hi; dir = -dir; }
+    else if (w <= lo && dir < 0) { clearInterval(sweeping); sweeping = null; setWidth(lo); return; }
+    setWidth(w);
+  }, 16);
+}
+
+// The readout exists so the thing this file is demonstrating is visible without anyone having
+// to take it on trust.
 function updateReadout(){
   const out = document.getElementById('readout');
   const board = document.querySelector('.board');
@@ -650,18 +778,22 @@ function updateReadout(){
   const byTop = {};
   objs.forEach(n => { const k = Math.round(n.getBoundingClientRect().top); byTop[k] = (byTop[k]||0) + 1; });
   const across = Math.max(...Object.values(byTop));
+  const nrows = Object.keys(byTop).length;
   const w = document.querySelector('.gate').getBoundingClientRect().width;
-  const capped = Math.round(w) < document.documentElement.clientWidth - 1;
   out.textContent = 'component ' + Math.round(w) + ' px · '
-    + across + ' across · ' + Object.keys(byTop).length + ' rows · board ' + Math.round(board.getBoundingClientRect().height) + ' px'
-    + (capped ? ' · at max width' : '');
+    + across + ' across · ' + nrows + ' rows · board ' + Math.round(board.getBoundingClientRect().height) + ' px'
+    + (nrows === 1 ? ' · FLATTENED — one row, no structure left (§10)' : '')
+    + (userW === null && Math.round(w) >= CAP ? ' · at max width' : '');
 }
 
 // A layout this file cannot draw must say so. A blank frame would be the silent failure the
 // whole project exists to refuse, and it would be indistinguishable from "nothing is wrong".
 try {
+  applyWidth();
   render();
+  wireWidthControl();
   updateReadout();
+  markPresets();
 } catch (err) {
   const host = document.getElementById('host');
   host.innerHTML = '<p class="fallback"><b>This exhibit failed to render.</b> The layout is computed at load time, so there is nothing to fall back to. Error: <code></code></p>';
@@ -674,8 +806,12 @@ new ResizeObserver(() => {
   cancelAnimationFrame(raf);
   raf = requestAnimationFrame(() => {
     const board = document.querySelector('.board');
-    if (board) { routeEdges(board, board.querySelector('.edges')); updateReadout(); }
+    if (board) { routeEdges(board, board.querySelector('.edges')); updateReadout(); markPresets(); }
   });
 }).observe(document.getElementById('host'));
+
+// The viewport still matters: it bounds what the control can ask for, and below 620 px it
+// replaces the control entirely.
+addEventListener('resize', applyWidth);
 </script>
 </body></html>
