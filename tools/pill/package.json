@@ -1,0 +1,19 @@
+{
+  "name": "arcviz-pill-bundle",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Bundles @entviz/react into a single inlinable script, so arcviz's layout mocks embed the real identifier pill rather than a stand-in.",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@entviz/core": "0.18.0",
+    "@entviz/react": "0.18.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

@@ -215,11 +215,23 @@ Measured, the chip's obligatory content as the mocks draw it — a ten-character
 | 14 px | 320 | 2 | 7 | 765 | 870 | **no — 1.53 screens** |
 | 12 px | 360 | 3 | 5 | 496 | 571 | **no, by 3 px** |
 
+*(Placeholder figures, retained for the record. The measured-against-the-real-component table is below.)*
+
 **This is the finding, and it is not about this file.** Arm B's central claim is that all thirteen objects stay co-present at rest — the property the arms README's question 4 rests on ("at this load every arm keeps everything co-present … so the stress board's fatal finding does not recur in any arm"), and one of the two things that retired layering under DD-4. **Co-presence holds at 8 and 10 px type and fails at 12.** At a legible size the stress board's fatal finding — budgeted markers scrolled off-viewport with no surviving trace — comes back, for arm B as much as for the others.
 
 So the co-presence argument does not discriminate between the arms at a legible type size, because it fails for all of them. DD-4 was decided partly on a property that may not exist. That is a second, independent reason the DD-4 re-argument is blocked (the first is the packing rule, §6).
 
-**Superseded in magnitude by §13.** The identifier pill is the widest obligatory element in the chip, so it sets the floor's width — and the pill the mocks draw is not the pill arcviz is specified to use. The correct one is *narrower* at every type size, by 7 px at an 8 px host rising to 20 px at 16 px, and it removes a stacked line as well. Re-measured against it, a 12 px host gives a chip about 86 px wide rather than 100 px, which is 3 chips across a 320 px viewport rather than 2. **Most of what legible type appeared to cost was the placeholder's fault, not legibility's.** The table above therefore states the trade too pessimistically, and the co-presence claim below needs re-testing before it is relied on in either direction.
+**Re-measured against the real component (§13).** `@entviz/react` is now embedded rather than modelled, and the floor is derived from the mounted pill at each base. The chip loses a stacked line — the label moves into the pill's own label slot — but is no narrower. Rendered registers, whole component including gate chrome, against a 320×568 screen:
+
+| type | 320 px viewport | fits one screen | 360 px viewport | fits one screen |
+|---|---|---|---|---|
+| 8 px | 3 across, 5 rows, 417 px | yes | 4 across, 4 rows, 352 px | yes |
+| 10 px | 3 across, 5 rows, 486 px | yes | 3 across, 5 rows, 473 px | yes |
+| 12 px | 2 across, 7 rows, 691 px | **no — 1.22 screens** | 3 across, 5 rows, 536 px | yes |
+| 14 px | 2 across, 7 rows, 800 px | **no — 1.41 screens** | 2 across, 7 rows, 760 px | **no** |
+| 16 px | 2 across, 7 rows, 894 px | **no — 1.57 screens** | 2 across, 7 rows, 875 px | **no** |
+
+**The conclusion holds and is now measured rather than modelled: co-presence survives to 10 px at the conformance width and fails at 12.** The real component bought one step at 360 px — 12 px type now fits a single screen there, where the placeholder said it did not — and bought nothing at 320. The figures in the first table of this section are superseded by these.
 
 **What this does not establish.** Which size is the floor. 8, 10, 12 and 14 are steps for looking at, not a finding; nothing here measures comprehension or legibility, and one expert's reaction at one viewing distance on one display is an observation, not a probe. What it does establish is the *shape* of the trade — every step up in type buys readability and spends co-presence — and that the trade was previously invisible because the type size was not a variable. `responsive-sweep/type8-320.png` and `type12-320.png` are the same load at the two ends of it.
 
@@ -276,9 +288,19 @@ Daniel Hardman: entviz already has a pill, its design encodes deliberate securit
 | 12 px | 91.5 | 78.2 | 100 | 86 |
 | 16 px | 118.0 | 98.2 | 126 | 106 |
 
-So the correct component is *cheaper* than the placeholder, and the gap widens as type grows — which is the opposite of what §11's table implies. At a 12 px host the chip is about 86 px, giving three across a 320 px viewport rather than two.
+**That table was a model, it was wrong, and the real component is now embedded.** The stand-in omitted the copy kebab and the pill's internal gaps, so it under-measured the pill by up to 10 px and produced the conclusion that the correct pill is meaningfully narrower. It is not. Measured against the mounted component:
 
-**These numbers are a stand-in measurement and should not be built on.** They model the pill from its design document; they are not the component. Given that the last two rounds of work were built on unexamined stand-ins, the next step is to embed `@entviz/react` and measure the real thing, not to refine the model.
+| host type | placeholder (teaser + tag) | real `EntvizPill` | chip as built | chip measured |
+|---|---|---|---|---|
+| 8 px | 65.0 | 61.3 | 76 × 44 | **69 × 37** |
+| 10 px | 78.2 | 76.1 | 86 × 53 | **84 × 45** |
+| 12 px | 91.5 | 90.9 | 100 × 59 | **99 × 52** |
+| 14 px | 104.7 | 105.7 | 113 × 68 | **114 × 58** |
+| 16 px | 118.0 | 120.6 | 126 × 74 | **129 × 64** |
+
+**On width it is a wash** — within a few pixels either way, and slightly *wider* at 14 px and above. The saving is vertical: the label moves into the pill's own label slot, so the chip loses a stacked line and is 37 px tall at an 8 px base instead of 44. That is worth having and it is not what the model predicted.
+
+**This is the third round in which a stand-in produced a conclusion the real thing reversed** — the width sweep that stopped at 800 px, the pill model, and the type ladder derived from it. The pattern is the finding: in this project the artifacts under study are mostly *stand-ins*, so "measured, not estimated" is not a sufficient discipline. What matters is whether the thing measured is the thing that ships.
 
 **Open.** Whether the mocks should embed the real component or continue to draw a faithful static stand-in of it; and whether the type scale should follow entviz's convention — `text-scale.ts` makes text the *inherited host running size* with named steps at 1, 0.85 and 0.72 em, and explicitly forbids "ad-hoc per-element magic numbers", which is exactly what arcviz's 8 / 6.5 / 6 px are. If arcviz embeds the pill, the pill inherits arcviz's font size, so arcviz's floor form has to be big enough to hold a pill at a legible host size. On that reading the type floor is not arcviz's to choose independently at all.
 
