@@ -19,6 +19,9 @@ The component caps at 480 px by default and turns surplus width into margin, so 
 | `words-320.png` | The words-only floor the perimeter glyphs replace, for the small-n probe to compare against `rest-320.png`. Items 10 and 11 carry their states as six-point words. |
 | `banner-el251-768.png` | Component pinned to 283 px inside a 768 px viewport: card 251 px, full stale banner on one line. |
 | `banner-el248-768.png` | Pinned to 280 px: card 248 px — the retest's number — with the short banner on one line. |
+| `type8-320.png` | The 8 px base every artifact in this repository uses, at the conformance width. Three across, five rows, fits one phone screen. |
+| `type10-320.png` | 10 px. Still three across, still one screen — the largest type at which co-presence survives at 320. |
+| `type12-320.png` | 12 px. Two across, seven rows, 1.22 screens: co-presence is gone at the conformance width. Fits at 360, though. |
 | `banner-el176-768.png` | Pinned to 208 px: card 176 px, short banner wrapping. Nothing clips. |
 
-Every capture is a render at the stated width, not a reconstruction or a scaled specimen.
+Every capture is a render at the stated width, not a reconstruction or a scaled specimen. Every identifier in them is the real `EntvizPill` from `@entviz/react`, not a drawing of one — the visible pill reads `ITEM nn` and a role glyph, and carries no value characters at all.
