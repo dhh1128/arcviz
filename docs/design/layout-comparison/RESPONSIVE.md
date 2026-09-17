@@ -185,8 +185,107 @@ The component therefore caps at **480 px** and centres, turning surplus width in
 
 **The key deserves a note, because it sits against a decision.** The design's own rule is point-of-use captions and no legend, inherited from the print charrette, and the component still carries none. A key on the *exhibit page* is not a reversal of that: the component is read by someone holding a credential, while this page is read by someone auditing a mechanism, and they need different things. But the distinction is worth stating rather than assuming, because there is a version of this where the key is evidence against the design — if a reader who knows the domain cannot tell what the marks mean, the vocabulary is failing, and no amount of apparatus fixes that. Which of the two it is, is exactly the small-n probe's question, and this file now renders `?h6h2=words` beside the glyphs so the probe has something to compare.
 
-## 11 · Open, and needing a ruling
+## 11 · The type floor, and the co-presence property that does not survive it
 
+Daniel Hardman opened the rebuilt file and said the type is far too small to ever work — his estimate was about 6 pt. The base size in every floor form in this repository is **8 CSS px**, with 6.5 px item tags and 6 px state words. So the estimate is right.
+
+**The derivation ran backwards, and it ran backwards from the wrong object.** The 76×44 floor was chosen and the type was shrunk until it fit. What it was shrunk to fit is a **placeholder the specification forbids** — see §13, which should be read before any number in this section is used. The measurements below are retained because the *shape* of the trade is right and the method is sound, but every absolute figure here is against the placeholder and is superseded.
+
+Measured, the chip's obligatory content as the mocks draw it — a ten-character SAID teaser, a separate item tag, one port label with its direction glyph — needs:
+
+| type base | pill | port | chip must be | fits 76×44 |
+|---|---|---|---|---|
+| 8 px | 65.0 | 48.0 | 73 × 44 | yes, with 3 px to spare |
+| 9 px | 71.6 | 53.8 | 80 × 47 | no |
+| 10 px | 78.2 | 59.5 | 86 × 53 | no |
+| 12 px | 91.5 | 70.9 | 100 × 59 | no |
+| 14 px | 104.7 | 82.4 | 113 × 68 | no |
+
+**The 76×44 floor holds its own content at exactly one type size, and it is the smallest one anybody tried.** One pixel larger and it does not fit. That is the signature of a form that was fixed first and had its contents fitted to it.
+
+**A contradiction already in the repository, now resolved.** [../stress-board/README.md](../stress-board/README.md) asserts "There is a legible floor form: 76×44 px … an 8 px ten-character SAID pill, a 6.5 px item tag". [../shape-gallery/README.md](../shape-gallery/README.md) says the opposite, and says it carefully: the coordinates "are **design choices embodied in the mocks**, not measured legibility floors … The claim that 76×44 is *where legibility gives out* is perceptual and requires a human to look; nobody has." A human has now looked. The word "legible" in the stress board's sentence is not supported and should come out.
+
+**What a legible floor costs.** The component now carries a type scale (`?type=8|10|12|14`); each step states a base size and the chip and mid dimensions *measured as necessary to carry the same content at it*, so the form follows the type rather than the reverse. Rendered:
+
+| type | viewport | across | rows | board column | whole component | fits a 320×568 screen |
+|---|---|---|---|---|---|---|
+| 8 px | 320 | 3 | 5 | 380 | 452 | yes |
+| 10 px | 320 | 3 | 5 | 451 | 523 | yes |
+| 12 px | 320 | 2 | 7 | 665 | 740 | **no — 1.30 screens** |
+| 14 px | 320 | 2 | 7 | 765 | 870 | **no — 1.53 screens** |
+| 12 px | 360 | 3 | 5 | 496 | 571 | **no, by 3 px** |
+
+**This is the finding, and it is not about this file.** Arm B's central claim is that all thirteen objects stay co-present at rest — the property the arms README's question 4 rests on ("at this load every arm keeps everything co-present … so the stress board's fatal finding does not recur in any arm"), and one of the two things that retired layering under DD-4. **Co-presence holds at 8 and 10 px type and fails at 12.** At a legible size the stress board's fatal finding — budgeted markers scrolled off-viewport with no surviving trace — comes back, for arm B as much as for the others.
+
+So the co-presence argument does not discriminate between the arms at a legible type size, because it fails for all of them. DD-4 was decided partly on a property that may not exist. That is a second, independent reason the DD-4 re-argument is blocked (the first is the packing rule, §6).
+
+**Superseded in magnitude by §13.** The identifier pill is the widest obligatory element in the chip, so it sets the floor's width — and the pill the mocks draw is not the pill arcviz is specified to use. The correct one is *narrower* at every type size, by 7 px at an 8 px host rising to 20 px at 16 px, and it removes a stacked line as well. Re-measured against it, a 12 px host gives a chip about 86 px wide rather than 100 px, which is 3 chips across a 320 px viewport rather than 2. **Most of what legible type appeared to cost was the placeholder's fault, not legibility's.** The table above therefore states the trade too pessimistically, and the co-presence claim below needs re-testing before it is relied on in either direction.
+
+**What this does not establish.** Which size is the floor. 8, 10, 12 and 14 are steps for looking at, not a finding; nothing here measures comprehension or legibility, and one expert's reaction at one viewing distance on one display is an observation, not a probe. What it does establish is the *shape* of the trade — every step up in type buys readability and spends co-presence — and that the trade was previously invisible because the type size was not a variable. `responsive-sweep/type8-320.png` and `type12-320.png` are the same load at the two ends of it.
+
+It also gives DD-4's reversal condition its first evidence. DD-4 reverses if "the compact floor proves illegible at 320 px". Nobody had looked; the first person to look said it was illegible. That is not sufficient to fire the condition — it is one person — but it is no longer true that there is nothing.
+
+## 12 · Overwhelm as a security failure, and where that question already lives
+
+Daniel's second reaction: the amount of detail is overwhelming, an expert in the domain finds it overwhelming, and overwhelming a reader so that they cannot tell what to attend to — or so that every render shows frustrating gaps until they stop attending at all — is itself a security failure, not merely a usability one.
+
+**This is [Q-8Y3M], already open, and it is his own ruling being revisited in the presence of the rendered consequence.** The charrette synthesis ([../charrette/synthesis.md](../charrette/synthesis.md)) states it almost exactly: "The composite as specified is tuned to the verifier and the adversary: identity pills outrank human-legible names, cards read as instrument panels, and a first-time holder looking for 'what does my credential say' reads past apparatus erected against an adversary they have never met." It names the two options — a single register everywhere, or a holder-facing register that "promotes `a`-section content and **demotes — never removes** — the apparatus" — records that "nothing in the research fixes where the dial belongs", and says it "should be decided before that phase starts." The stress board's own README already reported the board is "tuned to the far end of the [Q-8Y3M] dial by inheritance, and it quantifies what that costs but cannot adjudicate the dial."
+
+And [PLAN.md](../../research/PLAN.md) records the ruling that put it there: "**Scaffolding: full apparatus always.** Daniel Hardman's ruling. Every render carries the same structural honesty machinery regardless of audience — one code path, consistent, never under-warns, **at the cost of legibility on the common case.**" The cost was accepted in advance, in writing. What is new is seeing what it actually looks like.
+
+**Three things from the corpus that should discipline the response.** These come from [../../research/prior-art/literature.md](../../research/prior-art/literature.md), which is an audit with the relied-upon sentences quoted in it; I have read the audit and not the underlying papers, and anything load-bearing should be checked against them before it is built on.
+
+- The audit's own constraint on this exact pattern, under `[nngroup_progressive_disclosure]`: progressive disclosure "is a legitimate pattern for *complexity* (advanced/rarely-used features), but it must not be reached for as the solution to *disclosure-state honesty*. Deferring 'this field is redacted' to a secondary screen the user must actively navigate to would misuse the pattern — that information is not an advanced feature to hide, it is system status." So the answer cannot be a toggle that hides state.
+- `[schechter2007emperor]`: passive indicators whose *absence* produces no interruption are simply not noticed — 92% of participants entered passwords with the indicator removed. Demoting a marker toward passivity has a measured failure mode.
+- `[felt2015sslwarnings]`: a professional team applying warning best practice "ultimately failed at our goal of a well-understood warning", but did move adherence substantially through *opinionated design* — visual cues promoting a recommended action. The lever that works is prominence ordering, not explanation and not concealment.
+
+**Which suggests the distinction the design needs.** Full apparatus is a claim about *presence*, not about *equal prominence*. A render in which every fact is equally loud does not over-warn; it under-warns, because nothing in it is distinguishable — which is the failure Daniel's own ruling was written to prevent. So "demote, never remove" is not a weakening of the full-apparatus ruling but a condition on satisfying it, and the thing to design is an attention ordering over material that all stays present.
+
+**And the two reactions are one defect.** Everything is rendered at the floor size, so there is no hierarchy anywhere — nothing can be demoted, because everything is already at the bottom. The project spent its entire prominence budget on fitting thirteen objects onto a phone before any single state needed to be prominent. That is why §11's type finding and this section are the same problem seen twice: a legible type floor is what creates the headroom that an attention ordering would spend.
+
+**Not designed here, deliberately.** The charrette says [Q-8Y3M] is Daniel's to decide before the wireframe phase, and it shapes every subsequent artifact. Proposing a register split as though it were settled would be exactly the move this repository's own disciplines warn against.
+
+## 13 · The identifier pill: the specification is right and every artifact violates it
+
+Daniel Hardman: entviz already has a pill, its design encodes deliberate security/usability tradeoffs, and the pill drawn here ignores it.
+
+**arcviz's research layer already says the right thing.** [principles.md](../../research/principles.md):71 — "Every SAID and AID renders as an **entviz pill**, so an honest substitution disturbs a picture rather than hiding in a string nobody reads — but the pill's job is cheap rejection and recognition only." It already cites entviz's `trust.ts` for *rule-out, never rule-in*, and [threat-model.md](../../research/threat-model.md)'s substitution adversary already bounds the habituated glance at low-to-mid teens of bits. **Nothing in the research is wrong.** What went wrong is that every mock substituted a placeholder — a rounded rectangle containing `EGDKB8m5pt…` — and then the whole geometry was derived from the placeholder's dimensions.
+
+**The placeholder is the one thing the pill design names as prohibited.** `entviz-js/packages/react/docs/pill-design.md` §3.3: "**No SHORT truncated value chars inline** (`014d…b5e2`): an ~8-char head+tail teaser is both glanceable *and* grindable (a ~48-bit prefix collision is feasible), so it **trains the prefix/suffix heuristic vanity-grinding defeats** (threat-model T1/T6; paper §5.1)." The harm is not only the leaked bits. It is that a reader shown thirteen prefixes per render, every render, learns to identify credentials by prefix — and that learned heuristic is precisely what an adversary who grinds a colliding prefix exploits. A component built to defend against an issuer-controlled adversary is training the habit that defeats it. Note the boundary the same clause draws: a **full-value hover preview is fine** and is not grindable (§14 of that doc); the prohibition is on the short inline teaser.
+
+**What the pill actually is** (§3.1). Leading cap, empty in the wild posture. A label slot. A trailing role icon — `key · signature · digest · address · identifier · raw` — carrying the *type*, never the value, zero value-identity bits. A copy kebab on hover/focus. The value on hover, and on expand.
+
+**The label slot is the part I read wrongly first.** It is not "the slot that is notably not a value prefix". It is the **human-meaningful name** slot: explicit host text wins; failing that, and only under a corpus posture, a mnemonic; and the type text ("cesr key") is a *fallback so the pill is never empty*, not the design. **arcviz already has exactly the right content for it** — the opaque host load label, `ITEM 03`, which it currently renders as a separate 6.5 px tag beside a teaser that should not exist. Putting the label where it belongs removes a stacked line and the teaser at once.
+
+**The posture gate, as actually designed** (§13, `this.i ujdwjtex`, `core/src/trust.ts`).
+
+- The gate is a **`TrustAssumption` object**, host-declared and immutable, passed per pill. Provenance is **per-value, not per-viewport**: one assumption for a same-origin set, referenced from each of its pills; foreign entropy gets a different assumption or none. It is deliberately greppable — a reviewer can find every pill referencing a trusting assumption and ask whether that origin is really trusted. `resolveChannels(trust)` is the pure gate: outside `posture:"corpus"` **every** value-derived channel is off regardless of flags.
+- Three channels, all corpus-only and each opt-in: the **auto-mnemonic**, built *only from cells the entviz itself displays* so it can never show a character the visualization does not — the honest `…` marks omitted cells that are all present on expand; the **auto-color tint**, 16 hues as a soft pre-filter, never a partition; and the **colorbar icon** in the leading cap.
+- **Rule-out, never rule-in** (`uibwfl47`) is what makes them safe: a deterministic low-entropy function of the value is a *difference detector*. Two different displays prove different values; two matching displays prove nothing. Low entropy is therefore a feature, because the rule-in is never sold.
+- **The posture is never an end-user affordance.** "Trust is asserted by the party that *knows* the provenance (the host, in code), not by the reader deciding whether to trust." The pill exposes no control over its own posture, because a "mark as trusted" button would be a one-click false-reassurance vector. The only runtime elevation is **earned promotion** — wild → trusting by the user *completing a successful formal comparison* — reserved for v2.
+
+**arcviz is a wild-posture consumer, and its own gate says so.** The corpus posture was introduced for cesrview, a KEL viewer over *the user's own machine's* microledger. arcviz renders a presentation whose gate header states `P — PRESENTER: UNKNOWN · no evidence binds the presenting party to any holder AID below`. That is the definition of the adversarial case. Every value-derived channel is therefore off, and the mnemonic is doubly unavailable: it may only show cells the entviz displays, and arcviz currently displays no entviz at all.
+
+**One thing that survives, with its reasoning sharpened.** The `×N` recurrence marks are a *machine* comparison of full values, not a human glance judgment, so they are verification rather than recognition and rule-out-never-rule-in does not forbid them. What made them hazardous is the teaser beside them, which invites a reader to believe they could have reached the same judgment by eye.
+
+**Consequence for the floor, and for §11.** The pill is the widest obligatory element in the chip, so **the 76×44 floor was sized around an object the specification forbids.** Measured against a faithful wild pill — label slot, role icon, no value characters, no separate tag line — the chip is narrower at every type size:
+
+| host type | placeholder (teaser + tag) | entviz wild pill | chip as built | chip per spec |
+|---|---|---|---|---|
+| 8 px | 65.0 | 58.1 | 73 | 66 |
+| 12 px | 91.5 | 78.2 | 100 | 86 |
+| 16 px | 118.0 | 98.2 | 126 | 106 |
+
+So the correct component is *cheaper* than the placeholder, and the gap widens as type grows — which is the opposite of what §11's table implies. At a 12 px host the chip is about 86 px, giving three across a 320 px viewport rather than two.
+
+**These numbers are a stand-in measurement and should not be built on.** They model the pill from its design document; they are not the component. Given that the last two rounds of work were built on unexamined stand-ins, the next step is to embed `@entviz/react` and measure the real thing, not to refine the model.
+
+**Open.** Whether the mocks should embed the real component or continue to draw a faithful static stand-in of it; and whether the type scale should follow entviz's convention — `text-scale.ts` makes text the *inherited host running size* with named steps at 1, 0.85 and 0.72 em, and explicitly forbids "ad-hoc per-element magic numbers", which is exactly what arcviz's 8 / 6.5 / 6 px are. If arcviz embeds the pill, the pill inherits arcviz's font size, so arcviz's floor form has to be big enough to hold a pill at a legible host size. On that reading the type floor is not arcviz's to choose independently at all.
+
+## 14 · Open, and needing a ruling
+
+0. **The identifier pill (§13).** Embed `@entviz/react` in the mocks, or draw a faithful static stand-in of the wild pill? And does arcviz adopt entviz's type convention — inherited host running size, steps at 1 / 0.85 / 0.72 em — which would mean the floor form is sized by the pill rather than the reverse?
+0. **[Q-8Y3M], the scaffolding dial (§12).** Already yours to decide, per the charrette; the full-apparatus ruling is the current answer and this is the first look at what it costs.
 0. **The component's maximum width, and what to do with surplus width at all.** It is capped at 480 px so the graph stays a vertical stack, which is the conservative reading of DD-7; the alternatives are pinning it to 360 px so every artifact stays directly comparable, or spending desktop width on a genuinely different layout, which DD-7's own text calls a second layout rather than a reversal. `?maxw=` renders any of them. Nothing above the cap has been designed.
 1. **Which packing rule — global or band?** Global treats rows as pure viewport economy, which is what the caption inside the render says, and spends extra width; band preserves the authored bands so that a row means something, and ignores width above 360. It decides DD-4's height comparison (§6), and it decides whether a reader who infers meaning from rows is reading correctly or being misled.
 2. **DD-1 under wrap-packing.** Accept that a drawn edge may ascend, constrain packing so none does, or narrow DD-1 to govern rank rather than drawn direction.

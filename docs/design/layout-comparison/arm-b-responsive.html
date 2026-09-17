@@ -43,7 +43,8 @@
   :root{
     /* The only fixed numbers in the layout. Both are DD-5's floor forms, which are fixed by definition:
        a reflowed form carries the same content at any width, which is what makes it a floor. */
-    --chip-w:76px; --chip-h:44px;
+    --k:1;                          /* type scale; 1 = the 8 px base every earlier artifact used */
+    --chip-w:76px; --chip-h:44px;   /* set per type step by the script — see TYPE_STEPS */
     --mid-w:150px; --mid-h:72px;
     --gutter:14px;      /* the frontier continued down the left margin */
     --pad:8px;          /* board inset right of the gutter */
@@ -89,10 +90,10 @@
      px value on .host, which is exactly how a real embedder would give it one. */
   .host{flex:0 0 auto;width:100%;max-width:100%;min-width:0}
   .gate{border:5px double #111;background:#fff;width:100%}
-  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:9px;line-height:1.35}
+  .gatehead{background:#111;color:#fff;padding:5px 10px;font-size:calc(9px * var(--k,1));line-height:1.35}
   .board{position:relative;background:#fff;width:100%;overflow:hidden;container-type:inline-size;container-name:board}
   .edges{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
-  .band{position:relative;z-index:2;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:8px;color:#333}
+  .band{position:relative;z-index:2;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-bottom:1.5px dashed #111;padding:3px 8px;font-size:calc(8px * var(--k,1));color:#333}
   .body{position:relative;z-index:2;display:flex;align-items:stretch}
   .gutter{width:var(--gutter);flex:none;background:repeating-linear-gradient(45deg,#e6e6e6 0 4px,#f7f7f7 4px 8px);border-right:1.5px dashed #111}
   .rows{flex:1 1 auto;min-width:0;padding:var(--pad) 0 var(--pad) var(--pad);background:transparent;
@@ -105,23 +106,23 @@
 
   /* ---- object forms ---- */
   .obj{position:relative;background:#fff;flex:none}
-  .fl{width:var(--chip-w);height:var(--chip-h);border:1.5px solid #111;padding:2px 4px;font-size:8px;line-height:1.2;overflow:visible}
-  .flhole{width:var(--chip-w);height:var(--chip-h);border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:2px 4px;font-size:8px;line-height:1.2}
-  .flhole .hdr{font-weight:700;font-size:6.5px;letter-spacing:.06em}
-  .mid{width:var(--mid-w);height:var(--mid-h);border:1.5px solid #111;padding:3px 6px;font-size:8.5px;line-height:1.25}
-  .card{flex:1 1 100%;width:100%;border:1.5px solid #111;padding:7px 9px;font-size:10px;line-height:1.3;container-type:inline-size;container-name:card}
+  .fl{width:var(--chip-w);height:var(--chip-h);border:1.5px solid #111;padding:2px 4px;font-size:calc(8px * var(--k,1));line-height:1.2;overflow:visible}
+  .flhole{width:var(--chip-w);height:var(--chip-h);border:3px double #111;background:repeating-linear-gradient(45deg,#ececec 0 4px,#f9f9f9 4px 8px);padding:2px 4px;font-size:calc(8px * var(--k,1));line-height:1.2}
+  .flhole .hdr{font-weight:700;font-size:calc(6.5px * var(--k,1));letter-spacing:.06em}
+  .mid{width:var(--mid-w);height:var(--mid-h);border:1.5px solid #111;padding:3px 6px;font-size:calc(8.5px * var(--k,1));line-height:1.25}
+  .card{flex:1 1 100%;width:100%;border:1.5px solid #111;padding:7px 9px;font-size:calc(10px * var(--k,1));line-height:1.3;container-type:inline-size;container-name:card}
 
-  .role{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#555}
-  .fl .role,.mid .role{font-size:6.5px;letter-spacing:.06em;color:#555}
-  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:9.5px;border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
-  .fl .pill,.flhole .pill,.mid .pill{font-size:8px;padding:0 3px}
-  .x{font-size:7.5px;vertical-align:super;color:#333}
-  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:8px;padding:0 3px;background:#fafafa}
-  .fl .port,.mid .port{font-size:7px;padding:0 2px;border-bottom-width:2px}
-  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:8px}
-  .fl .seal{border-top-width:3px;font-size:6.5px}
-  .w6{font-size:6px;color:#333}
-  .shed{font-size:7px;color:#111;border:1px dotted #333;padding:0 2px;display:inline-block;line-height:1.1}
+  .role{font-size:calc(8.5px * var(--k,1));letter-spacing:.08em;text-transform:uppercase;color:#555}
+  .fl .role,.mid .role{font-size:calc(6.5px * var(--k,1));letter-spacing:.06em;color:#555}
+  .pill{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:calc(9.5px * var(--k,1));border:1px solid #333;border-radius:999px;padding:0 5px;background:#fff;white-space:nowrap;display:inline-block}
+  .fl .pill,.flhole .pill,.mid .pill{font-size:calc(8px * var(--k,1));padding:0 3px}
+  .x{font-size:calc(7.5px * var(--k,1));vertical-align:super;color:#333}
+  .port{display:inline-block;border:1px solid #333;border-bottom-width:3px;font-size:calc(8px * var(--k,1));padding:0 3px;background:#fafafa}
+  .fl .port,.mid .port{font-size:calc(7px * var(--k,1));padding:0 2px;border-bottom-width:2px}
+  .seal{display:inline-block;border-top:4px solid #111;padding-top:1px;font-size:calc(8px * var(--k,1))}
+  .fl .seal{border-top-width:3px;font-size:calc(6.5px * var(--k,1))}
+  .w6{font-size:calc(6px * var(--k,1));color:#333}
+  .shed{font-size:calc(7px * var(--k,1));color:#111;border:1px dotted #333;padding:0 2px;display:inline-block;line-height:1.1}
 
   /* ---- perimeter-class state carriers ----------------------------------------------------
      Each state owns one channel of the box's own perimeter, so it survives at every tier down
@@ -131,15 +132,15 @@
   .stale{border-top:none!important}
   .stale-top{display:flex;align-items:center}
   .stale-top .ln{flex:1;border-top:1.5px solid #111;min-width:4px}
-  .stale-top .tx{font-size:7px;padding:0 3px;white-space:nowrap}
+  .stale-top .tx{font-size:calc(7px * var(--k,1));padding:0 3px;white-space:nowrap}
   .fl.stale .stale-top{margin:-2px -4px 1px}
-  .fl.stale .stale-top .tx{font-size:6px;padding:0 2px}
+  .fl.stale .stale-top .tx{font-size:calc(6px * var(--k,1));padding:0 2px}
   .mid.stale .stale-top{margin:-3px -6px 2px}
   .card.stale .stale-top{margin:-7px -9px 4px}
   /* The card-scale banner never clips: it wraps rather than overflow. DD-10's conformance floor
      is met by the wrap; the shed below is the design behaviour above it. */
   .card.stale .stale-top{align-items:stretch}
-  .card.stale .stale-top .tx{white-space:normal;overflow-wrap:anywhere;font-size:8.5px;padding:0 4px;text-align:center}
+  .card.stale .stale-top .tx{white-space:normal;overflow-wrap:anywhere;font-size:calc(8.5px * var(--k,1));padding:0 4px;text-align:center}
   .card.stale .stale-top .ln{align-self:center}
   /* Threshold is measured, not chosen: the full banner text renders at 239.0 px and the two rule
      stubs floor at 4 px each, so the row needs 247 px. The row is the card's content box + 18 px
@@ -147,7 +148,7 @@
      the as-of sheds — and nothing is lost, because the T-line inside the card carries it. A card
      with no T-line may not use the short form. See RESPONSIVE.md §6. */
   @container card (max-width:230px){ .banner-auto .asof{display:none} }
-  .vt{font-size:7px;color:#555;margin-top:2px}
+  .vt{font-size:calc(7px * var(--k,1));color:#555;margin-top:2px}
   .mid .guessmini{border:1px solid #555;border-bottom-color:transparent;background:transparent;height:20px;margin-top:2px;position:relative}
   .mid .guessmini>.porous{bottom:-1px;left:-1px;right:-1px;height:1px}
 
@@ -159,7 +160,7 @@
   .h6p>.bl{left:-1.5px;bottom:-1.5px;border-left-width:1.5px;border-bottom-width:1.5px}
   .h6p>.br{right:-1.5px;bottom:-1.5px;border-right-width:1.5px;border-bottom-width:1.5px}
   .card.h6p>.ck{width:16px;height:16px}
-  .h6line{font-size:9px;border-left:3px solid #111;padding-left:5px;margin-top:4px}
+  .h6line{font-size:calc(9px * var(--k,1));border-left:3px solid #111;padding-left:5px;margin-top:4px}
 
   /* H2-guessable — the boundary of the guessable unit has a porous bottom edge. Its contrast
      partner H3-blinded would double that same edge; one channel, opposite values, which is what
@@ -170,17 +171,17 @@
   .porous{position:absolute;left:-1.5px;right:-1.5px;bottom:-1.5px;height:1.5px;pointer-events:none;
        background:repeating-linear-gradient(90deg,#111 0 3px,transparent 3px 7px)}
   .h2g{border-bottom-color:transparent!important}
-  .guess{border:1px solid #555;border-bottom-color:transparent;background:transparent;padding:5px 7px;font-size:9.5px;min-height:52px;margin-top:4px;position:relative}
+  .guess{border:1px solid #555;border-bottom-color:transparent;background:transparent;padding:5px 7px;font-size:calc(9.5px * var(--k,1));min-height:52px;margin-top:4px;position:relative}
   .guess>.porous{bottom:-1px;left:-1px;right:-1px;height:1px}
 
   /* ---- expanded-card interior ---- */
-  .manif{font-size:8.5px;color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
-  .ledger{font-size:9px;color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
+  .manif{font-size:calc(8.5px * var(--k,1));color:#333;border:1px solid #ddd;padding:1px 4px;margin-top:3px;display:inline-block}
+  .ledger{font-size:calc(9px * var(--k,1));color:#222;border-top:1px solid #bbb;margin-top:5px;padding-top:3px;line-height:1.32}
   .ledger .lh{color:#444;border-bottom:1px solid #ddd;margin-bottom:2px;padding-bottom:1px}
   .ledger .r{display:flex;gap:4px}
   .ledger .g{width:11px;flex:none;text-align:center}
-  .tline{font-size:9px;color:#333;margin-top:3px}
-  .cap{position:relative;z-index:2;font-size:7.5px;color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3;margin:0 var(--pad) var(--pad) calc(var(--gutter) + var(--pad))}
+  .tline{font-size:calc(9px * var(--k,1));color:#333;margin-top:3px}
+  .cap{position:relative;z-index:2;font-size:calc(7.5px * var(--k,1));color:#333;background:#fff;border:1px solid #999;padding:2px 5px;line-height:1.3;margin:0 var(--pad) var(--pad) calc(var(--gutter) + var(--pad))}
 
   .focusable{cursor:pointer}
   .focusable:focus-visible{outline:2px solid #111;outline-offset:2px}
@@ -239,6 +240,15 @@
   <button type="button" data-w="sweep">sweep ▸</button>
   <span class="readout" id="readout">—</span>
   <span class="hint">359/360 and 443/444 straddle a packing breakpoint — one pixel changes the whole board.</span>
+</div>
+
+<div class="wctl" id="tctl">
+  <span class="wlab">Type size</span>
+  <button type="button" data-t="8">8 px</button>
+  <button type="button" data-t="10">10 px</button>
+  <button type="button" data-t="12">12 px</button>
+  <button type="button" data-t="14">14 px</button>
+  <span class="hint">8 px is what every artifact in this repository uses, and it is the only size the 76&times;44 floor can hold. The larger steps size the floor to the type instead — watch the object count per row, and the register, when you press them.</span>
 </div>
 </div>
 
@@ -329,6 +339,7 @@ const OPT = {
   // viewport, so the element floor can be exercised without pretending it is a viewport.
   hostw:   PARAMS.get('hostw') ? +PARAMS.get('hostw') : null,
   maxw:    PARAMS.get('maxw') || null,
+  type:    PARAMS.get('type') || '8',
 };
 
 const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
@@ -700,6 +711,32 @@ function routeEdges(board, svg){
 // viewport. Below 620 px the control hides and the viewport takes over, because there the
 // demonstration happens on its own.
 //////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// THE TYPE STEPS.
+//
+// The 76x44 floor was not derived from a legibility floor; it was chosen, and the type was
+// then shrunk to fit inside it. Measured, the chip's obligatory content — a ten-character
+// SAID pill, an item tag, one port label — fits 76x44 at an 8 px base and at NO larger size.
+// Every earlier artifact in this repository is therefore at the smallest type that could be
+// made to work, which is the wrong direction of derivation.
+//
+// Each step below states a base type size and the chip dimensions MEASURED as necessary to
+// carry the same content at it. The form follows the type, not the reverse. What that costs
+// is the point: see RESPONSIVE.md §12.
+const TYPE_STEPS = {
+  '8':  {k:1,    chip:[76,44],   mid:[150,72],  note:'as built — every artifact in this repo'},
+  '10': {k:1.25, chip:[86,53],   mid:[172,86],  note:''},
+  '12': {k:1.5,  chip:[100,59],  mid:[198,98],  note:''},
+  '14': {k:1.75, chip:[113,68],  mid:[224,112], note:''},
+};
+function applyType(step){
+  const t = TYPE_STEPS[step] || TYPE_STEPS['8'];
+  const r = document.documentElement.style;
+  r.setProperty('--k', t.k);
+  r.setProperty('--chip-w', t.chip[0] + 'px'); r.setProperty('--chip-h', t.chip[1] + 'px');
+  r.setProperty('--mid-w',  t.mid[0]  + 'px'); r.setProperty('--mid-h',  t.mid[1]  + 'px');
+}
+
 const CAP = OPT.maxw === 'none' ? Infinity : (OPT.maxw ? +OPT.maxw : 480);
 const MINW = 240;                       // below the conformance floor on purpose: it still holds
 let userW = OPT.hostw || null;          // null means "follow the cap"
@@ -722,14 +759,28 @@ function applyWidth(){
 function setWidth(w){ userW = w; applyWidth(); markPresets(); }
 function markPresets(){
   const w = Math.round(document.getElementById('host').getBoundingClientRect().width);
-  document.querySelectorAll('.wctl button[data-w]').forEach(b => {
+  document.querySelectorAll('#wctl button[data-w]').forEach(b => {
     const v = b.dataset.w;
     b.setAttribute('aria-pressed', String(v !== 'sweep' && (v === 'fill' ? userW === Infinity : +v === w)));
   });
 }
 
+function wireTypeControl(){
+  document.querySelectorAll('#tctl button[data-t]').forEach(b => b.addEventListener('click', () => {
+    OPT.type = b.dataset.t;
+    applyType(OPT.type);
+    render();                      // the forms changed size, so the board is rebuilt
+    wireTypeControl.marked = false;
+    applyWidth(); updateReadout(); markPresets(); markType();
+  }));
+}
+function markType(){
+  document.querySelectorAll('#tctl button[data-t]').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.t === OPT.type)));
+}
+
 function wireWidthControl(){
-  document.querySelectorAll('.wctl button[data-w]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#wctl button[data-w]').forEach(b => b.addEventListener('click', () => {
     const v = b.dataset.w;
     if (v === 'sweep') return sweep();
     setWidth(v === 'fill' ? Infinity : +v);
@@ -780,7 +831,7 @@ function updateReadout(){
   const across = Math.max(...Object.values(byTop));
   const nrows = Object.keys(byTop).length;
   const w = document.querySelector('.gate').getBoundingClientRect().width;
-  out.textContent = 'component ' + Math.round(w) + ' px · '
+  out.textContent = OPT.type + ' px type · component ' + Math.round(w) + ' px · '
     + across + ' across · ' + nrows + ' rows · board ' + Math.round(board.getBoundingClientRect().height) + ' px'
     + (nrows === 1 ? ' · FLATTENED — one row, no structure left (§10)' : '')
     + (userW === null && Math.round(w) >= CAP ? ' · at max width' : '');
@@ -789,11 +840,14 @@ function updateReadout(){
 // A layout this file cannot draw must say so. A blank frame would be the silent failure the
 // whole project exists to refuse, and it would be indistinguishable from "nothing is wrong".
 try {
+  applyType(OPT.type);
   applyWidth();
   render();
   wireWidthControl();
+  wireTypeControl();
   updateReadout();
   markPresets();
+  markType();
 } catch (err) {
   const host = document.getElementById('host');
   host.innerHTML = '<p class="fallback"><b>This exhibit failed to render.</b> The layout is computed at load time, so there is nothing to fall back to. Error: <code></code></p>';
