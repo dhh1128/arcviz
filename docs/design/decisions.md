@@ -154,4 +154,5 @@ It also forbids reading the retest's failures as a verdict on the design. They a
 
 ## Open
 
+- **How a credential is identified to a human, and which identifier classes get a pill.** Opened 2026-09-18. Every artifact renders thirteen SAID pills and one AID, when the identifier that carries MITM risk is the AID and a SAID's integrity is settled by computation rather than by a human glance. Separately, the credentials are labelled `ITEM NN` — a test-harness placeholder that escaped into the entviz pill's label slot, where [affordances.md](../research/affordances.md) §5 had already specified a resolved COIA alias under P12. See [credential-identity.md](credential-identity.md); under study in its own session.
 - **The holder-facing presenter indicator.** The full-apparatus ruling and AF17's "no presenter indicator at all, positive or negative" collide on exactly one axis; see PLAN.md's 2026-09-14 entry.
