@@ -8,7 +8,9 @@ Each entry carries its status, the decision, why it beat the alternatives, what 
 
 ---
 
-## DD-1 — Graph orientation: presented node at top, references descend · **Ratified 2026-09-15**
+## DD-1 — Graph orientation: presented node at top, references descend · **Settled for now · his words, 2026-09-18**
+
+> "dd-1: I am willing to treat this as settled for now." — Daniel Hardman, 2026-09-18. The *for now* is part of it.
 
 The node the viewer was handed sits at the top. Edges point downward, from a node to whatever its `e` section references. Rank is by longest path, so a node reachable at two different depths sits at its deepest.
 
@@ -28,7 +30,9 @@ It also forbids the inconsistency the first gallery contained: holes at the bott
 
 ---
 
-## DD-2 — Minimum viewport: 320 CSS pixels · **Ratified 2026-09-15**
+## DD-2 — Minimum viewport: 320 CSS pixels · **REJECTED AS FORMULATED · his words, 2026-09-18**
+
+> "absolutely not. I never would have approved that formulation. I remember discussing this topic and deciding that 320 was a floor. But the way you've stated it -- as if it's one of the ten commandments instead of a good goal -- is wrong. Designs have tensions. Tensions have to be surfaced. Categorical language prevents tensions from being seen." — Daniel Hardman, 2026-09-18. The substance survives: 320 is a floor he decided on. Everything categorical below does not.
 
 Every layout must present without loss of information or functionality, and without two-dimensional scrolling, at 320 CSS pixels of width.
 
@@ -44,7 +48,9 @@ This also aligns with P10, which holds that accessibility and adversarial robust
 
 ---
 
-## DD-3 — Edge labels are rendered, inside the issuer boundary · **Ratified 2026-09-15**
+## DD-3 — Edge labels are rendered, inside the issuer boundary · **CONCLUSION ONLY · his words, 2026-09-18**
+
+> "I agree with this conclusion. But how we expose it has never been debated, and reasoning anything beyond the literal meaning of my words is taking it too far." — Daniel Hardman, 2026-09-18. What is his is one sentence, from 2026-09-15: "edges in ACDCs are labeled, and we need to expose that label, because each edge may have a different meaning." The issuer-boundary placement in this entry's title is the disclaimed half. Cite the sentence, never the entry.
 
 Every drawn edge carries its label. The label is the map key in the ACDC's `e` section — real examples from the corpus are `auth`, `le`, `qvi`, `waypoint`, `sourceA`/`sourceB`, and an edge group of `unanimous`, `anyOne`, `average`, `weightedAverage`.
 
@@ -90,7 +96,9 @@ Non-focused cards reflow to a compact floor. Cards carrying one of the four budg
 
 ---
 
-## DD-7 — The primary axis is vertical · **Ratified 2026-09-15**
+## DD-7 — The primary axis is vertical · **NOT SETTLED · his words, 2026-09-18**
+
+> "dd-7 was a speculation, not a settled decision. 'I think' is a load bearing hedge. I still think it's right, but it's not settled." — Daniel Hardman, 2026-09-18. What he actually said on 2026-09-15 was: "I think the primary axis should be vertical, because I think that's the only one that works on a phone." Both hedges were dropped when this entry was written.
 
 The graph lays out vertically. Fan-out wraps rather than extending horizontally.
 
@@ -120,7 +128,9 @@ A card needs to collapse and expand its own contents, because credentials carry 
 
 ---
 
-## DD-9 — Holder and verifier are both first-tier · **Ratified 2026-09-15**
+## DD-9 — Holder and verifier are both first-tier · **NOT SETTLED · his words, 2026-09-18**
+
+> "same. I was correcting an overreach by you, not announcing a doctrine." — Daniel Hardman, 2026-09-18. A correction recorded as a ruling.
 
 arcviz serves a credential holder and a credential verifier as co-equal audiences. Neither is a primary case to be optimized for, and neither is a secondary case to be accommodated afterwards.
 
@@ -136,7 +146,9 @@ arcviz serves a credential holder and a credential verifier as co-equal audience
 
 ---
 
-## DD-10 — 320 px is a correctness floor, not a design target · **Ratified 2026-09-15**
+## DD-10 — 320 px is a correctness floor, not a design target · **REJECTED AS FORMULATED · his words, 2026-09-18**
+
+> "d-10 same as d-2" — Daniel Hardman, 2026-09-18, rejecting the categorical register. This entry was written to stop the floor being mistaken for the design target and asserts itself more categorically than the entry it corrects ("non-negotiable").
 
 Nothing may break, clip, lose information, or require horizontal scrolling at 320 CSS pixels. That is conformance, it is non-negotiable, and it is testable in CI. But the layout is **not designed to 320**. Packing rules are width-dependent — three compact chips across at 320, four at 360, mid-floor cards sharing a row above some threshold and not below it — and the floor is the degenerate case rather than the design case.
 
