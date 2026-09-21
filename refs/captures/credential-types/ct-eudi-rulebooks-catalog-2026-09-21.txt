@@ -1,0 +1,91 @@
+{
+  "sha": "36f8adcf914ac06cac18d685add04e0a8a06d685",
+  "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/trees/36f8adcf914ac06cac18d685add04e0a8a06d685",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "598ae7928baa2ac2a9bb35e3280f6d7e8774d010",
+      "size": 9,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/598ae7928baa2ac2a9bb35e3280f6d7e8774d010"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd984abc5b3e78fea00f14937a42ac98b56b16a8",
+      "size": 3806,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/bd984abc5b3e78fea00f14937a42ac98b56b16a8"
+    },
+    {
+      "path": "rulebooks",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2ab2290cc7b9507c66ecfffb0bf2557255ff128d",
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/trees/2ab2290cc7b9507c66ecfffb0bf2557255ff128d"
+    },
+    {
+      "path": "rulebooks/mdl",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "87eb8a45cbf5b56777aec55814c970ac48db1e5d",
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/trees/87eb8a45cbf5b56777aec55814c970ac48db1e5d"
+    },
+    {
+      "path": "rulebooks/mdl/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "rulebooks/mdl/mdl-rulebook.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ab215089c5540d32f981839e163d61984bffdc6",
+      "size": 2443,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/5ab215089c5540d32f981839e163d61984bffdc6"
+    },
+    {
+      "path": "rulebooks/pid",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5f82ec3f2d4fb1e1590ffdd8a8b5b0d66cc18aaa",
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/trees/5f82ec3f2d4fb1e1590ffdd8a8b5b0d66cc18aaa"
+    },
+    {
+      "path": "rulebooks/pid/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "rulebooks/pid/pid-rulebook.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "732e2f3fc1a13687572d7b9f580473df4bbf2b01",
+      "size": 31355,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/732e2f3fc1a13687572d7b9f580473df4bbf2b01"
+    },
+    {
+      "path": "template",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "12c112d97911054bd43e9d98fb24105518c6d011",
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/trees/12c112d97911054bd43e9d98fb24105518c6d011"
+    },
+    {
+      "path": "template/attestation-rulebook-template.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "233cb61ce9b60d3dd63a027a0435e94e1b4818f1",
+      "size": 27792,
+      "url": "https://api.github.com/repos/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/git/blobs/233cb61ce9b60d3dd63a027a0435e94e1b4818f1"
+    }
+  ],
+  "truncated": false
+}

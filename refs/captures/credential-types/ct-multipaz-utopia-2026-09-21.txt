@@ -1,0 +1,1639 @@
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/EUCertificateOfResidence.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/EUCertificateOfResidence.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.cbor.toDataItem
+import org.multipaz.cbor.toDataItemFullDate
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import kotlinx.datetime.LocalDate
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.Options
+import org.multipaz.documenttype.knowntypes.SampleData
+import org.multipaz.documenttype.DocumentAttributeSensitivity
+
+/**
+ * Object containing the metadata of the EU Certificate of Residency (COR) document.
+ *
+ * TODO: see if this document type still exists and how exactly it is defined. This
+ * definition is ad hoc and added to facilitate interoperability testing.
+ */
+object EUCertificateOfResidence {
+    const val DOCTYPE = "eu.europa.ec.eudi.cor.1"
+    const val NAMESPACE = "eu.europa.ec.eudi.cor.1"
+    const val VCT = "https://example.eudi.ec.europa.eu/cor/1"
+
+    /**
+     * Build the EU Certificate of Residency Document Type.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_CERTIFICATE_OF_RESIDENCY))
+            .addMdocDocumentType(DOCTYPE)
+            .addJsonDocumentType(type = VCT, keyBound = true)
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "family_name",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_FAMILY_NAME),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_FAMILY_NAME),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PERSON,
+                sampleValueMdoc = SampleData.FAMILY_NAME.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "given_name",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_GIVEN_NAMES),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_GIVEN_NAMES),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PERSON,
+                sampleValueMdoc = SampleData.GIVEN_NAME.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "birth_date",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_DATE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_DATE_OF_BIRTH),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.TODAY,
+                sampleValueMdoc = LocalDate.parse(SampleData.BIRTH_DATE).toDataItemFullDate()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "age_over_18",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_OLDER_THAN_18),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_OLDER_THAN_18),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValueMdoc = SampleData.AGE_OVER_18.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "age_over_21",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_OLDER_THAN_21),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_OLDER_THAN_21),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValueMdoc = SampleData.AGE_OVER_21.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "arrival_date",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_DATE_OF_ARRIVAL),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_DATE_OF_ARRIVAL),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.DATE_RANGE,
+                sampleValueMdoc = LocalDate.parse(SampleData.ISSUE_DATE).toDataItemFullDate()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_address",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_ADDRESS),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_ADDRESS),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_ADDRESS.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "resident_country",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_COUNTRY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_COUNTRY),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_COUNTRY.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_state",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_STATE),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_STATE),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_STATE.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_city",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_CITY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_CITY),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_CITY.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_postal_code",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_POSTAL_CODE),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_POSTAL_CODE),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_POSTAL_CODE.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_street",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_STREET),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_STREET),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_STREET.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "resident_house_number",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_RESIDENT_HOUSE_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_RESIDENT_HOUSE_NUMBER),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_HOUSE_NUMBER.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "birth_place",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_PLACE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_PLACE_OF_BIRTH),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.PLACE,
+                sampleValueMdoc = SampleData.RESIDENT_CITY.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.IntegerOptions(Options.SEX_ISO_IEC_5218),
+                identifier = "gender",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_GENDER),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_GENDER),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.EMERGENCY,
+                sampleValueMdoc = SampleData.SEX_ISO_5218.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "nationality",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_NATIONALITY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_NATIONALITY),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.LANGUAGE,
+                sampleValueMdoc = SampleData.NATIONALITY.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "issuance_date",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_DATE_OF_ISSUE),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_DATE_OF_ISSUE),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.DATE_RANGE,
+                sampleValueMdoc = LocalDate.parse(SampleData.ISSUE_DATE).toDataItemFullDate()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "expiry_date",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_DATE_OF_EXPIRY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_DATE_OF_EXPIRY),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValueMdoc = LocalDate.parse(SampleData.EXPIRY_DATE).toDataItemFullDate()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "issuing_authority",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_ISSUING_AUTHORITY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_ISSUING_AUTHORITY),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValueMdoc = SampleData.ISSUING_AUTHORITY_EU_PID.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "document_number",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_DOCUMENT_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_DOCUMENT_NUMBER),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.NUMBERS,
+                sampleValueMdoc = SampleData.DOCUMENT_NUMBER.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "administrative_number",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_ADMINISTRATIVE_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_ADMINISTRATIVE_NUMBER),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                icon = Icon.NUMBERS,
+                sampleValueMdoc = SampleData.ADMINISTRATIVE_NUMBER.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "issuing_jurisdiction",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_ISSUING_JURISDICTION),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_ISSUING_JURISDICTION),
+                mandatory = false,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValueMdoc = SampleData.ISSUING_JURISDICTION.toDataItem()
+            )
+            .addAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "issuing_country",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_ATTRIBUTE_ISSUING_COUNTRY),
+                description = getLocalizedString(GeneratedStringKeys.COR_DESCRIPTION_ISSUING_COUNTRY),
+                mandatory = true,
+                mdocNamespace = NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValueMdoc = SampleData.ISSUING_COUNTRY.toDataItem()
+            )
+            .addSampleRequest(
+                id = "age_over_18",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_REQUEST_AGE_OVER_18),
+                mdocDataElements = mapOf(
+                    NAMESPACE to mapOf(
+                        "age_over_18" to false,
+                    )
+                ),
+                jsonClaims = listOf("age_over_18")
+            )
+            .addSampleRequest(
+                id = "mandatory",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_REQUEST_MANDATORY_DATA_ELEMENTS),
+                mdocDataElements = mapOf(
+                    NAMESPACE to mapOf(
+                        "family_name" to false,
+                        "given_name" to false,
+                        "birth_date" to false,
+                        "age_over_18" to false,
+                        "issuance_date" to false,
+                        "expiry_date" to false,
+                        "issuing_authority" to false,
+                        "issuing_country" to false
+                    )
+                ),
+                jsonClaims = listOf(
+                    "family_name",
+                    "given_name",
+                    "birth_date",
+                    "age_over_18",
+                    "issuance_date",
+                    "expiry_date",
+                    "issuing_authority",
+                    "issuing_country"
+                )
+            )
+            .addSampleRequest(
+                id = "full",
+                displayName = getLocalizedString(GeneratedStringKeys.COR_REQUEST_ALL_DATA_ELEMENTS),
+                mdocDataElements = mapOf(
+                    NAMESPACE to mapOf()
+                ),
+                jsonClaims = listOf()
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/GermanPersonalID.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/GermanPersonalID.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonArray
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.Options
+import org.multipaz.documenttype.knowntypes.SampleData
+import org.multipaz.documenttype.DocumentAttributeSensitivity
+
+/**
+ * Object containing the metadata of the German ID Document Type.
+ *
+ * For now, this is a copy of EUPersonaID.
+ *
+ * TODO: read this (and other) VCTs for their URLs.
+ */
+object GermanPersonalID {
+    const val EUPID_VCT = "https://example.bmi.bund.de/credential/pid/1.0"
+
+    /**
+     * Build the EU Personal ID Document Type.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_GERMAN_PERSONAL_ID))
+            .addJsonDocumentType(type = EUPID_VCT, keyBound = true)
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "family_name",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_FAMILY_NAME),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_FAMILY_NAME),
+                icon = Icon.PERSON,
+                sampleValue = JsonPrimitive(SampleData.FAMILY_NAME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "given_name",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_GIVEN_NAMES),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_GIVEN_NAMES),
+                icon = Icon.PERSON,
+                sampleValue = JsonPrimitive(SampleData.GIVEN_NAME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "birthdate",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_DATE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_DATE_OF_BIRTH),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_DATE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Number,
+                identifier = "age_in_years",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_AGE_IN_YEARS),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_AGE_IN_YEARS),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_IN_YEARS)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Number,
+                identifier = "age_birth_year",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_YEAR_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_YEAR_OF_BIRTH),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_BIRTH_YEAR)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "12",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_12),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_12),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "14",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_14),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_14),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "16",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_16),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_16),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER_16)
+            )
+            // TODO: nest in age_equal_or_over object
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "18",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_18),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_18),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER_18)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "21",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_21),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_21),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER_21)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "65",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_OLDER_THAN_65),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_OLDER_THAN_65),
+                sensitivity = DocumentAttributeSensitivity.AGE_INFORMATION,
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.AGE_OVER_65)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "birth_family_name",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_FAMILY_NAME_AT_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_FAMILY_NAME_AT_BIRTH),
+                icon = Icon.PERSON,
+                sampleValue = JsonPrimitive(SampleData.FAMILY_NAME_BIRTH)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "birth_place",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_PLACE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_PLACE_OF_BIRTH),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_PLACE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "birth_country",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_COUNTRY_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_COUNTRY_OF_BIRTH),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_COUNTRY)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "birth_state",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_STATE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_STATE_OF_BIRTH),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_STATE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "birth_city",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_CITY_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_CITY_OF_BIRTH),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_CITY)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "street_address",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_RESIDENT_ADDRESS),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_RESIDENT_ADDRESS),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.RESIDENT_ADDRESS)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "locality",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_RESIDENT_CITY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_RESIDENT_CITY),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.RESIDENT_CITY)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "country",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_RESIDENT_COUNTRY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_RESIDENT_COUNTRY),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.RESIDENT_COUNTRY)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "postal_code",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_RESIDENT_POSTAL_CODE),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_RESIDENT_POSTAL_CODE),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.RESIDENT_POSTAL_CODE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.IntegerOptions(Options.SEX_ISO_IEC_5218),
+                identifier = "gender",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_GENDER),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_GENDER),
+                icon = Icon.EMERGENCY,
+                sampleValue = JsonPrimitive(SampleData.SEX_ISO_5218)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.ComplexType,
+                identifier = "nationalities",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_NATIONALITY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_NATIONALITY),
+                icon = Icon.LANGUAGE,
+                sampleValue = buildJsonArray {
+                    add(JsonPrimitive(SampleData.NATIONALITY))
+                }
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "issuance_date",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_DATE_OF_ISSUE),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_DATE_OF_ISSUE),
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.DATE_RANGE,
+                sampleValue = JsonPrimitive(SampleData.ISSUE_DATE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "expiry_date",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_DATE_OF_EXPIRY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_DATE_OF_EXPIRY),
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValue = JsonPrimitive(SampleData.EXPIRY_DATE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "issuing_authority",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_ISSUING_AUTHORITY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_ISSUING_AUTHORITY),
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValue = JsonPrimitive(SampleData.ISSUING_AUTHORITY_EU_PID)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "document_number",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_DOCUMENT_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_DOCUMENT_NUMBER),
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive(SampleData.DOCUMENT_NUMBER)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "administrative_number",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_ADMINISTRATIVE_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_ADMINISTRATIVE_NUMBER),
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive(SampleData.ADMINISTRATIVE_NUMBER)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "issuing_jurisdiction",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_ISSUING_JURISDICTION),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_ISSUING_JURISDICTION),
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValue = JsonPrimitive(SampleData.ISSUING_JURISDICTION)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.StringOptions(Options.COUNTRY_ISO_3166_1_ALPHA_2),
+                identifier = "issuing_country",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_ATTRIBUTE_ISSUING_COUNTRY),
+                description = getLocalizedString(GeneratedStringKeys.GERMAN_ID_DESCRIPTION_ISSUING_COUNTRY),
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValue = JsonPrimitive(SampleData.ISSUING_COUNTRY)
+            )
+            .addSampleRequest(
+                id = "age_over_18",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_REQUEST_AGE_OVER_18),
+                jsonClaims = listOf("18")
+            )
+            .addSampleRequest(
+                id = "mandatory",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_REQUEST_MANDATORY_DATA_ELEMENTS),
+                jsonClaims = listOf(
+                    "family_name",
+                    "given_name",
+                    "birthdate",
+                    "18",
+                    "issuance_date",
+                    "expiry_date",
+                    "issuing_authority",
+                    "issuing_country"
+                )
+            )
+            .addSampleRequest(
+                id = "full",
+                displayName = getLocalizedString(GeneratedStringKeys.GERMAN_ID_REQUEST_ALL_DATA_ELEMENTS),
+                jsonClaims = listOf()
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/Loyalty.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/Loyalty.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.cbor.toDataItem
+import org.multipaz.cbor.toDataItemFullDate
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import org.multipaz.util.fromBase64Url
+import kotlinx.datetime.LocalDate
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.SampleData
+import org.multipaz.documenttype.DocumentAttributeSensitivity
+
+object Loyalty {
+    const val LOYALTY_DOCTYPE = "org.multipaz.loyalty.1"
+    const val LOYALTY_NAMESPACE = "org.multipaz.loyalty.1"
+
+    /**
+     * Build the Loyalty ID Document Type.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_LOYALTY_CARD))
+            .addMdocDocumentType(LOYALTY_DOCTYPE)
+            // Core holder data relevant for a loyalty card
+            //
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "family_name",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_FAMILY_NAME),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_FAMILY_NAME),
+                mandatory = true,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                icon = Icon.PERSON,
+                sampleValue = SampleData.FAMILY_NAME.toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "given_name",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_GIVEN_NAMES),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_GIVEN_NAMES),
+                mandatory = true,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                icon = Icon.PERSON,
+                sampleValue = SampleData.GIVEN_NAME.toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.Picture,
+                identifier = "portrait",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_PHOTO_OF_HOLDER),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_PHOTO_OF_HOLDER),
+                mandatory = true,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.PORTRAIT_IMAGE,
+                icon = Icon.ACCOUNT_BOX,
+                sampleValue = SampleData.PORTRAIT_BASE64URL.fromBase64Url().toDataItem()
+            )
+            // Then the LoyaltyID specific data elements.
+            //
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "membership_number",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_MEMBERSHIP_ID),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_MEMBERSHIP_ID),
+                mandatory = false,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                icon = Icon.NUMBERS,
+                sampleValue = SampleData.PERSON_ID.toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "tier",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_TIER),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_TIER),
+                mandatory = false,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                icon = Icon.STARS,
+                sampleValue = "basic".toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "issue_date",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_DATE_OF_ISSUE),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_DATE_OF_ISSUE),
+                mandatory = true,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValue = LocalDate.parse(SampleData.ISSUE_DATE).toDataItemFullDate()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "expiry_date",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_ATTRIBUTE_DATE_OF_EXPIRY),
+                description = getLocalizedString(GeneratedStringKeys.LOYALTY_DESCRIPTION_DATE_OF_EXPIRY),
+                mandatory = true,
+                mdocNamespace = LOYALTY_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValue = LocalDate.parse(SampleData.EXPIRY_DATE).toDataItemFullDate()
+            )
+            // Finally for the sample requests.
+            //
+            .addSampleRequest(
+                id = "mandatory",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_REQUEST_MANDATORY_DATA_ELEMENTS),
+                mdocDataElements = mapOf(
+                    LOYALTY_NAMESPACE to mapOf(
+                        "family_name" to false,
+                        "given_name" to false,
+                        "portrait" to false,
+                        "membership_number" to false,
+                        "tier" to false,
+                        "issue_date" to false,
+                        "expiry_date" to false,
+                    )
+                )
+            )
+            .addSampleRequest(
+                id = "full",
+                displayName = getLocalizedString(GeneratedStringKeys.LOYALTY_REQUEST_ALL_DATA_ELEMENTS),
+                mdocDataElements = mapOf(
+                    LOYALTY_NAMESPACE to mapOf()
+                )
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaBoardingPass.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaBoardingPass.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.cbor.toDataItem
+import org.multipaz.cbor.toDataItemDateTimeString
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import kotlin.time.Clock
+
+/**
+ * An example of what a boarding pass doctype could look like.
+ *
+ */
+object UtopiaBoardingPass {
+    const val BOARDING_PASS_DOCTYPE = "org.multipaz.example.boarding-pass.1"
+    const val BOARDING_PASS_NS = "org.multipaz.example.boarding-pass.1"
+
+    /**
+     * Creates the Boarding Pass document type definition using localized strings.
+     *
+     * @param locale BCP-47 language tag used to resolve localized strings.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_BOARDING_PASS)).apply {
+            addMdocDocumentType(BOARDING_PASS_DOCTYPE)
+            addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "passenger_name",
+                displayName = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_ATTRIBUTE_PASSENGER_NAME),
+                description = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_DESCRIPTION_PASSENGER_NAME),
+                mandatory = true,
+                mdocNamespace = BOARDING_PASS_NS,
+                icon = Icon.PERSON,
+                sampleValue = "Erika Mustermann".toDataItem()
+            )
+            addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "flight_number",
+                displayName = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_ATTRIBUTE_FLIGHT_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_DESCRIPTION_FLIGHT_NUMBER),
+                mandatory = true,
+                mdocNamespace = BOARDING_PASS_NS,
+                icon = Icon.AIRPORT_SHUTTLE,
+                sampleValue = "United 815".toDataItem()
+            )
+            addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "seat_number",
+                displayName = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_ATTRIBUTE_SEAT_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_DESCRIPTION_SEAT_NUMBER),
+                mandatory = true,
+                mdocNamespace = BOARDING_PASS_NS,
+                icon = Icon.DIRECTIONS,
+                sampleValue = "12A".toDataItem()
+            )
+            addMdocAttribute(
+                type = DocumentAttributeType.DateTime,
+                identifier = "departure_time",
+                displayName = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_ATTRIBUTE_DEPARTURE_TIME),
+                description = getLocalizedString(GeneratedStringKeys.BOARDING_PASS_DESCRIPTION_DEPARTURE_TIME),
+                mandatory = true,
+                mdocNamespace = BOARDING_PASS_NS,
+                icon = Icon.TODAY,
+                sampleValue = Clock.System.now().toDataItemDateTimeString()
+            )
+        }.build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaMovieTicket.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaMovieTicket.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import kotlinx.serialization.json.JsonPrimitive
+import org.multipaz.documenttype.StringOption
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.SampleData
+
+/**
+ * Object containing the metadata of the Utopia Movie Ticket Document Type.
+ */
+object UtopiaMovieTicket {
+    const val MOVIE_TICKET_VCT = "https://utopia.example.com/vct/movieticket"
+
+    /**
+     * Build the Movie Ticket Document Type.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_MOVIE_TICKET))
+            .addJsonDocumentType(type = MOVIE_TICKET_VCT, keyBound = false)
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "ticket_id",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_TICKET_NUMBER),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_TICKET_NUMBER),
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive(SampleData.TICKET_NUMBER)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "cinema",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_CINEMA_THEATER),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_CINEMA_THEATER),
+                icon = Icon.PLACE,
+                sampleValue = JsonPrimitive(SampleData.CINEMA)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "movie",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_MOVIE_TITLE),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_MOVIE_TITLE),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.MOVIE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.DateTime,
+                identifier = "show_date_time",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_DATE_AND_TIME_OF_SHOW),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_DATE_AND_TIME_OF_SHOW),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.MOVIE_DATE_TIME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.StringOptions(
+                    listOf(
+                        StringOption("NR", "NR - Not Rated"),
+                        StringOption("G", "G – General Audiences"),
+                        StringOption("PG", "PG – Parental Guidance Suggested"),
+                        StringOption("PG-13", "PG-13 – Parents Strongly Cautioned"),
+                        StringOption("R", "R – Restricted"),
+                        StringOption("NC-17", "NC-17 – Adults Only"),
+                    )
+                ),
+                identifier = "movie_rating",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_AGE_RATING_CODE),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_AGE_RATING_CODE),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.MOVIE_RATING)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "theater_id",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_THEATER),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_THEATER),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.THEATRE_NAME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "seat_id",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_SEAT),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_SEAT),
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive(SampleData.THEATRE_SEAT)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Boolean,
+                identifier = "parking_option",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_PARKING),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_PARKING),
+                icon = Icon.DIRECTIONS_CAR,
+                sampleValue = JsonPrimitive(SampleData.CINEMA_PARKING)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Picture,
+                identifier = "poster",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_ATTRIBUTE_MOVIE_POSTER),
+                description = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_DESCRIPTION_MOVIE_POSTER),
+                icon = Icon.IMAGE
+            )
+            .addSampleRequest(
+                id = "is_parking_prepaid",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_REQUEST_PREPAID_PARKING),
+                jsonClaims = listOf("parking_option")
+            )
+            .addSampleRequest(
+                id = "ticket_id",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_REQUEST_TICKET_NUMBER),
+                jsonClaims = listOf(
+                    "ticket_id",
+                )
+            )
+            .addSampleRequest(
+                id = "full",
+                displayName = getLocalizedString(GeneratedStringKeys.MOVIE_TICKET_REQUEST_ALL_DATA_ELEMENTS),
+                jsonClaims = listOf()
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaNaturalization.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/UtopiaNaturalization.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import kotlinx.serialization.json.JsonPrimitive
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.SampleData
+
+/**
+ * Naturalization Certificate of the fictional State of Utopia.
+ */
+object UtopiaNaturalization {
+    const val VCT = "http://utopia.example.com/vct/naturalization"
+
+    /**
+     * Build the Utopia Naturalization Certificate Document Type.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_NATURALIZATION_CERTIFICATE))
+            .addJsonDocumentType(type = VCT, keyBound = true)
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "family_name",
+                displayName = getLocalizedString(GeneratedStringKeys.NATURALIZATION_ATTRIBUTE_FAMILY_NAME),
+                description = getLocalizedString(GeneratedStringKeys.NATURALIZATION_DESCRIPTION_FAMILY_NAME),
+                icon = Icon.PERSON,
+                sampleValue = JsonPrimitive(SampleData.FAMILY_NAME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "given_name",
+                displayName = getLocalizedString(GeneratedStringKeys.NATURALIZATION_ATTRIBUTE_GIVEN_NAMES),
+                description = getLocalizedString(GeneratedStringKeys.NATURALIZATION_DESCRIPTION_GIVEN_NAMES),
+                icon = Icon.PERSON,
+                sampleValue = JsonPrimitive(SampleData.GIVEN_NAME)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "birth_date",
+                displayName = getLocalizedString(GeneratedStringKeys.NATURALIZATION_ATTRIBUTE_DATE_OF_BIRTH),
+                description = getLocalizedString(GeneratedStringKeys.NATURALIZATION_DESCRIPTION_DATE_OF_BIRTH),
+                icon = Icon.TODAY,
+                sampleValue = JsonPrimitive(SampleData.BIRTH_DATE)
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "naturalization_date",
+                displayName = getLocalizedString(GeneratedStringKeys.NATURALIZATION_ATTRIBUTE_DATE_OF_NATURALIZATION),
+                description = getLocalizedString(GeneratedStringKeys.NATURALIZATION_DESCRIPTION_DATE_OF_NATURALIZATION),
+                icon = Icon.DATE_RANGE,
+                sampleValue = JsonPrimitive(SampleData.ISSUE_DATE)
+            )
+            .addSampleRequest(
+                id = "full",
+                displayName = getLocalizedString(GeneratedStringKeys.NATURALIZATION_REQUEST_ALL_DATA_ELEMENTS),
+                jsonClaims = listOf()
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/DigitalPaymentCredential.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/DigitalPaymentCredential.kt
+package org.multipaz.utopia.knowntypes
+
+import org.multipaz.cbor.toDataItem
+import org.multipaz.cbor.toDataItemFullDate
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import kotlinx.datetime.LocalDate
+import org.multipaz.utopia.localization.LocalizedStrings
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.documenttype.knowntypes.PaymentTransaction
+import org.multipaz.documenttype.knowntypes.SampleData
+import org.multipaz.documenttype.DocumentAttributeSensitivity
+
+/**
+ * Example Payment SCA credential profile for card-based digital payments.
+ *
+ * This document type is a mock credential used for testing in a closed ecosystem and is
+ * non-normative. Field names, semantics, and sample values are subject to change.
+ */
+object DigitalPaymentCredential {
+    const val CARD_DOCTYPE = "org.multipaz.payment.sca.1"
+    const val CARD_NAMESPACE = "org.multipaz.payment.sca.1"
+
+    /**
+     * Creates the Digital Payment Credential document type definition with localized labels.
+     *
+     * @param locale BCP-47 language tag used to resolve localized strings.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_PAYMENT_CARD))
+            .addMdocDocumentType(CARD_DOCTYPE)
+
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "issuer_name",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_ISSUER_NAME),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_ISSUER_NAME),
+                mandatory = true,
+                mdocNamespace = CARD_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.ISSUER,
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValue = "Utopia Bank".toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "payment_instrument_id",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_PAYMENT_INSTRUMENT_ID),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_PAYMENT_INSTRUMENT_ID),
+                mandatory = false,
+                mdocNamespace = CARD_NAMESPACE,
+                icon = Icon.NUMBERS,
+                sampleValue = "pi-77AABBCC".toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "masked_account_reference",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_MASKED_ACCOUNT_REFERENCE),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_MASKED_ACCOUNT_REFERENCE),
+                mandatory = true,
+                mdocNamespace = CARD_NAMESPACE,
+                icon = Icon.NUMBERS,
+                sampleValue = "****1234".toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "holder_name",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_HOLDER_NAME),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_HOLDER_NAME),
+                mandatory = true,
+                mdocNamespace = CARD_NAMESPACE,
+                icon = Icon.PERSON,
+                sampleValue = "${SampleData.GIVEN_NAME} ${SampleData.FAMILY_NAME}".toDataItem()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "issue_date",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_ISSUE_DATE),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_ISSUE_DATE),
+                mandatory = true,
+                mdocNamespace = CARD_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValue = LocalDate.parse(SampleData.ISSUE_DATE).toDataItemFullDate()
+            )
+            .addMdocAttribute(
+                type = DocumentAttributeType.Date,
+                identifier = "expiry_date",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_ATTRIBUTE_EXPIRY_DATE),
+                description = getLocalizedString(GeneratedStringKeys.PAYMENT_DESCRIPTION_EXPIRY_DATE),
+                mandatory = true,
+                mdocNamespace = CARD_NAMESPACE,
+                sensitivity = DocumentAttributeSensitivity.VALIDITY,
+                icon = Icon.CALENDAR_CLOCK,
+                sampleValue = LocalDate.parse(SampleData.EXPIRY_DATE).toDataItemFullDate()
+            )
+
+            .addSampleRequest(
+                id = "payment_sca_minimal",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_MINIMAL),
+                mdocDataElements = mapOf(
+                    CARD_NAMESPACE to mapOf(
+                        "issuer_name" to false,
+                        "payment_instrument_id" to false,
+                        "masked_account_reference" to false,
+                        "holder_name" to false,
+                        "issue_date" to false,
+                        "expiry_date" to false
+                    )
+                )
+            )
+            .addSampleRequest(
+                id = "payment_sca_full",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_ALL),
+                mdocDataElements = mapOf(
+                    CARD_NAMESPACE to mapOf()
+                )
+            )
+            .addSampleRequest(
+                id = "payment_transaction",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_TRANSACTION),
+                mdocDataElements = mapOf(
+                    CARD_NAMESPACE to mapOf()
+                ),
+                cannedTransactionData = listOf(PaymentTransaction.sampleData)
+            )
+            .addSampleRequest(
+                id = "payment_transaction_only_conf",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_TRANSACTION),
+                mdocDataElements = emptyMap(),
+                cannedTransactionData = listOf(PaymentTransaction.sampleData)
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/DigitalPaymentCredentialSdJwt.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/DigitalPaymentCredentialSdJwt.kt
+package org.multipaz.utopia.knowntypes
+
+import kotlinx.serialization.json.JsonPrimitive
+import org.multipaz.documenttype.DocumentAttributeType
+import org.multipaz.documenttype.DocumentType
+import org.multipaz.documenttype.Icon
+import org.multipaz.documenttype.knowntypes.PaymentTransaction
+import org.multipaz.utopia.localization.GeneratedStringKeys
+import org.multipaz.utopia.localization.LocalizedStrings
+
+/**
+ * EMVCo Digital Payment Credential (DPC) profile for SD-JWT digital payments.
+ *
+ * Compliant with the EMVCo DPC Card Credential JSON Schema (urn:emvco:dpc:card:1).
+ */
+object DigitalPaymentCredentialSdJwt {
+    const val CARD_VCT = "urn:emvco:dpc:card:1"
+
+    /**
+     * Creates the Digital Payment Credential SD-JWT document type definition with localized labels.
+     *
+     * @param locale BCP-47 language tag used to resolve localized strings.
+     */
+    fun getDocumentType(locale: String = LocalizedStrings.getCurrentLocale()): DocumentType {
+        fun getLocalizedString(key: String) = LocalizedStrings.getString(key, locale)
+
+        return DocumentType.Builder(getLocalizedString(GeneratedStringKeys.DOCUMENT_DISPLAY_NAME_PAYMENT_CARD))
+            .addJsonDocumentType(type = CARD_VCT, keyBound = true)
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "credential_id",
+                displayName = "Credential ID",
+                description = "Unique identifier of this specific credential instance.",
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive("urn:uuid:9f2b7a2e-3b74-4a0d-9b1a-0e6a91f5d2c8")
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "network",
+                displayName = "Card Network",
+                description = "Payment network or scheme associated with the credential.",
+                icon = Icon.ACCOUNT_BALANCE,
+                sampleValue = JsonPrimitive("multipaz")
+            )
+            .addJsonAttribute(
+                type = DocumentAttributeType.String,
+                identifier = "last_four",
+                displayName = "Last Four Digits",
+                description = "The last four digits of the PAN for display and recognition.",
+                icon = Icon.NUMBERS,
+                sampleValue = JsonPrimitive("1513")
+            )
+            .addSampleRequest(
+                id = "payment_sca_minimal",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_MINIMAL),
+                jsonClaims = listOf(
+                    "credential_id",
+                    "network",
+                    "last_four"
+                )
+            )
+            .addSampleRequest(
+                id = "payment_sca_full",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_ALL),
+                jsonClaims = listOf()
+            )
+            .addSampleRequest(
+                id = "payment_transaction",
+                displayName = getLocalizedString(GeneratedStringKeys.PAYMENT_REQUEST_PAYMENT_SCA_ALL),
+                jsonClaims = listOf(),
+                cannedTransactionData = listOf(PaymentTransaction.sampleData)
+            )
+            .build()
+    }
+}
+
+===== FILE: multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/PingTransaction.kt
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/kotlin/org/multipaz/utopia/knowntypes/PingTransaction.kt
+package org.multipaz.utopia.knowntypes
+
+import kotlinx.io.bytestring.ByteString
+import kotlinx.io.bytestring.decodeToString
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNamingStrategy
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
+import org.multipaz.cbor.Cbor
+import org.multipaz.cbor.DataItem
+import org.multipaz.cbor.Tagged
+import org.multipaz.cbor.buildCborMap
+import org.multipaz.cbor.toDataItem
+import org.multipaz.credential.Credential
+import org.multipaz.crypto.Algorithm
+import org.multipaz.documenttype.CannedTransactionData
+import org.multipaz.documenttype.TransactionType
+import org.multipaz.documenttype.TransactionUserInput
+import org.multipaz.presentment.TransactionData
+import org.multipaz.presentment.TransactionProtocol
+import org.multipaz.sdjwt.credential.KeyBoundSdJwtVcCredential
+import org.multipaz.util.fromBase64Url
+import org.multipaz.util.toBase64Url
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.iterator
+
+/**
+ * Transaction type that round-trips some data through the presentment process for testing.
+ */
+object PingTransaction: TransactionType<PingTransaction.Payload>(
+    displayName = "Ping",
+    identifier = "org.multipaz.transaction.ping",
+    kbJwtResponseClaimName = "org.multipaz.transaction.ping.response"
+) {
+    @Serializable
+    data class JsonData(
+        val type: String,
+        val credentialIds: List<String>,
+        val transactionDataHashesAlg: List<String>?,
+        val string: String?,
+        val blob: String?  // use base64url-encoded String, could also write custom KSerializer
+    )
+
+    data class Payload(
+        val string: String?,
+        val blob: ByteString?
+    )
+
+    override fun serializeIso18013Request(payload: Payload): DataItem = buildCborMap {
+        payload.string?.let { put("string", it) }
+        payload.blob?.let { put("blob", it.toByteArray().toDataItem()) }
+    }
+
+    override fun parseIso18013Request(dataItem: DataItem): Payload = Payload(
+        string = dataItem.getOrNull("string")?.asTstr,
+        blob = dataItem.getOrNull("blob")?.asBstr?.let { ByteString(it) }
+    )
+
+    override fun serializeOpenId4VpRequest(
+        payload: Payload,
+        credentialIds: List<String>,
+        hashAlgorithms: List<Algorithm>?
+    ): String = jsonFormat.encodeToString(
+        value = JsonData(
+            type = identifier,
+            transactionDataHashesAlg = joseHashAlgorithms(hashAlgorithms),
+            credentialIds = credentialIds,
+            string = payload.string,
+            blob = payload.blob?.toByteArray()?.toBase64Url()
+        )
+    )
+
+    override fun parseOpenId4VpRequest(jsonString: String): Payload {
+        val data = jsonFormat.decodeFromString<JsonData>(jsonString)
+        return Payload(
+            string = data.string,
+            blob = data.blob?.fromBase64Url()?.let { ByteString(it) }
+        )
+    }
+
+    override fun parseJson(serialized: ByteString): TransactionData<Payload> {
+        val jsonString = serialized.decodeToString().fromBase64Url().decodeToString()
+        val data = jsonFormat.decodeFromString<JsonData>(jsonString)
+        return TransactionData(
+            type = this,
+            payload = Payload(
+                string = data.string,
+                blob = data.blob?.fromBase64Url()?.let { ByteString(it) }
+            ),
+            protocol = TransactionProtocol.OPENID4VP,
+            rawBytes = serialized,
+            hashAlgorithms = parseJoseHashAlgorithms(data.transactionDataHashesAlg),
+        )
+    }
+
+
+    override suspend fun isApplicable(
+        transactionData: TransactionData<Payload>,
+        credential: Credential
+    ): Boolean {
+        // For the sake of testing, refuse UtopiaNaturalization
+        return !(credential is KeyBoundSdJwtVcCredential
+                    && credential.vct == UtopiaNaturalization.VCT)
+                && super.isApplicable(transactionData, credential)
+    }
+
+    override suspend fun generateMdocResponseElements(
+        transactionData: TransactionData<Payload>,
+        credential: Credential,
+        userInput: TransactionUserInput?,
+        docRequestId: Int?
+    ): Map<String, DataItem> = buildMap {
+        putAll(super.generateMdocResponseElements(transactionData, credential, userInput, docRequestId))
+        transactionData.payload.string?.let {
+            put("string", it.toDataItem())
+        }
+        transactionData.payload.blob?.let {
+            put("blob", it.toByteArray().toDataItem())
+        }
+    }
+
+    override suspend fun generateSdJwtResponseClaims(
+        transactionData: TransactionData<Payload>,
+        credential: Credential,
+        userInput: TransactionUserInput?,
+        docRequestId: Int?
+    ): Map<String, JsonElement> = buildMap {
+        putAll(super.generateSdJwtResponseClaims(transactionData, credential, userInput, docRequestId))
+        transactionData.payload.string?.let {
+            put("string", JsonPrimitive(it))
+        }
+        transactionData.payload.blob?.let {
+            put("blob", JsonPrimitive(it.toByteArray().toBase64Url()))
+        }
+    }
+
+    override suspend fun verifyMdocResponse(
+        transactionData: TransactionData<Payload>,
+        responseElements: Map<String, DataItem>
+    ) {
+        super.verifyMdocResponse(transactionData, responseElements)
+        if (transactionData.protocol == TransactionProtocol.ISO_18013_5) {
+            transactionData.payload.string?.let { expectedString ->
+                val actualString = responseElements["string"]?.asTstr
+                if (actualString != expectedString) {
+                    throw IllegalStateException("String mismatch: expected $expectedString, got $actualString")
+                }
+            }
+            transactionData.payload.blob?.let { expectedBlob ->
+                val actualBlob = responseElements["blob"]?.asBstr
+                if (actualBlob == null || !ByteString(actualBlob).equals(expectedBlob)) {
+                    throw IllegalStateException("Blob mismatch")
+                }
+            }
+        }
+    }
+
+    override suspend fun verifySdJwtResponse(
+        transactionData: TransactionData<Payload>,
+        responseClaims: Map<String, JsonElement>
+    ) {
+        super.verifySdJwtResponse(transactionData, responseClaims)
+        if (transactionData.protocol == TransactionProtocol.ISO_18013_5) {
+            transactionData.payload.string?.let { expectedString ->
+                val actualString = responseClaims["string"]?.jsonPrimitive?.contentOrNull
+                if (actualString != expectedString) {
+                    throw IllegalStateException("String mismatch: expected $expectedString, got $actualString")
+                }
+            }
+            transactionData.payload.blob?.let { expectedBlob ->
+                val actualBlob = responseClaims["blob"]?.jsonPrimitive?.contentOrNull?.fromBase64Url()
+                if (actualBlob == null || !ByteString(actualBlob).equals(expectedBlob)) {
+                    throw IllegalStateException("Blob mismatch")
+                }
+            }
+        }
+    }
+
+    /** Sample transaction data for this transaction type */
+    val sampleData = CannedTransactionData<Payload>(
+        transactionType = PingTransaction,
+        payload = Payload("string data", null)
+    )
+
+    @OptIn(ExperimentalSerializationApi::class)
+    private val jsonFormat = Json {
+        explicitNulls = false
+        namingStrategy = JsonNamingStrategy.SnakeCase
+    }
+}
+===== FILE: multipaz-utopia/src/commonMain/lokalize/values/strings.json
+===== URL: https://raw.githubusercontent.com/openwallet-foundation/multipaz/main/multipaz-utopia/src/commonMain/lokalize/values/strings.json
+{
+  "document_display_name_movie_ticket": "Movie ticket",
+  "movie_ticket_attribute_ticket_number": "Ticket number",
+  "movie_ticket_attribute_cinema_theater": "Cinema theater",
+  "movie_ticket_attribute_movie_title": "Movie title",
+  "movie_ticket_attribute_date_and_time_of_show": "Date and time of the show",
+  "movie_ticket_attribute_age_rating_code": "Age rating code",
+  "movie_ticket_attribute_theater": "Theater",
+  "movie_ticket_attribute_seat": "Seat",
+  "movie_ticket_attribute_parking": "Parking",
+  "movie_ticket_attribute_movie_poster": "Movie poster",
+  "movie_ticket_request_prepaid_parking": "Prepaid parking",
+  "movie_ticket_request_ticket_number": "Ticket number",
+  "movie_ticket_request_all_data_elements": "All data elements",
+  "movie_ticket_description_ticket_number": "Ticket identification/reference number issued at the purchase time.",
+  "movie_ticket_description_cinema_theater": "Cinema theater name, and/or address/location of the admission.",
+  "movie_ticket_description_movie_title": "Movie name, title, and any other show identification information.",
+  "movie_ticket_description_date_and_time_of_show": "Date and time when the movie starts",
+  "movie_ticket_description_age_rating_code": "Movie rating code for age restrictions.",
+  "movie_ticket_description_theater": "Name or number of the theater in a multi-theater cinema building.",
+  "movie_ticket_description_seat": "Seat number or code (e.g. row/seat).",
+  "movie_ticket_description_parking": "Flag if car parking is prepaid with the ticket purchase.",
+  "movie_ticket_description_movie_poster": "Movie Poster",
+  "document_display_name_naturalization_certificate": "Naturalization certificate",
+  "naturalization_attribute_family_name": "Family name",
+  "naturalization_attribute_given_names": "Given names",
+  "naturalization_attribute_date_of_birth": "Date of birth",
+  "naturalization_attribute_date_of_naturalization": "Date of naturalization",
+  "naturalization_request_all_data_elements": "All data elements",
+  "naturalization_description_family_name": "Current last name(s), surname(s), or primary identifier of the naturalized person",
+  "naturalization_description_given_names": "Current first name(s), other name(s), or secondary identifier of the naturalized person",
+  "naturalization_description_date_of_birth": "Day, month, and year on which the naturalized person was born. If unknown, approximate date of birth.",
+  "naturalization_description_date_of_naturalization": "Date (and possibly time) when the person was naturalized.",
+  "document_display_name_boarding_pass": "Boarding pass",
+  "boarding_pass_attribute_passenger_name": "Passenger name",
+  "boarding_pass_attribute_flight_number": "Flight number",
+  "boarding_pass_attribute_seat_number": "Seat number",
+  "boarding_pass_attribute_departure_time": "Departure time",
+  "boarding_pass_description_passenger_name": "Last name, surname, or primary identifier, of the mDL holder.",
+  "boarding_pass_description_flight_number": "The flight number",
+  "boarding_pass_description_seat_number": "The seat number",
+  "boarding_pass_description_departure_time": "The date of time of departure",
+  "document_display_name_loyalty_card": "Loyalty card",
+  "loyalty_attribute_family_name": "Family name",
+  "loyalty_attribute_given_names": "Given names",
+  "loyalty_attribute_photo_of_holder": "Photo of holder",
+  "loyalty_attribute_membership_id": "Membership ID",
+  "loyalty_attribute_tier": "Tier",
+  "loyalty_attribute_date_of_issue": "Date of issue",
+  "loyalty_attribute_date_of_expiry": "Date of expiry",
+  "loyalty_request_mandatory_data_elements": "Mandatory data elements",
+  "loyalty_request_all_data_elements": "All data elements",
+  "loyalty_description_family_name": "Last name, surname, or primary identifier, of the document holder",
+  "loyalty_description_given_names": "First name(s), other name(s), or secondary identifier, of the document holder",
+  "loyalty_description_photo_of_holder": "A reproduction of the document holder's portrait.",
+  "loyalty_description_membership_id": "Person identifier of the Loyalty ID holder.",
+  "loyalty_description_tier": "Membership tier (basic, silver, gold, platinum, elite)",
+  "loyalty_description_date_of_issue": "Date when document was issued",
+  "loyalty_description_date_of_expiry": "Date when document expires",
+  "document_display_name_german_personal_id": "German personal ID",
+  "german_id_attribute_family_name": "Family name",
+  "german_id_attribute_given_names": "Given names",
+  "german_id_attribute_date_of_birth": "Date of birth",
+  "german_id_attribute_age_in_years": "Age in years",
+  "german_id_attribute_year_of_birth": "Year of birth",
+  "german_id_attribute_older_than_12": "Older than 12",
+  "german_id_attribute_older_than_14": "Older than 14",
+  "german_id_attribute_older_than_16": "Older than 16",
+  "german_id_attribute_older_than_18": "Older than 18",
+  "german_id_attribute_older_than_21": "Older than 21",
+  "german_id_attribute_older_than_65": "Older than 65",
+  "german_id_attribute_family_name_at_birth": "Family name at birth",
+  "german_id_attribute_place_of_birth": "Place of birth",
+  "german_id_attribute_country_of_birth": "Country of birth",
+  "german_id_attribute_state_of_birth": "State of birth",
+  "german_id_attribute_city_of_birth": "City of birth",
+  "german_id_attribute_resident_address": "Resident address",
+  "german_id_attribute_resident_city": "Resident city",
+  "german_id_attribute_resident_country": "Resident country",
+  "german_id_attribute_resident_postal_code": "Resident postal code",
+  "german_id_attribute_gender": "Gender",
+  "german_id_attribute_nationality": "Nationality",
+  "german_id_attribute_date_of_issue": "Date of issue",
+  "german_id_attribute_date_of_expiry": "Date of expiry",
+  "german_id_attribute_issuing_authority": "Issuing authority",
+  "german_id_attribute_document_number": "Document number",
+  "german_id_attribute_administrative_number": "Administrative number",
+  "german_id_attribute_issuing_jurisdiction": "Issuing jurisdiction",
+  "german_id_attribute_issuing_country": "Issuing country",
+  "german_id_request_age_over_18": "Age over 18",
+  "german_id_request_mandatory_data_elements": "Mandatory data elements",
+  "german_id_request_all_data_elements": "All data elements",
+  "german_id_description_family_name": "Current last name(s), surname(s), or primary identifier of the PID holder",
+  "german_id_description_given_names": "Current first name(s), other name(s), or secondary identifier of the PID holder",
+  "german_id_description_date_of_birth": "Day, month, and year on which the PID holder was born. If unknown, approximate date of birth.",
+  "german_id_description_age_in_years": "The age of the PID holder in years",
+  "german_id_description_year_of_birth": "The year when the PID holder was born",
+  "german_id_description_older_than_12": "Age over 12?",
+  "german_id_description_older_than_14": "Age over 14?",
+  "german_id_description_older_than_16": "Age over 16?",
+  "german_id_description_older_than_18": "Age over 18?",
+  "german_id_description_older_than_21": "Age over 21?",
+  "german_id_description_older_than_65": "Age over 65?",
+  "german_id_description_family_name_at_birth": "Last name(s), surname(s), or primary identifier of the PID holder at birth",
+  "german_id_description_place_of_birth": "Country and municipality or state/province where the PID holder was born",
+  "german_id_description_country_of_birth": "The country where the PID User was born, as an Alpha-2 country code as specified in ISO 3166-1",
+  "german_id_description_state_of_birth": "The state, province, district, or local area where the PID User was born",
+  "german_id_description_city_of_birth": "The municipality, city, town, or village where the PID User was born",
+  "german_id_description_resident_address": "The full address of the place where the PID holder currently resides and/or may be contacted (street/house number, municipality etc.)",
+  "german_id_description_resident_city": "The city where the PID holder currently resides",
+  "german_id_description_resident_country": "The country where the PID User currently resides, as an Alpha-2 country code as specified in ISO 3166-1",
+  "german_id_description_resident_postal_code": "The postal code of the place where the PID holder currently resides",
+  "german_id_description_gender": "PID holder's gender",
+  "german_id_description_nationality": "List of Alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the PID User.",
+  "german_id_description_date_of_issue": "Date (and possibly time) when the PID was issued.",
+  "german_id_description_date_of_expiry": "Date (and possibly time) when the PID will expire.",
+  "german_id_description_issuing_authority": "Name of the administrative authority that has issued this PID instance, or the ISO 3166 Alpha-2 country code of the respective Member State if there is no separate authority authorized to issue PIDs.",
+  "german_id_description_document_number": "A number for the PID, assigned by the PID Provider.",
+  "german_id_description_administrative_number": "A number assigned by the PID Provider for audit control or other purposes.",
+  "german_id_description_issuing_jurisdiction": "Country subdivision code of the jurisdiction that issued the PID, as defined in ISO 3166-2:2020, Clause 8. The first part of the code SHALL be the same as the value for issuing_country.",
+  "german_id_description_issuing_country": "Alpha-2 country code, as defined in ISO 3166-1, of the issuing authority's country or territory",
+  "document_display_name_payment_card": "Payment card",
+  "payment_attribute_issuer_name": "Issuer name",
+  "payment_attribute_payment_instrument_id": "Payment instrument ID",
+  "payment_attribute_masked_account_reference": "Masked account reference",
+  "payment_attribute_holder_name": "Holder name",
+  "payment_attribute_issue_date": "Issue date",
+  "payment_attribute_expiry_date": "Expiry date",
+  "payment_request_payment_sca_minimal": "Payment SCA (minimal)",
+  "payment_request_payment_sca_all": "Payment SCA (all data elements)",
+  "payment_request_payment_sca_transaction": "Payment SCA with payment transaction",
+  "payment_description_issuer_name": "Human-readable issuer name.",
+  "payment_description_payment_instrument_id": "Tokenized payment instrument identifier.",
+  "payment_description_masked_account_reference": "Masked account reference, for example PAN last 4.",
+  "payment_description_holder_name": "Payment account holder name.",
+  "payment_description_issue_date": "Date when this credential was issued.",
+  "payment_description_expiry_date": "Date when this credential expires.",
+  "document_display_name_certificate_of_residency": "Certificate of residency",
+  "cor_attribute_family_name": "Family name",
+  "cor_attribute_given_names": "Given names",
+  "cor_attribute_date_of_birth": "Date of birth",
+  "cor_attribute_older_than_18": "Older than 18",
+  "cor_attribute_older_than_21": "Older than 21",
+  "cor_attribute_date_of_arrival": "Date of arrival",
+  "cor_attribute_resident_address": "Resident address",
+  "cor_attribute_resident_country": "Resident country",
+  "cor_attribute_resident_state": "Resident state",
+  "cor_attribute_resident_city": "Resident city",
+  "cor_attribute_resident_postal_code": "Resident postal code",
+  "cor_attribute_resident_street": "Resident street",
+  "cor_attribute_resident_house_number": "Resident house number",
+  "cor_attribute_place_of_birth": "Place of birth",
+  "cor_attribute_gender": "Gender",
+  "cor_attribute_nationality": "Nationality",
+  "cor_attribute_date_of_issue": "Date of issue",
+  "cor_attribute_date_of_expiry": "Date of expiry",
+  "cor_attribute_issuing_authority": "Issuing authority",
+  "cor_attribute_document_number": "Document number",
+  "cor_attribute_administrative_number": "Administrative number",
+  "cor_attribute_issuing_jurisdiction": "Issuing jurisdiction",
+  "cor_attribute_issuing_country": "Issuing country",
+  "cor_request_age_over_18": "Age over 18",
+  "cor_request_mandatory_data_elements": "Mandatory data elements",
+  "cor_request_all_data_elements": "All data elements",
+  "cor_description_family_name": "Current last name(s), surname(s), or primary identifier of the COR holder",
+  "cor_description_given_names": "Current first name(s), other name(s), or secondary identifier of the COR holder",
+  "cor_description_date_of_birth": "Day, month, and year on which the COR holder was born. If unknown, approximate date of birth.",
+  "cor_description_older_than_18": "Age over 18?",
+  "cor_description_older_than_21": "Age over 21?",
+  "cor_description_date_of_arrival": "Day, month, and year on which the COR holder arrived to the EU.",
+  "cor_description_resident_address": "The full address of the place where the COR holder currently resides and/or may be contacted (street/house number, municipality etc.)",
+  "cor_description_resident_country": "The country where the user currently resides, as an Alpha-2 country code as specified in ISO 3166-1",
+  "cor_description_resident_state": "The state, province, district, or local area where the user currently resides.",
+  "cor_description_resident_city": "The city where the COR holder currently resides",
+  "cor_description_resident_postal_code": "The postal code of the place where the COR holder currently resides",
+  "cor_description_resident_street": "The name of the street where the user currently resides.",
+  "cor_description_resident_house_number": "The house number where the user currently resides, including any affix or suffix",
+  "cor_description_place_of_birth": "The place where the COR holder was born.",
+  "cor_description_gender": "COR holder's gender",
+  "cor_description_nationality": "Alpha-2 country code as specified in ISO 3166-1, representing the nationality of the user.",
+  "cor_description_date_of_issue": "Date (and possibly time) when the COR was issued.",
+  "cor_description_date_of_expiry": "Date (and possibly time) when the COR will expire.",
+  "cor_description_issuing_authority": "Name of the administrative authority that has issued this COR instance, or the ISO 3166 Alpha-2 country code of the respective Member State if there is no separate authority authorized to issue CORs.",
+  "cor_description_document_number": "A number for the COR, assigned by the COR Provider.",
+  "cor_description_administrative_number": "A number assigned by the COR Provider for audit control or other purposes.",
+  "cor_description_issuing_jurisdiction": "Country subdivision code of the jurisdiction that issued the COR, as defined in ISO 3166-2:2020, Clause 8. The first part of the code SHALL be the same as the value for issuing_country.",
+  "cor_description_issuing_country": "Alpha-2 country code, as defined in ISO 3166-1, of the issuing authority's country or territory"
+}
+

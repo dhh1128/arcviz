@@ -1,0 +1,200 @@
+
+
+Projects – OpenWallet Foundation
+
+Skip to main content
+
+Search
+
+Close Search
+
+Menu
+
+About
+
+Charter
+
+Governing Board
+
+Technical Advisory Council
+
+Staff
+
+Logos
+
+Contact
+
+Forum
+
+Projects
+
+Sponsors
+
+Participate
+
+Groups
+
+Learn
+
+Announcements
+
+Blog
+
+Newsletter
+
+Overview Deck
+
+Research
+
+Join Now
+
+twitter
+
+Projects
+
+The OpenWallet Foundation is a neutral home for open source projects supporting the development of interoperable digital wallets. Below you will find the Projects and important links to where project activity is taking place.
+
+Currently, we have projects in the Growth and Labs stages of development. You can learn more about the OpenWallet Foundation Project Lifecycle here: https://tac.openwallet.foundation/governance/project-lifecycle/
+
+If you would like to propose a project (Impact, Growth or Labs stage), you can find the project proposal process here: https://tac.openwallet.foundation/governance/project-lifecycle/#project-proposal-process
+
+Impact
+
+Growth
+
+Labs
+
+Adaptive Cloud Agent – Python (ACA-Py)
+
+Adaptive Cloud Agent - Python (ACA-Py) is a foundation for building Verifiable Credential (VC) ecosystems.
+Learn More
+
+Credo
+
+Previously known as Hyperledger Aries Framework Javascript, Credo initially heavily relied on Hyperledger standards such as DIDComm, Indy, and AnonCreds.
+Learn More
+
+DIDComm Mediator Service
+
+The DIDComm Mediator Service supports mobile DIDComm agents as a reliable intermediary providing an addressable HTTP endpoint for secure message routing.
+Learn More
+
+EUDIPLO
+
+EUDIPLO is a lightweight, open-source middleware layer designed to simplify integration with the European Digital Identity Wallet (EUDI Wallet) ecosystem.
+Learn More
+
+Multipaz
+
+Android libraries and reference applications for working with real-world identity.
+Learn More
+
+SD-JWT Javascript Reference Implementation
+
+A JavaScript implementation of the Selective Disclosure for JWTs (SD-JWT) specification.
+Learn More
+
+VCX
+
+VCX is an open-source codebase that provides a wide suite of Rust modules for building DID & Aries-related applications (client/mobile and server).
+Learn More
+
+Apostille
+
+Apostille is a comprehensive open-source platform for issuing, managing, and verifying digital credentials built on open standards.
+Learn More
+
+EHR Wallet
+
+is a blockchain-powered healthcare information solution designed to empower patients with full control over their medical data. The platform enables secure sharing of medical records, imaging data, and patient information using decentralized web3 technologies.
+Learn More
+
+Farmworker Wallet OS
+
+Low code components for the Mendix platform that can be used to create digital wallets.
+Learn More
+
+Multiformat-VC for iOS
+
+Pure Swift package for creating Verifiable Credentials (VCs) in multiple formats (SD-JWT and VC JWT).
+Learn More
+
+SD-JWT .NET Reference Implementation
+
+A .NET implementation of the Selective Disclosure for JWTs (SD-JWT) specification.
+Learn More
+
+SD-JWT Python Reference Implementation
+
+A Python implementation of the Selective Disclosure for JWTs (SD-JWT) specification.
+Learn More
+
+SD-JWT Rust Reference Implementation
+
+A Rust implementation of the Selective Disclosure for JWTs (SD-JWT) specification.
+Learn More
+
+TRS (Trust Resolver System)
+
+A TypeScript implementation of the Trust Resolving System that follows Trust Registry Query Protocol (TRQP) to simplify trust information resolution across different trust protocols.
+Learn More
+
+Tuvali
+
+A library which implements the OpenID4BLE specification for Android & IOS.
+Learn More
+
+VC-API
+
+An implementation of the VC API draft standard in REST that includes operations such as credential issuance, verification, and exchange.
+Learn More
+
+Wallet Framework .NET
+
+Multiprotocol wallet framework enabling implementations of OpenID4VC and SD-JWT VC, in accordance to the European Identity Wallet initiative's objectives.
+Learn More
+
+Copyright © Linux Foundation Europe. The OpenWallet Foundation is a project of Linux Foundation Europe. For applicable policies including privacy policy, terms of use and trademark usage guidelines, please see https://linuxfoundation.eu. Linux is a registered trademark of Linus Torvalds.
+
+Close Menu
+
+About
+
+Charter
+
+Governing Board
+
+Technical Advisory Council
+
+Staff
+
+Logos
+
+Contact
+
+Forum
+
+Projects
+
+Sponsors
+
+Participate
+
+Groups
+
+Learn
+
+Announcements
+
+Blog
+
+Newsletter
+
+Overview Deck
+
+Research
+
+Join Now
+
+twitter
+

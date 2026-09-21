@@ -1,0 +1,3037 @@
+
+
+Verifiable Credentials Use Cases
+
+Verifiable Credentials Use Cases
+
+W3C Group Note 18 March 2026
+
+More details about this document
+
+This version:
+
+https://www.w3.org/TR/2026/NOTE-vc-use-cases-20260318/
+
+Latest published version:
+
+https://www.w3.org/TR/vc-use-cases/
+
+Latest editor's draft:
+
+https://w3c.github.io/vc-use-cases/
+
+History:
+
+https://www.w3.org/standards/history/vc-use-cases/
+
+Commit history
+
+Editors:
+
+Joe Andrieu (Legendary Requirements)
+
+Kevin Dean (Legendary Requirements)
+
+Former editors:
+
+Shane McCarron (Spec-Ops)
+
+Matt Stone (The Brightlink)
+
+Tzviya Siegman (Wiley)
+
+Gregg Kellogg (Spec-Ops)
+
+Ted Thibodeau, Jr. (OpenLink Software, Inc.)
+
+Kevin Dean (GS1)
+
+Authors:
+
+Nate Otto (Badge Alliance)
+
+Sunny Lee (Badge Alliance)
+
+Brian Sletten (Bosatsu Consulting, Inc.)
+
+Daniel Burnett (Standards Play)
+
+Manu Sporny (Digital Bazaar, Inc.)
+
+Ken Ebert (Sovrin Foundation)
+
+Joe Andrieu (Legendary Requirements)
+
+Kevin Dean (GS1)
+
+Sho Nakatani (SecDevLab Inc.)
+
+Gabe Cohen (ReBld Technologies)
+
+Sebastian Crane
+
+Kristina Yasuda (SPRIN-D)
+
+Kirill Elagin
+
+Amy Guy
+
+Sandro Hawke (Writable Site)
+
+Erik Wilde (API Academy)
+
+David I. Lehn (Digital Bazaar, Inc.)
+
+Calvin Cheng (International Chamber of Commerce)
+
+Feedback:
+
+GitHub w3c/vc-use-cases
+(pull requests,
+new issue,
+open issues)
+
+Copyright
+©
+2026
+
+World Wide Web Consortium.
+W3C®
+liability,
+trademark and
+permissive document license rules apply.
+
+Abstract
+
+A verifiable credential is a qualification, achievement, quality, or piece
+of information about an entity's background such as a name, government
+ID, payment provider, home address, or university degree, provided in an
+electronic form whose integrity can be verified and whose content can be
+validated against a set of business rules appropriate to the claims
+that the content makes. Such a credential
+describes a quality or qualities, property or properties of an entity
+which establish its existence and uniqueness. The use cases outlined here are
+provided in order to make progress toward possible future standardization and
+interoperability of both low- and high-stakes credentials with the goals of
+storing, transmitting, and receiving digitally verifiable proof of attributes
+such as qualifications and achievements. The use cases in this document focus
+on concrete scenarios that the technology defined by the group should address.
+
+Status of This Document
+
+This section describes the status of this
+document at the time of its publication. A list of current W3C
+publications and the latest revision of this technical report can be found
+in the
+W3C standards and drafts index.
+
+This document represents a concise but limited collection of use cases readers
+should review alongside the Verifiable
+Credentials Data Model.
+
+The work on this document was carried out under tight time constraints due to
+limitations of the W3C process and publishing deadlines. Under such conditions,
+errors are unavoidable and some of the ideas presented here are incomplete.
+The Working Group hopes that in the future, W3C process can be revised to better
+support the dynamic nature of standards work in a more consistent way across
+different groups.
+
+Comments regarding this document are welcome. Please file directly on
+GitHub, or send them
+to public-vc-comments@w3.org
+(subscribe,
+archives).
+
+This document was published by the Verifiable Credentials Working Group as
+a Group Note using the
+Note track.
+
+This Group Note is endorsed by
+the Verifiable Credentials Working Group, but is not endorsed by
+W3C itself nor its
+Members.
+
+The
+W3C Patent
+Policy
+does not carry any licensing requirements or commitments on this
+document.
+
+This document is governed by the
+18 August 2025 W3C Process Document.
+
+Table of Contents
+
+Abstract
+
+Status of This Document
+
+1. Introduction
+
+1.1 Importance of this work
+
+1.2 Use case model
+
+1.3 Conformance
+
+2. User Roles
+
+3. User Needs
+
+3.1 Education
+
+3.2 Retail
+
+3.3 Finance
+
+3.4 Healthcare
+
+3.5 Professional Credentials
+
+3.6 Legal Identity
+
+3.7 Devices
+
+4. User Tasks
+
+4.1 Issue Credential
+
+4.2 Assert Credential
+
+4.3 Verify Credential
+
+4.4 Validate Credential
+
+4.5 Store Credential
+
+4.6 Retrieve Credential
+
+4.7 Revoke Credential
+
+5. Focal Use Cases
+
+5.1 Citizenship by Parentage
+
+5.1.1 Background
+
+5.1.2 Distinction
+
+5.1.3 Scenario
+
+5.1.4 Verifiable Credentials
+
+5.1.5 Verifiable Presentation
+
+5.1.6 Trust Hierarchy
+
+5.1.7 Threat model
+
+5.2 Expert Dive Instructor
+
+5.2.1 Background
+
+5.2.2 Distinction
+
+5.2.3 Scenario
+
+5.2.4 Verifiable Credentials
+
+5.2.5 Verifiable Presentation
+
+5.2.6 Trust Hierarchy
+
+5.2.7 Threat model
+
+5.3 International Travel with Minor and Upgrade
+
+5.3.1 Background
+
+5.3.2 Distinction
+
+5.3.3 Scenario
+
+5.3.4 Verifiable Credentials
+
+5.3.5 Verifiable Presentation
+
+5.3.6 Trust Hierarchy
+
+5.3.7 Threat model
+
+5.4 Chain of GS1 Credentials to Identify a Trade Item
+
+5.4.1 Background
+
+5.4.2 Distinction
+
+5.4.3 Scenario
+
+5.4.4 Verifiable Credentials
+
+5.4.5 Actors
+
+5.4.6 Validation Requirements
+
+5.4.7 Verifiable Presentation
+
+5.4.8 Trust Hierarchy
+
+5.4.9 Variation - License Transfer
+
+5.5 Exchange of Electronic Certificate of Origin
+
+5.5.1 Background
+
+5.5.2 Roles in Cross Border Trade
+
+5.5.3 Trade Flow
+
+5.5.4 Actors
+
+6. Extant Use Cases
+
+7. User Sequences
+
+7.1 How a Verifiable Credential Might Be Created
+
+7.2 How a Verifiable Credential Might Be Used
+
+A. Terminology
+
+B. Example Verifiable Credentials
+
+B.1 Focal Use Case: International Travel with Minor and Upgrade
+
+B.2 Focal Use Case: Chain of GS1 Credentials to Identify a Trade Item
+
+C. Acknowledgements
+
+D. References
+
+D.1 Normative references
+
+1. Introduction
+
+The Verifiable Credentials Working Group at the W3C develops standards for
+expressing and exchanging "credentials" that have been issued by a third
+party and to make them easier and more secure on the Web.
+
+Note
+
+This document does NOT attempt to define an architecture for the support of
+Verifiable Credentials. Instead it expresses the sorts of needs that real users have
+that could be addressed through support for some sort of self-sovereign credential
+environment. It attempts to use terminology that is consistent with the other
+deliverables of the Verifiable Credentials Working Group (you can see the relevant
+terms in Appendix A).
+
+1.1 Importance of this work
+
+Entities (people, organizations, devices) need to present many kinds of
+credentials as part of their everyday activities. As more and more of these
+important activities move to the Internet, entities need to be able to
+transmit instantly verifiable credentials (e.g., about their location,
+accomplishments, value, what-have-you). From educational records to payment
+account access, the next generation of web applications will authorize
+entities to perform actions based on rich sets of credentials issued by
+trusted parties. Human- and machine-mediated decisions about job applications,
+account access, collaboration, and professional development will depend on
+filtering and analyzing growing amounts of data. It is essential that data be
+verifiable.
+
+Standardization of digital credential technologies makes it possible for many
+stakeholders to issue, earn, and trust these essential records about their
+counterparties, without being locked into proprietary platforms.
+
+1.2 Use case model
+
+This document presents an aggregate use case model, composed of Needs, Roles,
+Tasks, and Sequences. Taken together, these models define the use cases that
+the Verifiable Credentials Working Group has addressed.
+
+User needs define the problem space addressed by verifiable credentials.
+User Roles specify the roles different entities play when interacting
+with verifiable credentials. Tasks define the functions users can
+accomplish, and sequences demonstrate how tasks might be realized, by
+interactions between entities over time.
+
+As with all models, this use case model is neither exhaustive nor complete. The
+listed uses cannot capture all possible use cases. Similarly, the models do not
+completely characterize the use cases represented. However, the combined model
+is intended to provide specific, coherent guidance for the work ahead.
+
+1.3 Conformance
+
+As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.
+
+The key word MUST in this document
+is to be interpreted as described in
+BCP 14
+[RFC2119] [RFC8174]
+when, and only when, it appears in all
+capitals, as shown here.
+
+2. User Roles
+
+There are four roles supported by verifiable credentials: Issuer,
+Verifier, Subject, and Holder.
+
+Figure 1
+Verifiable Credential User Roles
+
+Issuer
+
+The entity that creates a credential and associates it with a
+particular subject.
+
+Verifier
+
+The entity verifying a credential about a given subject.
+
+Subject
+
+The entity about whom a credential is issued.
+
+Holder
+
+A role an entity may perform by possessing one or more
+verifiable credentials. A holder is usually, but not always, the
+subject of the verifiable credentials that they are holding.
+Holders store their credentials in credential repositories.
+
+3. User Needs
+
+Verifiable credentials address user needs in a number of key domains:
+
+Figure 2
+Verifiable Credentials, Example Domains for User Needs
+
+3.1 Education
+
+The education domain includes all levels of the educational experience; from
+primary through professional continuing education.
+
+E.1 Digital transcript
+
+Joleene is the registrar of Mega University and, by virtue of her
+office, is
+responsible for the integrity, accuracy, and security of academic
+records.
+Joleen has been a pioneering registrar in advocating an "extended
+transcript"
+that includes not only the standard set of course grades but also
+adds
+supplementary information on learner competencies. These might
+include work
+experiences and non-educational but marketable skills. Upon the
+request of her
+students, Joleen issues a digital credential that includes an
+extended
+transcript.
+
+E.2 Taking a test
+
+Eunice is about to take her ACT (a test used to evaluate her
+readiness for
+college). When she arrives at the testing center, she is required to
+present
+identification. Her government-issued identity certificate is
+acceptable, as
+the verifiable credentials contained in it reflect all of the
+required
+attributes and it is difficult to counterfeit.
+
+E.3 Transferring schools
+
+Rocky is an undergraduate student at Wossamotta U. His school
+provides a
+credential repository service to all students and alumni, so
+he chooses
+to use it. In his third year, Rocky decides to transfer to
+Moosylvania Tech.
+They do not offer a service, but he does not want to continue to use
+the
+service of his old (and now rival school) so he moves his
+credentials to the
+service offered by his bank without needing to have them reissued.
+
+E.4 Online classes
+
+In MOOC and other online learning systems, being able to reliably
+identify
+participants is vital to ensure the individual evaluation and
+certification.
+Nick is participating in a course online and takes a test. He is
+required to
+provide his credentials to prove his identity before the test, and
+then to
+allow the system to issue a verifiable credential regarding
+the
+results of his test.
+
+3.2 Retail
+
+The retail domain encompasses all things where there is an exchange of value on
+an individual level. This includes brick-and-mortar store fronts, web-only
+venues, and even person-to-person sales.
+
+R.1 Address verification
+
+Francis has found the perfect pair of shoes. When processing orders,
+Giant Shoe
+Company wants to be certain that his shipping address is accurate
+(inaccurate
+addresses are very expensive in terms of customer service). They
+offer a
+discount for customers who make verifiable addresses available as
+part of the
+checkout process. Francis offers his certificate and gets the
+perfect shoes for
+even less than he expected.
+
+R.2 Adult beverages
+
+June goes to her local beer and wine store to buy a bottle of wine.
+She submits
+her identity credential that lets the liquor store owner know that
+she is over
+21 without having to reveal her actual date of birth, her address,
+or her state
+ID number.
+
+R.3 Fraud detection
+
+On a bright Sunday, Oskar remembers that he still needs to buy his
+wife a
+precious gift for their wedding anniversary. However, he is acutely
+aware that
+it is precisely in weekends that gangs set up fraudulent web shops
+that claim
+to sell such gifts, while in fact they only take the cash, and
+disappear on
+Mondays. So before actually purchasing a gift from the web shop of
+his choice,
+he requests the shop to provide a credential issued by the chamber
+of commerce,
+that contains proof of legitimacy. After having verified that the
+shop is
+legit, he can purchase his gift.
+
+R.4 Bona-fide shopper
+
+David owns a restaurant and has registered with a low cost wholesaler to purchase provisions in bulk. The wholesaler has
+issued a credential to David, to prove that he is entitled to enter the warehouse in order to purchase goods that are
+not available to the general public. The credential is marked "non-transferable" to stop David passing the credential to
+his friends to allow them to purchase low cost provisions.
+
+3.3 Finance
+
+The Finance domain includes banking, brokerage, insurance, and other
+industries where there is a high value placed on knowing exactly with whom
+you are dealing.
+
+F.1 Reuse know your customer
+
+Jane is opening an account at MidBank in Finland. As part of that
+process,
+the bank asks her to provide two from a variety of possible sources
+to confirm
+her identity — a so-called "Know Your Customer"
+check. She
+selects government-supplied verifiable credentials that
+confirm she
+receives postal mail at a certain address and that she has a
+national ID card.
+Confirming these allows the bank to open her account and be
+confident in her
+identity when she conducts transactions.
+
+Now that the account is open, Jane is issued a digitally-signed
+credential for her checking account at MidBank. This
+credential
+verifies that Jane has an account at MidBank and has access to her
+associated checking account. It is issued to a controlled
+identifier over which Jane has demonstrated proof-of-control.
+When presented, Jane again demonstrates proof-of-control over that
+identifier to give the verifier confidence that the current holder
+presenting the credential, is in fact, the original recipient of
+the credential. Since MidBank (and all banks in Finland) are
+required to perform "Know Your Customer" checks on
+accounts, this credential can also be treated as sufficient
+verification by other financial institutions. This helps Jane
+assure destination banks that she is verified, thereby
+allaying concerns about misdirected transactions and money
+laundering.
+
+F.2 Money transfer
+
+Susan wants to send funds to her family in another country via a
+popular money
+transfer service. She has verifiable credentials in her
+credential repository that can be used to share her
+identity profile. She has also been sent a credential from
+her
+family verifying their banking information. By sharing these with
+the money
+transfer service, they can automatically verify the source and
+destination of
+funds, thus being confident in the delivery of those funds and
+satisfying
+various regulations regarding prevention of money laundering.
+
+F.3 Closing account
+
+John opens a checking account at Big Bank Co and is issued a
+verifiable credential indicating that the account exists,
+that the bank
+verified John's identity, and that John has access to the account.
+Some time
+later, John is moving to a new city and decides to close that
+account. Big
+Bank Co needs to revoke that credential as part of their normal account
+closing
+process.
+
+F.4 Trying out a new service
+
+Nikita has several accounts with BigBank, as well as a brokerage
+account with
+WallStreetCo. She had placed all of her credentials in a
+credential repository at BigBank that came free when she
+opened her
+accounts. WallStreetCo is now offering a new repository that
+has an
+interface she thinks she will prefer. Nikita copies her
+credentials from
+BigBank into the repository at WallStreetCo to experiment with their
+service,
+but continues to use the service from BigBank while she is testing.
+
+F.5 New bank account from home
+
+Alice wants to open a new bank account. BigOnlineBank offers the
+ability to
+do this from home if she can provide electronic credentials. She
+offers
+government-issued certificates that verify her identity (address,
+national
+identity number, etc.), and opens her new account from her couch.
+
+3.4 Healthcare
+
+Privacy is critically important in the healthcare industry. This domain looks
+at everything from physical interaction to connecting patients and providers
+with service organizations.
+
+H.1 Prescribing
+
+Barney is a physician, and has recently become board certified in
+his state.
+The state's board issues Barney a digital certificate confirming
+that he is
+certified to practice medicine in that state. Barney can now use
+this
+certificate when writing prescriptions and referrals, thereby
+improving
+accountability and verifiability.
+
+H.2 Online pharmacy
+
+iPharmacy receives a prescription for Bob electronically from a
+local clinic.
+It includes a certificate about the physician that issued the
+prescription as
+well as one about Bob. iPharmacy's system automatically verifies the
+ability
+of the physician to write prescriptions, as well as Bob's insurance
+coverage.
+When Bob arrives to pick up his medication, iPharmacy further
+correlates his
+identity with the certificate, thereby improving the end-to-end
+accountability
+of their system.
+
+H.3 Insurance claim
+
+Tracy has a sore throat soon after moving to a new town. She finds a
+physician
+through her health care network and goes in for treatment. She is a
+new
+patient, so the clinic needs to know who she is and how she will be
+paying.
+When checking in, she presents her verifiable credential that
+demonstrates her identity and her proof of insurance. When the
+clinic submits
+this to the insurance company, they can automatically ascertain that
+she
+submitted her proof of identity and insurance to the provider and
+granted the
+physician the ability to submit the claim for payment.
+
+H.4 Traveling illness
+
+John is on the vacation of a lifetime, travelling the world. Falling
+ill, he
+visits a health clinic in a country in which he does not live. At
+the clinic,
+he is asked for proof of identity. He provides a credential that
+verifies his
+name and address, but elects not to disclose his marital status nor
+his social
+security number, as those are neither requested nor required at this
+clinic.
+He further marks the disclosure as expiring in 30 days—he does
+not want
+his information verifiable after that time.
+
+H.5 Proving Legal Disability Status
+
+Trina, who is legally blind, is currently unemployed, and needs to
+use the
+local free disability ride service to get to the employment office.
+To use
+this service, she is required to verify that she maintains legal
+disability
+status. Trina provides her government-issued disability credential
+to sign up
+for the ride service, and is not required to disclose her specific
+disability
+to the ride service, as this could put her at personal risk.
+
+3.5 Professional Credentials
+
+In many aspects of life it is important to know that entities are who
+they say they are, and that they can do what they say. Professional
+accreditation is one way of learning about the abilities of an entity.
+Being able to verify these credentials is essential to their value.
+
+C.1 Find a doctor
+
+Jason is looking for a new primary care physician. His health
+provider
+includes information on their web site about the physicians they
+have on
+staff, including verifiable credentials about
+their
+education, board certification, and continuing education. Jason can
+verify
+these credentials and be confident that his new physician satisfies
+his
+requirements.
+
+C.2 Busy doctor
+
+Barney was a board-certified physician, but he ran out of time to
+complete
+his continuing education requirements and his certification lapsed.
+Since the
+board can revoke his certification, credential verifiers will
+automatically be aware that he can no longer issue prescriptions or
+perform
+medical procedures.
+
+C.3 Bad university
+
+Jane was issued a certificate by BigTraining Co., indicating that
+she was a
+trained Project Manager. It was later discovered that BigTraining
+Co. was not
+actually training anyone, and their organization's certificate was
+revoked via
+the US Department of Education's Accreditation Database. Jane's
+credential is
+therefore invalid, and prospective employers will be aware of this
+when they
+check her certifications.
+
+C.4 New employer
+
+Jessica is a medical doctor practicing in the United States. She has
+a variety
+of digital credentials that explain her qualifications, schooling,
+continuing
+education achievements, and board certifications. These are all
+stored in the
+credential repository provided by her employer. When she is
+offered a
+position with another health provider network, she can automatically
+transfer
+all of these credentials to her new employer.
+
+C.5 Social authority
+
+Josie is a healthcare worker that has created a profile on a
+professional
+social network to make herself readily available for new
+opportunities in the
+workforce. She lists her employment history and qualifications
+including degrees,
+certificates, and digital badges. The website requests verification
+of her
+credentials in order for her qualifications to be visible
+when she
+posts messages. Josie authorizes the sharing of the relevant
+credentials with
+the website, and the site verifies and validates them before allowing Josie to
+expose them.
+
+"Freedom?" is an online forum that encourages free discussion about
+issues
+controversial in Freedonia. The forum allows users to register
+anonymous
+accounts, but it also allows users to obtain badges based upon
+real-world
+certifications. Paula has been certified as an aid worker, and
+wishes that
+information to be marked on her posts. She shares her certificate
+with the
+forum, but limits it to only verifying that she is the holder
+of the
+certificate, that she is the subject of it, and that she is
+an aid
+worker. In this way she maintains her anonymity in this
+controversial forum
+while still being able to assist her fellow countrymen.
+
+C.6 Job applicant
+
+Software Co. has posted an open position online and they are
+receiving
+thousands of applications. Cindy has applied for the job. Unlike
+many
+applicants, she has attached her education credentials—college
+degree,
+additional specific software training, etc. Software Co. evaluates
+these
+credentials automatically as they receive her application. Because
+her
+materials are verifiable and verified, her application is
+immediately
+forwarded as a viable candidate.
+
+3.6 Legal Identity
+
+For many transactions, an entity must be able to prove some aspect of
+their identity in a way that can be quickly verified. Governments and other
+widely recognized entities are well positioned to provide such
+identification in a verifiable digital form.
+
+L.1 Digital driving license
+
+Asako just passed the final test to receive a drivers license. As
+she is still
+a new driver, and may be pulled over for a traffic violation, she
+would like
+to receive a credential that asserts a claim that she
+has right
+to drive a car. She requests a credential from the certifying
+authority
+(issuer) that she can use to prove to the officer
+(verifier) that her claim is valid.
+
+L.2 Seamless immigration
+
+Tom is a frequent international traveler. In order to speed
+processing
+through immigration check points, he applies for a digital passport
+from his
+governmental authority. After satisfying background check
+requirements, the
+authority issues Tom an electronic version of his passport. This
+version is
+verifiable and retains a history of all the places he visits so that
+immigration officials can quickly and easily evaluate his
+suitability as a
+visitor to their country. Once they are satisfied, they will
+automatically
+add the details of this new visit to Tom's passport.
+
+L.3 Speedy air travel
+
+Security for air travel is more and more rigorous, requiring more
+and more
+time to validate each passenger. Ivan has a collection of
+verifiable credentials that are assembled into his air travel
+Identity Profile. When Ivan needs to pass through a
+security
+checkpoint at his airport, he presents this profile before entering
+the
+line. Because his identification can be immediately and
+automatically
+verified, he is permitted to skip the long line and go straight to
+the
+metal detector.
+
+L.4 Refugee crisis
+
+Thousands of people each year are displaced because of man-made and
+natural
+disasters. Anoushka is one such, having been forced to flee her
+village along
+with her mother and younger brother. They reach an IFRC center just
+across
+the border in a relatively safe area, but with no documentation.
+Since the
+government of her homeland is in turmoil, there is no way for the
+IFRC staff
+to easily establish their identities. Fortunately, Anoushka had been
+issued
+a self-sovereign proof of birth, attached to which is the proof of
+birth and
+marriage for her parents. She is able to retrieve this because it is
+available
+from many places over the Internet. Since it is verifiable, the
+IFRC is
+comfortable vouching for them and resettling them in a safer area
+for the
+duration of the conflict.
+
+3.7 Devices
+
+Intelligence devices are created and deployed so that they can interact with
+other entities (people, organizations, devices). Establishing trust
+and maintaining secure relationships with these devices is especially critical.
+
+D.1 Devices during manufacturing
+
+Bob, the director of production at HVAC Manufacturing, issues a
+device-identifying verifiable credential (e.g. IDevID, IAK)
+at the
+factory for an energy-saving fan controller IoT device.
+
+Carol, senior quality engineer at Certifications Testing Lab,
+issues a
+certification of specification-compliance verifiable
+credential to the
+fan-controller device at the certification lab during the
+manufacturing
+process.
+
+When the fan controller is installed at the customer's office at
+Modern Office
+Spaces, the controller's identifying credential can be
+verified by Sam,
+IT technician, to establish the identity of the controller as part
+of the
+on-boarding of the new controller. The controller's
+specification-compliance
+credential is verified to demonstrate the controller's
+Energy-Star
+compliance.
+
+D.2 Devices during delivery
+
+As the fan controller leaves the factory, additional
+verifiable credentials are issued by Vince, a systems
+engineer at VAR
+Resellers, as he verifies the manufacturer's configuration matches
+the
+verifiable credentials accompanying the device. He then
+installs a
+software package specific to Modern Office Spaces needs and issues
+verifiable credentials that establish evidence of
+possession by VAR
+Resellers and the software additions Vince made to the device.
+
+Finally, upon delivery to Sam, the end customer, the
+verifiable credentials show that the fan controller has
+been securely
+handled and contains the correct features and certifications.
+
+D.3 Devices setup for operating autonomously
+
+Sam, the new device owner, needs to trust the device originated
+from HVAC
+Manufacturing and was handled correctly at Certifications Testing
+Lab and
+installed with the correct software package at VAR Resellers.
+After Sam
+verifies each of the verifiable credentials, he issues
+another
+verifiable credential for fan controller #37 which includes
+assertions
+relating to trust: device manufacturer model/version, software
+manufacturer
+model/version, security versions of components TCB, and associated
+devices the
+fan controller is authorized to interact with including
+thermostat-board-room.
+
+The thermostat-board-room monitors room temperature. When the
+temperature is
+too hot it switches the fan controller #37 on and later when the
+temperature
+reaches a comfortable level, off. The device makes sure the
+control signals
+from thermostat-board-room are authorized (namely, that Sam
+intended for
+thermostat-board-room to control the fan controller).
+
+Sam is concerned about the security of the smart board room. He
+configures
+the autonomously interacting devices to re-verify device
+trustworthiness
+attributes periodically by re-checking that the device originated
+from HVAC
+Manufacturing and was handled correctly by Certifications Testing
+Lab and
+installed with the correct software package by VAR Resellers.
+
+Sam may update the device’s software occasionally during its
+lifetime. Even
+though Sam is applying the update, VAR Resellers supplies the
+correct update.
+The device ensures that only VAR Resellers is able to supply the
+updated
+software image and that only Sam is able to apply the update.
+
+4. User Tasks
+
+Use cases are often used as a driver for requirements. While the users of
+verifiable credentials have needs across many domains, the tasks
+associated with those needs span the domains. This section summarizes those
+tasks, as well as requirements related to the tasks, and maps the tasks and
+requirements back to the associated needs.
+
+Note
+
+It is worth noting that the subject may or may not be the same
+entity as the holder. There are no tasks in these examples that
+require participation of the subject.
+
+Figure 3
+Verifiable Credential User Tasks
+
+4.1 Issue Credential
+
+Requirement
+
+It MUST be possible for any entity to issue a verifiable credential.
+
+Motivation
+
+Individuals and organizations need a way to issue credentials about
+themselves or others that can be verified and trusted.
+
+Needs
+
+F.1, E.1, L.1, H.1
+
+4.2 Assert Credential
+
+Requirement
+
+It MUST be possible for the holder of a verifiable credential
+to restrict the amount of information exposed in a credential they
+choose to share. It also MUST be possible for the holder to limit the
+duration for which that information is shared.
+
+Motivations
+
+Credentials may be issued about a subject that include multiple
+attributes, only some of which are required when verifying a specific criteria
+is satisfied. The holder should have the ability to satisfy the
+criteria without revealing additional attributes that are not required.
+
+Needs
+
+R.2, H.4
+
+4.3 Verify Credential
+
+Requirement
+
+It is expected to be possible for a verifier to verify that the
+credential is an authentic statement of an issuer's
+claims about the
+subject. Verifiers MUST have the capability to
+cryptographically prove that a credential has not been tampered
+with since issuance (authenticity) and that the issuer continues
+to assert the claims as true (currency).
+
+To check authenticity, the issuer's verification method(s), such as
+a public key, must be discoverable from the credential itself. It
+is expected that the issuer identifier either is
+itself cryptographically verifiable, or that it can be used to
+reliably discover the cryptographic material necessary to confirm
+that the content of a credential has not been changed since
+issuance. It is understood that verification depends on the
+verifier's acceptance of the robustness of the cryptographic
+mechanisms used for testing authenticity and for discovering
+verification methods. An untrusted verification method cannot be
+relied upon for verification.
+
+Verifiers must also be able to
+inquire about the current status of a credential without
+revealing to the issuer
+
+The entity requesting that status
+
+The credential for which status is being checked
+
+The subject of the credential being checked
+
+Requiring that verifiers perform this status check
+is what enables issuers to revoke, suspend, or otherwise
+moderate the status of the credential.
+
+Similarly, if a discovery mechanism is used to retrieve
+verification methods for a given issuer, verifiers must be able
+to do so without revealing unnecessary information to the issuer.
+
+In short, it must be possible to fully verify a credential
+without leaking usage data to the issuer or anyone else. This
+is to avoid the so-called "phone home" problem.
+
+Motivations
+
+In many environments (such as order processing), information — such
+as a payer's address, citizenship, or age — needs to be
+automatically verified to complete the transaction.
+
+It MUST be possible to verify these in an automated fashion.
+
+Needs
+
+F.2, C.1, E.2,
+R.1, F.5, H.2,
+C.6
+
+4.4 Validate Credential
+
+Requirement
+
+It MUST be possible for a verifier to check whether a
+given credential is appropriate for a particular use. That is, given
+a credential that is authentic and current, the verifier needs to
+interpret the claims in the context of their own 'business rules'
+concerning, for instance, which parties are acceptable authorities, and which
+cryptographic mechanisms are acceptable for what situations.
+
+Is the issuer someone we know?
+
+Are the claims made by this issuer appropriate for this
+particular issuer's authority?
+
+Is the holder's presentation an appropriate use of the
+credential?
+
+The first and second questions will be answered because either the
+verifier already knows the public identifiers for the issuers it
+recognizes for specific credentials, or there is a discovery mechanism
+whereby verifiers can find appropriate issuers given their
+business requirements.
+
+The business rules may allow the use of certain credentials for
+specific situations, even when verification fails. For example, a
+suspended or expired professional license may be accepted by an employer as
+evidence of past experience without it being treated as a current
+qualification for roles that require that license. For this
+reason, current status (as part of verification) only deals with the
+status of the credential as maintained by the Issuer. Timeliness
+is the domain of validation.
+
+It's important to note that the bounds of authority for a given
+issuer are specific claim types made by them and relied upon by
+others. While a region's DMV (Department of Motor Vehicles)
+or equivalent agency might be an acceptable authority for an
+individual's driving privilege, it should probably not be treated
+as authoritative for an individual's hair color or current
+address, even though such claims are often included in
+today's driver's licenses.
+
+Unlike verification, it may not always be possible to
+automate validation. Some use cases require human review before accepting
+a particular credential for a particular use. For example, a
+digital proof of age system might need a trusted human agent to
+visually compare the holder/presenter in real-space to a
+reference photo securely referenced in the VC, before accepting a
+credential as valid.
+
+Motivations
+
+Verifiers need to be able to apply their own policies and rules
+to the information they rely on to run their "business" (which we
+mean broadly, to encompass all activity focused towards a goal).
+
+Given this need, any given VC might be verified but not usable in a
+particular situation. For example, a self-issued driver's license
+would likely not be acceptable for a car rental by most car
+rental agencies, even though the verification succeeds.
+
+Even so, in other cases, such as at a go-cart racing facility, it
+may be entirely appropriate to accept the name and image from a
+self-issued license for the purpose of leaderboards,
+announcements, and correspondence.
+
+These business rules are entirely the province of the verifier. Only after
+satisfying their rules should a verifier rely upon a claim as an
+accepted fact for specific use.
+
+Needs
+
+F.2, C.1, E.2,
+R.1, F.5, H.2,
+C.6
+
+4.5 Store Credential
+
+Requirement
+
+It MUST be possible for the holder of a credential to store that credential in one or
+more credential repositories.
+
+Motivation
+
+A credential is under the control of its holder. That holder will
+choose where their credentials are stored based upon a variety of factors
+(e.g., employer requirements, convenience, service levels, provider cost,
+business intelligence). The holder needs to be able to easily choose among
+various credential repositories, and also to be able to migrate their
+credentials to another without requesting new credentials from the
+credential issuer.
+
+Needs
+
+F.4, E.3, C.4
+
+4.6 Retrieve Credential
+
+Requirement
+
+It MUST be possible for a holder to select if and which appropriate
+credential should be sent to a verifier.
+
+Motivations
+
+A verifier may require that a holder verify aspects of their
+suitability for a transaction. In this case, the holder must be able
+to select which, if any, verifiable credential stored with their
+credential repository is used to satisfy the verifier.
+
+Needs
+
+C.5, E.4
+
+4.7 Revoke Credential
+
+Requirement
+
+It MUST be possible for the issuer of a credential to revoke it,
+after which it will no longer satisfy verification procedures.
+
+Motivation
+
+An entity (issuer) discovers that a credential they have
+issued and are endorsing for an end user (subject), is no longer valid
+and wishes to revoke the issued credential.
+
+Needs
+
+F.3, C.2, C.3
+
+5. Focal Use Cases
+
+Focal Use Cases are meant to provide examples where a blend of features from
+verifiable credentials standard may be used together to solve complex
+or challenging marketplace needs.
+
+5.1 Citizenship by Parentage
+
+5.1.1 Background
+
+Sam wants to claim US citizenship because his mother is American. Sam has a
+digital birth certificate from Kenya, where he was born while his Mother was
+in the Peace corps. He also has a digital version of his mother's US passport.
+Because his mother’s name changed between his birth and the issuance of the
+passport, Sam also has a marriage license with her maiden and married names.
+Sam is applying for a new passport from the US Secretary of State.
+
+5.1.2 Distinction
+
+This use case is challenging because the mother’s name changed, by marriage,
+between the issuance of the birth certificate and passport.
+
+5.1.3 Scenario
+
+Sam’s mother emailed him the certificate, license, and passport as independent
+Verifiable Credentials. He then creates a verifiable presentation
+which includes those credentials, a statement of their relationship to each
+other and his relationship to his mother. He then visits the US Secretary of
+State website, creates an account, starts the application for a passport, and
+uploads his new verifiable presentation as supporting evidence. After
+processing the application, Sam is issued both a traditional passport and a
+new digital passport.
+
+5.1.4 Verifiable Credentials
+
+Birth Certificate
+
+Establishes relationship to mother with maiden name
+
+Marriage License
+
+Establishes mother's name change
+
+Mother’s Passport
+
+Establishes mother's US citizenship
+
+Sam’s Passport
+
+Establishes Sam is the child in the birth certificate
+
+5.1.5 Verifiable Presentation
+
+A verifiable presentation which includes those three credentials,
+adds his name, photo, and demographic data along with the assertions that —
+
+He is the child in the birth certificate.
+
+The mother in the birth certificate, the person in the passport, the spouse in
+the marriage license are all the same person.
+
+5.1.6 Trust Hierarchy
+
+Sam is legally liable for his claim to the rights of citizenship. The state
+department is on the hook for verifying the underlying credentials and Sam’s
+claims, including correlating against any additional data they might
+already have.
+
+5.1.7 Threat model
+
+Threat: Terrorist / Identity fraud. A bad actor could be
+impersonating Sam to attain a passport. Of course, if a bad actor were to be
+able to collect the required verifiable credentials—mother’s
+passport, birth certificate, and marriage license, that actor has already
+significantly compromised the system.
+
+Response: Identity assurance based on the presentation
+and other data, above and beyond what is in the presentation and the
+credentials.
+
+Response: Identity assurance based on the contents of the
+credentials, potentially with enhanced data embedded in the credentials,
+i.e., data not currently in passports, birth certificates, or marriage license.
+For example, a biometric template could be embedded in the birth certificate
+credential and that template could be used for interactive identity assurance
+at the time of submitting the presentation.
+
+Threat: Exposure of private information. By storing
+potentially compromising information in credentials and sending them
+over the network, we are increasing the attack surface for the subjects
+of those credentials.
+
+Response: Encrypt the credentials (once by issuer, every
+verifier gets the same encrypted blob)
+
+Response: Encrypt the credentials uniquely for each
+verifier. This may leak usage data to the issuer, assuming the
+holder must ask for a new, encrypted credential for each
+verifier.
+
+Response: Blind the credentials uniquely for each
+verifier.
+
+Response: Encrypt the presentation uniquely for each
+verifier. No issuer involved.
+
+5.2 Expert Dive Instructor
+
+5.2.1 Background
+
+Pat earned multiple diving credentials while living and working in Fiji and
+Australia. Later, Pat is hired by NOAA as a Dive Instructor, which requires
+that they maintain certification as an instructor with additional specialist
+diver certifications in dry suit, night diving, and search and recovery. The
+dive instructor certification is public record, but the additional specialist
+certifications are private because they are for personal diving, not acting
+as an instructor.
+
+Part of Pat's job is logging the certifications of fellow divers during NOAA
+sanctioned dives.
+
+5.2.2 Distinction
+
+This use case is difficult because:
+
+Certification in Fiji and Australia. NOAA relies on an international
+certification agency, PADI, with relevance in multiple jurisdictions.
+
+Each of these credentials is issued by different schools in the name
+of PADI.
+
+Each credential has an independent expiration cycle.
+
+Pat grants NOAA permission (the capability) to validate future
+credential status changes.
+
+On each trip, Pat creates a certified log of all divers, effectively issuing
+a verified credential about other credentials.
+
+5.2.3 Scenario
+
+When Pat applied for his job at NOAA, he provided verifiable credentials
+issued by different dive schools licensed by PADI to do so. NOAA verifies
+cryptographically that the certifications were issued by PADI-approved dive
+schools and that the credentials were still in good standing by checking both
+the certifications' *and* the dive schools' revocation services.
+
+Upon accepting the job, Pat issues NOAA a revocable token that allows NOAA to
+check the current status of all of his certifications — not just the
+status of a single verifiable credential. After any specific
+certification expires — and Pat renews it — NOAA's next check of
+Pat's certifications returns the status of the renewed certification, not just
+the status of the (now expired) verifiable credential.
+
+When Pat takes a group of divers on NOAA sanctioned dives, he records the
+verifiable credentials for each diver (which demonstrate their diving
+certifications), creates a verifiable credential including those
+credentials; he signs and archives it on his laptop.
+
+When Pat retires from NOAA, he revokes that token and NOAA staff is no longer
+able to monitor his non-public certification status.
+
+5.2.4 Verifiable Credentials
+
+Advanced Open Water Instructor
+
+Drysuit Dive Certification
+
+Night Diving Certification
+
+Search & Recovery Dive Certification
+
+Fiji PADI School Affiliation Certification
+
+Australia PADI School Affiliation Certification
+
+Signed log entry of dive event
+
+5.2.5 Verifiable Presentation
+
+Verifiable credentials submitted with job application
+
+5.2.6 Trust Hierarchy
+
+PADI is liable for correctly certifying dive schools.
+
+Dive schools are liable for correctly certifying Pat's knowledge and skills.
+
+Pat is liable for representing the facts in their application and maintaining
+the revocable capability.
+
+NOAA is liable for verifying the credentials and Pat's assertions
+claiming them, and for assuring Pat's continued good standing for the required
+credentials.
+
+Pat is liable for making sure all divers, on each trip, have valid
+credentials and are properly logged.
+
+Diver's are liable for presenting valid credentials, specifically
+credentials for which they are the subject, including any formal
+identity credentials, e.g., passport or driver's license.
+
+5.2.7 Threat model
+
+Threat: Issuer is compromised. One of the dive schools
+had their private keys stolen, but the school itself only ever issues valid
+certificates.
+
+Response: Use multi-sig to prevent theft of a single key from
+relevance
+
+Response: Hardware wallet to minimize threat of network-based
+attack
+
+Response: Biometrically locked hardware wallet
+
+Response: Frequent rotation to minimize exposure from stolen
+keys
+
+Response: Enhanced background checks for all individuals with
+access to keys
+
+Response: Instead of institutional keys, sign certificates
+with individuals' keys plus credential from the school.
+
+Threat: A dive school could issue unearned certificates.
+
+Response: Audit certificate issuance. Record all issuance,
+systemically spot check for validity.
+
+Response: Background checks on schools prior to authorization
+
+Response: Limit the number of certificates that can be issued
+to limit impact of violation
+
+Response: Limit time horizon that the school may issue on
+behalf of PADI to require re-validation of qualifications
+
+Response: Use revocation mechanisms for school's authorization
+credentials
+
+Threat: Dive school could issue certificates with a revoked
+authorization.
+
+Response: Holders should verify the authorization,
+before they buy the course
+
+Response: Holders should verify the authorization at
+the point of receiving the credential
+
+Response: Verifiers should also verify the
+authorization of the issuer
+
+Threat: Pat could send a proxy to earn their certificate.
+
+Response: School should use multi-factor identity assurance
+during registration and onsite when testing.
+
+Response: Dive school retains video surveillance of event
+for future audits
+
+Response: Dive boat or test center takes photos of
+participants and logs them for later audit
+
+Threat: Pat or another dive master could lie about a diver being on
+the boat.
+
+Response: NOAA requires divers listed to submit endorsement
+that they were there (they endorse the dive log); divers mutually sign each
+other's log entries
+
+Response: Boat owner signs dive log
+
+Response: Pre-register excursion and expected diver list
+
+Response: Ongoing signed provenance data about Pat's job
+assignments (location, dates, correspondence, etc) by/with NOAA Manifest
+"souls on board" before/after including crew
+
+Response: Independent ID proofing of offline credentials
+(signed picture and/or photo ID)
+
+Threat: Malware could take control of issuer or verifier
+agent.
+
+Response: Run virus and malware scans regularly
+
+Response: Isolate issuer agent system to an air-gapped
+environment
+
+Threat: Pat is phished, and Pat gives capability to the wrong
+person/entity.
+
+Response: Use better identity assurance for the verifier,
+i.e., don't give capability to strangers.
+
+Response: Use Object Capabilities based on strong
+authentication and well-known public keys.
+
+Threat: Issuer spoofs Pat, and Pat receives VC from
+non-PADI-certified instructor.
+
+Response: Pat runs PADI's wallet software to make sure any
+certificates they receive are authentic.
+
+Response: Pat checks the VC with a PADI-provided tool before
+accepting it
+
+Response: Pat checks the VC with a standard tool, to see
+that (1) There really is a PADI authentication and (2) PADI authentication is
+actually from PADI
+
+Threat: Pat presents a fake credential as a PADI certification.
+
+Response: NOAA verifies the signature on the certification
+credential AND on the PADI authentication credential.
+
+Threat: Pat's laptop on the boat could be compromised.
+
+Response: Use air-gapping techniques, such as QR codes, to
+limit impact of compromise
+
+5.3 International Travel with Minor and Upgrade
+
+5.3.1 Background
+
+Malathi is traveling internationally with her 8-month-old son, Anand. His
+father, Rajesh, is staying home. Malathi has enough frequent flyer miles to
+upgrade the ticket to first class.
+
+5.3.2 Distinction
+
+This use case is difficult because:
+
+Current US passports do not establish explicit relationship between parent
+and child.
+
+When one parent travels with a minor, the other parent is required to grant
+permission for the trip, thus implying guardianship or responsibility.
+
+The DID or other Digital Identity system replaces the role of the notary in
+the paper/physical world
+
+Credentials must be coordinated between two verifiers (agent and airline) for
+two individuals, and a digital coupon is used.
+
+The relationship of the minor to the non-traveling parent must be established,
+in order for the permission to be considered.
+
+In the minor's passport case, the subject is not the holder of
+the verifiable credential. The holder of the passport is a
+parent, not the minor.
+
+5.3.3 Scenario
+
+Malathi obtains permission from Rajesh stating she is allowed to take the baby
+out of the country.
+
+Prior to booking the trips, Malathi visits HappyAir.com to request an upgrade
+to first class. HappyAir issues a verifiable credential redeemable for
+a first class upgrade on an international flight.
+
+She books the plane tickets through her travel agent who adds the lap child
+to the ticket.
+
+HappyAir verifies that Malathi has a signed statement from Anand’s other
+parent stating that she may exit the country with him.
+
+5.3.4 Verifiable Credentials
+
+Malathi's passport
+
+Establishes identity of the traveling parent
+
+Anand's passport
+
+Establishes identity of the minor
+
+Anand's Birth Certificate
+
+Establishes relationship to parents and provides link from Rajesh to Anand that
+qualifies the permission to travel
+
+Permission to travel from Rajesh
+
+Grants permission from non-traveling parent for minor to travel.
+
+Identity matches identity of the parent in the birth certificate, establishing
+relevance.
+
+Upgrade coupon for first class ticket
+
+Introduces commercial value in a verifiable credential
+
+For details, refer to
+Example Verifiable Credentials
+in Appendix
+
+5.3.5 Verifiable Presentation
+
+Submitted to HappyAir, includes Malathi and Anand's passport, assertion of
+permission, birth certificate and Frequent Flyer coupon.
+
+5.3.6 Trust Hierarchy
+
+Malathi is liable for her claim of parentage as well as securing right to
+admission for herself and her son at their destination (visa may be required).
+
+Malathi and Rajesh are both liable for attestation of permission to fly with
+Anand without the other parent.
+
+Malathi is liable for the cost of her ticket and her son’s ticket.
+
+The agency is liable for issuing valid tickets and for verifying the
+credentials provided by the travelers.
+
+The airline is liable for issuing tickets and, ultimately, fulfilling the
+terms of travel
+
+The airline is liable for accepting the upgrade coupons at ticketing.
+
+The airline is liable for verifying the credentials in the birth certificate
+match the credentials in the permission letter.
+
+The check-in agent, TSA agent, and passport control at the destination are
+liable for identity assurance at various points of travel, using information
+contained in the verifiable credentials.
+
+5.3.7 Threat model
+
+Threat: Stolen Key. Malathi steals Rajesh’s key in order to
+fake travel permission. (Kidnapping her own kids and fleeing Rajesh.)
+
+Response: Rajesh could store his key with a trusted third
+party, such as an attorney.
+
+Response: Rajesh could use a hardware wallet with pin or
+biometric.
+
+Response: Rajesh could use a passphrase on his key
+
+Threat: Stolen Key 2 Ticket purchaser has Malathi’s
+credentials, impersonating her to purchase a ticket. This could enable
+a third-party kidnapping.
+
+Response: Travel permission can be restricted to specific
+date and or trip minimizing abuse potential.
+
+Response: Embed identifying characteristics or biometric into
+the credentials so that verifiers can independently verify the subject
+in front of them is the subject in the credential.
+
+Response: Malathi could use a hardware wallet with pin or
+biometric.
+
+Response: Malathi could use a passphrase on her key
+
+Threat: Exposure of private information. By storing
+potentially compromising information in credentials and sending them over the
+network, we are increasing the attack surface for the subjects of those
+credentials.
+
+Response: Encrypt the credentials (once by issuer;
+every verifier gets the same encrypted blob)
+
+Response: Encrypt the credentials uniquely for each
+verifier. This may leak usage data to the issuer, assuming the
+holder must ask for a new, encrypted credential for each
+verifier.
+
+Response: Blind the credentials uniquely for each
+verifier.
+
+Response: Encrypt the presentation uniquely for each
+verifier. No issuer involved
+
+Threat: Stolen coupon Rajesh falsifies the upgrade coupon.
+
+Response: HappyAir signs the coupon with secure credentials.
+
+Response: Travel agent verifies the coupon through a
+distributed status registry, verifying it is still valid
+
+5.4 Chain of GS1 Credentials to Identify a Trade Item
+
+5.4.1 Background
+
+This use case has been provided by GS1.
+
+GS1 is the global supply chain standards development organization behind the retail barcode. The content of
+the barcode, the Global Trade Item Number (GTIN), is a 13-digit string composed of a GS1 Company Prefix (a
+unique string of 4-12 digits), a trade item reference (a numeric string unique within the GS1 Company Prefix to bring
+the length up to 12 digits), and a check digit (a mathematical calculation to detect keying errors).
+
+The GS1 Company Prefix is licensed to a user company by a local GS1 Member Organization. The license gives
+the user company the right to issue GS1 identification keys within the range of the GS1 Company Prefix and
+to issue Verifiable Credentials referring to the license Verifiable Credential.
+
+The license Verifiable Credential may be revoked if the user company fails to abide by the terms and
+conditions or may be transferred to another user company as part of a merger and acquisition.
+
+If the license is revoked, no new Verifiable Credentials derived from it may be issued. If the license is
+transferred, existing derived Verifiable Credentials remain valid, and the new user company may issue new
+Verifiable Credentials, including some that refer to Verifiable Credentials issued by the previous user
+company.
+
+Note
+
+The core GS1 standard is the identification of objects in the supply chain, typically trade items, but also
+locations, shipping containers, and much more. Every object is identified using a GS1 identification key,
+sometimes alongside a secondary key for higher granularity (e.g., a serial number alongside a GTIN to
+identify a specific instance of a trade item). Much of the text in this use case refers to keys and key
+credentials. These are the GS1 identification keys, not cryptographic keys.
+
+5.4.2 Distinction
+
+This differs from other focal use cases in that the rights granted by a Verifiable Credential can be
+transferred
+to another subject, without invalidating other Verifiable Credentials created by the original subject.
+
+5.4.3 Scenario
+
+Healthy Tots, a baby food manufacturer, wishes to list its products on the Sell Anything & Everything
+(SA&E) marketplace. As a global marketplace, SA&E requires unique identification for products listed
+on its site, and has chosen the GTIN as the preferred identification key. To ensure uniqueness, SA&E
+requires that companies listing products prove that they have the right to issue the GTINs they are using.
+
+5.4.4 Verifiable Credentials
+
+GS1 Prefix license
+
+Issued by GS1 Global Office to GS1 Utopia (a GS1 Member Organization operating in the region of Utopia). Grants GS1 Utopia the right to
+issue GS1 Company Prefix licenses within the range of the GS1 Prefix in the license.
+
+GS1 Company Prefix license
+
+Issued by GS1 Utopia to Healthy Tots. Grants Healthy Tots the right to issue GS1 identification keys
+within the range of the GS1 Company Prefix in the license.
+
+Key (GTIN)
+
+Issued by Healthy Tots to declare the existence of a GS1 identification key, typically a GTIN, within
+the range of the GS1 Company Prefix.
+
+For details, refer to
+Example Verifiable Credentials
+in Appendix B2.
+
+5.4.5 Actors
+
+GS1 Global Office, the trusted root of the GS1 identification system
+
+GS1 Utopia, a GS1 Member Organization, a country-based member of the GS1 federation, also a GS1 Prefix
+licensee
+
+Healthy Tots, a baby food manufacturer, also a GS1 Company Prefix licensee
+
+Sell Anything & Everything (SA&E), a global marketplace
+
+A trade item manufactured and sold by Healthy Tots, represented as a GS1 Digital Link URI
+
+Benevolent Conglomerate, a company that acquires Healthy Tots and, optionally, its GS1 licenses
+
+5.4.5.1 Issuer
+
+For the GS1 Prefix license Verifiable Credential, the issuer is GS1 Global Office.
+
+For the GS1 Company Prefix license Verifiable Credential, the issuer is GS1 Utopia, which is the subject of
+the corresponding GS1 Prefix license Verifiable Credential.
+
+For the trade item Verifiable Credential, the issuer is Healthy Tots, which is the subject of the
+corresponding GS1 Company Prefix license Verifiable Credential.
+
+5.4.5.2 Subject
+
+For the GS1 Prefix license Verifiable Credential, the subject is GS1 Utopia.
+
+For the GS1 Company Prefix license Verifiable Credential, the subject is Healthy Tots.
+
+For the trade item Verifiable Credential, the subject is the GTIN represented as a GS1 Digital Link URI.
+
+5.4.5.3 Holder
+
+For the GS1 Prefix license Verifiable Credential, the holder is GS1 Utopia.
+
+For the GS1 Company Prefix license Verifiable Credential, the holder is Healthy Tots.
+
+For the trade item Verifiable Credential, the holder is Healthy Tots.
+
+5.4.5.4 Verifier
+
+Sell Anything & Everything, a trading partner of Healthy Tots that needs to validate the identification
+of an object (typically a trade item) and the data associated with it.
+
+5.4.6 Validation Requirements
+
+The validity of a credential often depends on the validity of a prior credential and on comparison of data between
+the credential of interest and its prior credential. The validation process is recursive, ending only when there is
+no further prior credential and the first credential (the one with no prior credential) is issued by GS1 Global
+Office.
+
+Within the GS1 vocabularly, a credential that depends on a prior credential is said to extend the prior credential.
+Accordingly, every such credential has an "extendsCredential" property that references the ID of the prior
+credential; the absence of this property indicates the first credential.
+
+A GS1 Prefix license Verifiable Credential is valid if it is issued by GS1 Global Office.
+
+A GS1 Company Prefix license Verifiable Credential is valid if:
+
+the issuer is the same as the subject of the "extendsCredential";
+
+the GS1 Company Prefix in "licenseValue" ("9521234" in the examples) starts with the same digits as
+the GS1
+Prefix in "licenseValue" of the "extendsCredential" ("952" in the examples); and
+
+the credential was issued after the "extendsCredential" was issued and, if applicable, before the
+"extendsCredential" was revoked or transferred.
+
+A key (GTIN) Verifiable Credential is valid if:
+
+the issuer is the same as the subject of the "extendsCredential";
+
+the key (GTIN) in "credentialSubject.id" ("09521234555551" in the examples) is properly based on the
+GS1 Company Prefix in "licenseValue" of the "extendsCredential";
+
+the credential was issued after the "extendsCredential" was issued and, if applicable, before the
+"extendsCredential" was revoked or transferred; and
+
+the GS1 Company Prefix license Verifiable Credential is valid.
+
+5.4.7 Verifiable Presentation
+
+Healthy Tots presents the credential for the key (GTIN) that it has issued to identify its product as well as the GS1 Company
+Prefix license credential to prove that it has the right to issue the key to SA&E. To complete the
+validation, SA&E requires the GS1 Prefix license credential issued to GS1 Utopia, which is publicly
+accessible and discoverable via the GS1 Company Prefix license credential.
+
+5.4.8 Trust Hierarchy
+
+GS1 Global Office is responsible for management of the GS1 identification system as a whole. It is
+liable for ensuring that the GS1 Prefix licenses that it issues are unique.
+
+GS1 Utopia is responsible for management of the GS1 identification system within the range(s) of the
+GS1 Prefix(es) issued to it. It is liable for ensuring that the GS1 Company Prefix licenses that it
+issues are unique.
+
+Healthy Tots is responsible for management of the GS1 identification system within the range(s) of the
+GS1 Company Prefix(es) issued to it. It is liable for ensuring that the GS1 identification keys that
+it issues are unique.
+
+SA&E is responsible for ensuring that no two products listed on its website carry the same GTIN.
+
+5.4.9 Variation - License Transfer
+
+GS1 license Verifiable Credentials are issued with a validFrom property but not a
+validUntil
+property. Licenses are renewable as long as the licensee abides by the terms and conditions of the GS1 Member
+Organization that issued the license, including regular license payment if required. Accordingly, the only way for
+a
+trading partner to know that a license is no longer valid is to check its status for revocation.
+
+5.4.9.1 Revocation
+
+Once a license credential is revoked, any extension credentials (those that extend the revoked credential or that
+extend other extension credentials) created after the revocation are invalid. For example, a GTIN key credential
+created after the revocation of the underlying GS1 Company Prefix license credential is invalid because the
+company no longer has the right to issue GTINs, or any other key, within the scope of the GS1 Company Prefix.
+Other dependent credentials that are created after revocation may be valid, such as a product recall notice linked
+to a GTIN key credential created before the revocation.
+
+Extension credentials created prior to the revocation of an extended credential may be considered valid for
+certain use cases. The key credential used to identify a trade item with a GTIN, for example, will remain valid in
+perpetuity, long after trade items identified by the GTIN are no longer in the supply chain. Some of the data
+credentials associated with the GTIN, such as those that describe the product or that provide information such as
+recycling instructions, may also be valid well beyond the revocation of the GS1 Company Prefix license credential.
+
+5.4.9.2 Suspension
+
+Suspension of a license is an intermediate step for some GS1 Member Organizations, to give the licensee the
+opportunity to come back into compliance with the terms and conditions of their agreement. In general, a suspended
+credential should be treated as revoked, with the caveat that the suspension status could be removed entirely or
+replaced with the revocation status. Verifiers should therefore check the credential status periodically until one
+or the other occurs.
+
+5.4.9.3 Replacement
+
+Replacement is similar to revocation in that it invalidates the credential, but it indicates that there is
+another, equivalent credential available. The most common use case for this is in acquisitions and mergers, as
+defined in the GS1 General Specifications:
+
+During an acquisition or merger, a company may assume responsibility for the acquired company's GS1 Company
+Prefix and/or individual GS1 identification key licences. In the situations where the licences transfer, the
+acquiring company can:
+
+Use the acquired company's GS1 Company Prefix(es) and GS1 identification key(s
+
+Issue GS1 identification keys using the newly acquired GS1 Company Prefix(es)
+
+For example, products that the acquired company identified using its GS1 Company Prefix or individual GS1
+identification key licences can still be produced using the same GTINs after the merger. Additionally,
+parties, locations, assets, and other objects identified with GS1 identification keys can continue to use
+those keys after the merger.
+
+If a partial purchase occurs, where only a segment of a larger entity is acquired, the involved companies must
+determine whether GS1 identification licences are transferred based on their specific business
+requirements.
+
+In such a situation, the acquiring company takes over the licenses of the acquired company and should be issued
+the appropriate credentials. Those originally issued to the acquired company are no longer valid, but simple
+revocation could be highly disruptive as there may be thousands of extension credentials that could be invalidated
+by the business rules that apply to revocation. Instead, the replacement status indicates that the licence
+credential has been replaced. As with revocation, any new extension credentials that directly reference the
+replaced credential are invalid, but pre-existing extension credentials should be validated against the
+replacement credential using the normal business rules.
+
+Suppose that Healthy Tots is acquired by Benevolent Conglomerate. Benevolent Conglomerate may decide on a
+hands-off approach and leave Healthy Tots to continue its operations much as before, with no impact on the way
+that the GS1 identification keys are managed. It's possible, though, that Benevolent Conglomerate will decide to
+discontinue Healthy Tots as a separate entity and instead absorb its products into a central catalogue. The GS1
+Company Prefix license, originally issued to Healthy Tots, will be transferred by GS1 Utopia to Benevolent
+Conglomerate.
+
+In this case, a status check of the original GS1 Company Prefix license Verifiable Credential must indicate a
+status of "replaced" and, potentially, include the ID of the replacement. Regardless of whether the status
+indicates the ID of the replacement credential, the replacement must reference the credential it replaced. The
+maintain continuity of supply chain management, the following must be supported:
+
+The original key credentials issued by Healthy Tots remain valid, as:
+
+they were issued prior to the replacement;
+
+the replacement references the original license credential;
+
+using a combination of the original and replacement credentials, the key credentials can be validated according to
+the business rules; and
+
+the replacement GS1 Company Prefix license Verifiable Credential has not been revoked.
+
+Benevolent Conglomerate can issue new key Verifiable Credentials based on the GS1 Company Prefix license Verifiable
+Credential.
+
+Benevolent Conglomerate can issue additional Verifiable Credentials based on the key Verifiable Credentials issued
+by Healthy Tots, as the transfer (replacement) of the GS1 Company Prefix license Verifiable Credential provides an
+authenticated chain of responsibility.
+
+5.5 Exchange of Electronic Certificate of Origin
+
+5.5.1 Background
+
+This use case has been provided by International Chamber of Commerce.
+
+An Exporter sources and buys products from a Manufacturer for export to a destination country. At the
+destination country, the Importer, who is the Exporter's customer in turn distributes the products to many
+retailers in the destination country.
+
+To clear Customs at the destination country, the Importer may require the following documents from the
+Exporter to be presented:
+
+Exporter's Invoice
+
+Bill of Lading issued by shipping company
+
+Certificate of Origin issued by an authorised issuing authority (e.g., a Chamber of Commerce)
+
+Product Test Report issued by a testing laboratory from manufacturer
+
+Selective Redaction is used in a lossy manner to mask sensitive information that the upstream party does not
+want to share with downstream parties. For example, the Exporter may redact the manufacturer's details from
+the Product Test Report and Certificate of Origin before sending the report to the Importer. The Importer may
+further redact the Exporter's details from the Certificate of Origin when sharing copies of the certificate
+with its retailers.
+
+Note
+
+Note: The scenario above is highly simplified and the list of documents is not exhaustive. It is
+included solely for the purpose of illustrating this use case for Selective Redaction.]
+
+5.5.2 Roles in Cross Border Trade
+
+Roles in the above diagram are in blue.
+
+5.5.2.1 Professional Testing, Inspection, and Certification Lab
+
+Responsible for inspecting, testing, and certifying the products to ensure they meet quality and safety
+standards.
+
+5.5.2.2 Manufacturer
+
+The company that produces and supplies the products.
+
+5.5.2.3 Exporter
+
+The company that sells and exports the products to the Importer.
+
+5.5.2.4 Chamber of Commerce
+
+An organisation authorised to issue the Certificate of Origin, attesting the origin of the goods.
+
+5.5.2.5 Importing Customs
+
+The governmental body in importing country that validates the Certificate of Origin and review mandatory
+documents to ensure the goods comply with import regulations.
+
+5.5.2.6 Importer
+
+The company that purchases and imports the goods from the Exporter.
+
+5.5.2.7 Shipping Company
+
+A company that transports goods internationally, facilitating import and export operations.
+
+5.5.2.8 Retailers
+
+Businesses that distribute goods to consumers after they are imported and cleared through customs.
+
+5.5.3 Trade Flow
+
+The Manufacturer requests a product test report from a professional testing lab to certify that their goods
+meet the required safety and quality standards.
+
+The Test Lab sends the product test report to Manufacturer upon completion of testing.
+
+Manufacturer sends the Product Test Report to Exporter.
+
+Exporter submit the necessary documents to Chamber of Commerce to apply for the Cert of Origin.
+
+The Chamber of Commerce (Issuer) will review, approve, and issue Certificate of Origin (Subject) to the
+exporter, certifying the product's origin.
+
+The Exporter arranges shipment of goods with the Shipping Company.
+
+The Shipping Company issues a Bill of Lading to the Exporter for claiming goods in the importing
+country.
+
+The Exporter (Recipient) sends the redacted Certificate of Origin (redacting the Manufacturer Details), a
+Bill of Lading, Exporter Invoice and a redacted Product Test Report (redacting the Manufacturer Details) to
+the importer.
+
+It is essential for the Exporter to provide the Importer with the Cert of Origin, Bill of Lading,
+Exporter Invoice, and Product Test Report for the Import Customs Declaration, as this helps
+facilitate faster cargo clearance and approval for importing goods.
+
+The Exporter has the option to redact commercially sensitive information, such as the manufacturer's
+details or pricing, to prevent the importer from bypassing him for future business.
+
+The Importer (Recipient/Verifier) will verify the Certificate of Origin (CO) to authenticate the document
+and review the remaining documents to prepare for the Import Declaration.
+
+The CO provides a link to the issuer, which is crucial for verifying that the issuer is a recognized
+authority and ensuring the authenticity of the document.
+
+The Importer submits the Import Declaration, redacted Cert of Origin, Bill of Lading, Exporter Invoice, and
+redacted Product Test Report to Import Customs.
+
+Import Customs (Verifier) verifies the CO and reviews the other supporting documents to ensure the imported
+goods meet their importing regulations.
+
+Customs authorities primarily focus on verifying the authenticity of the CO, and essential
+information provided such as product details, quality, and safety report. The redacted documentation
+(which redacts the Manufacturer's name and pricing) will still meet Customs' requirements.
+
+After clearance by the Import Customs, the Importer can distribute the goods to retailers, providing the
+redacted Product Test Report and a further-redacted Cert of Origin (with Exporter details redacted).
+
+5.5.4 Actors
+
+5.5.4.1 Issuer
+
+The Issuer is typically the Issuing Authority in the exporting country. These authorities are responsible
+for issuing the CO, which attests to the origin of the goods. The issuer plays a key role in validating that
+the goods comply with the necessary requirements for certification.
+
+5.5.4.2 Subject
+
+The Subject of the CO is the certificate itself, which confirms that the goods being exported originate from
+a specific country. The CO serves as proof of origin, which is used by importers to claim tariff exemptions,
+demonstrate compliance with trade agreements like Free Trade Agreements (FTAs) or to meet the importing
+regulations.
+
+5.5.4.3 Verifier
+
+The Verifier is the party responsible for validating the authenticity of the CO. In the importing country,
+the Customs Authority will typically verify the CO during the importation process. Banks may also act as
+verifiers in situations where trade financing is involved, especially when using instruments like a Letter
+of Credit (L/C). Additionally, the importer themselves may verify the CO to ensure that the goods originated
+from the country they expect.
+
+5.5.4.4 Recipient
+
+The Recipient of the CO could be the Importer (and/or their appointed customs broker), who presents it to
+the importing country's Customs Authority during import clearance to secure tariff exemptions or to
+facilitate cargo clearance. In some cases, the CO may also be verified by the Exporter or by Banks,
+particularly when it is used in trade financing arrangements.
+
+6. Extant Use Cases
+
+Extant Use Cases are illustrative of market adoption, i.e., examples of the use
+of verifiable credentials in real-world applications.
+
+7. User Sequences
+
+The transaction examples in this section show basic ways in which
+verifiable credentials might be used. They are not meant to be
+architecturally constraining. Instead, they are meant to help illustrate the
+basic way it could be done in a typical commerce situation. Again
+— please remember that it is just an example, and should not be thought
+of as the canonical way such a credentials environment must be implemented.
+
+7.1 How a Verifiable Credential Might Be Created
+
+In this first example, a user will request a verifiable credential—a
+confirmation of their identity. Consider this illustration:
+
+Figure 4 Verifiable Credential Creation Flow Diagram
+
+Expanding on these steps:
+
+Jane asks her User Agent to help her get a verifiable credential about
+her identity.
+
+Her user agent connects her to a credential issuer that is able to
+verify her identity.
+
+The issuer examines her documentation.
+
+They are satisfied, so the issuer generates a
+verifiable credential for Jane that includes information about her
+identity linked to their own trusted credential.
+
+The issuer delivers the verifiable credential back to Jane's User Agent.
+
+Jane views the verifiable credential to ensure it reflects her requirements.
+
+When she is satisfied, she instructs her User Agent to save the
+verifiable credential so she can use it in the future.
+
+The UA communicates with her credential repository, instructing it to
+store the new verifiable credential.
+
+The credential repository returns a list of the
+verifiable credentials it is holding for Jane to the UA.
+
+The UA shows Jane her verifiable credential collection —
+confirming everything she has available.
+
+7.2 How a Verifiable Credential Might Be Used
+
+In this example, a holder of a credential needs to use that
+credential in a typical commerce situation:
+
+Figure 5
+Verifiable Credential Usage Flow Diagram
+
+Jane decides to shop on the website WinesOfTheWorld.example.com (merchant).
+
+The merchant's site requires Jane be 21 years of age and requests (via a user
+agent-supported API call) that Jane prove this.
+
+Jane's user agent asks her credential repository for the proof.
+
+The credential repository shows Jane some verifiable credentials
+it holds that can support her age claim (e.g., her passport, driving license,
+and birth certificate).
+
+Jane selects one of these, and authorizes that it be shared with the merchant.
+
+The credential repository returns the selected credential as a
+response to the user agent-supported API call, which in turn delivers it to
+the merchant.
+
+The merchant's server verifies that the claim is valid and satisfies
+the requirement.
+
+The merchant redirects the user agent to the web site with appropriate
+authorization.
+
+A. Terminology
+
+This section is non-normative.
+
+The following terms are used to describe concepts in this specification.
+
+claim
+
+An assertion made about a subject.
+
+credential
+
+A set of one or more claims made by an issuer. A
+verifiable credential is a
+tamper-evident credential that has authorship that can be cryptographically
+verified. Verifiable credentials can be used to build
+verifiable presentations, which can also be cryptographically verified.
+The claims in a credential can be about different subjects.
+
+data minimization
+
+The act of limiting the amount of shared data strictly to the minimum
+necessary to successfully accomplish a task or goal.
+
+decentralized identifier
+
+A portable URL-based identifier, also known as a DID,
+associated with an entity. These identifiers are most often used in a
+verifiable credential and are associated with subjects such that a
+verifiable credential itself can be easily ported from one
+repository to another without the need to reissue the credential.
+An example of a DID is did:example:123456abcdef.
+
+decentralized identifier document
+
+Also referred to as a DID document, this is a document
+that is accessible using a verifiable data registry and contains
+information related to a specific decentralized identifier, such as the
+associated repository and public key information.
+
+derived predicate
+
+A verifiable, boolean assertion about the value of another attribute in a
+verifiable credential. These are useful in zero-knowledge-proof-style
+verifiable presentations because they can limit information disclosure.
+For example, if a verifiable credential contains an attribute
+for expressing a specific height in centimeters, a derived predicate
+might reference the height attribute in the verifiable credential
+demonstrating that the issuer attests to a height value meeting the
+minimum height requirement, without actually disclosing the specific height
+value. For example, the subject is taller than 150 centimeters.
+
+digital signature
+
+A mathematical scheme for demonstrating the authenticity of a digital message.
+
+entity
+
+A thing with distinct and independent existence, such as a person,
+organization, or device that performs one or more roles in the ecosystem.
+
+graph
+
+A network of information composed of subjects and their relationship
+to other subjects or data.
+
+holder
+
+A role an entity might perform by possessing one or more
+verifiable credentials and generating presentations from them.
+A holder is usually, but not always, a subject of the verifiable
+credentials they are holding. Holders store their credentials in
+credential repositories.
+
+identity
+
+The means for keeping track of entities across contexts. Digital
+identities enable tracking and customization of entity interactions
+across digital contexts, typically using identifiers and attributes. Unintended
+distribution or use of identity information can compromise privacy. Collection
+and use of such information should follow the principle of
+data minimization.
+
+identity provider
+
+An identity provider, sometimes abbreviated as IdP, is a system
+for creating, maintaining, and managing identity information for
+holders, while providing authentication services to
+relying party applications within a federation or distributed network.
+In this case the holder is always the subject. Even if the
+verifiable credentials are bearer credentials, it is assumed the
+verifiable credentials remain with the subject, and if they are
+not, they were stolen by an attacker. This specification does not use this term
+unless comparing or mapping the concepts in this document to other
+specifications. This specification decouples the identity provider
+concept into two distinct concepts: the issuer and the holder.
+
+issuer
+
+A role an entity can perform by asserting claims about one or
+more subjects, creating a verifiable credential from these
+claims, and transmitting the verifiable credential to a
+holder.
+
+presentation
+
+Data derived from one or more verifiable credentials, issued by one or
+more issuers, that is shared with a specific verifier. A
+verifiable presentation
+is a tamper-evident presentation encoded in such a way that authorship of the
+data can be trusted after a process of cryptographic verification. Certain
+types of verifiable presentations might contain data that is synthesized from,
+but do not contain, the original verifiable credentials (for example,
+zero-knowledge proofs).
+
+repository
+
+A program, such as a storage vault or personal verifiable credential
+wallet, that stores and protects access to holders'
+verifiable credentials.
+
+selective disclosure
+
+The ability of a holder to make fine-grained decisions about what
+information to share.
+
+subject
+
+A thing about which claims are made.
+
+user agent
+
+A program, such as a browser or other Web client, that mediates the
+communication between holders, issuers, and verifiers.
+
+validation
+
+The assurance that a verifiable credential or a
+verifiable presentation meets the needs of a verifier and other
+dependent stakeholders. This specification is constrained to verifying
+verifiable credentials and verifiable presentations regardless of
+their usage. Validating verifiable credentials or
+verifiable presentations is outside the scope of this specification.
+
+verifiable data registry
+
+A role a system might perform by mediating the creation and verification
+of identifiers, keys, and other relevant data, such as
+verifiable credential schemas, revocation registries, issuer public keys,
+and so on, which might be required to use verifiable credentials. Some
+configurations might require correlatable identifiers for subjects. Some
+registries, such as ones for UUIDs and public keys, might just act as namespaces
+for identifiers.
+
+verification
+
+The evaluation of whether a verifiable credential or verifiable presentation
+is an authentic and timely statement of the issuer or presenter, respectively.
+This includes checking that: the credential (or presentation) conforms to the specification; the proof method is
+satisfied; and, if present, the status is successfully checked.
+
+verifier
+
+The entity verifying a claim about a given subject.
+
+URI
+
+A Uniform Resource Identifier, as defined by [RFC3986].
+
+B. Example Verifiable Credentials
+
+B.1 Focal Use Case: International Travel with Minor and Upgrade
+
+Example 1: Malathi's passport (simple model)
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://example.com/travel-vocab/v1"
+],
+"id": "did:example:9f6878c8-73c7-11e8-ab37-23a1a3504fd0",
+"type": ["VerifiableCredential", "PassportCredential"],
+/* gov't DID */
+"issuer": "did:example:CCnF3zFaXkPN4zB94XaomRdvw2zX3XHPVX3aExcgo6PV",
+"expires": "2028-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:BcRisGnqV4QPb6bRmDCqEjyuubBarS1Y1nhDwxBMTXY4",
+"givenName": "Malathi",
+"familyName": "Hamal",
+"citizenship": "US",
+/* any other claims made by gov't */
+},
+"proof": {/* signature by gov't */}
+}
+
+Example 2: Malathi's passport (passport is a document model)
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://example.com/travel-vocab/v1"
+],
+"id": "did:example:9f6878c8-73c7-11e8-ab37-23a1a3504fd0",
+"type": ["VerifiableCredential", "PassportCredential"],
+/* gov't DID */
+"issuer": "did:example:CCnF3zFaXkPN4zB94XaomRdvw2zX3XHPVX3aExcgo6PV",
+"expires": "2028-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:BcRisGnqV4QPb6bRmDCqEjyuubBarS1Y1nhDwxBMTXY4",
+"passport": {
+"id": "did:example:79c181dc-73c7-11e8-8c1f-2bb1fd2d268a",
+"type": "Passport",
+"traveler": {
+"id": "did:example:BcRisGnqV4QPb6bRmDCqEjyuubBarS1Y1nhDwxBMTXY4",
+"givenName": "Malathi",
+"familyName": "Hamal",
+"citizenship": "US"
+},
+/* any other passport fields */
+}
+},
+"proof": {/* signature by gov't */}
+}
+
+Example 3: Anand's passport
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://example.com/travel-vocab/v1"
+],
+"id": "did:example:b306614c-73c7-11e8-b596-47e8c5ce9144",
+"type": ["VerifiableCredential", "PassportCredential"],
+/* gov't DID */
+"issuer": "did:example:CCnF3zFaXkPN4zB94XaomRdvw2zX3XHPVX3aExcgo6PV",
+"expires": "2028-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:8vFBbPrhBUyG6DEzVncBZpzBNsmRrbfsQKXQKPLskBCu",
+"givenName": "Anand",
+"familyName": "Hamal"
+"citizenship": "US",
+/* any other claims made by gov't */
+},
+"proof": {/* signature by gov't */}
+}
+
+Example 4: Anand's birth certificate
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://example.com/travel-vocab/v1"
+],
+"id": "did:example:05a47fe2-73c8-11e8-ac1e-7fe0051a1d75",
+"type": ["VerifiableCredential", "BirthCertificate"],
+"issuer": "did:example:CCnF3zFaXkPN4zB94XaomRdvw2zX3XHPVX3aExcgo6PV",
+"expires": "2028-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:8vFBbPrhBUyG6DEzVncBZpzBNsmRrbfsQKXQKPLskBCu",
+"citizenship": "US",
+"birthDate": "2017-10-01T00:00:00Z",
+"birthPlace": {
+"type": "Hospital",
+"address": {
+"type": "US address",
+"addressLocality": "Denver",
+"addressRegion": "CO",
+"postalCode": "80209",
+"streetAddress": "123 Main St."
+}
+},
+"givenName": "Anand",
+"familyName": "Hamal",
+"parent": [{
+"id": "did:example:BcRisGnqV4QPb6bRmDCqEjyuubBarS1Y1nhDwxBMTXY4",
+"type": "Person",
+"givenName": "Malathi",
+"familyName": "Hamal",
+"maidenName": "Holla"
+}, {
+"id": "did:example:BgXRjB4RPrrsUVoVNaYNwzfznKsWep7AWrZkiyVcorEN",
+"type": "Person",
+"givenName": "Rajesh",
+"familyName": "Hamal"
+}]
+},
+"proof": {/* signature by gov't */}
+}
+
+Example 5: Permission to travel from Rajesh using schema.org vocab
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://example.com/travel-vocab/v1"
+],
+"id": "did:example:58c08196-73c6-11e8-b030-3bd8a829a356",
+"type": ["VerifiableCredential", "ChildTravelPass"],
+"issuer": "did:example:BgXRjB4RPrrsUVoVNaYNwzfznKsWep7AWrZkiyVcorEN",
+"expires": "2018-07-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:8vFBbPrhBUyG6DEzVncBZpzBNsmRrbfsQKXQKPLskBCu",
+"potentialAction": {
+"type": "TravelAction",
+"agent": "did:example:8vFBbPrhBUyG6DEzVncBZpzBNsmRrbfsQKXQKPLskBCu",
+"participant": "did:example:BcRisGnqV4QPb6bRmDCqEjyuubBarS1Y1nhDwxBMTXY4",
+"location": {
+"type": "Country",
+"address": {
+"addressCountry": "CA"
+}
+}
+}
+},
+"proof": {/* signature by Rajesh proving control of DID */}
+}
+
+B.2 Focal Use Case: Chain of GS1 Credentials to Identify a Trade Item
+
+These examples are based on the document "GS1 Verifiable Credentials - Data Model and Validations". The examples use Verifiable Credentials Data Model 2.0.
+
+The key artefact is the last one; it declares the existence of a GTIN, around which other Verifiable Credentials may be issued to declare data about the trade item (brand, size and unit of measure, ingredients, dimensions and weights, etc.). Validation of the artefact requires validating all the credentials that come before it, identified in each case by "extendsCredential".
+
+Example 6: GS1 Prefix 952 Licensed by GS1 Global Office to GS1 Utopia
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://ref.gs1.org/gs1/vc/license-context/"
+],
+"id": "did:example:079713e6-9646-4de1-a89d-573dfbd77968",
+"type": [
+"VerifiableCredential",
+"GS1PrefixLicenseCredential"
+],
+"issuer": "did:web:id.gs1.org",
+"validFrom": "2005-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:web:www.gs1utopia.example",
+"organization": {
+"gs1:partyGLN": "9521230000000",
+"gs1:organizationName": "GS1 Utopia",
+...
+},
+"licenseValue": "952"
+},
+"credentialStatus": {
+"id": "https://id.gs1.org/vc/license/status#79713",
+"type": "BitstringStatusListEntry",
+"statusPurpose": "revocation",
+"statusListIndex": "79713",
+"statusListCredential": "https://id.gs1.org/vc/license/status"
+},
+"proof": { ... }
+}
+
+Example 7: GS1 Company Prefix 9521234 Licensed by GS1 Utopia to Healthy Tots
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://ref.gs1.org/gs1/vc/license-context/"
+],
+"id": "did:example:b6d13abe-464d-4bb9-a568-b6d81efd57e3",
+"type": [
+"VerifiableCredential",
+"GS1CompanyPrefixLicenseCredential"
+],
+"issuer": "did:web:www.gs1utopia.example",
+"validFrom": "2023-11-19T14:56:37Z",
+"credentialSubject": {
+"id": "did:web:www.healthytots.example",
+"organization": {
+"gs1:partyGLN": "9521234000006",
+"gs1:organizationName": "Healthy Tots",
+...
+},
+"extendsCredential": "did:example:079713e6-9646-4de1-a89d-573dfbd77968",
+"licenseValue": "9521234"
+},
+"credentialStatus": {
+"id": "https://www.gs1utopia.example/credentials/gcp/status#613464",
+"type": "BitstringStatusListEntry",
+"statusPurpose": "revocation",
+"statusListIndex": "613464",
+"statusListCredential": "https://www.gs1utopia.example/credentials/gcp/status"
+},
+"proof": { ... }
+}
+
+Example 8: GTIN 9521234555551, Issued by Healthy Tots
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://ref.gs1.org/gs1/vc/declaration-context/"
+],
+"id": "did:example:60cda318-a0a7-4e39-b600-ea38bf68a31f",
+"type": [
+"VerifiableCredential",
+"KeyCredential"
+],
+"issuer": "did:web:www.healthytots.example",
+"validFrom": "2023-12-02T09:48:11Z",
+"credentialSubject": {
+"id": "https://id.gs1.org/01/09521234555551",
+"extendsCredential": "did:example:b6d13abe-464d-4bb9-a568-b6d81efd57e3"
+},
+"credentialStatus": {
+"id": "https://www.example.com/mycreds/status#60318",
+"type": "BitstringStatusListEntry",
+"statusPurpose": "revocation",
+"statusListIndex": "60318",
+"statusListCredential": "https://www.example.com/mycreds/status"
+},
+"proof": { ... }
+}
+
+C. Acknowledgements
+
+This section is non-normative.
+
+The editors are thankful to the contributions from the Web Payments Workshop,
+the Web Payments Community Group, the Web Payments Interest Group, the
+Credentials Community Group, the Verifiable Credentials Task Force, and the
+Verifiable Credentials Working Group.
+
+D. References
+
+D.1 Normative references
+
+[RFC2119]
+
+Key words for use in RFCs to Indicate Requirement Levels. S. Bradner. IETF. March 1997. Best Current Practice. URL: https://www.rfc-editor.org/rfc/rfc2119
+
+[RFC3986]
+
+Uniform Resource Identifier (URI): Generic Syntax. T. Berners-Lee; R. Fielding; L. Masinter. IETF. January 2005. Internet Standard. URL: https://www.rfc-editor.org/rfc/rfc3986
+
+[RFC8174]
+
+Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words. B. Leiba. IETF. May 2017. Best Current Practice. URL: https://www.rfc-editor.org/rfc/rfc8174
+
+↑
+
+Permalink
+
+Referenced in:
+
+§ Abstract
+
+§ 3.5 Professional Credentials
+
+§ 3.6 Legal Identity (2)
+
+§ 4.3 Verify Credential
+
+§ 5.1.6 Trust Hierarchy
+
+§ 7.2 How a Verifiable Credential Might Be Used
+
+§ A. Terminology (2) (3) (4) (5)
+
+Permalink
+
+Referenced in:
+
+§ Abstract
+
+§ 1. Introduction
+
+§ 1.1 Importance of this work (2)
+
+§ 2. User Roles (2) (3) (4)
+
+§ 3.1 Education
+
+§ 3.3 Finance (2) (3) (4) (5)
+
+§ 3.5 Professional Credentials (2) (3) (4)
+
+§ 3.6 Legal Identity
+
+§ 3.7 Devices (2)
+
+§ 4.1 Issue Credential
+
+§ 4.2 Assert Credential (2)
+
+§ 4.5 Store Credential (2) (3) (4) (5)
+
+§ 4.7 Revoke Credential (2)
+
+§ 5.1.5 Verifiable Presentation
+
+§ 5.1.7 Threat model (2) (3) (4) (5) (6) (7) (8) (9)
+
+§ 5.2.2 Distinction (2) (3) (4)
+
+§ 5.2.3 Scenario
+
+§ 5.2.6 Trust Hierarchy (2) (3) (4) (5) (6)
+
+§ 5.2.7 Threat model
+
+§ 5.3.7 Threat model (2) (3) (4) (5) (6)
+
+§ 7. User Sequences
+
+§ 7.1 How a Verifiable Credential Might Be Created (2)
+
+§ 7.2 How a Verifiable Credential Might Be Used (2) (3)
+
+§ A. Terminology (2) (3)
+
+Permalink
+
+Referenced in:
+
+§ 1.2 Use case model (2)
+
+§ 2. User Roles (2) (3)
+
+§ 3. User Needs
+
+§ 3.1 Education (2)
+
+§ 3.3 Finance (2) (3)
+
+§ 3.4 Healthcare
+
+§ 3.6 Legal Identity
+
+§ 3.7 Devices (2) (3) (4) (5) (6) (7) (8)
+
+§ 4. User Tasks
+
+§ 4.1 Issue Credential
+
+§ 4.2 Assert Credential
+
+§ 4.6 Retrieve Credential
+
+§ 5. Focal Use Cases
+
+§ 5.1.3 Scenario
+
+§ 5.1.7 Threat model
+
+§ 5.2.2 Distinction
+
+§ 5.2.3 Scenario (2) (3) (4) (5)
+
+§ 5.2.5 Verifiable Presentation
+
+§ 5.3.2 Distinction
+
+§ 5.3.3 Scenario
+
+§ 5.3.4 Verifiable Credentials
+
+§ 5.3.6 Trust Hierarchy
+
+§ 6. Extant Use Cases
+
+§ 7. User Sequences
+
+§ 7.1 How a Verifiable Credential Might Be Created (2) (3) (4) (5) (6) (7) (8) (9)
+
+§ 7.2 How a Verifiable Credential Might Be Used
+
+§ A. Terminology (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12) (13) (14) (15) (16) (17) (18) (19) (20) (21)
+
+Permalink
+
+Referenced in:
+
+§ A. Terminology
+
+Permalink
+
+Referenced in:
+
+§ A. Terminology
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+§ Abstract (2)
+
+§ 1.1 Importance of this work (2)
+
+§ 1.2 Use case model (2)
+
+§ 2. User Roles (2) (3) (4)
+
+§ 3.5 Professional Credentials (2)
+
+§ 3.6 Legal Identity (2)
+
+§ 3.7 Devices
+
+§ 4. User Tasks
+
+§ 4.1 Issue Credential
+
+§ 4.7 Revoke Credential
+
+§ A. Terminology (2) (3) (4) (5) (6)
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+§ 2. User Roles (2) (3)
+
+§ 3.5 Professional Credentials
+
+§ 4. User Tasks
+
+§ 4.2 Assert Credential (2)
+
+§ 4.5 Store Credential
+
+§ 4.6 Retrieve Credential (2) (3)
+
+§ 5.1.7 Threat model
+
+§ 5.2.7 Threat model (2)
+
+§ 5.3.2 Distinction (2)
+
+§ 5.3.7 Threat model
+
+§ 7.2 How a Verifiable Credential Might Be Used
+
+§ A. Terminology (2) (3) (4) (5) (6) (7)
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+§ A. Terminology
+
+Permalink
+
+Referenced in:
+
+§ 2. User Roles
+
+§ 3.6 Legal Identity
+
+§ 4.3 Verify Credential
+
+§ 4.5 Store Credential
+
+§ 4.7 Revoke Credential (2)
+
+§ 5.1.7 Threat model (2)
+
+§ 5.2.7 Threat model (2) (3) (4)
+
+§ 5.3.7 Threat model (2)
+
+§ 7.1 How a Verifiable Credential Might Be Created (2)
+
+§ A. Terminology (2) (3) (4) (5)
+
+Permalink
+
+Referenced in:
+
+§ 5.1.7 Threat model (2) (3) (4)
+
+§ 5.3.7 Threat model
+
+§ A. Terminology
+
+Permalink
+
+Referenced in:
+
+§ 5.1.3 Scenario (2)
+
+§ 5.1.5 Verifiable Presentation
+
+§ A. Terminology (2) (3) (4) (5) (6)
+
+Permalink
+
+Referenced in:
+
+§ 2. User Roles
+
+§ 3.1 Education
+
+§ 3.3 Finance (2) (3)
+
+§ 3.5 Professional Credentials
+
+§ 4.5 Store Credential (2)
+
+§ 4.6 Retrieve Credential
+
+§ 7.1 How a Verifiable Credential Might Be Created (2)
+
+§ 7.2 How a Verifiable Credential Might Be Used (2) (3)
+
+§ A. Terminology (2) (3)
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+§ 2. User Roles (2) (3) (4)
+
+§ 3.5 Professional Credentials
+
+§ 4. User Tasks (2)
+
+§ 4.2 Assert Credential
+
+§ 4.3 Verify Credential
+
+§ 4.7 Revoke Credential
+
+§ 5.1.7 Threat model
+
+§ 5.2.6 Trust Hierarchy
+
+§ 5.3.2 Distinction
+
+§ 5.3.7 Threat model (2) (3)
+
+§ A. Terminology (2) (3) (4) (5) (6) (7) (8) (9) (10) (11)
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+
+Permalink
+
+Referenced in:
+
+§ A. Terminology
+
+Permalink
+
+Referenced in:
+
+§ 7.1 How a Verifiable Credential Might Be Created
+
+§ A. Terminology (2)
+
+Permalink
+
+Referenced in:
+
+§ 2. User Roles
+
+§ 3.5 Professional Credentials
+
+§ 3.6 Legal Identity
+
+§ 4.3 Verify Credential
+
+§ 4.4 Validate Credential
+
+§ 4.6 Retrieve Credential (2) (3)
+
+§ 5.1.7 Threat model (2) (3) (4) (5)
+
+§ 5.2.7 Threat model (2)
+
+§ 5.3.7 Threat model (2) (3) (4) (5)
+
+§ A. Terminology (2) (3)
+
+Permalink
+
+Referenced in:
+
+Not referenced in this document.
+

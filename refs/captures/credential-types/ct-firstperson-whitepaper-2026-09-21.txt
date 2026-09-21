@@ -1,0 +1,132 @@
+
+
+White Paper — the FIRST PERSON NETWORK
+
+0
+
+Skip to Content
+
+White Paper
+
+News
+
+Open Menu
+Close Menu
+
+White Paper
+
+News
+
+Open Menu
+Close Menu
+
+White Paper
+
+News
+
+Part Seven: The four trust network effects in a two-sided market for trust.
+
+This white paper describes the complete breadth and depth of the First Person Project. At 80 pages, it is longer than your typical white paper—but that’s because the First Person Project is not your typical tech industry project.
+
+First Person Project White Paper
+
+The paper is available in three forms:
+
+View the Gdoc version v1.2
+
+Download the .pdf version v1.2 (~12 MB)
+
+Scan the Visual Overview in Google Slides
+
+Executive Summary
+
+What is the First Person Project?
+
+The First Person Project is an international multi-stakeholder collaboration whose goal is to solve one of the oldest and hardest problems on the Internet:
+
+How to prove you are a real unique person online with real trust relationships.
+
+This problem is widely known as proof of personhood (Part Four). The First Person Project began with the realization that digital trust is ultimately grounded in first-person trust relationships that can be represented with two new types of verifiable digital credentials:
+
+Personhood credentials are issued by any ecosystem (any qualified entity such as a company, university, nonprofit community, government, etc.) who can attest to the credential holder being a real unique person within that ecosystem.
+
+Verifiable relationship credentials are issued peer-to-peer between holders of personhood credentials in order to attest to verifiable first-person trust relationships.
+
+These First Person credentials can be stored in any compatible digital wallet and presented to any party who needs proof that the credential holder is a real unique human. This solution is:
+
+Decentralized, i.e., there is no centralized database of First Person credential holders (or their biometrics). First Person credentials are stored only in the digital wallets of the individuals to whom they are issued (and any biometrics are local to those devices).
+
+Privacy-preserving, i.e., First Person credentials can provide strong zero-knowledge proof verification that you are a real person without requiring you to share any personal data or be tracked in any type of global biometric database.
+
+The necessary technical building blocks (Part Two and Part Three) have been under develop- ment for over 20 years. What sparked the First Person Project in 2024 was the new capabilities of generative AI to impersonate humans so well that it is all but impossible to tell the difference.
+
+The collection of all First Person credential issuers and holders forms a decentralized trust graph (Part Five). Coherent governance of this new infrastructure enables the First Person Network (Part Seven) to provide not just privacy-preserving proof of personhood, but also the tools needed for individuals to safely delegate to personal AI agents (Part Eight).
+
+The First Person Project was born as a collaboration between Linux Foundation Decentralized Trust (LFDT), Ayra Association, Trust Over IP (ToIP), Decentralized Identity Foundation (DIF), and OpenWallet Foundation (OWF). While the First Person Project does not yet have an official legal home, Part Nine explains the goal of establishing the First Person Cooperative (FPC) as the governing body for the First Person Network.
+
+Part Nine and Part Ten conclude by explaining how you as an individual contributor—or the trust communities of which you are a member—are welcome to become involved.
+
+Why is the Linux Foundation “customer #1” for FPP?
+
+On 18 March 2025, at the opening of the annual Linux Foundation Member Summit conference, Linux Foundation Executive Director Jim Zemlin devoted his keynote address to explaining why the Linux Foundation needed to implement First Person credentials.
+
+Jim began by describing what came very close to being the most devastating malware injection attack in history. Known as the XZ attack, it is the subject of an entire Wired Magazine article. In short, some unknown attackers spent two years building up a fake open source contributor “Jia Tan” until they obtained maintainer rights on the XZ utility included in Linux distributions.
+
+Thankfully, this attack was detected by an assiduous Microsoft developer before the distribution went wide, averting what computer scientist Alex Stamos said "could have been the most widespread and effective backdoor ever planted in any software product".
+
+Jim went on to explain that open source software supply chains were also being challenged by the increasing use of AI code generation. How were open source software bills-of-materials (SBOMs) supposed to keep track of what humans were responsible for what AI code?
+
+Jim asserted the answer was implementing First Person credentials for privacy-preserving proof of personhood that supported two core values of the open source movement: Permissionless Entry and Worldwide Participation. He showed an example of how the combination of personhood credentials (issued by the Linux Foundation or a relevant employer) and verifiable relationship credentials (issued by project contributors to each other as they meet each other in person) would have prevented “Jia Tan” from ever obtaining maintainer rights to XZ utils.
+
+Jim concluded by saying the first place to implement was the most important open source project in the world: the Linux Kernel project (kernel.org)—a project that is now underway.
+
+Overview of the paper
+
+No one questions that trust is eroding on the Internet and in society. While it is inevitable that centralized solutions have dominated to date, it is equally inevitable that decentralized infrastructure will prevail.
+
+The Missing Trust Layer
+
+After 20 years of conferences and standards meetings, we have all the key building blocks required for decentralized trust: digital wallets, digital agents, digital credentials, decentralized identifiers (DIDs), personal private channels, and governance frameworks.
+
+The Building Blocks of Decentralized Trust
+
+In 2020, architects realized a trust layer for the Internet would require a protocol stack as carefully designed as the Internet’s TCP/IP stack. The ToIP stack follows that same four-layer model, including the keystone Trust Spanning Protocol (TSP). Now it is ready to go.
+
+Trust Over IP (ToIP)
+
+Gen AI deepfakes now exceed the ability for human detection. We need a simple, standard, privacy-preserving way for people to prove they are real unique humans without using a global biometric database.
+
+Proof of Personhood
+
+With two specific types of digital credentials—personhood credentials (PHCs) and verifiable relationship credentials (VRCs)—we can prove a real unique person has authentic trust relationships. This solution can be decentralized, privacy-preserving, and globally scalable—and standardized by the Decentralized Trust Graph Working Group.
+
+The Decentralized Trust Graph
+
+The First Person Project involves four collaborating LF projects—LF Decentralized Trust, ToIP, DIF, and OWF. So it is natural that its first application is protecting the LF open source supply chain from malware injection attacks and unverified AI agents.
+
+Case Study: The Linux Foundation
+
+The First Person Network
+
+Sustainable trust infrastructure requires combining technology and governance into a coherent sociotechnical organization—as the Internet did with IETF and ICANN. This is the goal of the First Person Network. It is being carefully engineered to achieve the network effects of a two-sided market for individuals and trust communities.
+
+There is no stopping the AI rocket ship. But we can change its direction. The biggest leverage point is the fundamental trust issue with personal AI agents: who do they work for? The compelling answer to that question: First Person Certified AI agents.
+
+First Person AI Agents
+
+How to govern an open global digital utility for decentralized trust? With a network cooperative “of the people, by the people, for the people”. And we can fund it using the First Person Fund, an ecosystem fund investing in the commercial value unlocked by this new trust layer.
+
+First Person Cooperative
+
+Beyond proof of personhood, the potential of the First Person Project and decentralized trust graphs is to enable trust communities of all shapes, sizes, and purposes to flourish. This new social substrate for the Internet can make a real, sustainable difference for all of us.
+
+A World of Trusted Communities
+
+v1.0 whitepaper |. v1.0 Gdoc
+
+©2026 First Person Network. All rights reserved.
+
+FAQ
+
+CONTACT
+

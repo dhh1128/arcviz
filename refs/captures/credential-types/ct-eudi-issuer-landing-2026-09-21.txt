@@ -1,0 +1,28 @@
+
+
+EUDIW Testing Issuer
+
+EUDIW Testing Issuer
+
+This is a EUDIW Testing Issuer supporting PID and mDL in mDoc and SD-JWT VC format at the following OID4VCI url: https://issuer.eudiw.dev/.well-known/openid-credential-issuer
+
+Credential Offer url: https://issuer.eudiw.dev/credential_offer
+
+Issuer repository can be found at: https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py
+
+Revocation repository can be found at: https://github.com/eu-digital-identity-wallet/eudi-srv-statuslist-py
+
+Credential Revocation url: https://backend.issuer.eudiw.dev/revocation/revocation_choice
+
+Guides:
+
+Credential Offer Guide
+
+Credential Offer Pre-Authorization Guide
+
+Credential Offer Deferred Guide
+
+Credential Offer Dynamic Guide
+
+Revocation Guide
+

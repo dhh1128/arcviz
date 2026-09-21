@@ -23,6 +23,7 @@ The project is in its research phase. Read [docs/research/PLAN.md](docs/research
 | `docs/design/decisions.md` | **The design constraint record.** Read before proposing any layout or treatment. |
 | `docs/research/` | Findings, principles, threat model, affordance inventory |
 | `docs/research/prior-art/` | One report per audited source of prior art |
+| `docs/research/credential-types/` | **The credential-type catalog** — 195 types from five ecosystems, the test set any classification scheme has to survive |
 | `refs/sources.yaml` | The citation record |
 | `refs/captures/`, `refs/screenshots/` | Republishable local captures |
 | `.ignored/private-refs/` | Captures that may not be republished — gitignored |

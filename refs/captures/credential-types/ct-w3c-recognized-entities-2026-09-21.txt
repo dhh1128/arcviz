@@ -1,0 +1,2144 @@
+
+
+Recognized Entities v1.0
+
+This specification describes a data model with which one or more recognized
+entities, such as one or more persons and/or organizations, can be described as
+known to perform specific actions, such as issuing or verifying a [=verifiable
+credential=]. The data model enables the publication or direct sharing of such
+information, providing a cryptographically-verifiable and privacy-preserving
+mechanism through which a [=holder=] can demonstrate that an entity whose
+credential they are using is recognized within a particular ecosystem. The
+specification is designed to interoperate with existing "trust infrastructures",
+such as X.509 certificate authority lists and ETSI Trust Service Lists, while
+enabling new decentralized ecosystems to be built using [=verifiable credentials=].
+
+This is an experimental specification and is undergoing regular revisions. It is
+not fit for production deployment.
+
+Introduction
+
+The [=verifiable credential=] ecosystem relies on the ability of [=verifiers=]
+to determine whether a particular [=issuer=] is recognized to perform a
+particular action, such as [=issuer|issuing=] a certain type of [=verifiable
+credential=]. Historically, this determination has often been made through
+out-of-band processes, bilateral agreements, or proprietary registries that are
+difficult to discover, query, or reason about in an automated way. As [=verifiable
+credentials=] are increasingly deployed across sectors such as education, healthcare,
+financial services, and government, the need for a standardized, interoperable
+mechanism to express and communicate recognition of entities that perform known
+actions has become critical. Without such a mechanism, ecosystem participants
+are forced to build bespoke "trust infrastructure", leading to fragmentation,
+increased integration costs, and barriers to cross-border and cross-sector
+interoperability.
+
+This specification addresses the challenge of expressing recognized entities,
+such as people and organizations, and the actions they perform, such as issuing
+and verifying, in a decentralized manner by defining a data model that any
+entity can use to publish or share recognition information as a [=verifiable
+credential=]. Rather than mandating a single central registry, the model allows
+any entity — a government body, an industry consortium, a standards
+organization, or even a single individual — to issue a
+`RecognizedEntityCredential` asserting that they know of one or more
+entities that are recognized to perform specific actions. This design enables a
+web of overlapping, competing, and complementary "trust registries" to coexist,
+allowing ecosystem participants to choose the entities they trust and to reason
+across multiple registries. The specification also supports interoperability
+with existing "trust infrastructure", such as X.509 certificate authority lists
+and ETSI Trust Service Lists, allowing existing recognized entity information to
+be referenced and composed into new decentralized ecosystems.
+
+This document builds on the [=verifiable credential=] data model to define
+a specific application rather than modifying the [[[VC-DATA-MODEL]]] itself.
+It uses the linked-data foundation of JSON-LD to add a small number of new
+types and properties alongside existing terms. A `RecognizedEntityCredential`
+is thus an ordinary [=verifiable credential=] — issued, presented, and
+verified using the same mechanisms as any other.
+
+Readers who are interested in the variety of use cases supported by this
+specification are urged to read Section [[[#use-cases]]].
+The remainder of this document is organized into the following sections:
+
+Section [[[#use-cases]]] describes a set of use cases that motivate the
+design of this specification.
+
+Section [[[#data-model]]] defines the core data model, including the
+`RecognizedEntity`, `RecognizedAction`, and `RecognizedEntityCredential`
+types along with their properties and worked examples.
+
+Appendix [[[#threat-model]]] discusses security, privacy, and market competition
+considerations relevant to implementers of this specification.
+
+A conforming document is any concrete expression of the data model
+that complies with the normative statements in this specification. Specifically,
+all relevant normative statements in Section
+of this document MUST be enforced.
+
+A conforming processor is any algorithm realized
+as software and/or hardware that generates or consumes a
+conforming document. Conforming processors MUST produce errors when
+non-conforming documents are consumed.
+
+This document also contains examples that contain JSON and JSON-LD content. Some
+of these examples contain characters that are invalid JSON, such as inline
+comments (`//`) and the use of ellipsis (`...`) to denote
+information that adds little value to the example. Implementers are cautioned to
+remove this content if they desire to use the information as valid JSON or
+JSON-LD.
+
+Use Cases
+
+This section describes a set of use cases that motivate the design of this
+specification.
+
+Education
+
+A national education authority wants to publish the set of universities and
+colleges that it recognizes as legitimate institutions within its jurisdiction.
+The authority issues a single [=recognized entity credential=] that lists each
+recognized institution along with descriptive information such as its common
+name, legal name, logo, and website. This enables software to display trusted
+information — such as the university's name, logo, and website — about a
+recognized institution to an interested party, having confirmed in an automated
+and cryptographically-verifiable way that the institution is recognized by the
+national authority, without contacting the authority directly.
+
+Vital Records
+
+A national association of vital records agencies wants to publish not just which
+entities it recognizes — such as a city, regional, or provincial agency — but
+which specific [=verifiable credentials=] each entity is recognized to issue.
+For example, a particular regional office is recognized to issue birth
+certificates, marriage certificates, and death certificates for its
+jurisdiction. The association issues a [=recognized entity credential=] in which
+each [=recognized entity=] is associated with a [=recognized action=] describing
+the type of vital record it might issue and the schema that record conforms to.
+A [=verifier=] receiving a birth certificate can then confirm both that its
+[=issuer=] is a recognized jurisdiction and that the jurisdiction was recognized
+to issue that particular type of vital record.
+
+Cross-border Trade
+
+Roughly five billion commercial invoices are exchanged annually among
+approximately 50 million trading entities worldwide. An exporter issues a
+commercial invoice as a [=verifiable credential=] and sends it to the importer.
+The importer, in turn, presents that invoice to the importing customs authority
+for border clearance and to a trade finance lender for documentary letter of
+credit settlement. Neither the customs authority nor the lender has a direct
+relationship with the exporter — they receive the invoice indirectly, through
+the importer, yet must determine whether the exporter is a legitimate
+registered entity.
+
+Verification relies on two independent but linked credentials, issued at
+different times and with different lifecycles:
+
+The commercial invoice [=verifiable credential=], issued by the exporter's
+DID — billions issued per year with a lifecycle of weeks to months.
+
+A `RecognizedEntityCredential` issued by the national business register of the
+exporting economy to the exporter — millions valid at any time, with lifecycles
+spanning years to decades.
+
+Upon receiving the invoice, the [=verifier=] resolves the exporter's DID,
+discovers the linked `RecognizedEntityCredential` issued by the national
+business register, and confirms that the DID in the invoice matches the subject
+of that credential. This gives the customs authority or the lender both document
+integrity — the invoice has not been tampered with — and identity integrity —
+the [=issuer=] is a registered entity in the exporting economy — enabling
+automated border clearance and automated trade finance due diligence without any
+prior knowledge of the exporter.
+
+Product Conformity
+
+A conformity assessment body (CAB) issues a certificate of conformity (CoC) as
+a [=verifiable credential=] attesting to the safety or quality performance of a
+specific product. The CoC accompanies the product through the supply chain to an
+importing market. However, the market surveillance authority in the importing
+country typically has no direct relationship with the CAB and cannot
+independently determine whether the certificate was issued by a genuinely
+accredited test laboratory.
+
+When the national accreditation authority in the exporting country issues a
+`RecognizedEntityCredential` to the CAB — attesting to the CAB's accreditation
+scope — a linked verification chain becomes possible, analogous to the
+cross-border trade case above:
+
+The certificate of conformity [=verifiable credential=], issued by the CAB's
+DID, asserting that a product meets specific safety or quality standards.
+
+A `RecognizedEntityCredential` issued by the national accreditation authority to
+the CAB, attesting that the CAB is accredited to perform conformity assessments
+within a defined scope.
+
+Upon receiving the CoC, the market surveillance authority resolves the CAB's
+DID, discovers the linked `RecognizedEntityCredential` issued by the national
+accreditation authority, and confirms that the DID in the certificate matches
+the subject of that credential. This gives the authority both document
+integrity — the CoC has not been tampered with — and identity integrity — the
+[=issuer=] is a genuinely accredited CAB — enabling pre-clearance of goods at
+the border without manual verification of the CAB's accreditation status.
+
+Federated Identifiers
+
+There are multiple examples of federated identifiers in common usage.
+International Standard Book Numbers (ISBNs), Legal Entity identifiers (LEIs),
+BIC numbers for shipping containers, and the Internet's domain name system. In
+each case, a central authority assigns a prefix to a registrar who then assigns
+a range of identifiers that extend that original prefix to a third party. The
+third party can then extend the character string further to create the complete
+identifier.
+
+Presented with such an identifier in a credential, a relying party might want to
+verify that it has been constructed by a party known to the federated identifier
+scheme owner, in full conformance with its operating procedures.
+
+An example of such a scheme is GS1, the organization behind many of the world's
+barcodes. A detailed description of its use case is presented in the [Verifiable
+Credentials Use
+Cases](https://www.w3.org/TR/vc-use-cases/#chain-of-gs1-credentials-to-identify-a-trade-item)
+document [[vc-use-cases]].
+
+Data Model
+
+The following sections outline the data model that is used by this specification
+for Verifiable Issuer and Verifier Lists.
+
+The data model described in this section has been built using input from a
+variety of the prior art evaluated for this paper including input from the EBSI
+Trusted Issuer Registry, ETSI TS 119 612, eSSIF-Lab TRAIN, the Trust over IP
+Foundation Trust Registry Protocol, and Rebooting the Web of Trust input
+documents. The data model described in this section is capable of expressing
+many, but not all, of the concepts described in those other specifications.
+
+The unified data model for this work can be represented as a list of service providers
+that represent entities or organizations that provide services such as
+credential issuance or validation. The data model also includes the
+details of the list operator description.
+
+General Properties
+
+The properties in this section can be added to objects found in a
+`RecognizedEntityCredential` as defined in Section
+[[[#recognizedentitycredential]]]. Each general property listed in
+this section is OPTIONAL; none of the values are required to be provided by
+an [=issuer=].
+
+Property
+
+Description
+
+id
+
+A URL that identifies the entity in a globally unambiguous way. The value for
+this property is defined in
+Section 4.4: Identifiers
+of the [[[VC-DATA-MODEL]]] specification.
+
+type
+
+The type of the entity. The value for this property is defined in
+Section 4.5: Types
+of the [[[VC-DATA-MODEL]]] specification. The `type` property MUST be
+`RecognizedIssuer` if the entity is an [=issuer=] of [=verifiable credentials=].
+
+name
+
+A human-readable name for the entity. The value for this property is defined in
+Section 4.6: Names and Descriptions
+of the [[[VC-DATA-MODEL]]] specification.
+
+legalName
+
+The official legal name of an organization or entity, as registered with legal
+authorities, which can differ from the commonly used name. The value MUST be a
+one or more [=string=]s or [=language value object=]s, as described in
+Section 11.1: Language
+and Base Direction of the [[[VC-DATA-MODEL]]] specification. An entity that
+has an official legal name in more than one language can express each of them by
+providing an array of [=language value objects=].
+
+image
+
+A link to a visual representation of the entity, such as a logo, photograph, or
+icon. The value MUST be a [=URL=], which includes values using the `data:` URL
+scheme as described in [[?RFC2397]].
+
+url
+
+A URL pointing to the primary website or web resource associated with the
+entity. The value MUST be a [=URL=].
+
+sameAs
+
+One or more URLs that refer to the same entity in other contexts or systems,
+enabling cross-reference and verification across different platforms.
+Each value MUST be a [=URL=].
+
+description
+
+A human-readable description providing details about the entity. The value for
+this property is defined in
+Section 4.6: Names and Descriptions
+of the [[[VC-DATA-MODEL]]] specification.
+
+digestMultibase
+
+One or more cryptographic digests used to verify the integrity of resources
+associated with the entity. The values for this property are defined in
+Section 5.3: Integrity of Related Resources
+of the [[[VC-DATA-MODEL]]] specification.
+
+RecognizedEntity
+
+A recognized entity is any entity that is recognized
+by an [=issuer=] of a `RecognizedEntityCredential` to perform a specific action.
+
+Property
+
+Description
+
+id
+
+A URL that identifies the entity in a globally unambiguous way. The value for
+this property is defined in
+Section 4.4: Identifiers
+of the [[[VC-DATA-MODEL]]] specification.
+
+type
+
+The `type` property MUST be `RecognizedEntity`. The value for
+this property is defined in
+Section 4.5: Types
+of the [[[VC-DATA-MODEL]]] specification.
+
+recognizedTo
+
+A specific action that the [=recognized entity=] is expected to perform as
+defined in Section [[[#recognizedaction]]]. This property may occur more
+than once if the [=recognized entity=] is expected to perform more than
+one action.
+
+recognizedIn
+
+An object that contains a reference to a document of recognized entities that
+contains this particular [=recognized entity=] as well as the actions it is
+known to perform. The `id` value of the object MUST be a
+[=URL=]. The `type` value of the object MUST conform to the
+type value space defined in
+the [[[VC-DATA-MODEL]]] specification and SHOULD be `ExternalEntityList`
+or `RecognizedEntityCredential`.
+
+Properties from Section [[[#general-properties]]] can be included in
+addition to the properties above.
+
+A `recognizedIn` entry with a `type` property value of `ExternalEntityList` SHOULD conform
+to a valid entity list specification. The origin of the list URL referenced by the
+`id` property in this case establishes the root of trust for the list.
+Examples of this are the X.509 Certificate Authority List, as specified in [[[RFC5280]]]
+and the European Union ETSI Trust Service List, as specified in [[[ETSI-TRUST-LISTS]]].
+For the `ExternalEntityList` type, [=verifiers=] and [=credential=] consumers need to fetch the
+entity list resource referenced by the `id` property in order to determine the entity list specification
+that the resource complies with, determine if it supports that specification, and process/terminate accordingly.
+A list with a `type` property value of `RecognizedEntityCredential` MUST conform
+to [[[VC-RECOGNIZED-ENTITIES]]].
+
+RecognizedAction
+
+A recognized action is an action that a [=recognized
+entity=] is expected to perform.
+
+Property
+
+Description
+
+type
+
+The `type` property MUST be `RecognizedAction`.
+
+action
+
+A [=string=] that specifies the name of the action to be performed such as
+`issue` or `verify`.
+
+recognizedBy
+
+A [=URL=], or object containing properties from Section
+[[[#general-properties]]], of the entity that performed the task of recognizing.
+
+outputValidation
+
+The value of the `outputValidation`
+property MUST be one or more data
+schemas that provide [=verifiers=] with enough information to determine whether
+the provided data conforms to the provided schema(s). Each validator MUST
+specify its `type` (for example, `JsonSchema`) and an `id`
+property that MUST be a [=URL=]
+identifying the schema file. The specific type definition determines the precise
+contents of each data schema. If multiple schemas are present, validity is
+determined according to the processing rules outlined by each associated `type`
+property.
+
+validFrom
+
+The earliest point in time at which the [=recognized action=] is valid, that
+is, the date and time from which the [=recognized entity=] is recognized to
+perform the action. The value MUST be an
+XML Schema dateTime
+value expressed in UTC with no sub-second precision, for example
+`2025-01-01T00:00:00Z`. This property is OPTIONAL; if absent, the validity
+period of the enclosing [=recognized entity credential=] applies.
+
+validUntil
+
+The latest point in time at which the [=recognized action=] is valid, that
+is, the date and time after which the [=recognized entity=] is no longer
+recognized to perform the action. The value MUST be an
+XML Schema dateTime
+value expressed in UTC with no sub-second precision, for example
+`2030-01-01T00:00:00Z`. This property is OPTIONAL; if absent, the validity
+period of the enclosing [=recognized entity credential=] applies.
+
+RecognizedEntityCredential
+
+When a recognized entity credential
+is published, it MUST be a conforming [=verifiable credential=], as defined in
+[[[VC-DATA-MODEL-2.0]]], that expresses the data model specified in the section
+that follows. It describes the format of a [=verifiable credential=] that
+encapsulates the recognized entities.
+
+A recognized entity is expressed inside a [=verifiable credential=],
+enabling a [=holder=] to provide it directly to a [=verifier=]. This
+mechanism, sometimes called "certificate stapling", increases privacy for the
+[=holder=] by ensuring that the [=verifier=] does not need to contact the
+[=issuer=] to retrieve the recognized entity credential. Still, a [=verifier=] might
+choose to ignore the [=holder=]-provided [=recognized entity credential=], even when
+its authenticity is verifiable, if, for instance, it desires a more recent
+version of the [=recognized entity credential=].
+
+Property
+
+Description
+
+id
+
+A [=verifiable credential=] that contains a set of recognized entities MAY
+express an `id` property to make its retrieval easier for other systems.
+
+type
+
+A [=verifiable credential=] that contains a set of recognized entities MUST
+express a `type` property that includes the `RecognizedEntityCredential`
+value.
+
+issuer
+
+The [=issuer=] of the [=verifiable credential=] as defined in the Verifiable
+Credentials Data Model specification in
+
+Section 4.76: Issuer. This object MAY also include other properties listed
+in Section [[[#general-properties]]]. This object MAY include a `recognizedIn`
+property, as defined in Section [[[#recognizedentity]]], that references a
+document of recognized entities in which the [=issuer=] itself appears; this
+enables the [=credential-based discovery=] process described in Section
+[[[#credential-based-discovery]]], allowing a [=verifier=] to traverse the
+recognition hierarchy until it reaches an [=issuer=] it recognizes.
+
+validFrom
+
+The earliest point in time at which the credential is valid. This property is
+defined in the Verifiable Credentials Data Model specification in
+
+Section 4.6: Validity Period.
+
+validUntil
+
+The latest point in time at which the credential is valid. This property is
+defined in the Verifiable Credentials Data Model specification in
+
+Section 4.6: Validity Period.
+
+credentialSubject
+
+A set of one or more `RecognizedEntity` objects as defined in
+Section [[[#recognizedentity]]].
+
+The following examples demonstrate how recognized entity credentials can be
+employed in a variety of use cases. The first example below is used to
+publish information about a set of known universities in a particular nation.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:learning-commission.example",
+"type": "RecognizedIssuer"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:university.example",
+"type": "RecognizedEntity",
+"name": "Example Tech",
+"legalName": "Example Polytechnic University",
+"image": "https://university.example/logo.png",
+"url": "https://www.university.example/",
+"description": "A university providing a great education in Utopia Valley.",
+}, {
+"id": "did:web:college.example",
+"type": "RecognizedEntity",
+"name": "Exemplar Community College",
+"legalName": "Community College of Examples and ",
+"image": "https://college.example/graphics/ecc.png",
+"url": "https://college.example/",
+"description": "The backbone of learning in the Utopia community.",
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:accreditor.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+The following example demonstrates how different languages can be supported
+within a [=recognized entity credential=]:
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:learning-commission.example",
+"type": "RecognizedIssuer"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:web:university.example",
+"type": "RecognizedEntity",
+"name": [
+{"@value": "Example Tech", "@language": "en"},
+{"@value": "Exemple Tech", "@language": "fr"},
+{"@value": "エグザンプル工科大学", "@language": "ja"},
+{"@value": "示例理工大学", "@language": "zh-Hans"},
+{"@value": "مثال للتقنية", "@language": "ar", "@direction": "rtl"},
+{"@value": "उदाहरण टेक", "@language": "hi"}
+],
+"legalName": [
+{"@value": "Example Polytechnic University", "@language": "en"},
+{"@value": "Université Polytechnique Exemple", "@language": "fr"},
+{"@value": "例示理工科大学", "@language": "ja"},
+{"@value": "レイジリコウカダイガク", "@language": "ja-Kana"},
+{"@value": "示例理工科大学", "@language": "zh-Hans"},
+{"@value": "جامعة مثال للعلوم التطبيقية", "@language": "ar", "@direction": "rtl"},
+{"@value": "उदाहरण प्रौद्योगिकी विश्वविद्यालय", "@language": "hi"}
+],
+"image": "https://university.example/logo.png",
+"url": "https://www.university.example/",
+"description": [
+{"@value": "A university providing a great education in Utopia Valley.",
+"@language": "en"},
+{"@value": "Une université offrant une excellente éducation dans la vallée d'Utopie.",
+"@language": "fr"},
+{"@value": "ユートピア渓谷で優れた教育を提供する大学です。",
+"@language": "ja"},
+{"@value": "一所在乌托邦谷提供优质教育的大学。",
+"@language": "zh-Hans"},
+{"@value": "جامعة تقدم تعليماً متميزاً في وادي يوتوبيا.",
+"@language": "ar", "@direction": "rtl"},
+{"@value": "यूटोपिया घाटी में उत्कृष्ट शिक्षा प्रदान करने वाला एक विश्वविद्यालय।",
+"@language": "hi"}
+]
+},
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:accreditor.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "zE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdw"
+}
+}
+
+The next example is used to publish information about a set of known issuers
+for a particular type of [=verifiable credential=].
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:learning-commission.example",
+"type": "RecognizedIssuer"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:university.example",
+"type": "RecognizedEntity",
+"name": "Example Tech",
+"legalName": "Example Polytechnic University",
+"image": "https://university.example/logo.png",
+"url": "https://www.university.example/",
+"description": "A university providing a great education in Utopia Valley.",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:learning-commission.example",
+"outputValidation": {
+"id": "https://learning-commission.example/credentials/bachelors.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiBZl963sknNAHgPyslVv6VztZpfWQoRvW1htfx-UwirFo",
+}
+}
+}, {
+"id": "did:web:college.example",
+"type": "RecognizedEntity",
+"name": "Exemplar Community College",
+"legalName": "Community College of Examples and ",
+"image": "https://college.example/graphics/ecc.png",
+"url": "https://college.example/",
+"description": "The backbone of learning in the Utopia community.",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:learning-commission.example",
+"outputValidation": {
+"id": "https://learning-commission.example/credentials/associates.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiWQoRvpfWW1htfsknNAHgPyslVv6VztZpfwirFoBZl963",
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:accreditor.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+The final example below is used to publish information about an entity that
+publishes a European Union ETSI Trust Service List [[ETSI-TRUST-LISTS]]
+using the generic `ExternalEntityList` type.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": "did:web:ec.europa.example",
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:ec.europa.example",
+"type": "RecognizedEntity",
+"name": "Utopian Commission",
+"legalName": "The Utopian Commission",
+"image": "https://ec.europa.example/logo.png",
+"url": "https://ec.europa.example/",
+"recognizedIn": {
+"id": "https://ec.europa.example/tsl/lotl.xml",
+"type": "ExternalEntityList"
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:ec.europa.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+Algorithms
+
+This section describes algorithms that a [=verifier=] can use when processing
+[=verifiable credentials=] and [=recognized entity credentials=] defined by this
+specification.
+
+Credential-based Discovery
+
+Credential-based discovery is the process by which a
+[=verifier=] that receives a [=verifiable credential=] from an unknown
+[=issuer=] locates a [=recognized entity credential=] that recognizes that
+[=issuer=], and, if necessary, traverses a hierarchy of [=recognized entity
+credentials=] until it reaches one whose own [=issuer=] the [=verifier=]
+recognizes.
+
+The mechanism relies on the `recognizedIn` property. When present on the
+`issuer` object of a [=verifiable credential=], including on the `issuer` object
+of a [=recognized entity credential=], the `recognizedIn` property references a
+[=verifiable credential=] of recognized entities that lists that [=issuer=] as a
+[=recognized entity=]. A [=verifier=] can fetch the referenced [=verifiable
+credential=] and inspect the [=issuer=] of that
+[=verifiable credential=]. If the [=verifier=] recognizes that [=issuer=],
+discovery succeeds. If it does not, the [=verifier=] can follow the
+`recognizedIn` property on the fetched [=verifiable credential=]'s `issuer`
+object to move one level up the hierarchy, repeating the process until it
+reaches an [=issuer=] it recognizes or a configured limit is reached.
+
+A [=holder=] MAY pre-fetch the [=recognized entity credentials=] along this
+hierarchy and provide them to the [=verifier=] alongside the [=verifiable
+credential=], using the "certificate stapling" mechanism described in Section
+[[[#recognizedentitycredential]]]. When the [=holder=] provides these
+[=verifiable credentials=], the [=verifier=] does not need to fetch them itself,
+provided that the [=verifier=] is satisfied with the freshness of the provided
+[=verifiable credentials=]. A [=verifier=] that requires more recent information
+MAY reject the [=holder=]-provided [=verifiable credentials=] or ignore them
+and fetch the [=recognized entity credentials=] directly.
+
+To perform [=credential-based discovery=] on a [=verifiable credential=]
+(credential) against a configured set of recognized [=issuers=]
+(recognizedIssuers) and an optional set of [=holder=]-provided
+[=verifiable credentials=] (providedDocuments), a [=verifier=] runs
+the following algorithm. The algorithm returns a list representing the
+recognition chain on success, or an error if no recognized [=issuer=] can be
+reached.
+
+Let current be credential and let chain be an
+empty list.
+
+Let maxDepth be the maximum recognition chain depth the [=verifier=]
+is configured to traverse. If the length of chain exceeds
+maxDepth, return an error.
+
+Let issuer be the value of the `issuer` property of
+current, and let issuerId be its identifier.
+
+If issuerId is a member of recognizedIssuers, append
+current to chain and return chain; discovery has
+succeeded.
+
+If issuer does not contain a `recognizedIn` property, return an error;
+the recognition hierarchy cannot be traversed any further.
+
+Let listReference be the value of the `recognizedIn` property and let
+listId be its `id`.
+
+Let list be the [=recognized entity credential=] identified by
+listId, obtained from providedDocuments if present and
+sufficiently fresh, or otherwise retrieved from listId.
+
+Verify the proof on list, confirm that it is currently valid, and
+confirm that issuerId appears as the `id` of a [=recognized entity=]
+in the `credentialSubject` of list. If any check fails, return an
+error.
+
+Append current to chain, set current to
+list, and return to step 2 to evaluate the [=issuer=] of the list.
+
+The example below shows a diploma [=verifiable credential=] issued by a state
+university whose own `issuer` object carries a `recognizedIn` property. A
+[=verifier=] that does not directly recognize the state university can follow
+that `recognizedIn` reference to the state's list of recognized universities,
+issued by the state department of education, to determine whether the state
+university is itself a [=recognized entity=].
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"ExampleDegreeCredential"
+],
+"issuer": {
+"id": "did:web:university.example",
+"name": "Example State University",
+"recognizedIn": {
+"id": "https://education.state.example/lists/recognized-universities.json",
+"type": "RecognizedEntityCredential",
+"name": "State List of Recognized Universities"
+}
+},
+"validFrom": "2025-06-01T00:00:00Z",
+"credentialSubject": {
+"id": "did:example:student-123",
+"name": "Alex Example",
+"degree": {
+"type": "ExampleBachelorDegree",
+"name": "Bachelor of Science in Computer Science"
+}
+},
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2025-06-01T20:08:22Z",
+"verificationMethod": "did:web:university.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+In this example, a [=verifier=] evaluating the diploma issued by
+`did:web:university.example` inspects the credential's `issuer` object. If the
+[=verifier=] already recognizes `did:web:university.example`, discovery
+succeeds. If not, the [=verifier=] follows the `recognizedIn` reference on the
+`issuer` object to
+`https://education.state.example/lists/recognized-universities.json` and checks
+whether that [=recognized entity credential=] lists Example State University as
+a [=recognized entity=]. If the [=verifier=] recognizes the state department of
+education that issued that list, discovery succeeds; otherwise, the [=verifier=]
+continues up the recognition hierarchy via the list's own `issuer` object until
+it reaches an [=issuer=] it recognizes, thereby completing the recognition
+chain.
+
+Identifier-based Discovery
+
+Identifier-based discovery is the process by which a
+[=verifier=] that receives a [=verifiable credential=] from an unknown
+[=issuer=] starts from the [=issuer=]'s identifier, resolves that identifier to
+a [=controlled identifier document=], and uses a service declared in that
+document to retrieve a [=verifiable presentation=] that might contain a
+[=recognized entity credential=] recognizing the [=issuer=]. Whereas
+[=credential-based discovery=] relies on a `recognizedIn` reference being
+present on the `issuer` object, identifier-based discovery makes no such
+assumption; it instead obtains recognition information by dereferencing the
+[=issuer=]'s identifier itself.
+
+The mechanism relies on the [=issuer=] publishing recognition information at a
+service endpoint that is discoverable from its identifier. The [=issuer=]'s
+identifier, typically expressed as the `id` of the `issuer` object (for example,
+`issuer.id`), is a [=URL=] that can be resolved or dereferenced to a
+[=controlled identifier document=], such as a [=DID document=]. That document
+MAY declare a service whose `type` array includes both `WhoisService` and
+`PathService`; the service's `serviceEndpoint` identifies the location at which
+the [=issuer=] publishes a [=verifiable presentation=] describing itself. The
+published [=verifiable presentation=] is signed by the [=issuer=] and contains
+[=verifiable credentials=] for which the [=issuer=]'s identifier is the
+`credentialSubject`. Among these MAY be a [=recognized entity credential=] in
+which the [=issuer=] appears as a [=recognized entity=].
+
+A [=verifier=] that obtains a [=recognized entity credential=] this way
+processes it exactly as in [=credential-based discovery=]. If the [=verifier=]
+recognizes the [=issuer=] of that [=recognized entity credential=], discovery
+succeeds. If it does not, and the [=recognized entity credential=] carries a
+`recognizedIn` property on its own `issuer` object, the [=verifier=] MAY
+continue with [=credential-based discovery=] to traverse the recognition
+hierarchy until it reaches an [=issuer=] it recognizes.
+
+The diagram below shows the [=identifier-based discovery=] process from the
+[=verifier=]'s perspective. The same steps repeat at each level of the
+hierarchy until a recognized trust anchor is reached.
+
+%%{init: {"flowchart": {"wrappingWidth": 500}}}%%
+flowchart TD
+VC["Verifiable Credential\n(any type)"]
+Q1{{"Issuer DID\nrecognized?"}}
+DID["Issuer DID Document"]
+WS{{"WhoisService\nendpoint found?"}}
+VP["Verifiable Presentation\nat WhoisService endpoint"]
+RecognizedEntityCredential["RecognizedEntityCredential\nfor the issuer"]
+Q2{{"Issuer of RecognizedEntityCredential\nrecognized?"}}
+SUCCESS(["Discovery succeeded"])
+FAIL(["Discovery failed"])
+
+VC --> Q1
+Q1 -->|"yes"| SUCCESS
+Q1 -->|"no"| DID
+DID --> WS
+WS -->|"no"| FAIL
+WS -->|"yes"| VP
+VP --> RecognizedEntityCredential
+RecognizedEntityCredential --> Q2
+Q2 -->|"yes"| SUCCESS
+Q2 -->|"no, repeat"| DID
+
+style VC fill:#b6d9b0,color:#000
+style RecognizedEntityCredential fill:#b6d9b0,color:#000
+style DID fill:#fef3a0,color:#000
+style VP fill:#fef3a0,color:#000
+style Q1 fill:#eee,color:#000
+style Q2 fill:#eee,color:#000
+style SUCCESS fill:#005a9c,color:#fff
+style FAIL fill:#c0392b,color:#fff
+
+Identifier-based discovery from the verifier's perspective
+
+To perform [=identifier-based discovery=] on a [=verifiable credential=]
+(credential) for a specific action (action, for example
+`issue`) against a configured set of recognized [=issuers=]
+(recognizedIssuers), a [=verifier=] runs the following algorithm. The
+algorithm returns a result with two boolean outcomes: recognized,
+indicating whether the [=issuer=] of credential is ultimately
+recognized by a member of recognizedIssuers, and
+actionRecognized, indicating whether that [=issuer=] is recognized to
+perform action and, where a [=recognized action=] declares an
+`outputValidation`, whether credential conforms to it. On success the
+result also includes the recognition chain that established the outcome.
+
+Let result be a structure with recognized set to
+`false`, actionRecognized set to `false`, and chain set to
+an empty list.
+
+Let issuer be the value of the `issuer` property of
+credential, and let issuerId be its identifier.
+
+Resolve or dereference issuerId to obtain a controlled identifier
+document, idDocument. If issuerId cannot be resolved,
+return result.
+
+Let service be a service in the `service` array of
+idDocument whose `type` includes both `WhoisService` and
+`PathService`. If no such service is present, return result;
+identifier-based discovery is not supported for this [=issuer=].
+
+Let endpoint be the `serviceEndpoint` of service and
+retrieve the [=verifiable presentation=], presentation, published at
+endpoint. If retrieval fails, return result.
+
+Verify the proof on presentation and confirm that it is bound to
+issuerId. If verification fails, return result.
+
+Let candidates be the [=recognized entity credentials=] contained in
+presentation in which issuerId appears as the `id` of a
+[=recognized entity=] in the `credentialSubject`. If candidates is
+empty, return result.
+
+For each list in candidates, verify the proof on
+list and confirm that it is currently valid, discarding any
+list that fails either check.
+
+For each valid list, let anchor be the result of
+determining whether the [=issuer=] of list is recognized: if the
+[=issuer=] of list is a member of recognizedIssuers, then
+anchor is a list containing list; otherwise, if the
+`issuer` object of list contains a `recognizedIn` property, then
+anchor is the recognition chain returned by performing
+[=credential-based discovery=] on list against
+recognizedIssuers, or nothing if that process does not succeed.
+
+If no valid list produces an anchor, return
+result; the [=issuer=] is not recognized.
+
+Otherwise, select a valid list that produced an anchor,
+set result.recognized to `true`, and set result.chain to
+credential followed by list followed by the elements of
+its anchor.
+
+Let entity be the [=recognized entity=] in the `credentialSubject` of
+the selected list whose `id` is issuerId, and let
+actions be the [=recognized actions=] declared by its `recognizedTo`
+property.
+
+If any [=recognized action=] in actions has an `action` value equal
+to action, and either that [=recognized action=] declares no
+`outputValidation` or credential conforms to every schema referenced
+by its `outputValidation`, set result.actionRecognized to `true`.
+
+Return result.
+
+The example below shows a controlled identifier document for the [=issuer=]
+`did:web:university.example` that declares a `WhoisService`. A [=verifier=] that
+does not directly recognize the university resolves this document, retrieves the
+[=verifiable presentation=] published at the service endpoint, and inspects the
+[=recognized entity credentials=] it contains to determine whether the
+university is recognized.
+
+{
+"@context": [
+"https://www.w3.org/ns/cid/v1"
+],
+"id": "did:web:university.example",
+"assertionMethod": [{
+"id": "#issuance-key-1",
+"type": "Multikey",
+"controller": "did:web:university.example",
+"publicKeyMultibase": "z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
+}],
+"service": [{
+"id": "#whois",
+"type": ["WhoisService", "PathService"],
+"serviceEndpoint": "https://university.example/whois.vp"
+}]
+}
+
+The [=verifiable presentation=] retrieved from the `serviceEndpoint` is signed
+by `did:web:university.example` and contains a [=recognized entity credential=],
+as shown below, issued by the state department of education that lists the
+university as a [=recognized entity=] recognized to `issue` credentials
+conforming to a computer science bachelor's degree schema. If the [=verifier=]
+recognizes `did:web:education.state.example`, the [=issuer=] is recognized;
+otherwise, the [=verifier=] establishes recognition through
+[=credential-based discovery=] using the `recognizedIn` reference on that
+credential's `issuer` object. Once recognition is established, the [=verifier=]
+additionally determines whether the university is recognized to perform the
+intended `issue` action and whether the diploma conforms to the schema named by
+that [=recognized action=]'s `outputValidation`.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": "VerifiablePresentation",
+"holder": "did:web:university.example",
+"verifiableCredential": [{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:education.state.example",
+"type": "RecognizedIssuer",
+"name": "State Department of Education"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:university.example",
+"type": "RecognizedEntity",
+"name": "Example State University",
+"url": "https://www.university.example/",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:education.state.example",
+"outputValidation": {
+"id": "https://education.state.example/credentials/cs-bachelors.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiBZl963sknNAHgPyslVv6VztZpfWQoRvW1htfx-UwirFo"
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:education.state.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:10:00Z",
+"verificationMethod": "did:web:university.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "authentication",
+"proofValue": "z3FXQjBHwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoHPGByaH"
+}
+}
+
+Threat Model
+
+This section details the general threat model for this specification
+including security considerations, privacy considerations, and market
+competition considerations.
+
+Readers are urged to familiarize themselves with the general security and
+privacy advice provided in the
+
+Security Considerations and
+
+Privacy Considerations
+sections of the [[[VC-DATA-MODEL]]] specification before reading this section.
+Implementers are expected to apply the general warnings provided in that
+specification to each specific feature provided by this specification.
+
+Target Threats
+
+Unauthorized Issuer Spoofing
+security —
+An unrecognized entity fabricates, replays, or reuses a stolen [=recognized
+entity credential=] to make its [=verifiable credentials=] appear to come from a
+legitimately recognized [=issuer=].
+
+Recognized Entity Credential Tampering
+security —
+A malicious intermediary swaps or modifies the [=recognized entity credential=]
+in a presented bundle so that an unrecognized [=issuer=]'s [=verifiable
+credential=] appears to be covered by a legitimate recognition chain.
+
+Implementation Threats
+
+List Retrieval Denial of Service
+security —
+A flood of fetch requests, a slow-drip server, or an excessively large list
+exhausts a [=verifier=]'s connections, memory, or CPU when it retrieves and
+processes a [=recognized entity credential=].
+
+Privacy Leakage via List Fetch
+privacy —
+When a [=verifier=] fetches a [=recognized entity credential=] from the list
+publisher, the publisher learns which [=issuer=] is being verified, enabling
+surveillance of commercial relationships and activity patterns.
+
+Unvetted Recognized Entity Credential Propagation
+security —
+A [=holder=] shares a [=recognized entity credential=] through peer-to-peer
+channels and a [=verifier=] accepts it without independently verifying its
+integrity against a trust anchor, spreading fraudulent recognition claims.
+
+List Publisher Impersonation
+security —
+An attacker fabricates a list publisher identity using a confusable identifier or
+display name so that a [=verifier=] treats an attacker-controlled registry as an
+authoritative trust anchor.
+
+Stale Recognition Acceptance
+security —
+A revoked or compromised [=issuer=] continues to pass validation because a
+[=recognized entity credential=] has an overly long validity period or because
+the [=verifier=] relies on aggressively cached, out-of-date list data.
+
+External Resource Substitution
+security —
+An attacker substitutes malicious content for an externally-referenced resource,
+such as a schema file, via server compromise, domain takeover, or DNS hijacking
+when the reference is not integrity-protected.
+
+Unbounded Recognition Chain Trust
+security —
+A compromised entry in a lower-level registry chained via
+recognizedIn is transitively trusted when a [=verifier=] does not
+enforce depth limits or independently validate each link in the chain.
+
+Abuse of Recognized Actions
+security —
+A [=verifier=] interprets the free-form action value more
+permissively than the list publisher intended, granting a [=recognized entity=]
+broader capabilities than were authorized.
+
+Overly Permissive Schema Constraints
+security —
+Broad, incomplete, or lax outputValidation schema rules let a
+recognized [=issuer=] produce a wider class of [=verifiable credentials=] than
+the list publisher intended to authorize.
+
+JSON Schema Attack
+security —
+A maliciously crafted or poorly-written outputValidation schema
+containing pathological regular expressions or deeply nested structures causes
+catastrophic backtracking or memory exhaustion in the [=verifier=].
+
+External Threats
+
+Surveillance of Recognized Entity Identifiers
+privacy —
+Because a [=recognized entity credential=] publicly names [=issuers=] with their
+identifiers and attributes, aggregating credentials across lists enables
+systematic profiling and surveillance of [=recognized entities=].
+
+Harms by Association
+privacy —
+A [=recognized entity credential=] reveals the membership of an ecosystem, and a
+single onward disclosure can expose participants to targeting, discrimination, or
+reputational harm even when the ecosystem was intended to remain private.
+
+Compromise of Recognized Entity Identifier
+security —
+An attacker who compromises the private key material of a recognized
+[=issuer=]'s identifier can impersonate that genuinely-enrolled [=issuer=],
+producing fraudulent [=verifiable credentials=] that pass validation.
+
+Verifier Trust Anchor Misconfiguration
+security —
+A [=verifier=] operator accidentally configures the wrong [=recognized entity
+credential=] as a trust anchor, causing the [=verifier=] to accept
+[=issuers=] vetted by an unintended governance authority.
+
+Dependency Threats
+
+Anti-Competitive List Gatekeeping
+market competition —
+A first-mover list publisher selectively denies registration to competitors, or
+is coerced into revoking legitimate entities, creating anti-competitive lock-in
+for [=verifiers=] that rely on a single list.
+
+Cryptographically Relevant Quantum Computer Breaks Cryptography
+security —
+A cryptographically relevant quantum computer (CRQC) breaks the signature
+schemes in common use, letting an attacker forge proofs on [=recognized entity
+credentials=] and [=verifiable credentials=] and collapsing the chain of trust.
+
+Security Considerations
+
+W3C is migrating to a holistic threat modelling approach and is in the process
+of deprecating the Security Considerations sections in new specifications.
+Please refer to Appendix [[[#threat-model]]] for documentation related to
+security considerations.
+
+Privacy Considerations
+
+W3C is migrating to a holistic threat modelling approach and is in the process
+of deprecating the Privacy Considerations sections in new specifications. Please
+refer to Appendix [[[#threat-model]]] for documentation related to privacy
+considerations.
+
+Ecosystem Examples
+
+This section demonstrates how the data model defined by this specification can
+be applied in existing credential ecosystems.
+
+GS1 Federated Identifier Example
+
+This entire example is currently under review by GS1 and might be changed
+based on input from that organization and others.
+
+GS1 operates one of the world's largest federated identifier schemes, in which
+a Global Trade Item Number (GTIN) is composed of a GS1 Company Prefix, an item
+reference, and a check digit. The GS1 Global Office allocates GS1 Prefixes to
+GS1 Member Organizations; each Member Organization licenses GS1 Company
+Prefixes, which extend its GS1 Prefix, to its member companies; and each member
+company assigns item references to create GTINs for its trade items. A detailed
+description of this use case is available in the
+
+Chain of GS1 Credentials to Identify a Trade Item section of the
+[[?VC-USE-CASES]] document. An example diagram of this scenario is shown below:
+
+flowchart TD
+GS1["GS1 Global Office\n(trust anchor)"]
+MO["GS1 Utopia\nMember Organization"]
+HT["Healthy Tots\nmember company"]
+
+REC1["RecognizedEntityCredential\nsubject: GS1 Utopia"]
+REC2["RecognizedEntityCredential\nsubject: Healthy Tots"]
+KEY["KeyCredential\nsubject: GTIN as GS1 Digital Link"]
+
+GS1 -->|issues| REC1
+REC1 -->|recognizes| MO
+MO -->|issues| REC2
+REC2 -->|recognizes| HT
+HT -->|issues| KEY
+
+KEY -.->|"issuer.recognizedIn"| REC2
+REC2 -.->|"issuer.recognizedIn"| REC1
+
+style GS1 fill:#005a9c,color:#fff
+style REC1 fill:darkgray, color:white
+style REC2 fill:darkgray, color:white
+style KEY fill:teal
+
+Relationship of organizations and credentials in the GS1 ecosystem
+
+This appendix demonstrates how that delegation chain can be expressed using the
+data model defined by this specification. Each level of the hierarchy publishes
+a [=recognized entity credential=] describing the entities one level below it,
+and each credential's `issuer` object carries a `recognizedIn` property
+referencing the [=recognized entity credential=] one level above it. The
+`recognizedIn` property plays a role analogous to the `extendsCredential`
+property used in GS1's own credential chain: it allows a [=verifier=] to
+traverse the hierarchy upward, using the [=credential-based discovery=]
+algorithm described in Section [[[#credential-based-discovery]]], until it
+reaches an [=issuer=] it recognizes. The examples below are illustrative;
+GS1's production systems use their own credential types and schemas.
+
+In the first example below, the GS1 Global Office publishes a [=recognized
+entity credential=] recognizing a Member Organization, GS1 Utopia, as the
+licensee of GS1 Prefix `950`. The `outputValidation` property constrains GS1
+Utopia to issuing credentials that conform to a GS1 Company Prefix Licence
+credential schema specific to GS1 Prefix `950`.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2",
+"https://ref.gs1.org/gs1/vc/licence-context"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:id.gs1.org",
+"type": "RecognizedIssuer",
+"name": "GS1 Global Office",
+"url": "https://www.gs1.org/"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:id.gs1utopia.example",
+"type": "RecognizedEntity",
+"name": "GS1 Utopia",
+"legalName": "GS1 Utopia Member Organization",
+"url": "https://gs1utopia.example/",
+"description": "The GS1 Member Organization for Utopia, licensee of GS1 Prefix 950.",
+"licenceValue": "950",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:id.gs1.org",
+"outputValidation": {
+"id": "https://id.gs1.org/schemas/prefix-license/950.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiBZl963sknNAHgPyslVv6VztZpfWQoRvW1htfx-UwirFo"
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:id.gs1.org#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+In the next example, GS1 Utopia publishes a [=recognized entity credential=]
+recognizing one of its member companies, Healthy Tots, as the licensee of GS1
+Company Prefix `9506000`. Healthy Tots is recognized to issue key credentials
+that conform to a schema specific to that company prefix. The `issuer` object
+carries a `recognizedIn` property referencing the GS1 Global Office credential
+from the previous example, allowing a [=verifier=] that does not directly
+recognize GS1 Utopia to continue up the hierarchy.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2",
+"https://ref.gs1.org/gs1/vc/licence-context"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:id.gs1utopia.example",
+"type": "RecognizedIssuer",
+"name": "GS1 Utopia",
+"recognizedIn": {
+"id": "https://id.gs1.org/lists/recognized-member-organizations.vc",
+"type": "RecognizedEntityCredential",
+"name": "GS1 Register of Member Organizations"
+}
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2030-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:healthytots.example",
+"type": "RecognizedEntity",
+"name": "Healthy Tots",
+"legalName": "Healthy Tots Baby Food, Inc.",
+"url": "https://healthytots.example/",
+"description": "A manufacturer of baby food, licensee of GS1 Company Prefix 9506000.",
+"licenceValue": "9506000",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:id.gs1utopia.example",
+"outputValidation": {
+"id": "https://id.gs1utopia.example/schemas/key-credential/9506000.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiWQoRvpfWW1htfsknNAHgPyslVv6VztZpfwirFoBZl963"
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:id.gs1utopia.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+In the final example, Healthy Tots issues a key credential whose subject is a
+GTIN expressed as a GS1 Digital Link URI. The GTIN `09506000134352` is
+constructed from the GS1 Company Prefix `9506000` licensed in the previous
+example. As in the diploma example in Section
+[[[#credential-based-discovery]]], the `issuer` object carries a
+`recognizedIn` property referencing the GS1 Utopia credential from the
+previous example.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2",
+"https://ref.gs1.org/gs1/vc/declaration-context"
+],
+"type": [
+"VerifiableCredential",
+"KeyCredential"
+],
+"issuer": {
+"id": "did:web:healthytots.example",
+"name": "Healthy Tots",
+"recognizedIn": {
+"id": "https://id.gs1utopia.example/lists/recognized-companies.vc",
+"type": "RecognizedEntityCredential",
+"name": "GS1 Utopia Register of Licensed Companies"
+}
+},
+"validFrom": "2026-01-15T00:00:00Z",
+"credentialSubject": {
+"id": "https://id.gs1.org/01/09506000134352",
+"name": "Healthy Tots Apple & Carrot Puree"
+},
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-01-15T09:30:00Z",
+"verificationMethod": "did:web:healthytots.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+A [=verifier=] receiving the key credential — for example, an online
+marketplace evaluating a product listing — processes the chain bottom-up using
+[=credential-based discovery=]. If the [=verifier=] does not directly
+recognize `did:web:healthytots.example`, it follows the `recognizedIn`
+reference on the key credential's `issuer` object, verifies the proof on the
+GS1 Utopia credential, and confirms that Healthy Tots appears there as a
+[=recognized entity=]. It also confirms, via the `recognizedTo` property, that
+Healthy Tots is recognized to `issue` and that the key credential conforms to
+the schema referenced by `outputValidation` — the schema-level counterpart of
+GS1's rule that an identification key be properly based on the licensed GS1
+Company Prefix. If the [=verifier=] does not recognize GS1 Utopia either, it
+repeats the process one level up, following the `recognizedIn` reference on
+the GS1 Utopia credential's `issuer` object to the GS1 Global Office
+credential. Because the GS1 Global Office is a well-known trust anchor,
+discovery terminates there, completing a recognition chain from a single trade
+item to the root of the GS1 federation. A [=holder=], such as the product's
+distributor, might staple all three credentials into a single presentation so
+that the [=verifier=] does not need to fetch any of them.
+
+UN GRID Cross-Border Trade Example
+
+This entire example is currently under review by UNTP and might be changed
+based on input from that group and others.
+
+The United Nations Global Registrar Information Directory (GRID) is a
+publicly accessible digital directory, hosted by the United Nations under
+the auspices of UN/CEFACT, that lists authoritative registrars, including
+national business registers, land registers, and trademark registers, from
+participating UN Member States. GRID addresses a critical verification gap
+in global trade and public administration: when supply chain participants,
+customs authorities, or trade finance lenders receive trade-relevant
+[=verifiable credentials=] from a foreign entity, they typically have no
+direct relationship with that entity and cannot independently verify its
+legitimate registration. Because billions of trade documents are exchanged
+globally every year, manual verification is not feasible. GRID solves this
+by providing a trustworthy, scalable map of the world's authoritative
+registrars, enabling automated verification and mitigating the risks of
+impersonation and fraud.
+
+The resulting verification chain involves three tiers of credential, each
+issued at a different time, with a different lifecycle, and by a different
+issuer:
+
+A trade document [=verifiable credential=], such as a commercial invoice,
+issued by the exporter's DID, with a lifecycle of weeks to a few months and
+issued in volumes of billions per year.
+
+A `RecognizedEntityCredential` issued by the national registrar's DID to the
+individual exporter, attesting that the exporter's DID is controlled by the
+registered legal entity, with a lifecycle spanning years to decades and one
+credential per registered entity.
+
+A `RecognizedEntityCredential` issued by GRID's DID to the national registrar,
+attesting that the registrar is a recognized, sovereign authority, with a
+lifecycle measured in decades. There are roughly one thousand such
+authoritative national registers worldwide.
+
+The discovery process runs from the trade document toward the trust anchor using
+[=identifier-based discovery=] at each step, because publishing a single
+credential that lists all registered entities in a national register, with
+potentially two million entities updated hundreds of times per day, and tens of
+millions of verifiers retrieving the list multiple times per day, might be a
+scale that is impractical for the national register to achieve. Instead, each
+registered entity holds its own individual `RecognizedEntityCredential` and
+publishes it at a `WhoisService` endpoint in its DID document. The national
+registrar likewise publishes the `RecognizedEntityCredential` that GRID issued
+to it at its own `WhoisService` endpoint. This approach decentralizes the
+publication of the list such that each recognized entity in the ecosystem
+shares the burden of distributing the information. The diagram below illustrates
+the relationships:
+
+%%{init: {"flowchart": {"wrappingWidth": 500}, "securityLevel": "loose"}}%%
+flowchart TD
+GRID["UN GRID\n[Trust Anchor]"]
+NAT["Utopian Business Register\n[National Registrar]"]
+ACME["ACME Exports Ltd.\n[Registered Exporter]"]
+
+GRID_REC["RecognizedEntityCredential\nsubject: Utopian Business Register"]
+NAT_REC["RecognizedEntityCredential\nsubject: ACME Exports Ltd."]
+INV["CommercialInvoiceCredential\nissued by ACME Exports' DID"]
+
+GRID -->|issues| GRID_REC
+GRID_REC -->|recognizes| NAT
+NAT -->|issues| NAT_REC
+NAT_REC -->|recognizes| ACME
+ACME -->|issues| INV
+
+INV -.->|"identifier-based discovery"| NAT_REC
+NAT_REC -.->|"identifier-based discovery"| GRID_REC
+
+style GRID fill:#005a9c,color:#fff
+style NAT fill:#aec6e8,color:#000
+style ACME fill:#aec6e8,color:#000
+style GRID_REC fill:#b6d9b0,color:#000,min-width:500px
+style NAT_REC fill:#b6d9b0,color:#000,min-width:500px
+style INV fill:#b6d9b0,color:#000,min-width:500px
+
+Relationship of organizations and credentials in the UN GRID ecosystem
+
+This appendix demonstrates how that three-tier chain can be expressed using
+the data model defined by this specification. The GRID credential at the top
+of the hierarchy is a `RecognizedEntityCredential` that recognizes national
+registrars as [=recognized entities=]. Each national registrar then issues an
+individual `RecognizedEntityCredential` to each of its registered members.
+Each member exporter, and the national registrar itself, publishes its
+credential at a `WhoisService` endpoint in its DID document, enabling
+[=identifier-based discovery=] as described in Section
+[[[#identifier-based-discovery]]]. The examples below are illustrative; UNTP's
+production systems use vocabulary defined by the United Nations Transparency
+Protocol [[?UNTP-DIA]].
+
+In the first example below, GRID publishes a `RecognizedEntityCredential`
+recognizing the Utopian Business Register as an authoritative national
+registrar. GRID's `issuer` DID is the trust anchor that verifiers configure
+explicitly. The `outputValidation` property constrains the Utopian Business
+Register to issuing credentials that conform to the UNTP-defined schema for
+registrar-issued entity recognition credentials.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/recognized-entities/v1",
+// highlighted text is from the UNTP vocabulary
+"https://vocabulary.uncefact.org/untp/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:grid.un.org",
+"type": "RecognizedIssuer",
+"name": "United Nations Global Registrar Information Directory",
+"url": "https://grid.un.org/"
+},
+"validFrom": "2025-01-01T00:00:00Z",
+"validUntil": "2035-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:register.business.utopia.example",
+"type": "RecognizedEntity",
+"name": "Utopian Business Register",
+"legalName": "Utopian Ministry of Commerce, Business Registry",
+"url": "https://register.business.utopia.example/",
+"description": "The national authoritative business register for Utopia, operated by the Ministry of Commerce.",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:grid.un.org",
+"outputValidation": {
+"id": "https://grid.un.org/schemas/erc-utopia.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiBZl963sknNAHgPyslVv6VztZpfWQoRvW1htfx-UwirFo"
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:grid.un.org#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+The Utopian Business Register publishes that credential at its own
+`WhoisService` endpoint, as shown in the DID document below. A verifier
+performing [=identifier-based discovery=] on the Utopian Business Register's
+DID resolves this document and retrieves the verifiable presentation at the
+service endpoint, which contains the GRID-issued credential recognizing the
+Utopian Business Register.
+
+{
+"@context": "https://www.w3.org/ns/did/v1.1",
+"id": "did:web:register.business.utopia.example",
+"assertionMethod": [{
+"id": "#issuance-key-1",
+"type": "Multikey",
+"controller": "did:web:register.business.utopia.example",
+"publicKeyMultibase": "z6Mkf5rGMoatrSj1f4CyvuHBeXJELe9RPdzo2PKGNCKVtZxP"
+}],
+service": [{
+"id": "#whois",
+"type": ["WhoisService", "PathService"],
+"serviceEndpoint": "https://register.business.utopia.example/whois.vp"
+}]
+}
+
+In the next example, the Utopian Business Register issues a
+`RecognizedEntityCredential` to one of its registered entities, ACME Exports
+Ltd. The credential asserts that the company's corporate registration number,
+`UTB-2019-041872`, is bound to the DID
+`did:web:acme-exports.utopia.example`. Before issuing this credential, the
+Utopian Business Register verified that ACME Exports controls that DID.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/recognized-entities/v1",
+// highlighted text is from the UNTP vocabulary
+"https://vocabulary.uncefact.org/untp/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:register.business.utopia.example",
+"type": "RecognizedIssuer",
+"name": "Utopian Business Register"
+},
+"validFrom": "2025-03-15T00:00:00Z",
+"validUntil": "2030-03-15T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:acme-exports.utopia.example",
+"type": ["RecognizedEntity", "Party"]
+"name": "ACME Exports",
+"legalName": "ACME Exports Ltd.",
+"url": "https://acme-exports.utopia.example/",
+"description": "A registered exporter in Utopia, corporate registration number UTB-2019-041872.",
+"registeredId": "UTB-2019-041872",
+"registrationCountry": "UTO"
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-04-10T20:08:22Z",
+"verificationMethod": "did:web:register.business.utopia.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo
+5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+ACME Exports publishes that credential at a `WhoisService` endpoint in its
+own DID document, as shown below.
+
+{
+"@context": "https://www.w3.org/ns/did/v1.1",
+"id": "did:web:acme-exports.utopia.example",
+"assertionMethod": [{
+"id": "#issuance-key-1",
+"type": "Multikey",
+"controller": "did:web:acme-exports.utopia.example",
+"publicKeyMultibase": "z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6x5GGnsfSbwqbUXwo"
+}],
+"service": [{
+"id": "#whois",
+"type": ["WhoisService", "PathService"],
+"serviceEndpoint": "https://acme-exports.utopia.example/whois.vp"
+}]
+}
+
+In the final example, ACME Exports issues a commercial invoice as a
+[=verifiable credential=] using its registered DID as the issuer.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/recognized-entities/v1",
+// highlighted text is from the UNTP vocabulary
+"https://vocabulary.uncefact.org/untp/v2"
+],
+"type": [
+"VerifiableCredential",
+"CommercialInvoiceCredential"
+],
+"issuer": {
+"id": "did:web:acme-exports.utopia.example",
+"name": "ACME Exports"
+},
+"validFrom": "2026-05-01T00:00:00Z",
+"validUntil": "2026-07-31T00:00:00Z",
+"credentialSubject": {
+"id": "https://acme-exports.utopia.example/invoices/INV-2026-00431",
+"invoiceNumber": "INV-2026-00431",
+"invoiceDate": "2026-05-01",
+"seller": {
+"id": "did:web:acme-exports.utopia.example",
+"name": "ACME Exports Ltd.",
+"registeredId": "UTB-2019-041872"
+},
+"buyer": {
+"name": "Acme Importer GmbH",
+"registeredId": "DE-HRB-123456"
+},
+"totalAmount": {
+"value": "45200.00",
+"currency": "USD"
+}
+},
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-05-01T10:15:00Z",
+"verificationMethod": "did:web:acme-exports.utopia.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}
+
+A [=verifier=] receiving the commercial invoice, such as an importing customs
+authority or a trade finance lender, performs [=identifier-based discovery=]
+to validate the invoice issuer. The [=verifier=] resolves
+`did:web:acme-exports.utopia.example` to ACME's DID document, locates the
+`WhoisService` endpoint, and retrieves the verifiable presentation published
+there. That presentation, signed by ACME's DID, contains the
+`RecognizedEntityCredential` issued by the Utopian Business Register in which
+ACME appears as a [=recognized entity=] recognized to `issue` credentials
+conforming to the UNTP commercial invoice schema. The [=verifier=] confirms
+that the invoice's `issuer.id` matches the `credentialSubject.id` in that
+credential and validates the `outputValidation` schema constraint against the
+invoice.
+
+If the [=verifier=] does not directly recognize the Utopian Business Register,
+it performs [=identifier-based discovery=] on the Utopian Business Register's
+DID in turn. The [=verifier=] resolves
+`did:web:register.business.utopia.example`, locates its `WhoisService`
+endpoint, and retrieves the verifiable presentation published there. That
+presentation, signed by the Utopian Business Register's DID, contains the
+`RecognizedEntityCredential` issued by GRID in which the Utopian Business
+Register appears as a [=recognized entity=]. Because GRID is a well-known
+trust anchor operated by the United Nations, discovery terminates there,
+completing a recognition chain from the commercial invoice to the root of the
+global trade identity infrastructure.
+
+The `registeredId` and `registrationCountry` properties used in the examples
+above are ecosystem-specific extensions defined by UNTP vocabulary [[?UNTP-DIA]]
+and carries the registrar-assigned corporate registration number and country.
+Those properties are not defined by this specification; they appear in the
+examples solely to illustrate the kind of information a registrar-issued
+`RecognizedEntityCredential` might carry in practice.
+
+Holder-Based Delivery
+
+The [=credential-based discovery=] and [=identifier-based discovery=] processes
+described in Section [[[#algorithms]]] both require a [=verifier=] to retrieve
+information from the network: the former fetches the [=recognized entity
+credential=] named by a `recognizedIn` property, while the latter resolves the
+[=issuer=]'s identifier and fetches a [=verifiable presentation=] from a service
+endpoint. A [=verifier=] that is offline, or that is unwilling to contact a
+third party during a transaction, cannot perform either process.
+
+This example demonstrates holder-based delivery, in
+which the [=holder=] supplies the [=recognized entity credential=] to the
+[=verifier=] alongside the [=verifiable credential=] it supports, using the
+"certificate stapling" mechanism described in Section
+[[[#recognizedentitycredential]]]. Because the [=holder=] provides every
+[=verifiable credential=] needed to establish the recognition chain, the
+[=verifier=] performs the entire evaluation locally. This approach also improves
+privacy for the [=holder=], as no list publisher learns which [=verifier=] is
+performing verification.
+
+Holder-based delivery depends on each [=recognized entity=] holding a
+[=recognized entity credential=] of its own, rather than on a single
+[=verifiable credential=] that enumerates every entity in an ecosystem. A
+registration authority that issues one credential per registered entity, as in
+Section [[[#un-grid-cross-border-trade-example]]] above, enables that entity to
+present its own recognition information without contacting the authority.
+
+In the scenario below, a mobile inspector verifies a food safety certificate at
+a remote processing facility where neither party has network connectivity. The
+diagram below shows the entire flow, including the steps that each party
+performs while still online.
+
+sequenceDiagram
+participant A as Food Safety Authority
+participant H as Processing Facility (Holder)
+participant V as Inspector (Verifier)
+autonumber
+rect rgb(235, 244, 235)
+Note over A,V: While online, before the exchange
+A->>H: RecognizedEntityCredential recognizing the facility
+Note right of A: Issued once, valid for a year
+H->>H: Cache credential and its recognized entity credential
+A->>V: Trust anchor configuration
+Note left of V: Verifier caches the authority DID document,<br/>verification keys, and schemas
+end
+rect rgb(252, 244, 235)
+Note over H,V: Offline exchange at the facility
+V->>H: Verifiable Presentation Request
+Note left of V: acceptedIssuers uses recognizedIn to ask for<br/>the supporting recognized entity credential
+H->>V: Verifiable Presentation
+Note right of H: Contains the certificate and the stapled<br/>recognized entity credential
+V->>V: Verify proofs and evaluate recognition chain locally
+end
+
+Holder-based delivery of a recognized entity credential to an offline verifier
+
+Because neither party can retrieve anything during the exchange, both cache
+what they need in advance. The [=holder=] caches:
+
+The [=verifiable credentials=] it intends to present.
+
+The [=recognized entity credential=] issued to it by the authority that
+recognizes it, and any further [=recognized entity credentials=] needed to
+reach a widely recognized trust anchor, as described in Section
+[[[#credential-based-discovery]]].
+
+The [=verifier=] caches:
+
+The identifiers of the [=issuers=] it accepts as trust anchors, along with the
+[=controlled identifier documents=] and verification key material needed to
+verify proofs from those [=issuers=] without resolving their identifiers.
+
+Any schemas referenced by the `outputValidation` property of a [=recognized
+action=] it intends to enforce, since those cannot be fetched while offline.
+
+Revocation or status information, which is necessarily as fresh as the moment
+the [=verifier=] went offline; see Section [[[#stale-credentials]]] below.
+
+The [=verifier=] asks for both [=verifiable credentials=] using a
+verifiable
+presentation request, as defined in the [[[VCALM]]] specification. The
+`acceptedIssuers` property of a `credentialQuery` accepts an object containing a
+`recognizedIn` property, which lets the [=verifier=] state that it will accept
+any [=issuer=] recognized in a given [=recognized entity credential=], rather
+than having to enumerate individual [=issuers=] it already knows:
+
+{
+"query": [{
+"type": "QueryByExample",
+"credentialQuery": {
+// shown to the facility operator by their wallet
+"reason": "Please present a food safety certificate for this lot.",
+"example": {
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": "ExampleFoodSafetyCertificate"
+},
+// the verifier accepts any issuer recognized in the authority's
+// recognized entity credential, and expects the holder to staple it
+"acceptedIssuers": [{
+"recognizedIn": {
+"id": "https://food-safety.utopia.example/lists/processors.vc",
+"type": "RecognizedEntityCredential"
+}
+}]
+}
+}],
+// bind the response to this verifier and this exchange
+"domain": "inspector.food-safety.utopia.example",
+"challenge": "c31f9a84-8d20-11f1-b4e7-3f21c7d90e12"
+}
+
+The [=holder=] responds with the [=verifiable presentation=] shown below. It
+contains two [=verifiable credentials=]: the food safety certificate issued by
+the processing facility, and the [=recognized entity credential=], issued by the
+national food safety authority, that recognizes the facility as an [=issuer=] of
+such certificates.
+
+{
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": "VerifiablePresentation",
+"holder": "did:web:processor.utopia.example",
+"verifiableCredential": [{
+// the credential that the verifier asked to see
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"ExampleFoodSafetyCertificate"
+],
+"issuer": {
+"id": "did:web:processor.utopia.example",
+"name": "Utopia Valley Food Processing"
+},
+"validFrom": "2026-08-01T00:00:00Z",
+"validUntil": "2027-08-01T00:00:00Z",
+"credentialSubject": {
+"id": "https://processor.utopia.example/lots/2026-08-14-A",
+"name": "Apple and Carrot Puree, Lot 2026-08-14-A"
+},
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-08-14T09:12:00Z",
+"verificationMethod": "did:web:processor.utopia.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z36XPGByaH3rvtKfwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}, {
+// the stapled recognized entity credential, delivered by the
+// holder so that the offline verifier does not need to fetch it
+"@context": [
+"https://www.w3.org/ns/credentials/v2",
+"https://www.w3.org/ns/credentials/examples/v2"
+],
+"type": [
+"VerifiableCredential",
+"RecognizedEntityCredential"
+],
+"issuer": {
+"id": "did:web:food-safety.utopia.example",
+"type": "RecognizedIssuer",
+"name": "Utopian Food Safety Authority"
+},
+"validFrom": "2026-01-01T00:00:00Z",
+"validUntil": "2027-01-01T00:00:00Z",
+"credentialSubject": [{
+"id": "did:web:processor.utopia.example",
+"type": "RecognizedEntity",
+"name": "Utopia Valley Food Processing",
+"legalName": "Utopia Valley Food Processing Cooperative",
+"recognizedTo": {
+"type": "RecognizedAction",
+"action": "issue",
+"recognizedBy": "did:web:food-safety.utopia.example",
+"outputValidation": {
+"id": "https://food-safety.utopia.example/schemas/certificate.json",
+"type": "JsonSchema",
+"digestMultibase": "uEiBZl963sknNAHgPyslVv6VztZpfWQoRvW1htfx-UwirFo"
+}
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-01-02T14:30:00Z",
+"verificationMethod": "did:web:food-safety.utopia.example#issuance-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "assertionMethod",
+"proofValue": "z3FXQjBHwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJoH"
+}
+}],
+"proof": {
+"type": "DataIntegrityProof",
+"created": "2026-08-20T11:05:00Z",
+"verificationMethod": "did:web:processor.utopia.example#authentication-key-1",
+"cryptosuite": "ecdsa-rdfc-2019",
+"proofPurpose": "authentication",
+// echoes the challenge and domain from the request above
+"challenge": "c31f9a84-8d20-11f1-b4e7-3f21c7d90e12",
+"domain": "inspector.food-safety.utopia.example",
+"proofValue": "z58dRtaBHwoEQXsnUXUAjwd2Ceiqke1GPfjAPAFYoXKo5ftPdwE7QZ8Mw22SC5LSRQg1d8bhe3252hYJ"
+}
+}
+
+The [=verifier=] evaluates the presentation without any network access. It
+verifies the proof on the [=verifiable presentation=], confirms that the
+`challenge` and `domain` match the ones it issued, and verifies the proof on
+each contained [=verifiable credential=] using its cached key material. It then
+confirms that the `issuer` of the food safety certificate,
+`did:web:processor.utopia.example`, appears as the `id` of a [=recognized
+entity=] in the `credentialSubject` of the [=recognized entity credential=], and
+that the facility is recognized to `issue` credentials conforming to the schema
+named by that [=recognized action=]'s `outputValidation`. Finally, the
+[=verifier=] confirms that it recognizes
+`did:web:food-safety.utopia.example`, the [=issuer=] of the [=recognized entity
+credential=], as a trust anchor.
+
+Stale Credentials
+
+A [=verifier=] is not obliged to accept a [=holder=]-provided [=recognized
+entity credential=]. As noted in Section [[[#recognizedentitycredential]]], a
+[=verifier=] that requires more recent information might ignore the provided
+[=verifiable credential=] and retrieve the [=recognized entity credential=]
+itself once it regains connectivity. An offline [=verifier=] cannot do so during
+the exchange, and therefore accepts a bounded staleness risk: recognition might
+have been revoked after the [=holder=] cached its [=recognized entity
+credential=], or after the [=verifier=] last refreshed its own cached data.
+
+Deployments reduce that risk by configuring a maximum acceptable age for stapled
+[=recognized entity credentials=], by issuing [=recognized entity credentials=]
+with validity periods appropriate to the expected offline interval, and by
+refreshing cached trust anchor and status information whenever connectivity is
+available. Related guidance is provided by threat
+T10: Stale
+Recognition Acceptance.
+
+Every check the [=verifier=] performs in this example is cryptographic and
+local. Holder-based delivery changes how the [=recognized entity credential=]
+reaches the [=verifier=], not the checks that the [=verifier=] performs on it. A
+[=holder=] cannot alter a [=recognized entity credential=] without invalidating
+its proof, although a [=holder=] does choose which [=verifiable credentials=] to
+present; see threat
+T8:
+Unvetted Recognized Entity Credential Propagation.
+
+Relationship to Other Technologies
+
+This specification was designed with awareness of existing "trust
+infrastructure" technologies, three of which are described below. The data model
+defined in this specification is capable of expressing many of the concepts
+found in these technologies and is designed to interoperate with them via the
+`recognizedIn` property.
+
+ETSI Trust Service Lists
+
+The European Telecommunications Standards Institute (ETSI) defines a format
+for Trust Service Lists (TSLs) in [[?ETSI-TRUST-LISTS]], which is used across
+the European Union to publish lists of trusted service providers — entities
+authorized to issue electronic signatures, seals, timestamps, and other
+trust services under the eIDAS regulation. Each EU member state publishes a
+national TSL, and the European Commission publishes a List of the Lists (LoTL)
+that references each national TSL, forming a well-defined, hierarchical trust
+federation.
+
+ETSI Trust Service Lists share several conceptual goals with this
+specification: both describe entities that are recognized to perform specific
+actions, associate those entities with identifying metadata, and are intended
+to be consumed by relying parties during validation. However, this
+specification differs from ETSI Trust Service Lists in several key ways:
+
+Format: ETSI Trust Service Lists are expressed as signed XML
+documents. This specification uses JSON-LD and the Verifiable Credentials Data
+Model, enabling integration with the broader decentralized identity ecosystem.
+
+Governance: ETSI Trust Service Lists are governed by a
+centralized, hierarchical structure rooted in EU member state authorities.
+This specification supports both centralized and decentralized governance
+models, allowing any entity to act as a recognizing authority within its
+own ecosystem.
+
+Scope: ETSI Trust Service Lists are scoped to electronic
+trust services regulated under eIDAS. This specification is domain-agnostic
+and can express recognition across any sector, including education,
+healthcare, and financial services.
+
+Holder-centric sharing: ETSI Trust Service Lists are
+published at well-known URLs and fetched by relying parties. This
+specification additionally supports "certificate stapling", where a holder
+presents a recognized entity credential directly to a verifier, reducing the need
+for verifiers to contact a central registry during each interaction.
+
+X.509 Certificate Authority Lists
+
+X.509 [[RFC5280]] is a standard for public key infrastructure (PKI) that
+defines the format for certificates and certificate chains. Certificate
+Authorities (CAs) are entities trusted to issue X.509 certificates that bind
+a public key to an identity. Trust in a CA is typically established through
+inclusion in a browser or operating system trust store — a curated list of
+root CAs — or through a certificate chain that traces back to such a root.
+
+X.509 CA infrastructure and this specification both address the problem of
+establishing whether a given entity can be relied upon to perform a specific
+action within a given context. However, this specification differs from X.509 CA
+lists in several key ways:
+
+Data model: X.509 certificates encode identifier and public key
+association in a binary ASN.1 format with a fixed schema. This specification
+uses a flexible, extensible JSON-LD data model that can express arbitrary
+metadata about recognized identifiers and the actions that the entities they
+identify are authorized to perform.
+
+Trust hierarchy: X.509 PKI relies on a strictly hierarchical
+chain of trust rooted in a small number of globally trusted root CAs. This
+specification supports a web-of-trust model where multiple, overlapping, and
+competing recognition registries can coexist, and ecosystem participants can
+choose which recognizing authorities they trust.
+
+Action semantics: X.509 certificates express key usage and
+extended key usage flags to constrain what a certificate may be used for, but
+these are limited to a fixed set of cryptographic operations. This
+specification expresses recognition for arbitrary, domain-specific actions
+such as issuing a particular type of credential, enabling richer and more
+context-specific claims of recognition.
+
+Decentralized issuance: Adding a new CA to existing trust
+stores requires acceptance by browser vendors and/or OS maintainers, which is a
+centralized and often slow process. In contrast, this specification allows any
+entity to issue a `RecognizedEntityCredential` and to share it within its
+ecosystem without requiring approval from a central gatekeeper.
+
+ISO/IEC 18013-5 mDL VICAL
+
+ISO/IEC 18013-5 defines the mobile Driving License (mDL), a standard for
+expressing driver's licenses as mobile documents (mDocs). As part of that
+ecosystem, the standard defines a Verified Issuer Certificate Authority List
+(VICAL), which is a signed data structure containing a list of entities that are
+recognized as certificate authorities empowered to issue mDLs. A relying party
+uses the VICAL to determine whether the issuer of a presented mDL is trusted
+within its jurisdiction.
+
+The VICAL concept and this specification share the goal of enabling relying
+parties to determine whether a credential issuer is recognized within a
+particular ecosystem. However, this specification differs from the mDL VICAL
+in several key ways:
+
+Format: The VICAL is a CBOR-encoded, COSE-signed data
+structure which is tightly coupled to the mDL ecosystem. This specification
+uses JSON-LD and the Verifiable Credentials Data Model, making it suitable
+for a broader range of credential types and deployment environments.
+
+Scope: The VICAL is specific to the mDL use case and the
+ISO/IEC 18013-5 trust model. This specification can use any type of credential
+to express recognition of any type of verifiable credential and any kind of
+action; it is not limited to issuing credentials for driving licenses.
+
+Action expressiveness: The VICAL records CAs which are trusted
+to issue mDL certificates, but does not have a general mechanism by which to
+express the scope or other types of actions a CA is recognized to perform. This
+specification's `RecognizedAction` structure explicitly captures the actions a
+recognized entity is authorized to perform and against which credential schemas,
+enabling more fine-grained authorization.
+
+Decentralization: The VICAL is managed by a designated VICAL
+provider within each mDL ecosystem and distributed through centralized
+channels. This specification allows any entity to publish a recognition
+credential without relying on a designated central provider, supporting
+more open and composable trust ecosystems.
+
+Acknowledgements
+
+The Working Group thanks the following individuals for significant
+contributions to the community: TBD
+
+The use cases in Section [[[#use-cases]]] are derived from an earlier
+Recognized Actions Use Cases document, developed over the course of
+several years, that has since been retired and replaced by that section. The
+Working Group thanks the authors of that document for establishing the
+foundation on which the use cases in this specification are built (in
+alphabetical order): David Chadwick (Truetrust Ltd), Oskar van Deventer (TNO),
+Isaac Henderson Johnson Jeyakumar (Fraunhofer IAO, Germany), Rieks Joosten
+(TNO), Line Kofoed (Bloqzone), Manu Sporny (Digital Bazaar), Shigeya Suzuki
+(Keio University), and Konstantin Tsabolov (Spherity).
+
+Work on this specification has been supported by the Rebooting the
+Web of Trust community facilitated by Christopher Allen, Joe Andrieu, and
+Erica Connell. The participants in the Internet Identity Workshop,
+facilitated by Phil Windley, Kaliya Young, Doc Searls, and Heidi Nobantu Saul,
+also supported the refinement of this work through numerous working sessions
+designed to educate about, debate on, and improve this specification.
+
+The Working Group would like to thank the following individuals for reviewing
+and providing feedback on the specification (in alphabetical order):
+
