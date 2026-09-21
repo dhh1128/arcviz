@@ -1,0 +1,63 @@
+# Daniel Hardman's posture on visualizing ACDCs
+
+**Everything in section 1 and 2 is Daniel Hardman's own words, verbatim, from 2026-09-19.** Typos are preserved; a verbatim quote is evidence, and correcting it quietly would make it less so. Everything in section 3 is **synthesized** — a session's reading of his words, never put to him or not yet ruled on.
+
+This file exists because on 2026-09-18 he stopped the design phase, and the reason he gave was that there was no agreed statement of what the rendering is for: *"I don't even know what the plan for this phase is... The most basic foundation that's missing: what is even the set of approved goals for this rendering? I don't even believe we're aligned there."* Everything the project had built until then was built against constraints rather than goals. This is the first document in the repository that records the goal side, and it records it in his words rather than in a session's paraphrase.
+
+Read [decisions.md](decisions.md) for what he has and has not ratified, and note that the ~50 P-numbered, Rule-numbered and AF-numbered claims in `docs/research/` are a prior session's synthesis that was never put to him and carries no standing.
+
+## 1 · The context he gave
+
+> Digital credentials are supposed to be convenient -- and they are, in some ways. No more physical stuff to carry around, except your phone. Can't be lost. Revocation is cheap. Renewal should be cheap and painless. And it should be easier to achieve much higher levels of assurance.
+>
+> However, the utility of this technology is significantly eroded on every side. On the security front, bad identifiers make evidence not quantum-safe, ephemeral (only evaluable in the "now", not with respect to a historical point), and lossy.
+>
+> On the usability front, Apple and Google have dumbed down the user experience in their wallets. They're using the ISO mDoc/mDL technology, which is visually pretty but is based on x509 certs, which are deeply flawed. Fundamentally, they want a user to *trust them* because that trust is the locus of a lot of financial and reputational and brand loyalty value to them. The claim that Apple and Google have made is that people are incapable of managing keys or understanding evidence for themselves, and can handle only the simplest of user experiences; everything else has to be delegated to a tech giant surveillance capitalist because that's the only solution customers will accept.
+>
+> Governments are rebelling. The EU has the eIDAS initiative which defines citizen wallets and the credential behaviors that they must implement. It uses SD-JWTs and OIDC4VP/OIDC4VC, which are both fundamentally flawed, IMO. OIDC is fundamentally about trusting an identity provider's judgment, although its recent incarnations are less IDP-dependent. It also defines business wallets (a deeply wrong-headed metaphor, IMO; in the physical world, businesses never have wallets, and introducing them digitally reinforces an opaque centralization that is actively unsafe and harmful. Google and Apple are replaced by governments as digital overlords, enthrones data and GDPR instead of human rights and agency as the central concern and the UX is worse.)
+>
+> What all these parties have in common is that they believe a user is capable of evaluating only the simplest kind of evidence -- one small card at a time, and that the world can run on extremely weak guarantees from evidence.
+>
+> When I started the arcviz project, I wanted to pursue a different vision.
+>
+> ACDCs can be rock-solid evidence -- permanent, quantum-safe, and associated with identifiers that have very strong guarantees about robust key control, transparency, and so forth. Because of their combinatorics, they can be used to prove far more sophisticated evidentiary propositions than what a single cred can deliver. They are truly decentralized (no benevolent overlord). And their range of expression is far, far greater than any other credential tech. Plus, they are great on privacy.
+>
+> But all that sophistication means there is a lot of complexity. Apple and Google are not wrong that most people are not interested in the details. Where I think they're wrong is to put a ceiling on the experience for all users, and to invest nothing in progressive disclosure or in teaching correct mental models.
+
+Supporting papers he named, in `~/code/me/papers/`: `acdc-vc-diff.md` and `x509-prob.md` (read these), `kspqs.md` and `was.md` (abstracts), plus `bdlp.md` on client-server power imbalance and `aold.md` on binding credentials about people to Linked Data.
+
+## 2 · The eight points
+
+> So, with that context, here is my posture with respect to visualizing ACDCs. I'm not stating these as goals, exactly, but I believe we could distill some goals from this list.
+>
+> 1. Security that proves everything is only as good as what a user is not trained to ignore. Therefore, it MUST be the case that evidence is presented in a way that's initially friendly to an unsophisticated user (the Google/Apple target) -- but this must be the tip of a progressive disclosure strategy iceberg that allows users to drill in and learn about what they're seeing, so true models are taught, and so people who want to go deeper (either because they're curious/sophisticated, or because stakes are higher) can do so without a different tool. There must be progressive disclosure hints and affordances.
+>
+> 2. Software should evalute everything and surface concerns with as little human judgment as possible. However, what evidence is supposed to prove is context-specific. The DMV would say that an expired or revoked driver's license isn't supposed to be used to prove anything, because they no longer stand behind any facts in the credential (even in the past; if they become aware of a factual error in an unexpired driver's license, they revoke the problem one and re-issue, but if they become aware of a factual error in an expired one, they do nothing, because that one has no SLA). But if I'm trying to prove that Sam once had a driver's license that said "Sham" when it should have said "Sam", the revoked driver's license is perfect evidence. So this creates a tension: we want software to verify, but we need context before we know whether the proving goals are achieved. The resolution of this tension is that KERI's IPEX begins with a message where a verifier provides a schema of the evidence they're looking for. This can then be compared to the schema of the evidence. In theory, this solves the problem. But there are two problems with the solution: A) it's also possible to present without a verifier requesting; and B) the requesting mechanism isn't as mature and expressive as it should be. That means that plugging the gap between what's proved and what *should* be proved is imperfect. But the compensation is that the vast majority of high-frequency provings should be canned, not ad hoc queries. So the schemas for the common kinds of proofs should be well known, and wallets should recognize them. An online purchase that asks for a credit card and a shipping address does not need an ad hoc schema. Etc.
+>
+> 3. Both cursory and deep inspection of evidence are valid modes for a user.
+>
+> 4. Visual inspection of evidence is almost never going to be how a verifier decides something. Decisions will be made by software that may surface questions to users (either dynamically, or to configure standing policy). So the display in arcviz is about helping users understand more than it is about proving something. *Mostly*. *By default*. This does not relieve arcviz of the need to provide rigorous evidence analysis, but it does provide guidance about progressive disclosure. An example of progressive disclosure is having things collapsed by default, but allowing them to be expanded. Another example is having a 3-dots menu. Another example is hover text.
+>
+> 5. Before a user can evaluate whether a particular attribute of evidence is doing the proper job, the user must have a confident mental model of what they're looking at. At first glance, the most important question about an ACDC DAG is: what kinds of evidence are there? (I am looking at a driver's license, a proof of age, and a credit card). The second question is, how are these pieces of evidence related? (The holder of the driver's license is the same party that is proving over 18, but the credit card belongs to someone else). The third question is whether all the details line up (expiration, state where DL issued, whether the DL has a statment about right to use a motorcycle, whether anything has been revoked). And the fourth question is data-oriented: given correct evidence, what data should I harvest from this evidence (e.g., I need to persist the credit card number long enough to charge the customer, so I need that specific field).
+>
+> 6. Although I presented point 5 with an ordered sequence of questions, that is not quite how a user *sees*. Seeing is partly a gestalt, and gestalt perception is quite important. If software is able to determine that something is *wrong* (meaning that the evidence fails to achieve its provable intention, e.g., because something is revoked or edges don't connect where they're supposed to, or a signature is wrong, etc), there should be an immediate gestalt signal that's unmistakable. Probably that signal should be something big and general (e.g., a red border around *everything*, with an error string). In addition, pointers to the specific place where the problem resides would be helpful. This is analogous to what happens when a user fills out a form, and 2 of the 10 required fields are problematic. Those 2 fields turn red, PLUS there's a big message somewhere that the user can't miss.
+>
+> 7. Building on 6, redundancy is not a bad thing. Signaling something only with color isn't great for the color-blind, but that doesn't mean we shouldn't use color; it means whe shouldn't *only* use color. Etc. Many times, we want 2 or 3 clues for the same signal.
+>
+> 8. I do want a print affordance. However, this can be lossy. People don't make sophisticated evidentiary judgments of a DAG of evidence just from printed pages, I theorize. They might make a judgment from the screen, and then print a summary. Or something like that. So constraining our design ceiling to what can be conveyed in print is unwise.
+
+### Two amendments he made afterwards
+
+> **On point 6 restated (2026-09-19).** Teaching isn't the primary goal. The primary goal is orientation or framing or basic understanding/eval, with affordances. Teaching is secondary but should never be ignored. And the affordances should surface more learning that is still aligned with the first-glance processing.
+
+> **On lossless presentation (2026-09-19).** I think this is a good general goal, but it is not absolute and should be framed with "should", not "SHOULD" and not "MUST". Lossiness is not the worst failure mode, and sometimes it's preferable to other things, maybe. I'm not listing when those sometimes are, yet. Just speculating that we might find some.
+
+## 3 · SYNTHESIZED — candidate goals, never approved
+
+Everything below is a session's distillation of section 2. **He has not ratified any of it.** It is recorded so the next session does not re-derive it, not so the next session can cite it.
+
+Five candidates were distilled and filed as `R-NMG3` in the `tagged` store: teach a correct mental model of what is being looked at; serve the cursory glance and the deep audit in one tool with no expert mode; make the software's evaluation legible rather than making the human do the evaluating; make "something is wrong" unmissable at a glance and locatable in detail; and do not let the renderer become the lossy layer. He softened the fifth (see the amendment above) and restated the first as secondary to orientation — but he never ruled on the set. **arcviz still has no approved goal set.**
+
+Three tensions inside his own posture were surfaced and remain open, all in the `tagged` store: the gestalt alarm's value depends on a base rate nobody has stated, and a whole-render alarm that fires often is exactly how users get trained to ignore it, which point 1 warns against (`P-A7AM`); helping-a-user-understand and making-a-user-notice compete for the same pixels and point 4 does not say which yields (`Q-X6X1`, answered by his amendment above); and point 2's irreducible band, where only the human knows the purpose, needs a rendered state of its own — "we could not evaluate this because nobody said what it was for" is distinct from pass and from fail.
+
+Run `tagged list` in this repo for the current state of all of it.
