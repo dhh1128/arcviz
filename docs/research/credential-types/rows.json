@@ -1,0 +1,4312 @@
+[
+ {
+  "id": 1,
+  "name": "SEDI_Identity",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "nameGiven",
+   "nameFamily",
+   "dob",
+   "image",
+   "faceTemplate",
+   "residenceStreet",
+   "residenceCity",
+   "residenceState",
+   "residencePostal",
+   "residenceCounty"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"Issuee: the holder's AID\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 2,
+  "name": "SEDI_Age",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "asOf",
+   "ageOver13",
+   "ageOver16",
+   "ageOver18",
+   "ageOver21",
+   "ageOver55",
+   "ageOver65"
+  ],
+  "fields_known": true,
+  "field_note": "The `A` aggregate is a set of individually-blinded blocks: an issuee block {d, u, i}, an as-of block {d, u, asOf}, and one block per age threshold; `d` and `u` recur in each block and are listed once here.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "A",
+   "has_issuee": true,
+   "issuee_note": "an issuee block carrying `i`, \"the holder's AID\", inside the `A` aggregate",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 3,
+  "name": "SEDI_Guardian",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "basis",
+   "subtype",
+   "powers",
+   "fiduciary",
+   "capacityConditioned",
+   "residualParentalRights",
+   "recognition",
+   "effectiveDate",
+   "reviewDueDate",
+   "expiryDate"
+  ],
+  "fields_known": true,
+  "field_note": "`recognition` is a nested container: authorityType, court, caseNumber, orderDate, lettersReference, instrumentReference, appointingState, registrationStatus, utahRegistrationReference. Edges `e` are subject, authorization, scope.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"Issuee = the GUARDIAN's AID (holder != subject)\"",
+   "names_other_credential": true,
+   "subject_stated": "The credential is HELD BY THE GUARDIAN (issuee) and names the WARD by edge - the holder-not-subject invariant"
+  }
+ },
+ {
+  "id": 4,
+  "name": "SEDI_AgePortraitPresentation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "ageOver21",
+   "venue",
+   "occurredAt"
+  ],
+  "fields_known": true,
+  "field_note": "Edges `e` are identity and age, combining a sedi-id and a sedi-age credential by I2I edge.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"Issuee = the verifier (Disclosee) AID\", inverting the usual direction; \"Issuer = the holder (Discloser); issuee = the verifier (Disclosee)\"",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 5,
+  "name": "FaceToFaceCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "knownAs",
+   "dt",
+   "assertDate",
+   "firstMet",
+   "lastInteraction",
+   "ongoing",
+   "minutes",
+   "modalities",
+   "keyControl",
+   "biometricHashes",
+   "biometricProtocol",
+   "basis",
+   "caveats"
+  ],
+  "fields_known": true,
+  "field_note": "Union of two harvest entries. The bakobo schema declares all sixteen; the provenant public-schema copy declares a subset (d, u, i, dt, assertDate, minutes, biometricHashes, basis, caveats).",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"Identifier that issuee controls, according to issuer\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 6,
+  "name": "ProofOfControlCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "res",
+   "be",
+   "assertDate",
+   "validUntil"
+  ],
+  "fields_known": true,
+  "field_note": "Union of three harvest entries (bakobo current, bakobo v1.1.0, provenant public-schema); only the current bakobo schema declares `validUntil`.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"Identifier of issuee\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 7,
+  "name": "gcd-credential (Generalized Cooperative Delegation)",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "gfw",
+   "facet",
+   "constraints",
+   "terminatingEvents",
+   "disclosables",
+   "role",
+   "c_goal",
+   "c_pgeo",
+   "c_rgeo",
+   "c_jur",
+   "c_ical",
+   "c_upto",
+   "c_proto",
+   "c_prove",
+   "c_human",
+   "c_after",
+   "c_before"
+  ],
+  "fields_known": true,
+  "field_note": "Union across five harvest entries spanning three schema versions: bakobo v3.1 and v2.0.1 organise the payload into `facet`, `constraints`, `terminatingEvents` and `disclosables` containers; bakobo v1.0.0 and the provenant public-schema copy use the flat `c_*` constraint fields; the VVP archived draft's sample carries only d, u, i, dt, c_goal, c_proto. `c_upto` exists only in an uncommitted public-schema edit. Rules `r` carry noRoleSemanticsWithoutGfw, issuerNotResponsibleOutsideConstraints, noConstraintOutsideConstraints/noConstraintSansPrefix, useStdIfPossible, onlyDelegateHeldAuthority, duties.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"AID of the delegate (the issuee)\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 8,
+  "name": "AwardCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "effective_dt",
+   "issuer_name",
+   "award_name",
+   "category",
+   "timeframe",
+   "details"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same field list.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"AID of issuee (award recipient)\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 9,
+  "name": "ai-coder-license",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "effective_dt",
+   "expire_dt",
+   "issuer_name",
+   "issuee_name"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same field list.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "a.i \"AID of issuee\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 10,
+  "name": "ai-user-coca",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "effective_dt",
+   "coc"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same field list. `coc` is \"The code of conduct to which the issuer commits. SHOULD hold the SAID of a document published elsewhere, OR HTML encoded as a data URL.\"",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes by field - `a.i` is present, though its description reads \"AID of issuee (award recipient)\" while the credential is an issuer self-attestation",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 11,
+  "name": "orgVet",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "loa",
+   "lids"
+  ],
+  "fields_known": true,
+  "field_note": "Three harvest entries (bakobo `org-vet`, public-schema `org-vet`, public-schema `ovc-org-vet`) declare the same four properties; the two public-schema copies are separate registry entries with different SAIDs sharing the `orgVet` credentialType string.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no `i` declared in `a` - the schema names an issuer `i` at the top level only (`additionalProperties` is true, so an issuee is not forbidden)",
+   "names_other_credential": false,
+   "subject_stated": "the org being vetted is identified through `lids` rather than as an issuee"
+  }
+ },
+ {
+  "id": 12,
+  "name": "citation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "sdt",
+   "des",
+   "typ",
+   "lbl",
+   "content",
+   "siz",
+   "loc"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same field list; `content` is a nested container {d, u, cargo}.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - no `i` in `a`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 13,
+  "name": "foreign-artifact-affidavit / Foreign Artifact ACDC",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "dt",
+   "art_digest",
+   "content_identifier",
+   "content_digest",
+   "art_posture",
+   "rev_latency",
+   "content_type",
+   "content_size",
+   "content_location",
+   "filename",
+   "description",
+   "provenance"
+  ],
+  "fields_known": true,
+  "field_note": "Union of three harvest entries. bakobo names the digest field `art_digest`; provenant public-schema names the same slot `content_identifier`; the ToIP dossier spec states only a minimum of `content_digest` (\"SHOULD be a bSAID or xSAID\") and `content_type`.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - \"It MUST be a valid ACDC with no issuee\"; \"A standard, issuee-less ACDC\"",
+   "names_other_credential": false,
+   "subject_stated": "the subject is an artifact, not a party"
+  }
+ },
+ {
+  "id": 14,
+  "name": "DataAttestation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "digest"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same three properties.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - no `i` in `a`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 15,
+  "name": "BindKeyAttestation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "pubkey",
+   "startDate",
+   "stopDate",
+   "uses"
+  ],
+  "fields_known": true,
+  "field_note": "Both harvest entries (bakobo and provenant public-schema) declare the same field list.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - no `i` in `a`; the subject is the issuer's own key",
+   "names_other_credential": false,
+   "subject_stated": "the subject is the issuer's own key"
+  }
+ },
+ {
+  "id": 16,
+  "name": "Dossier (Base)",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "assemble_dt",
+   "assembly_dt",
+   "assembler",
+   "purpose",
+   "ref",
+   "gov",
+   "evt_dt",
+   "evt_loc",
+   "jur",
+   "class",
+   "cls",
+   "phase",
+   "gov_rules",
+   "fi"
+  ],
+  "fields_known": true,
+  "field_note": "Union of four harvest entries (bakobo, provenant public-schema, the ToIP dossier spec, the VVP archived draft). The dossier spec writes `assembly_dt` and `cls` where bakobo and public-schema write `assemble_dt` and `class`, and adds `fi`; the VVP sample's `a` block carries only `d` and `dt`, with the payload in the edges (`e` = vetting, alloc, brand, bproxy, delsig). Top-level schema properties are v, d, i, s, u, rd/ri, r, a, e.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - \"it has an issuer but no issuee\"; the schema says \"A dossier SHOULD NOT include an issuee\"",
+   "names_other_credential": true,
+   "subject_stated": "a cryptographically verifiable affidavit about the composition and integrity of that collection rather than as a credential about a subject"
+  }
+ },
+ {
+  "id": 17,
+  "name": "a2p-campaign-credential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "brandId",
+   "campaignId",
+   "campaignType",
+   "startDate",
+   "endDate",
+   "telephoneNumbers",
+   "authorizedServiceProvider",
+   "campaignAttributes"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 18,
+  "name": "AegisStdVetCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "id",
+   "score",
+   "iat",
+   "exp",
+   "irp",
+   "cat"
+  ],
+  "fields_known": true,
+  "field_note": "The harvest flags that the `cat` description (\"short strings that describe ways that the key will be used\") appears copied from another schema and does not match a vetting-result field; recorded verbatim without resolving it.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 19,
+  "name": "BrandOwnerCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "vcard",
+   "goals"
+  ],
+  "fields_known": true,
+  "field_note": "Two harvest entries (`brand-owner` and `ovc-brand-owner`) declare the same five properties under different schema SAIDs and the same `BrandOwnerCredential` credentialType string.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 20,
+  "name": "TCRVettingCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "legalCompanyName",
+   "legalCompanyAddress",
+   "taxId",
+   "vettingScore",
+   "LEI"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 21,
+  "name": "TNAllocationCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "numbers",
+   "channel",
+   "doNotOriginate",
+   "startDate",
+   "endDate"
+  ],
+  "fields_known": true,
+  "field_note": "Union of the provenant public-schema entry and the VVP archived draft's sample. The VVP sample nests `numbers` as {rangeStart, rangeEnd}, adds an `e.tnalloc` edge {n, s, o} to a parent TNAlloc credential and a rule `perBrand`, and has no startDate/endDate. The ToIP dossier spec names the type but defers its fields to VVP.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - \"confers on its issuee\"; issuee in `a.i`",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 22,
+  "name": "TelephoneNumberCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "numbers",
+   "channel",
+   "doNotOriginate",
+   "startDate",
+   "endDate"
+  ],
+  "fields_known": true,
+  "field_note": "The source records this as the same field set as TN Allocation (row 21).",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 23,
+  "name": "VvpDossierCredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "name"
+  ],
+  "fields_known": true,
+  "field_note": "The payload is carried in the edges (`e`) block rather than in `a`, which is why the attributes block has only three fields.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 24,
+  "name": "LegalEntityvLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "LEI"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 25,
+  "name": "QualifiedvLEIIssuervLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "LEI",
+   "gracePeriod"
+  ],
+  "fields_known": true,
+  "field_note": "Two harvest entries: the provenant public-schema entry gives the field list; the VVP draft mentions the QVI credential only in passing and states no fields, referencing it through the vetting credential's `e.qvi` edge {n, s}.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 26,
+  "name": "LegalEntityOfficialOrganizationalRolevLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "LEI",
+   "personLegalName",
+   "officialRole"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 27,
+  "name": "LegalEntityEngagementContextRolevLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "LEI",
+   "personLegalName",
+   "engagementContextRole"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 28,
+  "name": "OORAuthorizationvLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "AID",
+   "LEI",
+   "personLegalName",
+   "officialRole"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 29,
+  "name": "ECRAuthorizationvLEICredential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "AID",
+   "LEI",
+   "personLegalName",
+   "engagementContextRole"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - the `a` block declares `i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 30,
+  "name": "iXBRLDataAttestation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "rd",
+   "f"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 31,
+  "name": "iXBRLDataD6Attestation",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "dt",
+   "rd",
+   "target",
+   "targetDigest"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 32,
+  "name": "Endorsement ACDC",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "said",
+   "act",
+   "disp",
+   "reason"
+  ],
+  "fields_known": true,
+  "field_note": "Top-level schema properties are v, d, i, s, u, a, e; the `e` block carries `d` and a `qp` edge {n, s} to a qualification proof. `act` is issue/revoke and `disp` is endorse/decline.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - the schema defines no issuee; the endorser is the issuer `i`, and the subject is named by SAID in `a.said`",
+   "names_other_credential": true,
+   "subject_stated": "A signed ACDC by which a candidate records a disposition toward a subject SAID (typically a dossier) for a named act (`issue` or `revoke`)"
+  }
+ },
+ {
+  "id": 33,
+  "name": "Declination",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "said",
+   "act",
+   "disp",
+   "reason"
+  ],
+  "fields_known": true,
+  "field_note": "Same schema as Endorsement (row 32); distinguished by `a.disp` = `decline`, plus optional `a.reason`.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": false,
+   "issuee_note": "no - same as Endorsement; the schema defines no issuee",
+   "names_other_credential": true,
+   "subject_stated": "An [endorsement] ACDC signed with `disp` of `decline`, by which a candidate records an authenticated refusal to endorse a subject SAID for a named act"
+  }
+ },
+ {
+  "id": 34,
+  "name": "Bridge wrapper",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "The ToIP dossier spec describes only the attestation - \"I verified this foreign credential on date X according to policy Y\" - and states no field names.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown - the spec describes only the attestation, not an issuee",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 35,
+  "name": "Observation Attestation",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the dossier spec gives the assertion (\"I observed Account X having Balance Y at Block Height Z\") but no field names.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 36,
+  "name": "Qualification proof",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - referenced via the endorsement's `e.qp` {n, s}; its own fields are left to the schema the threshold operator's `qs` field names.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown - the endorser holds it, but the spec does not say whether it carries an issuee",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 37,
+  "name": "Mortgage Creditworthiness Dossier",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as field names - the example derived schema's `properties` object is empty; it inherits the dossier base `a`/`e` structure recorded on row 16.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no - a dossier, so no issuee",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 38,
+  "name": "Court Case Dossier",
+  "ecosystem": "keri",
+  "fields": [
+   "status"
+  ],
+  "fields_known": true,
+  "field_note": "The only field the source names is `status`, carried on an annotation edge (values Marked, Offered, Admitted, Stricken); the dossier's own attributes block is the base structure on row 16.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "e",
+   "has_issuee": false,
+   "issuee_note": "no - a dossier",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 39,
+  "name": "Redacted Dossier",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the source names artifacts (Source Asset, Redacted Asset) linked by a blinded precursor edge, but no field names.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no - a dossier",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 40,
+  "name": "Predicate Dossier",
+  "ecosystem": "keri",
+  "fields": [
+   "inclusion_criteria_met"
+  ],
+  "fields_known": true,
+  "field_note": "The source names one field, `inclusion_criteria_met`, carried on a predicate edge that references a ZKP or derived cryptographic claim rather than the raw evidence.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "e",
+   "has_issuee": false,
+   "issuee_note": "no - a dossier",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 41,
+  "name": "Open-Endorsement Dossier",
+  "ecosystem": "keri",
+  "fields": [
+   "o",
+   "w",
+   "qs",
+   "fi"
+  ],
+  "fields_known": true,
+  "field_note": "The named fields are those of the `MxQ` threshold operator on an edge, not of an attributes block.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "e",
+   "has_issuee": false,
+   "issuee_note": "no - a dossier",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 42,
+  "name": "Token (derivative)",
+  "ecosystem": "keri",
+  "fields": [
+   "iss",
+   "iat",
+   "exp",
+   "aud",
+   "nonce",
+   "evd"
+  ],
+  "fields_known": true,
+  "field_note": "The ToIP dossier spec's derivative token supplies the field list; it \"embeds the dossier SAID as an evidence pointer\" in `evd`. Merged with the unnamed token entry in ev-life and the `Bearer token` contrast class in the VVP draft, neither of which states fields.",
+  "structure": {
+   "format": "other",
+   "payload_section": "claims",
+   "has_issuee": false,
+   "issuee_note": "no - bearer-shaped; \"A derivative MUST NOT be treated as independent evidence\"; ev-life: tokens \"lack a binding to a holder\"; VVP: \"bound by possession, not by issuee\"",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 43,
+  "name": "Citation (derivative / OOBI)",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - described as a resolvable identifier, canonically an OOBI URL, with no fields.",
+  "structure": {
+   "format": "other",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 44,
+  "name": "Bespoke ACDC",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - defined by contrast with a pre-curated dossier; no schema and no fields given.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 45,
+  "name": "Vetting credential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "i",
+   "dt",
+   "LEI"
+  ],
+  "fields_known": true,
+  "field_note": "Merges three harvest entries. The VVP archived draft gives the sample field list (an LE vLEI: `a` {d, i, dt, LEI}, `e` {qvi {n, s}}, `r` {usageDisclaimer, issuanceDisclaimer}); the ToIP dossier spec and ev-life name the credential but state no fields.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - \"a targeted credential\"; issuee in the nested `a.i`, proven \"via a digital signature from the issuee's AID\"",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 46,
+  "name": "Brand credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the VVP draft's Appendix C sample is a literal \"TODO\"; the prose names brand properties (brand name, logo, chatbot URL, social media handle, domain name) but no field identifiers. The dossier spec and ev-life name the credential without fields.",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - \"MUST be issued to an AP as a legal entity\"",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 47,
+  "name": "Brand proxy credential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "c_goal",
+   "c_proto"
+  ],
+  "fields_known": true,
+  "field_note": "The VVP sample is a GCD credential; rules `r` are noRoleSemanticsWithoutGfw, issuerNotResponsibleOutsideConstraints, noConstraintSansPrefix, useStdIfPossible, onlyDelegateHeldAuthority. Sample values: c_goal [\"ops.telco.*.proxybrand\"], c_proto [\"VVP:OP,TP\"].",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - issued by the AP to the OP; issuee in `a.i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 48,
+  "name": "Delegated signer credential",
+  "ecosystem": "keri",
+  "fields": [
+   "d",
+   "u",
+   "i",
+   "dt",
+   "c_goal",
+   "c_proto"
+  ],
+  "fields_known": true,
+  "field_note": "The VVP sample is a GCD credential with the same shape as the brand proxy credential; sample values c_goal [\"ops.telco.send.sign\"], c_proto [\"VVP:OP\"].",
+  "structure": {
+   "format": "acdc",
+   "payload_section": "a",
+   "has_issuee": true,
+   "issuee_note": "yes - \"the issuee of the credential MAY vary at the AP's [discretion]\"; issuee in `a.i`",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 49,
+  "name": "SHAKEN attestation credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named only as evidence incorporated into a dossier via the foreign artifact bridge mechanism.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 50,
+  "name": "RCD / CTIA-BCID vetting credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named only as evidence incorporated into a dossier via the foreign artifact wrapper mechanism.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 51,
+  "name": "Settlement credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the VVP draft names it as a hypothetical additional type with no schema; ev-life names settlement contracts as a kind of evidence and gives no field names anywhere in the paper.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 52,
+  "name": "AI-agent authorization credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named in the VVP draft as an example type, with no schema.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 53,
+  "name": "Personhood / human-not-AI credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named in the VVP draft as an example type with two external schema references ([F2F-SCHEMA], [PERSONHOOD-CRED]), and in ev-life as a distinct question with its own source of truth. Neither states fields.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 54,
+  "name": "Phone number credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - ev-life names credential types descriptively in prose; no field names appear anywhere in it.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - \"must be bound to the legal entity's control mechanism so no other party can use it\"",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 55,
+  "name": "Business identity credential",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - ev-life names credential types descriptively in prose; no field names appear anywhere in it.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - \"It is bound to its holder by a cryptographic key... a presentation of the credential must be accompanied by a digital signature that only the holder can create\"",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 56,
+  "name": "X.509 certificate",
+  "ecosystem": "keri",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - ev-life names it as \"generation-1 digital credentials\" with no assertion content and no fields; the tti material is private and recorded by name only.",
+  "structure": {
+   "format": "other",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "not stated",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 57,
+  "name": "Person Identification Data (PID)",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birth_date",
+   "family_name_birth",
+   "given_name_birth",
+   "place_of_birth",
+   "resident_address",
+   "resident_country",
+   "resident_state",
+   "resident_city",
+   "resident_postal_code",
+   "resident_street",
+   "resident_house_number",
+   "personal_administrative_number",
+   "sex",
+   "email_address",
+   "mobile_phone_number",
+   "nationality",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority",
+   "document_number",
+   "trust_anchor",
+   "issuing_country",
+   "portrait",
+   "issuing_jurisdiction",
+   "birthdate",
+   "nationalities",
+   "address",
+   "address.street_address",
+   "address.locality",
+   "address.region",
+   "address.postal_code",
+   "address.country",
+   "address.formatted",
+   "address.house_number",
+   "picture",
+   "birth_family_name",
+   "birth_given_name",
+   "email",
+   "phone_number",
+   "date_of_issuance",
+   "date_of_expiry",
+   "birth_place",
+   "attestation_legal_category"
+  ],
+  "fields_known": true,
+  "field_note": "Union of five harvest entries: the reference issuer's `pid_mdoc`, `pid_mdoc_deferred` (identical claim set) and `pid_vc_sd_jwt`; the PID rulebook's mandatory, optional and issuer-metadata attributes; and Multipaz's EUPersonalID. The mdoc and SD-JWT forms use different claim names for the same facts (birth_date/birthdate, portrait/picture, flat resident_* versus nested address.*, nationality/nationalities, issuance_date/date_of_issuance). One credential, two type identifiers chosen by serialization format: doctype `eu.europa.ec.eudi.pid.1` and vct `urn:eudi:pid:1`. The ARF names PID but states no field list.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "the ARF states \"the subject of all PIDs in the Wallet Unit will be the same person, namely the User of the Wallet Unit\"; all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": "the subject of all PIDs in the Wallet Unit will be the same person, namely the User of the Wallet Unit"
+  }
+ },
+ {
+  "id": 58,
+  "name": "Mobile Driving Licence (mDL)",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birth_date",
+   "issue_date",
+   "expiry_date",
+   "issuing_country",
+   "issuing_authority",
+   "document_number",
+   "portrait",
+   "driving_privileges",
+   "un_distinguishing_sign",
+   "administrative_number",
+   "sex",
+   "height",
+   "weight",
+   "eye_colour",
+   "hair_colour",
+   "birth_place",
+   "resident_address",
+   "portrait_capture_date",
+   "age_in_years",
+   "age_birth_year",
+   "age_over_18",
+   "issuing_jurisdiction",
+   "nationality",
+   "resident_city",
+   "resident_state",
+   "resident_postal_code",
+   "resident_country",
+   "family_name_national_character",
+   "given_name_national_character",
+   "signature_usual_mark",
+   "biometric_template_xx",
+   "age_over_NN",
+   "organ_donor",
+   "DHS_compliance",
+   "given_name_truncation",
+   "family_name_truncation",
+   "domestic_driving_privileges",
+   "EDL_credential",
+   "veteran",
+   "document_issue_date",
+   "age_over_XX",
+   "aka_given_name",
+   "name_suffix",
+   "aka_suffix",
+   "aka_family_name",
+   "age_over_13",
+   "age_over_16",
+   "age_over_21",
+   "age_over_25",
+   "age_over_60",
+   "age_over_62",
+   "age_over_65",
+   "aamva_version",
+   "aka_given_name.v2",
+   "race_ethnicity",
+   "first_name",
+   "middle_names",
+   "EDL_credential.v2",
+   "resident_county",
+   "CDL_indicator",
+   "DHS_temporary_lawful_status"
+  ],
+  "fields_known": true,
+  "field_note": "Union of six harvest entries: the EU reference issuer's `mdl_mdoc`, Google Wallet's supported-attributes page, Apple's PKIdentityDriversLicenseDescriptor, Multipaz's DrivingLicense, AAMVA's mDL Implementation Guidelines r1.6, and the ARF/rulebook, which states no fields of its own (\"The data model for ISO/IEC 18013-5-encoded mDLs is fully specified in ISO/IEC 18013-5\"). Two namespaces are in play, `org.iso.18013.5.1` and `org.iso.18013.5.1.aamva`; AAMVA records a deliberate collision on `sex` between them. `age_over_NN` and `age_over_XX` are placeholder forms written by Google and Apple for a generated ladder, which Multipaz enumerates explicitly. Several AAMVA identifiers (CDL_non_*, first_name_*, middle_names_*, hazmat_*, resident_*, DHS_*) are split across lines by the PDF's table layout and are recorded in the harvest as truncated rather than completed.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 59,
+  "name": "Photo ID",
+  "ecosystem": "eudi",
+  "fields": [
+   "portrait",
+   "portrait_capture_date",
+   "family_name_unicode",
+   "given_name_unicode",
+   "family_name_latin1",
+   "given_name_latin1",
+   "birth_date",
+   "age_over_18",
+   "age_in_years",
+   "age_birth_year",
+   "birthplace",
+   "name_at_birth",
+   "resident_address_unicode",
+   "resident_city_unicode",
+   "resident_postal_code",
+   "resident_country",
+   "resident_city_latin1",
+   "sex",
+   "nationality",
+   "document_number",
+   "issuing_subdivision",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority_unicode",
+   "issuing_country",
+   "sex_unicode",
+   "birth_date_unicode",
+   "issue_date",
+   "age_over_NN",
+   "family_name",
+   "family_name_viz",
+   "given_names",
+   "given_name_viz",
+   "birth_city",
+   "birth_state",
+   "birth_country",
+   "date_of_issue",
+   "date_of_expiry",
+   "issuing_authority",
+   "administrative_number",
+   "travel_document_type"
+  ],
+  "fields_known": true,
+  "field_note": "Union of three field-bearing harvest entries (the EU reference issuer's `photoid`, Apple's PKIdentityPhotoIDDescriptor, Multipaz's PhotoID); the open-source verifier names the doctype only. Multipaz additionally carries MRTD-style datagroups dg1 through dg12 and a generated ladder of age_over_NN predicates, recorded in this note rather than enumerated. The doctype string is unsettled: Apple names none, the verifier writes `org.iso.23220.photoid.1`, and the EU issuer's metadata writes `org.iso.23220.2.photoid.1` while using `org.iso.23220.photoid.1` as its own claim-path namespace.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 60,
+  "name": "Certificate of Residence",
+  "ecosystem": "eudi",
+  "fields": [
+   "given_name",
+   "family_name",
+   "birth_date",
+   "residence_address",
+   "gender",
+   "birth_place",
+   "nationality",
+   "arrival_date",
+   "expiry_date",
+   "issuance_date",
+   "issuing_country",
+   "issuing_authority",
+   "age_over_18"
+  ],
+  "fields_known": true,
+  "field_note": "Union of two harvest entries: the reference issuer's `cor_mdoc` and Multipaz's EUCertificateOfResidence, which adds `age_over_18`, omits several of the issuer's claims, and whose source is candid that \"This definition is ad hoc and added to facilitate interoperability testing\" and carries a TODO asking whether the document type still exists.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 61,
+  "name": "Diploma",
+  "ecosystem": "eudi",
+  "fields": [
+   "identifier",
+   "scoped_affiliation",
+   "personal_unique_code",
+   "personal_unique_id",
+   "home_organization",
+   "family_name",
+   "first_name",
+   "display_name",
+   "date_of_birth",
+   "common_name",
+   "email",
+   "principal_name",
+   "primary_affiliation",
+   "affiliations",
+   "assurance",
+   "image"
+  ],
+  "fields_known": true,
+  "field_note": "The harvest notes the claim set is an eduPerson-style affiliation schema rather than an award or qualification schema, despite the name \"Diploma\".",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 62,
+  "name": "Learning Credential",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "achievement_title",
+   "achievement_description",
+   "learning_outcomes",
+   "assessment_grade",
+   "language_of_classes",
+   "learner_identification",
+   "expected_study_time",
+   "level_of_learning_experience",
+   "types_of_quality_assurance",
+   "prerequisites_to_enroll",
+   "integration_stackability_options",
+   "issuing_authority",
+   "issuing_country",
+   "date_of_issuance",
+   "date_of_expiry"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 63,
+  "name": "European Health Insurance Card (EHIC)",
+  "ecosystem": "eudi",
+  "fields": [
+   "credential_holder",
+   "subject",
+   "social_security_pin",
+   "starting_date",
+   "ending_date",
+   "document_id",
+   "competent_institution",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority",
+   "issuing_country",
+   "personal_administrative_number",
+   "issuing_authority.id",
+   "issuing_authority.name",
+   "date_of_expiry",
+   "date_of_issuance",
+   "authentic_source",
+   "authentic_source.id",
+   "authentic_source.name"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `ehic_mdoc` and `ehic_sd_jwt_vc` entries, whose claim sets differ substantially: the mdoc form carries credential_holder, subject, social_security_pin, document_id and competent_institution; the SD-JWT form carries personal_administrative_number and id/name pairs for issuing_authority and authentic_source. The mdoc form carries a claim literally named `subject`. The SD-JWT vct namespace here is `urn:eudi:` while most other SD-JWT entries use `urn:eu.europa.ec.eudi:`.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 64,
+  "name": "Health ID",
+  "ecosystem": "eudi",
+  "fields": [
+   "health_insurance_id",
+   "patient_id",
+   "tax_number",
+   "one_time_token",
+   "affiliation_country",
+   "issuance_date",
+   "expiry_date",
+   "matching_institution-id",
+   "matching_registered_family_name",
+   "matching_registered_given_name",
+   "matching_resident_address",
+   "matching_birth_place",
+   "matching_birth_date",
+   "issuing_authority",
+   "document_number",
+   "administrative_number",
+   "issuing_country",
+   "issuing_jurisdiction"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `hiid_mdoc` and `hiid_sd_jwt_vc` entries, whose claim sets are identical. The harvest marks the `matching_*` prefix and `one_time_token` as stated field names and the record-linkage purpose read into them as inference.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 65,
+  "name": "Employee ID",
+  "ecosystem": "eudi",
+  "fields": [
+   "given_name",
+   "family_name",
+   "birth_date",
+   "employee_id",
+   "employer_name",
+   "employment_start_date",
+   "employment_type",
+   "country_code"
+  ],
+  "fields_known": true,
+  "field_note": "",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 66,
+  "name": "PDA1 (Portable Document A1)",
+  "ecosystem": "eudi",
+  "fields": [
+   "credential_holder",
+   "credential_holder.family_name",
+   "credential_holder.given_name",
+   "credential_holder.birth_date",
+   "social_security_pin",
+   "employment_details",
+   "employment_details.employment_type",
+   "employment_details.name",
+   "employment_details.employer_id",
+   "employment_details.id_type",
+   "employment_details.street",
+   "employment_details.town",
+   "employment_details.postal_code",
+   "employment_details.country_code",
+   "places_of_work",
+   "places_of_work.place_of_work",
+   "places_of_work.no_fixed_place",
+   "places_of_work.place_of_work.company",
+   "places_of_work.place_of_work.flag_base_home_state",
+   "places_of_work.place_of_work.company_id",
+   "places_of_work.place_of_work.id_type",
+   "places_of_work.place_of_work.street",
+   "places_of_work.place_of_work.town",
+   "places_of_work.place_of_work.postal_code",
+   "places_of_work.place_of_work.country_code",
+   "places_of_work.no_fixed_place.country_code",
+   "legislation",
+   "legislation.member_state",
+   "legislation.transitional_rules",
+   "legislation.starting_date",
+   "legislation.ending_date",
+   "status_confirmation",
+   "document_id",
+   "competent_institution",
+   "competent_institution.institution_id",
+   "competent_institution.institution_name",
+   "competent_institution.country_code",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority",
+   "issuing_country"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `pda1_mdoc` and `pda1_sd_jwt_vc` entries. The mdoc form states the twelve top-level claims only; the SD-JWT form expands the same structure into 41 claim paths, given here dotted.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 67,
+  "name": "Power of Representation",
+  "ecosystem": "eudi",
+  "fields": [
+   "legal_person_identifier",
+   "legal_name",
+   "full_powers",
+   "eService",
+   "effective_from_date",
+   "effective_until_date",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority",
+   "issuing_jurisdiction",
+   "issuing_country"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `por_mdoc` and `por_sd_jwt_vc` entries, whose claim sets are identical.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes - and note this is the one entry in this issuer whose subject matter is a relation between the holder and a third party (the represented legal person), rather than an attribute of the holder alone. all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": "the one entry in this issuer whose subject matter is a relation between the holder and a *third party* (the represented legal person), rather than an attribute of the holder alone"
+  }
+ },
+ {
+  "id": 68,
+  "name": "Seafarer certificate",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birth_date",
+   "issue_date",
+   "issue_place",
+   "expiry_date",
+   "issuing_country",
+   "issuing_authority",
+   "issuing_authority_logo",
+   "document_name",
+   "document_number",
+   "portrait",
+   "capacities",
+   "family_name_issuing_officer",
+   "given_name_issuing_officer",
+   "signature_usual_mark_issuing_officer",
+   "title_issuing_officer",
+   "stcw_code"
+  ],
+  "fields_known": true,
+  "field_note": "The four `*_issuing_officer` claims are stated and are unusual - this is the only entry in this issuer that names a human signatory of the issuing authority as claims within the credential.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 69,
+  "name": "Tax Number",
+  "ecosystem": "eudi",
+  "fields": [
+   "tax_number",
+   "affiliation_country",
+   "registered_given_name",
+   "registered_family_name",
+   "resident_address",
+   "birth_date",
+   "church_tax_ID",
+   "iban",
+   "credential_type",
+   "issuance_date",
+   "expiry_date",
+   "issuing_authority",
+   "issuing_jurisdiction",
+   "issuing_country"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `tax_mdoc` and `tax_sd_jwt_vc` entries, whose claim sets are identical.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 70,
+  "name": "Tax Residency",
+  "ecosystem": "eudi",
+  "fields": [
+   "taxpayer_type",
+   "name",
+   "date_of_birth",
+   "address",
+   "identification_number",
+   "legal_framework",
+   "source_country_competent_authority",
+   "start_date_of_residency_requested_period",
+   "end_date_of_residency_requested_period"
+  ],
+  "fields_known": true,
+  "field_note": "Distinct from Tax Number despite sharing the `tax` vct stem (`urn:eu.europa.ec.eudi:tax:1:1` versus `urn:eu.europa.ec.eudi:tax:1`); the claim sets do not overlap except on identity. The harvest flags `taxpayer_type` as stated, \"implying the subject may be other than a natural person\".",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 71,
+  "name": "MSISDN",
+  "ecosystem": "eudi",
+  "fields": [
+   "phone_number",
+   "registered_family_name",
+   "registered_given_name",
+   "contract_owner",
+   "end_user",
+   "mobile_operator",
+   "issuance_date",
+   "expiry_date",
+   "credential_type",
+   "issuing_organization",
+   "phone_number_in_use",
+   "document_number"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the reference issuer's `msisdn_mdoc` and `msisdn_sd_jwt_vc` entries, whose claim sets are identical.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 72,
+  "name": "Loyalty (EUDI)",
+  "ecosystem": "eudi",
+  "fields": [
+   "given_name",
+   "family_name",
+   "company",
+   "client_id",
+   "issuance_date",
+   "expiry_date",
+   "membership_number",
+   "portrait",
+   "tier",
+   "issue_date"
+  ],
+  "fields_known": true,
+  "field_note": "Union of two harvest entries: the reference issuer's `loyalty_mdoc` (given_name, family_name, company, client_id, issuance_date, expiry_date) and Multipaz's Loyalty card `org.multipaz.loyalty.1` (membership_number, family_name, given_name, portrait, tier, issue_date, expiry_date). They are separately defined doctypes, not two encodings of one.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 73,
+  "name": "Reservation",
+  "ecosystem": "eudi",
+  "fields": [
+   "booking_service_name",
+   "reservation_id",
+   "reservation_date",
+   "service_provider_name",
+   "location",
+   "check_in_date",
+   "check_out_date",
+   "guests",
+   "car_rental",
+   "num_of_rooms",
+   "family_name",
+   "given_name",
+   "birth_date"
+  ],
+  "fields_known": true,
+  "field_note": "Claims sit under namespace `org.iso.18013.5.reservation.1`. This is the only reference-issuer entry whose display name carries no format suffix and whose configuration id is not in the `eu.europa.ec.eudi.*` namespace.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 74,
+  "name": "Wallet Unit Attestation (WUA)",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in ARF Annex 1.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, but the subject is a Wallet Unit - software and hardware - not a person. This is the one type in this section whose subject is not a natural or legal person.",
+   "names_other_credential": false,
+   "subject_stated": "A data object that describes the components of the Wallet Unit or allows authentication and validation of those components"
+  }
+ },
+ {
+  "id": 75,
+  "name": "Wallet Instance Attestation (WIA)",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "stated only in prose - a revocation reference for the Wallet Instance; the Wallet Solution's name, version and certification. No claim identifiers given.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - the Wallet Instance",
+   "names_other_credential": false,
+   "subject_stated": "A type of Wallet Unit Attestation that attests the integrity and authenticity of a Wallet Instance, and that carries a revocation reference for the Wallet Instance, as well as information about the Wallet Solution, including its name, version, and certification."
+  }
+ },
+ {
+  "id": 76,
+  "name": "Key Attestation (KA)",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "stated only in prose - one or more public keys; a revocation reference for the WSCD or keystore. No claim identifiers given.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - the subject is a secure cryptographic device or keystore",
+   "names_other_credential": false,
+   "subject_stated": "A type of Wallet Unit Attestation that attests the certification and properties of a WSCA/WSCD or keystore available to the Wallet Unit, and that contains one or more public keys whose corresponding private keys are generated by and stored in that WSCA/WSCD or keystore, as well as a revocation reference for the WSCD or keystore."
+  }
+ },
+ {
+  "id": 77,
+  "name": "Pseudonym",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - it uniquely represents a User",
+   "names_other_credential": false,
+   "subject_stated": "Data uniquely representing a User which in itself does not allow to infer the User's attributes or person identification data, without the use of additional information that is kept separately by the issuer of the data uniquely representing the user."
+  }
+ },
+ {
+  "id": 78,
+  "name": "Wallet-relying party registration certificate",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - the issuee is a *verifier*, not a wallet holder. The accompanying definition names the issuer as a \"Provider of (wallet-relying party) registration certificates ... mandated by a Member State to issue wallet-relying party registration certificates to wallet-relying parties registered in that Member State\".",
+   "names_other_credential": false,
+   "subject_stated": "A data object that indicates the attributes the wallet-relying party has registered to intend to request from Users"
+  }
+ },
+ {
+  "id": 79,
+  "name": "Basic Identification Data Attestation (BIDA)",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the only source is a public open-source ISO 18013-5 verifier's recognized-doctype list (`eu.europa.ec.eudi.bida.1`), which gives no fields beyond the doctype labels.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes for the person-identifying ones (mDL, PID, BIDA, Photo ID, Student Card, mICOV)",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 80,
+  "name": "EU Age Verification attestation",
+  "ecosystem": "eudi",
+  "fields": [
+   "age_over_18",
+   "age_over_21"
+  ],
+  "fields_known": true,
+  "field_note": "Multipaz states `age_over_18`, `age_over_21` and a generated ladder of `age_over_NN` for doctype `eu.europa.ec.av.1`; the ZKP variants (AGE_VERIFICATION_REQUEST_AGE_OVER_18_ZKP, ..._AGE_OVER_21_ZKP) are request profiles rather than claims. The open-source verifier names the doctype and no fields.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "the two sources differ: Multipaz records \"yes, though the credential carries nothing identifying beyond the predicate\"; the open-source verifier records \"unknown for eu.europa.ec.av.1 (an age-only attestation may be deliberately unlinkable)\"",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 81,
+  "name": "Vaccination document (mICOV)",
+  "ecosystem": "eudi",
+  "fields": [
+   "1D47_vaccinated",
+   "RA01_vaccinated",
+   "dob",
+   "fn",
+   "gn",
+   "fni",
+   "gni",
+   "bd",
+   "bm",
+   "by",
+   "fac",
+   "pid_DL",
+   "pid_PPN"
+  ],
+  "fields_known": true,
+  "field_note": "Multipaz names namespaces `org.micov.attestation.1` and `org.micov.vtr.1`. `RA01_vaccinated` is given in the harvest as a style exemplar (\"RA01_vaccinated-style COVID entries\") rather than as a closed list, and `1D47_vaccinated` is yellow fever. fni/gni are name initials and bd/bm/by are birth day/month/year. The open-source verifier names the doctype `org.micov.1` and no fields.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 82,
+  "name": "German personal ID",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birthdate",
+   "place_of_birth",
+   "nationalities",
+   "date_of_expiry",
+   "issuing_authority"
+  ],
+  "fields_known": true,
+  "field_note": "The source states only \"Key fields - as EU PID\" and notes \"For now, this is a copy of EUPersonaID [sic]\"; the list here is Multipaz's own EU PID field list. VCT `https://example.bmi.bund.de/credential/pid/1.0`.",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 83,
+  "name": "Naturalization certificate",
+  "ecosystem": "eudi",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birth_date",
+   "naturalization_date"
+  ],
+  "fields_known": true,
+  "field_note": "Multipaz's Utopia sample, VCT `http://utopia.example.com/vct/naturalization`; the source calls it the \"Naturalization Certificate of the fictional State of Utopia\".",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 84,
+  "name": "Payment card (EMVCo DPC)",
+  "ecosystem": "eudi",
+  "fields": [
+   "payment_instrument_id",
+   "masked_account_reference",
+   "holder_name",
+   "issuer_name",
+   "issue_date",
+   "expiry_date",
+   "Credential ID",
+   "Card Network",
+   "Last Four Digits"
+  ],
+  "fields_known": true,
+  "field_note": "Merges Multipaz's two payment-card profiles, recorded separately in the harvest per its no-deduplication rule: the mdoc profile `org.multipaz.payment.sca.1` (payment_instrument_id, masked_account_reference, holder_name, issuer_name, issue_date, expiry_date) and the SD-JWT profile `urn:emvco:dpc:card:1`, whose three names are verbatim display names (\"Credential ID\", \"Card Network\", \"Last Four Digits\") rather than claim identifiers. The mdoc profile is flagged by its source as \"a mock credential used for testing in a closed ecosystem and is non-normative\".",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes (the cardholder)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 85,
+  "name": "Vehicle registration",
+  "ecosystem": "eudi",
+  "fields": [
+   "registration_info",
+   "issue_date",
+   "registration_holder",
+   "basic_vehicle_info",
+   "vin"
+  ],
+  "fields_known": true,
+  "field_note": "Multipaz's `nl.rdw.mekb.1` gives the field list. The open-source verifier separately names `org.iso.7367.2.1.mVC` (vehicle card) with no fields; the commonly-cited `org.iso.7367.1.mVRC` did not appear in any source fetched.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": null,
+   "issuee_note": "the two sources conflict: Multipaz records \"mixed: the credential is about a *vehicle*, but carries a registration_holder. Recorded as yes, with the subject being the vehicle and the holder named inside it\"; the open-source verifier records `no` for org.iso.7367.2.1.mVC, \"about a *thing* rather than a person\"",
+   "names_other_credential": false,
+   "subject_stated": "the subject being the vehicle and the holder named inside it"
+  }
+ },
+ {
+  "id": 86,
+  "name": "Bicycle ID card",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the only source is an open-source verifier's recognized-doctype list (`fr.idak.mbicycle.1`, \"Bicycle ID card - bicycle owner data\"), which gives no fields.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no for org.iso.7367.2.1.mVC and fr.idak.mbicycle.1, \"which are about a *thing* rather than a person - though the bicycle card is described as carrying 'bicycle owner data', so it straddles\"",
+   "names_other_credential": false,
+   "subject_stated": "about a *thing* rather than a person - though the bicycle card is described as carrying \"bicycle owner data\", so it straddles"
+  }
+ },
+ {
+  "id": 87,
+  "name": "Student card",
+  "ecosystem": "eudi",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the only source is an open-source verifier's recognized-doctype list (`fr.ft.hsc.1`), which gives no fields.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes for the person-identifying ones (mDL, PID, BIDA, Photo ID, Student Card, mICOV)",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 88,
+  "name": "IBAN attestation (urn:eu.europa.ec.eudi:iban:1)",
+  "ecosystem": "eudi",
+  "fields": [
+   "iban",
+   "national_account_number",
+   "account_product",
+   "account_name",
+   "account_type",
+   "currency",
+   "bank_account_status",
+   "payment_possibility",
+   "registered_family_name",
+   "registered_given_name",
+   "date_of_birth",
+   "account_holder_owner",
+   "coowner",
+   "disponent",
+   "issuing_organization",
+   "national_bank_code",
+   "issuance_date",
+   "expiry_date",
+   "credential_type",
+   "business_identifier_code"
+  ],
+  "fields_known": true,
+  "field_note": "Merges three harvest entries: the reference issuer's `iban_mdoc` and `iban_sd_jwt_vc` (identical claim sets) and the tti sweep's live SD-JWT VC artifact obtained 2026-08-28 from the Commission's reference issuer, whose twenty claims are the same set and are independently verifiable at the public issuer metadata endpoint. The tti entry adds four properties of the live artifact: every claim including the IBAN is selectively disclosable, with nothing in the clear but iss, iat, exp, vct, status and cnf; the values were typed into a web form and verified by nobody; the signing certificate is a PID document signer with no indication the issuer is a bank; and four claims declared as booleans in the issuer metadata are carried as the strings \"true\"/\"false\".",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes, holder-key-bound. all 27 configurations carry cryptographic_binding_methods_supported [\"jwk\",\"cose_key\"] and proof_types_supported with keys attestation and jwt - \"all 27 are holder-key-bound and require a holder proof-of-possession at issuance, which is the basis for every Issuee? yes\"",
+   "names_other_credential": false,
+   "subject_stated": "It binds an IBAN to a natural person and carries no legal-person claim at all - no LEI, no registration number, nothing that could carry a corporate identity."
+  }
+ },
+ {
+  "id": 89,
+  "name": "Aadhaar",
+  "ecosystem": "eudi",
+  "fields": [
+   "credential_issuing_date",
+   "enrolment_date",
+   "enrolment_number",
+   "is_nri",
+   "resident_image",
+   "resident_name",
+   "local_resident_name",
+   "age_above18",
+   "age_above50",
+   "age_above60",
+   "age_above75",
+   "dob",
+   "gender",
+   "building",
+   "local_building",
+   "locality",
+   "local_locality",
+   "street",
+   "local_street",
+   "landmark",
+   "local_landmark",
+   "vtc",
+   "local_vtc",
+   "sub_district",
+   "local_sub_district",
+   "district",
+   "local_district",
+   "state",
+   "local_state",
+   "po_name",
+   "local_po_name",
+   "pincode",
+   "address",
+   "local_address",
+   "mobile",
+   "masked_mobile",
+   "email",
+   "masked_email",
+   "masked_uid",
+   "aadhaar_type",
+   "CredentialIssuingDate",
+   "AadhaarExpiresOn",
+   "AadhaarType",
+   "Name",
+   "Dob",
+   "Photo",
+   "Address",
+   "Building",
+   "District",
+   "Email",
+   "IsNRI",
+   "AgeAbove18",
+   "AgeAbove50",
+   "AgeAbove60",
+   "AgeAbove75"
+  ],
+  "fields_known": true,
+  "field_note": "Union of two harvest entries. Google's supported-attributes page gives snake_case identifiers in namespace `in.gov.uidai.aadhaar.1`; Multipaz's Aadhaar.kt gives CamelCase names for what appears to be the same document, and several of its entries are described rather than quoted (\"enrollment date and number\", \"local-language name\", \"Address broken out into Building, District and further components\"), so its list is partial. `AadhaarExpiresOn` has no Google counterpart.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 90,
+  "name": "Extended / digital transcript",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as field names; the document describes the content in prose as \"course grades\", \"learner competencies\", \"work experiences\" and \"marketable skills\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the student, at whose request the registrar issues it)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 91,
+  "name": "Test result credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the course participant)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 92,
+  "name": "College degree credential (ExampleDegreeCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "degree",
+   "degree.type",
+   "degree.name",
+   "alumniOf",
+   "alumniOf.name"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the use-cases user story (which states no fields) with the Data Model 2.0 running example. `degree` is an object with `type` (e.g. \"ExampleBachelorDegree\") and `name` (e.g. \"Bachelor of Science and Arts\"); `alumniOf.name` appears in the example that combines this with `ExamplePersonCredential`. Nested properties are given as dotted paths.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 93,
+  "name": "Alumni credential (ExampleAlumniCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "name",
+   "alumniOf",
+   "alumniOf.id",
+   "alumniOf.name"
+  ],
+  "fields_known": true,
+  "field_note": "The Overview's single running example, repeated across every securing mechanism, and also in Data Model 2.0.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 94,
+  "name": "Achievement credential (ExampleAchievementCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "type",
+   "achievement",
+   "achievement.id",
+   "achievement.type",
+   "achievement.name",
+   "achievement.criteria.narrative"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject.type` is [\"AchievementSubject\"]; the `achievement` object carries a language-mapped `name`; the issuer is an object with `type: \"Profile\"`. From the dual-language example.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 95,
+  "name": "Open badge (OpenBadgeCredential) / digital badge",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in either harvest entry. Merges the use-cases \"digital badge\" user story with Data Model 2.0's `OpenBadgeCredential`, which is \"named only\" - it appears in the type-requirements table and a JWT-claims example with no fields and no stated assertion.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "the use-cases digital-badge story records yes; the Data Model 2.0 `OpenBadgeCredential` entry records unknown (named only)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 96,
+  "name": "Software training credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 97,
+  "name": "Professional training certificate",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 98,
+  "name": "Continuing education credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 99,
+  "name": "Board certification credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 100,
+  "name": "State medical board licence",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the physician)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 101,
+  "name": "Physician education credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 102,
+  "name": "Aid worker certification",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the three disclosed facts are enumerated in prose - that she is the holder, that she is the subject, and that she is an aid worker.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 103,
+  "name": "Organizational accreditation credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the revocation source is named as \"the US Department of Education's Accreditation Database\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, an organization rather than a person",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 104,
+  "name": "Dive instructor certification",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the document notes each credential has an independent expiration cycle.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 105,
+  "name": "Specialist dive certifications (drysuit, night, search & recovery)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in any of the three merged harvest entries (Drysuit Dive Certification, Night Diving Certification, Search & Recovery Dive Certification), each described as private because it is for personal diving rather than instructing.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 106,
+  "name": "Dive school affiliation certification",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in either merged harvest entry (Fiji PADI School Affiliation Certification, Australia PADI School Affiliation Certification); the pair exist separately because certification spans two jurisdictions.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, an organization (the dive school). Verifiers are expected to check both the certification's and the school's revocation services.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 107,
+  "name": "Signed log entry of a dive event",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the dive master issues \"a verifiable credential including those credentials\" and signs and archives it.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no single subject party; the credential is about an event and the set of credentials recorded at it",
+   "names_other_credential": true,
+   "subject_stated": "no single subject party; the credential is about an event and the set of credentials recorded at it. This is a credential whose subject is other credentials."
+  }
+ },
+ {
+  "id": 108,
+  "name": "Revocable status-check token",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; described as a capability allowing NOAA to check the current status of all of Pat's certifications rather than the status of a single credential.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, but inverted: the individual issues it to his employer, so the recipient is an organization and the credential grants a permission rather than describing the subject",
+   "names_other_credential": true,
+   "subject_stated": "the credential grants a permission rather than describing the subject"
+  }
+ },
+ {
+  "id": 109,
+  "name": "Verifiable address credential (ExampleAddressCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "type",
+   "address",
+   "address.streetAddress",
+   "address.addressLocality",
+   "address.addressRegion",
+   "address.postalCode",
+   "address.addressCountry"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the use-cases user story (no fields stated; status recorded there as inferred, since the credential is not given a type name) with the Implementation Guidelines' `ExampleAddressCredential` example, where `credentialSubject.type` is \"Person\" and `address` is an object of `type: \"PostalAddress\"`. Nested properties are given as dotted paths.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes (the shopper)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 110,
+  "name": "Postal-address confirmation credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 111,
+  "name": "Identity credential used as proof of age",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the story names what is withheld - date of birth, address, state ID number.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the purchaser)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 112,
+  "name": "Age verification credential (AgeVerificationCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "overAge"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject.overAge` (value 21 in the example) is the only subject property. The credential also carries `validFrom`, `validUntil` and a `refreshService` of type `VerifiableCredentialRefreshService2021`, in context `https://w3id.org/age/v1`; the specification notes \"this particular verifiable credential is not intended to be shared with anyone except for the original issuer\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 113,
+  "name": "Chamber-of-commerce legitimacy credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, but the subject is an organization (the web shop), not a person",
+   "names_other_credential": false,
+   "subject_stated": "the subject is an organization (the web shop), not a person"
+  }
+ },
+ {
+  "id": 114,
+  "name": "Wholesale purchase entitlement",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated, but the credential is explicitly \"marked 'non-transferable'\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the registered trade customer)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 115,
+  "name": "Bank / checking account credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as field names. The document notes it \"is issued to a controlled identifier over which Jane has demonstrated proof-of-control\", and that proof-of-control is re-demonstrated at presentation.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the account holder)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 116,
+  "name": "Banking information credential (third-party)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes; notable because the subject is the sender's family, not the holder presenting it",
+   "names_other_credential": false,
+   "subject_stated": "the subject is the sender's family, not the holder presenting it"
+  }
+ },
+ {
+  "id": 117,
+  "name": "National ID card credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated here; need F.5 adds \"address, national identity number, etc.\" for the analogous government-issued certificate (row 118).",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 118,
+  "name": "Government identity certificate",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as field names. Merges two harvest entries - the test-centre identification story (no fields) and the remote-account-opening story, whose only field statement is the document's own parenthetical \"address, national identity number, etc.\"",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the test candidate / the account opener)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 119,
+  "name": "Digital passport (PassportCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "givenName",
+   "familyName",
+   "citizenship",
+   "passport",
+   "passport.traveler",
+   "passport.traveler.givenName",
+   "passport.traveler.familyName",
+   "passport.traveler.citizenship"
+  ],
+  "fields_known": true,
+  "field_note": "Merges five harvest entries from the use-cases document (the digital-passport user story, Mother's Passport, Sam's Passport, Malathi's passport, Anand's passport); only the Appendix B.1 examples state fields, and the user stories state none. Type is [\"VerifiableCredential\", \"PassportCredential\"]. A second variant models the passport as a document: `credentialSubject.passport` of `type: \"Passport\"` containing a nested `traveler` object with the same three fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, and explicitly a case where the subject is not the holder: \"The holder of the passport is a parent, not the minor.\" Mother's Passport is likewise \"notable because the holder presenting it (Sam) is not the subject (his mother)\".",
+   "names_other_credential": false,
+   "subject_stated": "The holder of the passport is a parent, not the minor."
+  }
+ },
+ {
+  "id": 120,
+  "name": "Digital driving licence (ExampleDrivingLicenseCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "license",
+   "license.type",
+   "license.name"
+  ],
+  "fields_known": true,
+  "field_note": "Merges the use-cases user story (no fields; section 4.4 cautions that a DMV \"should probably not be treated as authoritative for an individual's hair color or current address, even though such claims are often included in today's driver's licenses\") with the Data Model 2.0 example, whose point is that it carries two `credentialStatus` entries at once - BitstringStatusListEntry objects with statusPurpose \"revocation\" and \"suspension\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 121,
+  "name": "Self-issued driver's licence",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as property identifiers; the source names in prose the fields a go-cart facility would use - name and image.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (issuer and subject are the same party)",
+   "names_other_credential": false,
+   "subject_stated": "issuer and subject are the same party"
+  }
+ },
+ {
+  "id": 122,
+  "name": "Permanent resident card (PermanentResidentCard)",
+  "ecosystem": "w3c",
+  "fields": [
+   "type",
+   "givenName",
+   "familyName",
+   "gender",
+   "image",
+   "residentSince",
+   "lprCategory",
+   "lprNumber",
+   "commuterClassification",
+   "birthCountry",
+   "birthDate"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject.type` is [\"PermanentResident\", \"Person\"]; the credential itself carries `identifier`, `validFrom` and `validUntil`, in context `https://w3id.org/citizenship/v3`. The example is the BBS unlinkable selective-disclosure pair, whose derived presentation discloses only `birthCountry`.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 123,
+  "name": "Birth certificate",
+  "ecosystem": "w3c",
+  "fields": [
+   "citizenship",
+   "birthDate",
+   "birthPlace",
+   "givenName",
+   "familyName",
+   "parent",
+   "parent.givenName",
+   "parent.familyName",
+   "parent.maidenName"
+  ],
+  "fields_known": true,
+  "field_note": "Merges three harvest entries: the focal use-case Birth Certificate (fields only from the Appendix B.1 `BirthCertificate` example), Anand's Birth Certificate, and the Recognized Entities draft's vital records, which states no fields. `birthPlace` nests a `Hospital` with an `address`; `parent` is an array of persons each with givenName, familyName and optionally maidenName.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 124,
+  "name": "Marriage licence / certificate",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in any of the three merged harvest entries (the focal use-case Marriage License, the parents' proof of marriage in need L.4, and the Recognized Entities draft's vital records); the Marriage License prose names maiden name and married name.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the two spouses)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 125,
+  "name": "Death certificate",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named as an example of a vital record a regional office may be recognized to issue.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 126,
+  "name": "Self-sovereign proof of birth",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 127,
+  "name": "Permission to travel (ChildTravelPass)",
+  "ecosystem": "w3c",
+  "fields": [
+   "potentialAction",
+   "potentialAction.agent",
+   "potentialAction.participant",
+   "potentialAction.location",
+   "potentialAction.location.address.addressCountry"
+  ],
+  "fields_known": true,
+  "field_note": "Type is [\"VerifiableCredential\", \"ChildTravelPass\"]; `credentialSubject.potentialAction` is of `type: \"TravelAction\"` and `location` is a `Country` with `address.addressCountry`. It expires. The document notes the DID system \"replaces the role of the notary in the paper/physical world\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, the minor is the subject; the issuer is the non-traveling parent, i.e. a private individual issuing about his own child",
+   "names_other_credential": false,
+   "subject_stated": "the minor is the subject; the issuer is the non-traveling parent"
+  }
+ },
+ {
+  "id": 128,
+  "name": "Relationship credential (RelationshipCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "name",
+   "spouse"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject` is an array of two objects, each with these three properties; the example exists to show multiple subjects in one credential.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, two of them",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 129,
+  "name": "Government disability credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the document is explicit that the specific disability is not disclosed, \"as this could put her at personal risk\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 130,
+  "name": "Insurance coverage credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the patient)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 131,
+  "name": "Electronic prescription",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the patient), with the prescriber also identified",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 132,
+  "name": "Identity profile (aggregate)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in either merged harvest entry (the finance identity profile, need F.2, and the air travel Identity Profile, need L.3). Both are recorded as inferred, because each names an aggregate rather than a single issued credential.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": true,
+   "subject_stated": "a collection of verifiable credentials that are assembled into his air travel Identity Profile; the profile is an aggregate presented as a unit, not a single issued credential"
+  }
+ },
+ {
+  "id": 133,
+  "name": "Upgrade coupon (frequent flyer)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, but it is a bearer-style entitlement whose value is the redemption right rather than a fact about the subject",
+   "names_other_credential": false,
+   "subject_stated": "a bearer-style entitlement whose value is the redemption right rather than a fact about the subject"
+  }
+ },
+ {
+  "id": 134,
+  "name": "Device-identifying credential (IDevID, IAK)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the document names the credential kinds as \"IDevID, IAK\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes, but the subject is a device rather than a person or organization",
+   "names_other_credential": false,
+   "subject_stated": "the subject is a device rather than a person or organization"
+  }
+ },
+ {
+  "id": 135,
+  "name": "Specification-compliance certification (device)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the device), issued by a certification testing lab",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 136,
+  "name": "Evidence-of-possession credential (supply chain)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the device)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 137,
+  "name": "Owner-issued device trust credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as property identifiers; the document's own prose list is \"device manufacturer model/version, software manufacturer model/version, security versions of components TCB, and associated devices the fan controller is authorized to interact with including thermostat-board-room\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the device, subject; issued by its new owner)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 138,
+  "name": "GS1 Prefix licence",
+  "ecosystem": "w3c",
+  "fields": [
+   "organization",
+   "organization.gs1:partyGLN",
+   "organization.gs1:organizationName",
+   "licenseValue"
+  ],
+  "fields_known": true,
+  "field_note": "Type is [\"VerifiableCredential\", \"GS1PrefixLicenseCredential\"]; `credentialStatus` is a BitstringStatusListEntry with statusPurpose \"revocation\"; issued with `validFrom` but deliberately no `validUntil`. Example licenseValue \"952\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, an organization",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 139,
+  "name": "GS1 Company Prefix licence",
+  "ecosystem": "w3c",
+  "fields": [
+   "organization",
+   "extendsCredential",
+   "licenseValue"
+  ],
+  "fields_known": true,
+  "field_note": "Type is [\"VerifiableCredential\", \"GS1CompanyPrefixLicenseCredential\"]; `extendsCredential` carries the ID of the prior credential (the GS1 Prefix licence). Example licenseValue \"9521234\". Transferable to another user company on merger or acquisition, and revocable, suspendable or replaceable.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, an organization",
+   "names_other_credential": true,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 140,
+  "name": "GS1 Key credential (GTIN)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "extendsCredential"
+  ],
+  "fields_known": true,
+  "field_note": "Type is [\"VerifiableCredential\", \"KeyCredential\"]; `credentialSubject.id` is the GTIN as a GS1 Digital Link URI (e.g. https://id.gs1.org/01/09521234555551) and `extendsCredential` points at the company prefix licence.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": false,
+   "issuee_note": "no. The subject is the GTIN, i.e. a trade item identifier, not a party",
+   "names_other_credential": true,
+   "subject_stated": "For the trade item Verifiable Credential, the subject is the GTIN represented as a GS1 Digital Link URI."
+  }
+ },
+ {
+  "id": 141,
+  "name": "Trade item data credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as formal field names; the attribute list is prose - \"brand, size and unit of measure, ingredients, dimensions and weights\", and elsewhere \"those that describe the product or that provide information such as recycling instructions\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no (subject is the trade item)",
+   "names_other_credential": false,
+   "subject_stated": "subject is the trade item"
+  }
+ },
+ {
+  "id": 142,
+  "name": "Product recall notice",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named only in passing, as an example of \"Other dependent credentials that are created after revocation [that] may be valid, such as a product recall notice linked to a GTIN key credential\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no (it is about a trade item)",
+   "names_other_credential": true,
+   "subject_stated": "it is about a trade item"
+  }
+ },
+ {
+  "id": 143,
+  "name": "Product test report",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; \"product details, quality, and safety report\" is the closest the document comes.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is the product",
+   "names_other_credential": false,
+   "subject_stated": "the subject is the product"
+  }
+ },
+ {
+  "id": 144,
+  "name": "Certificate of conformity",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - described in a Recognized Entities use-case narrative rather than defined.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is a product",
+   "names_other_credential": false,
+   "subject_stated": "the subject is a product"
+  }
+ },
+ {
+  "id": 145,
+  "name": "Accreditation scope credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; it is a `RecognizedEntityCredential` specialised to this purpose, so its structure is row 153's.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes (the CAB, an organization)",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 146,
+  "name": "Certificate of Origin",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the use-cases document gives this as a user story and names no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "the document makes an unusual claim here: \"The Subject of the CO is the certificate itself, which confirms that the goods being exported originate from a specific country.\" So the stated subject is neither a person nor the goods but the document. Recorded as stated, but flagged; it reads as an editing artefact rather than a considered modelling choice.",
+   "names_other_credential": false,
+   "subject_stated": "The Subject of the CO is the certificate itself, which confirms that the goods being exported originate from a specific country."
+  }
+ },
+ {
+  "id": 147,
+  "name": "Bill of lading",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated. The document never explicitly says it is expressed as a verifiable credential; it is named as one of the documents customs requires.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown; the document names it as a required document without modelling its subject",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 148,
+  "name": "Commercial invoice / exporter's invoice",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in either merged harvest entry. The use-cases Exporter's Invoice names pricing as information the exporter may redact; the Recognized Entities commercial invoice gives volumes (\"Roughly five billion commercial invoices are exchanged annually among approximately 50 million trading entities worldwide\") but no fields.",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "the Recognized Entities draft records \"no; the subject is a transaction\"; the use-cases document records unknown, naming the Exporter's Invoice as a document in the flow without modelling its subject",
+   "names_other_credential": false,
+   "subject_stated": "the subject is a transaction"
+  }
+ },
+ {
+  "id": 149,
+  "name": "Dispute credential (DisputeCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "currentStatus",
+   "statusReason",
+   "disputedClaim"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject.id` is the identifier of the disputed credential; `currentStatus` is \"Disputed\"; `statusReason` is a language-tagged value; `disputedClaim` is optional and is itself an object naming the subject and the wrong claim. Where the disputed credential has no identifier, \"a content-addressed identifier can be used\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is another credential",
+   "names_other_credential": true,
+   "subject_stated": "the subject is another credential"
+  }
+ },
+ {
+  "id": 150,
+  "name": "Assert credential (ExampleAssertCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "assertion"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject.id` is the presentation's URN and `assertion` carries the sentence \"This VP is submitted by the subject as evidence of a legal right to drive\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is a presentation, not a party",
+   "names_other_credential": true,
+   "subject_stated": "the subject is a presentation, not a party"
+  }
+ },
+ {
+  "id": 151,
+  "name": "JSON schema credential (JsonSchemaCredential)",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as property names - the harvest records only \"a schema document as the credential subject\"; the Overview's example has title \"ExampleAlumniCredential\" and description \"Alumni Credential using JsonSchema\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is a schema",
+   "names_other_credential": true,
+   "subject_stated": "the subject is a schema"
+  }
+ },
+ {
+  "id": 152,
+  "name": "Bitstring status list credential",
+  "ecosystem": "w3c",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated as property names - the payload is a bitstring, referenced from other credentials by `credentialStatus.statusListCredential` and `statusListIndex`. The Overview notes \"the default status list size is 131,072 entries\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "unknown",
+   "has_issuee": false,
+   "issuee_note": "no; the subject is a set of credential statuses",
+   "names_other_credential": true,
+   "subject_stated": "the subject is a set of credential statuses"
+  }
+ },
+ {
+  "id": 153,
+  "name": "Recognized entity credential (RecognizedEntityCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "id",
+   "type",
+   "name",
+   "legalName",
+   "image",
+   "url",
+   "description",
+   "recognizedTo",
+   "recognizedTo.action",
+   "recognizedTo.outputValidation"
+  ],
+  "fields_known": true,
+  "field_note": "`credentialSubject` is an array of `RecognizedEntity` objects with these properties; `recognizedTo` is a list of `RecognizedAction` objects with an `action` value and optional `outputValidation` schemas; the issuer object may carry `type: \"RecognizedIssuer\"` and `recognizedIn`, so recognition chains are traversable. Source is an experimental editor's draft, self-described as \"not fit for production deployment\".",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": true,
+   "issuee_note": "yes, typically many organizations in one credential",
+   "names_other_credential": true,
+   "subject_stated": "its subject is a *set of issuers*, and it exists to make trust registries expressible as credentials"
+  }
+ },
+ {
+  "id": 154,
+  "name": "Food preference credential (ExampleFoodPreferenceCredential)",
+  "ecosystem": "w3c",
+  "fields": [
+   "favoriteCheese"
+  ],
+  "fields_known": true,
+  "field_note": "The single property `credentialSubject.favoriteCheese` (\"Gouda\" in the example).",
+  "structure": {
+   "format": "w3c-vc",
+   "payload_section": "credentialSubject",
+   "has_issuee": false,
+   "issuee_note": "no; the example deliberately omits a subject identifier",
+   "names_other_credential": false,
+   "subject_stated": "issuer and holder are the same DID and there is no subject `id` at all"
+  }
+ },
+ {
+  "id": 155,
+  "name": "boardingPass / flightobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "headerFields",
+   "primaryFields",
+   "secondaryFields",
+   "auxiliaryFields",
+   "backFields",
+   "transitType",
+   "transitProviderEmail",
+   "contactVenueEmail",
+   "contactVenuePhoneNumber",
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Merges Apple's `boardingPass` pass style and Google's `flightclass`/`flightobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row. Apple's style additionally requires a `transitType` key (the archive page names PKTransitTypeAir but does not enumerate the full set). Google's boarding-pass resource is named `flight`, not `boardingPass`.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "Apple: unknown \"because the format defines no holder field; a passenger name is conventional but the spec does not require or name one\". Google: unknown.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 156,
+  "name": "eventTicket / eventticketobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "headerFields",
+   "primaryFields",
+   "secondaryFields",
+   "auxiliaryFields",
+   "backFields",
+   "contactVenueEmail",
+   "contactVenuePhoneNumber",
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Merges Apple's `eventTicket` pass style and Google's `eventticketclass`/`eventticketobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "Apple: unknown, for the same reason as boardingPass - the format defines no holder field. Google: unknown.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 157,
+  "name": "coupon / offerobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "headerFields",
+   "primaryFields",
+   "secondaryFields",
+   "auxiliaryFields",
+   "backFields",
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Merges Apple's `coupon` pass style and Google's `offerclass`/`offerobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": false,
+   "issuee_note": "Apple: no, inferred - \"the description frames the pass around an offer, not a person, and no holder field exists\". Google: no, inferred - \"an offer is about a discount, not a person\".",
+   "names_other_credential": false,
+   "subject_stated": "an offer is about a discount, not a person"
+  }
+ },
+ {
+  "id": 158,
+  "name": "storeCard / loyaltyobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "headerFields",
+   "primaryFields",
+   "secondaryFields",
+   "auxiliaryFields",
+   "backFields",
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Merges Apple's `storeCard` pass style and Google's `loyaltyclass`/`loyaltyobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": true,
+   "issuee_note": "Apple: yes, inferred from \"a store identifies an account the user has with your company\" - an account is subject-bound - though the format still names no holder field. Google: yes, inferred - a purchase history is account-bound.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 159,
+  "name": "generic / genericobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "headerFields",
+   "primaryFields",
+   "secondaryFields",
+   "auxiliaryFields",
+   "backFields",
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers",
+   "cardTitle",
+   "header",
+   "subheader",
+   "genericType"
+  ],
+  "fields_known": false,
+  "field_note": "Merges Apple's `generic` pass style and Google's `genericclass`/`genericobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row. Google's generic object adds cardTitle (required), header (required), subheader and genericType. Apple's style is explicitly the residual category, \"so nothing about it constrains the subject\".",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "Apple: unknown. Google: unknown.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 160,
+  "name": "giftcardobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Google's `giftcardclass`/`giftcardobject`. Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row. The harvest records the name as stated and the assertion as inferred from the resource name.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 161,
+  "name": "transitobject",
+  "ecosystem": "wallet",
+  "fields": [
+   "id",
+   "classId",
+   "state",
+   "barcode",
+   "rotatingBarcode",
+   "smartTapRedemptionValue",
+   "validTimeInterval",
+   "imageModulesData",
+   "textModulesData",
+   "linksModuleData",
+   "appLinkData",
+   "groupingInfo",
+   "messages",
+   "passConstraints",
+   "notifications",
+   "saveRestrictions",
+   "valueAddedModuleData",
+   "linkedObjectIds",
+   "merchantLocations",
+   "heroImage",
+   "logo",
+   "wideLogo",
+   "hexBackgroundColor",
+   "hasUsers"
+  ],
+  "fields_known": false,
+  "field_note": "Google's `transitclass`/`transitobject` (\"Replace paper tickets and reduce fraud\"). Both wallet type systems state a structural field set and explicitly no semantic claim vocabulary - Apple's five pass styles \"share the same field-group structure and none of them defines semantic claim names - an issuer puts arbitrary labelled key/value pairs into the groups\", and Google's content is \"issuer-defined text/image modules rather than a standardized claim vocabulary\", so \"the semantic answer is not stated\" for every one. `fields` therefore lists structural containers, not claim names, and `fields_known` is false. Apple's shared top-level pass keys (description, formatVersion, organizationName, passTypeIdentifier, serialNumber, teamIdentifier, barcodes, locations, beacons, relevantDates, maxDistance, webServiceURL, authenticationToken, appLaunchURL, associatedStoreIdentifiers, userInfo, voided, sharingProhibited, backgroundColor, foregroundColor, labelColor, logoText, footerBackgroundColor) are recorded in this note rather than repeated per row. A `media` resource exists to \"Download and upload rotating barcode values for transit objects\".",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 162,
+  "name": "Season pass",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_SEASON_PASS`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 163,
+  "name": "Utility bill",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_UTILITY_BILLS`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 164,
+  "name": "Parking pass",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_PARKING_PASS`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 165,
+  "name": "Voucher",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_VOUCHER`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 166,
+  "name": "Gym membership",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_GYM_MEMBERSHIP` (\"gym membership cards\"). A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown. Apple separately names gym membership cards as an example of its residual `generic` pass style, also without fields.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 167,
+  "name": "Library membership",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_LIBRARY_MEMBERSHIP`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 168,
+  "name": "Reservation (pass)",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_RESERVATIONS`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 169,
+  "name": "Auto insurance card",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_AUTO_INSURANCE`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 170,
+  "name": "Home insurance card",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_HOME_INSURANCE`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 171,
+  "name": "Entry ticket",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_ENTRY_TICKET`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 172,
+  "name": "Receipt",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "Enum value `GENERIC_RECEIPT`. A value of the `GenericType` enum on Google's generic pass object; the source gives the enum value and a short gloss but no fields of its own. The containing generic pass's structural fields are row 159. The harvest records all enum values as Issuee? unknown.",
+  "structure": {
+   "format": "pass",
+   "payload_section": "pass-fields",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 173,
+  "name": "Driver's licence / state ID in Apple Wallet",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated on Apple's support and security pages; the harvest points to the `org.iso.18013.5.1` element set requestable via PKIdentityDriversLicenseDescriptor, which is recorded on row 58.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes. The security guide states transmission \"follows the ISO/IEC 18013-5 standard\"; the credential is added by scanning the front and back of the physical credential plus a Live Photo/selfie.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 174,
+  "name": "Digital ID (Apple)",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated on the product pages; the harvest points to the ISO 23220_1 element set requestable via PKIdentityPhotoIDDescriptor, recorded on row 59.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes. Notable as a corpus case: \"the issuer of the wallet credential (Apple) is not the issuer of the source document (the State Department), and Apple says so\".",
+   "names_other_credential": false,
+   "subject_stated": "is derived from your government-issued passport but is not itself a government-issued passport, and can't be used for international travel or border crossing"
+  }
+ },
+ {
+  "id": 175,
+  "name": "Google Wallet ID pass (com.google.wallet.idcard.1)",
+  "ecosystem": "wallet",
+  "fields": [
+   "family_name",
+   "given_name",
+   "birth_date",
+   "issue_date",
+   "expiry_date",
+   "issuing_country",
+   "issuing_authority",
+   "document_number",
+   "portrait",
+   "sex",
+   "age_over_18",
+   "age_over_21",
+   "nationality",
+   "original_document_issue_date"
+  ],
+  "fields_known": true,
+  "field_note": "Google's supported-attributes page gives the claim list, in the ISO mDL namespace `org.iso.18013.5.1` despite the vendor-minted `com.google` doctype - \"type and vocabulary come apart\". Multipaz defines the same doctype as request profiles rather than a flat attribute list (age over 18, age over 21, ZKP variants of each, \"age over 18 and portrait\", \"age over 21 and portrait\", a mandatory-data-elements request and an all-data-elements request). `original_document_issue_date` is a distinct claim from `issue_date`.",
+  "structure": {
+   "format": "mdoc",
+   "payload_section": "claims",
+   "has_issuee": true,
+   "issuee_note": "yes",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 176,
+  "name": "My Number Card (Japan)",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - Apple's security guide describes it as \"combining mobile identity and Japan Public Key Infrastructure functionality\" and gives no fields.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes. Notable as the one non-US national ID card named in Apple's security guide, and as a credential that carries a signing PKI rather than only attributes.",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 177,
+  "name": "Digital car key",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (car key) and in Google's Access vertical (Digital Car Keys).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 178,
+  "name": "Home key",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (home keys).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 179,
+  "name": "Hotel key",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (hotel keys) and in Google's Access vertical (Hotel Keys).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 180,
+  "name": "Campus / student ID",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (student ID - campus access and payment) and in Google's Access vertical (Campus IDs).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 181,
+  "name": "Corporate badge",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (employee badge - office/facility access) and in Google's Access vertical (Corporate Badges).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 182,
+  "name": "Theme-park pass",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page; named example Disney MagicMobile.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 183,
+  "name": "Payment card (wallet)",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (\"credit and debit cards\") and in Google's Retail vertical (In-store payments).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 184,
+  "name": "Transit card (stored value)",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Named on Apple's Wallet marketing page (transit cards, Express Transit) and in Google's Tickets and Transit vertical (Closed Loop and Open Loop Transit Passes).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 185,
+  "name": "Order tracking",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated in credential terms - the source \"describes each by use, not by claim\", and states nothing about internal structure. Apple's page describes it as \"merchant and tracking details from your eligible order confirmations\".",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown for all of these Wallet features",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 186,
+  "name": "Movie ticket",
+  "ecosystem": "wallet",
+  "fields": [
+   "ticket_id",
+   "movie",
+   "movie_rating",
+   "cinema",
+   "theater_id",
+   "show_date_time",
+   "seat_id",
+   "parking_option",
+   "poster"
+  ],
+  "fields_known": true,
+  "field_note": "Multipaz's Utopia sample, VCT `https://utopia.example.com/vct/movieticket`.",
+  "structure": {
+   "format": "sd-jwt",
+   "payload_section": "claims",
+   "has_issuee": false,
+   "issuee_note": "no strong subject; it is an entitlement to attend a screening, with no identifying attributes of the bearer",
+   "names_other_credential": false,
+   "subject_stated": "no strong subject; it is an entitlement to attend a screening, with no identifying attributes of the bearer"
+  }
+ },
+ {
+  "id": 187,
+  "name": "Health insurance card",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named in Google's Health vertical (Health Insurance Cards) with Asserts and Key fields not stated at that level.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 188,
+  "name": "Test record / COVID card",
+  "ecosystem": "wallet",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - named in Google's Health vertical (Test Records, COVID Cards) with Asserts and Key fields not stated at that level.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "unknown",
+   "names_other_credential": false,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 189,
+  "name": "Personhood credential (PHC)",
+  "ecosystem": "personhood",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated on either source (the First Person Network white-paper page or the Medium article, the latter retrieved through a reader proxy because medium.com returns HTTP 403).",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - a natural person, called \"the credential holder\". The issuer is explicitly open-ended: \"any qualified entity such as a company, university, nonprofit community, government, etc.\"",
+   "names_other_credential": false,
+   "subject_stated": "Personhood credentials are issued by any ecosystem (any qualified entity such as a company, university, nonprofit community, government, etc.) who can attest to the credential holder being a real unique person within that ecosystem."
+  }
+ },
+ {
+  "id": 190,
+  "name": "Verifiable relationship credential (VRC)",
+  "ecosystem": "personhood",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated on either source.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - another natural person. This entry states a precondition on both parties: both issuer and issuee must already hold personhood credentials.",
+   "names_other_credential": false,
+   "subject_stated": "Verifiable relationship credentials are issued peer-to-peer between holders of personhood credentials in order to attest to verifiable first-person trust relationships."
+  }
+ },
+ {
+  "id": 191,
+  "name": "First Person Certified AI agent",
+  "ecosystem": "personhood",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated; the page gives the term and the question it answers, and says the detail lives in Part Eight of the full white paper, which was not fetched.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": true,
+   "issuee_note": "yes - an AI agent, with a natural person as the delegating principal. This is the inverse of proof of personhood: a credential whose subject is explicitly *not* human and which binds that non-human to a human.",
+   "names_other_credential": false,
+   "subject_stated": "a credential whose subject is explicitly *not* human and which binds that non-human to a human"
+  }
+ },
+ {
+  "id": 192,
+  "name": "Name-to-IBAN credential",
+  "ecosystem": "addendum",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the underlying material is private client work in private repositories and is recorded by name and assertion only, with no quotation and no detail (provenant-tti.md section 2). Anyone continuing this line should go to the named primary source.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "not stated in the publishable record",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 193,
+  "name": "Beneficial-ownership attestation",
+  "ecosystem": "addendum",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the underlying material is private client work in private repositories and is recorded by name and assertion only, with no quotation and no detail (provenant-tti.md section 2). Anyone continuing this line should go to the named primary source.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "not stated in the publishable record",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 194,
+  "name": "Supervisory licence attestation (bank licence, fit-and-proper)",
+  "ecosystem": "addendum",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the underlying material is private client work in private repositories and is recorded by name and assertion only, with no quotation and no detail (provenant-tti.md section 2). Anyone continuing this line should go to the named primary source.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "not stated in the publishable record",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ },
+ {
+  "id": 195,
+  "name": "PSD2 qualified certificate (ETSI TS 119 495)",
+  "ecosystem": "addendum",
+  "fields": [],
+  "fields_known": false,
+  "field_note": "not stated - the underlying material is private client work in private repositories and is recorded by name and assertion only, with no quotation and no detail (provenant-tti.md section 2). Anyone continuing this line should go to the named primary source. Named as a production analogue of a credential outliving the fact it asserts, under ETSI TS 119 495.",
+  "structure": {
+   "format": "unknown",
+   "payload_section": "unknown",
+   "has_issuee": null,
+   "issuee_note": "not stated in the publishable record",
+   "names_other_credential": null,
+   "subject_stated": ""
+  }
+ }
+]

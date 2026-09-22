@@ -1,0 +1,367 @@
+{
+ "1": [
+  "IDENTITY"
+ ],
+ "2": [
+  "AGE"
+ ],
+ "3": [
+  "AUTHORITY"
+ ],
+ "5": [
+  "HUMANNESS"
+ ],
+ "6": [
+  "CONTROL"
+ ],
+ "8": [
+  "AWARD"
+ ],
+ "9": [
+  "LICENCE"
+ ],
+ "11": [
+  "ORG-IDENTITY"
+ ],
+ "18": [
+  "ORG-IDENTITY"
+ ],
+ "19": [
+  "BRAND"
+ ],
+ "20": [
+  "ORG-IDENTITY"
+ ],
+ "21": [
+  "TELECOM",
+  "AUTHORITY"
+ ],
+ "22": [
+  "TELECOM"
+ ],
+ "24": [
+  "ORG-IDENTITY"
+ ],
+ "25": [
+  "ORG-IDENTITY",
+  "AUTHORITY"
+ ],
+ "26": [
+  "EMPLOYMENT"
+ ],
+ "27": [
+  "EMPLOYMENT"
+ ],
+ "36": [
+  "LICENCE"
+ ],
+ "45": [
+  "ORG-IDENTITY"
+ ],
+ "46": [
+  "BRAND"
+ ],
+ "50": [
+  "ORG-IDENTITY",
+  "BRAND"
+ ],
+ "53": [
+  "HUMANNESS"
+ ],
+ "54": [
+  "TELECOM"
+ ],
+ "55": [
+  "ORG-IDENTITY"
+ ],
+ "57": [
+  "IDENTITY"
+ ],
+ "58": [
+  "IDENTITY",
+  "LICENCE"
+ ],
+ "59": [
+  "IDENTITY"
+ ],
+ "60": [
+  "IDENTITY",
+  "RESIDENCE"
+ ],
+ "61": [
+  "IDENTITY",
+  "ACADEMIC"
+ ],
+ "62": [
+  "ACADEMIC"
+ ],
+ "63": [
+  "HEALTH"
+ ],
+ "64": [
+  "IDENTITY",
+  "HEALTH"
+ ],
+ "65": [
+  "IDENTITY",
+  "EMPLOYMENT"
+ ],
+ "66": [
+  "IDENTITY",
+  "EMPLOYMENT"
+ ],
+ "68": [
+  "IDENTITY",
+  "LICENCE"
+ ],
+ "69": [
+  "IDENTITY",
+  "FINANCIAL"
+ ],
+ "70": [
+  "FINANCIAL",
+  "RESIDENCE"
+ ],
+ "71": [
+  "IDENTITY",
+  "TELECOM"
+ ],
+ "72": [
+  "IDENTITY",
+  "MEMBERSHIP"
+ ],
+ "79": [
+  "IDENTITY"
+ ],
+ "80": [
+  "AGE"
+ ],
+ "81": [
+  "HEALTH"
+ ],
+ "82": [
+  "IDENTITY"
+ ],
+ "83": [
+  "CIVIL-STATUS"
+ ],
+ "84": [
+  "FINANCIAL"
+ ],
+ "87": [
+  "ACADEMIC",
+  "MEMBERSHIP"
+ ],
+ "88": [
+  "IDENTITY",
+  "FINANCIAL"
+ ],
+ "89": [
+  "IDENTITY"
+ ],
+ "90": [
+  "ACADEMIC"
+ ],
+ "91": [
+  "ACADEMIC"
+ ],
+ "92": [
+  "ACADEMIC"
+ ],
+ "93": [
+  "ACADEMIC",
+  "MEMBERSHIP"
+ ],
+ "94": [
+  "ACADEMIC"
+ ],
+ "95": [
+  "ACADEMIC"
+ ],
+ "96": [
+  "ACADEMIC"
+ ],
+ "97": [
+  "ACADEMIC"
+ ],
+ "98": [
+  "ACADEMIC",
+  "LICENCE"
+ ],
+ "99": [
+  "LICENCE"
+ ],
+ "100": [
+  "LICENCE"
+ ],
+ "101": [
+  "ACADEMIC"
+ ],
+ "102": [
+  "LICENCE"
+ ],
+ "103": [
+  "ORG-IDENTITY",
+  "AUTHORITY"
+ ],
+ "104": [
+  "LICENCE"
+ ],
+ "105": [
+  "LICENCE"
+ ],
+ "106": [
+  "ORG-IDENTITY",
+  "AUTHORITY"
+ ],
+ "109": [
+  "RESIDENCE"
+ ],
+ "110": [
+  "RESIDENCE"
+ ],
+ "111": [
+  "AGE"
+ ],
+ "112": [
+  "AGE"
+ ],
+ "113": [
+  "ORG-IDENTITY"
+ ],
+ "114": [
+  "MEMBERSHIP"
+ ],
+ "115": [
+  "FINANCIAL"
+ ],
+ "117": [
+  "IDENTITY"
+ ],
+ "118": [
+  "IDENTITY"
+ ],
+ "119": [
+  "IDENTITY",
+  "TRAVEL"
+ ],
+ "120": [
+  "LICENCE"
+ ],
+ "121": [
+  "LICENCE"
+ ],
+ "122": [
+  "IDENTITY",
+  "TRAVEL"
+ ],
+ "123": [
+  "CIVIL-STATUS",
+  "IDENTITY"
+ ],
+ "124": [
+  "CIVIL-STATUS"
+ ],
+ "125": [
+  "CIVIL-STATUS"
+ ],
+ "126": [
+  "CIVIL-STATUS"
+ ],
+ "128": [
+  "CIVIL-STATUS"
+ ],
+ "129": [
+  "HEALTH",
+  "CIVIL-STATUS"
+ ],
+ "130": [
+  "HEALTH"
+ ],
+ "131": [
+  "HEALTH"
+ ],
+ "138": [
+  "AUTHORITY"
+ ],
+ "139": [
+  "AUTHORITY"
+ ],
+ "145": [
+  "ORG-IDENTITY",
+  "AUTHORITY"
+ ],
+ "154": [
+  "MISC"
+ ],
+ "158": [
+  "MEMBERSHIP",
+  "FINANCIAL"
+ ],
+ "166": [
+  "MEMBERSHIP"
+ ],
+ "167": [
+  "MEMBERSHIP"
+ ],
+ "169": [
+  "FINANCIAL"
+ ],
+ "170": [
+  "FINANCIAL"
+ ],
+ "173": [
+  "IDENTITY",
+  "LICENCE"
+ ],
+ "174": [
+  "IDENTITY"
+ ],
+ "175": [
+  "IDENTITY"
+ ],
+ "176": [
+  "IDENTITY"
+ ],
+ "180": [
+  "ACADEMIC",
+  "MEMBERSHIP"
+ ],
+ "181": [
+  "EMPLOYMENT"
+ ],
+ "183": [
+  "FINANCIAL"
+ ],
+ "184": [
+  "FINANCIAL"
+ ],
+ "187": [
+  "HEALTH",
+  "FINANCIAL"
+ ],
+ "188": [
+  "HEALTH"
+ ],
+ "189": [
+  "HUMANNESS"
+ ],
+ "190": [
+  "RELATIONSHIP"
+ ],
+ "192": [
+  "ORG-IDENTITY",
+  "FINANCIAL"
+ ],
+ "193": [
+  "ORG-IDENTITY"
+ ],
+ "194": [
+  "ORG-IDENTITY",
+  "LICENCE"
+ ],
+ "195": [
+  "ORG-IDENTITY",
+  "LICENCE"
+ ]
+}
