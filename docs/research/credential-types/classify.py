@@ -88,24 +88,29 @@ V = {
         r"^disclosables$", r"^fiduciary$", r"^recognition$", r"^delegat", r"^licensevalue$",
         r"^extendscredential$", r"^authorizedserviceprovider$",
     ),
-    "humanness": _rx(r"^biometric", r"^knownas$", r"^firstmet$", r"^lastinteraction$", r"^modalities$",
-                     r"^personhood", r"^ongoing$", r"^minutes$"),
+    # `^biometric` was here and is narrowed: an mDL carries `biometric_template_xx` as an identity
+    # element, which is not a claim that the holder is a human being. `ongoing` and `minutes` are
+    # dropped as too generic to carry the claim on their own.
+    "humanness": _rx(r"^biometrichashes$", r"^biometricprotocol$", r"^knownas$", r"^firstmet$",
+                     r"^lastinteraction$", r"^modalities$", r"^personhood"),
     "brand": _rx(r"^brand", r"^logo", r"^vcard$", r"^wordmark$"),
+    # `issuing_organization` was here and is removed: it names the ISSUER, not an organization the
+    # credential is about, and it appears in the EU IBAN and MSISDN attestations about individuals.
     "org_identity": _rx(r"^lei$", r"^legalcompany", r"^lids$", r"^legal_name$", r"^taxid$", r"^partygln$",
-                        r"^organizationname$", r"^gracePeriod$", r"^issuing_organization$"),
+                        r"^organizationname$", r"^graceperiod$"),
     # Non-party vocabularies.
     # `typ`, `siz` and `loc` were in this list and are removed: they are generic enough to match a
     # citation, whose subject is external content rather than a thing the credential is about.
     "thing": _rx(r"^vin$", r"^registration_", r"^basic_vehicle_info$", r"^gtin", r"^res$",
                  r"^art_digest$", r"^content_", r"^digest$", r"^filename$",
-                 r"^provenance$", r"^uses$"),
+                 r"^provenance$", r"^uses$", r"^des$", r"^lbl$", r"^sdt$"),
     "bearer": _rx(r"ticket", r"coupon", r"^offer", r"voucher", r"^redemption", r"^seat", r"^barcode",
                   r"^admission", r"^movie$", r"^cinema$", r"^theater_id$", r"^parking_option$",
                   r"^poster$", r"^smarttapredemptionvalue$", r"^rotatingbarcode$"),
     "occurrence": _rx(r"^occurredat$", r"^venue$", r"^check_in_date$", r"^check_out_date$", r"^guests$",
                       r"^show_date_time$", r"^seat", r"^flight", r"^departure", r"^reservation_",
                       r"^booking_", r"^assembly_dt$", r"^evt_dt$", r"^evt_loc$", r"^transitType$",
-                      r"^assertdate$", r"^sdt$", r"^num_of_rooms$", r"^car_rental$"),
+                      r"^num_of_rooms$", r"^car_rental$"),
     # `be` was in this list and is removed: it is proof-of-control's "bits of entropy in the
     # challenge", and matching it classified a credential about a person as machinery. `pubkey`
     # moved here from "thing", because a key-binding attestation is about a key.
@@ -256,8 +261,8 @@ def _substantive_beyond(fields: list[str], key: str) -> bool:
 # Each is MECE on its own. Neither is MECE jointly with the other, which is the point.
 # --------------------------------------------------------------------------------------------
 
-SUBJECT_VALUES = ["PARTY", "THING", "OCCURRENCE", "EVIDENCE", "APPARATUS", "AGENT", "NONE", "UNKNOWN"]
-ALIGNMENT_VALUES = ["ORDINARY", "SELF", "OTHER_PARTY", "INVERTED", "NOT_A_PARTY", "UNKNOWN"]
+SUBJECT_VALUES = ["party", "thing", "occurrence", "evidence", "apparatus", "agent", "none", "unknown"]
+ALIGNMENT_VALUES = ["ordinary", "self-attested", "other-party", "inverted", "not-a-party", "unknown"]
 
 
 def subject_axis(row: dict) -> tuple[str, str]:
@@ -267,72 +272,104 @@ def subject_axis(row: dict) -> tuple[str, str]:
     own_claim = bool(_substantive(f)) if known else None
 
     if st.get("names_other_credential") is True and own_claim is False:
-        return "EVIDENCE", "references other evidence and claims nothing itself"
+        return "evidence", "references other evidence and claims nothing itself"
     if known and has(f, "evidence_ref") and not _substantive_beyond(f, "evidence_ref"):
-        return "EVIDENCE", f"payload is only evidence references {hits(f, 'evidence_ref')}"
+        return "evidence", f"payload is only evidence references {hits(f, 'evidence_ref')}"
     if not known:
         if st.get("names_other_credential") is True:
-            return "UNKNOWN", "references other evidence, but no field list to say whether it also claims something itself"
-        return "UNKNOWN", "no field list"
+            return "unknown", "references other evidence, but no field list to say whether it also claims something itself"
+        return "unknown", "no field list"
     if has(f, "apparatus"):
-        return "APPARATUS", f"apparatus fields {hits(f, 'apparatus')}"
+        return "apparatus", f"apparatus fields {hits(f, 'apparatus')}"
     if has(f, "identity") or has(f, "org_identity") or has(f, "humanness"):
-        return "PARTY", f"party attributes {(hits(f, 'identity') + hits(f, 'org_identity') + hits(f, 'humanness'))[:4]}"
-    if has(f, "thing"):
-        return "THING", f"thing fields {hits(f, 'thing')}"
-    if has(f, "bearer"):
-        return "NONE", f"bearer fields {hits(f, 'bearer')}"
-    if has(f, "occurrence"):
-        return "OCCURRENCE", f"occurrence fields {hits(f, 'occurrence')}"
-    # An issuee with no recognized subject vocabulary is still a credential about that party.
+        return "party", f"party attributes {(hits(f, 'identity') + hits(f, 'org_identity') + hits(f, 'humanness'))[:4]}"
+    # A declared issuee outranks object vocabulary. A proof-of-control credential names a resource
+    # and is about the PARTY who controls it; a telephone-allocation credential names a number range
+    # and is about the party holding the right. The object is what the claim is made WITH, not what
+    # the claim is ABOUT. Only a credential with no issuee at all is about the object itself.
     if st.get("has_issuee") is True:
-        return "PARTY", "an issuee is declared and no other subject vocabulary matched"
-    return "UNKNOWN", "no subject vocabulary matched and no issuee declared"
+        return "party", "an issuee is declared, so the payload's objects are what is claimed about them"
+    if has(f, "thing"):
+        return "thing", f"thing fields {hits(f, 'thing')}"
+    if has(f, "bearer"):
+        return "none", f"bearer fields {hits(f, 'bearer')}"
+    if has(f, "occurrence"):
+        return "occurrence", f"occurrence fields {hits(f, 'occurrence')}"
+    return "unknown", "no subject vocabulary matched and no issuee declared"
 
 
 def alignment_axis(row: dict) -> tuple[str, str]:
     st = row.get("structure") or {}
     subj, _ = subject_axis(row)
-    if subj in ("THING", "OCCURRENCE", "EVIDENCE", "APPARATUS", "NONE"):
-        return "NOT_A_PARTY", f"subject is {subj}"
+    if subj == "unknown":
+        # Answering "ordinary" here is the unsafe default in a second disguise: it would assert that
+        # the credential is about the party presenting it, on no evidence beyond an issuee existing.
+        return "unknown", "the subject is unknown, so how it aligns with the holder is unknown too"
+    if subj in ("thing", "occurrence", "evidence", "apparatus", "none"):
+        return "not-a-party", f"subject is {subj}"
     issuee = st.get("has_issuee")
-    if issuee is False and subj == "PARTY":
+    if issuee is False and subj == "party":
         # No issuee, yet the payload carries party attributes: the party is the issuer.
-        return "SELF", "party attributes present with no issuee declared"
+        return "self-attested", "party attributes present with no issuee declared"
     if issuee is True:
-        return "ORDINARY", "an issuee is declared"
-    return "UNKNOWN", "the source does not say whether there is an issuee"
+        return "ordinary", "an issuee is declared"
+    return "unknown", "the source does not say whether there is an issuee"
 
 
 # --------------------------------------------------------------------------------------------
 # Stage 2 -- the domain pass. Zero, one or several labels. Never exclusive.
 # --------------------------------------------------------------------------------------------
 
-DOMAIN_ORDER = [
-    "ORG-IDENTITY", "IDENTITY", "AGE", "HUMANNESS", "FINANCIAL", "ACADEMIC", "LICENCE",
-    "HEALTH", "EMPLOYMENT", "TELECOM", "RESIDENCE", "MEMBERSHIP", "CIVIL-STATUS",
-    "AUTHORITY", "BRAND",
+# The nine categories, lower-kebab, as settled on 2026-09-23. Each maps to one or more of the
+# field vocabularies above; the merges are recorded in docs/design/credential-categories.md and
+# each one has a reason from the corpus rather than from tidiness.
+CATEGORIES = [
+    "org-identity",   # who an organization is
+    "identity",       # who a natural person is -- absorbs age, residence and travel
+    "humanness",      # that a party is a real person, without saying which person
+    "financial",
+    "qualification",  # absorbs academic, licence and award
+    "health",
+    "affiliation",    # absorbs employment, membership and relationship
+    "authority",      # absorbs telecom rights, brand rights and proof of control
+    "civil-status",
 ]
 
-DOMAIN_VOCAB = {
-    "ORG-IDENTITY": "org_identity", "IDENTITY": "identity", "AGE": "age", "HUMANNESS": "humanness",
-    "FINANCIAL": "financial", "ACADEMIC": "academic", "LICENCE": "licence", "HEALTH": "health",
-    "EMPLOYMENT": "employment", "TELECOM": "telecom", "RESIDENCE": "residence",
-    "MEMBERSHIP": "membership", "CIVIL-STATUS": "civil_status", "AUTHORITY": "authority",
-    "BRAND": "brand",
+CATEGORY_VOCAB = {
+    "org-identity": ["org_identity"],
+    "identity": ["identity", "age", "residence"],
+    "humanness": ["humanness"],
+    "financial": ["financial"],
+    "qualification": ["academic", "licence"],
+    "health": ["health"],
+    "affiliation": ["employment", "membership"],
+    "authority": ["authority", "telecom", "brand"],
+    "civil-status": ["civil_status"],
 }
 
+RESIDUAL = "misc"
 
-def domains(row: dict) -> list[str]:
+
+def categories(row: dict) -> list[str]:
+    """Zero, one or several categories. Never exclusive -- a driving licence is two of them.
+
+    Ordering is meaningful rather than alphabetical: the first element is the one a single-glyph
+    rendering should use. `identity` is demoted whenever it co-occurs, because identity attributes
+    are the substrate nearly every credential is built on and are therefore the least informative
+    label a credential can carry (F-HZ5X, and the precision measurement in CLASSIFIER.md).
+    """
     f = row.get("fields") or []
     if not row.get("fields_known", False):
         return []
-    out = [d for d in DOMAIN_ORDER if has(f, DOMAIN_VOCAB[d])]
-    # The substrate rule: identity co-occurring is the common case, so when it does, it is not the
-    # informative label. It is kept, but demoted to last so the glyph picker takes the other one.
-    if "IDENTITY" in out and len(out) > 1:
-        out = [d for d in out if d != "IDENTITY"] + ["IDENTITY"]
+    out = [c for c in CATEGORIES if any(has(f, v) for v in CATEGORY_VOCAB[c])]
+    if "identity" in out and len(out) > 1:
+        out = [c for c in out if c != "identity"] + ["identity"]
     return out
+
+
+def domains(row: dict) -> list[str]:
+    """Deprecated alias kept so the older evaluation scripts still run."""
+    return categories(row)
 
 
 def classify(row: dict) -> dict:

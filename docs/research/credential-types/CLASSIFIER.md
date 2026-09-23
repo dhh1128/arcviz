@@ -12,8 +12,8 @@ A measured answer, not an argued one. The scheme sketched during the 2026-09-21/
 |---|---|---|---|
 | single spine, willing to guess | 147 | 48 | 105/147 = **71%** |
 | single spine, declines when blind | 84 | 111 | 61/84 = **72%** |
-| **two axes — subject** | 75 | 120 | 68/75 = **90%** |
-| **two axes — alignment** | 103 | 22 | 93/103 = **90%** |
+| **two axes — subject** | 75 | 120 | 70/75 = **93%** |
+| **two axes — alignment** | 62 | 63 | 57/62 = **91%** |
 
 ## Finding 1 — the ceiling is input, not rules
 
@@ -25,10 +25,10 @@ This is not a defect of the catalog. It is a fact about the ecosystems: a pass s
 
 The three-fork spine returned one value per credential, mixing two questions that are independent:
 
-- **SUBJECT** — what the credential is about: a party, a thing, an occurrence, other evidence, apparatus, an agent, or nothing.
-- **ALIGNMENT** — how issuer, holder and subject line up: ordinary, self-attestation, about another party, inverted, or not-a-party.
+- **subject** — what the credential is about: `party`, `thing`, `occurrence`, `evidence`, `apparatus`, `agent`, `none`, `unknown`.
+- **alignment** — how issuer, holder and subject line up: `ordinary`, `self-attested`, `other-party`, `inverted`, `not-a-party`, `unknown`.
 
-A key-binding attestation is a *self-attestation* whose *subject is a key*. A single-valued spine has to discard one of those, and `BindKeyAttestation`, `ai-user-coca` and `orgVet` all failed for exactly that reason rather than because any rule misread them. Split into two axes, each single-valued, agreement went from 71% to 90% on both — with no new evidence and no cleverer rules. The gain came entirely from no longer forcing one answer where the artifact has two.
+A key-binding attestation is a *self-attestation* whose *subject is a key*. A single-valued spine has to discard one of those, and `BindKeyAttestation`, `ai-user-coca` and `orgVet` all failed for exactly that reason rather than because any rule misread them. Split into two axes, each single-valued, agreement went from 71% to 93% and 91% — with no new evidence and no cleverer rules. The gain came entirely from no longer forcing one answer where the artifact has two.
 
 Each axis is MECE on its own. They are not MECE jointly, and that is the point rather than a defect.
 
@@ -40,17 +40,17 @@ Replacing it with a refusal is what dropped coverage from 147 to 84. That trade 
 
 ## Finding 4 — field presence tells you what a credential CARRIES, not what it is FOR
 
-Scored over the 54 rows that are both hand-labelled and field-bearing, the domain pass reaches **per-label recall 0.88 and precision 0.64**, with exact label-set agreement on only 19 of 54.
+Scored over the 54 rows that are both hand-labelled and field-bearing, the category pass reaches **per-label recall 0.94 and precision 0.77**, with exact label-set agreement on 32 of 54. The figures before the 2026-09-23 collapse to nine categories were recall 0.88, precision 0.64 and 19 of 54; the collapse did most of that work, because several of the merged pairs were exactly the ones the vocabularies could not separate.
 
-The asymmetry is the finding. Recall near 0.9 means field presence almost never *misses* a domain that is genuinely there. Precision at 0.64 means it adds domains that are present but not the point — and the false positives cluster exactly where you would predict: `RESIDENCE` 6, `LICENCE` 6, `AGE` 5, `IDENTITY` 5. A PID carries a residential address, so the classifier tags it `RESIDENCE`; an mDL carries `age_over_18`, so it tags `AGE`. Neither is *wrong* about the contents, and both are wrong about the point.
+The asymmetry is the finding. Recall near 0.9 means field presence almost never *misses* a domain that is genuinely there. Precision below 1 means it adds categories that are present but not the point, and before the collapse the false positives clustered exactly where you would predict: residence 6, licence 6, age 5, identity 5. A PID carries a residential address; an mDL carries `age_over_18`. Neither tag was *wrong* about the contents, and both were wrong about the point. Folding residence and age into `identity` removed that whole class of error, which is why the collapse raised precision by 13 points without touching a rule.
 
-This is the quantitative form of a defect the project had already named qualitatively: presence is not aboutness. The hand rule that demotes `IDENTITY` when it co-occurs was an intuitive instance of the missing mechanism, which is a notion of **dominance** — which fields are the payload's purpose versus which are supporting attributes. Nothing in a JSON Schema expresses that today.
+This is the quantitative form of a defect the project had already named qualitatively: presence is not aboutness. The hand rule that demotes `identity` when it co-occurs was an intuitive instance of the missing mechanism, which is a notion of **dominance** — which fields are the payload's purpose versus which are supporting attributes. Nothing in a JSON Schema expresses that today.
 
-The false negatives are few (9) and almost all sit on labels with no distinctive vocabulary to match: `TRAVEL`, `CONTROL`, `AWARD`, and the residual. Those are a labelling problem, not a classifier problem.
+The false negatives are few (4 after the collapse, 9 before) and almost all sat on pre-collapse labels with no distinctive vocabulary to match — travel, control, award and the residual — and three of those four were folded away by the collapse. Those are a labelling problem, not a classifier problem.
 
 ## Finding 5 — a residual will appear; name it honestly
 
-An early version had a `BEARER` bucket catching anything with no issuee and no matched vocabulary, and dossiers, disputes and iXBRL attestations fell into it. That is a residual wearing a category's name, which is worse than a residual, because it asserts something. `BEARER` now requires positive evidence — ticket, coupon, voucher, seat, barcode vocabulary — and anything else returns `UNKNOWN`.
+An early version had a `none`/bearer bucket catching anything with no issuee and no matched vocabulary, and dossiers, disputes and iXBRL attestations fell into it. That is a residual wearing a category's name, which is worse than a residual, because it asserts something. It now requires positive evidence — ticket, coupon, voucher, seat, barcode vocabulary — and anything else returns `unknown`.
 
 ## What would have to change for this to work
 
@@ -58,15 +58,16 @@ The rules are not the bottleneck and refining them further has low returns. Thre
 
 **Fall back to something other than schema fields when there is no schema.** Two thirds of the wallet and W3C corpus has none. A type identifier, an issuer identity, or a registry lookup would cover cases no field predicate can reach — with the caveat the catalog already records, that the type identifier is itself unstable.
 
-**Express dominance.** Precision is capped at roughly two thirds while every declared field counts equally. A schema convention marking which attributes are the payload's purpose, or a per-schema curated genus, would lift it; deriving it from field order or from required-versus-optional was not tested and is the cheapest thing to try next.
+**Express dominance.** Precision sits at 0.77 while every declared field counts equally, and the remaining errors are all of this kind. A schema convention marking which attributes are the payload's purpose, or a per-schema curated genus, would lift it; deriving it from field order or from required-versus-optional was not tested and is the cheapest thing to try next.
 
-**Decide what a classifier owes when it cannot answer.** `UNKNOWN` is currently 120 of 195 rows on the subject axis. That is not a failure to be engineered away — it is the honest state for a credential whose schema says nothing — but it does mean the rendering question is not "which of eight colours" but "what does the unmarked, unknown case look like, and how does it differ from the ordinary one". Those must not look alike.
+**Decide what a classifier owes when it cannot answer.** `unknown` is currently 120 of 195 rows on the subject axis. That is not a failure to be engineered away — it is the honest state for a credential whose schema says nothing — but it does mean the rendering question is not "which of eight colours" but "what does the unmarked, unknown case look like, and how does it differ from the ordinary one". Those must not look alike.
 
 ## Reproducing
 
 ```
 cd docs/research/credential-types
-python3 evaluate.py          # single-spine variants, coverage and misses
+python3 test_classify.py     # 30 hand-built vectors plus regression floors over the catalog
+python3 evaluate.py          # single-spine variants, coverage and per-row misses
 ```
 
 `classify.py` carries both spine variants behind keyword arguments (`safe_default`, `narrow_assembly`) and the two-axis functions (`subject_axis`, `alignment_axis`) side by side, so the numbers in the table above can each be reproduced without editing it. `domain_truth.json` holds the hand labels; `rows.json` holds inputs only and was extracted without reference to any category, so the rules are tested rather than confirmed.

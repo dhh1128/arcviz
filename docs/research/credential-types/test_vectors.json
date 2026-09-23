@@ -1,0 +1,790 @@
+{
+ "about": "Hand-built test vectors for classify.py. Each vector is a minimal synthetic credential with the smallest field set that should decide its case, plus the answer we intend. They pin behaviour and record decisions; they do not prove correctness, because there is no external authority to check against -- see test_classify.py's header. Every vector's `why` says what it is defending, and the ones marked REGRESSION each correspond to a bug the 2026-09-22 evaluation actually found.",
+ "vectors": [
+  {
+   "name": "identity -- a civil identity document",
+   "why": "The base case for the largest category. Name plus birth date plus portrait and nothing else.",
+   "row": {
+    "id": 9001,
+    "name": "t",
+    "fields": [
+     "family_name",
+     "given_name",
+     "birth_date",
+     "portrait"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "identity -- an age predicate is identity, not its own category",
+   "why": "Records the 2026-09-23 collapse: age folded into identity because the distinctiveness of a proof of age is about DISCLOSURE, not about domain.",
+   "row": {
+    "id": 9002,
+    "name": "t",
+    "fields": [
+     "age_over_18",
+     "age_over_21"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "A"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "identity -- an address is identity, not its own category",
+   "why": "Records the same collapse for residence, which was the largest single source of false positives before it.",
+   "row": {
+    "id": 9003,
+    "name": "t",
+    "fields": [
+     "resident_address",
+     "resident_city",
+     "resident_postal_code"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "org-identity -- who an organization is",
+   "why": "Kept separate from identity on purpose: merging them would make one bucket 36% of the corpus and erase the person-versus-organization distinction.",
+   "row": {
+    "id": 9004,
+    "name": "t",
+    "fields": [
+     "LEI",
+     "legalCompanyName",
+     "taxId"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "org-identity"
+    ]
+   }
+  },
+  {
+   "name": "humanness -- a real person, without saying which person",
+   "why": "Kept separate from identity although it is small, because it is the near-opposite in disclosure terms.",
+   "row": {
+    "id": 9005,
+    "name": "t",
+    "fields": [
+     "knownAs",
+     "firstMet",
+     "lastInteraction",
+     "biometricHashes"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "humanness"
+    ]
+   }
+  },
+  {
+   "name": "financial -- an account",
+   "why": "Base case.",
+   "row": {
+    "id": 9006,
+    "name": "t",
+    "fields": [
+     "iban",
+     "currency",
+     "bank_account_status"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "financial"
+    ]
+   }
+  },
+  {
+   "name": "qualification -- an academic award",
+   "why": "Records the collapse of academic, licence and award into one category after the academic/licence boundary failed on continuing education.",
+   "row": {
+    "id": 9007,
+    "name": "t",
+    "fields": [
+     "degree",
+     "alumniOf"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "credentialSubject"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "qualification"
+    ]
+   }
+  },
+  {
+   "name": "qualification -- a professional licence",
+   "why": "The other half of the same collapse: a licence and a degree land in one place by design.",
+   "row": {
+    "id": 9008,
+    "name": "t",
+    "fields": [
+     "board_certification",
+     "expire_dt"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "qualification"
+    ]
+   }
+  },
+  {
+   "name": "health",
+   "why": "Base case.",
+   "row": {
+    "id": 9009,
+    "name": "t",
+    "fields": [
+     "health_insurance_id",
+     "patient_id"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "health"
+    ]
+   }
+  },
+  {
+   "name": "affiliation -- employment",
+   "why": "Records the collapse of employment, membership and relationship into one category: all assert that a party is associated with another party.",
+   "row": {
+    "id": 9010,
+    "name": "t",
+    "fields": [
+     "employee_id",
+     "employer_name",
+     "employment_type"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "affiliation"
+    ]
+   }
+  },
+  {
+   "name": "affiliation -- membership",
+   "why": "The other half of that collapse.",
+   "row": {
+    "id": 9011,
+    "name": "t",
+    "fields": [
+     "membership_number",
+     "tier"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "affiliation"
+    ]
+   }
+  },
+  {
+   "name": "authority -- constrained delegation",
+   "why": "Base case for the category that absorbed telecom rights, brand rights and proof of control.",
+   "row": {
+    "id": 9012,
+    "name": "t",
+    "fields": [
+     "d",
+     "u",
+     "i",
+     "dt",
+     "gfw",
+     "facet",
+     "constraints",
+     "terminatingEvents"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "authority"
+    ]
+   }
+  },
+  {
+   "name": "authority -- a right to use telephone numbers",
+   "why": "Records the telecom merge: a right over a controlled identifier is the same shape as a prefix licence.",
+   "row": {
+    "id": 9013,
+    "name": "t",
+    "fields": [
+     "numbers",
+     "channel",
+     "doNotOriginate"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "authority"
+    ]
+   }
+  },
+  {
+   "name": "authority -- a right to use a brand",
+   "why": "Records the brand merge.",
+   "row": {
+    "id": 9014,
+    "name": "t",
+    "fields": [
+     "brand_name",
+     "logo"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "authority"
+    ]
+   }
+  },
+  {
+   "name": "civil-status",
+   "why": "Base case. Kept separate from identity: these are state-recorded facts about a person's status rather than attributes identifying them.",
+   "row": {
+    "id": 9015,
+    "name": "t",
+    "fields": [
+     "parent",
+     "citizenship"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "credentialSubject"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "civil-status"
+    ]
+   }
+  },
+  {
+   "name": "MULTI -- a driving licence is identity AND qualification, in that order",
+   "why": "The canonical bundling case and the reason categories are never exclusive. Also pins the substrate rule: identity is demoted to last when it co-occurs, so a single-glyph rendering picks the car rather than the person.",
+   "row": {
+    "id": 9020,
+    "name": "t",
+    "fields": [
+     "family_name",
+     "given_name",
+     "birth_date",
+     "portrait",
+     "driving_privileges"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "qualification",
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "MULTI -- an IBAN attestation is financial AND identity",
+   "why": "The EU IBAN attestation binds an account to a natural person and carries both.",
+   "row": {
+    "id": 9021,
+    "name": "t",
+    "fields": [
+     "iban",
+     "currency",
+     "registered_family_name",
+     "registered_given_name",
+     "date_of_birth"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "financial",
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "MULTI -- a seafarer certificate is qualification AND identity",
+   "why": "Three-way bundling in the real corpus; two survive after the collapse.",
+   "row": {
+    "id": 9022,
+    "name": "t",
+    "fields": [
+     "family_name",
+     "given_name",
+     "birth_date",
+     "capacities",
+     "stcw_code"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "qualification",
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "subject: thing -- a credential about an artifact",
+   "why": "A foreign-artifact affidavit gives binary data a cryptographic identity; there is no subject party.",
+   "row": {
+    "id": 9030,
+    "name": "t",
+    "fields": [
+     "art_digest",
+     "content_type",
+     "content_size",
+     "provenance"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "thing",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  },
+  {
+   "name": "subject: occurrence -- a booking",
+   "why": "An occurrence is a real subject type, distinct from the party who attended it.",
+   "row": {
+    "id": 9031,
+    "name": "t",
+    "fields": [
+     "booking_reference",
+     "check_in_date",
+     "check_out_date",
+     "num_of_rooms"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "occurrence",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  },
+  {
+   "name": "subject: evidence -- a dossier claims nothing of its own",
+   "why": "The narrowed assembly rule: referencing other evidence is not enough, the payload must make no substantive claim itself.",
+   "row": {
+    "id": 9032,
+    "name": "t",
+    "fields": [
+     "d",
+     "dt",
+     "assemble_dt",
+     "assembler",
+     "purpose",
+     "gov"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": true,
+     "payload_section": "e"
+    }
+   },
+   "expect": {
+    "subject": "evidence",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  },
+  {
+   "name": "REGRESSION -- edges alone do NOT make a credential evidence-about-evidence",
+   "why": "The loose rule classified half the KERI corpus as assembly, because nearly every ACDC has edges. A guardianship credential names its ward by edge and is ordinary evidence about the guardian.",
+   "row": {
+    "id": 9033,
+    "name": "t",
+    "fields": [
+     "d",
+     "u",
+     "i",
+     "basis",
+     "powers",
+     "fiduciary"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": true,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "authority"
+    ]
+   }
+  },
+  {
+   "name": "subject: apparatus -- a key-binding attestation",
+   "why": "Apparatus is machinery that makes other evidence usable. This is also the vector that proved the single spine was conflating two axes: it is a self-attestation whose subject is a key.",
+   "row": {
+    "id": 9034,
+    "name": "t",
+    "fields": [
+     "pubkey",
+     "uses"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "apparatus",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  },
+  {
+   "name": "subject: none -- a bearer ticket",
+   "why": "Possession is the whole binding; there is no subject at all. Requires POSITIVE bearer vocabulary, so that the bucket cannot act as a residual.",
+   "row": {
+    "id": 9035,
+    "name": "t",
+    "fields": [
+     "ticket_id",
+     "seat_id",
+     "barcode"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "none",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  },
+  {
+   "name": "alignment: self-attested -- party attributes with no issuee",
+   "why": "A credential with no issuee may still be about a party: its issuer.",
+   "row": {
+    "id": 9036,
+    "name": "t",
+    "fields": [
+     "LEI",
+     "legalCompanyName"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "self-attested",
+    "categories": [
+     "org-identity"
+    ]
+   }
+  },
+  {
+   "name": "REGRESSION -- no field list must NOT default to ordinary",
+   "why": "The single worst defect found: 19 of 42 misses came from one rule that rendered wallet attestations, device credentials and a relying party's own registration certificate as evidence about the person presenting them. Silent, confident and in the one direction that matters.",
+   "row": {
+    "id": 9040,
+    "name": "t",
+    "fields": [],
+    "fields_known": false,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "unknown"
+    }
+   },
+   "expect": {
+    "subject": "unknown",
+    "alignment": "unknown",
+    "categories": []
+   }
+  },
+  {
+   "name": "REGRESSION -- a declared issuee outranks object vocabulary",
+   "why": "Two bugs in one vector. `be` (proof-of-control's bits of entropy in the challenge) was matching the apparatus vocabulary and classifying a credential about a person as machinery. And `res` made the same credential look like a credential about a resource -- but a proof of control is about the PARTY who controls the thing, not about the thing. An object in the payload is what the claim is made WITH. Note the empty category list: `control` folded into `authority` at the collapse and has no field vocabulary yet, which is a known gap rather than an intended answer.",
+   "row": {
+    "id": 9041,
+    "name": "t",
+    "fields": [
+     "d",
+     "u",
+     "i",
+     "dt",
+     "res",
+     "be",
+     "assertDate"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": []
+   }
+  },
+  {
+   "name": "REGRESSION -- `issuing_organization` names the issuer, not an org the credential is about",
+   "why": "It appears in the EU IBAN and MSISDN attestations, which are about individuals, and was tagging both org-identity.",
+   "row": {
+    "id": 9042,
+    "name": "t",
+    "fields": [
+     "iban",
+     "issuing_organization",
+     "registered_given_name"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "financial",
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "REGRESSION -- a biometric template in an mDL is not a humanness claim",
+   "why": "`biometric_template_xx` is an identity element. Humanness means an assertion that the holder is a real person, which is a different claim from a biometric being on file.",
+   "row": {
+    "id": 9043,
+    "name": "t",
+    "fields": [
+     "family_name",
+     "birth_date",
+     "biometric_template_xx"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "claims"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "identity"
+    ]
+   }
+  },
+  {
+   "name": "REGRESSION -- a citation is about external content, so its subject is a thing",
+   "why": "Written first as `occurrence`, which was wrong and was copied from what the classifier happened to do: `sdt` (snapshot date) sat in the occurrence vocabulary. A citation points at non-ACDC content with a digest and a content type, which is the same shape as a foreign-artifact affidavit, so `thing` is the consistent answer. This vector is the reason the suite is worth having: it caught an expectation that had been written from observed behaviour instead of from intent.",
+   "row": {
+    "id": 9044,
+    "name": "t",
+    "fields": [
+     "d",
+     "dt",
+     "sdt",
+     "des",
+     "typ",
+     "lbl",
+     "siz",
+     "loc"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": false,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "thing",
+    "alignment": "not-a-party",
+    "categories": []
+   }
+  }
+ ]
+}
