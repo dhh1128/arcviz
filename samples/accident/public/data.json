@@ -1,5 +1,142 @@
 {
  "generated_by": "samples/accident/build_data.py",
+ "abbreviations": {
+  "authorization": {
+   "medium": "authz",
+   "short": "authz",
+   "note": "Never `auth`. 'authentication' is equally common in this domain and a reader who takes an authorization credential for an authentication one has made a security-relevant mistake. vLEI's own ECR-AUTH uses AUTH; this lexicon deliberately disagrees with it. Daniel, 2026-09-24."
+  },
+  "authentication": {
+   "medium": "authn",
+   "short": "authn",
+   "note": "Same collision, other side."
+  },
+  "credential": {
+   "medium": "cred",
+   "short": "cred"
+  },
+  "allocation": {
+   "medium": "alloc",
+   "short": "alloc"
+  },
+  "number": {
+   "medium": "num",
+   "short": "num"
+  },
+  "identifier": {
+   "medium": "id",
+   "short": "id",
+   "note": "Not `ident`, which reads as identity."
+  },
+  "attestation": {
+   "medium": "attest",
+   "short": "attest"
+  },
+  "delegation": {
+   "medium": "deleg",
+   "short": "deleg",
+   "note": "Not `del`, which reads as delete."
+  },
+  "organization": {
+   "medium": "org",
+   "short": "org"
+  },
+  "legal entity": {
+   "medium": "legal entity",
+   "short": "LE",
+   "note": "vLEI's own LE. Left long at medium because two letters are opaque to a reader outside vLEI."
+  },
+  "qualified vLEI issuer": {
+   "medium": "QVI",
+   "short": "QVI",
+   "note": "The domain's own term; no longer form is more readable to anyone who knows it."
+  },
+  "engagement context role": {
+   "medium": "ECR",
+   "short": "ECR",
+   "note": "vLEI's own."
+  },
+  "official organizational role": {
+   "medium": "OOR",
+   "short": "OOR",
+   "note": "vLEI's own."
+  },
+  "verification": {
+   "medium": "verif",
+   "short": "verif",
+   "note": "Not `ver`, which reads as version."
+  },
+  "verifiable": {
+   "medium": "verifiable",
+   "short": "vfbl",
+   "note": "No safe medium form: `ver` collides with version and `verif` with verification."
+  },
+  "revocation": {
+   "medium": "revoc",
+   "short": "revoc",
+   "note": "Not `rev`, which reads as revision."
+  },
+  "registry": {
+   "medium": "registry",
+   "short": "reg",
+   "note": "`reg` at short only; it also reads as register/regulation, which is tolerable at the floor form where context is dense."
+  },
+  "presentation": {
+   "medium": "presentation",
+   "short": "presn",
+   "note": "Not `pres`, which reads as president/presence/present."
+  },
+  "disclosure": {
+   "medium": "disclosure",
+   "short": "discl"
+  },
+  "signature": {
+   "medium": "sig",
+   "short": "sig"
+  },
+  "public key": {
+   "medium": "pubkey",
+   "short": "pk"
+  },
+  "issuer": {
+   "medium": "issuer",
+   "short": "issr",
+   "note": "Deliberately NOT `iss`, which is one character from `issuee` in a domain where the two are constantly contrasted."
+  },
+  "issuee": {
+   "medium": "issuee",
+   "short": "isse",
+   "note": "See issuer. The pair is the reason neither gets a three-letter form."
+  },
+  "photograph": {
+   "medium": "photo",
+   "short": "photo"
+  },
+  "statement": {
+   "medium": "stmt",
+   "short": "stmt"
+  },
+  "document": {
+   "medium": "doc",
+   "short": "doc"
+  },
+  "certificate": {
+   "medium": "cert",
+   "short": "cert"
+  },
+  "qualification": {
+   "medium": "qual",
+   "short": "qual"
+  },
+  "affiliation": {
+   "medium": "affil",
+   "short": "affil"
+  },
+  "transaction": {
+   "medium": "txn",
+   "short": "txn"
+  }
+ },
  "category_meanings": {
   "identity": "Who a natural person is. The civil-identity attribute set — name, birth date, portrait, place of birth, nationality — plus the things derived from it: an address, an age predicate, a travel document's holder page.",
   "org-identity": "Who an organization is. A legal identifier (LEI, registration number), a legal name, a vetting result, a level of assurance.",
