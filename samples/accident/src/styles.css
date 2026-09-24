@@ -208,3 +208,10 @@ q.issuer-text { quotes: "“" "”"; }
 
 /* font audit (turn 38): two weights only */
 h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
+
+/* turn-45: a pill never runs past its card. A stopgap: entviz clips the label with no ellipsis
+   and no way to read the rest; truncation and hover-scroll belong in entviz itself. */
+.party { max-width: 100%; min-width: 0; }
+.party .entviz-pill__wrap, .said-pill .entviz-pill__wrap { max-width: 100%; min-width: 0; }
+.dline { min-width: 0; max-width: 100%; }
+.card-main > .desc { flex: 1; }

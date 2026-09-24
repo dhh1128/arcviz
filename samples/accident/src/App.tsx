@@ -189,7 +189,6 @@ const WHEN_TEXT = (band: string) =>
   band.startsWith("pre-existing-") ? `predates the claim (issuance cluster ${band.slice(-1)})` : band;
 
 function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pictures: boolean }) {
-  const why = `${c.kind} · ${c.gain.toFixed(2)} bits${c.issuer_claim ? " · the issuer's own words" : ""}${c.text_alternative ? " · carried so the label works without pictures" : ""}`;
   let body: React.ReactNode;
   switch (c.kind) {
     case "role": return null; // carried by the labelled arrow
@@ -208,7 +207,7 @@ function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pic
     case "issuee": body = c.negative ? <>with no issuee</> : <>to <PartyPill party={frame.parties[c.value]} /></>; break;
     default: body = <>{c.kind}: {String(c.value)}</>;
   }
-  return <li className={"dline" + (c.negative ? " negative" : "")} title={why}>{body}</li>;
+  return <li className={"dline" + (c.negative ? " negative" : "")}>{body}</li>;
 }
 
 function Thumb({ n, pictures }: { n: CNode; pictures: boolean }) {
