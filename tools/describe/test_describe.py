@@ -366,3 +366,23 @@ def test_flags_are_split_before_any_normalization_touches_the_body():
     a = coia.parse("bob-payee-bitcoin,9", normalize=spy)
     assert seen == ["bob-payee-bitcoin"], seen
     assert a.group1 == "9"
+
+
+def test_no_alias_passes_no_label_so_entvizs_own_fallback_runs():
+    """`label: None`, never `""`. An empty string is still a label: it wins the precedence at
+    EntvizPill.ts:499 and suppresses the type text, leaving a pill with no text at all."""
+    import coia
+    p = coia.pill_props("EKx4P_qnxW1ycaLCUlzoFCZJv6NlvrX2SQu58vq_oIt3", None)
+    assert p["label"] is None and p["label"] != ""
+    assert p["coiaState"] == "no-alias"
+
+
+def test_flags_are_never_concatenated_into_the_pill_label():
+    """`label` is entviz's TRUSTED first-party slot; `note` is the self-declared one. A COIA
+    flag is a warning about the value, not part of anyone's name for it, so folding ',9' into
+    the label would launder a compromise warning into trusted chrome."""
+    import coia
+    p = coia.pill_props("EAID", coia.parse("bob-payee-bitcoin,9"))
+    assert p["label"] == "bob-payee-bitcoin"
+    assert "9" not in p["label"] and "," not in p["label"]
+    assert p["worst"] == "9" and p["coiaState"] == "flagged"

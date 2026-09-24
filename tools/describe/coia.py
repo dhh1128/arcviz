@@ -177,3 +177,52 @@ def render(identifier: str, alias: Alias | None, *, elide: int = 10) -> dict:
         "worst": alias.worst,
         "elided": identifier[:elide] + "…" if len(identifier) > elide else identifier,
     }
+
+
+def pill_props(identifier: str, alias: Alias | None) -> dict:
+    """What to hand `<EntvizPill>` for one AID. Read from entviz-js, not assumed.
+
+    THE SLOT IS `label`, and Daniel's instinct about it was right where mine was wrong. I had
+    described the CHARACTERIZATION STRIP (`CESR, Blake3-256`) from entviz's integration guide,
+    which belongs to the entviz drawing rather than to the pill chrome. The pill's own
+    host-settable slot is `label?: string`, documented as "First-party custom text shown after
+    the type (host-set, trusted — unlike the note)", and it does take precedence, in this
+    order (EntvizPill.ts:499-505):
+
+        explicit `label`  >  the gated mnemonic  >  the type text ("cesr key")
+
+    so passing nothing lets entviz's own fallback chain run and the pill is never empty. That
+    is exactly what "blank when no alias is known" should mean, and it is why arcviz must pass
+    `undefined` rather than `""` — an empty string is still a label, and would win the
+    precedence with nothing in it.
+
+    ONE CORRECTION TO THE MENTAL MODEL. The fallback is NOT "a compressed version of the value
+    with ellipses". That string is `valuePreview` (EntvizPill.ts:517), the HOVER TOOLTIP, which
+    shows the full value up to 100 characters. The pill's in-line fallback is the type text.
+    And the mnemonic rung is gated on the `corpus` trust posture, which arcviz can never claim
+    -- `credential-identity.md` §2 records that arcviz is wild by its own gate header -- so in
+    arcviz the chain is really `alias > type text`, with no middle rung.
+
+    FLAGS DO NOT GO IN THE LABEL, and this is the part that is security-relevant rather than
+    cosmetic. `label` is documented as TRUSTED first-party text, and entviz keeps a separate
+    `note` slot for self-declared content precisely so the two cannot be confused -- the source
+    comment at EntvizPill.ts:522 says the label is "never the note (self-declared) on the
+    pill". A COIA flag is a warning ABOUT the value, not part of anybody's name for it, so
+    concatenating `,9` into the label would launder a compromise warning into trusted chrome
+    and, worse, make it look like part of the party's name. The flags come back separately here
+    for the host to render as its own chrome.
+    """
+    if alias is None:
+        # Not "" -- an empty string is still a label and would win the precedence with nothing
+        # in it, suppressing the type text and leaving a pill with no text at all.
+        return {"value": identifier, "label": None, "coiaState": "no-alias", "flags": ()}
+    return {
+        "value": identifier,
+        "label": alias.body,
+        # Never "verified": COIA §6.3 says absence of a flag "never asserts the negation".
+        "coiaState": "flagged" if alias.is_flagged else "unflagged",
+        "flags": alias.flags,
+        "unknownFlags": alias.unknown,
+        "privateFlags": alias.group2,
+        "worst": alias.worst,
+    }
