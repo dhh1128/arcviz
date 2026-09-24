@@ -1,0 +1,1741 @@
+{
+ "generated_by": "samples/accident/build_data.py",
+ "host_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). Every name here was invented for this sample. Some AIDs are deliberately left unnamed so the pill's own fallback shows, and one alias carries COIA flag 0 (unverified) so the flag channel has something to render.",
+ "frames": [
+  {
+   "id": "accident",
+   "title": "Accident claim file",
+   "presented": "EC81rwwA15lRAY96qSKs3TXqbsiX9ep207-tEBgoWN5w",
+   "nodes": [
+    {
+     "name": "accident_bundle",
+     "said": "EC81rwwA15lRAY96qSKs3TXqbsiX9ep207-tEBgoWN5w",
+     "schema": "EHjjLUH6siYCtTCJ5RPHlaCPakN0PBpz0-o4OPkEIfbq",
+     "issuer": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "issuee": null,
+     "attrs": {
+      "d": "EK7AMYPsUmSHNDYStOG5zSKDT3Yemsfu6kZ04vrzD6FH",
+      "u": "0AA1Z8T-DBMKlC7EV9d8A85Q",
+      "dt": "2026-03-06T08:00:00+00:00",
+      "claimReference": "CLM-2026-0041",
+      "occurredAt": "2026-03-02T08:41:00+00:00"
+     },
+     "edges": [
+      {
+       "label": "licenceA",
+       "target": "EJpg3ia-NpS9iWR3ktgmar8qn2KHQ8CV1bfvGfi5ywRv",
+       "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+       "operator": null
+      },
+      {
+       "label": "licenceB",
+       "target": "EEEHQNYHQAmIshnnl5gzBtNWqNC127qe0SNryI7IDCKQ",
+       "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+       "operator": null
+      },
+      {
+       "label": "photoA",
+       "target": "ENz5FPBtAKzq_gwwOf24Ucn1gF0Ut2XmTNECYvNahSou",
+       "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+       "operator": null
+      },
+      {
+       "label": "photoB",
+       "target": "EGTUmx98zz83miJ0RMuWidO2Tts2VqrcNCrJ-bla3cbq",
+       "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+       "operator": null
+      },
+      {
+       "label": "photoC",
+       "target": "EFlyzvcWEdxT_YVi3_O7kZhhK_3j6ykTi9Q9tWEbDbkp",
+       "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+       "operator": null
+      },
+      {
+       "label": "photoD",
+       "target": "EOaXnc6bLghdmaZ6cl9vlyty-t00aDxKU53FKt-IZNIg",
+       "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+       "operator": null
+      },
+      {
+       "label": "statementA",
+       "target": "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk",
+       "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+       "operator": null
+      },
+      {
+       "label": "statementB",
+       "target": "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja",
+       "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+       "operator": null
+      }
+     ],
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "occurrence",
+      "subject_why": "occurrence fields ['occurredAt']",
+      "alignment": "not-a-party",
+      "alignment_why": "subject is occurrence",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Seven nodes: an untargeted root over two driving licences, two scene photographs and two witness statements. Three matched pairs, each colliding on schema and therefore on category, and each separated by a different channel -- issuee for the licences, an issuer-chosen attribute for the photographs, issuer for the statements. The root carries no issuee, matching the live VVP dossier's shape: a presented root is the claim rather than a part of it.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "claim file",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_licence_a",
+     "said": "EJpg3ia-NpS9iWR3ktgmar8qn2KHQ8CV1bfvGfi5ywRv",
+     "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+     "issuer": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+     "issuee": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
+     "attrs": {
+      "d": "EKhajAWIG2722lZxzkpsNkjc1_is45RFYPH8GV4XqRrq",
+      "u": "0ACgZWVQ9c5F2T2sIrz-qekX",
+      "i": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
+      "dt": "2021-06-30T09:12:00+00:00",
+      "licenceNumber": "D-4471-9920",
+      "holderName": "Alice Moreau",
+      "classes": [
+       "B"
+      ],
+      "expires": "2031-06-30",
+      "portraitDigest": "EOREqTrbc7mtotS5YeLkwBFW7zuEqOuYIJwFIPKAFGrz"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [
+       "qualification",
+       "identity"
+      ],
+      "category_hits": {
+       "qualification": [
+        "licenceNumber"
+       ],
+       "identity": [
+        "portraitDigest"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['portraitDigest']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Category identity and qualification; subject is a PARTY and alignment is ordinary -- the issuee is who the credential is about. Shares its schema AND its issuer with accident_licence_b, so within the bundle the pair is separable only by issuee.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/licence_a_portrait.png",
+      "digest": "EOREqTrbc7mtotS5YeLkwBFW7zuEqOuYIJwFIPKAFGrz",
+      "manifest": {
+       "bytes": 221507,
+       "depicts": "identity portrait, driver A",
+       "generated_at": null,
+       "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+       "generator_confidence": "reported-by-supplier, not verified",
+       "imported_at": "2026-09-24T16:20:47+00:00",
+       "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
+       "original_pixels": [
+        2400,
+        1792
+       ],
+       "pixels": [
+        512,
+        382
+       ],
+       "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+       "sha256": "66db4ae7c018c3e97f17e33afb3938a8faab4d3e686d62542d43b82837122e82",
+       "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/womans-face-1.jpg"
+      }
+     },
+     "type": {
+      "name": "driving licence",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     },
+     "glyph_override": {
+      "category": "qualification",
+      "glyph": "qualification.driving",
+      "why": "Q-D4RX: nothing selects a subcategory yet; hand-assigned for this sample"
+     }
+    },
+    {
+     "name": "accident_licence_b",
+     "said": "EEEHQNYHQAmIshnnl5gzBtNWqNC127qe0SNryI7IDCKQ",
+     "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+     "issuer": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+     "issuee": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
+     "attrs": {
+      "d": "EKOvl_NbZSZWga5hD8xHpYqv7L3tT_ncrGZsZI_GHE32",
+      "u": "0AA6XzjwotRLN1lYlIJxJgh9",
+      "i": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
+      "dt": "2019-11-14T11:48:00+00:00",
+      "licenceNumber": "D-8813-2077",
+      "holderName": "Bob Ferreira",
+      "classes": [
+       "B"
+      ],
+      "expires": "2029-11-14",
+      "portraitDigest": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [
+       "qualification",
+       "identity"
+      ],
+      "category_hits": {
+       "qualification": [
+        "licenceNumber"
+       ],
+       "identity": [
+        "portraitDigest"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['portraitDigest']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The matched half of accident_licence_a. Same schema, same issuing authority, different issuee. Whatever channel carries category will show these two identically.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/licence_b_portrait.png",
+      "digest": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z",
+      "manifest": {
+       "bytes": 236944,
+       "depicts": "identity portrait, driver B",
+       "generated_at": null,
+       "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+       "generator_confidence": "reported-by-supplier, not verified",
+       "imported_at": "2026-09-24T16:20:48+00:00",
+       "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
+       "original_pixels": [
+        2400,
+        1792
+       ],
+       "pixels": [
+        512,
+        382
+       ],
+       "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+       "sha256": "1b685a79855a791f651cecbca0364f5de09ae0210d92bcb7d38019b33e7b8790",
+       "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/mans-face-1.jpg"
+      }
+     },
+     "type": {
+      "name": "driving licence",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     },
+     "glyph_override": {
+      "category": "qualification",
+      "glyph": "qualification.driving",
+      "why": "Q-D4RX: nothing selects a subcategory yet; hand-assigned for this sample"
+     }
+    },
+    {
+     "name": "accident_photo_a",
+     "said": "ENz5FPBtAKzq_gwwOf24Ucn1gF0Ut2XmTNECYvNahSou",
+     "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+     "issuer": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "issuee": null,
+     "attrs": {
+      "d": "EDYcBrI5bvtqutZrLknKM6TrNmeehWBFjWYaiRUb1Y-P",
+      "u": "0ABTKqzywii0Fa1gfMjZtTaT",
+      "dt": "2026-03-02T10:15:40+00:00",
+      "depicts": "front nearside impact damage, vehicle A",
+      "vehicleVin": "WVWZZZ1KZAW084471",
+      "plate": "UTA 1234",
+      "imageDigest": "EP7g94PQXobB1PGwpl1fCOGinJz7ZDGez04XhjUKgW9e",
+      "capturedAt": "2026-03-02T10:15:00+00:00"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "unknown",
+      "subject_why": "no subject vocabulary matched and no issuee declared",
+      "alignment": "unknown",
+      "alignment_why": "the subject is unknown, so how it aligns with the holder is unknown too",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Subject is a THING and there is no issuee at all -- the adjuster attests what the image depicts, and no party is the credential's subject. This is the case where 'which party is this about' has no answer, and the only discriminator against accident_photo_b is an issuer-chosen attribute (depicts / vehicleVin) that nothing in the credential marks as the subject.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/photo_a.png",
+      "digest": "EP7g94PQXobB1PGwpl1fCOGinJz7ZDGez04XhjUKgW9e",
+      "manifest": {
+       "bytes": 273769,
+       "depicts": "front nearside impact damage, vehicle A",
+       "generated_at": null,
+       "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+       "generator_confidence": "reported-by-supplier, not verified",
+       "imported_at": "2026-09-24T16:20:47+00:00",
+       "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
+       "original_pixels": [
+        2816,
+        1536
+       ],
+       "pixels": [
+        512,
+        279
+       ],
+       "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+       "sha256": "4edd162b743c6979ff94d2db38a5a638fe5eba31fb815935d0a0394135fac41e",
+       "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/bumper.jpg"
+      }
+     },
+     "type": {
+      "name": "scene photograph",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_photo_b",
+     "said": "EGTUmx98zz83miJ0RMuWidO2Tts2VqrcNCrJ-bla3cbq",
+     "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+     "issuer": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "issuee": null,
+     "attrs": {
+      "d": "EAWRNFTxMkyp6BtTJBezxFDQxYMsCV9hs4VaVSgxlYe6",
+      "u": "0AAkIEeE5hp7YRRCglgcFIe5",
+      "dt": "2026-03-02T10:16:05+00:00",
+      "depicts": "driver's door and wing, vehicle A",
+      "vehicleVin": "WVWZZZ1KZAW084471",
+      "plate": "UTA 1234",
+      "imageDigest": "ELnRVaMv7DkoWo169hT4nuhvhxl-Mvvggmpk3xjHP9rR",
+      "capturedAt": "2026-03-02T10:15:00+00:00"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "unknown",
+      "subject_why": "no subject vocabulary matched and no issuee declared",
+      "alignment": "unknown",
+      "alignment_why": "the subject is unknown, so how it aligns with the holder is unknown too",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The matched half of accident_photo_a. Same schema, same attesting adjuster, no issuee on either -- so the issuee channel that separates the two licences is not merely unhelpful here, it is absent.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/photo_b.png",
+      "digest": "ELnRVaMv7DkoWo169hT4nuhvhxl-Mvvggmpk3xjHP9rR",
+      "manifest": {
+       "bytes": 262720,
+       "depicts": "driver's door and wing, vehicle A",
+       "generated_at": null,
+       "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+       "generator_confidence": "reported-by-supplier, not verified",
+       "imported_at": "2026-09-24T16:20:47+00:00",
+       "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
+       "original_pixels": [
+        2816,
+        1536
+       ],
+       "pixels": [
+        512,
+        279
+       ],
+       "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+       "sha256": "d85e7e1841fa0e23efc706ae2532edf0b83ac10d25c3958a34f4be00008e3b93",
+       "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/drivers-door.jpg"
+      }
+     },
+     "type": {
+      "name": "scene photograph",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_photo_c",
+     "said": "EFlyzvcWEdxT_YVi3_O7kZhhK_3j6ykTi9Q9tWEbDbkp",
+     "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+     "issuer": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "issuee": null,
+     "attrs": {
+      "d": "EPPnJrJTi8rokMTz_N2BXYFS5jGDvJ2Js-ixZLWIlJMD",
+      "u": "0ADe3kRvvBmxEJ6e6yT3OMAF",
+      "dt": "2026-03-02T10:17:12+00:00",
+      "depicts": "front and passenger-side damage with maroon paint transfer, vehicle B",
+      "vehicleVin": "1FTDF15Y6PLA20877",
+      "plate": "77-YELLOW",
+      "imageDigest": "EPi36v691mmG_YW0ZikcqYVPIb8PocD-nSEBVbEPUpoI",
+      "capturedAt": "2026-03-02T10:15:00+00:00"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "unknown",
+      "subject_why": "no subject vocabulary matched and no issuee declared",
+      "alignment": "unknown",
+      "alignment_why": "the subject is unknown, so how it aligns with the holder is unknown too",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The other driver's vehicle, and the exhibit that makes the thumbnail channel do something no field does. Its passenger side carries MAROON PAINT TRANSFER matching the saloon in photo_a and photo_b, so two exhibits corroborate each other through their images alone -- a relationship no attribute in either credential states and no edge in the DAG draws. It also collides with them on schema, issuer and the absent issuee while differing in vehicle, so it is the cross-vehicle counterpart to their same-vehicle pair.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/photo_c.png",
+      "digest": "EPi36v691mmG_YW0ZikcqYVPIb8PocD-nSEBVbEPUpoI",
+      "manifest": {
+       "bytes": 252704,
+       "depicts": "front and passenger-side damage to a yellow pickup, vehicle B",
+       "generated_at": null,
+       "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+       "generator_confidence": "reported-by-supplier, not verified",
+       "imported_at": "2026-09-24T16:26:04+00:00",
+       "note": "Synthetic. Depicts nothing real. Carries MAROON PAINT TRANSFER along the passenger side, which corroborates the maroon saloon in photo_a and photo_b -- a relationship between two exhibits that no field in either credential states and no edge in the DAG draws.",
+       "original_pixels": [
+        2816,
+        1536
+       ],
+       "pixels": [
+        512,
+        279
+       ],
+       "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+       "sha256": "ab2d2c4a6ddb948e0d135ab2793bc62eb88e68fef6d03dfc37d1255a4a354a6a",
+       "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/pickup.jpg"
+      }
+     },
+     "type": {
+      "name": "scene photograph",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_photo_d",
+     "said": "EOaXnc6bLghdmaZ6cl9vlyty-t00aDxKU53FKt-IZNIg",
+     "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+     "issuer": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "issuee": null,
+     "attrs": {
+      "d": "ENKrzZnBYdl-Ij2pRQ0GA3H9yuCkc0IU7WtEJDRkc6b0",
+      "u": "0AAEOAJ3MrJACL3Am1kkBpWk",
+      "dt": "2026-03-02T10:22:41+00:00",
+      "depicts": "signal head and stop line, northbound approach",
+      "imageDigest": "EMyVCLfBWR6hZi9doiATErkJtlV1ELt0DFDRUzGE0ybI",
+      "capturedAt": "2026-03-02T10:15:00+00:00"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "unknown",
+      "subject_why": "no subject vocabulary matched and no issuee declared",
+      "alignment": "unknown",
+      "alignment_why": "the subject is unknown, so how it aligns with the holder is unknown too",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The committed-but-unresolvable image state, which must render distinctly from 'no image' and from a resolved one. It is deliberately the exhibit whose absence costs the most: the two witness statements disagree about whether the northbound car entered on amber, and this is the only thing in the bundle that bears on it. A render that lets this look like a photograph nobody took has hidden the hole in the argument. Its subject is also neither a party nor a thing but a PLACE, so it carries no issuee, no VIN and no plate -- a fourth subject kind inside one bundle.",
+     "image": {
+      "state": "committed-not-resolved",
+      "digest": "EMyVCLfBWR6hZi9doiATErkJtlV1ELt0DFDRUzGE0ybI"
+     },
+     "type": {
+      "name": "scene photograph",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_statement_a",
+     "said": "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk",
+     "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+     "issuer": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
+     "issuee": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+     "attrs": {
+      "d": "EIRcoT8_Kh7m6HGysdTdj03a1vrHuA2wWUh6cWhfqXmX",
+      "u": "0ACwMNW6jiFS9IITpjNVE9_B",
+      "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+      "dt": "2026-03-04T14:02:00+00:00",
+      "observedAt": "2026-03-02T08:41:00+00:00",
+      "account": "The northbound car entered the junction on amber.",
+      "vantagePoint": "northeast corner, on foot"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [
+       "financial"
+      ],
+      "category_hits": {
+       "financial": [
+        "account"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Subject is an OCCURRENCE, and the issuee is the insurer receiving the statement rather than what the statement is about -- the same divergence the live VVP dossier's tnalloc credential shows, where an issuee is present and is not the subject. Shares its schema and its issuee with accident_statement_b; the pair is separable only by ISSUER.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "witness statement",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "accident_statement_b",
+     "said": "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja",
+     "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+     "issuer": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
+     "issuee": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+     "attrs": {
+      "d": "EFqiqrXe4rAKgjRIB8BiW9TdBykbJd2l2vKkMhTDVOaW",
+      "u": "0ABzOvEUfr3OK9OdtKJMID4v",
+      "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+      "dt": "2026-03-05T09:30:00+00:00",
+      "observedAt": "2026-03-02T08:41:00+00:00",
+      "account": "The northbound car was already in the junction.",
+      "vantagePoint": "southbound queue, second vehicle"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [
+       "financial"
+      ],
+      "category_hits": {
+       "financial": [
+        "account"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The matched half of accident_statement_a, and the two accounts disagree about the same fact on purpose. A bundle may hold evidence that conflicts, and nothing in the credentials says so -- both are valid, correctly issued and mutually inconsistent.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "witness statement",
+      "source": "hand-supplied",
+      "schema_state": "unavailable"
+     }
+    }
+   ],
+   "descriptors": {
+    "host-aliases": {
+     "EC81rwwA15lRAY96qSKs3TXqbsiX9ep207-tEBgoWN5w": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EHjjLUH6siYCtTCJ5RPHlaCPakN0PBpz0-o4OPkEIfbq",
+         "name": "claim file"
+        },
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+         null
+        ],
+        "gain": 0.848,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EJpg3ia-NpS9iWR3ktgmar8qn2KHQ8CV1bfvGfi5ywRv": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+         "name": "driving licence"
+        },
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "licence",
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+         "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP"
+        ],
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "image",
+        "value": "EOREqTrbc7mtotS5YeLkwBFW7zuEqOuYIJwFIPKAFGrz",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "when",
+        "value": "pre-existing-2",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EEEHQNYHQAmIshnnl5gzBtNWqNC127qe0SNryI7IDCKQ": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
+         "name": "driving licence"
+        },
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "licence",
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+         "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2"
+        ],
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "image",
+        "value": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "when",
+        "value": "pre-existing-1",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "ENz5FPBtAKzq_gwwOf24Ucn1gF0Ut2XmTNECYvNahSou": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+         "name": "scene photograph"
+        },
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "photo",
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+         null
+        ],
+        "gain": 0.848,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "image",
+        "value": "EP7g94PQXobB1PGwpl1fCOGinJz7ZDGez04XhjUKgW9e",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "subject",
+        "value": "front nearside impact damage, vehicle A",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EGTUmx98zz83miJ0RMuWidO2Tts2VqrcNCrJ-bla3cbq": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+         "name": "scene photograph"
+        },
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "photo",
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+         null
+        ],
+        "gain": 0.848,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "image",
+        "value": "ELnRVaMv7DkoWo169hT4nuhvhxl-Mvvggmpk3xjHP9rR",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "subject",
+        "value": "driver's door and wing, vehicle A",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EFlyzvcWEdxT_YVi3_O7kZhhK_3j6ykTi9Q9tWEbDbkp": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+         "name": "scene photograph"
+        },
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "photo",
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+         null
+        ],
+        "gain": 0.848,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "image",
+        "value": "EPi36v691mmG_YW0ZikcqYVPIb8PocD-nSEBVbEPUpoI",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "subject",
+        "value": "front and passenger-side damage with maroon paint transfer, vehicle B",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EOaXnc6bLghdmaZ6cl9vlyty-t00aDxKU53FKt-IZNIg": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
+         "name": "scene photograph"
+        },
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "photo",
+        "gain": 1.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+         null
+        ],
+        "gain": 0.848,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "subject",
+        "value": "signal head and stop line, northbound approach",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "image_committed_not_resolved",
+        "digest": "EMyVCLfBWR6hZi9doiATErkJtlV1ELt0DFDRUzGE0ybI"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+         "name": "witness statement"
+        },
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "statement",
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
+         "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw"
+        ],
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
+         "name": "witness statement"
+        },
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "statement",
+        "gain": 2.17,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
+         "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw"
+        ],
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     }
+    }
+   },
+   "descriptor_variants": [
+    "host-aliases"
+   ],
+   "parties": {
+    "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": {
+     "identifier": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
+     "label": "Alice Moreau",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
+      "label": "Alice Moreau",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    },
+    "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": {
+     "identifier": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+     "label": "Northgate Mutual claims intake",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+      "label": "Northgate Mutual claims intake",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    },
+    "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO": {
+     "identifier": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
+     "label": null,
+     "aliasState": "none",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
+      "label": null,
+      "coiaState": "no-alias",
+      "flags": []
+     }
+    },
+    "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": {
+     "identifier": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
+     "label": "Jae Park witness",
+     "aliasState": "shown",
+     "coiaFlags": [
+      [
+       "0",
+       "unverified",
+       "doubt about the alias assertion is unresolved"
+      ]
+     ],
+     "coiaUnknownFlags": [],
+     "coiaWorst": "0",
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
+      "label": "Jae Park witness",
+      "coiaState": "flagged",
+      "flags": [
+       [
+        "0",
+        "unverified",
+        "doubt about the alias assertion is unresolved"
+       ]
+      ],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": "0"
+     }
+    },
+    "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
+     "identifier": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+     "label": "Rosa Iqbal claims adjuster Northgate Mutual",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
+      "label": "Rosa Iqbal claims adjuster Northgate Mutual",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    },
+    "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2": {
+     "identifier": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
+     "label": null,
+     "aliasState": "none",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
+      "label": null,
+      "coiaState": "no-alias",
+      "flags": []
+     }
+    },
+    "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": {
+     "identifier": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+     "label": "Driver Licence Division Utah",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
+      "label": "Driver Licence Division Utah",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    }
+   },
+   "supplied_by_hand": [
+    "type names (schemas do not resolve)",
+    "subject field 'depicts' for the photograph schema",
+    "which attribute holds an image digest"
+   ]
+  },
+  {
+   "id": "vlei",
+   "title": "vLEI chain",
+   "presented": "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z",
+   "nodes": [
+    {
+     "name": "vlei_qvi",
+     "said": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+     "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
+     "issuer": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
+     "issuee": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+     "attrs": {
+      "d": "EGdD8OHB-_MG0sDjFAS9r9rBq8ev8Sk4WseDo1n9VH_7",
+      "u": "0ABKCYKzXs1hBmUkLt1hs4cM",
+      "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+      "LEI": "984500ARCV1Z0000FIX01",
+      "dt": "2026-01-12T09:00:00.000000+00:00"
+     },
+     "edges": [],
+     "classified": {
+      "categories": [
+       "org-identity"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "LEI"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['LEI']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Root of the chain; no edges. Issuer stands in for the real chain's delegate-of-the-absent-root; issuee stands in for the QVI's own AID.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Qualified vLEI Issuer Credential",
+      "source": "borrowed from the real vLEI schema",
+      "schema_state": "unavailable"
+     },
+     "borrowed_schema": {
+      "real_schema": "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao",
+      "state": "verified",
+      "title": "Qualified vLEI Issuer Credential",
+      "issuer_role": "GLEIF Issuee AID",
+      "issuee_role": "QVI Issuee AID",
+      "entailed": [
+       "issuer",
+       "issuee"
+      ],
+      "pinned_edges": []
+     }
+    },
+    {
+     "name": "vlei_le",
+     "said": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+     "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
+     "issuer": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+     "issuee": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+     "attrs": {
+      "d": "EAbuYpDL8lbpNtTigT8d1-J2BPq7W8DSAqH1yjIdYOH0",
+      "u": "0AAwdDl--p2R5L3RNhkXZMaj",
+      "i": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+      "LEI": "984500ARCV1Z0000FIX01",
+      "dt": "2026-01-15T11:30:00.000000+00:00"
+     },
+     "edges": [
+      {
+       "label": "qvi",
+       "target": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+       "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
+       "operator": null
+      }
+     ],
+     "classified": {
+      "categories": [
+       "org-identity"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "LEI"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['LEI']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Issuer is the QVI credential's issuee (issuer/subject alternation begins here). Edge 'qvi' left at the default I2I operator (no 'o' written).",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Legal Entity vLEI Credential",
+      "source": "borrowed from the real vLEI schema",
+      "schema_state": "unavailable"
+     },
+     "borrowed_schema": {
+      "real_schema": "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY",
+      "state": "verified",
+      "title": "Legal Entity vLEI Credential",
+      "issuer_role": "QVI Issuer AID",
+      "issuee_role": "LE Issuer AID",
+      "entailed": [
+       "issuer",
+       "issuee"
+      ],
+      "pinned_edges": [
+       "qvi"
+      ]
+     }
+    },
+    {
+     "name": "vlei_ecr_auth",
+     "said": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+     "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
+     "issuer": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+     "issuee": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+     "attrs": {
+      "d": "EM3UwJMXlWOlRWI_kmVQ5IiNQoTi7Z1NnertAxRDM4kN",
+      "u": "0ADV56Sp6Q-B9UqjMdcNIA6E",
+      "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+      "LEI": "984500ARCV1Z0000FIX01",
+      "dt": "2026-01-19T14:05:00.000000+00:00",
+      "AID": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+      "personLegalName": "Jordan Q. Fixture",
+      "engagementContextRole": "Compliance Analyst"
+     },
+     "edges": [
+      {
+       "label": "le",
+       "target": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+       "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
+       "operator": null
+      }
+     ],
+     "classified": {
+      "categories": [
+       "org-identity",
+       "affiliation"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "LEI"
+       ],
+       "affiliation": [
+        "engagementContextRole"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['LEI']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Issuer is the LE credential's issuee; issuee flips back to the QVI org AID -- the 'chain alternates who is speaking' (corpus-vlei-chain.md sec.1). Edge 'le' at the default operator.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "ECR Authorization vLEI Credential",
+      "source": "borrowed from the real vLEI schema",
+      "schema_state": "unavailable"
+     },
+     "borrowed_schema": {
+      "real_schema": "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g",
+      "state": "verified",
+      "title": "ECR Authorization vLEI Credential",
+      "issuer_role": "LE Issuer AID",
+      "issuee_role": "QVI Issuee AID",
+      "entailed": [
+       "issuer",
+       "issuee"
+      ],
+      "pinned_edges": [
+       "le"
+      ]
+     }
+    },
+    {
+     "name": "vlei_ecr",
+     "said": "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z",
+     "schema": "EDyt0FijsXX7G8q_ZEaf33Dx0QI47CQoFu7ergn96W9k",
+     "issuer": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+     "issuee": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+     "attrs": {
+      "d": "ECCRlUkO_-sc-Jer-y9Ibzx2FumY9xhRRplYEAWvFoFo",
+      "u": "0ADtJH6EdW0pImZlh61YaN7a",
+      "i": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+      "LEI": "984500ARCV1Z0000FIX01",
+      "dt": "2026-01-21T08:45:00.000000+00:00",
+      "personLegalName": "Jordan Q. Fixture",
+      "engagementContextRole": "Compliance Analyst"
+     },
+     "edges": [
+      {
+       "label": "auth",
+       "target": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+       "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
+       "operator": "I2I"
+      }
+     ],
+     "classified": {
+      "categories": [
+       "org-identity",
+       "affiliation"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "LEI"
+       ],
+       "affiliation": [
+        "engagementContextRole"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['LEI']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The individual holder's own credential. Carries the chain's ONLY top-level `u` (anti-correlation salt on a small, guessable attribute space -- LEI + role), matching corpus-vlei-chain.md sec.4 exactly. Edge 'auth' writes o=I2I EXPLICITLY, unlike 'qvi' and 'le' upstream, which leave it at the default -- render these identically (RULE 9).",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Legal Entity Engagement Context Role vLEI Credential",
+      "source": "borrowed from the real vLEI schema",
+      "schema_state": "unavailable"
+     },
+     "borrowed_schema": {
+      "real_schema": "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw",
+      "state": "verified",
+      "title": "Legal Entity Engagement Context Role vLEI Credential",
+      "issuer_role": "QVI or LE Issuer AID",
+      "issuee_role": "Person Issuee AID",
+      "entailed": [
+       "issuer",
+       "issuee"
+      ],
+      "pinned_edges": [
+       "auth",
+       "le"
+      ]
+     }
+    }
+   ],
+   "descriptors": {
+    "no-aliases": {
+     "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
+         "name": "Qualified vLEI Issuer Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
+         "name": "Legal Entity vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
+         "name": "ECR Authorization vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EDyt0FijsXX7G8q_ZEaf33Dx0QI47CQoFu7ergn96W9k",
+         "name": "Legal Entity Engagement Context Role vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     }
+    },
+    "host-aliases": {
+     "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
+         "name": "Qualified vLEI Issuer Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
+         "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S"
+        ],
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
+         "name": "Legal Entity vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+         "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ"
+        ],
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
+         "name": "ECR Authorization vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+         "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S"
+        ],
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EDyt0FijsXX7G8q_ZEaf33Dx0QI47CQoFu7ergn96W9k",
+         "name": "Legal Entity Engagement Context Role vLEI Credential"
+        },
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+         "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD"
+        ],
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     }
+    }
+   },
+   "descriptor_variants": [
+    "no-aliases",
+    "host-aliases"
+   ],
+   "parties": {
+    "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": {
+     "identifier": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+     "label": "Fixture Legal Entity",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+      "label": "Fixture Legal Entity",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    },
+    "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": {
+     "identifier": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
+     "label": "GLEIF root",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
+      "label": "GLEIF root",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    },
+    "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD": {
+     "identifier": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+     "label": null,
+     "aliasState": "none",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+      "label": null,
+      "coiaState": "no-alias",
+      "flags": []
+     }
+    },
+    "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": {
+     "identifier": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+     "label": "Fixture QVI",
+     "aliasState": "shown",
+     "coiaFlags": [],
+     "coiaUnknownFlags": [],
+     "coiaWorst": null,
+     "bindingConfident": null,
+     "bindingSource": null,
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+      "label": "Fixture QVI",
+      "coiaState": "unflagged",
+      "flags": [],
+      "unknownFlags": [],
+      "privateFlags": "",
+      "worst": null
+     }
+    }
+   },
+   "supplied_by_hand": [
+    "schema entailments borrowed from the real vLEI schemas; the corpus chain uses stand-in schema SAIDs"
+   ]
+  }
+ ]
+}

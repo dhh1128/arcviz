@@ -160,3 +160,9 @@ dmypy.json
 
 # Never publish: proprietary UI captures, paywalled papers, third-party wallet screenshots.
 .ignored/
+
+# Sample build output and dependencies
+samples/*/node_modules/
+samples/*/dist/
+samples/*/public/glyphs/
+samples/*/public/attachments/
