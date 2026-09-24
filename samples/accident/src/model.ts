@@ -65,9 +65,6 @@ export interface Party {
   identifier: string;
   label: string | null;
   aliasState: "shown" | "withheld-here" | "none";
-  coiaFlags: [string, string, string][];
-  coiaUnknownFlags: string[];
-  coiaWorst: string | null;
 }
 
 export interface Frame {

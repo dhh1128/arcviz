@@ -104,10 +104,9 @@ def parties(host: dict, aids: set) -> dict:
     lookup = host["aliases"]
     out = {}
     for aid in sorted(aids):
-        raw = lookup.get(aid)
-        alias = coia_reader.parse(raw) if raw else None
-        view = coia_reader.party_view(aid, alias)
-        out[aid] = {k: (list(v) if isinstance(v, tuple) else v) for k, v in view.items()}
+        # Verbatim, as the host's interface returned it (D-DCTS).
+        alias = lookup.get(aid)
+        out[aid] = coia_reader.party_view(aid, alias)
         out[aid]["pill"] = coia_reader.pill_props(aid, alias)
     return out
 
@@ -189,8 +188,8 @@ def accident(host: dict) -> dict:
                                        "why": "Q-D4RX: nothing selects a subcategory yet; "
                                               "hand-assigned for this sample"}
         if n.startswith("accident_photo") and not cls["categories"]:
-            extra["photo_glyph"] = {"why": "photographs land in misc; which glyph a misc photograph "
-                                           "gets is undecided, and this node was marked as one by hand"}
+            extra["photo_glyph"] = {"why": "photographs land in misc and show misc.file with the "
+                                           "sniffed extension (Daniel, 2026-09-24)"}
         nodes.append(node_json(n, s, cls, extra))
 
     aids = {x for s in sads.values() for x in (s["i"], (s.get("a") or {}).get("i")) if x}
@@ -257,7 +256,7 @@ def main() -> int:
     host = json.loads((HERE / "host.json").read_text())
     PUBLIC.mkdir(exist_ok=True)
     (PUBLIC / "glyphs").mkdir(exist_ok=True)
-    for svg in [*GLYPHS.glob("*.svg"), *(HERE / "candidates").glob("*.svg")]:
+    for svg in GLYPHS.glob("*.svg"):
         shutil.copy2(svg, PUBLIC / "glyphs" / svg.name)
     (PUBLIC / "attachments").mkdir(exist_ok=True)
     for png in (CORPUS / "attachments").glob("*.png"):

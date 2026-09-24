@@ -439,7 +439,7 @@
       "schema_state": "unavailable"
      },
      "photo_glyph": {
-      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
+      "why": "photographs land in misc and show misc.file with the sniffed extension (Daniel, 2026-09-24)"
      }
     },
     {
@@ -501,7 +501,7 @@
       "schema_state": "unavailable"
      },
      "photo_glyph": {
-      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
+      "why": "photographs land in misc and show misc.file with the sniffed extension (Daniel, 2026-09-24)"
      }
     },
     {
@@ -563,7 +563,7 @@
       "schema_state": "unavailable"
      },
      "photo_glyph": {
-      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
+      "why": "photographs land in misc and show misc.file with the sniffed extension (Daniel, 2026-09-24)"
      }
     },
     {
@@ -601,7 +601,7 @@
       "schema_state": "unavailable"
      },
      "photo_glyph": {
-      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
+      "why": "photographs land in misc and show misc.file with the sniffed extension (Daniel, 2026-09-24)"
      }
     },
     {
@@ -1179,141 +1179,91 @@
      "identifier": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
      "label": "Alice Moreau",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
-      "label": "Alice Moreau",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Alice Moreau"
      }
     },
     "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": {
      "identifier": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
      "label": "Northgate Mutual claims intake",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
-      "label": "Northgate Mutual claims intake",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Northgate Mutual claims intake"
      }
     },
     "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO": {
      "identifier": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
      "label": null,
      "aliasState": "none",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
-      "label": null,
-      "coiaState": "no-alias",
-      "flags": []
+      "label": null
      }
     },
     "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": {
      "identifier": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
      "label": "Jae Park witness",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
-      "label": "Jae Park witness",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Jae Park witness"
      }
     },
     "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
      "identifier": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
      "label": "Rosa Iqbal claims adjuster Northgate Mutual",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
-      "label": "Rosa Iqbal claims adjuster Northgate Mutual",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Rosa Iqbal claims adjuster Northgate Mutual"
      }
     },
     "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2": {
      "identifier": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
      "label": null,
      "aliasState": "none",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
-      "label": null,
-      "coiaState": "no-alias",
-      "flags": []
+      "label": null
      }
     },
     "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": {
      "identifier": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
      "label": "Driver Licence Division Utah",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
-      "label": "Driver Licence Division Utah",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Driver Licence Division Utah"
      }
     }
    },
@@ -1797,81 +1747,52 @@
      "identifier": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
      "label": "Fixture Legal Entity",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
-      "label": "Fixture Legal Entity",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Fixture Legal Entity"
      }
     },
     "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": {
      "identifier": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
      "label": "GLEIF root",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
-      "label": "GLEIF root",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "GLEIF root"
      }
     },
     "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD": {
      "identifier": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
      "label": null,
      "aliasState": "none",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
-      "label": null,
-      "coiaState": "no-alias",
-      "flags": []
+      "label": null
      }
     },
     "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": {
      "identifier": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
      "label": "Fixture QVI",
      "aliasState": "shown",
-     "coiaFlags": [],
-     "coiaUnknownFlags": [],
-     "coiaWorst": null,
      "bindingConfident": null,
      "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
       "value": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
-      "label": "Fixture QVI",
-      "coiaState": "unflagged",
-      "flags": [],
-      "unknownFlags": [],
-      "privateFlags": "",
-      "worst": null
+      "label": "Fixture QVI"
      }
     }
    },

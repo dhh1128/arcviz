@@ -29,10 +29,6 @@ export const PLACEHOLDERS: Record<string, { title: string; body: string }> = {
     title: "Reputation channel",
     body: "credential-descriptors.md section 1 requires assessment to ride in its own channel, never the name slot, and does not design it. This slot shows where the host's evidentiary stance on the credential would go. No host stance is supplied.",
   },
-  photoglyph: {
-    title: "Photograph glyph",
-    body: "Photographs land in misc, and the generic document says nothing. Two candidates, switchable in the header: a picture pictograph (Phosphor 'image'), or the document with its lines removed and the file extension printed on it. The extension is read from the bytes, so a withheld picture shows '?'.",
-  },
   subglyph: {
     title: "Subcategory glyph, hand-assigned",
     body: "Nothing selects a subcategory. The licences show the car because it was hand-assigned for this sample (Q-D4RX). The classifier alone would give the qualification rosette.",
@@ -79,8 +75,19 @@ function Glyph({ name, size = 32, color }: { name: string; size?: number; color?
   );
 }
 
-type PhotoGlyph = "picture" | "extension" | "none";
-const PhotoMode = createContext<PhotoGlyph>("picture");
+function glyphsFor(n: CNode): { category: string; glyph: string; override: boolean; ext?: string | null }[] {
+  const cats = n.classified.categories.length ? n.classified.categories : ["misc"];
+  return cats.map((c) => {
+    if (n.glyph_override && n.glyph_override.category === c)
+      return { category: c, glyph: n.glyph_override.glyph, override: true };
+    if (c === "misc" && n.photo_glyph)
+      // Daniel, 2026-09-24: the document with the extension on it. The extension comes from the
+      // bytes, so a withheld picture has none to show.
+      return { category: c, glyph: "misc.file", override: false, ext: n.image.media_type ?? null };
+    return { category: c, glyph: c, override: false };
+  });
+}
+
 // The host's trust posture for the AIDs in this presentation. Wild (entviz's default) gives an
 // unnamed AID the type text; corpus opens the mnemonic, as bakobo/cesrview does. Whether a
 // presentation is a corpus is the host's call, never arcviz's (docs/integration/entviz.md).
@@ -112,19 +119,6 @@ function TypeName({ name }: { name: string }) {
   return <span ref={ref} title={shown !== name ? name : undefined}>{shown}</span>;
 }
 
-function glyphsFor(n: CNode, photo: PhotoGlyph = "picture"): { category: string; glyph: string; override: boolean; ext?: string | null }[] {
-  const cats = n.classified.categories.length ? n.classified.categories : ["misc"];
-  return cats.map((c) => {
-    if (n.glyph_override && n.glyph_override.category === c)
-      return { category: c, glyph: n.glyph_override.glyph, override: true };
-    if (c === "misc" && n.photo_glyph && photo === "picture")
-      return { category: c, glyph: "misc.photo", override: true };
-    if (c === "misc" && n.photo_glyph && photo === "extension")
-      // The extension comes from the bytes, so a withheld picture has none to show.
-      return { category: c, glyph: "misc.doc-blank", override: true, ext: n.image.media_type ?? null };
-    return { category: c, glyph: c, override: false };
-  });
-}
 
 function Band({ cats }: { cats: string[] }) {
   return (
@@ -265,8 +259,7 @@ function Card({
 }) {
   const [open, setOpen] = useState(false);
   const marks = useContext(Marks);
-  const photoMode = useContext(PhotoMode);
-  const glyphs = glyphsFor(n, photoMode);
+  const glyphs = glyphsFor(n);
   const cats = glyphs.map((g) => g.category);
   const primary = PALETTE[cats[0]] ?? PALETTE.misc;
   const typeName = n.type.name;
@@ -291,25 +284,15 @@ function Card({
     >
       <Band cats={cats} />
       <div className="card-body">
-        <header className="card-head">
-          <span className="glyph-row" style={{ color: primary.color }}>
-            {glyphs.map((g) => (
-              <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")} title={`${g.category}${g.override ? " (glyph hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
-                <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
-                {g.ext !== undefined && <span className="ext">{g.ext ? "." + g.ext : "?"}</span>}
-              </span>
-            ))}
-            {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
-          </span>
-          <div className="type">
-            <div className="type-name">
-              {isPresented && <span className="presented-tag">presented</span>}
-              {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
-            </div>
-          </div>
+        {/* Daniel, turn 10: the top of a credential is its SAID and the (i); kind goes to the bottom. */}
+        <header className="card-top">
+          {isPresented && <span className="presented-tag">presented</span>}
           <SaidHandle said={n.said} />
           <Info notes={notes} />
         </header>
+        <div className="type-name">
+          {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
+        </div>
         <AxisTags n={n} />
         {marks && unknown && <div><Ph id="unknown" /></div>}
         <div className="card-main">
@@ -324,10 +307,18 @@ function Card({
           <div className="review-marks">
             <span className="reputation" title={PLACEHOLDERS.reputation.body}>host's stance: not supplied</span>
             {n.image.state === "committed-not-resolved" && <Ph id="thumbs" />}
-            {n.photo_glyph && <Ph id="photoglyph" />}
           </div>
         )}
         <footer className="card-foot">
+            <span className="glyph-row" style={{ color: primary.color }}>
+            {glyphs.map((g) => (
+              <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")} title={`${g.category}${g.override ? " (glyph hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
+                <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
+                {g.ext !== undefined && <span className="ext">{g.ext ? "." + g.ext : "?"}</span>}
+              </span>
+            ))}
+            {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
+          </span>
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}
@@ -500,7 +491,6 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
 
 // First glance, posture point 5: what kinds of evidence are there?
 function Kinds({ frame }: { frame: Frame }) {
-  const photoMode = useContext(PhotoMode);
   const groups = new Map<string, { n: CNode; count: number }>();
   for (const n of frame.nodes) {
     const k = n.type.name ?? `unresolved type ${n.schema.slice(0, 8)}`;
@@ -511,7 +501,7 @@ function Kinds({ frame }: { frame: Frame }) {
     <div className="kinds" aria-label="What kinds of evidence are here">
       <Ph id="palette" />
       {[...groups.entries()].map(([k, { n, count }]) => {
-        const g = glyphsFor(n, photoMode)[0];
+        const g = glyphsFor(n)[0];
         return (
           <span className="kind" key={k}>
             <Glyph name={g.glyph} size={24} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
@@ -566,14 +556,6 @@ function Legend() {
         </div>
       </div>
 
-      <h4 id="ph-photoglyph">Photograph glyph <Ph id="photoglyph" /></h4>
-      <div className="row-demo">
-        <div><Glyph name="misc.photo" size={32} color={PALETTE.misc.color} /> <span className="demo-label-inline">picture</span></div>
-        <div><span className="glyph-slot"><Glyph name="misc.doc-blank" size={32} color={PALETTE.misc.color} /><span className="ext">.png</span></span>
-          <span className="glyph-slot"><Glyph name="misc.doc-blank" size={32} color={PALETTE.misc.color} /><span className="ext">?</span></span>
-          <span className="demo-label-inline">document + extension; ? when the picture is withheld</span></div>
-      </div>
-
       <h4 id="ph-thumbs">Pictures <Ph id="thumbs" /></h4>
       <p>Three states: the picture; a hatched frame when the credential commits to a picture this presentation did not supply; nothing when there is no picture.</p>
 
@@ -598,7 +580,6 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
-  const [photo, setPhoto] = useState<PhotoGlyph>("picture");
   const [corpus, setCorpus] = useState(false);
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
@@ -613,7 +594,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><PhotoMode.Provider value={photo}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}>
+    <Marks.Provider value={marks}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -632,14 +613,6 @@ export default function App() {
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
             <label title="The host's trust posture for these AIDs. Wild: an unnamed AID shows its type text. Corpus: it shows the mnemonic built from its value.">
               <input type="checkbox" checked={corpus} onChange={(e) => setCorpus(e.target.checked)} /> host treats AIDs as a corpus
-            </label>
-            <label title="Candidates for the photograph glyph">
-              photo glyph
-              <select value={photo} onChange={(e) => setPhoto(e.target.value as PhotoGlyph)}>
-                <option value="picture">picture</option>
-                <option value="extension">document + extension</option>
-                <option value="none">generic document</option>
-              </select>
             </label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
@@ -667,6 +640,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Lexicon.Provider></Trust.Provider></PhotoMode.Provider></Marks.Provider>
+    </Lexicon.Provider></Trust.Provider></Marks.Provider>
   );
 }

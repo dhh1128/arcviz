@@ -8,7 +8,7 @@ This is the second channel for [credential categories](credential-categories.md)
 
 ![all nineteen pictures at 32 px](iconography/contact-32.png)
 
-Nineteen pictures in twenty-one files: every one of the nine categories, ten subcategories, and `misc`. `authority` and `civil-status` reuse a subcategory's picture as the category glyph (his ruling). `authority` is the key from `authority.control`, and `civil-status` is the ring from `civil-status.marriage`. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
+Twenty pictures in twenty-two files: every one of the nine categories, ten subcategories, `misc`, and `misc.file`. `authority` and `civil-status` reuse a subcategory's picture as the category glyph (his ruling). `authority` is the key from `authority.control`, and `civil-status` is the ring from `civil-status.marriage`. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
 
 | Glyph | Picture | Source |
 |---|---|---|
@@ -33,6 +33,7 @@ Nineteen pictures in twenty-one files: every one of the nine categories, ten sub
 | `civil-status.birth` | baby | Phosphor |
 | `civil-status.marriage` | solitaire ring | original |
 | `misc` | document | Material Symbols |
+| `misc.file` | document with no lines, for a printed file extension | Material Symbols, edited |
 
 ## The rules
 
@@ -51,6 +52,12 @@ Nineteen pictures in twenty-one files: every one of the nine categories, ten sub
 **The size ladder.** 32 px is the floor. The handoff's measurement on `bakobo/schema` showed that interior detail is gone at 32 px and only outline carries, and every glyph here was accepted or rejected on its 32 px render. 64 and 128 px are rendered for checking. Nothing smaller than 32 px has been tested.
 
 **Imagery kept out of the set.** Check marks, crosses, warning triangles, padlocks and shields are left for arcviz's own evaluation signals, where point 6 asks that "something is wrong" be unmistakable. A red or plain Greek cross is avoided because the Red Cross emblem is legally protected. How far that protection reaches for a monochrome plus sign hasn't been checked. `humanness` shows no face and no fingerprint, because it asserts that the holder is a person without saying which one. `affiliation` uses busts, not full figures, because an affiliation can be with something that isn't a person (his).
+
+## File extensions (his)
+
+A photograph carries no category, so it lands in `misc`, and the plain document says nothing about it. On 2026-09-24 Daniel chose the document with its lines removed and the file extension printed on it over a picture pictograph: *"We already show the actual photo, so having an icon for a photo isn't important."* The glyph is `misc.file`. The extension is text the renderer lays over it, never part of the path, so the glyph is still one silhouette in `currentColor`. He asked for the text to be white, because black is unreadable on the glyph's dark fill.
+
+The extension is read from the bytes, never from a file name or a claim in the credential, so it is only known when the attachment resolves. What a withheld attachment shows is open; the sample shows `?`.
 
 ## Composition
 

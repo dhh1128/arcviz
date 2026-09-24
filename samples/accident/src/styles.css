@@ -141,3 +141,12 @@ q.issuer-text { quotes: "“" "”"; }
 .edges path { stroke: #7d848d; }
 .edge-label { font: 600 11px ui-monospace, Menlo, monospace; fill: var(--issuer); paint-order: stroke; stroke: var(--page); stroke-width: 3px; }
 .rank { gap: 34px 14px; }
+
+/* turn-10: SAID and (i) on top, kind at the bottom */
+.card-top { display: flex; align-items: center; gap: 6px; min-height: 18px; }
+.card-top .said { margin-right: auto; margin-left: -3px; }
+.card-top .presented-tag { margin-right: 0; }
+.card-foot { justify-content: space-between; align-items: flex-end; }
+.glyph-row { align-items: flex-end; }
+.unknown-badge { margin-top: 0; align-self: center; }
+.ext { color: #fff; bottom: 4px; font-size: 8px; }

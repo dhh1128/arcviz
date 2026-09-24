@@ -38,7 +38,7 @@ That is the thing that reads as "the raw value with ellipses". It is not `valueP
 
 `EntvizPill.ts:522` is explicit that the label is *"never the note (self-declared) on the pill"*. entviz keeps two slots precisely so first-party text and self-declared text cannot be confused.
 
-So **COIA flags never go in the label.** A flag is a warning *about* the value, not part of anybody's name for it; concatenating `,9` would launder a compromise warning into trusted chrome and make it read as part of the party's name. Return flags separately and let the host render them as its own chrome.
+The label is where the host's resolved alias goes, **verbatim, flags included**. An earlier version of this note said COIA flags must be split off the label and rendered as separate chrome. Daniel reversed that on 2026-09-24 (D-DCTS): communicating an alias's MITM risk is the job of the interface that resolves AIDs to aliases, and arcviz *"is already surfacing those flags if it displays coia aliases by calling the interface that looks them up."* The alias is the host's first-party text, so the trusted slot is the right one. Only self-declared text belongs in `note`.
 
 ## Props worth knowing about
 

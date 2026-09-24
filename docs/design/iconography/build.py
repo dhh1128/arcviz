@@ -157,6 +157,17 @@ def marriage():
 
 
 # --- the set ---------------------------------------------------------------------
+def file_blank():
+    """`misc` with its two text lines removed, so a renderer can print a file extension on the
+    page instead. Daniel, 2026-09-24, choosing it over a picture pictograph for photographs:
+    "We already show the actual photo, so having an icon for a photo isn't important." The
+    extension is text laid over the glyph by the renderer, never part of the path, so the glyph
+    stays one silhouette in currentColor."""
+    keep = [s for s in subpaths(raw(SRC / "material-symbols/description-fill.svg"))
+            if abs(s[0][1][0] - 349) > 0.5]   # the two lines both start at x=349
+    return union(*keep)
+
+
 # name -> (builder, <title>, credit). The credit is written into the glyph as a comment, because
 # Apache-2.0 asks modified files to say they were changed and CC BY asks for it at point of use.
 # None means an arcviz original.
@@ -180,6 +191,7 @@ GLYPHS = {
     "civil-status.birth": (lambda: load(SRC / "phosphor/baby-fill.svg"), "civil-status: birth", "Phosphor Icons 'baby' (fill), MIT; rescaled and centred on a 24-unit grid"),
     "civil-status.marriage": (marriage, "civil-status: marriage", None),
     "misc": (lambda: load(SRC / "material-symbols/description-fill.svg"), "misc", "Material Symbols 'description' (rounded, fill), Apache-2.0; rescaled and centred on a 24-unit grid"),
+    "misc.file": (file_blank, "misc: file", "Material Symbols 'description' (rounded, fill), Apache-2.0; its two text lines removed, rescaled and centred on a 24-unit grid"),
 }
 
 

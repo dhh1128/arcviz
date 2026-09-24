@@ -7,7 +7,7 @@ These notes exist because that knowledge was being rediscovered. During the 2026
 | File | Covers |
 |---|---|
 | [entviz.md](entviz.md) | The pill's label slot and its precedence, the mnemonic and its trust gate, why `label` and `note` are separate, which surprises cost time |
-| [coia.md](coia.md) | Consuming aliases without claiming conformance, the flag registry, the ordering rule that protects it, the three-channel separation |
+| [coia.md](coia.md) | Consuming aliases without claiming conformance: displayed verbatim, flags included, never parsed |
 
 **Every claim carries a file and line so it can be rechecked rather than believed.** These are sibling projects under active development; a note without a citation becomes a confident lie the first time something moves. If you find one of these stale, fix it here rather than working around it in code — the whole point is that the next reader does not repeat the discovery.
 

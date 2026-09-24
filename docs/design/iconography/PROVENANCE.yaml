@@ -69,3 +69,4 @@ assets:
   - {glyph: civil-status.birth,     set: phosphor,         file: baby-fill.svg,                 sha256: 33e21a6a72fa6394, modified: [rescaled]}
   - {glyph: civil-status.marriage,  set: original}
   - {glyph: misc,                   set: material-symbols, file: description-fill.svg,          sha256: 10e46e933608eca6, modified: [rescaled]}
+  - {glyph: misc.file,              set: material-symbols, file: description-fill.svg,          sha256: 10e46e933608eca6, modified: [two text-line subpaths removed, rescaled]}

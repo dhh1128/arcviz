@@ -314,97 +314,37 @@ def test_a_verified_schema_entailment_reaches_the_descriptor():
 
 # --- COIA ----------------------------------------------------------------------------------
 
-def test_coia_parse_vectors_flag_groups_are_exact():
-    """All eleven §6 parse vectors from the spec's normative set, on the half arcviz claims.
-
-    arcviz implements the flag split of §6.1/§6.2 and does NOT implement §5 normalization --
-    §3's Normalizer class is 69 further vectors and a real piece of work, and the reference
-    coia.py in that repo is the oracle. So every vector's flag groups are asserted exactly,
-    and one vector's BODY ("Bob As CEO,9" -> "bob-as-ceo") is knowingly not checked, because
-    passing it would require the normalizer this module disclaims. Recorded rather than
-    skipped silently: a partial pass presented as a pass is the failure this repo refuses.
-    """
-    import json as _json
-    import coia_reader as coia
-    path = Path.home() / "code" / "me" / "coia" / "vectors.json"
-    if not path.exists():
-        return  # the spec repo is a sibling, not a dependency
-    vectors = _json.loads(path.read_text())["parse"]
-    needs_normalizer = 0
-    for name, raw, (want_body, want_g1, want_g2) in vectors:
-        a = coia.parse(raw)
-        assert a.group1 == want_g1 and a.group2 == want_g2, (name, a)
-        if a.body != want_body:
-            needs_normalizer += 1
-    assert needs_normalizer == 1, (
-        f"{needs_normalizer} vectors need §5 normalization; one is expected and known. "
-        "If this number moved, either the spec's vectors changed or the disclaimer is stale.")
-
-
-def test_an_unflagged_alias_is_never_reported_as_verified():
-    """COIA §6.3: 'Absence is never a guarantee... An application MUST NOT render an absent
-    flag as a positive assurance.' That is this project's own thesis, in someone else's spec."""
-    import coia_reader as coia
-    got = coia.render("EAID", coia.parse("cecilia-second-violin-vienna-symphony"))
-    assert got["state"] == "unflagged"
-    assert "verified" not in str(got).lower()
-
-
-def test_a_compromised_flag_survives_to_the_renderer():
-    """Dropping a flag would put a reassuring human name on an identifier its own creator
-    marked as controlled by the wrong party."""
-    import coia_reader as coia
-    got = coia.render("EAID", coia.parse("bob-payee-bitcoin,9"))
-    assert got["worst"] == "9"
-    assert ("9", "compromised", "positive evidence that the wrong party controls it") in got["flags"]
-
-
-def test_an_unrecognized_flag_digit_is_surfaced_not_dropped():
-    """§6.3: a reader 'MUST surface it rather than ignore it -- it is a warning from a later
-    version of the registry.'"""
-    import coia_reader as coia
-    a = coia.parse("someone-somewhere,3")
-    assert a.unknown == ("3",)
-    assert coia.render("EAID", a)["unknown_flags"] == ("3",)
-
-
-def test_flags_are_split_before_any_normalization_touches_the_body():
-    """§6.2 says the reverse order 'destroys the delimiter'. §5 normalization discards
-    punctuation, so normalizing first eats the comma and folds a compromised flag into a name."""
-    import coia_reader as coia
-    seen = []
-
-    def spy(body):
-        seen.append(body)
-        return body.replace(",", "")
-
-    a = coia.parse("bob-payee-bitcoin,9", normalize=spy)
-    assert seen == ["bob-payee-bitcoin"], seen
-    assert a.group1 == "9"
-
-
 def test_no_alias_passes_no_label_so_entvizs_own_fallback_runs():
     """`label: None`, never `""`. An empty string is still a label: it wins the precedence at
     EntvizPill.ts:499 and suppresses the type text, leaving a pill with no text at all."""
     import coia_reader as coia
     p = coia.pill_props("EKx4P_qnxW1ycaLCUlzoFCZJv6NlvrX2SQu58vq_oIt3", None)
-    assert p["label"] is None and p["label"] != ""
-    assert p["coiaState"] == "no-alias"
+    assert p["label"] is None
+    assert coia.pill_props("EAID", "")["label"] is None
 
 
-def test_flags_are_never_concatenated_into_the_pill_label():
-    """`label` is entviz's TRUSTED first-party slot; `note` is the self-declared one. A COIA
-    flag is a warning about the value, not part of anyone's name for it, so folding ',9' into
-    the label would launder a compromise warning into trusted chrome."""
+def test_the_alias_is_shown_verbatim_flags_and_all():
+    """D-DCTS, Daniel 2026-09-24: arcviz "is *already* surfacing those flags if it displays coia
+    aliases by calling the interface that looks them up." So a flagged alias reaches the label
+    exactly as the host's interface returned it -- nothing split off, nothing stripped, no
+    separate warning channel re-adjudicating a risk the interface already communicated."""
     import coia_reader as coia
-    p = coia.pill_props("EAID", coia.parse("bob-payee-bitcoin,9"))
-    assert p["label"] == "bob-payee-bitcoin"
-    assert "9" not in p["label"] and "," not in p["label"]
-    assert p["worst"] == "9" and p["coiaState"] == "flagged"
+    assert coia.pill_props("EAID", "bob-payee-bitcoin,9")["label"] == "bob-payee-bitcoin,9"
+    view = coia.party_view("EAID", "jae-park-witness,0")
+    assert view["label"] == "jae-park-witness,0"
+    assert not any(k.lower().startswith("coia") for k in view), view
+
+
+def test_the_lookup_is_consulted_once_per_identifier():
+    import coia_reader as coia
+    calls = []
+    look = coia.AliasLookup(lambda aid: calls.append(aid) or {"EA": "alice"}.get(aid))
+    assert look("EA") == "alice" and look("EA") == "alice" and look("EB") is None
+    assert calls == ["EA", "EB"]
 
 
 def test_channel_vectors():
-    """The three trust channels, and the decision about whether to apply a known alias.
+    """The host's judgements about a party, and the decision about whether to apply an alias.
 
     Kept in the same file as the describe vectors because they are the same kind of artifact --
     a claim with the reason it is held -- and split into their own section because they test a
@@ -417,7 +357,7 @@ def test_channel_vectors():
     for vec in data["channels"]:
         assert vec.get("defends"), f"{vec['name']} carries no `defends`"
         i = vec["input"]
-        alias = coia.parse(i["alias"]) if i.get("alias") else None
+        alias = i.get("alias")
         got = coia.party_view(
             i["identifier"], alias,
             binding=coia.Binding(**i["binding"]) if i.get("binding") else None,

@@ -1,269 +1,86 @@
-"""Consume COIA aliases. arcviz READS them; it never mints one.
+"""Consume COIA aliases. arcviz DISPLAYS them; it never mints, parses or interprets one.
 
-NAMED `coia_reader` AND NOT `coia`, because the first name was a mistake worth not repeating.
-The COIA specification ships its own `coia.py` -- the normative oracle at ~/code/me/coia --
-and a file of mine with that basename implies this is an implementation OF the spec, which is
-a conformance claim the paragraph below explicitly disclaims. It is a CONSUMER. Nothing here
-changes COIA, proposes a change to COIA, or implements its generator, normalizer or matcher.
+NAMED `coia_reader` AND NOT `coia`, because the spec ships its own `coia.py` -- the normative
+oracle at ~/code/me/coia -- and a file of ours with that basename would imply a conformance
+claim. arcviz claims none of COIA's three classes (Normalizer, Generator, Matcher).
 
-WHAT COIA IS, read from the spec at ~/code/me/coia rather than recalled. It is a convention
-for the label field that wallets and key managers already have -- three components in a fixed
-order, *who*, *role*, *scope* -- plus a comma-delimited flag suffix. It is explicitly "not an
-identifier, not a namespace, and not a protocol", and §1 is blunt that "an alias improves UX
-for the person who creates it. It is not a commitment to meaning for anyone else."
+WHAT COIA IS, read from the spec rather than recalled. A convention for the label field that
+wallets and key managers already have -- *who*, *role*, *scope* -- plus a comma-delimited flag
+suffix. §1: "an alias improves UX for the person who creates it. It is not a commitment to
+meaning for anyone else." So arcviz never mines an alias for meaning, and the COIA `role` is not
+the `role` channel in `describe.py`.
 
-SO ARCVIZ IS A CONSUMER AND ONLY A CONSUMER, and two consequences follow that are easy to get
-wrong. Generating an alias needs who/role/scope answered by a human about their own context,
-which arcviz does not have and must not invent; the application supplies a lookup and arcviz
-renders what comes back. And §1 forbids the tempting move of reading meaning out of somebody
-else's alias -- parsing `cecilia-second-violin-vienna-symphony` for a role would be "a
-dangerous antipattern" in the spec's words -- so the body is displayed verbatim and never
-mined. The `role` in a COIA alias and the `role` channel in `describe.py` are different
-things and must not be conflated.
+THE ALIAS IS SHOWN EXACTLY AS THE LOOKUP RETURNS IT, FLAGS AND ALL. Daniel, 2026-09-24
+(D-DCTS), after this module had split flags off into a separate warning chip: "It is the job of
+a COIA alias to eliminate or communicate MITM risk, so if you're trying to say that the name
+'Jae Park witness' still has MITM risk, we're doing it wrong. This is the job of the interface
+that you should be calling to resolve AIDs to aliases." And: "Maybe arcviz should surface some
+flags, but not ones on aliases. It is *already* surfacing those flags if it displays coia
+aliases by calling the interface that looks them up."
 
-THE FLAGS ARE WHY THIS MODULE EXISTS RATHER THAN A ONE-LINE DICTIONARY LOOKUP. §6.3 registers
-ten digits -- 0 unverified, 1 pairwise, 4 unfit, 5 second-hand, 6 test, 7 do-not-use, 8
-retired, 9 compromised -- ordered by seriousness, and they qualify the whole alias assertion
-rather than only its subject. They are safety-relevant, and dropping one silently would put a
-reassuring human name on an identifier the creator has marked as controlled by the wrong
-party. `principles.md` P12 already requires the proved-versus-guessed distinction to be
-visible; COIA's flags are that distinction, already standardised, already in the data.
+So the host's lookup interface owns the alias and the risk it carries. Whatever it returns --
+`jae-park-witness`, or `bob-payee-bitcoin,9` -- is what the pill's label shows, verbatim. An
+earlier version of this module parsed the §6.1/§6.2 flag groups, stripped them from the label
+and returned them as a separate channel; that is gone, along with its tests, because it put
+arcviz in the business of re-adjudicating a risk the interface had already communicated.
 
-AND THE SPEC STATES THIS PROJECT'S OWN THESIS, IN §6.3: "*Absence is never a guarantee.* For
-every flag, absence means only that the flag was not set; it never asserts the negation. An
-application MUST NOT render an absent flag as a positive assurance." An unflagged alias is
-therefore not a verified one, and `AliasLookup` returns three states -- no alias, an alias
-with flags, an alias without -- so a render cannot collapse the last two into "fine".
-
-CONFORMANCE, STATED HONESTLY. §3 defines three classes: Normalizer, Generator, Matcher.
-arcviz claims NONE of them. It implements the flag split of §6.1/§6.2, which is the
-safety-critical half, and it does NOT implement §5 normalization -- that is 69 of the spec's
-golden vectors and a real piece of work, and the reference `coia.py` in that repo is the
-oracle for it. An application that already has a conforming normalizer may pass one in. The
-test suite runs all eleven §6 parse vectors and records which assertions it can make without
-a normalizer, rather than claiming a pass it has not earned.
+What is left is small, and every piece of it is about not collapsing states: no alias versus an
+alias, a name withheld here versus none known, and a host that said nothing versus a host that
+said no.
 """
 
 from __future__ import annotations
 
-import re
-import unicodedata
 from dataclasses import dataclass, field
-
-# §6.2: "a reader MUST accept U+3001, U+060C and U+FF0C as group delimiters in addition to
-# U+002C, so a user retyping an alias on a CJK or Arabic keyboard is understood."
-DELIMITERS = ",、،，"
-
-# §6.3, quoted. Ordered by seriousness ascending, and that ordering "carries meaning: a reader
-# encountering an unrecognized digit MAY use its position as a severity hint."
-REGISTRY = {
-    "0": ("unverified", "doubt about the alias assertion is unresolved"),
-    "1": ("pairwise", "for one relationship only; do not share"),
-    "4": ("unfit", "technical posture weak for high-stakes use, and not yet accepted"),
-    "5": ("second-hand", "imported, restored, synced, or accepted from another party"),
-    "6": ("test", "throwaway, test, demo; no real-world consequence"),
-    "7": ("do-not-use", "the creator has decided not to transact"),
-    "8": ("retired", "no longer in service; historical references still resolve"),
-    "9": ("compromised", "positive evidence that the wrong party controls it"),
-}
-RESERVED = {"2", "3"}
 
 
 @dataclass(frozen=True)
-class Alias:
-    """One alias as read. `body` is for display only -- never for parsing (§1)."""
-    raw: str
-    body: str
-    group1: str = ""          # registry digits, §6.3
-    group2: str = ""          # private use, §6.1
-    # Digits in group1 that this build of the registry does not know. §6.3: "A reader
-    # encountering an unrecognized digit in group1 MUST surface it rather than ignore it --
-    # it is a warning from a later version of the registry."
-    unknown: tuple = ()
-
-    @property
-    def flags(self) -> tuple:
-        return tuple((d, *REGISTRY[d]) for d in self.group1 if d in REGISTRY)
-
-    @property
-    def worst(self) -> str | None:
-        """The most serious registry digit, or None. group1 is sorted descending, so it is
-        first -- but an unknown digit may outrank everything known and is included by
-        position, which is what §6.3 says its position is for."""
-        candidates = self.group1
-        return candidates[0] if candidates else None
-
-    @property
-    def is_flagged(self) -> bool:
-        return bool(self.group1 or self.group2)
-
-
-def _fold_digits(s: str) -> str:
-    """§6.2: "a reader MUST accept any Unicode decimal digit." Folds to ASCII."""
-    out = []
-    for ch in s:
-        if ch.isdigit():
-            v = unicodedata.digit(ch, None)
-            out.append(str(v) if v is not None else ch)
-        else:
-            out.append(ch)
-    return "".join(out)
-
-
-def parse(raw: str, *, normalize=None) -> Alias:
-    """Split an alias into body and flag groups, per §6.1 and §6.2.
-
-    §6.2 is explicit about the order and about why: "A matcher or reader MUST split flag
-    groups off *before* normalizing the body. The reverse order destroys the delimiter." §5
-    normalization discards punctuation, so normalizing first would eat the comma and silently
-    fold a `,9` compromised flag into the name.
-    """
-    if raw is None:
-        raise ValueError("no alias")
-    text = _fold_digits(raw)
-    parts = re.split(f"[{re.escape(DELIMITERS)}]", text)
-    body = parts[0]
-    g1 = parts[1] if len(parts) > 1 else ""
-    g2 = parts[2] if len(parts) > 2 else ""
-
-    def canon(group: str) -> str:
-        digits = {c for c in group if c.isdigit()}
-        # §6.1: duplicates collapsed, sorted DESCENDING "so that the most serious flag appears
-        # first". A reader accepts ascending input and canonicalises it.
-        return "".join(sorted(digits, reverse=True))
-
-    g1, g2 = canon(g1), canon(g2)
-    unknown = tuple(d for d in g1 if d not in REGISTRY)
-    if normalize is not None:
-        body = normalize(body)
-    return Alias(raw=raw, body=body, group1=g1, group2=g2, unknown=unknown)
-
-
-@dataclass
 class AliasLookup:
-    """The argument arcviz takes: a map from identifier to alias, supplied by the application.
+    """The argument arcviz takes: the host's interface from identifier to alias.
 
-    A plain callable would have done, but the three-state result is the point and a callable
-    returning None invites a caller to write `alias or aid` and lose the distinction between
-    "this party has no alias" and "this party has an alias the creator flagged as
-    compromised". `describe` needs those to render differently.
+    Returns the alias string exactly as the host resolved it, or None when the host has none.
+    Cached because a render asks about the same AID many times.
     """
     lookup: callable
-    normalize: callable | None = None
     _cache: dict = field(default_factory=dict)
 
-    def __call__(self, identifier: str) -> Alias | None:
-        if identifier in self._cache:
-            return self._cache[identifier]
-        raw = self.lookup(identifier)
-        alias = parse(raw, normalize=self.normalize) if raw else None
-        self._cache[identifier] = alias
-        return alias
+    def __call__(self, identifier: str) -> str | None:
+        if identifier not in self._cache:
+            raw = self.lookup(identifier)
+            self._cache[identifier] = raw if raw else None
+        return self._cache[identifier]
 
 
-def render(identifier: str, alias: Alias | None, *, elide: int = 10) -> dict:
-    """What a renderer needs to draw one party, with nothing collapsed.
-
-    Deliberately NOT a string. `credential-identity.md` records Korir's finding that
-    participants read a DID's random-string form as itself the security mechanism, so how much
-    raw identifier to show, and whether to show it at all, is a rendering decision this does
-    not make.
-    """
-    if alias is None:
-        return {"identifier": identifier, "alias": None, "state": "no-alias",
-                "elided": identifier[:elide] + "…" if len(identifier) > elide else identifier}
-    return {
-        "identifier": identifier,
-        "alias": alias.body,
-        # Never "verified". §6.3: absence of a flag "never asserts the negation".
-        "state": "flagged" if alias.is_flagged else "unflagged",
-        "flags": alias.flags,
-        "unknown_flags": alias.unknown,
-        "private_flags": alias.group2,
-        "worst": alias.worst,
-        "elided": identifier[:elide] + "…" if len(identifier) > elide else identifier,
-    }
-
-
-def pill_props(identifier: str, alias: Alias | None) -> dict:
+def pill_props(identifier: str, alias: str | None) -> dict:
     """What to hand `<EntvizPill>` for one AID. Read from entviz-js, not assumed.
 
-    THE SLOT IS `label`, and Daniel's instinct about it was right where mine was wrong. I had
-    described the CHARACTERIZATION STRIP (`CESR, Blake3-256`) from entviz's integration guide,
-    which belongs to the entviz drawing rather than to the pill chrome. The pill's own
-    host-settable slot is `label?: string`, documented as "First-party custom text shown after
-    the type (host-set, trusted — unlike the note)", and it does take precedence, in this
-    order (EntvizPill.ts:499-505):
+    The host-settable slot is `label` (EntvizPill.ts:62), filled by precedence
+    (EntvizPill.ts:499-505):
 
         explicit `label`  >  the gated mnemonic  >  the type text ("cesr key")
 
-    so passing nothing lets entviz's own fallback chain run and the pill is never empty. That
-    is exactly what "blank when no alias is known" should mean, and it is why arcviz must pass
-    `undefined` rather than `""` — an empty string is still a label, and would win the
-    precedence with nothing in it.
+    Passing nothing lets entviz's own fallback run, so the pill is never empty. That is what
+    "no alias known" must mean, and it is why arcviz passes None and never "" -- an empty
+    string is still a label, wins the precedence with nothing in it, and blanks the pill.
 
-    WHAT THE MIDDLE RUNG ACTUALLY IS, corrected after getting it wrong. I claimed the
-    fallback was the type text and that "a compressed version of the value with ellipses" was
-    the hover tooltip. Both halves were wrong. The mnemonic (describe.ts:428) is built from the
-    entviz's OWN displayed cells and returns `first…middle…last` for a >=256-bit value -- cell
-    texts are chunks of the value itself, so a CESR AID renders as something like
-    `EKx4…vq_o…It3`. That IS the raw value with ellipses. bakobo/cesrview is the worked
-    example: its StreamPill passes no label and declares `STREAM_TRUST = {posture: 'corpus',
-    mnemonic: true, ...}`, and its own test comment reads "The entviz pill never draws the raw
-    value; the value lives on cesrview's own wrapper" -- what a reader sees as the value is the
-    mnemonic, which is made of the value.
-
-    AND THAT IS THE CONSEQUENCE ARCVIZ HAS TO FACE. The mnemonic rung is gated on the `corpus`
-    trust posture, and `credential-identity.md` section 2 records arcviz as WILD by its own
-    gate header. So cesrview's pills fall back to a scannable value fragment and arcviz's fall
-    all the way to the type text -- "cesr key" -- which is materially worse, and it is a
-    consequence of a posture decision rather than of anything about labels. cesrview made the
-    opposite call deliberately, with a decision id (e5vk7n), on the ground that a pasted CESR
-    stream is a single-origin body of values. Whether a single presented dossier is the same
-    kind of thing is Daniel's call and is not made here.
-
-    FLAGS DO NOT GO IN THE LABEL, and this is the part that is security-relevant rather than
-    cosmetic. `label` is documented as TRUSTED first-party text, and entviz keeps a separate
-    `note` slot for self-declared content precisely so the two cannot be confused -- the source
-    comment at EntvizPill.ts:522 says the label is "never the note (self-declared) on the
-    pill". A COIA flag is a warning ABOUT the value, not part of anybody's name for it, so
-    concatenating `,9` into the label would launder a compromise warning into trusted chrome
-    and, worse, make it look like part of the party's name. The flags come back separately here
-    for the host to render as its own chrome.
+    The mnemonic rung is gated on entviz's `corpus` trust posture, and whether a presentation
+    is a corpus is the host's call, not arcviz's; see docs/integration/entviz.md.
     """
-    if alias is None:
-        # Not "" -- an empty string is still a label and would win the precedence with nothing
-        # in it, suppressing the type text and leaving a pill with no text at all.
-        return {"value": identifier, "label": None, "coiaState": "no-alias", "flags": ()}
-    return {
-        "value": identifier,
-        "label": alias.body,
-        # Never "verified": COIA §6.3 says absence of a flag "never asserts the negation".
-        "coiaState": "flagged" if alias.is_flagged else "unflagged",
-        "flags": alias.flags,
-        "unknownFlags": alias.unknown,
-        "privateFlags": alias.group2,
-        "worst": alias.worst,
-    }
+    return {"value": identifier, "label": alias if alias else None}
 
 
 # ---------------------------------------------------------------------------------------
-# The three channels, kept apart.
+# What the host says about a party on a node, kept apart.
 #
-# THREE SPEAKERS, NEVER MERGED. A COIA flag is the ALIAS CREATOR's warning about an
-# identifier. A binding judgement is the HOST's view of whether that alias names the party
-# controlling the identifier. An evidentiary stance is the HOST's view of whether a credential
-# deserves to be credited. They are different assertions by different parties about different
-# objects, and collapsing any two of them loses which party is speaking -- which is exactly
-# what makes the interesting cases interesting. A host may vet an alias its creator flagged
-# unverified. A host may be certain an AID belongs to a diploma mill and credit nothing it
-# issues.
+# THE NAME SLOT CARRIES IDENTITY ONLY. Daniel, 2026-09-24: "naming an issuer isn't supposed to
+# be a reputation signal at all... Knowing that a witness testified to fact X in court, and
+# knowing that witness X is trustworthy, are radically different questions." So nothing below
+# is ever folded into the label.
 #
-# AND THE NAME SLOT CARRIES IDENTITY ONLY. Daniel, 2026-09-24: "naming an issuer isn't supposed
-# to be a reputation signal at all... Knowing that a witness testified to fact X in court, and
-# knowing that witness X is trustworthy, are radically different questions." Identification is
-# a precondition for evaluation, not a form of it, so no assessment from any of the three
-# channels is ever folded into the label.
+# Two host judgements survive the D-DCTS revision. The alias creator's flags are no longer a
+# separate channel: they are part of the alias, which the interface returns and arcviz shows.
+# `Binding` is kept pending Daniel's reading of whether it, too, belongs to the lookup
+# interface -- it is the host's confidence that an alias names an identifier's controller.
 
 
 @dataclass(frozen=True)
@@ -271,9 +88,7 @@ class Binding:
     """The host's view of whether an alias names the controller of an identifier.
 
     `confident` is a tri-state and the third state is load-bearing: None means the host did not
-    say, which is NOT "no". COIA §6.3 makes the same point about its own flags -- "absence means
-    only that the flag was not set; it never asserts the negation" -- and the rule generalises
-    to every judgement arcviz receives rather than computes.
+    say, which is NOT "no".
     """
     confident: bool | None = None
     source: str | None = None       # host-defined; rendered as attribution, never interpreted
@@ -290,37 +105,28 @@ class Stance:
     reason: str | None = None
 
 
-def party_view(identifier: str, alias: Alias | None, *,
+def party_view(identifier: str, alias: str | None, *,
                binding: Binding | None = None, stance: Stance | None = None,
                apply_alias: bool | None = None) -> dict:
     """Everything known about one party as it appears on one node, with nothing merged.
 
     `apply_alias` is the host's per-(identifier, node) call about whether to USE a known alias
     here. It defaults to showing it, because identification is a precondition for evaluation
-    and withholding a name is the more damaging choice -- a viewer who knows something about
-    that party can no longer apply it. A host may still decline, for reasons that are its own:
-    not wanting to reveal which parties it recognises, or holding an alias that is simply wrong
-    in this context.
+    and withholding a name is the more damaging choice.
     """
-    known = alias is not None
+    known = bool(alias)
     show = True if apply_alias is None else apply_alias
     return {
         "identifier": identifier,
-        # Identity only. No flag digits, no trust marks, no reputation.
-        "label": alias.body if (known and show) else None,
+        # Identity only, and verbatim: whatever the host's interface returned, flags included.
+        "label": alias if (known and show) else None,
         # Three states, not two: a name withheld here is not the same as a party we cannot
         # name at all, and a viewer should be able to tell them apart.
         "aliasState": ("shown" if known and show
                        else "withheld-here" if known
                        else "none"),
-        # Channel 1 -- the alias creator speaking about the identifier.
-        "coiaFlags": alias.flags if known else (),
-        "coiaUnknownFlags": alias.unknown if known else (),
-        "coiaWorst": alias.worst if known else None,
-        # Channel 2 -- the host speaking about the binding.
         "bindingConfident": binding.confident if binding else None,
         "bindingSource": binding.source if binding else None,
-        # Channel 3 -- the host speaking about the credential.
         "credited": stance.credited if stance else None,
         "creditedReason": stance.reason if stance else None,
     }
