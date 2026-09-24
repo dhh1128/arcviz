@@ -8,7 +8,7 @@ This is the second channel for [credential categories](credential-categories.md)
 
 ![all nineteen glyphs at 32 px](iconography/contact-32.png)
 
-Nineteen glyphs: seven categories with a glyph of their own, ten subcategories, and `misc`. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
+Nineteen pictures in twenty-one files: every one of the nine categories, ten subcategories, and `misc`. `authority` and `civil-status` reuse a subcategory's picture as the category glyph (his ruling). `authority` is the key from `authority.control`, and `civil-status` is the ring from `civil-status.marriage`. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
 
 | Glyph | Picture | Source |
 |---|---|---|
@@ -26,8 +26,10 @@ Nineteen glyphs: seven categories with a glyph of their own, ten subcategories, 
 | `qualification.driving` | car | Material Symbols |
 | `health` | heart with pulse line | Material Symbols |
 | `affiliation` | three busts, asymmetric | Phosphor, edited |
+| `authority` | key (as `authority.control`) | Font Awesome |
 | `authority.delegation` | hierarchy tree | Font Awesome |
 | `authority.control` | key | Font Awesome |
+| `civil-status` | ring (as `civil-status.marriage`) | original |
 | `civil-status.birth` | baby | Phosphor |
 | `civil-status.marriage` | solitaire ring | original |
 | `misc` | document | Material Symbols |
@@ -60,9 +62,8 @@ How many glyphs is realistic: of the 85 catalog types whose fields are published
 
 ## Open
 
-- **`authority` and `civil-status` have no category-level glyph.** Only their subcategories have one. A credential the classifier labels `authority` without anything that picks delegation or control currently has nothing to show.
 - **Nothing selects a subcategory.** `classify.py` returns categories only. Showing a car instead of the rosette needs a rule that recognizes a driving privilege, and that rule doesn't exist.
-- **`authority.control` is a key, and arcviz will also draw KERI key state.** If key state gets a key glyph, one picture will mean two things. This is noted, not resolved.
+- **`authority`'s glyph is a key, and arcviz will also draw KERI key state.** If key state gets a key glyph, one picture will mean two things. This is noted, not resolved.
 - **`health` has no vaccination or prescription subcategory.** The syringe and stethoscope were candidates and weren't chosen.
 - **The wide-glyph correction** (`aspect^0.2`) is a judgement made by eye.
 
@@ -70,7 +71,7 @@ How many glyphs is realistic: of the 85 catalog types whose fields are published
 
 | Path | Holds |
 |---|---|
-| [iconography/glyphs/](iconography/glyphs/) | The nineteen SVGs, one flattened path each. Each carries a comment naming its source and what was changed. |
+| [iconography/glyphs/](iconography/glyphs/) | The twenty-one SVGs, one flattened path each. Each carries a comment naming its source and what was changed. |
 | [iconography/build.py](iconography/build.py) | Builds `glyphs/` and the three sheets from `sources/`. Every modification to a vendored glyph is made here, in code. |
 | [iconography/sources/](iconography/sources/) | The vendored originals, unmodified. |
 | [iconography/PROVENANCE.yaml](iconography/PROVENANCE.yaml) | Per asset: project, package and version, file, sha256, licence, where the licence was read, retrieval date, modifications. Also the sets considered and excluded. |

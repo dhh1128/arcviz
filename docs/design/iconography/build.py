@@ -205,6 +205,10 @@ COMPOSITIONS = [
     ("GCD", ["financial", "affiliation", "authority.delegation"]),
     ("four (never observed)", ["health", "financial", "affiliation", "identity"]),
 ]
+# Categories whose own glyph is one of their subcategories' pictures (his ruling, 2026-09-24).
+# Written as separate files, with their own <title>, so a renderer looks glyphs up by category name.
+ALIASES = {"authority": "authority.control", "civil-status": "civil-status.marriage"}
+
 GAP = 4  # px between adjacent 32 px glyphs: one eighth of the glyph
 
 
@@ -215,6 +219,9 @@ def main():
     for name, (build, title, credit) in GLYPHS.items():
         svgs[name] = svg_text(fit(build()), title, credit)
         (out / f"{name}.svg").write_text(svgs[name])
+    for alias, target in ALIASES.items():
+        build, title, credit = GLYPHS[target]
+        (out / f"{alias}.svg").write_text(svg_text(fit(build()), alias, credit))
 
     font = ImageFont.load_default(size=13)
     names = list(GLYPHS)

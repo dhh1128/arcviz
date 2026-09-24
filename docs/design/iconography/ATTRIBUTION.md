@@ -4,7 +4,7 @@ The glyphs in `glyphs/` are derived from the works below. Every one has been mod
 
 ## Font Awesome Free — CC BY 4.0
 
-`financial`, `qualification.academic`, `authority.delegation` and `authority.control` are adapted from Font Awesome Free 7.3.1 by Fonticons, Inc. (https://fontawesome.com), icons `money-bill-wave`, `graduation-cap`, `sitemap` and `key` (solid), licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). Changes were made: rescaled and recentred. The licence and its disclaimer of warranties are in `licenses/CC-BY-4.0.txt` and `licenses/font-awesome-free.txt`.
+`financial`, `qualification.academic`, `authority`, `authority.delegation` and `authority.control` are adapted from Font Awesome Free 7.3.1 by Fonticons, Inc. (https://fontawesome.com), icons `money-bill-wave`, `graduation-cap`, `sitemap` and `key` (solid), licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). Changes were made: rescaled and recentred. The licence and its disclaimer of warranties are in `licenses/CC-BY-4.0.txt` and `licenses/font-awesome-free.txt`.
 
 ## Material Symbols — Apache-2.0
 
@@ -20,4 +20,4 @@ The glyphs in `glyphs/` are derived from the works below. Every one has been mod
 
 ## Originals
 
-`org-identity` (after a sketch by Daniel Hardman) and `civil-status.marriage` are arcviz originals, drawn in `build.py`, under the repository's licence.
+`org-identity` (after a sketch by Daniel Hardman) `civil-status` and `civil-status.marriage` are arcviz originals, drawn in `build.py`, under the repository's licence.
