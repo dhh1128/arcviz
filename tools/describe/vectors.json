@@ -590,6 +590,170 @@
           "distinguishing_as_text": false
         }
       }
+    },
+    {
+      "name": "a_channel_the_type_entails_says_nothing",
+      "defends": "Daniel, 2026-09-24: 'A QVI credential is always issued to someone acting as a qvi... The goal is to figure out which out of all possible useful data is the datum that is most helpful.' Where a schema FIXES a relation -- the real Legal Entity vLEI schema documents its `i` as 'QVI Issuer AID' and its `a.i` as 'LE Issuer AID' -- naming it restates the type in longer words. Note this is not the suppress-constants rule: the value varies across the DAG and is still worthless, because it is determined in the world rather than in this presentation. Which is why schema resolution had to exist before this could.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "P1",
+            "issuee": "P2"
+          },
+          {
+            "said": "B",
+            "schema": "S2",
+            "issuer": "P2",
+            "issuee": "P3"
+          }
+        ],
+        "entailed": {
+          "S1": [
+            "parties"
+          ],
+          "S2": [
+            "parties"
+          ]
+        }
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": true
+        }
+      }
+    },
+    {
+      "name": "an_entailed_relation_returns_when_the_host_can_name_a_party",
+      "defends": "The interesting half, and the reason the suppression is not simply 'drop parties when the schema is known'. A schema can entail that the issuee is a legal entity; it cannot entail WHICH legal entity. If the host puts a name to the identifier, that name is knowledge the type does not contain -- 'from the QVI to the legal entity' says nothing, 'from GLEIF to Provenant' says something. So an entailed party channel stays suppressed while the parties are anonymous and comes back the moment either end resolves.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "P1",
+            "issuee": "P2"
+          },
+          {
+            "said": "B",
+            "schema": "S2",
+            "issuer": "P2",
+            "issuee": "P3"
+          }
+        ],
+        "entailed": {
+          "S1": [
+            "parties"
+          ],
+          "S2": [
+            "parties"
+          ]
+        },
+        "aliased": [
+          "P1"
+        ]
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        },
+        "B": {
+          "kinds": [
+            "type"
+          ]
+        }
+      }
+    },
+    {
+      "name": "entailment_is_only_honoured_when_it_was_supplied",
+      "defends": "Suppressing a component on a bad entailment makes the label say LESS than it should, and an omission is the direction this project treats as dangerous -- which is why schemas.py only reports entailments from a VERIFIED schema and withholds them from an unverified one. The same DAG with no entailment map keeps everything, so a resolution failure degrades to a wordier label rather than a quieter one. That is the safe direction.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "P1",
+            "issuee": "P2"
+          },
+          {
+            "said": "B",
+            "schema": "S2",
+            "issuer": "P2",
+            "issuee": "P3"
+          }
+        ]
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        }
+      }
+    },
+    {
+      "name": "gain_ranks_a_shared_channel_below_a_unique_one",
+      "defends": "Daniel asked for the datum that is MOST helpful, which is a ranking and not a filter, so every component carries its surprisal in bits -- log2(N over how many nodes share the value) -- and a render with room for three lines drops the weakest rather than truncating whichever happened to be last. Here four nodes share one issuer and differ in issuee, so the relation that includes the issuee is worth 2 bits and a channel every node shares is worth 0. Added after a mutation that forced every gain to zero went uncaught: the ranking existed and nothing held it.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "P1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "P2"
+          },
+          {
+            "said": "C",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "P3"
+          },
+          {
+            "said": "D",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "P4"
+          }
+        ]
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties"
+          ],
+          "gains": {
+            "type": 0.0,
+            "parties": 2.0
+          }
+        }
+      }
     }
   ],
   "channels": [

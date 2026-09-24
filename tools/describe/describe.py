@@ -96,6 +96,14 @@ class Dag:
     # reported as such rather than folded into "no image".
     image_fields: dict = field(default_factory=dict)
     resolvable_digests: set = field(default_factory=set)
+    # schema SAID -> the channels that schema FIXES, so naming them per-node says nothing.
+    # Supplied by `schemas.resolve`, and only ever from a VERIFIED schema: acting on an
+    # entailment SUPPRESSES a component, so a wrong one makes the label say less than it
+    # should, and an omission is the direction this project treats as dangerous.
+    entailed: dict = field(default_factory=dict)
+    # Identifiers the host could put a name to. Host knowledge, which no schema can entail --
+    # see `_entailed_here`.
+    aliased: set = field(default_factory=set)
 
     def incoming(self, said: str) -> list[str]:
         return sorted(label for n in self.nodes
@@ -127,6 +135,8 @@ class Component:
     # True when this component is carried NOT because it discriminates but because the
     # component it accompanies cannot be rendered as text. See `describe_node`.
     text_alternative: bool = False
+    # Bits of surprisal within this DAG. A render with room for three lines drops the lowest.
+    gain: float = 0.0
 
 
 # Channels whose value means something only by contrast with the other nodes' values. An
@@ -155,6 +165,52 @@ def _is_deviation(dag: "Dag", get, target) -> bool:
     if len(counts) < 2:
         return False
     return counts[mine] < max(counts.values())
+
+
+def _entailed_here(dag: "Dag", kind: str, target: "Node") -> bool:
+    """True when this channel says nothing a viewer could not predict from the type.
+
+    SURPRISAL, NOT AVAILABILITY -- Daniel, 2026-09-24: "The goal is to figure out which out of
+    all possible useful data is the datum that is most helpful, in the context of this DAG."
+    The vLEI chain is the case that forced it. A QVI credential always runs from the root to a
+    QVI; a legal-entity credential always runs from a QVI to a legal entity. Those relations
+    are fixed by the schema -- the real Legal Entity vLEI schema documents its `i` as "QVI
+    Issuer AID" and its `a.i` as "LE Issuer AID" -- so a descriptor reading "from the QVI to
+    the legal entity" restates the type in longer words. It is not that the value is constant
+    across THIS DAG; it is determined in the world, which is why no amount of looking at the
+    presentation could reveal it and why schema resolution had to come first.
+
+    THE EXCEPTION IS AN ALIAS, and it is the interesting half. A schema can entail that the
+    issuee is a legal entity. It cannot entail WHICH legal entity, and if the host can put a
+    name to the identifier then that name is knowledge the type does not contain. So an
+    entailed party channel stays suppressed while the parties are anonymous and comes back the
+    moment either end resolves -- "from the QVI to the legal entity" says nothing, and "from
+    GLEIF to Provenant" says something.
+    """
+    fixed = dag.entailed.get(target.schema) or ()
+    if kind not in fixed:
+        return False
+    if kind in ("parties", "issuer", "issuee"):
+        parties = {target.issuer, target.issuee} - {None}
+        if parties & dag.aliased:
+            return False
+    return True
+
+
+def _gain(dag: "Dag", get, target) -> float:
+    """Bits of surprisal for this channel's value, within this DAG.
+
+    log2(N / how many nodes share the value): unique in a nine-node bundle is about 3.2 bits,
+    shared by everything is 0. Carried on the component so a render with room for three lines
+    can drop the weakest rather than truncating whichever happened to be last -- the ranking
+    Daniel asked for, made explicit instead of implied by channel order.
+    """
+    import math
+    mine = get(target)
+    if mine is None:
+        return 0.0
+    same = sum(1 for n in dag.nodes if get(n) == mine)
+    return math.log2(len(dag.nodes) / same) if same else 0.0
 
 
 def _role_stem(label: str) -> str:
@@ -391,7 +447,12 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
     components = [Component(kind="type",
                             value={"schema": target.schema,
                                    "name": dag.type_names.get(target.schema)},
-                            role_bearing=True)]
+                            role_bearing=True,
+                            # Computed even though the head is never dropped. A render that
+                            # ranks components needs the number to be true, not a placeholder,
+                            # and a head reporting 0 bits while fully discriminating is the
+                            # kind of quietly wrong figure somebody later reasons from.
+                            gain=_gain(dag, lambda n: n.schema, target))]
     # The head is also the first discriminator: anything of another type is already ruled out.
     distractors = [d for d in distractors if d.schema == target.schema]
 
@@ -419,6 +480,8 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
         # nine nodes of the accident bundle, seven of which shared it.
         if kind in _RELATIVE_CHANNELS and not _is_deviation(dag, get, target):
             continue
+        if _entailed_here(dag, kind, target):
+            continue
         mine = get(target)
         if mine is None:
             # An absence can discriminate -- "the one with no issuee" -- but it names nothing,
@@ -435,7 +498,8 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
             # nothing. Generalising the head-noun rule rather than special-casing the head.
             continue
         components.append(Component(kind=kind, value=mine, role_bearing=role_bearing,
-                                    issuer_claim=issuer_claim))
+                                    issuer_claim=issuer_claim,
+                                    gain=_gain(dag, get, target)))
         distractors = remaining
 
     for kind, get, role_bearing, issuer_claim in deferred_negatives:

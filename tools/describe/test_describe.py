@@ -29,7 +29,9 @@ def _dag_from_spec(spec: dict) -> Dag:
                type_names=spec.get("type_names", {}),
                subject_fields=spec.get("subject_fields", {}),
                image_fields=spec.get("image_fields", {}),
-               resolvable_digests=set(spec.get("resolvable_digests", [])))
+               resolvable_digests=set(spec.get("resolvable_digests", [])),
+               entailed={k: tuple(v) for k, v in (spec.get("entailed") or {}).items()},
+               aliased=set(spec.get("aliased", [])))
 
 
 def _check_vector(vec: dict) -> list[str]:
@@ -73,6 +75,11 @@ def _check_vector(vec: dict) -> list[str]:
             head = got.components[0]
             if head.kind != "type" or head.value.get("name") != want["type_name"]:
                 bad(f"{said} head {head.kind}/{head.value} != type name {want['type_name']}")
+        if "gains" in want:
+            actual = {c.kind: round(c.gain, 3) for c in got.components}
+            for kind, bits in want["gains"].items():
+                if abs(actual.get(kind, -1) - bits) > 0.01:
+                    bad(f"{said} gain[{kind}] = {actual.get(kind)}, expected {bits}")
         if "band" in want and bands.get(said) != want["band"]:
             bad(f"{said} band {bands.get(said)!r} != {want['band']!r}")
     return problems
