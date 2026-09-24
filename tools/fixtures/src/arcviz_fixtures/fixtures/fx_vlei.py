@@ -28,6 +28,23 @@ from ..common import credential, make_registry, simple_edge
 from ..registry import fixture
 
 _DT_PROP = {"dt": {"type": "string", "format": "date-time"}}
+
+# Issuance dates that RESPECT THE DELEGATION ORDER, which the generated stamps did not.
+# `det.stamp()` derives a date from a label digest, so the four dates landed in an arbitrary
+# order: the chain runs qvi -> le -> ecr_auth -> ecr and the stamps came out 01-16, 01-18,
+# 01-17 and 01-15, putting the ECR three days before the authorization that permits it and a
+# day before the QVI credential at the root of its own chain. Nothing in the project noticed
+# for the life of the fixture. It matters twice: any claim about what dates reveal in this
+# chain was being tested against incoherent data, and a credential issued before the one it
+# depends on is exactly the anomaly a renderer ought to shout about -- so the corpus should
+# contain it on purpose, in a fixture built to show it, rather than by accident in the
+# reference chain. Fixed dates rather than derived ones, because the ORDER is the content.
+_ISSUED = {
+    "qvi": "2026-01-12T09:00:00.000000+00:00",
+    "le": "2026-01-15T11:30:00.000000+00:00",
+    "ecr_auth": "2026-01-19T14:05:00.000000+00:00",
+    "ecr": "2026-01-21T08:45:00.000000+00:00",
+}
 _LEI_PROP = {"LEI": {"type": "string"}}
 
 
@@ -42,7 +59,7 @@ def build_vlei_qvi(corpus_dir):
         attr_props={**_LEI_PROP, **_DT_PROP}, attr_required=["LEI", "dt"])
     serder = credential(
         "vlei_qvi", issuer=issuer, issuee=issuee, schema_said=schema_said,
-        attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": det.stamp("vlei:qvi")},
+        attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["qvi"]},
         registry=registry.said,
     )
     return {
@@ -76,7 +93,7 @@ def build_vlei_le(corpus_dir):
     edge = {'d': '', 'qvi': simple_edge("vlei:le:qvi", n=qvi['d'], s=qvi_schema)}  # default operator (no 'o')
     serder = credential(
         "vlei_le", issuer=issuer, issuee=issuee, schema_said=schema_said,
-        attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": det.stamp("vlei:le")},
+        attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["le"]},
         registry=registry.said, edge=edge,
     )
     return {
@@ -118,7 +135,7 @@ def build_vlei_ecr_auth(corpus_dir):
     serder = credential(
         "vlei_ecr_auth", issuer=issuer, issuee=issuee, schema_said=schema_said,
         attrs={
-            "LEI": "984500ARCV1Z0000FIX01", "dt": det.stamp("vlei:ecr_auth"),
+            "LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["ecr_auth"],
             "AID": person_aid, "personLegalName": "Jordan Q. Fixture",
             "engagementContextRole": "Compliance Analyst",
         },
@@ -168,7 +185,7 @@ def build_vlei_ecr(corpus_dir):
     serder = credential(
         "vlei_ecr", issuer=issuer, issuee=issuee, schema_said=schema_said,
         attrs={
-            "LEI": "984500ARCV1Z0000FIX01", "dt": det.stamp("vlei:ecr"),
+            "LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["ecr"],
             "personLegalName": "Jordan Q. Fixture", "engagementContextRole": "Compliance Analyst",
         },
         registry=registry.said, edge=edge,

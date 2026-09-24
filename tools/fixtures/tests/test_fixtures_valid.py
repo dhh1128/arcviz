@@ -593,3 +593,44 @@ def test_h7_missing_delegator_kel_recipe_names_a_genuinely_absent_aid():
     # Since the "served" set for this flavour is the whole chain unchanged
     # (nothing was ever there to remove), that should be reflected honestly.
     assert manifest["served"] == manifest["chain"]
+
+
+def test_a_credential_is_never_issued_before_what_it_depends_on():
+    """Issuance dates must respect the edge order, everywhere in the corpus.
+
+    The vLEI chain failed this silently for the life of the fixture: `det.stamp()` derives a
+    date from a label digest, so the four dates landed in an arbitrary order and the ECR sat
+    three days before the authorization permitting it. It matters twice over -- any claim about
+    what dates reveal in that chain was being tested against incoherent data, and "issued
+    before the credential it depends on" is exactly the anomaly a renderer should shout about,
+    so the corpus should contain it deliberately in a fixture built to show it rather than by
+    accident in the reference chain.
+    """
+    import json
+    sads = {}
+    for path in CORPUS_DIR.glob("*.json"):
+        if path.name.endswith((".meta.json", ".expanded.json")):
+            continue
+        sad = json.loads(path.read_text())
+        if isinstance(sad.get("d"), str):
+            sads[sad["d"]] = (path.stem, sad)
+
+    problems = []
+    for name, sad in sads.values():
+        a, e = sad.get("a"), sad.get("e")
+        if not isinstance(a, dict) or not isinstance(e, dict):
+            continue
+        mine = a.get("dt")
+        if not isinstance(mine, str):
+            continue
+        for label, blk in e.items():
+            if label == "d" or not isinstance(blk, dict) or not blk.get("n"):
+                continue
+            target = sads.get(blk["n"])
+            if not target:
+                continue
+            theirs = (target[1].get("a") or {}).get("dt") if isinstance(target[1].get("a"), dict) else None
+            if isinstance(theirs, str) and mine < theirs:
+                problems.append(f"{name} ({mine[:10]}) is dated before its `{label}` edge "
+                                f"target {target[0]} ({theirs[:10]})")
+    assert not problems, "\n".join(problems)
