@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
 import type { TrustAssumption } from "@entviz/core";
-import { abbreviate, budgeted, ranks, type Tier, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
+import { budgeted, ranks, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
 // ---------------------------------------------------------------------------------------------
@@ -95,7 +95,6 @@ function glyphsFor(n: CNode): { category: string; glyph: string; override: boole
 // foreign entropy gets a different assumption (or none)" (@entviz/core trust.ts:12-15). So an
 // aliased AID gets HOST_CORPUS, and an AID the lookup does not know gets none, which is wild.
 const HOST_CORPUS: TrustAssumption = { posture: "corpus", mnemonic: true };
-const Lexicon = createContext<Data["abbreviations"]>({});
 const Meanings = createContext<Record<string, string>>({});
 
 // Hover text for a kind glyph: its label, what the category means (from
@@ -108,30 +107,10 @@ function glyphTitle(g: { category: string; glyph: string; override: boolean }, m
   return lines.filter(Boolean).join("\n\n");
 }
 
-// The longest form of the type name that fits on one line of the space it has.
-function TypeName({ name }: { name: string }) {
-  const lex = useContext(Lexicon);
-  const ref = useRef<HTMLSpanElement>(null);
-  const [tier, setTier] = useState<Tier>("full");
-  useLayoutEffect(() => {
-    const el = ref.current?.parentElement;
-    if (!el) return;
-    const fit = () => {
-      const cs = getComputedStyle(el);
-      const ctx = document.createElement("canvas").getContext("2d")!;
-      ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-      const room = el.clientWidth - (el.querySelector(".presented-tag")?.getBoundingClientRect().width ?? 0) - 8;
-      const pick = (["full", "medium", "short"] as Tier[]).find((t) => ctx.measureText(abbreviate(name, lex, t)).width <= room) ?? "short";
-      setTier(pick);
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [name, lex]);
-  const shown = abbreviate(name, lex, tier);
-  return <span ref={ref} title={shown !== name ? name : undefined}>{shown}</span>;
-}
+// Type names are shown in full and wrap. The sample used to abbreviate them card by card, and
+// Daniel judged the approach broken (turn 37): it swapped every lexicon term at once rather than
+// the fewest that would fit, it made cards in one view disagree, and a lexicon of English short
+// forms "won't work in localization" (D-SE3W).
 
 
 function Band({ cats }: { cats: string[] }) {
@@ -313,7 +292,7 @@ function Card({
           <Info notes={notes} />
         </header>
         <div className="type-name">
-          {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
+          {typeName ?? <span className="muted">unresolved type</span>}
         </div>
         <AxisTags n={n} />
         {marks && unknown && <div><Ph id="unknown" /></div>}
@@ -612,7 +591,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}><Meanings.Provider value={data.category_meanings}>
+    <Marks.Provider value={marks}><PillIcons.Provider value={icons}><Meanings.Provider value={data.category_meanings}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -658,6 +637,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Meanings.Provider></PillIcons.Provider></Lexicon.Provider></Marks.Provider>
+    </Meanings.Provider></PillIcons.Provider></Marks.Provider>
   );
 }

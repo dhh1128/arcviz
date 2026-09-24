@@ -80,7 +80,6 @@ export interface Frame {
 
 export interface Data {
   generated_by: string;
-  abbreviations: Record<string, { medium: string; short: string }>;
   category_meanings: Record<string, string>;
   host_note: string;
   frames: Frame[];
@@ -129,18 +128,4 @@ export function budgeted(d: Descriptor, lines: number): { kept: Component[]; dro
     kept: body.filter((_, i) => keep.has(i)),
     dropped: body.filter((_, i) => !keep.has(i)),
   };
-}
-
-// refs/abbreviations.json: "A render uses the longest form that fits. `short` exists for the
-// floor form, not as a default." Whole words only, longest term first so "legal entity" wins
-// over any shorter term inside it.
-export type Tier = "full" | "medium" | "short";
-export function abbreviate(text: string, lex: Data["abbreviations"], tier: Tier): string {
-  if (tier === "full") return text;
-  let out = text;
-  for (const term of Object.keys(lex).sort((a, b) => b.length - a.length)) {
-    const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    out = out.replace(new RegExp(`\\b${esc}\\b`, "gi"), lex[term][tier]);
-  }
-  return out;
 }
