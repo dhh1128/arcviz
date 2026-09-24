@@ -124,6 +124,9 @@ class Component:
     issuer_claim: bool = False
     # True when this component discriminates by an ABSENCE ("the one with no issuee").
     negative: bool = False
+    # True when this component is carried NOT because it discriminates but because the
+    # component it accompanies cannot be rendered as text. See `describe_node`.
+    text_alternative: bool = False
 
 
 def _role_stem(label: str) -> str:
@@ -283,7 +286,7 @@ def _subject_is_unsaid(dag: Dag, n: Node, components: list) -> bool:
         return False
     if not any(m.schema == n.schema for m in dag.nodes if m.said != n.said):
         return False
-    return not any(c.kind in ("subject", "image", "issuee") and not c.negative
+    return not any(c.kind in ("subject", "issuee") and not c.negative
                    for c in components)
 
 
@@ -292,6 +295,12 @@ class Description:
     said: str
     components: list
     distinguishing: bool
+    # Whether the label still picks this node out when the images CANNOT be shown -- a
+    # text-only export, a screen reader, a tier too small for a thumbnail. Reported separately
+    # because `distinguishing` alone was quietly asserting a modality the label cannot assume:
+    # five nodes in the accident bundle came back "shown by its picture", each correct in the
+    # data model and each useless to a reader who cannot see the picture.
+    distinguishing_as_text: bool = True
     annotations: list = field(default_factory=list)
     # The distractors still standing when the channels ran out. Non-empty means the render
     # must not pretend: these nodes are not separable by anything available.
@@ -302,6 +311,7 @@ class Description:
             "said": self.said,
             "distinguishing": self.distinguishing,
             "indistinguishable_from": self.indistinguishable_from,
+            "distinguishing_as_text": self.distinguishing_as_text,
             "annotations": self.annotations,
             "components": [{"kind": c.kind, "value": c.value,
                             "role_bearing": c.role_bearing,
@@ -310,7 +320,13 @@ class Description:
         }
 
 
-def describe_node(dag: Dag, target: Node) -> Description:
+def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
+    """Run the incremental selection, optionally with some channels unavailable.
+
+    `skip` is what makes the text-only question answerable: run the same algorithm with the
+    image channel removed and see whether the distractor set still empties. That is a real
+    second answer rather than a guess about one, and it costs one extra pass.
+    """
     distractors = [n for n in dag.nodes if n.said != target.said]
 
     # The head. Always present, even when every node shares it, because the viewer's first
@@ -326,6 +342,8 @@ def describe_node(dag: Dag, target: Node) -> Description:
 
     deferred_negatives = []
     for kind, get, role_bearing, issuer_claim in _channels(dag):
+        if kind in skip:
+            continue
         if not distractors:
             break
         mine = get(target)
@@ -360,9 +378,34 @@ def describe_node(dag: Dag, target: Node) -> Description:
     annotations = _annotations(dag, target)
     if _subject_is_unsaid(dag, target, components):
         annotations.append({"kind": "subject_undetermined"})
+    return components, distractors
+
+
+def describe_node(dag: Dag, target: Node) -> Description:
+    components, distractors = _select(dag, target)
+
+    # THE LABEL IS THE UNION OF WHAT EACH MODALITY NEEDS, which is the general form of a
+    # narrower fix that did not survive its own test. The first attempt appended the subject
+    # whenever an image discriminated, and then reported text-only separability from a SECOND,
+    # unrelated selection -- so the flag described a label the render would never see. Running
+    # the selection again with the image channel unavailable, and carrying whatever it needed
+    # that the first pass did not, makes the emitted label the one both flags are about.
+    text_components, text_only_left = _select(dag, target, skip=("image",))
+    have = {(c.kind, str(c.value)) for c in components}
+    for c in text_components:
+        if (c.kind, str(c.value)) not in have:
+            components.append(Component(kind=c.kind, value=c.value,
+                                        role_bearing=c.role_bearing,
+                                        issuer_claim=c.issuer_claim, negative=c.negative,
+                                        text_alternative=True))
+
+    annotations = _annotations(dag, target)
+    if _subject_is_unsaid(dag, target, components):
+        annotations.append({"kind": "subject_undetermined"})
     return Description(said=target.said, components=components,
                        annotations=annotations,
                        distinguishing=not distractors,
+                       distinguishing_as_text=not text_only_left,
                        indistinguishable_from=sorted(d.said for d in distractors))
 
 
@@ -396,6 +439,8 @@ def render_plain(d: Description, names: dict | None = None) -> str:
         else:
             parts.append(f"{c.kind} {short(c.value)}")
     out = ", ".join(parts)
+    if not d.distinguishing_as_text:
+        out += "  [NOT UNIQUE WITHOUT THE PICTURES]"
     for a in d.annotations:
         out += ("  [picture withheld]" if a["kind"] == "image_committed_not_resolved"
                 else "  [subject undetermined]")

@@ -6,13 +6,35 @@
       "defends": "Show what varies, suppress what is constant (R-ZCYM). Both nodes share an issuer, so the issuer must never appear -- it rules nothing out. This is the rule that makes the description contrastive rather than absolute, and it is the one an implementation is most likely to lose by rendering a fixed template.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "ISS", "issuee": "P1"},
-          {"said": "B", "schema": "S1", "issuer": "ISS", "issuee": "P2"}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P2"
+          }
         ]
       },
       "expect": {
-        "A": {"kinds": ["type", "issuee"], "distinguishing": true},
-        "B": {"kinds": ["type", "issuee"], "distinguishing": true}
+        "A": {
+          "kinds": [
+            "type",
+            "issuee"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "issuee"
+          ],
+          "distinguishing": true
+        }
       }
     },
     {
@@ -20,13 +42,33 @@
       "defends": "The head is included even when it rules nothing out, because the viewer's first question is what kind of evidence this is. Both nodes share a schema here and the type component still appears on both.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "I1"},
-          {"said": "B", "schema": "S1", "issuer": "I2"}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "I1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "I2"
+          }
         ]
       },
       "expect": {
-        "A": {"kinds": ["type", "issuer"], "distinguishing": true},
-        "B": {"kinds": ["type", "issuer"], "distinguishing": true}
+        "A": {
+          "kinds": [
+            "type",
+            "issuer"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "issuer"
+          ],
+          "distinguishing": true
+        }
       }
     },
     {
@@ -34,15 +76,46 @@
       "defends": "An edge label names the ROLE and then falls back to a bare index when the referrer has two of them. Left whole, licenceA and licenceB are unique, so the role channel alone would distinguish every node and the algorithm would stop before consulting anything meaningful -- emitting ITEM 03 with a longer name, in the channel that was meant to replace it. Found by running the algorithm, not by reasoning. Here the stems collide, so the issuee must be what separates them.",
       "dag": {
         "nodes": [
-          {"said": "ROOT", "schema": "S0", "issuer": "I0",
-           "out_edges": {"licenceA": "A", "licenceB": "B"}},
-          {"said": "A", "schema": "S1", "issuer": "ISS", "issuee": "P1"},
-          {"said": "B", "schema": "S1", "issuer": "ISS", "issuee": "P2"}
+          {
+            "said": "ROOT",
+            "schema": "S0",
+            "issuer": "I0",
+            "out_edges": {
+              "licenceA": "A",
+              "licenceB": "B"
+            }
+          },
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P2"
+          }
         ]
       },
       "expect": {
-        "A": {"kinds": ["type", "role", "issuee"], "distinguishing": true},
-        "B": {"kinds": ["type", "role", "issuee"], "distinguishing": true}
+        "A": {
+          "kinds": [
+            "type",
+            "role",
+            "issuee"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "role",
+            "issuee"
+          ],
+          "distinguishing": true
+        }
       }
     },
     {
@@ -50,15 +123,42 @@
       "defends": "The counterweight to the vector above: stripping an index must not throw away a real role distinction. The live VVP dossier's labels are vetting, alloc, tnalloc and delsig, which differ in stem, so role alone should separate them and nothing further is needed.",
       "dag": {
         "nodes": [
-          {"said": "ROOT", "schema": "S0", "issuer": "I0",
-           "out_edges": {"vetting": "A", "tnalloc": "B"}},
-          {"said": "A", "schema": "S1", "issuer": "ISS"},
-          {"said": "B", "schema": "S1", "issuer": "ISS"}
+          {
+            "said": "ROOT",
+            "schema": "S0",
+            "issuer": "I0",
+            "out_edges": {
+              "vetting": "A",
+              "tnalloc": "B"
+            }
+          },
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS"
+          }
         ]
       },
       "expect": {
-        "A": {"kinds": ["type", "role"], "distinguishing": true},
-        "B": {"kinds": ["type", "role"], "distinguishing": true}
+        "A": {
+          "kinds": [
+            "type",
+            "role"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "role"
+          ],
+          "distinguishing": true
+        }
       }
     },
     {
@@ -66,15 +166,57 @@
       "defends": "The petition case: N endorsements of identical schema, identical role and identical issuee, differing in nothing the render can reach. The honest answer is that these are not separable, so distinguishing is false and every sibling is named. A label that looked like an answer here would be the worst failure this algorithm can have, because it would be invisible.",
       "dag": {
         "nodes": [
-          {"said": "E1", "schema": "S1", "issuer": "SAME", "issuee": "PET"},
-          {"said": "E2", "schema": "S1", "issuer": "SAME", "issuee": "PET"},
-          {"said": "E3", "schema": "S1", "issuer": "SAME", "issuee": "PET"}
+          {
+            "said": "E1",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "PET"
+          },
+          {
+            "said": "E2",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "PET"
+          },
+          {
+            "said": "E3",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "PET"
+          }
         ]
       },
       "expect": {
-        "E1": {"kinds": ["type"], "distinguishing": false, "indistinguishable_from": ["E2", "E3"]},
-        "E2": {"kinds": ["type"], "distinguishing": false, "indistinguishable_from": ["E1", "E3"]},
-        "E3": {"kinds": ["type"], "distinguishing": false, "indistinguishable_from": ["E1", "E2"]}
+        "E1": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": false,
+          "indistinguishable_from": [
+            "E2",
+            "E3"
+          ]
+        },
+        "E2": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": false,
+          "indistinguishable_from": [
+            "E1",
+            "E3"
+          ]
+        },
+        "E3": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": false,
+          "indistinguishable_from": [
+            "E1",
+            "E2"
+          ]
+        }
       }
     },
     {
@@ -82,12 +224,27 @@
       "defends": "'The one with no issuee' discriminates without informing, so it is spent only when the positive channels are exhausted. Here the issuer separates them first, and the negative must not appear at all.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "I1", "issuee": "P1"},
-          {"said": "B", "schema": "S1", "issuer": "I2"}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "I1",
+            "issuee": "P1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "I2"
+          }
         ]
       },
       "expect": {
-        "B": {"kinds": ["type", "issuer"], "distinguishing": true}
+        "B": {
+          "kinds": [
+            "type",
+            "issuer"
+          ],
+          "distinguishing": true
+        }
       }
     },
     {
@@ -95,50 +252,140 @@
       "defends": "The other half: when every positive channel is constant, an absence is better than reporting indistinguishable, because it is true and it does separate them. The component is marked negative so a render can treat it differently from a positive claim.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "SAME", "issuee": "P1"},
-          {"said": "B", "schema": "S1", "issuer": "SAME"}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "SAME",
+            "issuee": "P1"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "SAME"
+          }
         ]
       },
       "expect": {
-        "B": {"kinds": ["type", "issuee"], "distinguishing": true, "negative_kinds": ["issuee"]}
+        "B": {
+          "kinds": [
+            "type",
+            "issuee"
+          ],
+          "distinguishing": true,
+          "negative_kinds": [
+            "issuee"
+          ]
+        }
       }
     },
     {
       "name": "unresolved_image_annotates_and_never_discriminates",
-      "defends": "P-YY9V. A committed image that does not resolve WOULD be an effective discriminator -- 'the one whose photo is missing' picks out exactly one node -- and that is the trap: whether a portrait was disclosed is an accident of this presentation, not a fact about whose licence it is. So it surfaces as an annotation, which always shows and never discriminates, and the label falls through to the issuee.",
+      "defends": "P-YY9V. A committed image that does not resolve WOULD be an effective discriminator -- 'the one whose photo is missing' picks out exactly one node -- and that is the trap: whether a portrait was disclosed is an accident of this presentation, not a fact about whose licence it is. So it surfaces as an annotation, which always shows and never discriminates, and the label falls through to the issuee. Node A is separable without its picture too -- its issuee differs from B's -- so that issuee is carried in the label as a text alternative and distinguishing_as_text is true. An earlier draft of this vector expected false, on the assumption that a node discriminated by its image is lost without it; the implementation was right and the expectation was wrong.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "ISS", "issuee": "P1",
-           "attrs": {"portraitDigest": "DIG_A"}},
-          {"said": "B", "schema": "S1", "issuer": "ISS", "issuee": "P2",
-           "attrs": {"portraitDigest": "DIG_B"}}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P1",
+            "attrs": {
+              "portraitDigest": "DIG_A"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS",
+            "issuee": "P2",
+            "attrs": {
+              "portraitDigest": "DIG_B"
+            }
+          }
         ],
-        "image_fields": {"S1": "portraitDigest"},
-        "resolvable_digests": ["DIG_A"]
+        "image_fields": {
+          "S1": "portraitDigest"
+        },
+        "resolvable_digests": [
+          "DIG_A"
+        ]
       },
       "expect": {
-        "A": {"kinds": ["type", "image"], "distinguishing": true, "annotations": []},
-        "B": {"kinds": ["type", "issuee"], "distinguishing": true,
-              "annotations": ["image_committed_not_resolved"]}
+        "A": {
+          "kinds": [
+            "type",
+            "image",
+            "issuee"
+          ],
+          "distinguishing": true,
+          "annotations": [],
+          "distinguishing_as_text": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "issuee"
+          ],
+          "distinguishing": true,
+          "annotations": [
+            "image_committed_not_resolved"
+          ]
+        }
       }
     },
     {
-      "name": "image_outranks_an_issuer_supplied_subject_field",
-      "defends": "Two criteria agree here and both are the project's own. Provenance: the credential commits to the image by digest, so the binding is cryptographic, while the subject field is an unmarked issuer claim that nothing identifies as the subject. Directness: two thumbnails are separated by perception rather than by reading. So when both would discriminate, the image wins.",
+      "name": "image_outranks_the_subject_but_does_not_replace_it",
+      "defends": "Two claims at once, and the second was learned by running the algorithm over the finished accident bundle. FIRST, when both would discriminate the image wins, on two criteria that agree: the credential commits to the image by digest so the binding is cryptographic, while the subject field is an unmarked issuer claim that nothing identifies as the subject; and two thumbnails are separated by perception rather than by reading. SECOND, the subject rides along anyway, marked as a text alternative. A thumbnail is a modality the label cannot assume -- a text-only export, a screen reader, a tier too small for a picture -- and five of nine nodes in the accident bundle came back 'shown by its picture', each correct in the data model and each useless to a reader who cannot see the picture. The image is the discriminator; the subject is what survives when the picture cannot be drawn.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "ISS",
-           "attrs": {"imageDigest": "DIG_A", "depicts": "front wing"}},
-          {"said": "B", "schema": "S1", "issuer": "ISS",
-           "attrs": {"imageDigest": "DIG_B", "depicts": "rear door"}}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS",
+            "attrs": {
+              "imageDigest": "DIG_A",
+              "depicts": "front wing"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS",
+            "attrs": {
+              "imageDigest": "DIG_B",
+              "depicts": "rear door"
+            }
+          }
         ],
-        "subject_fields": {"S1": "depicts"},
-        "image_fields": {"S1": "imageDigest"},
-        "resolvable_digests": ["DIG_A", "DIG_B"]
+        "subject_fields": {
+          "S1": "depicts"
+        },
+        "image_fields": {
+          "S1": "imageDigest"
+        },
+        "resolvable_digests": [
+          "DIG_A",
+          "DIG_B"
+        ]
       },
       "expect": {
-        "A": {"kinds": ["type", "image"], "distinguishing": true},
-        "B": {"kinds": ["type", "image"], "distinguishing": true}
+        "A": {
+          "kinds": [
+            "type",
+            "image",
+            "subject"
+          ],
+          "distinguishing": true,
+          "distinguishing_as_text": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "image",
+            "subject"
+          ],
+          "distinguishing": true,
+          "distinguishing_as_text": true
+        }
       }
     },
     {
@@ -146,13 +393,35 @@
       "defends": "credential-categories.md measured that field presence tells you what a credential carries, not what it is for, and that nothing in a JSON Schema expresses dominance. The algorithm does not guess a subject field from a name. When two nodes share a schema and no subject field was supplied, that gap is annotated rather than silently absorbed, so the unsolved problem stays visible in the output.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "I1", "attrs": {"depicts": "front wing"}},
-          {"said": "B", "schema": "S1", "issuer": "I2", "attrs": {"depicts": "rear door"}}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "I1",
+            "attrs": {
+              "depicts": "front wing"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "I2",
+            "attrs": {
+              "depicts": "rear door"
+            }
+          }
         ]
       },
       "expect": {
-        "A": {"annotations": ["subject_undetermined"]},
-        "B": {"annotations": ["subject_undetermined"]}
+        "A": {
+          "annotations": [
+            "subject_undetermined"
+          ]
+        },
+        "B": {
+          "annotations": [
+            "subject_undetermined"
+          ]
+        }
       }
     },
     {
@@ -160,12 +429,26 @@
       "defends": "Zero schemas resolve in arcviz's corpus, so the type is an opaque key: the algorithm can say two nodes are the same type and cannot say what type. The component stays, carrying name null, because a render that prints 'unknown type' tells the truth where one that omits the component does not.",
       "dag": {
         "nodes": [
-          {"said": "A", "schema": "S1", "issuer": "I1"},
-          {"said": "B", "schema": "S2", "issuer": "I1"}
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "I1"
+          },
+          {
+            "said": "B",
+            "schema": "S2",
+            "issuer": "I1"
+          }
         ]
       },
       "expect": {
-        "A": {"kinds": ["type"], "distinguishing": true, "type_name": null}
+        "A": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": true,
+          "type_name": null
+        }
       }
     },
     {
@@ -173,23 +456,119 @@
       "defends": "F-NR1G. A bare timestamp discriminates but says little; what carried meaning in the live VVP dossier is that two credentials sat months before the rest while three sat within a minute of each other. So the channel is the CLUSTER, and the last cluster is the assembly. Two licences years old against two statements from this week must band apart.",
       "dag": {
         "nodes": [
-          {"said": "OLD1", "schema": "S1", "issuer": "SAME", "attrs": {"dt": "2019-11-14T11:48:00+00:00"}},
-          {"said": "OLD2", "schema": "S2", "issuer": "SAME", "attrs": {"dt": "2021-06-30T09:12:00+00:00"}},
-          {"said": "NEW1", "schema": "S3", "issuer": "SAME", "attrs": {"dt": "2026-03-04T14:02:00+00:00"}},
-          {"said": "NEW2", "schema": "S4", "issuer": "SAME", "attrs": {"dt": "2026-03-05T09:30:00+00:00"}}
+          {
+            "said": "OLD1",
+            "schema": "S1",
+            "issuer": "SAME",
+            "attrs": {
+              "dt": "2019-11-14T11:48:00+00:00"
+            }
+          },
+          {
+            "said": "OLD2",
+            "schema": "S2",
+            "issuer": "SAME",
+            "attrs": {
+              "dt": "2021-06-30T09:12:00+00:00"
+            }
+          },
+          {
+            "said": "NEW1",
+            "schema": "S3",
+            "issuer": "SAME",
+            "attrs": {
+              "dt": "2026-03-04T14:02:00+00:00"
+            }
+          },
+          {
+            "said": "NEW2",
+            "schema": "S4",
+            "issuer": "SAME",
+            "attrs": {
+              "dt": "2026-03-05T09:30:00+00:00"
+            }
+          }
         ]
       },
       "expect": {
-        "NEW1": {"band": "assembled-for-this-claim"},
-        "NEW2": {"band": "assembled-for-this-claim"},
-        "OLD1": {"band": "pre-existing-1"}
+        "NEW1": {
+          "band": "assembled-for-this-claim"
+        },
+        "NEW2": {
+          "band": "assembled-for-this-claim"
+        },
+        "OLD1": {
+          "band": "pre-existing-1"
+        }
       }
     },
     {
       "name": "a_single_node_dag_needs_no_discriminator",
       "defends": "A presentation of one credential has no distractors, so the description is the head alone. The boundary case is worth pinning because an implementation that always appends an issuee or a date would be adding noise nobody asked for, and the DAG-scope principle says the bundle decides.",
-      "dag": {"nodes": [{"said": "ONLY", "schema": "S1", "issuer": "I1", "issuee": "P1"}]},
-      "expect": {"ONLY": {"kinds": ["type"], "distinguishing": true}}
+      "dag": {
+        "nodes": [
+          {
+            "said": "ONLY",
+            "schema": "S1",
+            "issuer": "I1",
+            "issuee": "P1"
+          }
+        ]
+      },
+      "expect": {
+        "ONLY": {
+          "kinds": [
+            "type"
+          ],
+          "distinguishing": true
+        }
+      }
+    },
+    {
+      "name": "text_only_distinguishability_is_reported_separately",
+      "defends": "P-E3Q4, pinned rather than trusted. Two nodes whose pictures differ but whose every text channel is identical are separable when the thumbnails are shown and not separable otherwise. `distinguishing` says yes and `distinguishing_as_text` says no, and a render that cannot show pictures must be able to know that without inferring it. One flag saying yes while the reader can distinguish nothing is the same class of defect as every other one this corpus exists to refuse.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "ISS",
+            "attrs": {
+              "imageDigest": "DIG_A",
+              "depicts": "the same words"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "ISS",
+            "attrs": {
+              "imageDigest": "DIG_B",
+              "depicts": "the same words"
+            }
+          }
+        ],
+        "subject_fields": {
+          "S1": "depicts"
+        },
+        "image_fields": {
+          "S1": "imageDigest"
+        },
+        "resolvable_digests": [
+          "DIG_A",
+          "DIG_B"
+        ]
+      },
+      "expect": {
+        "A": {
+          "distinguishing": true,
+          "distinguishing_as_text": false
+        },
+        "B": {
+          "distinguishing": true,
+          "distinguishing_as_text": false
+        }
+      }
     }
   ]
 }

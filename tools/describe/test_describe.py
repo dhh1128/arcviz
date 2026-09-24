@@ -53,6 +53,10 @@ def _check_vector(vec: dict) -> list[str]:
                 bad(f"{said} components {kinds} != expected {want['kinds']}")
         if "distinguishing" in want and got.distinguishing != want["distinguishing"]:
             bad(f"{said} distinguishing={got.distinguishing} != {want['distinguishing']}")
+        if "distinguishing_as_text" in want:
+            if got.distinguishing_as_text != want["distinguishing_as_text"]:
+                bad(f"{said} distinguishing_as_text={got.distinguishing_as_text} "
+                    f"!= {want['distinguishing_as_text']}")
         if "indistinguishable_from" in want:
             if got.indistinguishable_from != want["indistinguishable_from"]:
                 bad(f"{said} indistinguishable_from={got.indistinguishable_from} "
@@ -192,8 +196,25 @@ def test_dropping_the_subject_field_changes_the_answer_rather_than_breaking_it()
     dag, _, by_said = _accident_dag(with_subject=False)
     out = {by_said[d.said]: d for d in describe(dag)}
     assert all(d.distinguishing for d in out.values())
-    assert [a["kind"] for a in out["accident_photo_a"].annotations] == []
+    # With no subject field the photographs are separable only by their pictures, so they are
+    # NOT separable as text and must say so on both channels.
+    assert [a["kind"] for a in out["accident_photo_a"].annotations] == ["subject_undetermined"]
+    assert out["accident_photo_a"].distinguishing_as_text is False
     assert "subject_undetermined" in [a["kind"] for a in out["accident_statement_a"].annotations]
+
+
+def test_the_bundle_survives_losing_its_pictures():
+    """The change P-E3Q4 asked for, asserted end to end.
+
+    With the subject field supplied, every node must remain separable when no thumbnail can
+    be drawn -- which is a text-only export, a screen reader, or the 76x44 floor form. Before
+    the text alternative was carried, five of nine nodes collapsed to "shown by its picture".
+    """
+    dag, _, by_said = _accident_dag(with_subject=True)
+    for d in describe(dag):
+        assert d.distinguishing_as_text, (
+            f"{by_said[d.said]} cannot be told apart without its picture: "
+            f"{[(c.kind, c.value) for c in d.components]}")
 
 
 def test_the_vlei_chain_is_separable_too():
