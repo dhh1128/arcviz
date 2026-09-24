@@ -10,6 +10,6 @@
     "sad": "accident_licence_a.json",
     "cesr": "accident_licence_a.cesr"
   },
-  "generated_at": "2026-09-24T16:10:33.505641+00:00",
+  "generated_at": "2026-09-24T16:22:32.168417+00:00",
   "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
 }

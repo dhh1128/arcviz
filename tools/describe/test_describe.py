@@ -96,13 +96,28 @@ def test_role_stem_strips_an_index_and_nothing_else():
 
 def _accident_dag(with_subject: bool):
     names = ["accident_bundle", "accident_licence_a", "accident_licence_b",
-             "accident_photo_a", "accident_photo_b",
+             "accident_photo_a", "accident_photo_b", "accident_photo_c",
              "accident_statement_a", "accident_statement_b"]
     sads = {n: json.loads((CORPUS / f"{n}.json").read_text()) for n in names}
     sc = {n: s["s"] for n, s in sads.items()}
-    resolvable = {sads["accident_photo_a"]["a"]["imageDigest"],
-                  sads["accident_photo_b"]["a"]["imageDigest"],
-                  sads["accident_licence_a"]["a"]["portraitDigest"]}
+    # Derived from what is ON DISK, never from a list written here. An earlier version
+    # hardcoded the three digests that resolved at the time, and went on asserting that
+    # driver B's portrait was withheld for a while after it started resolving -- a test
+    # passing against a model of the corpus instead of against the corpus, which is the
+    # failure this repository exists to refuse, in its own suite.
+    attachments = CORPUS / "attachments"
+    manifest = json.loads((attachments / "MANIFEST.json").read_text())
+    resolvable = set()
+    for cred, fieldname in (("accident_photo_a", "imageDigest"),
+                            ("accident_photo_b", "imageDigest"),
+                            ("accident_photo_c", "imageDigest"),
+                            ("accident_licence_a", "portraitDigest"),
+                            ("accident_licence_b", "portraitDigest")):
+        stem = {"accident_photo_a": "photo_a", "accident_photo_b": "photo_b",
+                "accident_photo_c": "photo_c", "accident_licence_a": "licence_a_portrait",
+                "accident_licence_b": "licence_b_portrait"}[cred]
+        if (attachments / f"{stem}.png").exists() and stem in manifest:
+            resolvable.add(sads[cred]["a"][fieldname])
     dag = load_corpus_dag(
         CORPUS, names,
         type_names={sc["accident_licence_a"]: "driving licence",
@@ -139,14 +154,18 @@ def test_accident_bundle_uses_a_different_channel_for_each_pair():
     assert "issuer" in got["accident_statement_b"], got["accident_statement_b"]
     # Driver B's portrait does not resolve, so it cannot be the discriminator and the label
     # must fall through to the issuee -- see the unresolved_image vector for why.
-    assert "issuee" in got["accident_licence_b"], got["accident_licence_b"]
+    # Both portraits now resolve, so the licence pair is separated by the faces themselves --
+    # which is the thumbnail hypothesis, and the reason real portraits were worth having.
+    assert "image" in got["accident_licence_a"], got["accident_licence_a"]
+    assert "image" in got["accident_licence_b"], got["accident_licence_b"]
 
 
-def test_the_withheld_portrait_is_annotated_on_the_node_that_withheld_it():
+def test_the_withheld_image_is_annotated_on_the_node_that_withheld_it():
     dag, _, by_said = _accident_dag(with_subject=True)
     ann = {by_said[d.said]: [a["kind"] for a in d.annotations] for d in describe(dag)}
-    assert ann["accident_licence_b"] == ["image_committed_not_resolved"], ann
-    assert ann["accident_licence_a"] == [], ann
+    assert ann["accident_photo_c"] == ["image_committed_not_resolved"], ann
+    for served in ("accident_photo_a", "accident_licence_a", "accident_licence_b"):
+        assert "image_committed_not_resolved" not in ann[served], (served, ann[served])
 
 
 def test_the_root_is_described_by_its_type_alone():

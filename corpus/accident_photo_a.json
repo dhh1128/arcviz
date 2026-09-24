@@ -1,16 +1,17 @@
 {
-  "v": "ACDCCAACAAJSONAAHr.",
+  "v": "ACDCCAACAAJSONAAIF.",
   "t": "acm",
-  "d": "EDMSk5vWj03aZHpPI8L4MQvjy2dod9o3-ceFeJnDbPY3",
+  "d": "EOZI63mhvQium_dmBIHxorRY5eLCs5R4EXd-Hgk-bAPI",
   "i": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
-  "s": "EFIGlKMganWcgeC5qI5uS-U7oOV92AtH9FEfRvZ3egV-",
+  "s": "EEKjyVxAJ0BWutkOwRLSwNCf1rdDqt9L5WuWq6YvDj_O",
   "a": {
-    "d": "EODJHmjzcZqRM3_dqs6pWFpssBM5_P_AO8gQ4fxPG97U",
+    "d": "EDYcBrI5bvtqutZrLknKM6TrNmeehWBFjWYaiRUb1Y-P",
     "u": "0ABTKqzywii0Fa1gfMjZtTaT",
     "dt": "2026-03-02T10:15:40+00:00",
-    "depicts": "front nearside damage, vehicle A",
+    "depicts": "front nearside impact damage, vehicle A",
     "vehicleVin": "WVWZZZ1KZAW084471",
-    "imageDigest": "EPOtFA7dHO2npSMg8hByjz6e-1v6vkY9tUfipTcFtYie",
+    "plate": "UTA 1234",
+    "imageDigest": "EP7g94PQXobB1PGwpl1fCOGinJz7ZDGez04XhjUKgW9e",
     "capturedAt": "2026-03-02T10:15:00+00:00"
   }
 }

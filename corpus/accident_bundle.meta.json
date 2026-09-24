@@ -11,6 +11,7 @@
     "accident_licence_b",
     "accident_photo_a",
     "accident_photo_b",
+    "accident_photo_c",
     "accident_statement_a",
     "accident_statement_b"
   ],
@@ -18,6 +19,6 @@
     "sad": "accident_bundle.json",
     "cesr": "accident_bundle.cesr"
   },
-  "generated_at": "2026-09-24T16:10:33.610571+00:00",
+  "generated_at": "2026-09-24T16:22:32.290788+00:00",
   "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
 }

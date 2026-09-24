@@ -1,16 +1,17 @@
 {
-  "v": "ACDCCAACAAJSONAAHp.",
+  "v": "ACDCCAACAAJSONAAH_.",
   "t": "acm",
-  "d": "EC1enL-AusczsD1yqA68WTvrRopds2cn5yFPY4kGlYjw",
+  "d": "ED3UOyRCuTWlUrUH2TScaZiaLy5_tOqtRV6VUNkCxzMF",
   "i": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
-  "s": "EFIGlKMganWcgeC5qI5uS-U7oOV92AtH9FEfRvZ3egV-",
+  "s": "EEKjyVxAJ0BWutkOwRLSwNCf1rdDqt9L5WuWq6YvDj_O",
   "a": {
-    "d": "EFcmMRHCDLSH5vg0pbYOkqLHheRkylIDoMpWbYZpWBNQ",
+    "d": "EAWRNFTxMkyp6BtTJBezxFDQxYMsCV9hs4VaVSgxlYe6",
     "u": "0AAkIEeE5hp7YRRCglgcFIe5",
     "dt": "2026-03-02T10:16:05+00:00",
-    "depicts": "offside rear damage, vehicle B",
-    "vehicleVin": "JTDKN3DU0A1075512",
-    "imageDigest": "EKoVo6BoeXUqIB8xg-Gf_IrrpJIbf6ASuOeC49874ZC2",
+    "depicts": "driver's door and wing, vehicle A",
+    "vehicleVin": "WVWZZZ1KZAW084471",
+    "plate": "UTA 1234",
+    "imageDigest": "ELnRVaMv7DkoWo169hT4nuhvhxl-Mvvggmpk3xjHP9rR",
     "capturedAt": "2026-03-02T10:15:00+00:00"
   }
 }

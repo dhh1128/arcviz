@@ -80,6 +80,7 @@ ISSUED = {
     "licence_b": "2019-11-14T11:48:00+00:00",
     "photo_a": "2026-03-02T10:15:40+00:00",
     "photo_b": "2026-03-02T10:16:05+00:00",
+    "photo_c": "2026-03-02T10:17:12+00:00",
     "statement_a": "2026-03-04T14:02:00+00:00",
     "statement_b": "2026-03-05T09:30:00+00:00",
     "bundle": "2026-03-06T08:00:00+00:00",
@@ -112,10 +113,12 @@ def _photograph_schema():
             "dt": {"type": "string"},
             "depicts": {"type": "string"},
             "vehicleVin": {"type": "string"},
+            "plate": {"type": "string"},
             "imageDigest": {"type": "string"},
             "capturedAt": {"type": "string"},
         },
-        attr_required=["dt", "depicts", "vehicleVin", "imageDigest", "capturedAt"],
+        attr_required=["dt", "depicts", "vehicleVin", "plate", "imageDigest",
+                       "capturedAt"],
     )
 
 
@@ -188,11 +191,11 @@ def _licence(label, *, issuee, number, name, expires, issued, portrait_digest):
     ), schema_said
 
 
-def _photograph(label, *, depicts, vin, image_digest, issued):
+def _photograph(label, *, depicts, vin, plate, image_digest, issued):
     schema_said, _ = _photograph_schema()
     return credential(
         label, issuer=ADJUSTER, schema_said=schema_said,
-        attrs={"dt": issued, "depicts": depicts, "vehicleVin": vin,
+        attrs={"dt": issued, "depicts": depicts, "vehicleVin": vin, "plate": plate,
                "imageDigest": image_digest,
                "capturedAt": "2026-03-02T10:15:00+00:00"},
     ), schema_said
@@ -231,11 +234,12 @@ def build_accident_licence_a(corpus_dir):
 
 @fixture("accident_licence_b")
 def build_accident_licence_b(corpus_dir):
-    withheld = images.synthetic("licence_b_portrait", ground="plum", mark="bone")
+    portrait = images.synthetic("licence_b_portrait", ground="plum", mark="bone")
     serder, _ = _licence("accident_licence_b", issuee=DRIVER_B,
                          number="D-8813-2077", name="Bob Ferreira",
                          expires="2029-11-14", issued=ISSUED["licence_b"],
-                         portrait_digest=images.digest(withheld))  # bytes NOT written
+                         portrait_digest=_attach(corpus_dir, "licence_b_portrait",
+                                                 portrait))
     return {
         "serder": serder,
         "meta": {
@@ -255,8 +259,8 @@ def build_accident_licence_b(corpus_dir):
 def build_accident_photo_a(corpus_dir):
     frame = images.synthetic("photo_a", ground="rust", mark="slate")
     serder, _ = _photograph("accident_photo_a",
-                            depicts="front nearside damage, vehicle A",
-                            vin="WVWZZZ1KZAW084471", issued=ISSUED["photo_a"],
+                            depicts="front nearside impact damage, vehicle A",
+                            vin="WVWZZZ1KZAW084471", plate="UTA 1234", issued=ISSUED["photo_a"],
                             image_digest=_attach(corpus_dir, "photo_a", frame))
     return {
         "serder": serder,
@@ -279,8 +283,8 @@ def build_accident_photo_a(corpus_dir):
 def build_accident_photo_b(corpus_dir):
     frame = images.synthetic("photo_b", ground="moss", mark="ochre")
     serder, _ = _photograph("accident_photo_b",
-                            depicts="offside rear damage, vehicle B",
-                            vin="JTDKN3DU0A1075512", issued=ISSUED["photo_b"],
+                            depicts="driver's door and wing, vehicle A",
+                            vin="WVWZZZ1KZAW084471", plate="UTA 1234", issued=ISSUED["photo_b"],
                             image_digest=_attach(corpus_dir, "photo_b", frame))
     return {
         "serder": serder,
@@ -290,6 +294,32 @@ def build_accident_photo_b(corpus_dir):
                 "The matched half of accident_photo_a. Same schema, same attesting "
                 "adjuster, no issuee on either -- so the issuee channel that separates the "
                 "two licences is not merely unhelpful here, it is absent."
+            ),
+            "matrix_cells": ["H1"],
+            "rules_exercised": [],
+        },
+    }
+
+
+@fixture("accident_photo_c")
+def build_accident_photo_c(corpus_dir):
+    withheld = images.synthetic("photo_c", ground="ochre", mark="plum")
+    serder, _ = _photograph("accident_photo_c",
+                            depicts="offside rear damage, vehicle B",
+                            vin="JTDKN3DU0A1075512", plate="UTA 8890", issued=ISSUED["photo_c"],
+                            image_digest=images.digest(withheld))  # bytes NOT written
+    return {
+        "serder": serder,
+        "meta": {
+            "title": "Accident bundle: photograph of vehicle B, image withheld",
+            "summary": (
+                "The committed-but-unresolvable image state, which must render distinctly "
+                "from 'no image' and from a resolved one. It sits on a photograph rather "
+                "than on a licence because both licences now carry portraits that resolve, "
+                "which is what lets the licence pair test whether a face separates two "
+                "identity documents at thumbnail size. It is also the only exhibit here "
+                "about the OTHER driver's vehicle, so its absence costs the argument "
+                "something a viewer should notice."
             ),
             "matrix_cells": ["H1"],
             "rules_exercised": [],
@@ -342,6 +372,7 @@ def build_accident_statement_b(corpus_dir):
 
 @fixture("accident_bundle", depends_on=["accident_licence_a", "accident_licence_b",
                                         "accident_photo_a", "accident_photo_b",
+                                        "accident_photo_c",
                                         "accident_statement_a", "accident_statement_b"])
 def build_accident_bundle(corpus_dir):
     """The adjuster's claim file: one untargeted root over six heterogeneous exhibits."""
@@ -364,6 +395,8 @@ def build_accident_bundle(corpus_dir):
                               n=said_of("accident_photo_a"), s=photo_schema),
         'photoB': simple_edge("accident_bundle:photoB",
                               n=said_of("accident_photo_b"), s=photo_schema),
+        'photoC': simple_edge("accident_bundle:photoC",
+                              n=said_of("accident_photo_c"), s=photo_schema),
         'statementA': simple_edge("accident_bundle:statementA",
                                   n=said_of("accident_statement_a"), s=statement_schema),
         'statementB': simple_edge("accident_bundle:statementB",
