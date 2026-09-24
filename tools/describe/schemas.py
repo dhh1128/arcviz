@@ -54,6 +54,11 @@ class SchemaInfo:
     # Channels the TYPE already fixes, so naming them per-node says nothing. This is the input
     # the surprisal criterion was missing.
     entailed: tuple = ()
+    # Edge labels this schema REQUIRES and whose target type it pins with a `const`. Read
+    # structurally rather than from prose, so it is the sounder of the two entailments here --
+    # `issuer_role` and `issuee_role` come from human-written property descriptions that the
+    # real vLEI schemas already get wrong in places.
+    pinned_edges: tuple = ()
     source: str | None = None
 
     @property
@@ -89,7 +94,9 @@ def resolve(said: str, *, registry: dict | None = None, fetch=None, digest=None,
         info = SchemaInfo(
             said=said, state=VERIFIED, title=known.get("title"), short=known.get("short"),
             issuer_role=known.get("issuer_role"), issuee_role=known.get("issuee_role"),
-            entailed=tuple(known.get("entailed") or ()), source="registry:known_schemas")
+            entailed=tuple(known.get("entailed") or ()),
+            pinned_edges=tuple(known.get("pinned_edges") or ()),
+            source="registry:known_schemas")
         if cache is not None:
             cache[said] = info
         return info
@@ -118,6 +125,7 @@ def resolve(said: str, *, registry: dict | None = None, fetch=None, digest=None,
             info = SchemaInfo(
                 said=said, state=state, title=parsed.get("title"),
                 short=None, source=src.get("id"),
+                pinned_edges=_pinned_edges(parsed) if state == VERIFIED else (),
                 issuer_role=_role_of(parsed, "i"), issuee_role=_role_of(parsed, "a.i"),
                 entailed=("issuer", "issuee") if state == VERIFIED and
                 _role_of(parsed, "i") and _role_of(parsed, "a.i") else ())
@@ -126,6 +134,27 @@ def resolve(said: str, *, registry: dict | None = None, fetch=None, digest=None,
     if cache is not None and info.state != MISMATCH:
         cache[said] = info
     return info
+
+
+def _pinned_edges(schema: dict) -> tuple:
+    """Edge labels the schema requires with a const-pinned target schema.
+
+    The Legal Entity vLEI schema carries `required: ['d', 'qvi']` on its `e` section and a
+    `const` on that edge's `s`, so every instance has a `qvi` edge pointing at one fixed type.
+    A descriptor that names such an edge is restating the type pair.
+    """
+    e = (schema.get("properties") or {}).get("e") or {}
+    out = []
+    for variant in (e.get("oneOf") or [e]):
+        if not isinstance(variant, dict):
+            continue
+        required = set(variant.get("required") or ())
+        for label, blk in (variant.get("properties") or {}).items():
+            if label in ("d", "u") or label not in required or not isinstance(blk, dict):
+                continue
+            if ((blk.get("properties") or {}).get("s") or {}).get("const"):
+                out.append(label)
+    return tuple(sorted(set(out)))
 
 
 def _role_of(schema: dict, path: str):

@@ -55,8 +55,14 @@
       "credential_type": "LegalEntityvLEICredential",
       "issuer_role": "Qualified vLEI Issuer",
       "issuee_role": "Legal Entity",
-      "entailed": ["issuer", "issuee"],
-      "verified": "2026-09-24, fetched from both sources above; `$id` equals this key; issuer_role and issuee_role read from the schema's own property descriptions ('QVI Issuer AID', 'LE Issuer AID')"
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "verified": "2026-09-24, fetched from both sources above; `$id` equals this key; issuer_role and issuee_role read from the schema's own property descriptions ('QVI Issuer AID', 'LE Issuer AID'); pinned_edges read structurally from the e section's required list plus the const on that edge's s",
+      "pinned_edges": [
+        "qvi"
+      ]
     }
   },
   "fallback": {

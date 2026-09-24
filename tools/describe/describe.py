@@ -104,6 +104,12 @@ class Dag:
     # Identifiers the host could put a name to. Host knowledge, which no schema can entail --
     # see `_entailed_here`.
     aliased: set = field(default_factory=set)
+    # schema SAID -> edge labels that schema PINS to a fixed target type. Distinct from
+    # `entailed` because this is a property of the REFERRING schema rather than of the node
+    # being described: the Legal Entity vLEI schema requires exactly one edge named `qvi`
+    # whose target schema is fixed by a `const`, so the label says nothing about the target
+    # that the target's own type does not already say.
+    pinned_edges: dict = field(default_factory=dict)
 
     def incoming(self, said: str) -> list[str]:
         return sorted(label for n in self.nodes
@@ -187,6 +193,21 @@ def _entailed_here(dag: "Dag", kind: str, target: "Node") -> bool:
     moment either end resolves -- "from the QVI to the legal entity" says nothing, and "from
     GLEIF to Provenant" says something.
     """
+    if kind == "role":
+        # THE EDGE LABEL IS ENTAILED BY THE REFERRER'S SCHEMA, not by the target's, which is
+        # why this is not a lookup in `entailed`. Daniel caught this: "Why is ', as qvi' and
+        # ', as le' something that you consider correct behavior? Aren't all the other
+        # credential relationships also fixed by the schema?" They are. The real Legal Entity
+        # vLEI schema has `required: ['d', 'qvi']` and pins that edge's `s` with a const, so
+        # every credential of that type has a `qvi` edge pointing at a QVI credential. Saying
+        # "QVI credential, as qvi" is therefore tautological twice over -- the label is fixed
+        # by the referring type, and it names the target's type, which is already the head.
+        return all(
+            label in (dag.pinned_edges.get(n.schema) or ())
+            for n in dag.nodes
+            for label, tgt in n.out_edges.items()
+            if tgt == target.said) and any(
+            tgt == target.said for n in dag.nodes for tgt in n.out_edges.values())
     fixed = dag.entailed.get(target.schema) or ()
     if kind not in fixed:
         return False

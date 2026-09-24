@@ -31,7 +31,9 @@ def _dag_from_spec(spec: dict) -> Dag:
                image_fields=spec.get("image_fields", {}),
                resolvable_digests=set(spec.get("resolvable_digests", [])),
                entailed={k: tuple(v) for k, v in (spec.get("entailed") or {}).items()},
-               aliased=set(spec.get("aliased", [])))
+               aliased=set(spec.get("aliased", [])),
+               pinned_edges={k: tuple(v)
+                             for k, v in (spec.get("pinned_edges") or {}).items()})
 
 
 def _check_vector(vec: dict) -> list[str]:

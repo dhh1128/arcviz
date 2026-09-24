@@ -754,6 +754,40 @@
           }
         }
       }
+    },
+    {
+      "name": "an_edge_label_the_referrers_schema_pins_says_nothing",
+      "defends": "Daniel, 2026-09-24: 'Why is \", as qvi\" and \", as le\" something that you consider correct behavior? Aren't all the other credential relationships also fixed by the schema?' They are, and I had shown the tautology as if it were the fix. The real Legal Entity vLEI schema carries required: ['d','qvi'] on its e section and a const on that edge's s, so every credential of that type has a qvi edge pointing at one fixed type. 'QVI credential, as qvi' is therefore tautological twice: the label is fixed by the referring type, and it names the target's type, which is already the head. Note this entailment belongs to the REFERRER's schema rather than the target's, which is why it is not a lookup in `entailed` -- and it is read structurally from the const rather than from prose, so it is the sounder of the two.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "TGT",
+            "schema": "S1",
+            "issuer": "P1"
+          },
+          {
+            "said": "SRC",
+            "schema": "S2",
+            "issuer": "P2",
+            "out_edges": {
+              "qvi": "TGT"
+            }
+          }
+        ],
+        "pinned_edges": {
+          "S2": [
+            "qvi"
+          ]
+        }
+      },
+      "expect": {
+        "TGT": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        }
+      }
     }
   ],
   "channels": [
