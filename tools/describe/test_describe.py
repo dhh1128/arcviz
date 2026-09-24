@@ -310,7 +310,7 @@ def test_coia_parse_vectors_flag_groups_are_exact():
     skipped silently: a partial pass presented as a pass is the failure this repo refuses.
     """
     import json as _json
-    import coia
+    import coia_reader as coia
     path = Path.home() / "code" / "me" / "coia" / "vectors.json"
     if not path.exists():
         return  # the spec repo is a sibling, not a dependency
@@ -329,7 +329,7 @@ def test_coia_parse_vectors_flag_groups_are_exact():
 def test_an_unflagged_alias_is_never_reported_as_verified():
     """COIA §6.3: 'Absence is never a guarantee... An application MUST NOT render an absent
     flag as a positive assurance.' That is this project's own thesis, in someone else's spec."""
-    import coia
+    import coia_reader as coia
     got = coia.render("EAID", coia.parse("cecilia-second-violin-vienna-symphony"))
     assert got["state"] == "unflagged"
     assert "verified" not in str(got).lower()
@@ -338,7 +338,7 @@ def test_an_unflagged_alias_is_never_reported_as_verified():
 def test_a_compromised_flag_survives_to_the_renderer():
     """Dropping a flag would put a reassuring human name on an identifier its own creator
     marked as controlled by the wrong party."""
-    import coia
+    import coia_reader as coia
     got = coia.render("EAID", coia.parse("bob-payee-bitcoin,9"))
     assert got["worst"] == "9"
     assert ("9", "compromised", "positive evidence that the wrong party controls it") in got["flags"]
@@ -347,7 +347,7 @@ def test_a_compromised_flag_survives_to_the_renderer():
 def test_an_unrecognized_flag_digit_is_surfaced_not_dropped():
     """§6.3: a reader 'MUST surface it rather than ignore it -- it is a warning from a later
     version of the registry.'"""
-    import coia
+    import coia_reader as coia
     a = coia.parse("someone-somewhere,3")
     assert a.unknown == ("3",)
     assert coia.render("EAID", a)["unknown_flags"] == ("3",)
@@ -356,7 +356,7 @@ def test_an_unrecognized_flag_digit_is_surfaced_not_dropped():
 def test_flags_are_split_before_any_normalization_touches_the_body():
     """§6.2 says the reverse order 'destroys the delimiter'. §5 normalization discards
     punctuation, so normalizing first eats the comma and folds a compromised flag into a name."""
-    import coia
+    import coia_reader as coia
     seen = []
 
     def spy(body):
@@ -371,7 +371,7 @@ def test_flags_are_split_before_any_normalization_touches_the_body():
 def test_no_alias_passes_no_label_so_entvizs_own_fallback_runs():
     """`label: None`, never `""`. An empty string is still a label: it wins the precedence at
     EntvizPill.ts:499 and suppresses the type text, leaving a pill with no text at all."""
-    import coia
+    import coia_reader as coia
     p = coia.pill_props("EKx4P_qnxW1ycaLCUlzoFCZJv6NlvrX2SQu58vq_oIt3", None)
     assert p["label"] is None and p["label"] != ""
     assert p["coiaState"] == "no-alias"
@@ -381,7 +381,7 @@ def test_flags_are_never_concatenated_into_the_pill_label():
     """`label` is entviz's TRUSTED first-party slot; `note` is the self-declared one. A COIA
     flag is a warning about the value, not part of anyone's name for it, so folding ',9' into
     the label would launder a compromise warning into trusted chrome."""
-    import coia
+    import coia_reader as coia
     p = coia.pill_props("EAID", coia.parse("bob-payee-bitcoin,9"))
     assert p["label"] == "bob-payee-bitcoin"
     assert "9" not in p["label"] and "," not in p["label"]

@@ -1,5 +1,18 @@
 # describe
 
+**Status: a prototype and an executable specification, not arcviz's implementation.** arcviz's
+renderer is React, and there is no TypeScript here to put this in -- the repository currently
+holds one `.ts` file, a measurement harness under `tools/pill/`. So this is Python for the same
+reason `docs/research/credential-types/classify.py` is Python: to work out what the answer IS,
+and to hold it to vectors, before anything ships. The durable artifact is `vectors.json`, which
+is language-neutral and is what a TypeScript implementation would be held to; the Python is one
+implementation that proves the vectors are satisfiable and nothing more. If the two ever
+disagree, the vectors win.
+
+`coia_reader.py` is likewise a consumer of the COIA specification, not an implementation of it,
+and is deliberately not named `coia.py` -- that basename belongs to the spec's own normative
+oracle at `~/code/me/coia`.
+
 An executable answer to "given a DAG, what should each credential's label say?", plus the vectors that hold it honest. Run `python3 test_describe.py` (or under pytest). Standard library only — this is renderer-side code, and `tools/fixtures/README.md` is explicit that the renderer must never link a KERI node.
 
 The reasoning is in [`docs/design/description-evaluation-set.md`](../../docs/design/description-evaluation-set.md); the module docstring in `describe.py` says what the algorithm is and, more importantly, what it refuses to guess. `vectors.json` carries one `defends` field per vector, because a vector whose intent is unrecorded cannot be maintained — the next reader cannot tell an intended result from an accident.

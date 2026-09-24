@@ -1,5 +1,11 @@
 """Consume COIA aliases. arcviz READS them; it never mints one.
 
+NAMED `coia_reader` AND NOT `coia`, because the first name was a mistake worth not repeating.
+The COIA specification ships its own `coia.py` -- the normative oracle at ~/code/me/coia --
+and a file of mine with that basename implies this is an implementation OF the spec, which is
+a conformance claim the paragraph below explicitly disclaims. It is a CONSUMER. Nothing here
+changes COIA, proposes a change to COIA, or implements its generator, normalizer or matcher.
+
 WHAT COIA IS, read from the spec at ~/code/me/coia rather than recalled. It is a convention
 for the label field that wallets and key managers already have -- three components in a fixed
 order, *who*, *role*, *scope* -- plus a comma-delimited flag suffix. It is explicitly "not an
