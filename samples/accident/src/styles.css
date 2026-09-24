@@ -178,3 +178,19 @@ q.issuer-text { quotes: "“" "”"; }
 
 /* turn-24: extension centred vertically on the page */
 .ext { top: 50%; bottom: auto; transform: translateY(-50%); line-height: 1; }
+
+/* DD-11: a credential card is white paper in every theme; only the page around it goes dark. */
+@media (prefers-color-scheme: dark) {
+  :root { --page: #1b1d21; color: #e4e6ea; background: var(--page); }
+  .page-head h1, .controls { color: #c9cdd3; }
+  .evaluation { background: #2a2d33; border-left-color: #8a9099; color: #e4e6ea; }
+  .kinds, .legend { background: #24272c; border-color: #3a3e45; color: #e4e6ea; }
+  .rank + .rank { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.10); }
+  .rank-label, .hand { color: #9aa0a8; }
+  .tabs button { background: #24272c; color: #e4e6ea; border-color: #3a3e45; }
+  .tabs button.on { background: #e4e6ea; color: #1b1d21; }
+  .edges path { stroke: #5b616a; }
+  .edge-box { fill: #8a9099; }
+  .edge-label { fill: #e8c77a; stroke: var(--page); }
+  .card { color: #1d1f23; }
+}

@@ -164,6 +164,18 @@ It also forbids reading the retest's failures as a verdict on the design. They a
 
 **Reversed if.** The conformance target is deliberately set below AA, which would need saying out loud.
 
+## DD-11 — A credential card is white paper in every colour theme · **his, 2026-09-24**
+
+> "q-vs11: yes" — Daniel Hardman, 2026-09-24, answering: should a credential card stay white paper whatever the browser's colour theme, so the category palette, the glyphs and the white file-extension text on `misc.file` are tuned for contrast once, while the page around them may go dark? Earlier the same day he had said "might be wise" and, if so, that the extension text should be white.
+
+A card's own colours do not follow `prefers-color-scheme`. The page around the cards may.
+
+**Why.** Everything drawn on a card is tuned against one background, so it is tuned once. That covers the category colours, the kind glyphs, the white extension text on `misc.file` and the entviz pills.
+
+**Reversed if.** A palette is found that holds its contrast on both light and dark card backgrounds, or a host needs cards that match a dark UI.
+
+---
+
 ## Open
 
 - **How a credential is identified to a human, and which identifier classes get a pill.** Opened 2026-09-18. Every artifact renders thirteen SAID pills and one AID, when the identifier that carries MITM risk is the AID and a SAID's integrity is settled by computation rather than by a human glance. Separately, the credentials are labelled `ITEM NN` — a test-harness placeholder that escaped into the entviz pill's label slot, where [affordances.md](../research/affordances.md) §5 had already specified a resolved COIA alias under P12. See [credential-identity.md](credential-identity.md); under study in its own session.
