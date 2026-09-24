@@ -165,3 +165,7 @@ q.issuer-text { quotes: "“" "”"; }
 .ext { font-size: 9px; }
 .rank { gap: 40px 14px; }
 .rank + .rank { padding-top: 30px; }
+
+/* turn-16: lighter connectors */
+.edges path { stroke: #c3c8cf; stroke-width: 1.2; }
+.edge-box { fill: #aab0b8; }

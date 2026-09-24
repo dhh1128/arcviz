@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
-import type { TrustAssumption } from "@entviz/core";
+import { characterize, describeChannels, mnemonic, type TrustAssumption } from "@entviz/core";
 import { abbreviate, budgeted, ranks, type Tier, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
@@ -130,6 +130,21 @@ function Band({ cats }: { cats: string[] }) {
   );
 }
 
+// Daniel, turn 16: shorten a SAID the way the entviz pill shortens a value, not by keeping a
+// prefix. entviz's mnemonic (describe.ts:428) is built from the entviz's own displayed cells --
+// first…middle…last above 256 bits -- so it never shows a character the visualization doesn't,
+// the ellipses honestly mark what was left out, and what it shows is spread across the whole
+// value. A bare prefix concentrates every shown character at one end, which is the cheapest
+// thing to grind a look-alike for, and gives no sign that anything was omitted.
+function shortSaid(said: string): string {
+  try {
+    const m = mnemonic(describeChannels(said).cells, characterize(said).sizeBits);
+    return m || said;
+  } catch {
+    return said;
+  }
+}
+
 function SaidHandle({ said }: { said: string }) {
   // A reference handle: displayed, copyable, and deliberately NOT wrapped in the comparison
   // ceremony. A SAID's integrity is settled by recomputation, not by a human glance.
@@ -143,7 +158,7 @@ function SaidHandle({ said }: { said: string }) {
         navigator.clipboard?.writeText(said).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1200); });
       }}
     >
-      {copied ? "copied" : said.slice(0, 8)}
+      {copied ? "copied" : shortSaid(said)}
     </button>
   );
 }
