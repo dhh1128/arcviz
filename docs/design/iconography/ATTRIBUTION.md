@@ -20,4 +20,4 @@ The glyphs in `glyphs/` are derived from the works below. Every one has been mod
 
 ## Originals
 
-`org-identity` (after a sketch by Daniel Hardman) `civil-status` and `civil-status.marriage` are arcviz originals, drawn in `build.py`, under the repository's licence.
+`org-identity` (after a sketch by Daniel Hardman), `civil-status` and `civil-status.marriage` are arcviz originals, drawn in `build.py`, under the repository's licence.

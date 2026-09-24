@@ -6,7 +6,7 @@ This is the second channel for [credential categories](credential-categories.md)
 
 ## The set
 
-![all nineteen glyphs at 32 px](iconography/contact-32.png)
+![all nineteen pictures at 32 px](iconography/contact-32.png)
 
 Nineteen pictures in twenty-one files: every one of the nine categories, ten subcategories, and `misc`. `authority` and `civil-status` reuse a subcategory's picture as the category glyph (his ruling). `authority` is the key from `authority.control`, and `civil-status` is the ring from `civil-status.marriage`. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
 
