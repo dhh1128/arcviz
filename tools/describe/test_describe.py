@@ -295,3 +295,74 @@ def test_an_unverified_schema_lends_a_name_but_not_an_entailment():
     assert info.title == "Some Credential"
     assert info.entailed == ()
     assert not info.trustworthy
+
+
+# --- COIA ----------------------------------------------------------------------------------
+
+def test_coia_parse_vectors_flag_groups_are_exact():
+    """All eleven §6 parse vectors from the spec's normative set, on the half arcviz claims.
+
+    arcviz implements the flag split of §6.1/§6.2 and does NOT implement §5 normalization --
+    §3's Normalizer class is 69 further vectors and a real piece of work, and the reference
+    coia.py in that repo is the oracle. So every vector's flag groups are asserted exactly,
+    and one vector's BODY ("Bob As CEO,9" -> "bob-as-ceo") is knowingly not checked, because
+    passing it would require the normalizer this module disclaims. Recorded rather than
+    skipped silently: a partial pass presented as a pass is the failure this repo refuses.
+    """
+    import json as _json
+    import coia
+    path = Path.home() / "code" / "me" / "coia" / "vectors.json"
+    if not path.exists():
+        return  # the spec repo is a sibling, not a dependency
+    vectors = _json.loads(path.read_text())["parse"]
+    needs_normalizer = 0
+    for name, raw, (want_body, want_g1, want_g2) in vectors:
+        a = coia.parse(raw)
+        assert a.group1 == want_g1 and a.group2 == want_g2, (name, a)
+        if a.body != want_body:
+            needs_normalizer += 1
+    assert needs_normalizer == 1, (
+        f"{needs_normalizer} vectors need §5 normalization; one is expected and known. "
+        "If this number moved, either the spec's vectors changed or the disclaimer is stale.")
+
+
+def test_an_unflagged_alias_is_never_reported_as_verified():
+    """COIA §6.3: 'Absence is never a guarantee... An application MUST NOT render an absent
+    flag as a positive assurance.' That is this project's own thesis, in someone else's spec."""
+    import coia
+    got = coia.render("EAID", coia.parse("cecilia-second-violin-vienna-symphony"))
+    assert got["state"] == "unflagged"
+    assert "verified" not in str(got).lower()
+
+
+def test_a_compromised_flag_survives_to_the_renderer():
+    """Dropping a flag would put a reassuring human name on an identifier its own creator
+    marked as controlled by the wrong party."""
+    import coia
+    got = coia.render("EAID", coia.parse("bob-payee-bitcoin,9"))
+    assert got["worst"] == "9"
+    assert ("9", "compromised", "positive evidence that the wrong party controls it") in got["flags"]
+
+
+def test_an_unrecognized_flag_digit_is_surfaced_not_dropped():
+    """§6.3: a reader 'MUST surface it rather than ignore it -- it is a warning from a later
+    version of the registry.'"""
+    import coia
+    a = coia.parse("someone-somewhere,3")
+    assert a.unknown == ("3",)
+    assert coia.render("EAID", a)["unknown_flags"] == ("3",)
+
+
+def test_flags_are_split_before_any_normalization_touches_the_body():
+    """§6.2 says the reverse order 'destroys the delimiter'. §5 normalization discards
+    punctuation, so normalizing first eats the comma and folds a compromised flag into a name."""
+    import coia
+    seen = []
+
+    def spy(body):
+        seen.append(body)
+        return body.replace(",", "")
+
+    a = coia.parse("bob-payee-bitcoin,9", normalize=spy)
+    assert seen == ["bob-payee-bitcoin"], seen
+    assert a.group1 == "9"
