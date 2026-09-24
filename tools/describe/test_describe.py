@@ -416,6 +416,71 @@ def test_channel_vectors():
     assert not problems, "\n".join(problems)
 
 
+
+
+# --- the abbreviation lexicon ------------------------------------------------------------
+# Checked by test rather than by eye, because the rule it enforces is exactly the kind a
+# careful human misses: `auth` looks fine until you notice the domain contains two words it
+# could come from.
+
+def _lexicon():
+    return json.loads((HERE / ".." / ".." / "refs" / "abbreviations.json").read_text())
+
+
+def test_no_abbreviation_is_reachable_from_two_terms():
+    """Daniel's rule, 2026-09-24: an abbreviation must be unambiguous WITHIN THE DOMAIN, not
+    merely derivable from the word. A mechanical shortener produces `auth` from both
+    authorization and authentication and is wrong in a way nobody notices until a reader takes
+    one credential for the other -- security-relevant here, not cosmetic."""
+    lex = _lexicon()["terms"]
+    seen = {}
+    collisions = []
+    for term, forms in lex.items():
+        for tier in ("medium", "short"):
+            form = forms.get(tier)
+            if not form or form == term:
+                continue
+            key = form.casefold()
+            if key in seen and seen[key] != term:
+                collisions.append(f"{form!r} is reachable from {seen[key]!r} and {term!r}")
+            seen.setdefault(key, term)
+    assert not collisions, "\n".join(collisions)
+
+
+def test_the_two_words_that_forced_the_rule_do_not_collide():
+    lex = _lexicon()["terms"]
+    assert lex["authorization"]["medium"] == "authz"
+    assert lex["authentication"]["medium"] == "authn"
+    for term in ("authorization", "authentication"):
+        for tier in ("medium", "short"):
+            assert lex[term][tier] != "auth", f"{term}/{tier} fell back to the ambiguous form"
+
+
+def test_every_abbreviation_is_shorter_than_its_term_or_equal_by_choice():
+    """A `short` equal to `medium` is a statement that no shorter form is safe, not an
+    omission -- but an abbreviation LONGER than the word it abbreviates is a mistake."""
+    for term, forms in _lexicon()["terms"].items():
+        for tier in ("medium", "short"):
+            assert len(forms[tier]) <= len(term), f"{term}/{tier}={forms[tier]} is not shorter"
+
+
+def test_tiers_never_widen():
+    """short may equal medium; it may never be longer. A render stepping down a tier must
+    never get more text than it had."""
+    for term, forms in _lexicon()["terms"].items():
+        assert len(forms["short"]) <= len(forms["medium"]), term
+
+
+def test_every_disagreement_with_the_ecosystem_is_explained():
+    """vLEI ships AUTH, and this lexicon refuses it. Any entry that departs from the domain's
+    own usage carries a `note` saying so, because an unexplained disagreement reads as an
+    oversight and gets 'corrected' back."""
+    lex = _lexicon()["terms"]
+    assert "vLEI's own ECR-AUTH uses AUTH" in lex["authorization"]["note"]
+    for term in ("issuer", "issuee", "verifiable", "identifier", "delegation"):
+        assert lex[term].get("note"), f"{term} departs from the obvious short form unexplained"
+
+
 if __name__ == "__main__":
     # This block MUST be the last thing in the file. A test defined after it is invisible to
     # this runner and silently reported as absent rather than as failing -- which is how four
