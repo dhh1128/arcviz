@@ -296,6 +296,22 @@ def test_an_unverified_schema_lends_a_name_but_not_an_entailment():
     assert not info.trustworthy
 
 
+def test_a_verified_schema_entailment_reaches_the_descriptor():
+    """End to end, from the registry rather than from a vector. `schemas.resolve` names the
+    two party slots ("issuer", "issuee") while the vectors name the channel ("parties"), and
+    for a while each half passed its own tests while the real Legal Entity schema suppressed
+    nothing. Found by building the sample, which is the only place the two met."""
+    import schemas
+    le = schemas.resolve("ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY")
+    assert le.trustworthy and set(le.entailed) == {"issuer", "issuee"}
+    nodes = [Node(said="A", schema="LE", issuer="Q", issuee="L"),
+             Node(said="B", schema="OTHER", issuer="L", issuee="P")]
+    dag = Dag(nodes=nodes, entailed={"LE": le.entailed})
+    got = {d.said: [c.kind for c in d.components] for d in describe(dag)}
+    assert got["A"] == ["type"], got
+    assert "parties" in got["B"], got
+
+
 # --- COIA ----------------------------------------------------------------------------------
 
 def test_coia_parse_vectors_flag_groups_are_exact():

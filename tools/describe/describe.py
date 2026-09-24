@@ -226,7 +226,12 @@ def _entailed_here(dag: "Dag", kind: str, target: "Node") -> bool:
             for label, tgt in n.out_edges.items()
             if tgt == target.said) and any(
             tgt == target.said for n in dag.nodes for tgt in n.out_edges.values())
-    fixed = dag.entailed.get(target.schema) or ()
+    fixed = set(dag.entailed.get(target.schema) or ())
+    # `schemas.resolve` reports the two party slots separately, as a schema documents them;
+    # the `parties` channel is their pair. Without this the vectors passed on "parties" while
+    # every real verified schema, which says ("issuer", "issuee"), suppressed nothing.
+    if {"issuer", "issuee"} <= fixed:
+        fixed.add("parties")
     if kind not in fixed:
         return False
     if kind in ("parties", "issuer", "issuee"):
