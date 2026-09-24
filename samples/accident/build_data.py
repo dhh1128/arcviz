@@ -45,6 +45,24 @@ from describe import describe, load_corpus_dag  # noqa: E402
 GLYPHS = ROOT / "docs" / "design" / "iconography" / "glyphs"
 
 
+def category_meanings() -> dict:
+    """Category -> its 'Means' text, read from the table in credential-categories.md so the
+    hover text has one source. Markdown emphasis is stripped; `misc` comes from the sentence
+    that defines it."""
+    import re
+    doc = (ROOT / "docs" / "design" / "credential-categories.md").read_text()
+    out = {}
+    for line in doc.splitlines():
+        m = re.match(r"^\| `([a-z-]+)` \| (.+?) \|", line)
+        if m:
+            out[m.group(1)] = re.sub(r"[*`]", "", m.group(2)).strip()
+        m = re.match(r"^`misc` is (.+)$", line)
+        if m:
+            tail = re.sub(r"[*`]", "", m.group(1)).rsplit(", and ", 1)[-1].strip()
+            out["misc"] = "The residual. " + tail[0].upper() + tail[1:]
+    return out
+
+
 def sniff(b: bytes) -> str | None:
     """Media type from the bytes, never from a name. Only knowable when the bytes resolve."""
     if b.startswith(b"\x89PNG\r\n\x1a\n"):
@@ -265,6 +283,7 @@ def main() -> int:
     lexicon = json.loads((ROOT / "refs" / "abbreviations.json").read_text())
     data = {"generated_by": "samples/accident/build_data.py",
             "abbreviations": lexicon["terms"],
+            "category_meanings": category_meanings(),
             "host_note": host["_note"],
             "frames": [accident(host), vlei(host)]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")

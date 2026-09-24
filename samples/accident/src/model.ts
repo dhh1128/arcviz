@@ -81,6 +81,7 @@ export interface Frame {
 export interface Data {
   generated_by: string;
   abbreviations: Record<string, { medium: string; short: string }>;
+  category_meanings: Record<string, string>;
   host_note: string;
   frames: Frame[];
 }

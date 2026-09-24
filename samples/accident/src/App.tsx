@@ -59,14 +59,14 @@ function Ph({ id, inline = true }: { id: keyof typeof PLACEHOLDERS; inline?: boo
 // ---------------------------------------------------------------------------------------------
 // Small pieces
 
-function Glyph({ name, size = 32, color }: { name: string; size?: number; color?: string }) {
+function Glyph({ name, size = 32, color, title }: { name: string; size?: number; color?: string; title?: string }) {
   const url = `glyphs/${name}.svg`;
   return (
     <span
       className="glyph"
       role="img"
-      aria-label={name}
-      title={name}
+      aria-label={title ?? name}
+      title={title ?? name}
       style={{
         width: size, height: size, backgroundColor: color ?? "currentColor",
         WebkitMaskImage: `url(${url})`, maskImage: `url(${url})`,
@@ -96,6 +96,17 @@ function glyphsFor(n: CNode): { category: string; glyph: string; override: boole
 // aliased AID gets HOST_CORPUS, and an AID the lookup does not know gets none, which is wild.
 const HOST_CORPUS: TrustAssumption = { posture: "corpus", mnemonic: true };
 const Lexicon = createContext<Data["abbreviations"]>({});
+const Meanings = createContext<Record<string, string>>({});
+
+// Hover text for a kind glyph: its label, what the category means (from
+// credential-categories.md), and why this credential got it.
+function glyphTitle(g: { category: string; glyph: string; override: boolean }, meanings: Record<string, string>, evidence?: string[]): string {
+  const label = g.glyph.replace(".", ": ");
+  const lines = [label, meanings[g.category] ?? ""];
+  if (evidence) lines.push(evidence.length ? `On this credential because of: ${evidence.join(", ")}.` : "Nothing matched, so the residual.");
+  if (g.override) lines.push("The subcategory glyph was assigned by hand for this sample.");
+  return lines.filter(Boolean).join("\n\n");
+}
 
 // The longest form of the type name that fits on one line of the space it has.
 function TypeName({ name }: { name: string }) {
@@ -269,6 +280,7 @@ function Card({
   const [open, setOpen] = useState(false);
   const marks = useContext(Marks);
   const glyphs = glyphsFor(n);
+  const meanings = useContext(Meanings);
   const cats = glyphs.map((g) => g.category);
   const primary = PALETTE[cats[0]] ?? PALETTE.misc;
   const typeName = n.type.name;
@@ -322,8 +334,9 @@ function Card({
         <footer className="card-foot">
             <span className="glyph-row" style={{ color: primary.color }}>
             {glyphs.map((g) => (
-              <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")} title={`${g.category}${g.override ? " (glyph hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
-                <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
+              <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")}>
+                <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color}
+                  title={glyphTitle(g, meanings, n.classified.category_hits[g.category] ?? [])} />
                 {g.ext !== undefined && <span className="ext">{g.ext ? g.ext : "?"}</span>}
               </span>
             ))}
@@ -495,6 +508,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
 
 // First glance, posture point 5: what kinds of evidence are there?
 function Kinds({ frame }: { frame: Frame }) {
+  const meanings = useContext(Meanings);
   const groups = new Map<string, { n: CNode; count: number }>();
   for (const n of frame.nodes) {
     const k = n.type.name ?? `unresolved type ${n.schema.slice(0, 8)}`;
@@ -508,7 +522,7 @@ function Kinds({ frame }: { frame: Frame }) {
         const g = glyphsFor(n)[0];
         return (
           <span className="kind" key={k}>
-            <Glyph name={g.glyph} size={24} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
+            <Glyph name={g.glyph} size={24} color={(PALETTE[g.category] ?? PALETTE.misc).color} title={glyphTitle(g, meanings)} />
             {k}{count > 1 ? ` ×${count}` : ""}
           </span>
         );
@@ -598,7 +612,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}>
+    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}><Meanings.Provider value={data.category_meanings}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -644,6 +658,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </PillIcons.Provider></Lexicon.Provider></Marks.Provider>
+    </Meanings.Provider></PillIcons.Provider></Lexicon.Provider></Marks.Provider>
   );
 }

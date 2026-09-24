@@ -137,6 +137,18 @@
    "short": "txn"
   }
  },
+ "category_meanings": {
+  "identity": "Who a natural person is. The civil-identity attribute set — name, birth date, portrait, place of birth, nationality — plus the things derived from it: an address, an age predicate, a travel document's holder page.",
+  "org-identity": "Who an organization is. A legal identifier (LEI, registration number), a legal name, a vetting result, a level of assurance.",
+  "humanness": "That the holder is a real person — and, in the personhood variants, a unique one within some community. Deliberately does not say which person.",
+  "financial": "An account, a payment instrument, a tax relationship, an insurance policy. Anything whose misuse costs money directly.",
+  "qualification": "That a party has been assessed against a standard and met it. Degrees, transcripts, professional licences, statutory certifications, awards, driving privileges.",
+  "health": "Health cover, patient identity, vaccination and test records, prescriptions. Kept separate from financial despite health insurance being a policy, because the disclosure stakes are different in kind.",
+  "affiliation": "That a party is associated with another party. Employment, organizational role, membership, enrolment, loyalty, alumni status, peer relationships.",
+  "authority": "A granted or demonstrated right: to act for another party, or over a controlled resource or identifier. Delegation, guardianship, power of representation, a telephone-number range, a brand, a GS1 prefix, proof of control of a domain.",
+  "civil-status": "State-recorded facts about a person's status rather than their identity: birth, marriage, death, naturalization, residency status, legally recognized disability.",
+  "misc": "The residual. A credential landing there is a prompt to look rather than a classification."
+ },
  "host_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). The aliases are real COIA 2.0 aliases minted by the spec's reference implementation from the who/role/scope answers in alias_answers; regenerate with make_host.py. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
  "frames": [
   {
