@@ -68,12 +68,13 @@ def classify_node(s: dict) -> dict:
     a = s.get("a") if isinstance(s.get("a"), dict) else {}
     row = {"id": s["d"], "name": s["d"], "fields": list(a.keys()), "fields_known": True,
            "structure": {"has_issuee": "i" in a,
-                         "names_other_credential": bool(s.get("e"))}}
+                         "names_other_credential": bool(s.get("e"))},
+           # Disclosed values, so a bare `account` can be checked for money beside it.
+           "values": a}
     subj, subj_why = classify.subject_axis(row)
     align, align_why = classify.alignment_axis(row)
     cats = classify.categories(row)
-    why = {c: sorted({h for v in classify.CATEGORY_VOCAB[c] for h in classify.hits(row["fields"], v)})
-           for c in cats}
+    why = classify.category_evidence(row)
     return {"categories": cats, "category_hits": why,
             "subject": subj, "subject_why": subj_why,
             "alignment": align, "alignment_why": align_why,

@@ -785,6 +785,98 @@
     "alignment": "not-a-party",
     "categories": []
    }
+  },
+  {
+   "name": "financial -- an account with no money is not financial",
+   "why": "Daniel, 2026-09-24: a bare `account` is just as likely a user account, or a witness's account of events, as a bank account. With no floating-point field and no currency code or symbol anywhere, it is not money. Found when the accident bundle's witness statements rendered with a banknote.",
+   "row": {
+    "id": 9101,
+    "name": "t",
+    "fields": [
+     "d",
+     "i",
+     "observedAt",
+     "account",
+     "vantagePoint"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    },
+    "values": {
+     "account": "The northbound car entered the junction on amber.",
+     "vantagePoint": "northeast corner, on foot"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": []
+   }
+  },
+  {
+   "name": "financial -- an account beside a currency code is financial",
+   "why": "The other half of the same ruling: `account` counts as money when the credential also carries a currency, here an ISO 4217 code in a disclosed value.",
+   "row": {
+    "id": 9102,
+    "name": "t",
+    "fields": [
+     "d",
+     "i",
+     "account",
+     "denomination"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    },
+    "values": {
+     "account": "00-1234-5678",
+     "denomination": "EUR"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "financial"
+    ]
+   }
+  },
+  {
+   "name": "financial -- an account beside a floating-point field is financial",
+   "why": "The ruling's other form of evidence: a field whose declared JSON Schema type is `number`.",
+   "row": {
+    "id": 9103,
+    "name": "t",
+    "fields": [
+     "d",
+     "i",
+     "accountRef",
+     "limit"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    },
+    "field_types": {
+     "accountRef": "string",
+     "limit": "number"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "financial"
+    ]
+   }
   }
  ]
 }

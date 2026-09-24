@@ -252,11 +252,11 @@
        "identity"
       ],
       "category_hits": {
-       "qualification": [
-        "licenceNumber"
-       ],
        "identity": [
         "portraitDigest"
+       ],
+       "qualification": [
+        "licenceNumber"
        ]
       },
       "subject": "party",
@@ -329,11 +329,11 @@
        "identity"
       ],
       "category_hits": {
-       "qualification": [
-        "licenceNumber"
-       ],
        "identity": [
         "portraitDigest"
+       ],
+       "qualification": [
+        "licenceNumber"
        ]
       },
       "subject": "party",
@@ -621,14 +621,8 @@
      },
      "edges": [],
      "classified": {
-      "categories": [
-       "financial"
-      ],
-      "category_hits": {
-       "financial": [
-        "account"
-       ]
-      },
+      "categories": [],
+      "category_hits": {},
       "subject": "party",
       "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
       "alignment": "ordinary",
@@ -662,14 +656,8 @@
      },
      "edges": [],
      "classified": {
-      "categories": [
-       "financial"
-      ],
-      "category_hits": {
-       "financial": [
-        "account"
-       ]
-      },
+      "categories": [],
+      "category_hits": {},
       "subject": "party",
       "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
       "alignment": "ordinary",

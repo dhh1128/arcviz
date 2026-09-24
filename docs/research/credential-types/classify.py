@@ -51,7 +51,7 @@ V = {
     ),
     "age": _rx(r"^age_?over", r"^ageover", r"^age_?above", r"^overage$", r"^age_in_years$", r"^age_birth_year$"),
     "financial": _rx(
-        r"^iban$", r"account", r"^currency$", r"^bank", r"^national_bank_code$", r"^business_identifier_code$",
+        r"^iban$", r"^currency$", r"^bank", r"^national_bank_code$", r"^business_identifier_code$",
         r"^payment", r"^card", r"^masked_account_reference$", r"^tax_?number$", r"^taxpayer_type$",
         r"^church_tax_id$", r"^monetarylimit$", r"^c_upto$", r"^balance$", r"^last four digits$",
         r"^credential id$", r"^card network$", r"^payment_instrument_id$",
@@ -350,6 +350,56 @@ CATEGORY_VOCAB = {
 RESIDUAL = "misc"
 
 
+# A bare `account` is money only when the credential also carries money. Daniel, 2026-09-24,
+# after a witness statement's `account` (of what happened) was classified financial: "our
+# classifier should only match that field name to money if it can find a field of type floating
+# point and/or a field with an ISO currency code or a common currency symbol in it. Otherwise
+# this is just as likely to be a user account." Anchored names that are unambiguously financial
+# (`masked_account_reference`, `iban`, ...) stay in the vocabulary above and need no support.
+ACCOUNT = re.compile(r"account")
+
+# A SUBSET of ISO 4217, the codes in common use; extend it rather than trusting it as complete.
+ISO_CURRENCIES = {
+    "USD", "EUR", "GBP", "JPY", "CNY", "CHF", "CAD", "AUD", "NZD", "HKD", "SGD", "SEK", "NOK",
+    "DKK", "PLN", "CZK", "HUF", "RON", "BGN", "TRY", "RUB", "UAH", "INR", "PKR", "BDT", "KRW",
+    "IDR", "MYR", "THB", "VND", "PHP", "ILS", "AED", "SAR", "QAR", "EGP", "NGN", "KES", "ZAR",
+    "BRL", "MXN", "ARS", "CLP", "COP", "PEN",
+}
+CURRENCY_SYMBOLS = "$€£¥₹₩₽₺₪฿₫₴₦₱"
+
+
+def money_evidence(row: dict) -> list[str]:
+    """Fields that show the credential carries money, from the only two inputs that can say so:
+    a declared JSON Schema type (`field_types`: name -> type) and disclosed values (`values`:
+    name -> value). Either may be absent, and the catalog rows carry neither, so a bare
+    `account` there never counts as financial."""
+    out = []
+    for name, typ in (row.get("field_types") or {}).items():
+        if typ == "number" or (isinstance(typ, list) and "number" in typ):
+            out.append(name)
+    for name, val in (row.get("values") or {}).items():
+        if isinstance(val, float):
+            out.append(name)
+        elif isinstance(val, str):
+            v = val.strip()
+            if v.upper() in ISO_CURRENCIES and v.isupper() or any(ch in CURRENCY_SYMBOLS for ch in v):
+                out.append(name)
+    return sorted(set(out))
+
+
+def category_evidence(row: dict) -> dict[str, list[str]]:
+    """Category -> the field names that put it there. The reasons, so a render can show them."""
+    f = row.get("fields") or []
+    if not row.get("fields_known", False):
+        return {}
+    out = {c: sorted({h for v in CATEGORY_VOCAB[c] for h in hits(f, v)}) for c in CATEGORIES}
+    accounts = [x for x in f if ACCOUNT.search(x.lower().strip("`"))]
+    money = money_evidence(row) if accounts else []
+    if money:
+        out["financial"] = sorted(set(out["financial"]) | set(accounts) | set(money))
+    return {c: v for c, v in out.items() if v}
+
+
 def categories(row: dict) -> list[str]:
     """Zero, one or several categories. Never exclusive -- a driving licence is two of them.
 
@@ -358,10 +408,8 @@ def categories(row: dict) -> list[str]:
     are the substrate nearly every credential is built on and are therefore the least informative
     label a credential can carry (F-HZ5X, and the precision measurement in CLASSIFIER.md).
     """
-    f = row.get("fields") or []
-    if not row.get("fields_known", False):
-        return []
-    out = [c for c in CATEGORIES if any(has(f, v) for v in CATEGORY_VOCAB[c])]
+    ev = category_evidence(row)
+    out = [c for c in CATEGORIES if c in ev]
     if "identity" in out and len(out) > 1:
         out = [c for c in out if c != "identity"] + ["identity"]
     return out
