@@ -230,18 +230,7 @@ def test_the_vlei_chain_is_separable_too():
         assert d.distinguishing, d
 
 
-if __name__ == "__main__":
-    failures = 0
-    for name, fn in sorted(globals().items()):
-        if name.startswith("test_") and callable(fn):
-            try:
-                fn()
-                print(f"  ok   {name}")
-            except AssertionError as exc:
-                failures += 1
-                print(f"  FAIL {name}\n       {exc}")
-    print(f"\n{failures} failure(s)")
-    sys.exit(1 if failures else 0)
+
 
 
 # --- schema resolution -------------------------------------------------------------------
@@ -386,3 +375,55 @@ def test_flags_are_never_concatenated_into_the_pill_label():
     assert p["label"] == "bob-payee-bitcoin"
     assert "9" not in p["label"] and "," not in p["label"]
     assert p["worst"] == "9" and p["coiaState"] == "flagged"
+
+
+def test_channel_vectors():
+    """The three trust channels, and the decision about whether to apply a known alias.
+
+    Kept in the same file as the describe vectors because they are the same kind of artifact --
+    a claim with the reason it is held -- and split into their own section because they test a
+    different surface. Every one carries a `defends`, for the same reason: a vector whose
+    intent is unrecorded cannot be maintained.
+    """
+    import coia_reader as coia
+    data = json.loads((HERE / "vectors.json").read_text())
+    problems = []
+    for vec in data["channels"]:
+        assert vec.get("defends"), f"{vec['name']} carries no `defends`"
+        i = vec["input"]
+        alias = coia.parse(i["alias"]) if i.get("alias") else None
+        got = coia.party_view(
+            i["identifier"], alias,
+            binding=coia.Binding(**i["binding"]) if i.get("binding") else None,
+            stance=coia.Stance(**i["stance"]) if i.get("stance") else None,
+            apply_alias=i.get("apply_alias"))
+        for key, want in vec["expect"].items():
+            actual = got[key]
+            if isinstance(want, list):          # JSON has no tuples
+                actual = [list(x) if isinstance(x, tuple) else x for x in actual]
+            if actual != want:
+                problems.append(f"{vec['name']}: {key} = {actual!r}, expected {want!r}")
+    assert not problems, "\n".join(problems)
+
+
+if __name__ == "__main__":
+    # This block MUST be the last thing in the file. A test defined after it is invisible to
+    # this runner and silently reported as absent rather than as failing -- which is how four
+    # channel vectors passed a mutation test they should have caught. pytest collects them
+    # either way, so the discrepancy is the tell.
+    import inspect as _inspect
+    _src = pathlib.Path(__file__).read_text() if "pathlib" in dir() else open(__file__).read()
+    if _src.index('if __name__ == "__main__":') < _src.rfind("\ndef test_"):
+        raise SystemExit("test_describe.py: a test is defined AFTER the runner block and "
+                         "would never run. Move the runner to the end of the file.")
+    failures = 0
+    for name, fn in sorted(globals().items()):
+        if name.startswith("test_") and callable(fn):
+            try:
+                fn()
+                print(f"  ok   {name}")
+            except AssertionError as exc:
+                failures += 1
+                print(f"  FAIL {name}\n       {exc}")
+    print(f"\n{failures} failure(s)")
+    sys.exit(1 if failures else 0)

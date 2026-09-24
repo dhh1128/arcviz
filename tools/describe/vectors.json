@@ -591,5 +591,160 @@
         }
       }
     }
-  ]
+  ],
+  "channels": [
+    {
+      "name": "a_flag_and_a_binding_judgement_are_different_speakers",
+      "defends": "A COIA flag is the ALIAS CREATOR's warning about an identifier; a binding judgement is the HOST's view of whether that alias names the controller. Here they disagree -- the creator flagged the alias unverified and the host has since vetted it -- and both must survive intact. Neither overrides the other, because they are assertions by different parties, and a render that let one silence the other would lose which party is speaking. Daniel, 2026-09-24: trust is not one value.",
+      "input": {
+        "identifier": "EPROV",
+        "alias": "provenant-qvi,0",
+        "binding": {
+          "confident": true,
+          "source": "internal directory"
+        }
+      },
+      "expect": {
+        "label": "provenant-qvi",
+        "aliasState": "shown",
+        "coiaWorst": "0",
+        "bindingConfident": true,
+        "bindingSource": "internal directory"
+      }
+    },
+    {
+      "name": "binding_confidence_and_evidentiary_stance_are_independent",
+      "defends": "Daniel's diploma-mill case, which is the one that makes the independence unmissable. The host is HIGHLY CONFIDENT the AID is controlled by a diploma mill -- so the identifier-to-alias binding is strongly trusted -- and has no intention whatever of crediting the diploma. Confidence in the naming is not endorsement of the content. A design storing one boolean cannot express this, which is why the abstraction it replaced was stopped before it was written.",
+      "input": {
+        "identifier": "EMILL",
+        "alias": "acme-diploma-services",
+        "binding": {
+          "confident": true,
+          "source": "investigated 2026-03"
+        },
+        "stance": {
+          "credited": false,
+          "reason": "known diploma mill"
+        }
+      },
+      "expect": {
+        "label": "acme-diploma-services",
+        "bindingConfident": true,
+        "credited": false,
+        "creditedReason": "known diploma mill"
+      }
+    },
+    {
+      "name": "the_name_slot_carries_identity_only",
+      "defends": "Daniel, 2026-09-24: 'naming an issuer isn't supposed to be a reputation signal at all... Knowing that a witness testified to fact X in court, and knowing that witness X is trustworthy, are radically different questions.' So with all three channels populated and two of them negative, the label is still exactly the alias body -- no flag digits, no trust marks, no reputational text. Identification is a precondition for evaluation, not a form of it.",
+      "input": {
+        "identifier": "EBAD",
+        "alias": "bob-payee-bitcoin,9",
+        "binding": {
+          "confident": false
+        },
+        "stance": {
+          "credited": false
+        }
+      },
+      "expect": {
+        "label": "bob-payee-bitcoin",
+        "coiaWorst": "9",
+        "bindingConfident": false,
+        "credited": false
+      }
+    },
+    {
+      "name": "host_silence_is_not_a_negative_judgement",
+      "defends": "The third state is the load-bearing one. A host that says nothing about a binding has not said 'no', and rendering None as a negative would manufacture a verdict nobody reached. COIA §6.3 makes the same point about its own flags -- 'absence means only that the flag was not set; it never asserts the negation' -- and it generalises to every judgement arcviz receives rather than computes. This is the project's own thesis applied to the trust channels.",
+      "input": {
+        "identifier": "EQUIET",
+        "alias": "someone-somewhere"
+      },
+      "expect": {
+        "label": "someone-somewhere",
+        "aliasState": "shown",
+        "bindingConfident": null,
+        "credited": null,
+        "coiaFlags": [],
+        "coiaWorst": null
+      }
+    },
+    {
+      "name": "an_untrusted_credential_does_not_suppress_the_name",
+      "defends": "Pins the correction directly, because the error it replaces was mine and was committed. I argued that a confident alias on an untrusted credential launders reputation and should perhaps be withheld; that proves too much, since if naming launders then naming anything launders and the only safe render shows nothing. A court transcript names perjurers and endorses none of them, and withholding the name is strictly worse because a viewer can no longer apply what they know about that party. So a negative stance leaves the label alone.",
+      "input": {
+        "identifier": "EMILL",
+        "alias": "acme-diploma-services",
+        "stance": {
+          "credited": false,
+          "reason": "not accepted"
+        }
+      },
+      "expect": {
+        "label": "acme-diploma-services",
+        "aliasState": "shown",
+        "credited": false
+      }
+    },
+    {
+      "name": "a_name_withheld_here_is_not_the_same_as_no_name",
+      "defends": "Absent and undisclosed are different, which is AGENTS.md's first rule and this repository's whole thesis. 'We know this party and are not naming them here' and 'we cannot name this party' are different situations for a viewer, and only the first is a choice somebody made. So aliasState distinguishes withheld-here from none, and the label is empty in both.",
+      "input": {
+        "identifier": "EKNOWN",
+        "alias": "cecilia-violin-vienna",
+        "apply_alias": false
+      },
+      "expect": {
+        "label": null,
+        "aliasState": "withheld-here"
+      }
+    },
+    {
+      "name": "applying_a_known_alias_is_the_default",
+      "defends": "Once the laundering objection fell (see the untrusted-credential vector), the default follows: show the alias whenever the binding is known, because identification is a precondition for evaluation and silence is the more damaging choice. The host keeps a per-(identifier, node) override for reasons that are its own -- not revealing which parties it recognises, or holding an alias that is wrong in this particular context -- but it must opt out rather than opt in.",
+      "input": {
+        "identifier": "EKNOWN",
+        "alias": "cecilia-violin-vienna"
+      },
+      "expect": {
+        "label": "cecilia-violin-vienna",
+        "aliasState": "shown"
+      }
+    },
+    {
+      "name": "no_alias_is_its_own_state_and_carries_no_channels",
+      "defends": "With no alias there is nothing for any of the three channels to be about: no creator flagged anything, no host vetted a binding that does not exist. All three come back empty rather than false, so a render cannot read 'we have no alias' as 'we have an alias nobody trusts'.",
+      "input": {
+        "identifier": "ESTRANGER"
+      },
+      "expect": {
+        "label": null,
+        "aliasState": "none",
+        "coiaFlags": [],
+        "coiaWorst": null,
+        "bindingConfident": null,
+        "credited": null
+      }
+    },
+    {
+      "name": "an_unknown_flag_digit_survives_all_three_channels",
+      "defends": "COIA §6.3: a reader 'MUST surface' an unrecognized digit, because it is a warning from a later version of the registry. Carried here to pin that the three-channel assembly does not drop it on the way -- an unknown warning is the one most easily lost, since no code path knows what to do with it.",
+      "input": {
+        "identifier": "EFUTURE",
+        "alias": "someone-somewhere,3",
+        "binding": {
+          "confident": true
+        }
+      },
+      "expect": {
+        "label": "someone-somewhere",
+        "coiaUnknownFlags": [
+          "3"
+        ],
+        "bindingConfident": true
+      }
+    }
+  ],
+  "_channels_comment": "Vectors for the three trust channels -- the alias creator's COIA flags, the host's binding judgement, the host's evidentiary stance -- and for the per-(identifier, node) decision about whether to apply a known alias. These pin Daniel's rulings of 2026-09-24: trust is made one identifier and one ACDC at a time rather than corpus-wide; arcviz may compute and must not adjudicate; and the name slot carries identity only, because identification is a precondition for evaluation rather than a form of it."
 }

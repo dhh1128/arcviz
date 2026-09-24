@@ -245,3 +245,82 @@ def pill_props(identifier: str, alias: Alias | None) -> dict:
         "privateFlags": alias.group2,
         "worst": alias.worst,
     }
+
+
+# ---------------------------------------------------------------------------------------
+# The three channels, kept apart.
+#
+# THREE SPEAKERS, NEVER MERGED. A COIA flag is the ALIAS CREATOR's warning about an
+# identifier. A binding judgement is the HOST's view of whether that alias names the party
+# controlling the identifier. An evidentiary stance is the HOST's view of whether a credential
+# deserves to be credited. They are different assertions by different parties about different
+# objects, and collapsing any two of them loses which party is speaking -- which is exactly
+# what makes the interesting cases interesting. A host may vet an alias its creator flagged
+# unverified. A host may be certain an AID belongs to a diploma mill and credit nothing it
+# issues.
+#
+# AND THE NAME SLOT CARRIES IDENTITY ONLY. Daniel, 2026-09-24: "naming an issuer isn't supposed
+# to be a reputation signal at all... Knowing that a witness testified to fact X in court, and
+# knowing that witness X is trustworthy, are radically different questions." Identification is
+# a precondition for evaluation, not a form of it, so no assessment from any of the three
+# channels is ever folded into the label.
+
+
+@dataclass(frozen=True)
+class Binding:
+    """The host's view of whether an alias names the controller of an identifier.
+
+    `confident` is a tri-state and the third state is load-bearing: None means the host did not
+    say, which is NOT "no". COIA §6.3 makes the same point about its own flags -- "absence means
+    only that the flag was not set; it never asserts the negation" -- and the rule generalises
+    to every judgement arcviz receives rather than computes.
+    """
+    confident: bool | None = None
+    source: str | None = None       # host-defined; rendered as attribution, never interpreted
+
+
+@dataclass(frozen=True)
+class Stance:
+    """The host's view of whether to credit one ACDC as evidence. Per ACDC, never per corpus.
+
+    A holder does not trust a presentation uniformly: Provenant trusts GLEIF and itself, and
+    does not thereby trust a stranger citing GLEIF's AID. So this hangs off a node's SAID.
+    """
+    credited: bool | None = None
+    reason: str | None = None
+
+
+def party_view(identifier: str, alias: Alias | None, *,
+               binding: Binding | None = None, stance: Stance | None = None,
+               apply_alias: bool | None = None) -> dict:
+    """Everything known about one party as it appears on one node, with nothing merged.
+
+    `apply_alias` is the host's per-(identifier, node) call about whether to USE a known alias
+    here. It defaults to showing it, because identification is a precondition for evaluation
+    and withholding a name is the more damaging choice -- a viewer who knows something about
+    that party can no longer apply it. A host may still decline, for reasons that are its own:
+    not wanting to reveal which parties it recognises, or holding an alias that is simply wrong
+    in this context.
+    """
+    known = alias is not None
+    show = True if apply_alias is None else apply_alias
+    return {
+        "identifier": identifier,
+        # Identity only. No flag digits, no trust marks, no reputation.
+        "label": alias.body if (known and show) else None,
+        # Three states, not two: a name withheld here is not the same as a party we cannot
+        # name at all, and a viewer should be able to tell them apart.
+        "aliasState": ("shown" if known and show
+                       else "withheld-here" if known
+                       else "none"),
+        # Channel 1 -- the alias creator speaking about the identifier.
+        "coiaFlags": alias.flags if known else (),
+        "coiaUnknownFlags": alias.unknown if known else (),
+        "coiaWorst": alias.worst if known else None,
+        # Channel 2 -- the host speaking about the binding.
+        "bindingConfident": binding.confident if binding else None,
+        "bindingSource": binding.source if binding else None,
+        # Channel 3 -- the host speaking about the credential.
+        "credited": stance.credited if stance else None,
+        "creditedReason": stance.reason if stance else None,
+    }
