@@ -251,9 +251,10 @@ function Info({ notes }: { notes: string[] }) {
 }
 
 function Card({
-  n, frame, desc, lines, pictures, incoming, register,
+  n, frame, desc, lines, pictures, incoming, register, raised, onRaise,
 }: {
   n: CNode; frame: Frame; desc: Descriptor; lines: number; pictures: boolean;
+  raised: boolean; onRaise: () => void;
   incoming: { label: string; from: CNode }[];
   register: (said: string, el: HTMLElement | null) => void;
 }) {
@@ -279,7 +280,8 @@ function Card({
   return (
     <article
       ref={(el) => register(n.said, el)}
-      className={"card" + (unknown ? " card-unknown" : "") + (isPresented ? " presented" : "") + (open ? " open" : "")}
+      className={"card" + (unknown ? " card-unknown" : "") + (isPresented ? " presented" : "") + (open ? " open" : "") + (raised ? " raised" : "")}
+      onPointerDown={onRaise}
       aria-expanded={open}
     >
       <Band cats={cats} />
@@ -391,45 +393,33 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const box = useRef<HTMLDivElement>(null);
   const bands = useRef<(HTMLDivElement | null)[]>([]);
   const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number }[]>([]);
+  const [raised, setRaised] = useState<string | null>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
   const incoming = (said: string) =>
     frame.nodes.flatMap((m) => m.edges.filter((e) => e.target === said).map((e) => ({ label: e.label, from: m })));
 
-  // One arrow per edge, labelled with the edge's own label (DD-3: "we need to expose that
-  // label"). Every arrow arrives at the top-left of its target with the label beside the
-  // arrowhead. A target on the first line of its rank is reached directly. A target further
-  // down a wrapped rank is reached along the band's left gutter, so the line never threads
-  // through a sibling above it and makes siblings read as a chain.
+  // One curved connector per edge, labelled with the edge's own label (DD-3: "we need to
+  // expose that label"). Daniel, turn 11: curves everywhere, drawn over the cards, ending in a
+  // small box at the middle of the target's top edge. A clicked card rises above the lines.
   const measure = () => {
     const root = box.current;
     if (!root) return;
     const r0 = root.getBoundingClientRect();
-    const rankOf = new Map<string, number>();
-    rows.forEach((row, i) => row.forEach((s) => rankOf.set(s, i)));
-    const firstTop = rows.map((row) => Math.min(...row.map((s) => els.current.get(s)?.getBoundingClientRect().top ?? Infinity)));
     const arrivals = new Map<string, number>();
     const out: { d: string; key: string; label: string; lx: number; ly: number }[] = [];
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
         const b = els.current.get(e.target)?.getBoundingClientRect();
-        const r = rankOf.get(e.target);
-        const band = r !== undefined ? bands.current[r]?.getBoundingClientRect() : undefined;
-        if (!a || !b || r === undefined) continue;
+        if (!a || !b) continue;
         const k = arrivals.get(e.target) ?? 0;
         arrivals.set(e.target, k + 1);
         const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
-        const ax = b.left - r0.left + 22 + k * 16, ay = b.top - r0.top;
-        let d: string;
-        if (!band || Math.abs(b.top - firstTop[r]) < 2) {
-          const my = (y1 + ay) / 2;
-          d = `M${x1},${y1} C${x1},${my} ${ax},${my} ${ax},${ay}`;
-        } else {
-          const gx = band.left - r0.left + 10, ty = band.top - r0.top + 9, hy = ay - 20;
-          d = `M${x1},${y1} L${x1},${ty} L${gx},${ty} L${gx},${hy} L${ax},${hy} L${ax},${ay}`;
-        }
-        out.push({ key: m.said + e.label, d, label: e.label, lx: ax + 6, ly: ay - 6 - k * 11 });
+        const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
+        const bend = Math.max(30, (y2 - y1) / 2);
+        const d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${y2 - bend} ${x2},${y2}`;
+        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 8, ly: y2 + 4 + k * 13 });
       }
     }
     // Only set state when the geometry actually moved, or measuring re-renders forever.
@@ -458,12 +448,12 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   return (
     <div className="graph" ref={box}>
       <svg className="edges" width={size.w} height={size.h} aria-hidden>
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,1 L9,5 L0,9 z" className="arrowhead" />
-          </marker>
-        </defs>
-        {paths.map((p) => <path key={p.key} d={p.d} markerEnd="url(#arrow)" />)}
+        {paths.map((p) => <path key={p.key} d={p.d} />)}
+      </svg>
+      {/* Terminators and labels sit above everything, including a raised card, so covering the
+          lines never hides where an edge lands or what it is called. */}
+      <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
+        {paths.map((p) => <rect key={p.key + ":b"} x={p.lx - 12} y={p.ly - 8} width={7} height={7} className="edge-box" />)}
         {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className="edge-label">{p.label}</text>)}
       </svg>
       {rows.map((row, i) => (
@@ -479,6 +469,8 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
               <Card
                 key={said} n={n} frame={frame} desc={desc[said]} lines={lines} pictures={pictures}
                 incoming={incoming(said)}
+                raised={raised === said}
+                onRaise={() => setRaised(said)}
                 register={(s, el) => { if (el) els.current.set(s, el); else els.current.delete(s); }}
               />
             );

@@ -139,7 +139,7 @@ q.issuer-text { quotes: "“" "”"; }
 .rank-label { left: auto; right: 12px; }
 .edges .arrowhead { fill: #7d848d; stroke: none; }
 .edges path { stroke: #7d848d; }
-.edge-label { font: 600 11px ui-monospace, Menlo, monospace; fill: var(--issuer); paint-order: stroke; stroke: var(--page); stroke-width: 3px; }
+.edge-label { font: 600 11px ui-monospace, Menlo, monospace; fill: var(--issuer); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
 .rank { gap: 34px 14px; }
 
 /* turn-10: SAID and (i) on top, kind at the bottom */
@@ -150,3 +150,11 @@ q.issuer-text { quotes: "“" "”"; }
 .glyph-row { align-items: flex-end; }
 .unknown-badge { margin-top: 0; align-self: center; }
 .ext { color: #fff; bottom: 4px; font-size: 8px; }
+
+/* turn-11: connectors over the cards; a clicked card rises above them */
+.edges { z-index: 2; }
+.card.raised { z-index: 3; }
+.rank + .rank { padding-left: 10px; }
+.rank-label { top: auto; bottom: 3px; }
+.edge-ends { position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: 4; }
+.edge-box { fill: #7d848d; }
