@@ -268,7 +268,9 @@
         "portraitDigest"
        ],
        "qualification": [
-        "licenceNumber"
+        "licenceNumber",
+        "title: drivinglicence",
+        "title: licence"
        ]
       },
       "subject": "party",
@@ -345,7 +347,9 @@
         "portraitDigest"
        ],
        "qualification": [
-        "licenceNumber"
+        "licenceNumber",
+        "title: drivinglicence",
+        "title: licence"
        ]
       },
       "subject": "party",
@@ -1230,7 +1234,9 @@
         "LEI"
        ],
        "qualification": [
-        "title: Qualified vLEI Issuer Credential"
+        "title: qualified",
+        "title: qualifiedv",
+        "title: qualifiedvlei"
        ]
       },
       "subject": "party",
@@ -1413,7 +1419,9 @@
       ],
       "category_hits": {
        "affiliation": [
-        "engagementContextRole"
+        "engagementContextRole",
+        "title: engagementcontextrole",
+        "title: role"
        ]
       },
       "subject": "party",

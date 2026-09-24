@@ -36,8 +36,25 @@ HERE = Path(__file__).resolve().parent
 # against names a classifier might wish for.
 # --------------------------------------------------------------------------------------------
 
-def _rx(*pats: str) -> list[re.Pattern]:
-    return [re.compile(p) for p in pats]
+def _rx(*pats: str, scope: str = "both") -> list[tuple[re.Pattern, str]]:
+    """Patterns with the SCOPE they apply in: field names, title words, or both.
+
+    ONE VOCABULARY FOR BOTH, per Daniel's question of 2026-09-24 -- "Aren't they the same rules
+    that we use when checking for fields?" -- and his yes to Q-A3DZ. They mostly are. Where a
+    pattern means something else in the other register it says so here, next to the pattern,
+    instead of living in a second list: `card` is a payment card as a field name and only a form
+    factor in "Student card"; `board` is a board certification as a field and "boarding pass" in
+    a title. Measured before the merge: the field list applied unchanged to titles cost
+    precision 0.790 -> 0.738."""
+    return [(re.compile(p), scope) for p in pats]
+
+
+def field_only(*pats: str):
+    return _rx(*pats, scope="field")
+
+
+def title_only(*pats: str):
+    return _rx(*pats, scope="title")
 
 
 V = {
@@ -52,21 +69,32 @@ V = {
     "age": _rx(r"^age_?over", r"^ageover", r"^age_?above", r"^overage$", r"^age_in_years$", r"^age_birth_year$"),
     "financial": _rx(
         r"^iban$", r"^currency$", r"^bank", r"^national_bank_code$", r"^business_identifier_code$",
-        r"^payment", r"^card", r"^masked_account_reference$", r"^tax_?number$", r"^taxpayer_type$",
+        r"^payment", r"^masked_account_reference$", r"^tax_?number$", r"^taxpayer_type$",
         r"^church_tax_id$", r"^monetarylimit$", r"^c_upto$", r"^balance$", r"^last four digits$",
         r"^credential id$", r"^card network$", r"^payment_instrument_id$",
+    ) + field_only(
+        r"^card",   # a payment card as a field; only the physical form in "Student card"
     ),
     "academic": _rx(
-        r"degree", r"transcript", r"^achievement", r"^learning", r"^course", r"grade", r"^alumniof$",
+        r"degree", r"transcript", r"^achievement", r"^learning", r"^course", r"^alumniof$",
         r"diploma", r"^scoped_affiliation$", r"^home_organization$", r"^primary_affiliation$",
         r"^affiliations$", r"^expected_study_time$", r"^level_of_learning_experience$",
         r"^prerequisites_to_enroll$", r"^criteria", r"^assessment",
+    ) + field_only(
+        r"grade",  # a grade field; "upgrade coupon" in a title
     ),
     "licence": _rx(
         r"licen[cs]e", r"^driving_privileges$", r"^domestic_driving_privileges$", r"^capacities$",
-        r"^stcw_code$", r"^certification", r"^board", r"^privileges$", r"^loa$", r"^score$",
+        r"^stcw_code$", r"^certification", r"^privileges$", r"^loa$", r"^score$",
         r"^vettingscore$", r"^effective_dt$", r"^expire_dt$", r"^authorisation number$",
         r"^licensed roles$",
+    ) + title_only(
+        # Daniel, 2026-09-24, on the QVI credential: "doesn't the word Qualified in its name tell
+        # you it's a certification?" `certificate` is NOT here: birth, death, marriage and X.509
+        # certificates are not certifications.
+        r"^qualifi", r"^certified", r"^accredit",
+    ) + field_only(
+        r"^board",  # a board certification as a field; "boarding pass" in a title
     ),
     "health": _rx(
         r"^health", r"^patient", r"vaccinat", r"^social_security_pin$", r"^competent_institution$",
@@ -79,14 +107,20 @@ V = {
     "telecom": _rx(r"^phone", r"^msisdn$", r"^numbers$", r"^telephone", r"^mobile_operator$", r"^contract_owner$",
                    r"^end_user$", r"^rangestart$", r"^rangeend$", r"^donotoriginate$", r"^channel$"),
     "residence": _rx(r"^resident_", r"^residence", r"^address", r"^arrival_date$", r"^postal", r"^locality$"),
-    "membership": _rx(r"^membership", r"^loyalty", r"^client_id$", r"^tier$", r"^company$", r"^merchant"),
+    "membership": _rx(r"^membership", r"^loyalty", r"^client_id$", r"^tier$", r"^merchant") + field_only(r"^company$"),
     "civil_status": _rx(r"^parent", r"^spouse$", r"^maidenname$", r"^naturalization", r"^citizenship$",
-                        r"^marital", r"^lprcategory$", r"^lprnumber$", r"^residentsince$", r"^ward$"),
+                        r"^marital", r"^lprcategory$", r"^lprnumber$", r"^residentsince$", r"^ward$")
+                        + title_only(r"^marriage", r"^birthcertificate", r"^death", r"^naturali[sz]ation"),
     "authority": _rx(
         r"^c_goal", r"^c_proto", r"^constraints$", r"^goals$", r"^facet$", r"^gfw$", r"^powers$",
         r"^full_powers$", r"^eservice$", r"^legal_person_identifier$", r"^terminatingevents$",
         r"^disclosables$", r"^fiduciary$", r"^recognition$", r"^delegat", r"^licensevalue$",
         r"^extendscredential$", r"^authorizedserviceprovider$",
+    ) + title_only(
+        # Daniel, 2026-09-24: "can't you get authority from the authorization credential because
+        # it has authorization in its name?" `authorization`, never `auth`, which is also
+        # authentication (refs/abbreviations.json).
+        r"^authori[sz]ation", r"^mandate", r"^powerof(attorney|representation)", r"^guardian",
     ),
     # `^biometric` was here and is narrowed: an mDL carries `biometric_template_xx` as an identity
     # element, which is not a claim that the holder is a human being. `ongoing` and `minutes` are
@@ -96,7 +130,7 @@ V = {
     "brand": _rx(r"^brand", r"^logo", r"^vcard$", r"^wordmark$"),
     # `issuing_organization` was here and is removed: it names the ISSUER, not an organization the
     # credential is about, and it appears in the EU IBAN and MSISDN attestations about individuals.
-    "org_identity": _rx(r"^lei$", r"^legalcompany", r"^lids$", r"^legal_name$", r"^taxid$", r"^partygln$",
+    "org_identity": field_only(r"^lei$") + _rx( r"^legalcompany", r"^lids$", r"^legal_name$", r"^taxid$", r"^partygln$",
                         r"^organizationname$", r"^graceperiod$"),
     # Non-party vocabularies.
     # `typ`, `siz` and `loc` were in this list and are removed: they are generic enough to match a
@@ -127,7 +161,7 @@ def hits(fields: list[str], key: str) -> list[str]:
     out = []
     for f in fields:
         low = f.lower().strip("`")
-        if any(rx.search(low) for rx in V[key]):
+        if any(rx.search(low) for rx, scope in V[key] if scope != "title"):
             out.append(f)
     return out
 
@@ -171,7 +205,7 @@ def _substantive(fields: list[str]) -> list[str]:
         low = f.lower().strip("`")
         if low in HOUSEKEEPING:
             continue
-        if any(rx.search(low) for rx in ASSEMBLY_META):
+        if any(rx.search(low) for rx, _ in ASSEMBLY_META):
             continue
         out.append(f)
     return out
@@ -359,20 +393,25 @@ RESIDUAL = "misc"
 ACCOUNT = re.compile(r"account")
 ORG_ID_ONLY = re.compile(r"^(lei|lids|taxid|partygln)$")
 
-# The credential's TYPE NAME, as its schema titles it, is evidence too. Daniel, 2026-09-24:
-# "can't you get 'authority' from the authorization credential because it has 'authorization'
-# in its name? Are we not scanning the credential titles?" We were not. A verified schema's
-# title is written by the same author as its field names, so it is no less trustworthy, and it
-# is the only place the vLEI authorization credentials say what they are: their fields are those
-# of the credential they authorize. Narrow on purpose -- few categories, words that do not collide
-# (`authorization`, never `auth`, which is also authentication; see refs/abbreviations.json).
-TITLE_VOCAB = {
-    "authority": re.compile(r"authori[sz]ation|delegat|mandate|power ?of ?(attorney|representation)|guardian", re.I),
-    # Daniel, 2026-09-24, on the Qualified vLEI Issuer credential: "doesn't the word 'Qualified'
-    # in its name tell you it's a certification?"
-    # "certificate" is left out: birth, death, marriage and X.509 certificates are not certifications.
-    "qualification": re.compile(r"qualifi|certified|certification|accredit|diploma|degree", re.I),
-}
+# The credential's TYPE NAME, as its schema titles it, is evidence too, read with the SAME
+# vocabulary as field names (see `_rx` for the scopes). Daniel, 2026-09-24: "Are we not scanning
+# the credential titles?" A verified schema's title is written by the same author as its field
+# names, and it is the only place the vLEI authorization credentials say what they are: their
+# fields are those of the credential they authorize.
+
+
+def title_words(title: str) -> list[str]:
+    """Lowercased words of a title, camelCase split, plus each run of two and three words joined,
+    so a multi-word term ("power of attorney") meets a single-token pattern."""
+    t = re.sub(r"([a-z])([A-Z])", r"\1 \2", title)
+    t = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1 \2", t)
+    w = [x.lower() for x in re.split(r"[^A-Za-z0-9]+", t) if x]
+    return w + ["".join(w[i:i + 2]) for i in range(len(w) - 1)] + ["".join(w[i:i + 3]) for i in range(len(w) - 2)]
+
+
+def title_hits(title: str, key: str) -> list[str]:
+    """Every title word matching vocabulary `key`, in the scopes that apply to titles."""
+    return [t for t in title_words(title) if any(rx.search(t) for rx, scope in V[key] if scope != "field")]
 
 
 def title_of(row: dict) -> str:
@@ -421,10 +460,10 @@ def category_evidence(row: dict) -> dict[str, list[str]]:
     if roles and out["org-identity"] and all(ORG_ID_ONLY.search(x.lower().strip("`")) for x in out["org-identity"]):
         out["org-identity"] = []
     title = title_of(row)
-    for cat, rx in TITLE_VOCAB.items():
-        m = rx.search(title)
-        if m:
-            out[cat] = sorted(set(out[cat]) | {f"title: {title}"})
+    for cat in CATEGORIES:
+        words = sorted({w for v in CATEGORY_VOCAB[cat] for w in title_hits(title, v)})
+        if words:
+            out[cat] = sorted(set(out[cat]) | {f"title: {w}" for w in words})
     accounts = [x for x in f if ACCOUNT.search(x.lower().strip("`"))]
     money = money_evidence(row) if accounts else []
     if money:
