@@ -73,7 +73,7 @@
     },
     {
       "name": "role_label_index_does_not_discriminate",
-      "defends": "An edge label names the ROLE and then falls back to a bare index when the referrer has two of them. Left whole, licenceA and licenceB are unique, so the role channel alone would distinguish every node and the algorithm would stop before consulting anything meaningful -- emitting ITEM 03 with a longer name, in the channel that was meant to replace it. Found by running the algorithm, not by reasoning. Here the stems collide, so the issuee must be what separates them. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays. Here it also does the separating that the issuee used to, since the relation carries the issuee inside it -- the point the vector defends is unchanged: the edge label's A/B index must not be what tells them apart.",
+      "defends": "An edge label names the ROLE and then falls back to a bare index when the referrer has two of them. Left whole, licenceA and licenceB are unique, so the role channel alone would distinguish every node and the algorithm would stop before consulting anything meaningful -- emitting ITEM 03 with a longer name, in the channel that was meant to replace it. Found by running the algorithm, not by reasoning. Here the stems collide, so the issuee must be what separates them. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays. Here it also does the separating that the issuee used to, since the relation carries the issuee inside it -- the point the vector defends is unchanged: the edge label's A/B index must not be what tells them apart. REVISED 2026-09-24 under Q-BNBH (Daniel: 'change describe and the vector'): the stem `licence` is the same on both licences and on nothing else of that type, so 'as licence' tells the viewer nothing the type does not, and a drawn edge already carries the label. The role is no longer emitted here; the issuee still separates them.",
       "dag": {
         "nodes": [
           {
@@ -103,7 +103,6 @@
         "A": {
           "kinds": [
             "type",
-            "role",
             "parties"
           ],
           "distinguishing": true
@@ -111,7 +110,6 @@
         "B": {
           "kinds": [
             "type",
-            "role",
             "parties"
           ],
           "distinguishing": true
@@ -892,6 +890,62 @@
             "collected"
           ],
           "distinguishing": true
+        }
+      }
+    },
+    {
+      "name": "a_role_constant_within_its_type_says_nothing",
+      "defends": "Q-BNBH, Daniel 2026-09-24: 'change describe and the vector'. Two witness statements referenced as statementA and statementB both read 'as statement', and nothing else of their type plays another role, so the role repeats the type (and, once edges are drawn, the arrow's label). It is dropped. The single-node case keeps its role: with one credential of a type, 'constant' is vacuous, and a label like the VVP dossier's 'vetting' may be exactly what says why that credential is here.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "ROOT",
+            "schema": "S0",
+            "issuer": "I0",
+            "out_edges": {
+              "statementA": "A",
+              "statementB": "B",
+              "vetting": "C"
+            }
+          },
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "W1",
+            "issuee": "INS"
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "W2",
+            "issuee": "INS"
+          },
+          {
+            "said": "C",
+            "schema": "S2",
+            "issuer": "Q"
+          }
+        ]
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "parties"
+          ]
+        },
+        "C": {
+          "kinds": [
+            "type",
+            "role",
+            "parties"
+          ]
         }
       }
     }

@@ -736,15 +736,6 @@
         "text_alternative": false
        },
        {
-        "kind": "role",
-        "value": "licence",
-        "gain": 2.17,
-        "role_bearing": true,
-        "issuer_claim": true,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
         "kind": "parties",
         "value": [
          "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
@@ -795,15 +786,6 @@
         "gain": 2.17,
         "role_bearing": true,
         "issuer_claim": false,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
-        "kind": "role",
-        "value": "licence",
-        "gain": 2.17,
-        "role_bearing": true,
-        "issuer_claim": true,
         "negative": false,
         "text_alternative": false
        },
@@ -862,15 +844,6 @@
         "text_alternative": false
        },
        {
-        "kind": "role",
-        "value": "photo",
-        "gain": 1.17,
-        "role_bearing": true,
-        "issuer_claim": true,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
         "kind": "parties",
         "value": [
          "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
@@ -917,15 +890,6 @@
         "gain": 1.17,
         "role_bearing": true,
         "issuer_claim": false,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
-        "kind": "role",
-        "value": "photo",
-        "gain": 1.17,
-        "role_bearing": true,
-        "issuer_claim": true,
         "negative": false,
         "text_alternative": false
        },
@@ -980,15 +944,6 @@
         "text_alternative": false
        },
        {
-        "kind": "role",
-        "value": "photo",
-        "gain": 1.17,
-        "role_bearing": true,
-        "issuer_claim": true,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
         "kind": "parties",
         "value": [
          "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
@@ -1039,15 +994,6 @@
         "text_alternative": false
        },
        {
-        "kind": "role",
-        "value": "photo",
-        "gain": 1.17,
-        "role_bearing": true,
-        "issuer_claim": true,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
         "kind": "parties",
         "value": [
          "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
@@ -1094,15 +1040,6 @@
         "text_alternative": false
        },
        {
-        "kind": "role",
-        "value": "statement",
-        "gain": 2.17,
-        "role_bearing": true,
-        "issuer_claim": true,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
         "kind": "parties",
         "value": [
          "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
@@ -1135,15 +1072,6 @@
         "gain": 2.17,
         "role_bearing": true,
         "issuer_claim": false,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
-        "kind": "role",
-        "value": "statement",
-        "gain": 2.17,
-        "role_bearing": true,
-        "issuer_claim": true,
         "negative": false,
         "text_alternative": false
        },

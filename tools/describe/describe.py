@@ -241,6 +241,22 @@ def _entailed_here(dag: "Dag", kind: str, target: "Node") -> bool:
     return True
 
 
+def _role_constant_within_type(dag: "Dag", get, target) -> bool:
+    """True when every node sharing the target's type plays the same role.
+
+    Daniel, 2026-09-24 (Q-BNBH): "change describe and the vector". Two witness statements
+    referenced as `statementA` and `statementB` both read "as statement", which says nothing the
+    type did not -- and once edges are drawn as labelled arrows it repeats the arrow as well. So
+    a role adds nothing when it is constant across the target's type in this DAG.
+
+    Needs at least two nodes of the type. With one, "constant" is vacuous, and the role may be
+    exactly what says why this one credential is here (the live VVP dossier's `vetting`,
+    `alloc`, `tnalloc`, `delsig`), so it is kept rather than dropped on a technicality.
+    """
+    same = [n for n in dag.nodes if n.schema == target.schema]
+    return len(same) >= 2 and len({get(n) for n in same}) == 1
+
+
 def _gain(dag: "Dag", get, target) -> float:
     """Bits of surprisal for this channel's value, within this DAG.
 
@@ -543,6 +559,8 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
         if kind in _RELATIVE_CHANNELS and not _is_deviation(dag, get, target):
             continue
         if _entailed_here(dag, kind, target):
+            continue
+        if kind == "role" and _role_constant_within_type(dag, get, target):
             continue
         mine = get(target)
         if mine is None:
