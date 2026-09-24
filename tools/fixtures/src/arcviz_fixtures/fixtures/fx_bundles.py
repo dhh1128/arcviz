@@ -156,12 +156,27 @@ WITNESS_B = det.aid("accident_bundle:witness_b")
 ATTACHMENTS = "attachments"
 
 
-def _attach(corpus_dir, name, payload):
-    """Write the bytes and return the digest of exactly what was written."""
+def _attach(corpus_dir, name, fallback):
+    """Digest whatever is actually being served, preferring a committed real image.
+
+    A photorealistic attachment is a VENDORED asset, not generated output. `generate_images.py`
+    makes it once, by hand, against a model whose output is not reproducible; this generator
+    only ever reads it and digests what it finds. That is what keeps `arcviz-fixtures`
+    deterministic -- the promise every SAID in the corpus rests on -- while still letting the
+    bundle carry images a human can actually tell apart, which coloured rectangles cannot test.
+
+    With no committed image (a fresh clone that has not run the generator, or a box with no
+    API key) the abstract placeholder is written instead. The bundle still works, the three
+    image states are still exercised, and only the realism is lost.
+    """
     out = corpus_dir / ATTACHMENTS
     out.mkdir(parents=True, exist_ok=True)
-    (out / f"{name}.png").write_bytes(payload)
-    return images.digest(payload)
+    committed = out / f"{name}.png"
+    manifest = out / "MANIFEST.json"
+    if committed.exists() and manifest.exists() and name in json.loads(manifest.read_text()):
+        return images.digest(committed.read_bytes())
+    committed.write_bytes(fallback)
+    return images.digest(fallback)
 
 
 def _licence(label, *, issuee, number, name, expires, issued, portrait_digest):
