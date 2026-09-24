@@ -118,3 +118,18 @@ q.issuer-text { quotes: "“" "”"; }
 /* A rank is one band, so siblings that wrap onto several lines still read as one generation. */
 .rank + .rank { background: rgba(120, 128, 140, 0.07); border: 1px solid rgba(120, 128, 140, 0.18); border-radius: 12px; padding: 22px 10px 12px; }
 .rank-label { position: absolute; top: 3px; left: 12px; font-size: 0.72rem; color: var(--muted); }
+
+/* turn-4 revisions */
+.card { z-index: auto; }   /* a z-index here traps the entviz popover under later cards */
+.glyph-slot { position: relative; display: inline-flex; }
+.ext { position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; font: 700 8.5px/1 ui-monospace, Menlo, monospace; color: #000; letter-spacing: -0.02em; }
+.unknown-badge { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-top: 7px; border-radius: 50%; border: 1.5px dotted var(--unknown); color: #7a4a00; background: #fff4df; font-weight: 700; font-size: 0.8rem; }
+.incoming { display: flex; gap: 6px; }
+.info-wrap { position: relative; flex: none; }
+.info { background: none; border: none; padding: 1px; color: var(--muted); cursor: pointer; line-height: 0; }
+.info:hover, .info[aria-expanded="true"] { color: var(--ink); }
+.info-pop { position: absolute; right: 0; top: 20px; z-index: 40; width: 260px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); padding: 4px 10px; font-size: 0.8rem; }
+.info-pop p { margin: 6px 0; }
+.review-marks { display: flex; flex-wrap: wrap; gap: 4px; }
+.card-foot { justify-content: flex-end; }
+.demo-label-inline { font-size: 0.75rem; color: var(--muted); }

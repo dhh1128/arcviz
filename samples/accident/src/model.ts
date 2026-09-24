@@ -41,6 +41,7 @@ export interface Img {
   src?: string;
   digest?: string;
   manifest?: Record<string, any>;
+  media_type?: string | null;
 }
 
 export interface CNode {
@@ -56,6 +57,7 @@ export interface CNode {
   image: Img;
   type: { name: string | null; source: string; schema_state: string };
   glyph_override?: { category: string; glyph: string; why: string };
+  photo_glyph?: { why: string };
   borrowed_schema?: Record<string, any>;
 }
 

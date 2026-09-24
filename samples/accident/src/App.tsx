@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
+import type { TrustAssumption } from "@entviz/core";
 import { budgeted, ranks, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
@@ -27,6 +28,10 @@ export const PLACEHOLDERS: Record<string, { title: string; body: string }> = {
   reputation: {
     title: "Reputation channel",
     body: "credential-descriptors.md section 1 requires assessment to ride in its own channel, never the name slot, and does not design it. This slot shows where the host's evidentiary stance on the credential would go. No host stance is supplied.",
+  },
+  photoglyph: {
+    title: "Photograph glyph",
+    body: "Photographs land in misc, and the generic document says nothing. Two candidates, switchable in the header: a picture pictograph (Phosphor 'image'), or the document with its lines removed and the file extension printed on it. The extension is read from the bytes, so a withheld picture shows '?'.",
   },
   subglyph: {
     title: "Subcategory glyph, hand-assigned",
@@ -74,12 +79,25 @@ function Glyph({ name, size = 32, color }: { name: string; size?: number; color?
   );
 }
 
-function glyphsFor(n: CNode): { category: string; glyph: string; override: boolean }[] {
+type PhotoGlyph = "picture" | "extension" | "none";
+const PhotoMode = createContext<PhotoGlyph>("picture");
+// The host's trust posture for the AIDs in this presentation. Wild (entviz's default) gives an
+// unnamed AID the type text; corpus opens the mnemonic, as bakobo/cesrview does. Whether a
+// presentation is a corpus is the host's call, never arcviz's (docs/integration/entviz.md).
+const Trust = createContext<TrustAssumption | undefined>(undefined);
+
+function glyphsFor(n: CNode, photo: PhotoGlyph = "picture"): { category: string; glyph: string; override: boolean; ext?: string | null }[] {
   const cats = n.classified.categories.length ? n.classified.categories : ["misc"];
-  return cats.map((c) =>
-    n.glyph_override && n.glyph_override.category === c
-      ? { category: c, glyph: n.glyph_override.glyph, override: true }
-      : { category: c, glyph: c, override: false });
+  return cats.map((c) => {
+    if (n.glyph_override && n.glyph_override.category === c)
+      return { category: c, glyph: n.glyph_override.glyph, override: true };
+    if (c === "misc" && n.photo_glyph && photo === "picture")
+      return { category: c, glyph: "misc.photo", override: true };
+    if (c === "misc" && n.photo_glyph && photo === "extension")
+      // The extension comes from the bytes, so a withheld picture has none to show.
+      return { category: c, glyph: "misc.doc-blank", override: true, ext: n.image.media_type ?? null };
+    return { category: c, glyph: c, override: false };
+  });
 }
 
 function Band({ cats }: { cats: string[] }) {
@@ -113,6 +131,7 @@ function SaidHandle({ said }: { said: string }) {
 function PartyPill({ party }: { party?: Party }) {
   if (!party) return <span className="muted">(no party)</span>;
   const flags = party.coiaFlags ?? [];
+  const trust = useContext(Trust);
   return (
     <span className="party">
       <EntvizPill
@@ -120,6 +139,7 @@ function PartyPill({ party }: { party?: Party }) {
         // undefined, never "": an empty string still wins the label precedence and blanks the pill.
         label={party.label ?? undefined}
         typeSignal="autoCombo"
+        trust={trust}
         onCompare={() => {}}
         maxWidth="100%"
       />
@@ -184,23 +204,38 @@ function Thumb({ n, pictures }: { n: CNode; pictures: boolean }) {
 // The card
 
 function AxisTags({ n }: { n: CNode }) {
+  // Deviations get words, because they say something. `unknown` gets no words on the face of
+  // the card (Daniel, turn 4: "do we need text for the absence of something?"); it gets the
+  // dotted outline and the '?' badge in the header, and its explanation lives in the (i).
   const { subject, alignment } = n.classified;
-  const tags: { text: string; unknown: boolean; why: string }[] = [];
-  const s = SUBJECT_TEXT[subject];
-  if (s) tags.push({ text: s, unknown: subject === "unknown", why: n.classified.subject_why });
-  const a = ALIGNMENT_TEXT[alignment];
-  if (a && !(alignment === "unknown" && subject === "unknown"))
-    tags.push({ text: a, unknown: alignment === "unknown", why: n.classified.alignment_why });
+  const tags: { text: string; why: string }[] = [];
+  const s = subject === "unknown" ? null : SUBJECT_TEXT[subject];
+  if (s) tags.push({ text: s, why: n.classified.subject_why });
+  const a = alignment === "unknown" ? null : ALIGNMENT_TEXT[alignment];
+  if (a) tags.push({ text: a, why: n.classified.alignment_why });
   if (!tags.length) return null;
   return (
     <div className="axis-tags">
       {tags.map((t) => (
-        <span key={t.text} className={"axis-tag" + (t.unknown ? " unknown" : "")} title={`${t.why}. Computed by the synthesized classifier, not ratified.`}>
-          {t.unknown ? "? " : ""}{t.text}
-        </span>
+        <span key={t.text} className="axis-tag" title={`${t.why}. Computed by the synthesized classifier, not ratified.`}>{t.text}</span>
       ))}
-      {tags.some((t) => t.unknown) && <Ph id="unknown" />}
     </div>
+  );
+}
+
+// Progressive disclosure for everything that explains rather than orients. Hover or focus
+// shows it; click pins it open.
+function Info({ notes }: { notes: string[] }) {
+  const [pinned, setPinned] = useState(false);
+  if (!notes.length) return null;
+  return (
+    <span className="info-wrap">
+      <button className="info" aria-label="About this credential" aria-expanded={pinned} title={notes.join("\n\n")}
+        onClick={() => setPinned(!pinned)}>
+        <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.4" /><circle cx="8" cy="4.6" r="1" fill="currentColor" /><rect x="7.2" y="6.6" width="1.6" height="5.4" rx="0.8" fill="currentColor" /></svg>
+      </button>
+      {pinned && <div className="info-pop" role="note">{notes.map((t, i) => <p key={i}>{t}</p>)}</div>}
+    </span>
   );
 }
 
@@ -212,13 +247,24 @@ function Card({
   register: (said: string, el: HTMLElement | null) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const glyphs = glyphsFor(n);
+  const marks = useContext(Marks);
+  const photoMode = useContext(PhotoMode);
+  const glyphs = glyphsFor(n, photoMode);
   const cats = glyphs.map((g) => g.category);
   const primary = PALETTE[cats[0]] ?? PALETTE.misc;
   const typeName = n.type.name;
   const { kept, dropped } = budgeted(desc, lines);
   const unknown = n.classified.subject === "unknown" || n.classified.alignment === "unknown";
   const isPresented = frame.presented === n.said;
+
+  const notes: string[] = [];
+  notes.push(`Kind: ${cats.join(", ")}${n.classified.categories.length ? "" : " (nothing matched, so the residual)"}.`);
+  if (unknown) notes.push("The classifier could not tell what this credential is about, so it cannot say whether it is evidence about the party presenting it. That is not the same as ordinary.");
+  for (const e of incoming) notes.push(`Referenced as “${e.label}” by the ${e.from.type.name ?? "unresolved type"}. The label is the referring issuer's choice.`);
+  if (desc.annotations.some((x) => x.kind === "subject_undetermined")) notes.push("This label tells it apart from its siblings but does not say what it is about.");
+  if (desc.annotations.some((x) => x.kind === "image_committed_not_resolved")) notes.push("The credential commits to a picture that this presentation did not supply.");
+  if (dropped.length) notes.push(`${dropped.length} weaker ${dropped.length === 1 ? "datum" : "data"} not shown: ${dropped.map((c) => c.kind).join(", ")}. Raise the line budget or open “more”.`);
+  notes.push("No host judgement about this credential was supplied.");
 
   return (
     <article
@@ -229,54 +275,49 @@ function Card({
       <Band cats={cats} />
       <div className="card-body">
         {incoming.length > 0 && (
-          <div className="incoming" title="The edge label, chosen by the referring credential's issuer. DD-3: every drawn edge carries its label.">
+          <div className="incoming">
             {incoming.map((e) => (
-              <span key={e.label + e.from.said}>
-                referenced as <code className="issuer-text">{e.label}</code> by the {e.from.type.name ?? "unresolved type"}
-              </span>
+              <code key={e.label + e.from.said} className="issuer-text" title={`referenced as “${e.label}” by the ${e.from.type.name ?? "unresolved type"}`}>{e.label}</code>
             ))}
           </div>
         )}
         <header className="card-head">
           <span className="glyph-row" style={{ color: primary.color }}>
             {glyphs.map((g) => (
-              <span key={g.glyph} className={g.override ? "glyph-override" : ""} title={`${g.category}${g.override ? " (subcategory hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
+              <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")} title={`${g.category}${g.override ? " (glyph hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
                 <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
+                {g.ext !== undefined && <span className="ext">{g.ext ? "." + g.ext : "?"}</span>}
               </span>
             ))}
+            {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
           </span>
           <div className="type">
             <div className="type-name">
               {isPresented && <span className="presented-tag">presented</span>}
               {typeName ?? <span className="muted">unresolved type</span>}
             </div>
-            <div className="cat-names">{cats.join(" · ")}</div>
           </div>
           <SaidHandle said={n.said} />
+          <Info notes={notes} />
         </header>
         <AxisTags n={n} />
+        {marks && unknown && <div><Ph id="unknown" /></div>}
         <div className="card-main">
           <Thumb n={n} pictures={pictures} />
           <ul className="desc">
             {kept.map((c, i) => <ComponentLine key={i} c={c} frame={frame} pictures={pictures} />)}
-            {dropped.length > 0 && (
-              <li className="dropped" title={dropped.map((c) => `${c.kind} (${c.gain.toFixed(2)} bits)`).join(", ")}>
-                +{dropped.length} weaker {dropped.length === 1 ? "datum" : "data"} not shown
-              </li>
-            )}
           </ul>
         </div>
-        {desc.annotations.map((a, i) => (
-          <div key={i} className="annotation">
-            {a.kind === "image_committed_not_resolved" ? <>⚠ a committed picture was not supplied <Ph id="thumbs" /></>
-              : a.kind === "subject_undetermined" ? "the label does not say what this one is about"
-              : a.kind}
-          </div>
-        ))}
         {!desc.distinguishing && <div className="annotation">⚠ not distinguishable from {desc.indistinguishable_from.length} other(s)</div>}
         {!pictures && !desc.distinguishing_as_text && <div className="annotation">⚠ cannot be told apart without its picture</div>}
+        {marks && (
+          <div className="review-marks">
+            <span className="reputation" title={PLACEHOLDERS.reputation.body}>host's stance: not supplied</span>
+            {n.image.state === "committed-not-resolved" && <Ph id="thumbs" />}
+            {n.photo_glyph && <Ph id="photoglyph" />}
+          </div>
+        )}
         <footer className="card-foot">
-          <span className="reputation" title={PLACEHOLDERS.reputation.body}>host's stance: not supplied</span>
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}
@@ -441,6 +482,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
 
 // First glance, posture point 5: what kinds of evidence are there?
 function Kinds({ frame }: { frame: Frame }) {
+  const photoMode = useContext(PhotoMode);
   const groups = new Map<string, { n: CNode; count: number }>();
   for (const n of frame.nodes) {
     const k = n.type.name ?? `unresolved type ${n.schema.slice(0, 8)}`;
@@ -451,7 +493,7 @@ function Kinds({ frame }: { frame: Frame }) {
     <div className="kinds" aria-label="What kinds of evidence are here">
       <Ph id="palette" />
       {[...groups.entries()].map(([k, { n, count }]) => {
-        const g = glyphsFor(n)[0];
+        const g = glyphsFor(n, photoMode)[0];
         return (
           <span className="kind" key={k}>
             <Glyph name={g.glyph} size={24} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
@@ -487,7 +529,7 @@ function Legend() {
       <div className="axis-demo">
         <div className="mini">ordinary <span className="muted">(nothing drawn)</span></div>
         <div className="mini"><span className="axis-tag">about an event</span> a deviation</div>
-        <div className="mini card-unknown-demo"><span className="axis-tag unknown">? subject unknown</span> unknown</div>
+        <div className="mini card-unknown-demo"><span className="unknown-badge" style={{ marginTop: 0 }}>?</span> unknown: the dotted outline and the ? badge, no words</div>
       </div>
 
       <h4 id="ph-glyphrow">Four or more glyphs <Ph id="glyphrow" /></h4>
@@ -504,6 +546,14 @@ function Legend() {
           {sampleRow.slice(0, 2).map((c) => <Glyph key={c} name={c} size={24} color={PALETTE[c].color} />)}
           <span className="more-glyphs" title={sampleRow.slice(2).join(", ")}>+{sampleRow.length - 2}</span>
         </div>
+      </div>
+
+      <h4 id="ph-photoglyph">Photograph glyph <Ph id="photoglyph" /></h4>
+      <div className="row-demo">
+        <div><Glyph name="misc.photo" size={32} color={PALETTE.misc.color} /> <span className="demo-label-inline">picture</span></div>
+        <div><span className="glyph-slot"><Glyph name="misc.doc-blank" size={32} color={PALETTE.misc.color} /><span className="ext">.png</span></span>
+          <span className="glyph-slot"><Glyph name="misc.doc-blank" size={32} color={PALETTE.misc.color} /><span className="ext">?</span></span>
+          <span className="demo-label-inline">document + extension; ? when the picture is withheld</span></div>
       </div>
 
       <h4 id="ph-thumbs">Pictures <Ph id="thumbs" /></h4>
@@ -529,7 +579,9 @@ export default function App() {
   const [frameId, setFrameId] = useState("accident");
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
-  const [marks, setMarks] = useState(true);
+  const [marks, setMarks] = useState(false);
+  const [photo, setPhoto] = useState<PhotoGlyph>("picture");
+  const [corpus, setCorpus] = useState(false);
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
   useEffect(() => {
@@ -543,7 +595,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}>
+    <Marks.Provider value={marks}><PhotoMode.Provider value={photo}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -559,7 +611,18 @@ export default function App() {
               <span className="num">{lines === 4 ? "all" : lines}</span>
             </label>
             <label><input type="checkbox" checked={pictures} onChange={(e) => setPictures(e.target.checked)} /> pictures</label>
-            <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> placeholder marks</label>
+            <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
+            <label title="The host's trust posture for these AIDs. Wild: an unnamed AID shows its type text. Corpus: it shows the mnemonic built from its value.">
+              <input type="checkbox" checked={corpus} onChange={(e) => setCorpus(e.target.checked)} /> host treats AIDs as a corpus
+            </label>
+            <label title="Candidates for the photograph glyph">
+              photo glyph
+              <select value={photo} onChange={(e) => setPhoto(e.target.value as PhotoGlyph)}>
+                <option value="picture">picture</option>
+                <option value="extension">document + extension</option>
+                <option value="none">generic document</option>
+              </select>
+            </label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
                 <input type="checkbox" checked={v === "host-aliases"}
@@ -577,7 +640,7 @@ export default function App() {
         <main className="layout">
           <section className="frame">
             <Kinds frame={frame} />
-            {frame.supplied_by_hand.length > 0 && (
+            {marks && frame.supplied_by_hand.length > 0 && (
               <p className="hand">Supplied by hand for this sample: {frame.supplied_by_hand.join("; ")}.{" "}
                 {frame.id === "vlei" && <Ph id="borrowed" />}</p>
             )}
@@ -586,6 +649,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Marks.Provider>
+    </Trust.Provider></PhotoMode.Provider></Marks.Provider>
   );
 }

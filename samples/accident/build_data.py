@@ -45,6 +45,15 @@ from describe import describe, load_corpus_dag  # noqa: E402
 GLYPHS = ROOT / "docs" / "design" / "iconography" / "glyphs"
 
 
+def sniff(b: bytes) -> str | None:
+    """Media type from the bytes, never from a name. Only knowable when the bytes resolve."""
+    if b.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if b.startswith(b"\xff\xd8\xff"):
+        return "jpg"
+    return None
+
+
 def sad(name: str) -> dict:
     return json.loads((CORPUS / f"{name}.json").read_text())
 
@@ -150,7 +159,8 @@ def accident(host: dict) -> dict:
         if png.exists() and stem[cred] in manifest:
             resolvable.add(dig)
             images[cred] = {"state": "resolved", "src": f"attachments/{png.name}",
-                            "digest": dig, "manifest": manifest[stem[cred]]}
+                            "digest": dig, "manifest": manifest[stem[cred]],
+                            "media_type": sniff(png.read_bytes())}
         else:
             images[cred] = {"state": "committed-not-resolved", "digest": dig}
 
@@ -178,6 +188,9 @@ def accident(host: dict) -> dict:
                                        "glyph": "qualification.driving",
                                        "why": "Q-D4RX: nothing selects a subcategory yet; "
                                               "hand-assigned for this sample"}
+        if n.startswith("accident_photo") and not cls["categories"]:
+            extra["photo_glyph"] = {"why": "photographs land in misc; which glyph a misc photograph "
+                                           "gets is undecided, and this node was marked as one by hand"}
         nodes.append(node_json(n, s, cls, extra))
 
     aids = {x for s in sads.values() for x in (s["i"], (s.get("a") or {}).get("i")) if x}
@@ -244,7 +257,7 @@ def main() -> int:
     host = json.loads((HERE / "host.json").read_text())
     PUBLIC.mkdir(exist_ok=True)
     (PUBLIC / "glyphs").mkdir(exist_ok=True)
-    for svg in GLYPHS.glob("*.svg"):
+    for svg in [*GLYPHS.glob("*.svg"), *(HERE / "candidates").glob("*.svg")]:
         shutil.copy2(svg, PUBLIC / "glyphs" / svg.name)
     (PUBLIC / "attachments").mkdir(exist_ok=True)
     for png in (CORPUS / "attachments").glob("*.png"):

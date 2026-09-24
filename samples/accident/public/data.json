@@ -152,7 +152,8 @@
        "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
        "sha256": "66db4ae7c018c3e97f17e33afb3938a8faab4d3e686d62542d43b82837122e82",
        "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/womans-face-1.jpg"
-      }
+      },
+      "media_type": "png"
      },
      "type": {
       "name": "driving licence",
@@ -228,7 +229,8 @@
        "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
        "sha256": "1b685a79855a791f651cecbca0364f5de09ae0210d92bcb7d38019b33e7b8790",
        "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/mans-face-1.jpg"
-      }
+      },
+      "media_type": "png"
      },
      "type": {
       "name": "driving licence",
@@ -291,12 +293,16 @@
        "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
        "sha256": "4edd162b743c6979ff94d2db38a5a638fe5eba31fb815935d0a0394135fac41e",
        "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/bumper.jpg"
-      }
+      },
+      "media_type": "png"
      },
      "type": {
       "name": "scene photograph",
       "source": "hand-supplied",
       "schema_state": "unavailable"
+     },
+     "photo_glyph": {
+      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
      }
     },
     {
@@ -349,12 +355,16 @@
        "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
        "sha256": "d85e7e1841fa0e23efc706ae2532edf0b83ac10d25c3958a34f4be00008e3b93",
        "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/drivers-door.jpg"
-      }
+      },
+      "media_type": "png"
      },
      "type": {
       "name": "scene photograph",
       "source": "hand-supplied",
       "schema_state": "unavailable"
+     },
+     "photo_glyph": {
+      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
      }
     },
     {
@@ -407,12 +417,16 @@
        "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
        "sha256": "ab2d2c4a6ddb948e0d135ab2793bc62eb88e68fef6d03dfc37d1255a4a354a6a",
        "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/pickup.jpg"
-      }
+      },
+      "media_type": "png"
      },
      "type": {
       "name": "scene photograph",
       "source": "hand-supplied",
       "schema_state": "unavailable"
+     },
+     "photo_glyph": {
+      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
      }
     },
     {
@@ -448,6 +462,9 @@
       "name": "scene photograph",
       "source": "hand-supplied",
       "schema_state": "unavailable"
+     },
+     "photo_glyph": {
+      "why": "photographs land in misc; which glyph a misc photograph gets is undecided, and this node was marked as one by hand"
      }
     },
     {
