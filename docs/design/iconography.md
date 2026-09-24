@@ -57,7 +57,7 @@ Twenty pictures in twenty-two files: every one of the nine categories, ten subca
 
 A photograph carries no category, so it lands in `misc`, and the plain document says nothing about it. On 2026-09-24 Daniel chose the document with its lines removed and the file extension printed on it over a picture pictograph: *"We already show the actual photo, so having an icon for a photo isn't important."* The glyph is `misc.file`. The extension is text the renderer lays over it, never part of the path, so the glyph is still one silhouette in `currentColor`. He asked for the text to be white, because black is unreadable on the glyph's dark fill.
 
-The extension is read from the bytes, never from a file name or a claim in the credential, so it is only known when the attachment resolves. What a withheld attachment shows is open; the sample shows `?`.
+The extension is read from the bytes, never from a file name or a claim in the credential, so it is only known when the attachment resolves. A withheld attachment, or an unrecognized type, shows the blank page with no text (his, 2026-09-24). The extension is centred vertically on the glyph.
 
 ## Composition
 

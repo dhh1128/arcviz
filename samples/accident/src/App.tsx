@@ -82,7 +82,7 @@ function glyphsFor(n: CNode): { category: string; glyph: string; override: boole
       return { category: c, glyph: n.glyph_override.glyph, override: true };
     if (c === "misc" && n.photo_glyph)
       // Daniel, 2026-09-24: the document with the extension on it. The extension comes from the
-      // bytes, so a withheld picture has none to show.
+      // bytes, so a withheld picture has none, and then the page is left blank (Daniel, turn 24).
       return { category: c, glyph: "misc.file", override: false, ext: n.image.media_type ?? null };
     return { category: c, glyph: c, override: false };
   });
@@ -337,7 +337,7 @@ function Card({
               <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")}>
                 <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color}
                   title={glyphTitle(g, meanings, n.classified.category_hits[g.category] ?? [])} />
-                {g.ext !== undefined && <span className="ext">{g.ext ? g.ext : "?"}</span>}
+                {g.ext && <span className="ext">{g.ext}</span>}
               </span>
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
