@@ -48,22 +48,925 @@
     }
   ],
   "known_schemas": {
-    "_comment": "SAID -> what is known without fetching anything. `verified` records how the entry was established, because an entry nobody checked is a claim, not a fact.",
-    "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY": {
-      "title": "Legal Entity vLEI Credential",
-      "short": "LE credential",
-      "credential_type": "LegalEntityvLEICredential",
-      "issuer_role": "Qualified vLEI Issuer",
-      "issuee_role": "Legal Entity",
+    "EAqOeo_YMHDEMZ-dIJTYd72nsoUS-C1RdXtOdfAj7ZxR": {
+      "title": "Generalized Cooperative Delegation Credential",
+      "origin": "bakobo",
+      "ref": "gcd-2.0.1/gcd-2.0.1.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "gcd-credential",
+      "url": "https://schema.bakobo.com/gcd-2.0.1/gcd-2.0.1.schema.json",
+      "issuer_role": "AID of the issuer (the delegator)",
+      "issuee_role": "AID of the delegate (the issuee) who receives the delegated authority. When the delegate is also a KERI cooperative-delegated AID of the issuer, this is the AID as it appears in the delegator's interaction event — but GCD does not require a KERI cooperative-delegation binding; it documents delegated authority for any issuer-to-delegate relationship.",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EAwWdh1p_JlRUn35GjvueqljM5w-tQCe3XWIc52k0pyC": {
+      "title": "Bind Key",
+      "origin": "bakobo",
+      "ref": "bindkey/bindkey.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "BindKeyAttestation",
+      "url": "https://schema.bakobo.com/bindkey/bindkey.schema.json",
+      "issuer_role": "AID of the issuer declaring the key binding"
+    },
+    "EBCnd7qk82wLBOgFukdmsdkksAuPpmzt5-eg9YKWWP3j": {
+      "title": "AI user code of conduct attestation",
+      "origin": "bakobo",
+      "ref": "ai-user-coca-1.0.0/ai-user-coca-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ai-user-coca",
+      "url": "https://schema.bakobo.com/ai-user-coca-1.0.0/ai-user-coca-1.0.0.schema.json",
+      "issuer_role": "Identifier of the issuer (the one giving the award)",
+      "issuee_role": "AID of issuee (award recipient)",
       "entailed": [
         "issuer",
         "issuee"
       ],
-      "verified": "2026-09-24, fetched from both sources above; `$id` equals this key; issuer_role and issuee_role read from the schema's own property descriptions ('QVI Issuer AID', 'LE Issuer AID'); pinned_edges read structurally from the e section's required list plus the const on that edge's s",
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "ai-user-coca/ai-user-coca.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EBaOk8MWJv-mMOer7VySiiPMqBZbzLW7FQsZJR-lGCfu": {
+      "title": "SEDI Age Attestation",
+      "origin": "bakobo",
+      "ref": "sedi-age-2.0.0/sedi-age-2.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Age",
+      "url": "https://schema.bakobo.com/sedi-age-2.0.0/sedi-age-2.0.0.schema.json",
+      "issuer_role": "AID of the issuer (the State, via the Department of Government Operations)"
+    },
+    "EBxJHMk6MOEUogB6A1rP5x9te7DscPfxFfUGJCkq1Lq5": {
+      "title": "Award Credential",
+      "origin": "bakobo",
+      "ref": "award-1.0.0/award-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "AwardCredential",
+      "url": "https://schema.bakobo.com/award-1.0.0/award-1.0.0.schema.json",
+      "issuer_role": "AID of the issuer(the one giving the award)",
+      "issuee_role": "AID of issuee (award recipient)",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "award/award.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EBzm1khKzF5_kasnw3QTKfcycQyqMc3WE6WXW5UM9o2L": {
+      "title": "SEDI County Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-county-pre-presentation-rd-1.0.0/sedi-present-county-pre-presentation-rd-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_CountyPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-county-pre-presentation-rd-1.0.0/sedi-present-county-pre-presentation-rd-1.0.0.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ED7zRxzpuvv89c6jDwgyBNOoW06Ut0wm_8jJQRqKYv_5": {
+      "title": "SEDI Core Schema",
+      "origin": "bakobo",
+      "ref": "sedi-core-0.1.0/sedi-core-0.1.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Core_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-core-0.1.0/sedi-core-0.1.0.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EDH3Q0MW6oCcwyYw2MN39n1YfPs37o1QEv86kB-fBzmh": {
+      "title": "Citation",
+      "origin": "bakobo",
+      "ref": "citation-1.0.0/citation-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "citation",
+      "url": "https://schema.bakobo.com/citation-1.0.0/citation-1.0.0.schema.json",
+      "issuer_role": "Identifier of the issuer",
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "citation/citation.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EDLnuzqWAuaahMDwPIynm0StlbqrUZHKMehfmyaMwIEh": {
+      "title": "SEDI Ward Authorization",
+      "origin": "bakobo",
+      "ref": "sedi-ward-authz-pre-core-compact-1.0.0/sedi-ward-authz-pre-core-compact-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Ward_AuthZ",
+      "url": "https://schema.bakobo.com/sedi-ward-authz-pre-core-compact-1.0.0/sedi-ward-authz-pre-core-compact-1.0.0.schema.json",
+      "issuer_role": "Guardian issuer AID",
+      "issuee_role": "Ward issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EDg5tBqnVFoGILBgIknKs-0CHv3au4GczuPgjf4jx1X2": {
+      "title": "SEDI Residence Schema",
+      "origin": "bakobo",
+      "ref": "sedi-residence/sedi-residence.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Residence_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-residence/sedi-residence.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EDhcDjDkCgdCHQurAvXjYPx2bR9jpBxw6WvOYiismmOV": {
+      "title": "SEDI Digital Guardian",
+      "origin": "bakobo",
+      "ref": "sedi-guardian-pre-core-compact-3.0.0/sedi-guardian-pre-core-compact-3.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Guardian",
+      "url": "https://schema.bakobo.com/sedi-guardian-pre-core-compact-3.0.0/sedi-guardian-pre-core-compact-3.0.0.schema.json",
+      "issuer_role": "Issuer = the appointing authority (court/DGO for court bases; the individual for a self-executed designation; DGO for a parental attestation)",
+      "issuee_role": "Issuee = the GUARDIAN's AID (holder != subject)",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EDqAod5ZiCNfQziVHjOALNNRabw2iwpAYqqOsEXUcxm5": {
+      "title": "Generalized Cooperative Delegation Credential",
+      "origin": "bakobo",
+      "ref": "gcd/gcd.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "gcd-credential",
+      "url": "https://schema.bakobo.com/gcd/gcd.schema.json",
+      "issuer_role": "AID of the issuer (the delegator)",
+      "issuee_role": "AID of the delegate (the issuee) who receives the delegated authority. When the delegate is also a KERI cooperative-delegated AID of the issuer, this is the AID as it appears in the delegator's interaction event — but GCD does not require a KERI cooperative-delegation binding; it documents delegated authority for any issuer-to-delegate relationship.",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EE1qJmXEgBbinrT_1fSe3_ccu-MWG7znc2D88f6aCxL_": {
+      "title": "SEDI County Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-county-pre-core-compact-1.0.0/sedi-present-county-pre-core-compact-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_CountyPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-county-pre-core-compact-1.0.0/sedi-present-county-pre-core-compact-1.0.0.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EE5FA0uE3ydhSYrG8lqECgR0Ad3NpkQxPw0b3jp-2eDa": {
+      "title": "Data Attestation",
+      "origin": "bakobo",
+      "ref": "attestation/attestation.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "DataAttestation",
+      "url": "https://schema.bakobo.com/attestation/attestation.schema.json",
+      "issuer_role": "AID of the issuer making the attestation"
+    },
+    "EEOlXEm4qnRfnZMEOmK9dI-ZzPWpGzq4zSr8V_Lbg9uA": {
+      "title": "Private Bind Key",
+      "origin": "bakobo",
+      "ref": "bindkey-private/bindkey-private.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "PrivateBindKeyAttestation",
+      "url": "https://schema.bakobo.com/bindkey-private/bindkey-private.schema.json",
+      "issuer_role": "AID of the holder, which issues this credential to itself",
+      "issuee_role": "AID of the holder: the issuee, and also the issuer, because this credential is self-issued",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EEgFNN1XH90koG5J5pbXKlRNU6TnibizaTQmJcRfEcop": {
+      "title": "SEDI Residence Schema",
+      "origin": "bakobo",
+      "ref": "sedi-residence-0.1.0/sedi-residence-0.1.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Residence_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-residence-0.1.0/sedi-residence-0.1.0.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EFvHYHX0cUx9sdjxZOr9fpPcQKdzRNFH42D8R29p7lAH": {
+      "title": "Bind Key",
+      "origin": "bakobo",
+      "ref": "bindkey-1.0.0/bindkey-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "BindKeyAttestation",
+      "url": "https://schema.bakobo.com/bindkey-1.0.0/bindkey-1.0.0.schema.json",
+      "issuer_role": "AID of the issuer",
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "bindkey/bindkey.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EFxTYHyCerqMSJthl17hGxZhcRz1lEP5cWtRZ-hsZh85": {
+      "title": "SEDI Age Attestation",
+      "origin": "bakobo",
+      "ref": "sedi-age-pre-core-compact-3.0.0/sedi-age-pre-core-compact-3.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Age",
+      "url": "https://schema.bakobo.com/sedi-age-pre-core-compact-3.0.0/sedi-age-pre-core-compact-3.0.0.schema.json",
+      "issuer_role": "AID of the issuer (the State, via the Department of Government Operations)"
+    },
+    "EGScFnkqFnKv0c8X2yBXKieX7Ya6h7kAPiLz_48YsIL_": {
+      "title": "SEDI Age-and-Portrait Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-age-portrait-pre-presentation-rd-3.0.0/sedi-present-age-portrait-pre-presentation-rd-3.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_AgePortraitPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-age-portrait-pre-presentation-rd-3.0.0/sedi-present-age-portrait-pre-presentation-rd-3.0.0.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EH4PDqEiMgA6gO0hjC5bnbosnBdGjUKug60yhx9CtUAO": {
+      "title": "Foreign Evidence",
+      "origin": "bakobo",
+      "ref": "foreign-evidence/foreign-evidence.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ForeignEvidenceAttestation",
+      "url": "https://schema.bakobo.com/foreign-evidence/foreign-evidence.schema.json",
+      "issuer_role": "AID of the reissuer that ran the checks",
+      "issuee_role": "AID of the holder who presented the foreign credential",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EHM6a9atXNYYta67ZKp8VknJ0KiQ8m5BU6RkMWoK5_1Y": {
+      "title": "SEDI Ward Core",
+      "origin": "bakobo",
+      "ref": "sedi-ward-core/sedi-ward-core.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Ward_Core_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-ward-core/sedi-ward-core.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EHReayB8hE1jqYEr418Hxh_najdMS8UExEG4G6Ris3MO": {
+      "title": "AI user code of conduct attestation",
+      "origin": "bakobo",
+      "ref": "ai-user-coca/ai-user-coca.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ai-user-coca",
+      "url": "https://schema.bakobo.com/ai-user-coca/ai-user-coca.schema.json",
+      "issuer_role": "AID of the issuer making the declaration"
+    },
+    "EHcc2Ow86VVg37zhILHFz942GEYfQ8PGTwKb2h4KdJFU": {
+      "title": "SEDI Age-and-Portrait Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-age-portrait/sedi-present-age-portrait.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_AgePortraitPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-age-portrait/sedi-present-age-portrait.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EHp3Ik9q-6-sT0IFaLRJDEjd-j3zMRdy1aN6O6awCsZd": {
+      "title": "SEDI IAR Schema",
+      "origin": "bakobo",
+      "ref": "sedi-iar/sedi-iar.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_IAR_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-iar/sedi-iar.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa": {
+      "title": "Org Vet",
+      "origin": "bakobo",
+      "ref": "org-vet/org-vet.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "orgVet",
+      "url": "https://schema.bakobo.com/org-vet/org-vet.schema.json",
+      "issuer_role": "AID of the vetting issuer",
+      "issuee_role": "Issuee: the AID controlled by the organization being vetted. Required, because a vet of nobody in particular cannot be presented by the organization it vets.",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EJvd1ns0KVsbB4Ji1MEv4cdq8WOSQezILlluN63K_JOH": {
+      "title": "Foreign Artifact Affidavit",
+      "origin": "bakobo",
+      "ref": "faa/faa.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "foreign-artifact-affidavit",
+      "url": "https://schema.bakobo.com/faa/faa.schema.json",
+      "issuer_role": "AID of the issuer -- the party attesting to the artifact's integrity and provenance"
+    },
+    "EJvwY9n7EsJ4ZejUBHFrnrNammC8BkGI9YaW1Wnp5c22": {
+      "title": "Org Vet",
+      "origin": "bakobo",
+      "ref": "org-vet-1.0.0/org-vet-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "orgVet",
+      "url": "https://schema.bakobo.com/org-vet-1.0.0/org-vet-1.0.0.schema.json",
+      "issuer_role": "Identifier of the issuer",
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "org-vet/org-vet.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EJxFPpyDRV-W6O2Vtjdy2K90ltWmQK8l1jePw5YOo_Ft": {
+      "title": "Data Attestation",
+      "origin": "bakobo",
+      "ref": "attestation-1.0.0/attestation-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "DataAttestation",
+      "url": "https://schema.bakobo.com/attestation-1.0.0/attestation-1.0.0.schema.json",
+      "issuer_role": "Issuer AID",
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "attestation/attestation.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EKzRBzCdp2t0iKuHMSNAa-EaJdULjmEJTJ6zR1DlzuQq": {
+      "title": "Citation",
+      "origin": "bakobo",
+      "ref": "citation/citation.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "citation",
+      "url": "https://schema.bakobo.com/citation/citation.schema.json",
+      "issuer_role": "AID of the issuer making the citation"
+    },
+    "ELIEUVwNAk1z-_jJJ9BuUtQw-c3TY-RvcQyYw5dI4_JK": {
+      "title": "AI coder license",
+      "origin": "bakobo",
+      "ref": "ai-coder/ai-coder.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ai-coder",
+      "url": "https://schema.bakobo.com/ai-coder/ai-coder.schema.json",
+      "issuer_role": "AID of the issuer granting the license",
+      "issuee_role": "Issuee: the AID of the licensed developer",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ELNhZbCUiafPrMFnL2vRGEjylRu8zug-3M-goUft8bfh": {
+      "title": "SEDI Core Schema",
+      "origin": "bakobo",
+      "ref": "sedi-core/sedi-core.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Core_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-core/sedi-core.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ELQbIW0bvd8ocbitQmjsaKEMEMxPX5YDFOdsWCca171s": {
+      "title": "SEDI Ward Core",
+      "origin": "bakobo",
+      "ref": "sedi-ward-core-pre-core-compact-1.0.0/sedi-ward-core-pre-core-compact-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Ward_Core_ACDC_acm_message",
+      "url": "https://schema.bakobo.com/sedi-ward-core-pre-core-compact-1.0.0/sedi-ward-core-pre-core-compact-1.0.0.schema.json",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Issuee SMAID SEDI Management AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EM00uWV5K7YtTt5dDWH2diXCGtDhQlrWHsLPT5WKh-Pc": {
+      "title": "Award Credential",
+      "origin": "bakobo",
+      "ref": "award/award.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "award",
+      "url": "https://schema.bakobo.com/award/award.schema.json",
+      "issuer_role": "AID of the issuer conferring the award",
+      "issuee_role": "Issuee: the AID of the award's recipient",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EM3kQ1QEU3kJFqV8aZrse-QXs5oNlaFfaiwEUFt4uq4C": {
+      "title": "Generalized Cooperative Delegation Credential",
+      "origin": "bakobo",
+      "ref": "gcd-1.0.0/gcd-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "gcd-credential",
+      "url": "https://schema.bakobo.com/gcd-1.0.0/gcd-1.0.0.schema.json",
+      "issuer_role": "AID of the issuer (the delegator)",
+      "issuee_role": "AID of delegate, as it appears in delegator's interaction event",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EMQmtKXdW2bAgtzn9sUJ8VcWwasXvkL5JneYwU83m6Eh": {
+      "title": "SEDI Digital Guardian",
+      "origin": "bakobo",
+      "ref": "sedi-guardian/sedi-guardian.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Guardian",
+      "url": "https://schema.bakobo.com/sedi-guardian/sedi-guardian.schema.json",
+      "issuer_role": "Issuer = the appointing authority (court/DGO for court bases; the individual for a self-executed designation; DGO for a parental attestation)",
+      "issuee_role": "Issuee = the GUARDIAN's AID (holder != subject)",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EMZtIHLNTVmFfzKXGC1Qvwza37mNqaxLh0bU7zjQyJHS": {
+      "title": "SEDI Identity Credential",
+      "origin": "bakobo",
+      "ref": "sedi-id/sedi-id.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Identity",
+      "url": "https://schema.bakobo.com/sedi-id/sedi-id.schema.json",
+      "issuer_role": "AID of the issuer (the State, via the Department of Government Operations)",
+      "issuee_role": "Issuee: the holder's AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ENzPKrfeHE7Qs247OhF5RQ_QO78iCiJevqIErOY5H94Q": {
+      "title": "SEDI Digital Guardian",
+      "origin": "bakobo",
+      "ref": "sedi-guardian-2.0.0/sedi-guardian-2.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Guardian",
+      "url": "https://schema.bakobo.com/sedi-guardian-2.0.0/sedi-guardian-2.0.0.schema.json",
+      "issuer_role": "Issuer = the appointing authority (court/DGO for court bases; the individual for a self-executed designation; DGO for a parental attestation)",
+      "issuee_role": "Issuee = the GUARDIAN's AID (holder != subject)",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EO6WbKaHwNOalVVY5oHi4NaZWG5yynFIDCHpQACVPCw7": {
+      "title": "Proof-of-Control Credential",
+      "origin": "bakobo",
+      "ref": "proof-of-control-1.1.0/proof-of-control-1.1.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ProofOfControlCredential",
+      "url": "https://schema.bakobo.com/proof-of-control-1.1.0/proof-of-control-1.1.0.schema.json",
+      "issuer_role": "AID of the issuer",
+      "issuee_role": "Identifier of issuee",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EOZgLvehWuTl_lOJjEX7sEqsif1jrk9f_H10_p85r65H": {
+      "title": "SEDI Age Attestation",
+      "origin": "bakobo",
+      "ref": "sedi-age/sedi-age.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Age",
+      "url": "https://schema.bakobo.com/sedi-age/sedi-age.schema.json",
+      "issuer_role": "AID of the issuer (the State, via the Department of Government Operations)"
+    },
+    "EOkso5ZxAnIOO4j8D8zsfxx2ECn0MB0Ml8A0sZx-6qT0": {
+      "title": "SEDI County Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-county/sedi-present-county.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_CountyPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-county/sedi-present-county.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EOmwVWvnVLQBZ498MGlQ2thbtRrTR5bSXScuWpSCbZoL": {
+      "title": "SEDI Age-and-Portrait Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-age-portrait-2.0.0/sedi-present-age-portrait-2.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_AgePortraitPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-age-portrait-2.0.0/sedi-present-age-portrait-2.0.0.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EOzVErBz2Mr9Xyz5NDML3Y0x_SYaKwX2Y4KTGvevTs15": {
+      "title": "Face-to-Face credential",
+      "origin": "bakobo",
+      "ref": "face-to-face/face-to-face.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "FaceToFaceCredential",
+      "url": "https://schema.bakobo.com/face-to-face/face-to-face.schema.json",
+      "issuer_role": "AID of the issuer",
+      "issuee_role": "Identifier that issuee controls, according to issuer",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EP7Ef1-gpddGtdIE3EM8HSCuXiWLi9KYL1pvnRayfkRP": {
+      "title": "Proof-of-Control Credential",
+      "origin": "bakobo",
+      "ref": "proof-of-control/proof-of-control.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ProofOfControlCredential",
+      "url": "https://schema.bakobo.com/proof-of-control/proof-of-control.schema.json",
+      "issuer_role": "AID of the issuer",
+      "issuee_role": "Identifier of issuee",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EPOBcvL3nas-yNPNufD2bIlO7nwuJLy4MAvqSxJmfmh3": {
+      "title": "SEDI Age-and-Portrait Presentation",
+      "origin": "bakobo",
+      "ref": "sedi-present-age-portrait-pre-core-compact-3.0.0/sedi-present-age-portrait-pre-core-compact-3.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_AgePortraitPresentation",
+      "url": "https://schema.bakobo.com/sedi-present-age-portrait-pre-core-compact-3.0.0/sedi-present-age-portrait-pre-core-compact-3.0.0.schema.json",
+      "issuer_role": "Issuer = the holder (Discloser) AID",
+      "issuee_role": "Issuee = the verifier (Disclosee) AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EPhWFgeOy8g7yRy-Xtyvbdieqvl_3YVXNHMgTEZuJOWh": {
+      "title": "AI coder license",
+      "origin": "bakobo",
+      "ref": "ai-coder-1.0.0/ai-coder-1.0.0.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ai-coder-license",
+      "url": "https://schema.bakobo.com/ai-coder-1.0.0/ai-coder-1.0.0.schema.json",
+      "issuer_role": "Identifier of the issuer",
+      "issuee_role": "AID of issuee",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "also_published_by": [
+        {
+          "origin": "provenant",
+          "ref": "ai-coder/ai-coder.schema.json",
+          "url": null
+        }
+      ]
+    },
+    "EPtKrKbreCiM9b0pY5aKk3d8qfRwCq7x7wVc2A70jKVF": {
+      "title": "SEDI Ward Authorization",
+      "origin": "bakobo",
+      "ref": "sedi-ward-authz/sedi-ward-authz.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "SEDI_Ward_AuthZ",
+      "url": "https://schema.bakobo.com/sedi-ward-authz/sedi-ward-authz.schema.json",
+      "issuer_role": "Guardian issuer AID",
+      "issuee_role": "Ward issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EAoRVmgPyacjhUxaV0nPwiuUuHMjKDpNZrj7ClofZ-3Z": {
+      "title": "OVC Brand Owner Credential",
+      "origin": "provenant",
+      "ref": "ovc-brand-owner/ovc-brand-owner.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "BrandOwnerCredential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "AID of the legal entity that is the direct owner or a licensee of the brand",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy": {
+      "title": "Legal Entity Official Organizational Role vLEI Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "legal-entity-official-organizational-role-vLEI-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "LegalEntityOfficialOrganizationalRolevLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/legal-entity-official-organizational-role-vLEI-credential.json",
+      "issuer_role": "QVI Issuer AID",
+      "issuee_role": "Person Issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "auth"
+      ]
+    },
+    "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao": {
+      "title": "Qualified vLEI Issuer Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "qualified-vLEI-issuer-vLEI-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "QualifiedvLEIIssuervLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/qualified-vLEI-issuer-vLEI-credential.json",
+      "issuer_role": "GLEIF Issuee AID",
+      "issuee_role": "QVI Issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_": {
+      "title": "Brand Owner Credential",
+      "origin": "provenant",
+      "ref": "brand-owner/brand-owner.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "BrandOwnerCredential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "AID of the legal entity that is the direct owner or a licensee of the brand",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ECYorXkheU7YsXZkYLGtvBOxEZ6alS5H5FJRn0tgDXV0": {
+      "title": "iXBRL Data Value D6 Attestation",
+      "origin": "provenant",
+      "ref": "vLEI/acdc/verifiable-ixbrl-report-d6-attestation.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "iXBRLDataD6Attestation",
+      "pinned_edges": [
+        "ecr",
+        "oor"
+      ]
+    },
+    "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw": {
+      "title": "Legal Entity Engagement Context Role vLEI Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "legal-entity-engagement-context-role-vLEI-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "LegalEntityEngagementContextRolevLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/legal-entity-engagement-context-role-vLEI-credential.json",
+      "issuer_role": "QVI or LE Issuer AID",
+      "issuee_role": "Person Issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "auth",
+        "le"
+      ]
+    },
+    "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ": {
+      "title": "TN Allocation Credential",
+      "origin": "provenant",
+      "ref": "tn-alloc/tn-alloc.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "TNAllocationCredential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Recipient Brand AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EG68irpfVX667KCLwG85Cn1Mp3sCe38ftARyQJrxP2kF": {
+      "title": "Proof-of-Control Credential",
+      "origin": "provenant",
+      "ref": "proof-of-control/proof-of-control.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ProofOfControlCredential",
+      "issuer_role": "AID of the issuer",
+      "issuee_role": "Identifier of issuee",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EGEebb1pVRcZ6OXHlYitl5DNh-LDrMWPwRtstiKiDhRy": {
+      "title": "Telephone Number Credential",
+      "origin": "provenant",
+      "ref": "tn/tn.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "TelephoneNumberCredential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Recipient Brand AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "le"
+      ]
+    },
+    "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P": {
+      "title": "Verifiable Voice Dossier Credential",
+      "origin": "provenant",
+      "ref": "vvp-dossier/vvp-dossier.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "VvpDossierCredential",
+      "issuer_role": "Issuer AID",
+      "pinned_edges": [
+        "alloc",
+        "delsig",
+        "tnalloc"
+      ]
+    },
+    "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g": {
+      "title": "ECR Authorization vLEI Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "ecr-authorization-vlei-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "ECRAuthorizationvLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/ecr-authorization-vlei-credential.json",
+      "issuer_role": "LE Issuer AID",
+      "issuee_role": "QVI Issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "le"
+      ]
+    },
+    "EHFdm3U_4nML6lo-q_xDTO8183hC9HlWif2l4ycNo8TW": {
+      "title": "OVC Identity Credential",
+      "origin": "provenant",
+      "ref": "ovc-org-vet/ovc-org-vet.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "orgVet",
+      "issuer_role": "Identifier of the issuer"
+    },
+    "EK3YbEFp3zUuHPsGrLRzwr6zWBXcOFJNTTBqezXd_2yf": {
+      "title": "A2P Campaign Credential",
+      "origin": "provenant",
+      "ref": "a2p-campaign/a2p-campaign.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "a2p-campaign-credential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "AID of issuee (org that will send messages in this campaign)",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "le"
+      ]
+    },
+    "EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E": {
+      "title": "OOR Authorization vLEI Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "oor-authorization-vlei-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "OORAuthorizationvLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/oor-authorization-vlei-credential.json",
+      "issuer_role": "LE Issuer AID",
+      "issuee_role": "QVI Issuee AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "le"
+      ]
+    },
+    "EKR1nFV0JvRhc4xkhzlZJfpN_taaspipcZWWSLj37Fdk": {
+      "title": "Aegis Standard Vetting Result Credential",
+      "origin": "provenant",
+      "ref": "aegis-std-vetting/aegis-std-vetting.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "AegisStdVetCredential",
+      "issuer_role": "AID of the issuer"
+    },
+    "EKrv2S0OVc8SeKCzIAOSE-y4j5ybLOOgB69y12Lzxh6Y": {
+      "title": "Face-to-Face credential",
+      "origin": "provenant",
+      "ref": "face-to-face/face-to-face.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "FaceToFaceCredential",
+      "issuer_role": "AID of the issuer",
+      "issuee_role": "Identifier that issuee controls, according to issuer",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o": {
+      "title": "Generalized Cooperative Delegation Credential",
+      "origin": "provenant",
+      "ref": "gcd/gcd.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "gcd-credential",
+      "issuer_role": "AID of the issuer (the delegator)",
+      "issuee_role": "AID of delegate, as it appears in delegator's interaction event",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ]
+    },
+    "ELuPsd1mylvD9iY_gH5hEJzoUd8OZWtU6J2svJwIq-TJ": {
+      "title": "Foreign Artifact Affidavit",
+      "origin": "provenant",
+      "ref": "faa/faa.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "foreign-artifact-affidavit",
+      "issuer_role": "AID of the issuer -- the party attesting to the artifact's integrity and provenance"
+    },
+    "EMhvwOlyEJ9kN4PrwCpr9Jsv7TxPhiYveZ0oP3lJzdEi": {
+      "title": "iXBRL Data Value Attestation",
+      "origin": "provenant",
+      "ref": "vLEI/acdc/verifiable-ixbrl-report-attestation.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "iXBRLDataAttestation",
+      "pinned_edges": [
+        "ecr",
+        "oor"
+      ]
+    },
+    "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY": {
+      "title": "Legal Entity vLEI Credential",
+      "origin": "weboftrust-vlei",
+      "ref": "legal-entity-vLEI-credential.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "LegalEntityvLEICredential",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/legal-entity-vLEI-credential.json",
+      "issuer_role": "QVI Issuer AID",
+      "issuee_role": "LE Issuer AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
       "pinned_edges": [
         "qvi"
       ]
-    }
+    },
+    "EPy_7LE3tVdl8qEKN5i4L8eAgIM-1I51-DNiewmcq-fe": {
+      "title": "TCR Vetting Credential",
+      "origin": "provenant",
+      "ref": "tcr-vetting/tcr-vetting.schema.json",
+      "verified": "2026-09-24, SAID recomputed with keripy Saider.saidify(label='$id')",
+      "credential_type": "TCRVettingCredential",
+      "issuer_role": "Issuer AID",
+      "issuee_role": "Recipient Brand AID",
+      "entailed": [
+        "issuer",
+        "issuee"
+      ],
+      "pinned_edges": [
+        "le"
+      ]
+    },
+    "_comment": "SAID -> what is known without fetching anything. `verified` records how the entry was established, because an entry nobody checked is a claim, not a fact."
   },
   "fallback": {
     "_comment": [
@@ -93,6 +996,38 @@
         "state": "mismatch",
         "means": "a document was obtained and it does NOT digest to the SAID asked for",
         "render": "this is a security event, not an absence. Never fall back to it silently, never cache it, and surface it at the gestalt level per posture.md point 6"
+      }
+    ]
+  },
+  "verification": {
+    "method": "Every entry's SAID was recomputed from the document with keripy's Saider.saidify and compared to the key it is filed under. Entries that did not match were DROPPED, not recorded. Local sources were read from committed state (git show HEAD:) rather than from working trees, because a working copy is somebody's edit in progress.",
+    "why": "A schema is content-addressed, so this is computation and not trust. Copying a publisher's asserted SAID would make this a record of claims; recomputing makes it a record of facts, and needs no relationship with any publisher.",
+    "two_kinds": "A publisher's registry maps SAIDs for schemas AND for ACDC rules blocks. A schema SAIDs on `$id`, a rules block on `d`. Only schemas can appear in a credential's `s` field, so only schemas are recorded here -- but rules blocks are counted, because sixteen of bakobo's briefly looked like sixteen broken schemas before the distinction was noticed.",
+    "counts": {
+      "bakobo": {
+        "in_registry": 62,
+        "schemas": 46,
+        "rules_blocks": 16,
+        "dropped": 0
+      },
+      "provenant": {
+        "in_registry": 28,
+        "schemas": 28,
+        "rules_blocks": 0,
+        "dropped": 0
+      },
+      "weboftrust-vlei": {
+        "tried": 6,
+        "schemas": 6,
+        "dropped": 0
+      }
+    },
+    "known_gaps": [
+      {
+        "said": "EJrcLKzq4d1PFtlnHLb9tl4zGwPAjO6v0dec4CiJMZk6",
+        "seen_in": "the live VVP dossier at eu-west.provenant.net, as its LEI vetting credential (a.lids, a.loa)",
+        "status": "served by NONE of the three sources here, checked 2026-09-24 against bakobo's live registry.json and both local repos",
+        "why_it_matters": "A schema in production use that no known publisher serves is exactly the case the `unavailable` state exists for: four of that dossier's five credentials resolve offline from this registry and the fifth stays an opaque type key. Recorded rather than left to be rediscovered, because an absence with no note reads as a gap nobody looked for."
       }
     ]
   }
