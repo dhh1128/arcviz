@@ -196,12 +196,25 @@ def pill_props(identifier: str, alias: Alias | None) -> dict:
     `undefined` rather than `""` — an empty string is still a label, and would win the
     precedence with nothing in it.
 
-    ONE CORRECTION TO THE MENTAL MODEL. The fallback is NOT "a compressed version of the value
-    with ellipses". That string is `valuePreview` (EntvizPill.ts:517), the HOVER TOOLTIP, which
-    shows the full value up to 100 characters. The pill's in-line fallback is the type text.
-    And the mnemonic rung is gated on the `corpus` trust posture, which arcviz can never claim
-    -- `credential-identity.md` §2 records that arcviz is wild by its own gate header -- so in
-    arcviz the chain is really `alias > type text`, with no middle rung.
+    WHAT THE MIDDLE RUNG ACTUALLY IS, corrected after getting it wrong. I claimed the
+    fallback was the type text and that "a compressed version of the value with ellipses" was
+    the hover tooltip. Both halves were wrong. The mnemonic (describe.ts:428) is built from the
+    entviz's OWN displayed cells and returns `first…middle…last` for a >=256-bit value -- cell
+    texts are chunks of the value itself, so a CESR AID renders as something like
+    `EKx4…vq_o…It3`. That IS the raw value with ellipses. bakobo/cesrview is the worked
+    example: its StreamPill passes no label and declares `STREAM_TRUST = {posture: 'corpus',
+    mnemonic: true, ...}`, and its own test comment reads "The entviz pill never draws the raw
+    value; the value lives on cesrview's own wrapper" -- what a reader sees as the value is the
+    mnemonic, which is made of the value.
+
+    AND THAT IS THE CONSEQUENCE ARCVIZ HAS TO FACE. The mnemonic rung is gated on the `corpus`
+    trust posture, and `credential-identity.md` section 2 records arcviz as WILD by its own
+    gate header. So cesrview's pills fall back to a scannable value fragment and arcviz's fall
+    all the way to the type text -- "cesr key" -- which is materially worse, and it is a
+    consequence of a posture decision rather than of anything about labels. cesrview made the
+    opposite call deliberately, with a decision id (e5vk7n), on the ground that a pasted CESR
+    stream is a single-origin body of values. Whether a single presented dossier is the same
+    kind of thing is Daniel's call and is not made here.
 
     FLAGS DO NOT GO IN THE LABEL, and this is the part that is security-relevant rather than
     cosmetic. `label` is documented as TRUSTED first-party text, and entviz keeps a separate
