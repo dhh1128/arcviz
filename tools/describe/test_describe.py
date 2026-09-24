@@ -97,6 +97,7 @@ def test_role_stem_strips_an_index_and_nothing_else():
 def _accident_dag(with_subject: bool):
     names = ["accident_bundle", "accident_licence_a", "accident_licence_b",
              "accident_photo_a", "accident_photo_b", "accident_photo_c",
+             "accident_photo_d",
              "accident_statement_a", "accident_statement_b"]
     sads = {n: json.loads((CORPUS / f"{n}.json").read_text()) for n in names}
     sc = {n: s["s"] for n, s in sads.items()}
@@ -111,10 +112,12 @@ def _accident_dag(with_subject: bool):
     for cred, fieldname in (("accident_photo_a", "imageDigest"),
                             ("accident_photo_b", "imageDigest"),
                             ("accident_photo_c", "imageDigest"),
+                            ("accident_photo_d", "imageDigest"),
                             ("accident_licence_a", "portraitDigest"),
                             ("accident_licence_b", "portraitDigest")):
         stem = {"accident_photo_a": "photo_a", "accident_photo_b": "photo_b",
-                "accident_photo_c": "photo_c", "accident_licence_a": "licence_a_portrait",
+                "accident_photo_c": "photo_c", "accident_photo_d": "photo_d",
+                "accident_licence_a": "licence_a_portrait",
                 "accident_licence_b": "licence_b_portrait"}[cred]
         if (attachments / f"{stem}.png").exists() and stem in manifest:
             resolvable.add(sads[cred]["a"][fieldname])
@@ -163,8 +166,9 @@ def test_accident_bundle_uses_a_different_channel_for_each_pair():
 def test_the_withheld_image_is_annotated_on_the_node_that_withheld_it():
     dag, _, by_said = _accident_dag(with_subject=True)
     ann = {by_said[d.said]: [a["kind"] for a in d.annotations] for d in describe(dag)}
-    assert ann["accident_photo_c"] == ["image_committed_not_resolved"], ann
-    for served in ("accident_photo_a", "accident_licence_a", "accident_licence_b"):
+    assert ann["accident_photo_d"] == ["image_committed_not_resolved"], ann
+    for served in ("accident_photo_a", "accident_photo_c",
+                   "accident_licence_a", "accident_licence_b"):
         assert "image_committed_not_resolved" not in ann[served], (served, ann[served])
 
 

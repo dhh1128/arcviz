@@ -74,5 +74,24 @@
     "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
     "sha256": "d85e7e1841fa0e23efc706ae2532edf0b83ac10d25c3958a34f4be00008e3b93",
     "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/drivers-door.jpg"
+  },
+  "photo_c": {
+    "bytes": 252704,
+    "depicts": "front and passenger-side damage to a yellow pickup, vehicle B",
+    "generated_at": null,
+    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "imported_at": "2026-09-24T16:26:04+00:00",
+    "note": "Synthetic. Depicts nothing real. Carries MAROON PAINT TRANSFER along the passenger side, which corroborates the maroon saloon in photo_a and photo_b -- a relationship between two exhibits that no field in either credential states and no edge in the DAG draws.",
+    "original_pixels": [
+      2816,
+      1536
+    ],
+    "pixels": [
+      512,
+      279
+    ],
+    "provenance_statement": "Daniel states these are AI-generated, carry no copyright encumbrance, and that the faces are invented.",
+    "sha256": "ab2d2c4a6ddb948e0d135ab2793bc62eb88e68fef6d03dfc37d1255a4a354a6a",
+    "source": "supplied by Daniel Hardman, 2026-09-24, as ~/xfer/pickup.jpg"
   }
 }

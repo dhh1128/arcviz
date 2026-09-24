@@ -1,0 +1,15 @@
+{
+  "title": "Accident bundle: photograph of the junction, image withheld",
+  "summary": "The committed-but-unresolvable image state, which must render distinctly from 'no image' and from a resolved one. It is deliberately the exhibit whose absence costs the most: the two witness statements disagree about whether the northbound car entered on amber, and this is the only thing in the bundle that bears on it. A render that lets this look like a photograph nobody took has hidden the hole in the argument. Its subject is also neither a party nor a thing but a PLACE, so it carries no issuee, no VIN and no plate -- a fourth subject kind inside one bundle.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "accident_photo_d",
+  "files": {
+    "sad": "accident_photo_d.json",
+    "cesr": "accident_photo_d.cesr"
+  },
+  "generated_at": "2026-09-24T16:26:38.416417+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

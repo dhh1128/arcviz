@@ -1,6 +1,6 @@
 {
-  "title": "Accident bundle: photograph of vehicle B, image withheld",
-  "summary": "The committed-but-unresolvable image state, which must render distinctly from 'no image' and from a resolved one. It sits on a photograph rather than on a licence because both licences now carry portraits that resolve, which is what lets the licence pair test whether a face separates two identity documents at thumbnail size. It is also the only exhibit here about the OTHER driver's vehicle, so its absence costs the argument something a viewer should notice.",
+  "title": "Accident bundle: photograph of vehicle B",
+  "summary": "The other driver's vehicle, and the exhibit that makes the thumbnail channel do something no field does. Its passenger side carries MAROON PAINT TRANSFER matching the saloon in photo_a and photo_b, so two exhibits corroborate each other through their images alone -- a relationship no attribute in either credential states and no edge in the DAG draws. It also collides with them on schema, issuer and the absent issuee while differing in vehicle, so it is the cross-vehicle counterpart to their same-vehicle pair.",
   "matrix_cells": [
     "H1"
   ],
@@ -10,6 +10,6 @@
     "sad": "accident_photo_c.json",
     "cesr": "accident_photo_c.cesr"
   },
-  "generated_at": "2026-09-24T16:22:32.239354+00:00",
+  "generated_at": "2026-09-24T16:26:38.398250+00:00",
   "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
 }

@@ -81,6 +81,7 @@ ISSUED = {
     "photo_a": "2026-03-02T10:15:40+00:00",
     "photo_b": "2026-03-02T10:16:05+00:00",
     "photo_c": "2026-03-02T10:17:12+00:00",
+    "photo_d": "2026-03-02T10:22:41+00:00",
     "statement_a": "2026-03-04T14:02:00+00:00",
     "statement_b": "2026-03-05T09:30:00+00:00",
     "bundle": "2026-03-06T08:00:00+00:00",
@@ -117,8 +118,7 @@ def _photograph_schema():
             "imageDigest": {"type": "string"},
             "capturedAt": {"type": "string"},
         },
-        attr_required=["dt", "depicts", "vehicleVin", "plate", "imageDigest",
-                       "capturedAt"],
+        attr_required=["dt", "depicts", "imageDigest", "capturedAt"],
     )
 
 
@@ -191,14 +191,17 @@ def _licence(label, *, issuee, number, name, expires, issued, portrait_digest):
     ), schema_said
 
 
-def _photograph(label, *, depicts, vin, plate, image_digest, issued):
+def _photograph(label, *, depicts, image_digest, issued, vin=None, plate=None):
     schema_said, _ = _photograph_schema()
-    return credential(
-        label, issuer=ADJUSTER, schema_said=schema_said,
-        attrs={"dt": issued, "depicts": depicts, "vehicleVin": vin, "plate": plate,
-               "imageDigest": image_digest,
-               "capturedAt": "2026-03-02T10:15:00+00:00"},
-    ), schema_said
+    attrs = {"dt": issued, "depicts": depicts}
+    if vin is not None:
+        attrs["vehicleVin"] = vin
+    if plate is not None:
+        attrs["plate"] = plate
+    attrs["imageDigest"] = image_digest
+    attrs["capturedAt"] = "2026-03-02T10:15:00+00:00"
+    return credential(label, issuer=ADJUSTER, schema_said=schema_said,
+                      attrs=attrs), schema_said
 
 
 def _statement(label, *, issuer, account, vantage, issued):
@@ -303,23 +306,53 @@ def build_accident_photo_b(corpus_dir):
 
 @fixture("accident_photo_c")
 def build_accident_photo_c(corpus_dir):
-    withheld = images.synthetic("photo_c", ground="ochre", mark="plum")
+    frame = images.synthetic("photo_c", ground="ochre", mark="plum")
     serder, _ = _photograph("accident_photo_c",
-                            depicts="offside rear damage, vehicle B",
-                            vin="JTDKN3DU0A1075512", plate="UTA 8890", issued=ISSUED["photo_c"],
+                            depicts=("front and passenger-side damage with maroon paint "
+                                     "transfer, vehicle B"),
+                            vin="1FTDF15Y6PLA20877", plate="77-YELLOW",
+                            issued=ISSUED["photo_c"],
+                            image_digest=_attach(corpus_dir, "photo_c", frame))
+    return {
+        "serder": serder,
+        "meta": {
+            "title": "Accident bundle: photograph of vehicle B",
+            "summary": (
+                "The other driver's vehicle, and the exhibit that makes the thumbnail "
+                "channel do something no field does. Its passenger side carries MAROON "
+                "PAINT TRANSFER matching the saloon in photo_a and photo_b, so two exhibits "
+                "corroborate each other through their images alone -- a relationship no "
+                "attribute in either credential states and no edge in the DAG draws. It also "
+                "collides with them on schema, issuer and the absent issuee while differing "
+                "in vehicle, so it is the cross-vehicle counterpart to their same-vehicle "
+                "pair."
+            ),
+            "matrix_cells": ["H1"],
+            "rules_exercised": [],
+        },
+    }
+
+
+@fixture("accident_photo_d")
+def build_accident_photo_d(corpus_dir):
+    withheld = images.synthetic("photo_d", ground="bone", mark="slate")
+    serder, _ = _photograph("accident_photo_d",
+                            depicts="signal head and stop line, northbound approach",
+                            issued=ISSUED["photo_d"],
                             image_digest=images.digest(withheld))  # bytes NOT written
     return {
         "serder": serder,
         "meta": {
-            "title": "Accident bundle: photograph of vehicle B, image withheld",
+            "title": "Accident bundle: photograph of the junction, image withheld",
             "summary": (
                 "The committed-but-unresolvable image state, which must render distinctly "
-                "from 'no image' and from a resolved one. It sits on a photograph rather "
-                "than on a licence because both licences now carry portraits that resolve, "
-                "which is what lets the licence pair test whether a face separates two "
-                "identity documents at thumbnail size. It is also the only exhibit here "
-                "about the OTHER driver's vehicle, so its absence costs the argument "
-                "something a viewer should notice."
+                "from 'no image' and from a resolved one. It is deliberately the exhibit "
+                "whose absence costs the most: the two witness statements disagree about "
+                "whether the northbound car entered on amber, and this is the only thing in "
+                "the bundle that bears on it. A render that lets this look like a "
+                "photograph nobody took has hidden the hole in the argument. Its subject is "
+                "also neither a party nor a thing but a PLACE, so it carries no issuee, no "
+                "VIN and no plate -- a fourth subject kind inside one bundle."
             ),
             "matrix_cells": ["H1"],
             "rules_exercised": [],
@@ -372,7 +405,7 @@ def build_accident_statement_b(corpus_dir):
 
 @fixture("accident_bundle", depends_on=["accident_licence_a", "accident_licence_b",
                                         "accident_photo_a", "accident_photo_b",
-                                        "accident_photo_c",
+                                        "accident_photo_c", "accident_photo_d",
                                         "accident_statement_a", "accident_statement_b"])
 def build_accident_bundle(corpus_dir):
     """The adjuster's claim file: one untargeted root over six heterogeneous exhibits."""
@@ -397,6 +430,8 @@ def build_accident_bundle(corpus_dir):
                               n=said_of("accident_photo_b"), s=photo_schema),
         'photoC': simple_edge("accident_bundle:photoC",
                               n=said_of("accident_photo_c"), s=photo_schema),
+        'photoD': simple_edge("accident_bundle:photoD",
+                              n=said_of("accident_photo_d"), s=photo_schema),
         'statementA': simple_edge("accident_bundle:statementA",
                                   n=said_of("accident_statement_a"), s=statement_schema),
         'statementB': simple_edge("accident_bundle:statementB",
