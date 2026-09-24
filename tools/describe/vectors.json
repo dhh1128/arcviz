@@ -788,6 +788,112 @@
           ]
         }
       }
+    },
+    {
+      "name": "a_party_named_in_a_field_is_not_the_issuee",
+      "defends": "Daniel's crime-scene case, turn 22: 'If I am doing a crime scene analysis, how do I know from descriptors that one sample is DNA for person 1, another for person 2?' The donor is named in a FIELD and the issuee is the lab, so the issuee channel cannot separate them. The VVP dossier showed the same independence from the other direction -- its number-allocation credential has an issuee AND a subject that is a phone range. Adding this needed one line of field-role data, not a new mechanism, which is the point of making the map an input. The `parties` component rides along at 0.0 bits because every sample came from one lab: worthless as a discriminator, kept because it is absolute rather than relative, and ranked last so a budgeted render drops it first. That is the ranking doing the job a suppression rule would have done more crudely.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "LAB",
+            "attrs": {
+              "donor": "person 1"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "LAB",
+            "attrs": {
+              "donor": "person 2"
+            }
+          }
+        ],
+        "field_roles": {
+          "S1": {
+            "party": "donor"
+          }
+        }
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties",
+            "party_field"
+          ],
+          "distinguishing": true,
+          "gains": {
+            "type": 0.0,
+            "parties": 0.0,
+            "party_field": 1.0
+          }
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "parties",
+            "party_field"
+          ],
+          "distinguishing": true
+        }
+      }
+    },
+    {
+      "name": "locus_and_collection_time_are_their_own_channels",
+      "defends": "'How do I know that one is fingerprints on the fridge, another on the table?' A locus is neither a party nor a thing but a place WITHIN a scene, and nothing in the channel list could hold it. Collection time is likewise distinct from issuance time -- the gap between them is chain-of-custody, and a design that conflates them cannot show it. Here the two prints share a type, an issuer and an issuance date and are separated by where they were lifted from. Both channels appear: the locus separates them and the collection time is carried anyway, because the gap between collection and issuance is chain-of-custody and is worth saying even where it is not what tells two exhibits apart.",
+      "dag": {
+        "nodes": [
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "LAB",
+            "attrs": {
+              "locus": "fridge handle",
+              "takenAt": "2026-03-02T10:02",
+              "dt": "2026-03-05"
+            }
+          },
+          {
+            "said": "B",
+            "schema": "S1",
+            "issuer": "LAB",
+            "attrs": {
+              "locus": "kitchen table",
+              "takenAt": "2026-03-02T10:15",
+              "dt": "2026-03-05"
+            }
+          }
+        ],
+        "field_roles": {
+          "S1": {
+            "locus": "locus",
+            "collected": "takenAt"
+          }
+        }
+      },
+      "expect": {
+        "A": {
+          "kinds": [
+            "type",
+            "parties",
+            "locus",
+            "collected"
+          ],
+          "distinguishing": true
+        },
+        "B": {
+          "kinds": [
+            "type",
+            "parties",
+            "locus",
+            "collected"
+          ],
+          "distinguishing": true
+        }
+      }
     }
   ],
   "channels": [

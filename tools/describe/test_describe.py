@@ -28,6 +28,7 @@ def _dag_from_spec(spec: dict) -> Dag:
     return Dag(nodes=nodes,
                type_names=spec.get("type_names", {}),
                subject_fields=spec.get("subject_fields", {}),
+               field_roles=spec.get("field_roles", {}),
                image_fields=spec.get("image_fields", {}),
                resolvable_digests=set(spec.get("resolvable_digests", [])),
                entailed={k: tuple(v) for k, v in (spec.get("entailed") or {}).items()},

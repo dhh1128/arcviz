@@ -88,9 +88,27 @@ class Dag:
     # schema SAID -> human type name, where one is known. Empty in arcviz today, because no
     # schema document in the corpus resolves.
     type_names: dict = field(default_factory=dict)
-    # schema SAID -> the attribute that names what the credential is ABOUT. See the module
-    # docstring: this is an input because nothing in the data determines it.
+    # schema SAID -> {role: attribute name}. WHICH FIELD PLAYS WHICH PART, supplied per schema
+    # by whoever knows, because nothing in the data determines it: credential-categories.md
+    # measured that field presence tells you what a credential CARRIES, not what it is FOR, and
+    # that no JSON Schema expresses dominance.
+    #
+    # This generalises what was `subject_fields`. Daniel's crime-scene case is why: telling DNA
+    # from person 1 apart from DNA from person 2 needs a PARTY named in a field rather than the
+    # issuee; telling prints on the fridge from prints on the table needs a LOCUS, which is
+    # neither a party nor a thing but a place within a scene; and a forensic sample's
+    # COLLECTION time is a different fact from its issuance time -- the gap between them is
+    # chain-of-custody, and a design that conflates them cannot show it. Adding a role here is
+    # a line of data; adding a channel for a role nobody named would have been a guess.
+    field_roles: dict = field(default_factory=dict)
+    # Retained as the narrow case of the above, so existing callers and vectors keep working.
     subject_fields: dict = field(default_factory=dict)
+
+    def field_for(self, schema: str | None, role: str) -> str | None:
+        roles = self.field_roles.get(schema) or {}
+        if role in roles:
+            return roles[role]
+        return self.subject_fields.get(schema) if role == "subject" else None
     # schema SAID -> attribute holding a digest of an attached image, and the set of digests
     # that actually resolve to bytes. A digest that does not resolve is a THIRD state and is
     # reported as such rather than folded into "no image".
@@ -308,12 +326,27 @@ def _channels(dag: Dag):
             return None
         return _role_stem(inc[0])
 
-    def subject(n):
-        fld = dag.subject_fields.get(n.schema)
-        if fld is None:
-            return None
-        v = n.attrs.get(fld)
-        return v if isinstance(v, (str, int, float)) else None
+    def _by_role(role):
+        def get(n):
+            fld = dag.field_for(n.schema, role)
+            if fld is None:
+                return None
+            v = n.attrs.get(fld)
+            return v if isinstance(v, (str, int, float)) else None
+        return get
+
+    subject = _by_role("subject")
+    # WHO the evidence concerns, when that is a field rather than the issuee. The VVP dossier
+    # showed the two are independent -- its number-allocation credential has an issuee AND a
+    # subject that is a phone range -- and the crime-scene case shows the mirror: a DNA sample
+    # names its donor in a field, and the issuee is the lab.
+    party_field = _by_role("party")
+    # WHERE it was taken. Prints on the fridge against prints on the table: not a party, not a
+    # thing, a place within a scene, and nothing else in the channel list can hold it.
+    locus = _by_role("locus")
+    # WHEN it was collected, as distinct from when the credential was issued. The gap between
+    # them is chain-of-custody.
+    collected = _by_role("collected")
 
     def image(n):
         """The digest, but ONLY when it resolves to bytes.
@@ -359,6 +392,9 @@ def _channels(dag: Dag):
         # structural could separate is separable at all.
         ("image",      image,                      True,  False),
         ("subject",    subject,                    True,  True),
+        ("party_field", party_field,               True,  True),
+        ("locus",      locus,                      True,  True),
+        ("collected",  collected,                  True,  True),
         ("issuee",     lambda n: n.issuee,         False, False),
         ("issuer",     lambda n: n.issuer,         False, False),
         ("when",       lambda n: bands.get(n.said), True, False),
@@ -401,7 +437,7 @@ def _subject_is_unsaid(dag: Dag, n: Node, components: list) -> bool:
     beside it. Then "I cannot tell you what this one is about" is the honest report, and it is
     the dominance problem surfacing at exactly the node it damages.
     """
-    if dag.subject_fields.get(n.schema) is not None:
+    if any(dag.field_for(n.schema, r) for r in ("subject", "party_field", "locus")):
         return False
     if not any(m.schema == n.schema for m in dag.nodes if m.said != n.said):
         return False
@@ -592,6 +628,12 @@ def render_plain(d: Description, names: dict | None = None) -> str:
             parts.append("shown by its picture")
         elif c.kind == "when":
             parts.append(c.value)
+        elif c.kind == "locus":
+            parts.append(f"at {c.value}")
+        elif c.kind == "collected":
+            parts.append(f"collected {c.value}")
+        elif c.kind == "party_field":
+            parts.append(f"of {c.value}")
         elif c.kind == "role":
             parts.append(f"as {c.value}")
         elif c.kind == "parties":
