@@ -1,5 +1,14 @@
 # The evaluation set for credential descriptions
 
+> **Superseded in part, 2026-09-24. Read [credential-descriptors.md](credential-descriptors.md) first.**
+>
+> This document was written early on 2026-09-23 and §1, §2 and §6 have since been corrected
+> twice — the criterion is now surprisal rather than minimal-distinguishing, the channel
+> grading has changed, and the trust model it does not mention has been decided. What remains
+> current and useful is §3 (why an evaluation set is needed, with the measurement), §4 (the
+> eight bundles and what each one stresses) and §5 (the live VVP dossier). Those are why this
+> file is kept rather than deleted.
+
 **Status.** The goal in §1 and the scope principle in §2 are Daniel Hardman's, settled 2026-09-23, and are quoted rather than paraphrased. Everything else — the choice of bundles, the claim that each stresses a different discriminator, and every assessment of a channel — is synthesized. It is recorded so a later session does not re-derive it, not so a later session can cite it as decided.
 
 ## 1 · What a description is for
