@@ -3,7 +3,8 @@
     "bytes": 221507,
     "depicts": "identity portrait, driver A",
     "generated_at": null,
-    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+    "generator_confidence": "reported-by-supplier, not verified",
     "imported_at": "2026-09-24T16:20:47+00:00",
     "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
     "original_pixels": [
@@ -22,7 +23,8 @@
     "bytes": 236944,
     "depicts": "identity portrait, driver B",
     "generated_at": null,
-    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+    "generator_confidence": "reported-by-supplier, not verified",
     "imported_at": "2026-09-24T16:20:48+00:00",
     "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
     "original_pixels": [
@@ -41,7 +43,8 @@
     "bytes": 273769,
     "depicts": "front nearside impact damage, vehicle A",
     "generated_at": null,
-    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+    "generator_confidence": "reported-by-supplier, not verified",
     "imported_at": "2026-09-24T16:20:47+00:00",
     "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
     "original_pixels": [
@@ -60,7 +63,8 @@
     "bytes": 262720,
     "depicts": "driver's door and wing, vehicle A",
     "generated_at": null,
-    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+    "generator_confidence": "reported-by-supplier, not verified",
     "imported_at": "2026-09-24T16:20:47+00:00",
     "note": "Synthetic. Depicts nothing real: no real person, vehicle, or incident.",
     "original_pixels": [
@@ -79,7 +83,8 @@
     "bytes": 252704,
     "depicts": "front and passenger-side damage to a yellow pickup, vehicle B",
     "generated_at": null,
-    "generator": "UNKNOWN -- AI-generated per Daniel; the model was not recorded",
+    "generator": "Google Gemini, most likely the image model known as 'nano banana'. Daniel's recollection, 2026-09-24, offered as likely rather than certain; the exact model id and the prompts were not recorded.",
+    "generator_confidence": "reported-by-supplier, not verified",
     "imported_at": "2026-09-24T16:26:04+00:00",
     "note": "Synthetic. Depicts nothing real. Carries MAROON PAINT TRANSFER along the passenger side, which corroborates the maroon saloon in photo_a and photo_b -- a relationship between two exhibits that no field in either credential states and no edge in the DAG draws.",
     "original_pixels": [
