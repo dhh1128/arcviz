@@ -1,0 +1,93 @@
+{
+  "_comment": [
+    "Well-known places to look for an ACDC schema, and well-known schema SAIDs named outright.",
+    "",
+    "WHY A REGISTRY IS SAFE HERE, WHICH IS NOT OBVIOUS AND IS THE WHOLE DESIGN. A schema is",
+    "content-addressed: its SAID is a digest of the document, so a fetched schema can be",
+    "checked against the SAID that was asked for. The registry is therefore a HINT ABOUT WHERE",
+    "TO LOOK and not a trust anchor. A hostile or compromised entry cannot substitute a",
+    "different schema, because the digest will not match; the worst it can do is fail to",
+    "answer, or learn that somebody asked. That is why adding a source is a low-stakes act and",
+    "why arcviz may fetch from a source it has no relationship with.",
+    "",
+    "WHAT IT IS FOR. Resolving a schema turns an opaque SAID into a type NAME, and -- more",
+    "importantly -- into what the type already IMPLIES. The real Legal Entity vLEI schema",
+    "documents its `i` property as 'QVI Issuer AID' and its `a.i` as 'LE Issuer AID', so the",
+    "party relation of every credential of that type is stated in the schema. A descriptor that",
+    "says 'issued by the QVI to the legal entity' is then restating the type in longer words,",
+    "and the algorithm can know that instead of guessing.",
+    "",
+    "THE STATIC MAP COMES FIRST AND NEEDS NO NETWORK. The famous types have stable, published",
+    "SAIDs; naming them here answers the common case with no fetch, no latency and no",
+    "correlation. Sources are for the long tail.",
+    "",
+    "FETCHING IS NOT FREE AND IS NOT ALWAYS RIGHT. Asking a host for schema X tells that host",
+    "somebody is looking at a credential of that type, which is a correlation vector the",
+    "dossier specification treats at length. Resolution must therefore be a choice a deployment",
+    "makes, not something a renderer does because it can, and the answers are cacheable",
+    "forever because a content-addressed document cannot change."
+  ],
+  "version": 1,
+  "updated": "2026-09-24",
+  "sources": [
+    {
+      "id": "weboftrust-vlei",
+      "name": "WebOfTrust/vLEI",
+      "kind": "github-raw-directory",
+      "url": "https://raw.githubusercontent.com/WebOfTrust/vLEI/dev/schema/acdc/",
+      "verified": "2026-09-24, HTTP 200, `$id` present and equal to the SAID in the filename's schema",
+      "note": "Files are named by credential type rather than by SAID, so this source is enumerable rather than addressable: fetch the index, read each `$id`. Good for building the static map; poor for resolving an arbitrary SAID."
+    },
+    {
+      "id": "gleif-it-vlei",
+      "name": "GLEIF-IT/vlei-schema",
+      "kind": "github-raw-directory",
+      "url": "https://raw.githubusercontent.com/GLEIF-IT/vlei-schema/main/",
+      "verified": "2026-09-24, HTTP 200, served a byte-identical document to weboftrust-vlei for legal-entity-vLEI-credential.json",
+      "note": "Two independent hosts serving the same content-addressed documents. That redundancy is the point: if either is unreachable the other answers, and neither can lie."
+    }
+  ],
+  "known_schemas": {
+    "_comment": "SAID -> what is known without fetching anything. `verified` records how the entry was established, because an entry nobody checked is a claim, not a fact.",
+    "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY": {
+      "title": "Legal Entity vLEI Credential",
+      "short": "LE credential",
+      "credential_type": "LegalEntityvLEICredential",
+      "issuer_role": "Qualified vLEI Issuer",
+      "issuee_role": "Legal Entity",
+      "entailed": ["issuer", "issuee"],
+      "verified": "2026-09-24, fetched from both sources above; `$id` equals this key; issuer_role and issuee_role read from the schema's own property descriptions ('QVI Issuer AID', 'LE Issuer AID')"
+    }
+  },
+  "fallback": {
+    "_comment": [
+      "What arcviz does when a schema cannot be resolved, which is the common case: arcviz's own",
+      "corpus contains 38 fixtures and not one schema document, so every SAID in it is opaque.",
+      "The four states below must render distinctly. Collapsing the last two is the failure this",
+      "repository exists to refuse -- a schema that is merely absent and a schema whose content",
+      "does not match its SAID are not the same situation, and only one of them is an attack."
+    ],
+    "states": [
+      {
+        "state": "verified",
+        "means": "fetched, and the document digests to the SAID that was asked for",
+        "render": "use the title; treat the entailments as known"
+      },
+      {
+        "state": "unverified",
+        "means": "a document was obtained but its SAID was not recomputed, only compared to a self-declared `$id`",
+        "render": "the title MAY be shown and MUST be marked as unverified provenance, per principles.md P12; entailments must NOT be relied on, because an unverified schema could understate what the type implies"
+      },
+      {
+        "state": "unavailable",
+        "means": "no source answered, or resolution is switched off for privacy",
+        "render": "the schema SAID is an opaque type key: it can say two nodes share a type and cannot say what type. Say so, rather than omitting the type component -- 'unknown type' is true and an absent component is not"
+      },
+      {
+        "state": "mismatch",
+        "means": "a document was obtained and it does NOT digest to the SAID asked for",
+        "render": "this is a security event, not an absence. Never fall back to it silently, never cache it, and surface it at the gestalt level per posture.md point 6"
+      }
+    ]
+  }
+}

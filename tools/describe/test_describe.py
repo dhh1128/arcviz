@@ -242,3 +242,56 @@ if __name__ == "__main__":
                 print(f"  FAIL {name}\n       {exc}")
     print(f"\n{failures} failure(s)")
     sys.exit(1 if failures else 0)
+
+
+# --- schema resolution -------------------------------------------------------------------
+# Offline only, deliberately. The live sources were exercised by hand and are recorded in
+# refs/schema-registry.json's `verified` fields; a suite that reaches the network fails for
+# reasons that have nothing to do with the code, and a flaky test gets muted rather than fixed.
+
+def test_a_known_said_resolves_with_no_network_at_all():
+    import schemas
+    info = schemas.resolve("ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY")
+    assert info.state == schemas.VERIFIED
+    assert info.title == "Legal Entity vLEI Credential"
+    assert info.entailed == ("issuer", "issuee")
+    assert info.trustworthy
+
+
+def test_resolution_asks_for_nothing_unless_a_fetcher_is_supplied():
+    """Asking a host for a schema tells it somebody holds a credential of that type, so the
+    default must be silence rather than convenience."""
+    import schemas
+    asked = []
+    info = schemas.resolve("EUNKNOWNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    assert info.state == schemas.UNAVAILABLE
+    assert asked == []
+
+
+def test_a_mismatched_document_is_its_own_state_and_is_never_cached():
+    """A schema that does not digest to the SAID asked for is a security event, not an
+    absence. Falling back to `unavailable` would file an attack under 'nothing found'."""
+    import schemas
+    cache = {}
+    reg = {"sources": [{"id": "liar", "url": "x"}], "known_schemas": {}}
+    info = schemas.resolve("ESOUGHT", registry=reg,
+                           fetch=lambda said, src: '{"$id": "ESOUGHT", "title": "t"}',
+                           digest=lambda doc: "EDIFFERENT", cache=cache)
+    assert info.state == schemas.MISMATCH
+    assert cache == {}, "a mismatch must never be remembered as an answer"
+
+
+def test_an_unverified_schema_lends_a_name_but_not_an_entailment():
+    """A wrong title is visible and merely wrong. A wrong entailment SUPPRESSES a component,
+    so it makes the label say less than it should -- an omission, which is the direction this
+    project treats as dangerous."""
+    import schemas
+    reg = {"sources": [{"id": "s", "url": "x"}], "known_schemas": {}}
+    doc = ('{"$id": "ESOUGHT", "title": "Some Credential", "properties": '
+           '{"i": {"description": "Issuer AID"}, "a": {"properties": '
+           '{"i": {"description": "Issuee AID"}}}}}')
+    info = schemas.resolve("ESOUGHT", registry=reg, fetch=lambda said, src: doc)
+    assert info.state == schemas.UNVERIFIED
+    assert info.title == "Some Credential"
+    assert info.entailed == ()
+    assert not info.trustworthy
