@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
-import { characterize, describeChannels, mnemonic, type TrustAssumption } from "@entviz/core";
+import type { TrustAssumption } from "@entviz/core";
 import { abbreviate, budgeted, ranks, type Tier, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
@@ -130,36 +130,21 @@ function Band({ cats }: { cats: string[] }) {
   );
 }
 
-// Daniel, turn 16: shorten a SAID the way the entviz pill shortens a value, not by keeping a
-// prefix. entviz's mnemonic (describe.ts:428) is built from the entviz's own displayed cells --
-// first…middle…last above 256 bits -- so it never shows a character the visualization doesn't,
-// the ellipses honestly mark what was left out, and what it shows is spread across the whole
-// value. A bare prefix concentrates every shown character at one end, which is the cheapest
-// thing to grind a look-alike for, and gives no sign that anything was omitted.
-function shortSaid(said: string): string {
-  try {
-    const m = mnemonic(describeChannels(said).cells, characterize(said).sizeBits);
-    return m || said;
-  } catch {
-    return said;
-  }
-}
+// A SAID is shown in an entviz pill (Daniel, turn 17), for the copy menu, the visualization and
+// the value-preview hover it brings, and for entviz's own shortening. Two settings keep it a
+// reference handle rather than something to compare by eye (credential-descriptors.md section 1:
+// "The SAID keeps the display and loses the ceremony"). No `onCompare`, so the pill offers no
+// comparison. And `corpus` posture with only the mnemonic on, because under the default wild
+// posture the pill shows no value text at all, just "cesr digest". Setting that posture is this
+// sample's choice, made for SAIDs only: their integrity is settled by recomputing the digest,
+// which is not true of the AIDs, whose posture stays the host's call.
+const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 
 function SaidHandle({ said }: { said: string }) {
-  // A reference handle: displayed, copyable, and deliberately NOT wrapped in the comparison
-  // ceremony. A SAID's integrity is settled by recomputation, not by a human glance.
-  const [copied, setCopied] = useState(false);
   return (
-    <button
-      className="said"
-      title={`SAID ${said} — a reference handle, not something to compare by eye. Click to copy.`}
-      onClick={(e) => {
-        e.stopPropagation();
-        navigator.clipboard?.writeText(said).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1200); });
-      }}
-    >
-      {copied ? "copied" : shortSaid(said)}
-    </button>
+    <span className="said-pill">
+      <EntvizPill value={said} trust={SAID_TRUST} typeSignal="icon" maxWidth="100%" />
+    </span>
   );
 }
 
@@ -304,7 +289,7 @@ function Card({
         {/* Daniel, turn 10: the top of a credential is its SAID and the (i); kind goes to the bottom. */}
         <header className="card-top">
           {isPresented && <span className="presented-tag">presented</span>}
-          <SaidHandle said={n.said} />
+          <span className="said-slot"><SaidHandle said={n.said} /></span>
           <Info notes={notes} />
         </header>
         <div className="type-name">

@@ -169,3 +169,6 @@ q.issuer-text { quotes: "“" "”"; }
 /* turn-16: lighter connectors */
 .edges path { stroke: #c3c8cf; stroke-width: 1.2; }
 .edge-box { fill: #aab0b8; }
+
+/* turn-17: the SAID is an entviz pill */
+.said-slot { margin-right: auto; min-width: 0; font-size: 0.85rem; }
