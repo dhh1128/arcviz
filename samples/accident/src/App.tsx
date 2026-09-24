@@ -151,7 +151,7 @@ function Band({ cats }: { cats: string[] }) {
 // gate is per value set, not per kind of value, so every SAID pill has to be told.
 const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 
-// Experiment (Daniel, turn 18): entviz's colorbar icon, a miniature of the visualization's
+// On permanently (Daniel, turn 42): entviz's colorbar icon, a miniature of the visualization's
 // colorbar that replaces the pill's constant 2x2 badge. It is value-derived and entviz only
 // draws it under corpus posture: on every SAID, and on an AID only when the host's lookup knows it.
 const PillIcons = createContext(false);
@@ -597,7 +597,7 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
-  const icons = false; // the colorbar-icon experiment (turn 18) is over; its checkbox is gone
+  const icons = true; // Daniel, turn 42: colorbar icons on permanently (on SAIDs, and on AIDs the lookup knows)
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
   useEffect(() => {
