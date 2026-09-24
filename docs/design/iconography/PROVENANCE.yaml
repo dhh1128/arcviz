@@ -1,0 +1,69 @@
+# Provenance and licence record for every third-party file in sources/.
+# Each licence was read from the file actually shipped (or, where none ships, fetched from the
+# project's repository), not from package metadata or recollection. Retrieved 2026-09-24.
+# sha256 values are the first 16 hex digits of the file as vendored, unmodified.
+
+sets:
+  phosphor:
+    project: Phosphor Icons
+    package: "@phosphor-icons/core@2.1.1 (npm), assets/fill/"
+    repository: https://github.com/phosphor-icons/core
+    licence: MIT
+    licence_read_from: "LICENSE in the npm package; also https://raw.githubusercontent.com/phosphor-icons/core/main/LICENSE"
+    licence_copy: licenses/phosphor.MIT.txt
+  material-symbols:
+    project: Material Symbols (Google)
+    package: "@material-symbols/svg-400@0.47.5 (npm), rounded/ -- a community repackaging (github.com/marella/material-symbols) of Google's icons, whose README credits Google"
+    repository: https://github.com/google/material-design-icons
+    licence: Apache-2.0
+    licence_read_from: "LICENSE in the npm package; also https://raw.githubusercontent.com/google/material-design-icons/master/LICENSE"
+    licence_copy: licenses/material-symbols.Apache-2.0.txt
+  font-awesome:
+    project: Font Awesome Free (Fonticons, Inc.)
+    package: "@fortawesome/fontawesome-free@7.3.1 (npm), svgs/solid/"
+    repository: https://github.com/FortAwesome/Font-Awesome
+    licence: CC-BY-4.0
+    licence_note: "Font Awesome Free is three licences: icons CC BY 4.0, fonts OFL-1.1, code MIT. Only SVG icons are used here, so only CC BY 4.0 applies."
+    licence_read_from: "LICENSE.txt in the npm package; CC BY 4.0 legal code from https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+    licence_copy: [licenses/font-awesome-free.txt, licenses/CC-BY-4.0.txt]
+  fluent:
+    project: Fluent UI System Icons (Microsoft)
+    package: "@fluentui/svg-icons@1.1.341 (npm), icons/"
+    repository: https://github.com/microsoft/fluentui-system-icons
+    licence: MIT
+    licence_read_from: "The npm package ships no licence file (package.json says MIT); read from https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/LICENSE"
+    licence_copy: licenses/fluent.MIT.txt
+  daniel:
+    project: arcviz
+    note: "A sketch Daniel Hardman supplied on 2026-09-24 as the idea for org-identity; it is not used directly. The glyph is a redrawing in build.py (temple)."
+    licence: Apache-2.0 (the repository's own)
+
+considered_and_excluded:
+  remixicon:
+    package: remixicon@4.9.1 (npm)
+    reason: "package.json declares Apache-2.0, but the License file shipped beside it is the custom 'Remix Icon License v1.0' (January 2026), which forbids distributing the icons as an icon collection. A public glyph set may be one. Not used."
+  game-icons:
+    repository: https://github.com/game-icons/icons
+    licence: "CC BY 3.0 (license.txt in the repository; some contributors CC0)"
+    reason: "Licence is fine; the style is illustrative, inconsistent and loses its detail at 32 px. Not used."
+
+assets:
+  - {glyph: identity,               set: phosphor,         file: identification-badge-fill.svg, sha256: 772e0caaa75808fa, modified: [rescaled]}
+  - {glyph: identity.travel,        set: material-symbols, file: flight-fill.svg,               sha256: 571c3103c2e00b26, modified: [rescaled]}
+  - {glyph: identity.age,           set: phosphor,         file: person-fill.svg,               sha256: f56b99998503175d, modified: [head lowered, three scaled copies overlapped with a cut gap, rescaled]}
+  - {glyph: identity.address,       set: phosphor,         file: house-fill.svg,                sha256: 4783cdf0ae5f5ec3, modified: [rescaled]}
+  - {glyph: org-identity,           set: original,         after: sources/daniel/org-icon.svg}
+  - {glyph: humanness,              set: phosphor,         file: person-fill.svg,               sha256: f56b99998503175d, modified: [head lowered 10/256, rescaled]}
+  - {glyph: financial,              set: font-awesome,     file: money-bill-wave.svg,           sha256: 3c4d4536e3d10bf7, modified: [rescaled]}
+  - {glyph: financial.tax,          set: phosphor,         file: receipt-fill.svg,              sha256: c8ea3afaa7142f69, modified: [rescaled]}
+  - {glyph: financial.insurance,    set: fluent,           file: umbrella_24_filled.svg,        sha256: 49a1c89708eee48d, modified: [rescaled]}
+  - {glyph: qualification,          set: phosphor,         file: medal-fill.svg,                sha256: f2e47d98711e5ce8, modified: [rescaled]}
+  - {glyph: qualification.academic, set: font-awesome,     file: graduation-cap.svg,            sha256: c0b60145dc6a4d54, modified: [rescaled]}
+  - {glyph: qualification.driving,  set: material-symbols, file: directions_car-fill.svg,       sha256: 3a262b825503e208, modified: [rescaled]}
+  - {glyph: health,                 set: material-symbols, file: ecg_heart-fill.svg,            sha256: 2a6bdb968ca84b51, modified: [rescaled]}
+  - {glyph: affiliation,            set: phosphor,         file: users-three-fill.svg,          sha256: aca109558096eca8, modified: [back figures rebuilt from the front bust, right one scaled 0.7 and raised, rescaled]}
+  - {glyph: authority.delegation,   set: font-awesome,     file: sitemap.svg,                   sha256: 01af1d6c60c75b51, modified: [rescaled]}
+  - {glyph: authority.control,      set: font-awesome,     file: key.svg,                       sha256: 00b1116eff8b8f1f, modified: [rescaled]}
+  - {glyph: civil-status.birth,     set: phosphor,         file: baby-fill.svg,                 sha256: 33e21a6a72fa6394, modified: [rescaled]}
+  - {glyph: civil-status.marriage,  set: original}
+  - {glyph: misc,                   set: material-symbols, file: description-fill.svg,          sha256: 10e46e933608eca6, modified: [rescaled]}
