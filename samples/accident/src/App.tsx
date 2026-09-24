@@ -103,7 +103,7 @@ const Meanings = createContext<Record<string, string>>({});
 function glyphTitle(g: { category: string; glyph: string; override: boolean }, meanings: Record<string, string>, evidence?: string[]): string {
   const label = g.glyph.replace(".", ": ");
   const lines = [label, meanings[g.category] ?? ""];
-  if (evidence) lines.push(evidence.length ? `On this credential because of: ${evidence.join(", ")}.` : "Nothing matched, so the residual.");
+  if (evidence?.length) lines.push(`On this credential because of: ${evidence.join(", ")}.`);
   if (g.override) lines.push("The subcategory glyph was assigned by hand for this sample.");
   return lines.filter(Boolean).join("\n\n");
 }
