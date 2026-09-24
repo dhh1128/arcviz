@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
 import type { TrustAssumption } from "@entviz/core";
-import { abbreviate, budgeted, ranks, type Tier, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
+import { abbreviations, budgeted, ranks, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
 // ---------------------------------------------------------------------------------------------
@@ -112,7 +112,8 @@ function glyphTitle(g: { category: string; glyph: string; override: boolean }, m
 function TypeName({ name }: { name: string }) {
   const lex = useContext(Lexicon);
   const ref = useRef<HTMLSpanElement>(null);
-  const [tier, setTier] = useState<Tier>("full");
+  const forms = useMemo(() => abbreviations(name, lex), [name, lex]);
+  const [shown, setShown] = useState(name);
   useLayoutEffect(() => {
     const el = ref.current?.parentElement;
     if (!el) return;
@@ -121,15 +122,13 @@ function TypeName({ name }: { name: string }) {
       const ctx = document.createElement("canvas").getContext("2d")!;
       ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
       const room = el.clientWidth - (el.querySelector(".presented-tag")?.getBoundingClientRect().width ?? 0) - 8;
-      const pick = (["full", "medium", "short"] as Tier[]).find((t) => ctx.measureText(abbreviate(name, lex, t)).width <= room) ?? "short";
-      setTier(pick);
+      setShown(forms.find((f) => ctx.measureText(f).width <= room) ?? forms[forms.length - 1]);
     };
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [name, lex]);
-  const shown = abbreviate(name, lex, tier);
+  }, [name, forms]);
   return <span ref={ref} title={shown !== name ? name : undefined}>{shown}</span>;
 }
 
@@ -598,7 +597,7 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
-  const [icons, setIcons] = useState(false);
+  const icons = false; // the colorbar-icon experiment (turn 18) is over; its checkbox is gone
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
   useEffect(() => {
@@ -629,9 +628,6 @@ export default function App() {
             </label>
             <label><input type="checkbox" checked={pictures} onChange={(e) => setPictures(e.target.checked)} /> pictures</label>
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
-            <label title="entviz's colorbar icon at the pill's left edge: a miniature of the visualization's colorbar, derived from the value. Drawn only under corpus posture: on every SAID, and on an AID only when the host's alias lookup knows it.">
-              <input type="checkbox" checked={icons} onChange={(e) => setIcons(e.target.checked)} /> pill colorbar icons
-            </label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
                 <input type="checkbox" checked={v === "host-aliases"}

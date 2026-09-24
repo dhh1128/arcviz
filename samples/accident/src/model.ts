@@ -132,15 +132,63 @@ export function budgeted(d: Descriptor, lines: number): { kept: Component[]; dro
 }
 
 // refs/abbreviations.json: "A render uses the longest form that fits. `short` exists for the
-// floor form, not as a default." Whole words only, longest term first so "legal entity" wins
-// over any shorter term inside it.
+// floor form, not as a default."
+//
+// ONE TERM AT A TIME. Daniel, turn 36: the first version "went from zero abbreviated words to 2
+// abbreviated words without testing whether one abbreviated word would make it fit". So this
+// yields candidates in order of increasing abbreviation: each step shortens ONE more occurrence,
+// the one that saves the most characters, first to its medium form and only then, again one at a
+// time, to its short form. The render takes the first candidate that fits.
+//
+// Capitals are kept: a replacement for a capitalised word is capitalised, and a medium form that
+// differs from the term only in case ("legal entity") is no change at all.
 export type Tier = "full" | "medium" | "short";
-export function abbreviate(text: string, lex: Data["abbreviations"], tier: Tier): string {
-  if (tier === "full") return text;
-  let out = text;
+
+interface Occ { start: number; end: number; term: string; tier: 0 | 1 | 2 }
+
+function withCase(original: string, repl: string): string {
+  if (repl !== repl.toLowerCase()) return repl;            // already carries its own capitals (ECR, LE)
+  return /^[A-Z]/.test(original) ? repl[0].toUpperCase() + repl.slice(1) : repl;
+}
+
+export function abbreviations(text: string, lex: Record<string, { medium: string; short: string }>): string[] {
+  const occ: Occ[] = [];
+  const taken = new Array(text.length).fill(false);
   for (const term of Object.keys(lex).sort((a, b) => b.length - a.length)) {
     const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    out = out.replace(new RegExp(`\\b${esc}\\b`, "gi"), lex[term][tier]);
+    for (const m of text.matchAll(new RegExp(`\\b${esc}\\b`, "gi"))) {
+      const s0 = m.index!, e0 = s0 + m[0].length;
+      if (taken.slice(s0, e0).some(Boolean)) continue;
+      taken.fill(true, s0, e0);
+      occ.push({ start: s0, end: e0, term, tier: 0 });
+    }
+  }
+  const render = () => {
+    let out = "", at = 0;
+    for (const o of [...occ].sort((a, b) => a.start - b.start)) {
+      const orig = text.slice(o.start, o.end);
+      const form = o.tier === 0 ? orig : withCase(orig, o.tier === 1 ? lex[o.term].medium : lex[o.term].short);
+      out += text.slice(at, o.start) + form;
+      at = o.end;
+    }
+    return out + text.slice(at);
+  };
+  const out = [text];
+  for (const tier of [1, 2] as const) {
+    for (;;) {
+      const current = render();
+      let best: Occ | null = null, bestLen = current.length;
+      for (const o of occ) {
+        if (o.tier >= tier) continue;   // a term whose medium form saves nothing can still go to short
+        const was = o.tier; o.tier = tier;
+        const len = render().length;
+        o.tier = was;
+        if (len < bestLen) { best = o; bestLen = len; }
+      }
+      if (!best) break;
+      best.tier = tier;
+      out.push(render());
+    }
   }
   return out;
 }
