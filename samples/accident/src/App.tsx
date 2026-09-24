@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
 import type { TrustAssumption } from "@entviz/core";
-import { budgeted, ranks, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
+import { abbreviate, budgeted, ranks, type Tier, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
 // ---------------------------------------------------------------------------------------------
@@ -85,6 +85,32 @@ const PhotoMode = createContext<PhotoGlyph>("picture");
 // unnamed AID the type text; corpus opens the mnemonic, as bakobo/cesrview does. Whether a
 // presentation is a corpus is the host's call, never arcviz's (docs/integration/entviz.md).
 const Trust = createContext<TrustAssumption | undefined>(undefined);
+const Lexicon = createContext<Data["abbreviations"]>({});
+
+// The longest form of the type name that fits on one line of the space it has.
+function TypeName({ name }: { name: string }) {
+  const lex = useContext(Lexicon);
+  const ref = useRef<HTMLSpanElement>(null);
+  const [tier, setTier] = useState<Tier>("full");
+  useLayoutEffect(() => {
+    const el = ref.current?.parentElement;
+    if (!el) return;
+    const fit = () => {
+      const cs = getComputedStyle(el);
+      const ctx = document.createElement("canvas").getContext("2d")!;
+      ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const room = el.clientWidth - (el.querySelector(".presented-tag")?.getBoundingClientRect().width ?? 0) - 8;
+      const pick = (["full", "medium", "short"] as Tier[]).find((t) => ctx.measureText(abbreviate(name, lex, t)).width <= room) ?? "short";
+      setTier(pick);
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [name, lex]);
+  const shown = abbreviate(name, lex, tier);
+  return <span ref={ref} title={shown !== name ? name : undefined}>{shown}</span>;
+}
 
 function glyphsFor(n: CNode, photo: PhotoGlyph = "picture"): { category: string; glyph: string; override: boolean; ext?: string | null }[] {
   const cats = n.classified.categories.length ? n.classified.categories : ["misc"];
@@ -130,7 +156,6 @@ function SaidHandle({ said }: { said: string }) {
 
 function PartyPill({ party }: { party?: Party }) {
   if (!party) return <span className="muted">(no party)</span>;
-  const flags = party.coiaFlags ?? [];
   const trust = useContext(Trust);
   return (
     <span className="party">
@@ -143,14 +168,6 @@ function PartyPill({ party }: { party?: Party }) {
         onCompare={() => {}}
         maxWidth="100%"
       />
-      {flags.map(([digit, name, meaning]) => (
-        <span key={digit} className="coia-flag" title={`COIA flag ${digit}: ${meaning}. Set by whoever created this alias; it qualifies the alias, not the credential.`}>
-          ⚑ {name}
-        </span>
-      ))}
-      {party.coiaUnknownFlags?.map((d) => (
-        <span key={d} className="coia-flag" title="An unrecognised COIA flag digit. Surfaced, never dropped.">⚑ flag {d}?</span>
-      ))}
     </span>
   );
 }
@@ -163,13 +180,13 @@ function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pic
   const why = `${c.kind} · ${c.gain.toFixed(2)} bits${c.issuer_claim ? " · the issuer's own words" : ""}${c.text_alternative ? " · carried so the label works without pictures" : ""}`;
   let body: React.ReactNode;
   switch (c.kind) {
-    case "role": body = <>as <q className="issuer-text">{c.value}</q></>; break;
+    case "role": return null; // carried by the labelled arrow
+    case "image": return null; // the thumbnail is this component
     case "parties": {
       const [i, e] = c.value as [string, string | null];
       body = <>from <PartyPill party={frame.parties[i]} />{e && <> to <PartyPill party={frame.parties[e]} /></>}</>;
       break;
     }
-    case "image": body = pictures ? <>shown by its picture</> : <span className="muted">picture not drawn in this mode</span>; break;
     case "subject": body = <q className="issuer-text">{String(c.value)}</q>; break;
     case "party_field": body = <>of <q className="issuer-text">{String(c.value)}</q></>; break;
     case "locus": body = <>at <q className="issuer-text">{String(c.value)}</q></>; break;
@@ -274,13 +291,6 @@ function Card({
     >
       <Band cats={cats} />
       <div className="card-body">
-        {incoming.length > 0 && (
-          <div className="incoming">
-            {incoming.map((e) => (
-              <code key={e.label + e.from.said} className="issuer-text" title={`referenced as “${e.label}” by the ${e.from.type.name ?? "unresolved type"}`}>{e.label}</code>
-            ))}
-          </div>
-        )}
         <header className="card-head">
           <span className="glyph-row" style={{ color: primary.color }}>
             {glyphs.map((g) => (
@@ -294,7 +304,7 @@ function Card({
           <div className="type">
             <div className="type-name">
               {isPresented && <span className="presented-tag">presented</span>}
-              {typeName ?? <span className="muted">unresolved type</span>}
+              {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
             </div>
           </div>
           <SaidHandle said={n.said} />
@@ -389,44 +399,46 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const els = useRef(new Map<string, HTMLElement>());
   const box = useRef<HTMLDivElement>(null);
   const bands = useRef<(HTMLDivElement | null)[]>([]);
-  const [paths, setPaths] = useState<{ d: string; key: string }[]>([]);
+  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number }[]>([]);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
   const incoming = (said: string) =>
     frame.nodes.flatMap((m) => m.edges.filter((e) => e.target === said).map((e) => ({ label: e.label, from: m })));
 
+  // One arrow per edge, labelled with the edge's own label (DD-3: "we need to expose that
+  // label"). Every arrow arrives at the top-left of its target with the label beside the
+  // arrowhead. A target on the first line of its rank is reached directly. A target further
+  // down a wrapped rank is reached along the band's left gutter, so the line never threads
+  // through a sibling above it and makes siblings read as a chain.
   const measure = () => {
     const root = box.current;
     if (!root) return;
     const r0 = root.getBoundingClientRect();
-    const out: { d: string; key: string }[] = [];
-    // A rank that wraps puts siblings above one another, and a line threaded through a column
-    // of siblings reads as a chain. So when a rank wraps, the band itself carries membership and
-    // one line runs from each referrer to the band; the edge label stays on each card.
-    const wrapped = new Set<number>();
-    rows.forEach((row, i) => {
-      const tops = new Set(row.map((s) => Math.round(els.current.get(s)?.getBoundingClientRect().top ?? 0)));
-      if (tops.size > 1) wrapped.add(i);
-    });
     const rankOf = new Map<string, number>();
     rows.forEach((row, i) => row.forEach((s) => rankOf.set(s, i)));
-    const seenBand = new Set<string>();
+    const firstTop = rows.map((row) => Math.min(...row.map((s) => els.current.get(s)?.getBoundingClientRect().top ?? Infinity)));
+    const arrivals = new Map<string, number>();
+    const out: { d: string; key: string; label: string; lx: number; ly: number }[] = [];
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
+        const b = els.current.get(e.target)?.getBoundingClientRect();
         const r = rankOf.get(e.target);
-        const band = r !== undefined && wrapped.has(r) ? bands.current[r] : null;
-        const b = (band ?? els.current.get(e.target))?.getBoundingClientRect();
-        if (!a || !b) continue;
-        if (band) {
-          const k = m.said + ":" + r;
-          if (seenBand.has(k)) continue;
-          seenBand.add(k);
-        }
+        const band = r !== undefined ? bands.current[r]?.getBoundingClientRect() : undefined;
+        if (!a || !b || r === undefined) continue;
+        const k = arrivals.get(e.target) ?? 0;
+        arrivals.set(e.target, k + 1);
         const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
-        const x2 = band ? x1 : b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
-        const my = (y1 + y2) / 2;
-        out.push({ key: m.said + e.label, d: `M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}` });
+        const ax = b.left - r0.left + 22 + k * 16, ay = b.top - r0.top;
+        let d: string;
+        if (!band || Math.abs(b.top - firstTop[r]) < 2) {
+          const my = (y1 + ay) / 2;
+          d = `M${x1},${y1} C${x1},${my} ${ax},${my} ${ax},${ay}`;
+        } else {
+          const gx = band.left - r0.left + 10, ty = band.top - r0.top + 9, hy = ay - 20;
+          d = `M${x1},${y1} L${x1},${ty} L${gx},${ty} L${gx},${hy} L${ax},${hy} L${ax},${ay}`;
+        }
+        out.push({ key: m.said + e.label, d, label: e.label, lx: ax + 6, ly: ay - 6 - k * 11 });
       }
     }
     // Only set state when the geometry actually moved, or measuring re-renders forever.
@@ -455,7 +467,13 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   return (
     <div className="graph" ref={box}>
       <svg className="edges" width={size.w} height={size.h} aria-hidden>
-        {paths.map((p) => <path key={p.key} d={p.d} />)}
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" className="arrowhead" />
+          </marker>
+        </defs>
+        {paths.map((p) => <path key={p.key} d={p.d} markerEnd="url(#arrow)" />)}
+        {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className="edge-label">{p.label}</text>)}
       </svg>
       {rows.map((row, i) => (
         <div className="rank" key={i} ref={(el) => { bands.current[i] = el; }}>
@@ -595,7 +613,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><PhotoMode.Provider value={photo}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}>
+    <Marks.Provider value={marks}><PhotoMode.Provider value={photo}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -649,6 +667,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Trust.Provider></PhotoMode.Provider></Marks.Provider>
+    </Lexicon.Provider></Trust.Provider></PhotoMode.Provider></Marks.Provider>
   );
 }

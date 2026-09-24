@@ -1,10 +1,10 @@
 {
- "_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). Every name here was invented for this sample. Some AIDs are deliberately left unnamed so the pill's own fallback shows, and one alias carries COIA flag 0 (unverified) so the flag channel has something to render.",
+ "_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). Every name here was invented for this sample. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
  "aliases": {
   "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": "Rosa Iqbal claims adjuster Northgate Mutual",
   "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": "Driver Licence Division Utah",
   "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": "Alice Moreau",
-  "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": "Jae Park witness,0",
+  "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": "Jae Park witness",
   "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": "Northgate Mutual claims intake",
   "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": "GLEIF root",
   "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": "Fixture QVI",

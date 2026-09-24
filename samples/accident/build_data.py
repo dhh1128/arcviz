@@ -262,7 +262,9 @@ def main() -> int:
     (PUBLIC / "attachments").mkdir(exist_ok=True)
     for png in (CORPUS / "attachments").glob("*.png"):
         shutil.copy2(png, PUBLIC / "attachments" / png.name)
+    lexicon = json.loads((ROOT / "refs" / "abbreviations.json").read_text())
     data = {"generated_by": "samples/accident/build_data.py",
+            "abbreviations": lexicon["terms"],
             "host_note": host["_note"],
             "frames": [accident(host), vlei(host)]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")

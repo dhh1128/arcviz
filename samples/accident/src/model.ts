@@ -83,6 +83,7 @@ export interface Frame {
 
 export interface Data {
   generated_by: string;
+  abbreviations: Record<string, { medium: string; short: string }>;
   host_note: string;
   frames: Frame[];
 }
@@ -118,7 +119,9 @@ export function ranks(frame: Frame): string[][] {
 // the head and is always shown, so the budget applies to everything after it. Kept components
 // are displayed in the algorithm's own order; only the choice of WHICH to keep uses the gain.
 export function budgeted(d: Descriptor, lines: number): { kept: Component[]; dropped: Component[] } {
-  const body = d.components.filter((c) => c.kind !== "type");
+  // Not budgeted: the type is the head, the role rides on the labelled arrow, and the image is
+  // the thumbnail. None of them is a line of text on the card.
+  const body = d.components.filter((c) => !["type", "role", "image"].includes(c.kind));
   if (lines >= body.length) return { kept: body, dropped: [] };
   const order = body
     .map((c, i) => ({ c, i }))
@@ -128,4 +131,18 @@ export function budgeted(d: Descriptor, lines: number): { kept: Component[]; dro
     kept: body.filter((_, i) => keep.has(i)),
     dropped: body.filter((_, i) => !keep.has(i)),
   };
+}
+
+// refs/abbreviations.json: "A render uses the longest form that fits. `short` exists for the
+// floor form, not as a default." Whole words only, longest term first so "legal entity" wins
+// over any shorter term inside it.
+export type Tier = "full" | "medium" | "short";
+export function abbreviate(text: string, lex: Data["abbreviations"], tier: Tier): string {
+  if (tier === "full") return text;
+  let out = text;
+  for (const term of Object.keys(lex).sort((a, b) => b.length - a.length)) {
+    const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    out = out.replace(new RegExp(`\\b${esc}\\b`, "gi"), lex[term][tier]);
+  }
+  return out;
 }

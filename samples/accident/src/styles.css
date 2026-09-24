@@ -133,3 +133,11 @@ q.issuer-text { quotes: "“" "”"; }
 .review-marks { display: flex; flex-wrap: wrap; gap: 4px; }
 .card-foot { justify-content: flex-end; }
 .demo-label-inline { font-size: 0.75rem; color: var(--muted); }
+
+/* turn-7: labelled arrows, one per edge */
+.rank + .rank { padding-left: 26px; }
+.rank-label { left: auto; right: 12px; }
+.edges .arrowhead { fill: #7d848d; stroke: none; }
+.edges path { stroke: #7d848d; }
+.edge-label { font: 600 11px ui-monospace, Menlo, monospace; fill: var(--issuer); paint-order: stroke; stroke: var(--page); stroke-width: 3px; }
+.rank { gap: 34px 14px; }
