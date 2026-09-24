@@ -157,8 +157,10 @@ def test_accident_bundle_uses_a_different_channel_for_each_pair():
     got = {by_said[d.said]: [c.kind for c in d.components] for d in describe(dag)}
     assert "image" in got["accident_photo_a"], got["accident_photo_a"]
     assert "image" in got["accident_photo_b"], got["accident_photo_b"]
-    assert "issuer" in got["accident_statement_a"], got["accident_statement_a"]
-    assert "issuer" in got["accident_statement_b"], got["accident_statement_b"]
+    # The statements are separated by who WROTE them, which since the role-first change is
+    # carried inside the party relation rather than by a bare issuer component.
+    for n in ("accident_statement_a", "accident_statement_b"):
+        assert "parties" in got[n], got[n]
     # Driver B's portrait does not resolve, so it cannot be the discriminator and the label
     # must fall through to the issuee -- see the unresolved_image vector for why.
     # Both portraits now resolve, so the licence pair is separated by the faces themselves --
@@ -176,12 +178,15 @@ def test_the_withheld_image_is_annotated_on_the_node_that_withheld_it():
         assert "image_committed_not_resolved" not in ann[served], (served, ann[served])
 
 
-def test_the_root_is_described_by_its_type_alone():
-    """A presented root is the claim rather than a part of it: nothing else shares its schema,
-    so the head is the whole description and no discriminator is appended for its own sake."""
+def test_the_root_gets_no_discriminator_it_does_not_need():
+    """A presented root is the claim rather than a part of it, and nothing else shares its
+    schema -- so nothing is appended to tell it apart. What it carries is role-bearing only:
+    what it is, and who assembled it. Renamed from ..._by_its_type_alone, which was written
+    while the objective was minimality and expected the head on its own."""
     dag, _, by_said = _accident_dag(with_subject=True)
     root = next(d for d in describe(dag) if by_said[d.said] == "accident_bundle")
-    assert [c.kind for c in root.components] == ["type"], root.components
+    assert [c.kind for c in root.components] == ["type", "parties"], root.components
+    assert all(c.role_bearing for c in root.components), root.components
 
 
 def test_dropping_the_subject_field_changes_the_answer_rather_than_breaking_it():
@@ -198,7 +203,7 @@ def test_dropping_the_subject_field_changes_the_answer_rather_than_breaking_it()
     assert all(d.distinguishing for d in out.values())
     # With no subject field the photographs are separable only by their pictures, so they are
     # NOT separable as text and must say so on both channels.
-    assert [a["kind"] for a in out["accident_photo_a"].annotations] == ["subject_undetermined"]
+    assert "subject_undetermined" in [a["kind"] for a in out["accident_photo_a"].annotations]
     assert out["accident_photo_a"].distinguishing_as_text is False
     assert "subject_undetermined" in [a["kind"] for a in out["accident_statement_a"].annotations]
 

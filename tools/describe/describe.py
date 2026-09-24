@@ -129,6 +129,34 @@ class Component:
     text_alternative: bool = False
 
 
+# Channels whose value means something only by contrast with the other nodes' values. An
+# absolute channel is worth saying when it is constant; a relative one is not.
+_RELATIVE_CHANNELS = ("when",)
+
+
+def _is_deviation(dag: "Dag", get, target) -> bool:
+    """True when the target is NOT in the majority band for a relative channel.
+
+    ANNOUNCE THE DEVIATION, NOT THE DEFAULT -- which is not a new idea here but the rule
+    `credential-categories.md` already chose for its alignment axis: `ordinary` is the unmarked
+    default and every other value is something the viewer should notice. A date band is the
+    same shape. In the accident bundle, "these two licences predate the collision and
+    everything else was made for the claim" is worth saying about the two licences and is
+    noise on the other seven, and an earlier draft put it on all nine.
+    """
+    mine = get(target)
+    if mine is None:
+        return False
+    counts = {}
+    for n in dag.nodes:
+        v = get(n)
+        if v is not None:
+            counts[v] = counts.get(v, 0) + 1
+    if len(counts) < 2:
+        return False
+    return counts[mine] < max(counts.values())
+
+
 def _role_stem(label: str) -> str:
     """`licenceA` -> `licence`, `photo2` -> `photo`, `vetting` -> `vetting`.
 
@@ -229,9 +257,23 @@ def _channels(dag: Dag):
             return None
         return dig if dig in dag.resolvable_digests else None
 
+    def parties(n):
+        """Who issued this to whom -- the relation, not either identifier alone.
+
+        Separate from the `issuer` and `issuee` channels below, which exist only to tell two
+        nodes apart. In a delegation chain the party relation IS the argument: the vLEI chain
+        is a chain precisely because one party accredits the next, and a label that omits it
+        because the schema already made the node unique has described four credentials and no
+        chain.
+        """
+        if not n.issuer:
+            return None
+        return (n.issuer, n.issuee)
+
     return [
         # kind,        getter,                     role_bearing, issuer_claim
         ("role",       role,                       True,  True),
+        ("parties",    parties,                    True,  False),
         # Image before subject, on both of this project's own criteria. Provenance: the
         # credential commits to the image by digest, so the binding is cryptographic, while
         # the subject field is an unmarked issuer claim that nothing in the credential even
@@ -286,8 +328,21 @@ def _subject_is_unsaid(dag: Dag, n: Node, components: list) -> bool:
         return False
     if not any(m.schema == n.schema for m in dag.nodes if m.said != n.said):
         return False
-    return not any(c.kind in ("subject", "issuee") and not c.negative
-                   for c in components)
+    for c in components:
+        if c.negative:
+            continue
+        if c.kind in ("subject", "issuee"):
+            return False
+        # `parties` deliberately does NOT satisfy this, though an earlier draft let it. "From
+        # X to Y" names the issuee, and the issuee is the subject only when the alignment is
+        # ORDINARY. A witness statement is addressed to the insurer and is about the
+        # collision; a number allocation is issued to a party and is about a phone range. The
+        # alignment axis exists in credential-categories.md to make that call and the
+        # algorithm does not yet receive it, so the conservative answer is the honest one:
+        # over-announce a gap we cannot rule out rather than claim the subject was stated.
+        # Caught by the witness statements, which lost their annotation the moment the
+        # relation was allowed to satisfy it.
+    return True
 
 
 @dataclass
@@ -344,8 +399,26 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
     for kind, get, role_bearing, issuer_claim in _channels(dag):
         if kind in skip:
             continue
-        if not distractors:
-            break
+        # THE OBJECTIVE IS ROLE, NOT MINIMALITY, and this is the line that says so. An earlier
+        # version stopped as soon as the distractor set emptied, which is correct for a
+        # minimal distinguishing description and wrong for this one: every node in the vLEI
+        # chain has a distinct schema, so the type name alone made each unique and the
+        # algorithm stopped -- emitting four type names and no chain, with the delegation
+        # ladder that makes it a chain invisible in every label. Minimality was a proxy that
+        # works when nodes collide and under-delivers exactly when they do not. So a
+        # role-bearing channel is gathered whenever it has something to say, and only the
+        # channels whose sole job is telling two nodes apart are gated on still needing to.
+        if not distractors and not role_bearing:
+            continue
+        # A ROLE-BEARING CHANNEL IS NOT AUTOMATICALLY WORTH SAYING. Two kinds hide under that
+        # flag. `type` and `parties` are ABSOLUTE -- what this is, who made it -- and mean
+        # something even when every node shares them. `when` is RELATIVE: the band
+        # "assembled-for-this-claim" is defined by contrast with the other bands, so when
+        # every node sits in one band the label says nothing at all and costs a phrase on
+        # every card. Found by overshooting: the first role-first draft put a date band on all
+        # nine nodes of the accident bundle, seven of which shared it.
+        if kind in _RELATIVE_CHANNELS and not _is_deviation(dag, get, target):
+            continue
         mine = get(target)
         if mine is None:
             # An absence can discriminate -- "the one with no issuee" -- but it names nothing,
@@ -354,7 +427,7 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
                 deferred_negatives.append((kind, get, role_bearing, issuer_claim))
             continue
         remaining = [d for d in distractors if get(d) == mine]
-        if len(remaining) == len(distractors) and not role_bearing:
+        if not role_bearing and len(remaining) == len(distractors):
             # Rules nothing out: the suppress-constants rule. It applies only to channels that
             # say WHICH one this is. A role-bearing channel says what part the node plays, and
             # that is the locked goal rather than a discriminator -- "one of the two licences"
@@ -436,6 +509,9 @@ def render_plain(d: Description, names: dict | None = None) -> str:
             parts.append(c.value)
         elif c.kind == "role":
             parts.append(f"as {c.value}")
+        elif c.kind == "parties":
+            issuer, issuee = c.value
+            parts.append(f"from {short(issuer)}" + (f" to {short(issuee)}" if issuee else ""))
         else:
             parts.append(f"{c.kind} {short(c.value)}")
     out = ", ".join(parts)

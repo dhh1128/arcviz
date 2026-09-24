@@ -3,7 +3,7 @@
   "vectors": [
     {
       "name": "constant_channel_is_suppressed",
-      "defends": "Show what varies, suppress what is constant (R-ZCYM). Both nodes share an issuer, so the issuer must never appear -- it rules nothing out. This is the rule that makes the description contrastive rather than absolute, and it is the one an implementation is most likely to lose by rendering a fixed template.",
+      "defends": "Show what varies, suppress what is constant (R-ZCYM). Both nodes share an issuer, so the issuer must never appear -- it rules nothing out. This is the rule that makes the description contrastive rather than absolute, and it is the one an implementation is most likely to lose by rendering a fixed template. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer. The claim this vector defends is unaffected -- what it pins is that a channel which rules nothing out is not added FOR THAT PURPOSE, and `parties` is not there for that purpose.",
       "dag": {
         "nodes": [
           {
@@ -24,14 +24,14 @@
         "A": {
           "kinds": [
             "type",
-            "issuee"
+            "parties"
           ],
           "distinguishing": true
         },
         "B": {
           "kinds": [
             "type",
-            "issuee"
+            "parties"
           ],
           "distinguishing": true
         }
@@ -39,7 +39,7 @@
     },
     {
       "name": "type_is_the_head_and_always_present",
-      "defends": "The head is included even when it rules nothing out, because the viewer's first question is what kind of evidence this is. Both nodes share a schema here and the type component still appears on both.",
+      "defends": "The head is included even when it rules nothing out, because the viewer's first question is what kind of evidence this is. Both nodes share a schema here and the type component still appears on both. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer. The claim this vector defends is unaffected -- what it pins is that a channel which rules nothing out is not added FOR THAT PURPOSE, and `parties` is not there for that purpose.",
       "dag": {
         "nodes": [
           {
@@ -58,14 +58,14 @@
         "A": {
           "kinds": [
             "type",
-            "issuer"
+            "parties"
           ],
           "distinguishing": true
         },
         "B": {
           "kinds": [
             "type",
-            "issuer"
+            "parties"
           ],
           "distinguishing": true
         }
@@ -73,7 +73,7 @@
     },
     {
       "name": "role_label_index_does_not_discriminate",
-      "defends": "An edge label names the ROLE and then falls back to a bare index when the referrer has two of them. Left whole, licenceA and licenceB are unique, so the role channel alone would distinguish every node and the algorithm would stop before consulting anything meaningful -- emitting ITEM 03 with a longer name, in the channel that was meant to replace it. Found by running the algorithm, not by reasoning. Here the stems collide, so the issuee must be what separates them.",
+      "defends": "An edge label names the ROLE and then falls back to a bare index when the referrer has two of them. Left whole, licenceA and licenceB are unique, so the role channel alone would distinguish every node and the algorithm would stop before consulting anything meaningful -- emitting ITEM 03 with a longer name, in the channel that was meant to replace it. Found by running the algorithm, not by reasoning. Here the stems collide, so the issuee must be what separates them. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays. Here it also does the separating that the issuee used to, since the relation carries the issuee inside it -- the point the vector defends is unchanged: the edge label's A/B index must not be what tells them apart.",
       "dag": {
         "nodes": [
           {
@@ -104,7 +104,7 @@
           "kinds": [
             "type",
             "role",
-            "issuee"
+            "parties"
           ],
           "distinguishing": true
         },
@@ -112,7 +112,7 @@
           "kinds": [
             "type",
             "role",
-            "issuee"
+            "parties"
           ],
           "distinguishing": true
         }
@@ -120,7 +120,7 @@
     },
     {
       "name": "role_label_that_differs_meaningfully_does_discriminate",
-      "defends": "The counterweight to the vector above: stripping an index must not throw away a real role distinction. The live VVP dossier's labels are vetting, alloc, tnalloc and delsig, which differ in stem, so role alone should separate them and nothing further is needed.",
+      "defends": "The counterweight to the vector above: stripping an index must not throw away a real role distinction. The live VVP dossier's labels are vetting, alloc, tnalloc and delsig, which differ in stem, so role alone should separate them and nothing further is needed. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays.",
       "dag": {
         "nodes": [
           {
@@ -148,14 +148,16 @@
         "A": {
           "kinds": [
             "type",
-            "role"
+            "role",
+            "parties"
           ],
           "distinguishing": true
         },
         "B": {
           "kinds": [
             "type",
-            "role"
+            "role",
+            "parties"
           ],
           "distinguishing": true
         }
@@ -163,7 +165,7 @@
     },
     {
       "name": "indistinguishable_is_reported_not_fabricated",
-      "defends": "The petition case: N endorsements of identical schema, identical role and identical issuee, differing in nothing the render can reach. The honest answer is that these are not separable, so distinguishing is false and every sibling is named. A label that looked like an answer here would be the worst failure this algorithm can have, because it would be invisible.",
+      "defends": "The petition case: N endorsements of identical schema, identical role and identical issuee, differing in nothing the render can reach. The honest answer is that these are not separable, so distinguishing is false and every sibling is named. A label that looked like an answer here would be the worst failure this algorithm can have, because it would be invisible. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays. The petition case is the proof that carrying it costs nothing here: all three endorsements share an issuer AND an issuee, so the relation is present in every label and separates none of them, and distinguishing stays false exactly as before.",
       "dag": {
         "nodes": [
           {
@@ -189,7 +191,8 @@
       "expect": {
         "E1": {
           "kinds": [
-            "type"
+            "type",
+            "parties"
           ],
           "distinguishing": false,
           "indistinguishable_from": [
@@ -199,7 +202,8 @@
         },
         "E2": {
           "kinds": [
-            "type"
+            "type",
+            "parties"
           ],
           "distinguishing": false,
           "indistinguishable_from": [
@@ -209,7 +213,8 @@
         },
         "E3": {
           "kinds": [
-            "type"
+            "type",
+            "parties"
           ],
           "distinguishing": false,
           "indistinguishable_from": [
@@ -221,7 +226,7 @@
     },
     {
       "name": "absence_is_deferred_behind_positives",
-      "defends": "'The one with no issuee' discriminates without informing, so it is spent only when the positive channels are exhausted. Here the issuer separates them first, and the negative must not appear at all.",
+      "defends": "'The one with no issuee' discriminates without informing, so it is spent only when the positive channels are exhausted. Here the issuer separates them first, and the negative must not appear at all. UPDATED for the role-first objective: `parties` is carried whenever the node has an issuer, because who issued this to whom is part of what part it plays. The relation now separates these two before the bare issuer is reached, which is the better answer for the same reason the vector exists: a positive, informative component beats one that only tells them apart.",
       "dag": {
         "nodes": [
           {
@@ -241,46 +246,55 @@
         "B": {
           "kinds": [
             "type",
-            "issuer"
+            "parties"
           ],
           "distinguishing": true
         }
       }
     },
     {
-      "name": "absence_is_used_when_nothing_else_remains",
-      "defends": "The other half: when every positive channel is constant, an absence is better than reporting indistinguishable, because it is true and it does separate them. The component is marked negative so a render can treat it differently from a positive claim.",
+      "name": "absence_is_used_when_nothing_else_remains_subject",
+      "defends": "When every positive channel is constant, an absence is better than reporting indistinguishable, because it is true and it does separate them; the component is marked negative so a render can treat it differently from a positive claim. This vector used to exercise a missing ISSUEE, which the `parties` channel now subsumes -- it carries (issuer, issuee) as one value, so a missing issuee is a positive difference in the relation rather than a bare absence. It moves to the subject, which nothing subsumes: both nodes share a type, an issuer and an issuee, and one simply has no value in the field the schema designates as its subject.",
       "dag": {
         "nodes": [
           {
             "said": "A",
             "schema": "S1",
             "issuer": "SAME",
-            "issuee": "P1"
+            "issuee": "P1",
+            "attrs": {
+              "depicts": "the north approach"
+            }
           },
           {
             "said": "B",
             "schema": "S1",
-            "issuer": "SAME"
+            "issuer": "SAME",
+            "issuee": "P1",
+            "attrs": {}
           }
-        ]
+        ],
+        "subject_fields": {
+          "S1": "depicts"
+        }
       },
       "expect": {
         "B": {
           "kinds": [
             "type",
-            "issuee"
+            "parties",
+            "subject"
           ],
           "distinguishing": true,
           "negative_kinds": [
-            "issuee"
+            "subject"
           ]
         }
       }
     },
     {
       "name": "unresolved_image_annotates_and_never_discriminates",
-      "defends": "P-YY9V. A committed image that does not resolve WOULD be an effective discriminator -- 'the one whose photo is missing' picks out exactly one node -- and that is the trap: whether a portrait was disclosed is an accident of this presentation, not a fact about whose licence it is. So it surfaces as an annotation, which always shows and never discriminates, and the label falls through to the issuee. Node A is separable without its picture too -- its issuee differs from B's -- so that issuee is carried in the label as a text alternative and distinguishing_as_text is true. An earlier draft of this vector expected false, on the assumption that a node discriminated by its image is lost without it; the implementation was right and the expectation was wrong.",
+      "defends": "P-YY9V. A committed image that does not resolve WOULD be an effective discriminator -- 'the one whose photo is missing' picks out exactly one node -- and that is the trap: whether a portrait was disclosed is an accident of this presentation, not a fact about whose licence it is. So it surfaces as an annotation, which always shows and never discriminates, and the label falls through to the issuee. Node A is separable without its picture too -- its issuee differs from B's -- so that issuee is carried in the label as a text alternative and distinguishing_as_text is true. An earlier draft of this vector expected false, on the assumption that a node discriminated by its image is lost without it; the implementation was right and the expectation was wrong. UPDATED when the objective changed from minimal-distinguishing to role-first: a `parties` component is now carried whenever the node has an issuer, because who issued a credential to whom is part of what part it plays rather than a device for telling it apart. Node A also carries `subject_undetermined`: no subject field was supplied, and the party relation in its label does not settle what the credential is ABOUT, because the issuee is the subject only when the alignment is ordinary and the algorithm does not receive the alignment axis.",
       "dag": {
         "nodes": [
           {
@@ -313,28 +327,31 @@
         "A": {
           "kinds": [
             "type",
-            "image",
-            "issuee"
+            "parties",
+            "image"
           ],
           "distinguishing": true,
-          "annotations": [],
+          "annotations": [
+            "subject_undetermined"
+          ],
           "distinguishing_as_text": true
         },
         "B": {
           "kinds": [
             "type",
-            "issuee"
+            "parties"
           ],
           "distinguishing": true,
           "annotations": [
-            "image_committed_not_resolved"
+            "image_committed_not_resolved",
+            "subject_undetermined"
           ]
         }
       }
     },
     {
       "name": "image_outranks_the_subject_but_does_not_replace_it",
-      "defends": "Two claims at once, and the second was learned by running the algorithm over the finished accident bundle. FIRST, when both would discriminate the image wins, on two criteria that agree: the credential commits to the image by digest so the binding is cryptographic, while the subject field is an unmarked issuer claim that nothing identifies as the subject; and two thumbnails are separated by perception rather than by reading. SECOND, the subject rides along anyway, marked as a text alternative. A thumbnail is a modality the label cannot assume -- a text-only export, a screen reader, a tier too small for a picture -- and five of nine nodes in the accident bundle came back 'shown by its picture', each correct in the data model and each useless to a reader who cannot see the picture. The image is the discriminator; the subject is what survives when the picture cannot be drawn.",
+      "defends": "Two claims at once, and the second was learned by running the algorithm over the finished accident bundle. FIRST, when both would discriminate the image wins, on two criteria that agree: the credential commits to the image by digest so the binding is cryptographic, while the subject field is an unmarked issuer claim that nothing identifies as the subject; and two thumbnails are separated by perception rather than by reading. SECOND, the subject rides along anyway, marked as a text alternative. A thumbnail is a modality the label cannot assume -- a text-only export, a screen reader, a tier too small for a picture -- and five of nine nodes in the accident bundle came back 'shown by its picture', each correct in the data model and each useless to a reader who cannot see the picture. The image is the discriminator; the subject is what survives when the picture cannot be drawn. UPDATED when the objective changed from minimal-distinguishing to role-first: a `parties` component is now carried whenever the node has an issuer, because who issued a credential to whom is part of what part it plays rather than a device for telling it apart.",
       "dag": {
         "nodes": [
           {
@@ -371,6 +388,7 @@
         "A": {
           "kinds": [
             "type",
+            "parties",
             "image",
             "subject"
           ],
@@ -380,6 +398,7 @@
         "B": {
           "kinds": [
             "type",
+            "parties",
             "image",
             "subject"
           ],
@@ -426,7 +445,7 @@
     },
     {
       "name": "type_name_absent_does_not_remove_the_component",
-      "defends": "Zero schemas resolve in arcviz's corpus, so the type is an opaque key: the algorithm can say two nodes are the same type and cannot say what type. The component stays, carrying name null, because a render that prints 'unknown type' tells the truth where one that omits the component does not.",
+      "defends": "Zero schemas resolve in arcviz's corpus, so the type is an opaque key: the algorithm can say two nodes are the same type and cannot say what type. The component stays, carrying name null, because a render that prints 'unknown type' tells the truth where one that omits the component does not. UPDATED when the objective changed from minimal-distinguishing to role-first: a `parties` component is now carried whenever the node has an issuer, because who issued a credential to whom is part of what part it plays rather than a device for telling it apart.",
       "dag": {
         "nodes": [
           {
@@ -444,7 +463,8 @@
       "expect": {
         "A": {
           "kinds": [
-            "type"
+            "type",
+            "parties"
           ],
           "distinguishing": true,
           "type_name": null
@@ -504,7 +524,7 @@
     },
     {
       "name": "a_single_node_dag_needs_no_discriminator",
-      "defends": "A presentation of one credential has no distractors, so the description is the head alone. The boundary case is worth pinning because an implementation that always appends an issuee or a date would be adding noise nobody asked for, and the DAG-scope principle says the bundle decides.",
+      "defends": "A presentation of one credential has no distractors, so nothing is added for the sake of telling it apart -- no date, no issuer used as a tiebreaker. What it DOES carry is its type and its party relation, because both say what the thing is rather than which one it is. An earlier version of this vector expected the type alone, written while the objective was minimality; under a role-first objective 'issued by X to Y' is not noise, it is half the content of a lone credential.",
       "dag": {
         "nodes": [
           {
@@ -518,7 +538,8 @@
       "expect": {
         "ONLY": {
           "kinds": [
-            "type"
+            "type",
+            "parties"
           ],
           "distinguishing": true
         }
