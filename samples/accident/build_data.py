@@ -76,7 +76,7 @@ def sad(name: str) -> dict:
     return json.loads((CORPUS / f"{name}.json").read_text())
 
 
-def classify_node(s: dict) -> dict:
+def classify_node(s: dict, title: str | None = None) -> dict:
     """Run the synthesized classifier over the DISCLOSED attribute names.
 
     No schema document resolves for either frame, so the field list is what was disclosed, not
@@ -84,7 +84,7 @@ def classify_node(s: dict) -> dict:
     render says so.
     """
     a = s.get("a") if isinstance(s.get("a"), dict) else {}
-    row = {"id": s["d"], "name": s["d"], "fields": list(a.keys()), "fields_known": True,
+    row = {"id": s["d"], "name": s["d"], "title": title, "fields": list(a.keys()), "fields_known": True,
            "structure": {"has_issuee": "i" in a,
                          "names_other_credential": bool(s.get("e"))},
            # Disclosed values, so a bare `account` can be checked for money beside it.
@@ -197,7 +197,7 @@ def accident(host: dict) -> dict:
     nodes = []
     for n in names:
         s = sads[n]
-        cls = classify_node(s)
+        cls = classify_node(s, type_names.get(s["s"]))
         extra = {"image": images.get(n, {"state": "none"}),
                  "type": {"name": type_names.get(s["s"]), "source": "hand-supplied",
                           "schema_state": schemas.resolve(s["s"]).state}}
@@ -261,7 +261,7 @@ def vlei(host: dict) -> dict:
         # A category declared for a verified schema type outranks the field-based classifier,
         # which cannot see it (the ECR Authorization credential carries the same fields as the
         # ECR credential it authorizes).
-        c = classify_node(sads[n])
+        c = classify_node(sads[n], type_names[sads[n]["s"]])
         rec = known.get(VLEI_REAL[n]) or {}
         if rec.get("categories"):
             c["categories"] = rec["categories"]

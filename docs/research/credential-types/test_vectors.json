@@ -905,6 +905,36 @@
      "affiliation"
     ]
    }
+  },
+  {
+   "name": "authority -- the title names an authorization",
+   "why": "Daniel, 2026-09-24: 'can't you get authority from the authorization credential because it has authorization in its name?' The vLEI ECR Authorization credential carries exactly the fields of the ECR credential it authorizes, so only its title says what it is. A category the title names is also placed first, because the title says what the credential is for.",
+   "row": {
+    "id": 9105,
+    "name": "ECRAuthorizationvLEICredential",
+    "fields": [
+     "d",
+     "i",
+     "AID",
+     "LEI",
+     "personLegalName",
+     "engagementContextRole"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "authority",
+     "affiliation"
+    ]
+   }
   }
  ]
 }

@@ -359,6 +359,22 @@ RESIDUAL = "misc"
 ACCOUNT = re.compile(r"account")
 ORG_ID_ONLY = re.compile(r"^(lei|lids|taxid|partygln)$")
 
+# The credential's TYPE NAME, as its schema titles it, is evidence too. Daniel, 2026-09-24:
+# "can't you get 'authority' from the authorization credential because it has 'authorization'
+# in its name? Are we not scanning the credential titles?" We were not. A verified schema's
+# title is written by the same author as its field names, so it is no less trustworthy, and it
+# is the only place the vLEI authorization credentials say what they are: their fields are those
+# of the credential they authorize. Narrow on purpose -- one category, words that do not collide
+# (`authorization`, never `auth`, which is also authentication; see refs/abbreviations.json).
+TITLE_VOCAB = {
+    "authority": re.compile(r"authori[sz]ation|delegat|mandate|power ?of ?(attorney|representation)|guardian", re.I),
+}
+
+
+def title_of(row: dict) -> str:
+    """The schema's title where a caller supplies one, else the catalog row's type name."""
+    return row.get("title") or row.get("name") or ""
+
 # A SUBSET of ISO 4217, the codes in common use; extend it rather than trusting it as complete.
 ISO_CURRENCIES = {
     "USD", "EUR", "GBP", "JPY", "CNY", "CHF", "CAD", "AUD", "NZD", "HKD", "SGD", "SEK", "NOK",
@@ -390,9 +406,7 @@ def money_evidence(row: dict) -> list[str]:
 
 def category_evidence(row: dict) -> dict[str, list[str]]:
     """Category -> the field names that put it there. The reasons, so a render can show them."""
-    f = row.get("fields") or []
-    if not row.get("fields_known", False):
-        return {}
+    f = (row.get("fields") or []) if row.get("fields_known", False) else []
     out = {c: sorted({h for v in CATEGORY_VOCAB[c] for h in hits(f, v)}) for c in CATEGORIES}
     # An organization identifier beside a role names the organization the role is AT, not the
     # credential's subject. Daniel, 2026-09-24, on the vLEI Engagement Context Role credential:
@@ -402,6 +416,11 @@ def category_evidence(row: dict) -> dict[str, list[str]]:
     roles = hits(f, "employment") + hits(f, "membership")
     if roles and out["org-identity"] and all(ORG_ID_ONLY.search(x.lower().strip("`")) for x in out["org-identity"]):
         out["org-identity"] = []
+    title = title_of(row)
+    for cat, rx in TITLE_VOCAB.items():
+        m = rx.search(title)
+        if m:
+            out[cat] = sorted(set(out[cat]) | {f"title: {title}"})
     accounts = [x for x in f if ACCOUNT.search(x.lower().strip("`"))]
     money = money_evidence(row) if accounts else []
     if money:
@@ -418,7 +437,10 @@ def categories(row: dict) -> list[str]:
     label a credential can carry (F-HZ5X, and the precision measurement in CLASSIFIER.md).
     """
     ev = category_evidence(row)
-    out = [c for c in CATEGORIES if c in ev]
+    # A category the TITLE names comes first: the title says what the credential is for, where
+    # field names say only what it carries -- the dominance that CLASSIFIER.md found missing.
+    titled = [c for c in CATEGORIES if any(x.startswith("title: ") for x in ev.get(c, []))]
+    out = titled + [c for c in CATEGORIES if c in ev and c not in titled]
     if "identity" in out and len(out) > 1:
         out = [c for c in out if c != "identity"] + ["identity"]
     return out
