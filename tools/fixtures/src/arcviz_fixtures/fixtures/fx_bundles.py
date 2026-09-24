@@ -56,6 +56,7 @@ marks as synthesized and not ratified, and they are repeated here in the same sp
 import json
 
 from .. import determinism as det
+from .. import images
 from .. import schemas
 from ..common import credential, simple_edge
 from ..registry import fixture
@@ -95,8 +96,10 @@ def _licence_schema():
             "holderName": {"type": "string"},
             "classes": {"type": "array", "items": {"type": "string"}},
             "expires": {"type": "string"},
+            "portraitDigest": {"type": "string"},
         },
-        attr_required=["dt", "licenceNumber", "holderName", "classes", "expires"],
+        attr_required=["dt", "licenceNumber", "holderName", "classes", "expires",
+                       "portraitDigest"],
         require_issuee=True,
     )
 
@@ -144,21 +147,38 @@ WITNESS_A = det.aid("accident_bundle:witness_a")
 WITNESS_B = det.aid("accident_bundle:witness_b")
 
 
-def _licence(label, *, issuee, number, name, expires, issued):
+# Attachments. A credential commits to an image by digest; resolving that digest to bytes is
+# a separate act that can fail, so the three states a render must distinguish -- none
+# committed, committed and resolves, committed and does NOT resolve -- are all present in this
+# one bundle by construction. Bytes that are written land in corpus/attachments/ and their
+# digests are computed over the real content, so a consumer can recompute and check. Bytes
+# that are deliberately NOT written leave a digest committing to content nothing can serve.
+ATTACHMENTS = "attachments"
+
+
+def _attach(corpus_dir, name, payload):
+    """Write the bytes and return the digest of exactly what was written."""
+    out = corpus_dir / ATTACHMENTS
+    out.mkdir(parents=True, exist_ok=True)
+    (out / f"{name}.png").write_bytes(payload)
+    return images.digest(payload)
+
+
+def _licence(label, *, issuee, number, name, expires, issued, portrait_digest):
     schema_said, _ = _licence_schema()
     return credential(
         label, issuer=LICENSING_AUTHORITY, issuee=issuee, schema_said=schema_said,
         attrs={"dt": issued, "licenceNumber": number, "holderName": name,
-               "classes": ["B"], "expires": expires},
+               "classes": ["B"], "expires": expires, "portraitDigest": portrait_digest},
     ), schema_said
 
 
-def _photograph(label, *, depicts, vin, digest_seed, issued):
+def _photograph(label, *, depicts, vin, image_digest, issued):
     schema_said, _ = _photograph_schema()
     return credential(
         label, issuer=ADJUSTER, schema_said=schema_said,
         attrs={"dt": issued, "depicts": depicts, "vehicleVin": vin,
-               "imageDigest": det.aid(f"accident_bundle:image:{digest_seed}"),
+               "imageDigest": image_digest,
                "capturedAt": "2026-03-02T10:15:00+00:00"},
     ), schema_said
 
@@ -173,9 +193,11 @@ def _statement(label, *, issuer, account, vantage, issued):
 
 @fixture("accident_licence_a")
 def build_accident_licence_a(corpus_dir):
+    portrait = images.synthetic("licence_a_portrait", ground="slate", mark="bone")
     serder, _ = _licence("accident_licence_a", issuee=DRIVER_A,
                          number="D-4471-9920", name="Alice Moreau",
-                         expires="2031-06-30", issued=ISSUED["licence_a"])
+                         expires="2031-06-30", issued=ISSUED["licence_a"],
+                         portrait_digest=_attach(corpus_dir, "licence_a_portrait", portrait))
     return {
         "serder": serder,
         "meta": {
@@ -194,9 +216,11 @@ def build_accident_licence_a(corpus_dir):
 
 @fixture("accident_licence_b")
 def build_accident_licence_b(corpus_dir):
+    withheld = images.synthetic("licence_b_portrait", ground="plum", mark="bone")
     serder, _ = _licence("accident_licence_b", issuee=DRIVER_B,
                          number="D-8813-2077", name="Bob Ferreira",
-                         expires="2029-11-14", issued=ISSUED["licence_b"])
+                         expires="2029-11-14", issued=ISSUED["licence_b"],
+                         portrait_digest=images.digest(withheld))  # bytes NOT written
     return {
         "serder": serder,
         "meta": {
@@ -214,9 +238,11 @@ def build_accident_licence_b(corpus_dir):
 
 @fixture("accident_photo_a")
 def build_accident_photo_a(corpus_dir):
+    frame = images.synthetic("photo_a", ground="rust", mark="slate")
     serder, _ = _photograph("accident_photo_a",
                             depicts="front nearside damage, vehicle A",
-                            vin="WVWZZZ1KZAW084471", digest_seed="a", issued=ISSUED["photo_a"])
+                            vin="WVWZZZ1KZAW084471", issued=ISSUED["photo_a"],
+                            image_digest=_attach(corpus_dir, "photo_a", frame))
     return {
         "serder": serder,
         "meta": {
@@ -236,9 +262,11 @@ def build_accident_photo_a(corpus_dir):
 
 @fixture("accident_photo_b")
 def build_accident_photo_b(corpus_dir):
+    frame = images.synthetic("photo_b", ground="moss", mark="ochre")
     serder, _ = _photograph("accident_photo_b",
                             depicts="offside rear damage, vehicle B",
-                            vin="JTDKN3DU0A1075512", digest_seed="b", issued=ISSUED["photo_b"])
+                            vin="JTDKN3DU0A1075512", issued=ISSUED["photo_b"],
+                            image_digest=_attach(corpus_dir, "photo_b", frame))
     return {
         "serder": serder,
         "meta": {

@@ -1,11 +1,11 @@
 {
-  "v": "ACDCCAACAAJSONAAHL.",
+  "v": "ACDCCAACAAJSONAAIL.",
   "t": "acm",
-  "d": "EJo7Gnauoh1vjGeNa7AmDZjO_qnmt3HgZKebKxlMkco2",
+  "d": "EIuk10tZKXQMdzAgoUx6x55HqmmxKCyIkFk-SeOInh7e",
   "i": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
-  "s": "EBizrLods0iuIbxJv1A19e3WFo-_-eKixQZ7Cp-l_OB7",
+  "s": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
   "a": {
-    "d": "EHli0AJhzjiIGnOtttsEV1QBBTbqh5mDdpKej-1dQjG3",
+    "d": "EGuFlOT3nkLRUlaUw4PCpc18epj3Op17gKbhrT-wx7sv",
     "u": "0AA6XzjwotRLN1lYlIJxJgh9",
     "i": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
     "dt": "2019-11-14T11:48:00+00:00",
@@ -14,6 +14,7 @@
     "classes": [
       "B"
     ],
-    "expires": "2029-11-14"
+    "expires": "2029-11-14",
+    "portraitDigest": "EAQqKhslcWpfd2er-20xtv71uPFhfbsfSnjFuYht2I40"
   }
 }
