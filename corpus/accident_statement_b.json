@@ -1,13 +1,14 @@
 {
-  "v": "ACDCCAACAAJSONAAHg.",
+  "v": "ACDCCAACAAJSONAAIB.",
   "t": "acm",
-  "d": "EPPgKZ5bWFbVrjYyZ48mc_niA4FS0uouZvgsXo6OQVw5",
+  "d": "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja",
   "i": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
-  "s": "EKjf_HRad-J7ePo7cmUSGo8EaMQ1ruJ5mbBCe_ZN_PVX",
+  "s": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
   "a": {
-    "d": "EONexaE60riekiGZwfvyVm_KOfOgMe4bLd5yVpf4--RU",
+    "d": "EFqiqrXe4rAKgjRIB8BiW9TdBykbJd2l2vKkMhTDVOaW",
     "u": "0ABzOvEUfr3OK9OdtKJMID4v",
     "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+    "dt": "2026-03-05T09:30:00+00:00",
     "observedAt": "2026-03-02T08:41:00+00:00",
     "account": "The northbound car was already in the junction.",
     "vantagePoint": "southbound queue, second vehicle"

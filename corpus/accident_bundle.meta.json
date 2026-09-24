@@ -18,6 +18,6 @@
     "sad": "accident_bundle.json",
     "cesr": "accident_bundle.cesr"
   },
-  "generated_at": "2026-09-24T13:06:51.251695+00:00",
+  "generated_at": "2026-09-24T13:15:42.833447+00:00",
   "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
 }

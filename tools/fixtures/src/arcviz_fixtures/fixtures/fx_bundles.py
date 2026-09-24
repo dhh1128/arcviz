@@ -66,18 +66,37 @@ from ..registry import fixture
 OCCURRENCE = "2026-03-02T08:41:00+00:00"
 CLAIM_REF = "CLM-2026-0041"
 
+# Issuance dates (`a.dt`). Every ACDC in the live VVP dossier carries one and only 4 of
+# the 36 corpus fixtures did, so the instrument could not test a channel that production
+# credentials use universally. The values are chosen to carry ARGUMENT STRUCTURE rather
+# than merely to differ: the licences predate the collision by years and are background
+# the claim did not create, while the photographs, statements and the claim file itself
+# are minutes apart because they were assembled as one act, for this claim. That is the
+# same shape the real dossier shows -- two credentials from December, then three within
+# 57 seconds of each other in March.
+ISSUED = {
+    "licence_a": "2021-06-30T09:12:00+00:00",
+    "licence_b": "2019-11-14T11:48:00+00:00",
+    "photo_a": "2026-03-02T10:15:40+00:00",
+    "photo_b": "2026-03-02T10:16:05+00:00",
+    "statement_a": "2026-03-04T14:02:00+00:00",
+    "statement_b": "2026-03-05T09:30:00+00:00",
+    "bundle": "2026-03-06T08:00:00+00:00",
+}
+
 
 def _licence_schema():
     return schemas.attr_schema(
         title="Driving Licence Schema",
         credential_type="ArcvizFixture_DrivingLicence",
         attr_props={
+            "dt": {"type": "string"},
             "licenceNumber": {"type": "string"},
             "holderName": {"type": "string"},
             "classes": {"type": "array", "items": {"type": "string"}},
             "expires": {"type": "string"},
         },
-        attr_required=["licenceNumber", "holderName", "classes", "expires"],
+        attr_required=["dt", "licenceNumber", "holderName", "classes", "expires"],
         require_issuee=True,
     )
 
@@ -87,12 +106,13 @@ def _photograph_schema():
         title="Scene Photograph Attestation Schema",
         credential_type="ArcvizFixture_ScenePhotograph",
         attr_props={
+            "dt": {"type": "string"},
             "depicts": {"type": "string"},
             "vehicleVin": {"type": "string"},
             "imageDigest": {"type": "string"},
             "capturedAt": {"type": "string"},
         },
-        attr_required=["depicts", "vehicleVin", "imageDigest", "capturedAt"],
+        attr_required=["dt", "depicts", "vehicleVin", "imageDigest", "capturedAt"],
     )
 
 
@@ -101,11 +121,12 @@ def _statement_schema():
         title="Witness Statement Schema",
         credential_type="ArcvizFixture_WitnessStatement",
         attr_props={
+            "dt": {"type": "string"},
             "observedAt": {"type": "string"},
             "account": {"type": "string"},
             "vantagePoint": {"type": "string"},
         },
-        attr_required=["observedAt", "account", "vantagePoint"],
+        attr_required=["dt", "observedAt", "account", "vantagePoint"],
         require_issuee=True,
     )
 
@@ -123,30 +144,30 @@ WITNESS_A = det.aid("accident_bundle:witness_a")
 WITNESS_B = det.aid("accident_bundle:witness_b")
 
 
-def _licence(label, *, issuee, number, name, expires):
+def _licence(label, *, issuee, number, name, expires, issued):
     schema_said, _ = _licence_schema()
     return credential(
         label, issuer=LICENSING_AUTHORITY, issuee=issuee, schema_said=schema_said,
-        attrs={"licenceNumber": number, "holderName": name,
+        attrs={"dt": issued, "licenceNumber": number, "holderName": name,
                "classes": ["B"], "expires": expires},
     ), schema_said
 
 
-def _photograph(label, *, depicts, vin, digest_seed):
+def _photograph(label, *, depicts, vin, digest_seed, issued):
     schema_said, _ = _photograph_schema()
     return credential(
         label, issuer=ADJUSTER, schema_said=schema_said,
-        attrs={"depicts": depicts, "vehicleVin": vin,
+        attrs={"dt": issued, "depicts": depicts, "vehicleVin": vin,
                "imageDigest": det.aid(f"accident_bundle:image:{digest_seed}"),
                "capturedAt": "2026-03-02T10:15:00+00:00"},
     ), schema_said
 
 
-def _statement(label, *, issuer, account, vantage):
+def _statement(label, *, issuer, account, vantage, issued):
     schema_said, _ = _statement_schema()
     return credential(
         label, issuer=issuer, issuee=INSURER, schema_said=schema_said,
-        attrs={"observedAt": OCCURRENCE, "account": account, "vantagePoint": vantage},
+        attrs={"dt": issued, "observedAt": OCCURRENCE, "account": account, "vantagePoint": vantage},
     ), schema_said
 
 
@@ -154,7 +175,7 @@ def _statement(label, *, issuer, account, vantage):
 def build_accident_licence_a(corpus_dir):
     serder, _ = _licence("accident_licence_a", issuee=DRIVER_A,
                          number="D-4471-9920", name="Alice Moreau",
-                         expires="2031-06-30")
+                         expires="2031-06-30", issued=ISSUED["licence_a"])
     return {
         "serder": serder,
         "meta": {
@@ -175,7 +196,7 @@ def build_accident_licence_a(corpus_dir):
 def build_accident_licence_b(corpus_dir):
     serder, _ = _licence("accident_licence_b", issuee=DRIVER_B,
                          number="D-8813-2077", name="Bob Ferreira",
-                         expires="2029-11-14")
+                         expires="2029-11-14", issued=ISSUED["licence_b"])
     return {
         "serder": serder,
         "meta": {
@@ -195,7 +216,7 @@ def build_accident_licence_b(corpus_dir):
 def build_accident_photo_a(corpus_dir):
     serder, _ = _photograph("accident_photo_a",
                             depicts="front nearside damage, vehicle A",
-                            vin="WVWZZZ1KZAW084471", digest_seed="a")
+                            vin="WVWZZZ1KZAW084471", digest_seed="a", issued=ISSUED["photo_a"])
     return {
         "serder": serder,
         "meta": {
@@ -217,7 +238,7 @@ def build_accident_photo_a(corpus_dir):
 def build_accident_photo_b(corpus_dir):
     serder, _ = _photograph("accident_photo_b",
                             depicts="offside rear damage, vehicle B",
-                            vin="JTDKN3DU0A1075512", digest_seed="b")
+                            vin="JTDKN3DU0A1075512", digest_seed="b", issued=ISSUED["photo_b"])
     return {
         "serder": serder,
         "meta": {
@@ -237,7 +258,7 @@ def build_accident_photo_b(corpus_dir):
 def build_accident_statement_a(corpus_dir):
     serder, _ = _statement("accident_statement_a", issuer=WITNESS_A,
                            account="The northbound car entered the junction on amber.",
-                           vantage="northeast corner, on foot")
+                           vantage="northeast corner, on foot", issued=ISSUED["statement_a"])
     return {
         "serder": serder,
         "meta": {
@@ -259,7 +280,7 @@ def build_accident_statement_a(corpus_dir):
 def build_accident_statement_b(corpus_dir):
     serder, _ = _statement("accident_statement_b", issuer=WITNESS_B,
                            account="The northbound car was already in the junction.",
-                           vantage="southbound queue, second vehicle")
+                           vantage="southbound queue, second vehicle", issued=ISSUED["statement_b"])
     return {
         "serder": serder,
         "meta": {
@@ -309,14 +330,15 @@ def build_accident_bundle(corpus_dir):
     schema_said, _ = schemas.attr_schema(
         title="Accident Claim File Schema",
         credential_type="ArcvizFixture_AccidentClaimFile",
-        attr_props={"claimReference": {"type": "string"},
+        attr_props={"dt": {"type": "string"},
+            "claimReference": {"type": "string"},
                     "occurredAt": {"type": "string"}},
-        attr_required=["claimReference", "occurredAt"],
+        attr_required=["dt", "claimReference", "occurredAt"],
     )
 
     serder = credential(
         "accident_bundle", issuer=ADJUSTER, schema_said=schema_said,
-        attrs={"claimReference": CLAIM_REF, "occurredAt": OCCURRENCE},
+        attrs={"dt": ISSUED["bundle"], "claimReference": CLAIM_REF, "occurredAt": OCCURRENCE},
         edge=edge,
     )
 

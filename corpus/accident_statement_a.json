@@ -1,13 +1,14 @@
 {
-  "v": "ACDCCAACAAJSONAAHb.",
+  "v": "ACDCCAACAAJSONAAH8.",
   "t": "acm",
-  "d": "ELD30YASmKLn5Wbjqz2wkgFt7qqdBzjCwLFDvPZgX65F",
+  "d": "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk",
   "i": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
-  "s": "EKjf_HRad-J7ePo7cmUSGo8EaMQ1ruJ5mbBCe_ZN_PVX",
+  "s": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
   "a": {
-    "d": "EH0GHo3QCnxM2xveaByOIJOeudvNXDaljMK3QX0EblR4",
+    "d": "EIRcoT8_Kh7m6HGysdTdj03a1vrHuA2wWUh6cWhfqXmX",
     "u": "0ACwMNW6jiFS9IITpjNVE9_B",
     "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+    "dt": "2026-03-04T14:02:00+00:00",
     "observedAt": "2026-03-02T08:41:00+00:00",
     "account": "The northbound car entered the junction on amber.",
     "vantagePoint": "northeast corner, on foot"
