@@ -166,3 +166,4 @@ samples/*/node_modules/
 samples/*/dist/
 samples/*/public/glyphs/
 samples/*/public/attachments/
+.vite/
