@@ -9,6 +9,17 @@
   --unknown: #c77800;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 15px;
+  /* THREE text sizes, after entviz's own scale (@entviz/react text-scale.ts: body 1em, small
+     0.85em, fine 0.72em). rem rather than em, so nesting never compounds them into a fourth. The
+     file extension on misc.file is exempt: it is drawn as part of a 32 px glyph, not set as text. */
+  --t-body: 1rem;
+  --t-small: 0.85rem;
+  --t-fine: 0.72rem;
+  /* Fonts as entviz does it (@entviz/react pill-design.md 3.4, EntvizPill.ts mnemonicStyle): the
+     chrome inherits the host's running font, and value-derived text -- identifiers, edge labels,
+     field names, file extensions -- is monospace, in entviz's own stack. system-ui above is the
+     sample page acting as host. Two weights: 400 and 600. */
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1.4;
   color: var(--ink);
   background: var(--page);
@@ -16,27 +27,27 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 button { font: inherit; }
-code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+code { font-family: var(--mono); font-size: 1em; }
 
 .page { max-width: 1400px; margin: 0 auto; padding: 12px; }
 .page-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
-.page-head h1 { font-size: 1.1rem; margin: 0; }
+.page-head h1 { font-size: var(--t-body); margin: 0; }
 .tabs button { border: 1px solid var(--line); background: var(--paper); padding: 4px 10px; cursor: pointer; }
 .tabs button:first-child { border-radius: 6px 0 0 6px; }
 .tabs button:last-child { border-radius: 0 6px 6px 0; }
 .tabs button.on { background: var(--ink); color: white; border-color: var(--ink); }
-.controls { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.85rem; color: var(--muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: var(--t-small); color: var(--muted); }
 .controls label { display: inline-flex; align-items: center; gap: 4px; }
 .num { font-variant-numeric: tabular-nums; }
 
-.evaluation { margin: 10px 0; padding: 6px 10px; border-left: 4px solid var(--muted); background: #eceef1; font-size: 0.88rem; }
+.evaluation { margin: 10px 0; padding: 6px 10px; border-left: 4px solid var(--muted); background: #eceef1; font-size: var(--t-small); }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
 @media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } }
 
 .kinds { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; padding: 8px 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
 .kind { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
-.hand { font-size: 0.8rem; color: var(--muted); margin: 6px 2px; }
+.hand { font-size: var(--t-fine); color: var(--muted); margin: 6px 2px; }
 
 /* The graph. Rows by rank, cards wrap within a row; edges are drawn in an overlay. */
 .graph { position: relative; margin-top: 12px; }
@@ -52,53 +63,53 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em;
 .band { display: flex; flex-direction: column; width: 10px; flex: none; }
 .band-seg { flex: 1; }
 .card-body { flex: 1; min-width: 0; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
-.incoming { font-size: 0.75rem; color: var(--muted); }
+.incoming { font-size: var(--t-fine); color: var(--muted); }
 .card-head { display: flex; align-items: flex-start; gap: 8px; }
 .glyph-row { display: inline-flex; gap: 4px; flex: none; }
 .glyph { display: inline-block; flex: none; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; vertical-align: middle; }
 .glyph-override { position: relative; }
 .glyph-override::after { content: ""; position: absolute; inset: -2px; border: 1px dashed var(--ph); border-radius: 4px; }
 .type { flex: 1; min-width: 0; }
-.type-name { font-weight: 650; }
-.cat-names { font-size: 0.75rem; color: var(--muted); }
-.presented-tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-right: 6px; }
-.said { font-family: ui-monospace, Menlo, monospace; font-size: 0.72rem; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 4px; padding: 0 3px; cursor: copy; }
+.type-name { font-weight: 600; }
+.cat-names { font-size: var(--t-fine); color: var(--muted); }
+.presented-tag { font-size: var(--t-fine); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-right: 6px; }
+.said { font-family: var(--mono); font-size: var(--t-small); color: var(--muted); background: none; border: 1px solid transparent; border-radius: 4px; padding: 0 3px; cursor: copy; }
 .said:hover { border-color: var(--line); }
 
 .axis-tags { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
-.axis-tag { font-size: 0.75rem; padding: 1px 6px; border-radius: 10px; background: #e7e9ee; color: var(--ink); }
+.axis-tag { font-size: var(--t-small); padding: 1px 6px; border-radius: 10px; background: #e7e9ee; color: var(--ink); }
 .axis-tag.unknown { background: #fff4df; color: #7a4a00; border: 1px dotted var(--unknown); font-weight: 600; }
 
 .card-main { display: flex; gap: 8px; align-items: flex-start; }
 .thumb { margin: 0; width: 88px; height: 66px; flex: none; border-radius: 4px; overflow: hidden; background: #eee; }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.thumb.withheld { display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.66rem; color: var(--muted); padding: 4px; background: repeating-linear-gradient(45deg, #f1f1f1 0 6px, #e1e1e1 6px 8px); border: 1px dashed #999; }
-.desc { list-style: none; margin: 0; padding: 0; font-size: 0.88rem; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.thumb.withheld { display: flex; align-items: center; justify-content: center; text-align: center; font-size: var(--t-fine); color: var(--muted); padding: 4px; background: repeating-linear-gradient(45deg, #f1f1f1 0 6px, #e1e1e1 6px 8px); border: 1px dashed #999; }
+.desc { list-style: none; margin: 0; padding: 0; font-size: var(--t-body); display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .dline.negative { font-style: italic; }
-.dropped { font-size: 0.75rem; color: var(--muted); }
+.dropped { font-size: var(--t-fine); color: var(--muted); }
 .issuer-text { color: var(--issuer); }
 q.issuer-text { quotes: "“" "”"; }
 .party { max-width: 100%; display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; vertical-align: middle; }
-.coia-flag { font-size: 0.72rem; color: #8a2b00; background: #ffece3; border-radius: 4px; padding: 0 4px; }
-.annotation { font-size: 0.78rem; color: #6a4a00; }
+.coia-flag { font-size: var(--t-fine); color: #8a2b00; background: #ffece3; border-radius: 4px; padding: 0 4px; }
+.annotation { font-size: var(--t-small); color: #6a4a00; }
 .card-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
-.reputation { font-size: 0.72rem; color: var(--muted); border: 1px dashed var(--ph); border-radius: 4px; padding: 0 5px; }
-.more { font-size: 0.75rem; background: none; border: 1px solid var(--line); border-radius: 4px; padding: 1px 8px; cursor: pointer; }
+.reputation { font-size: var(--t-fine); color: var(--muted); border: 1px dashed var(--ph); border-radius: 4px; padding: 0 5px; }
+.more { font-size: var(--t-small); background: none; border: 1px solid var(--line); border-radius: 4px; padding: 1px 8px; cursor: pointer; }
 .muted { color: var(--muted); }
 
-.details { border-top: 1px solid var(--line); padding-top: 6px; font-size: 0.84rem; }
-.details h4 { margin: 8px 0 4px; font-size: 0.82rem; }
+.details { border-top: 1px solid var(--line); padding-top: 6px; font-size: var(--t-small); }
+.details h4 { margin: 8px 0 4px; font-size: var(--t-small); }
 .details p { margin: 3px 0; }
-.hint { color: var(--muted); font-size: 0.78rem; }
+.hint { color: var(--muted); font-size: var(--t-fine); }
 .gains td, .attrs td { padding: 1px 8px 1px 0; vertical-align: top; }
 .attrs td:last-child { word-break: break-word; }
 .instrument { background: #f6f1fb; margin: 6px -10px -8px; padding: 4px 10px 8px; }
 
-.ph { display: inline-block; font-size: 0.66rem; font-weight: 600; color: var(--ph); border: 1px dashed var(--ph); border-radius: 4px; padding: 0 4px; text-decoration: none; white-space: nowrap; vertical-align: middle; }
+.ph { display: inline-block; font-size: var(--t-fine); font-weight: 600; color: var(--ph); border: 1px dashed var(--ph); border-radius: 4px; padding: 0 4px; text-decoration: none; white-space: nowrap; vertical-align: middle; }
 
-.legend { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 0.84rem; position: sticky; top: 8px; max-height: calc(100vh - 16px); overflow: auto; }
-.legend h3 { margin: 0 0 6px; font-size: 0.95rem; }
-.legend h4 { margin: 12px 0 4px; font-size: 0.82rem; }
+.legend { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: var(--t-small); position: sticky; top: 8px; max-height: calc(100vh - 16px); overflow: auto; }
+.legend h3 { margin: 0 0 6px; font-size: var(--t-body); }
+.legend h4 { margin: 12px 0 4px; font-size: var(--t-small); }
 .legend p { margin: 4px 0; }
 .swatches { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 8px; }
 .swatches li { display: flex; align-items: center; gap: 4px; }
@@ -106,7 +117,7 @@ q.issuer-text { quotes: "“" "”"; }
 .axis-demo { display: flex; flex-direction: column; gap: 4px; }
 .card-unknown-demo { outline: 2px dotted var(--unknown); outline-offset: 2px; padding: 2px 4px; border-radius: 4px; }
 .row-demo > div { display: flex; align-items: center; gap: 4px; margin: 3px 0; flex-wrap: wrap; }
-.demo-label { font-size: 0.75rem; color: var(--muted); width: 100%; }
+.demo-label { font-size: var(--t-fine); color: var(--muted); width: 100%; }
 .more-glyphs { font-weight: 700; color: var(--muted); padding: 0 3px; }
 
 @media (max-width: 420px) {
@@ -117,29 +128,29 @@ q.issuer-text { quotes: "“" "”"; }
 
 /* A rank is one band, so siblings that wrap onto several lines still read as one generation. */
 .rank + .rank { background: rgba(120, 128, 140, 0.07); border: 1px solid rgba(120, 128, 140, 0.18); border-radius: 12px; padding: 22px 10px 12px; }
-.rank-label { position: absolute; top: 3px; left: 12px; font-size: 0.72rem; color: var(--muted); }
+.rank-label { position: absolute; top: 3px; left: 12px; font-size: var(--t-fine); color: var(--muted); }
 
 /* turn-4 revisions */
 .card { z-index: auto; }   /* a z-index here traps the entviz popover under later cards */
 .glyph-slot { position: relative; display: inline-flex; }
-.ext { position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; font: 700 8.5px/1 ui-monospace, Menlo, monospace; color: #000; letter-spacing: -0.02em; }
-.unknown-badge { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-top: 7px; border-radius: 50%; border: 1.5px dotted var(--unknown); color: #7a4a00; background: #fff4df; font-weight: 700; font-size: 0.8rem; }
+.ext { position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; font: 600 8.5px/1 var(--mono); color: #000; letter-spacing: -0.02em; }
+.unknown-badge { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-top: 7px; border-radius: 50%; border: 1.5px dotted var(--unknown); color: #7a4a00; background: #fff4df; font-weight: 700; font-size: var(--t-small); }
 .incoming { display: flex; gap: 6px; }
 .info-wrap { position: relative; flex: none; }
 .info { background: none; border: none; padding: 1px; color: var(--muted); cursor: pointer; line-height: 0; }
 .info:hover, .info[aria-expanded="true"] { color: var(--ink); }
-.info-pop { position: absolute; right: 0; top: 20px; z-index: 40; width: 260px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); padding: 4px 10px; font-size: 0.8rem; }
+.info-pop { position: absolute; right: 0; top: 20px; z-index: 40; width: 260px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); padding: 4px 10px; font-size: var(--t-small); }
 .info-pop p { margin: 6px 0; }
 .review-marks { display: flex; flex-wrap: wrap; gap: 4px; }
 .card-foot { justify-content: flex-end; }
-.demo-label-inline { font-size: 0.75rem; color: var(--muted); }
+.demo-label-inline { font-size: var(--t-fine); color: var(--muted); }
 
 /* turn-7: labelled arrows, one per edge */
 .rank + .rank { padding-left: 26px; }
 .rank-label { left: auto; right: 12px; }
 .edges .arrowhead { fill: #7d848d; stroke: none; }
 .edges path { stroke: #7d848d; }
-.edge-label { font: 600 11px ui-monospace, Menlo, monospace; fill: var(--issuer); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.edge-label { font-weight: 600; font-size: var(--t-small); font-family: var(--mono); fill: var(--issuer); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
 .rank { gap: 34px 14px; }
 
 /* turn-10: SAID and (i) on top, kind at the bottom */
@@ -160,8 +171,8 @@ q.issuer-text { quotes: "“" "”"; }
 .edge-box { fill: #7d848d; }
 
 /* turn-14 */
-.edge-label { font-size: 13px; }
-.card-top .said { font-size: 0.85rem; }
+.edge-label { font-size: var(--t-small); }
+.card-top .said { font-size: var(--t-small); }
 .ext { font-size: 9px; }
 .rank { gap: 40px 14px; }
 .rank + .rank { padding-top: 30px; }
@@ -171,7 +182,7 @@ q.issuer-text { quotes: "“" "”"; }
 .edge-box { fill: #aab0b8; }
 
 /* turn-17: the SAID is an entviz pill */
-.said-slot { margin-right: auto; min-width: 0; font-size: 0.85rem; }
+.said-slot { margin-right: auto; min-width: 0; font-size: var(--t-small); }
 
 /* turn-18: the kind glyphs and "more" sit at the same distance from every card's bottom */
 .card-foot { margin-top: auto; }
@@ -194,3 +205,6 @@ q.issuer-text { quotes: "“" "”"; }
   .edge-label { fill: #e8c77a; stroke: var(--page); }
   .card { color: #1d1f23; }
 }
+
+/* font audit (turn 38): two weights only */
+h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
