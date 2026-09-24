@@ -88,10 +88,13 @@ function glyphsFor(n: CNode): { category: string; glyph: string; override: boole
   });
 }
 
-// The host's trust posture for the AIDs in this presentation. Wild (entviz's default) gives an
-// unnamed AID the type text; corpus opens the mnemonic, as bakobo/cesrview does. Whether a
-// presentation is a corpus is the host's call, never arcviz's (docs/integration/entviz.md).
-const Trust = createContext<TrustAssumption | undefined>(undefined);
+// An AID's trust posture is PER VALUE, decided by whether the host's alias lookup knows it
+// (Daniel, turn 21: "Deciding whether an AID is part of the corpus is supposed to be determined
+// by whether the AID is found in the alias lookup -- and this might be different from one AID to
+// the next"). That is also how entviz frames it: "Provenance is per-VALUE, not per-viewport...
+// foreign entropy gets a different assumption (or none)" (@entviz/core trust.ts:12-15). So an
+// aliased AID gets HOST_CORPUS, and an AID the lookup does not know gets none, which is wild.
+const HOST_CORPUS: TrustAssumption = { posture: "corpus", mnemonic: true };
 const Lexicon = createContext<Data["abbreviations"]>({});
 
 // The longest form of the type name that fits on one line of the space it has.
@@ -131,18 +134,16 @@ function Band({ cats }: { cats: string[] }) {
 }
 
 // A SAID is shown in an entviz pill (Daniel, turn 17), for the copy menu, the visualization and
-// the value-preview hover it brings, and for entviz's own shortening. Two settings keep it a
-// reference handle rather than something to compare by eye (credential-descriptors.md section 1:
-// "The SAID keeps the display and loses the ceremony"). No `onCompare`, so the pill offers no
-// comparison. And `corpus` posture with only the mnemonic on, because under the default wild
-// posture the pill shows no value text at all, just "cesr digest". Setting that posture is this
-// sample's choice, made for SAIDs only: their integrity is settled by recomputing the digest,
-// which is not true of the AIDs, whose posture stays the host's call.
+// the value-preview hover it brings, and for entviz's own shortening. No `onCompare`, so it
+// offers no comparison: "The SAID keeps the display and loses the ceremony"
+// (credential-descriptors.md section 1). Always corpus posture, because "SAIDs don't have a
+// MITM risk and should never be 'wild'" (Daniel, turn 21). entviz has no notion of that: its
+// gate is per value set, not per kind of value, so every SAID pill has to be told.
 const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 
 // Experiment (Daniel, turn 18): entviz's colorbar icon, a miniature of the visualization's
 // colorbar that replaces the pill's constant 2x2 badge. It is value-derived and entviz only
-// draws it under corpus posture, so for AIDs it appears only when the host-corpus box is ticked.
+// draws it under corpus posture: on every SAID, and on an AID only when the host's lookup knows it.
 const PillIcons = createContext(false);
 
 function SaidHandle({ said }: { said: string }) {
@@ -156,8 +157,8 @@ function SaidHandle({ said }: { said: string }) {
 
 function PartyPill({ party }: { party?: Party }) {
   if (!party) return <span className="muted">(no party)</span>;
-  const trust = useContext(Trust);
   const icons = useContext(PillIcons);
+  const trust = party.aliasState === "none" ? undefined : HOST_CORPUS;
   return (
     <span className="party">
       <EntvizPill
@@ -583,7 +584,6 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
-  const [corpus, setCorpus] = useState(false);
   const [icons, setIcons] = useState(false);
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
@@ -598,7 +598,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}>
+    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -615,10 +615,7 @@ export default function App() {
             </label>
             <label><input type="checkbox" checked={pictures} onChange={(e) => setPictures(e.target.checked)} /> pictures</label>
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
-            <label title="The host's trust posture for these AIDs. Wild: an unnamed AID shows its type text. Corpus: it shows the mnemonic built from its value.">
-              <input type="checkbox" checked={corpus} onChange={(e) => setCorpus(e.target.checked)} /> host treats AIDs as a corpus
-            </label>
-            <label title="entviz's colorbar icon at the pill's left edge: a miniature of the visualization's colorbar, derived from the value. Drawn only under corpus posture, so on SAIDs always and on AIDs only when the box to the left is ticked.">
+            <label title="entviz's colorbar icon at the pill's left edge: a miniature of the visualization's colorbar, derived from the value. Drawn only under corpus posture: on every SAID, and on an AID only when the host's alias lookup knows it.">
               <input type="checkbox" checked={icons} onChange={(e) => setIcons(e.target.checked)} /> pill colorbar icons
             </label>
             {frame.descriptor_variants.length > 1 && (
@@ -647,6 +644,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </PillIcons.Provider></Lexicon.Provider></Trust.Provider></Marks.Provider>
+    </PillIcons.Provider></Lexicon.Provider></Marks.Provider>
   );
 }
