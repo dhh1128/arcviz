@@ -935,6 +935,33 @@
      "affiliation"
     ]
    }
+  },
+  {
+   "name": "qualification -- the title says qualified",
+   "why": "Daniel, 2026-09-24, on the Qualified vLEI Issuer credential: 'doesn't the word Qualified in its name tell you it's a certification?' Its only field is an LEI, so fields alone say org-identity. The title names the certification, which leads. 'certificate' is deliberately not in the title vocabulary: birth, death, marriage and X.509 certificates are not certifications.",
+   "row": {
+    "id": 9106,
+    "name": "QualifiedvLEIIssuervLEICredential",
+    "fields": [
+     "d",
+     "i",
+     "LEI"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "qualification",
+     "org-identity"
+    ]
+   }
   }
  ]
 }

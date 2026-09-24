@@ -1222,11 +1222,15 @@
      "edges": [],
      "classified": {
       "categories": [
+       "qualification",
        "org-identity"
       ],
       "category_hits": {
        "org-identity": [
         "LEI"
+       ],
+       "qualification": [
+        "title: Qualified vLEI Issuer Credential"
        ]
       },
       "subject": "party",

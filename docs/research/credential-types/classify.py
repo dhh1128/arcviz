@@ -364,10 +364,14 @@ ORG_ID_ONLY = re.compile(r"^(lei|lids|taxid|partygln)$")
 # in its name? Are we not scanning the credential titles?" We were not. A verified schema's
 # title is written by the same author as its field names, so it is no less trustworthy, and it
 # is the only place the vLEI authorization credentials say what they are: their fields are those
-# of the credential they authorize. Narrow on purpose -- one category, words that do not collide
+# of the credential they authorize. Narrow on purpose -- few categories, words that do not collide
 # (`authorization`, never `auth`, which is also authentication; see refs/abbreviations.json).
 TITLE_VOCAB = {
     "authority": re.compile(r"authori[sz]ation|delegat|mandate|power ?of ?(attorney|representation)|guardian", re.I),
+    # Daniel, 2026-09-24, on the Qualified vLEI Issuer credential: "doesn't the word 'Qualified'
+    # in its name tell you it's a certification?"
+    # "certificate" is left out: birth, death, marriage and X.509 certificates are not certifications.
+    "qualification": re.compile(r"qualifi|certified|certification|accredit|diploma|degree", re.I),
 }
 
 
