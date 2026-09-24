@@ -316,7 +316,7 @@ function Card({
             {glyphs.map((g) => (
               <span key={g.glyph} className={"glyph-slot" + (g.override && marks ? " glyph-override" : "")} title={`${g.category}${g.override ? " (glyph hand-assigned)" : ""} — matched on ${(n.classified.category_hits[g.category] ?? []).join(", ") || "nothing: residual"}`}>
                 <Glyph name={g.glyph} color={(PALETTE[g.category] ?? PALETTE.misc).color} />
-                {g.ext !== undefined && <span className="ext">{g.ext ? "." + g.ext : "?"}</span>}
+                {g.ext !== undefined && <span className="ext">{g.ext ? g.ext : "?"}</span>}
               </span>
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
@@ -392,7 +392,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const els = useRef(new Map<string, HTMLElement>());
   const box = useRef<HTMLDivElement>(null);
   const bands = useRef<(HTMLDivElement | null)[]>([]);
-  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number }[]>([]);
+  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[]>([]);
   const [raised, setRaised] = useState<string | null>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
@@ -407,7 +407,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     if (!root) return;
     const r0 = root.getBoundingClientRect();
     const arrivals = new Map<string, number>();
-    const out: { d: string; key: string; label: string; lx: number; ly: number }[] = [];
+    const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[] = [];
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
@@ -418,8 +418,12 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
         const bend = Math.max(30, (y2 - y1) / 2);
-        const d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${y2 - bend} ${x2},${y2}`;
-        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 8, ly: y2 + 4 + k * 13 });
+        // The box and its label sit wholly above the target's top border: the label's baseline is
+        // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
+        // into the same target stacks its box and label higher.
+        const by = y2 - 9 - k * 17;
+        const d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${by - bend} ${x2},${by}`;
+        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5 });
       }
     }
     // Only set state when the geometry actually moved, or measuring re-renders forever.
@@ -453,7 +457,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       {/* Terminators and labels sit above everything, including a raised card, so covering the
           lines never hides where an edge lands or what it is called. */}
       <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
-        {paths.map((p) => <rect key={p.key + ":b"} x={p.lx - 12} y={p.ly - 8} width={7} height={7} className="edge-box" />)}
+        {paths.map((p) => <rect key={p.key + ":b"} x={p.bx} y={p.by} width={7} height={7} className="edge-box" />)}
         {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className="edge-label">{p.label}</text>)}
       </svg>
       {rows.map((row, i) => (

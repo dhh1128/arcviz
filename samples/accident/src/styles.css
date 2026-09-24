@@ -158,3 +158,10 @@ q.issuer-text { quotes: "“" "”"; }
 .rank-label { top: auto; bottom: 3px; }
 .edge-ends { position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: 4; }
 .edge-box { fill: #7d848d; }
+
+/* turn-14 */
+.edge-label { font-size: 13px; }
+.card-top .said { font-size: 0.85rem; }
+.ext { font-size: 9px; }
+.rank { gap: 40px 14px; }
+.rank + .rank { padding-top: 30px; }
