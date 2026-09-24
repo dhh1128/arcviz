@@ -1,0 +1,15 @@
+{
+  "title": "Accident bundle: photograph of vehicle B",
+  "summary": "The matched half of accident_photo_a. Same schema, same attesting adjuster, no issuee on either -- so the issuee channel that separates the two licences is not merely unhelpful here, it is absent.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "accident_photo_b",
+  "files": {
+    "sad": "accident_photo_b.json",
+    "cesr": "accident_photo_b.cesr"
+  },
+  "generated_at": "2026-09-24T13:06:51.206388+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

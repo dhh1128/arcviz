@@ -6,3 +6,4 @@ from . import fx_shapes         # noqa: F401
 from . import fx_vlei           # noqa: F401
 from . import fx_holes          # noqa: F401
 from . import fx_rule8          # noqa: F401
+from . import fx_bundles       # noqa: F401

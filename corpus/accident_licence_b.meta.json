@@ -1,0 +1,15 @@
+{
+  "title": "Accident bundle: driver B's driving licence",
+  "summary": "The matched half of accident_licence_a. Same schema, same issuing authority, different issuee. Whatever channel carries category will show these two identically.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "accident_licence_b",
+  "files": {
+    "sad": "accident_licence_b.json",
+    "cesr": "accident_licence_b.cesr"
+  },
+  "generated_at": "2026-09-24T13:06:51.180952+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

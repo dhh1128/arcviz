@@ -1,0 +1,15 @@
+{
+  "title": "Accident bundle: second witness statement",
+  "summary": "The matched half of accident_statement_a, and the two accounts disagree about the same fact on purpose. A bundle may hold evidence that conflicts, and nothing in the credentials says so -- both are valid, correctly issued and mutually inconsistent.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "accident_statement_b",
+  "files": {
+    "sad": "accident_statement_b.json",
+    "cesr": "accident_statement_b.cesr"
+  },
+  "generated_at": "2026-09-24T13:06:51.233051+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

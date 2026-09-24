@@ -8,6 +8,13 @@ Each `<name>.json` is the disclosed field map (what a renderer would receive); `
 
 | Fixture | Title | Matrix cells | Rules | Depends on |
 |---|---|---|---|---|
+| `accident_bundle` | Accident bundle (heterogeneous evidence over one occurrence) | H1 | — | accident_licence_a, accident_licence_b, accident_photo_a, accident_photo_b, accident_statement_a, accident_statement_b |
+| `accident_licence_a` | Accident bundle: driver A's driving licence | H1 | — | — |
+| `accident_licence_b` | Accident bundle: driver B's driving licence | H1 | — | — |
+| `accident_photo_a` | Accident bundle: photograph of vehicle A | H1 | — | — |
+| `accident_photo_b` | Accident bundle: photograph of vehicle B | H1 | — | — |
+| `accident_statement_a` | Accident bundle: first witness statement | H1 | — | — |
+| `accident_statement_b` | Accident bundle: second witness statement | H1 | — | — |
 | `bare_agid` | Bare AGID (Aggregate fully compact) | H5 | RULE 7 | — |
 | `blinded_edge_group` | Blinded Edge-Group | H8 | RULE 1 | — |
 | `blinded_rule_group` | Blinded Rule-Group (and nested blinded Rule) | H3, H8 | RULE 1 | — |

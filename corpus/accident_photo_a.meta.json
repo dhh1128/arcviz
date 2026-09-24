@@ -1,0 +1,15 @@
+{
+  "title": "Accident bundle: photograph of vehicle A",
+  "summary": "Subject is a THING and there is no issuee at all -- the adjuster attests what the image depicts, and no party is the credential's subject. This is the case where 'which party is this about' has no answer, and the only discriminator against accident_photo_b is an issuer-chosen attribute (depicts / vehicleVin) that nothing in the credential marks as the subject.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "accident_photo_a",
+  "files": {
+    "sad": "accident_photo_a.json",
+    "cesr": "accident_photo_a.cesr"
+  },
+  "generated_at": "2026-09-24T13:06:51.193552+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}
