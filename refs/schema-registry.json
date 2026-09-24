@@ -837,7 +837,11 @@
       ],
       "pinned_edges": [
         "le"
-      ]
+      ],
+      "categories": [
+        "authority"
+      ],
+      "categories_source": "Daniel Hardman, 2026-09-24: 'The authorization one is control.' No field-based rule can see this: its fields (AID, LEI, personLegalName, engagementContextRole) are those of the ECR credential it authorizes, so the category is declared for the schema type."
     },
     "EHFdm3U_4nML6lo-q_xDTO8183hC9HlWif2l4ycNo8TW": {
       "title": "OVC Identity Credential",

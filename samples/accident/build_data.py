@@ -255,7 +255,21 @@ def vlei(host: dict) -> dict:
                               pinned_edges=pinned, aliased=aliased)
         variants[key] = describe_json(dag)
 
-    nodes = [node_json(n, sads[n], classify_node(sads[n]),
+    known = json.loads((ROOT / "refs" / "schema-registry.json").read_text())["known_schemas"]
+
+    def classified(n):
+        # A category declared for a verified schema type outranks the field-based classifier,
+        # which cannot see it (the ECR Authorization credential carries the same fields as the
+        # ECR credential it authorizes).
+        c = classify_node(sads[n])
+        rec = known.get(VLEI_REAL[n]) or {}
+        if rec.get("categories"):
+            c["categories"] = rec["categories"]
+            c["category_hits"] = {cat: [f"its schema type, {rec['title']}, declared by hand"]
+                                  for cat in rec["categories"]}
+        return c
+
+    nodes = [node_json(n, sads[n], classified(n),
                        {"image": {"state": "none"},
                         "type": {"name": type_names[sads[n]["s"]],
                                  "source": "borrowed from the real vLEI schema",

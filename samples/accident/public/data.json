@@ -1343,15 +1343,11 @@
      ],
      "classified": {
       "categories": [
-       "org-identity",
-       "affiliation"
+       "authority"
       ],
       "category_hits": {
-       "org-identity": [
-        "LEI"
-       ],
-       "affiliation": [
-        "engagementContextRole"
+       "authority": [
+        "its schema type, ECR Authorization vLEI Credential, declared by hand"
        ]
       },
       "subject": "party",
@@ -1409,13 +1405,9 @@
      ],
      "classified": {
       "categories": [
-       "org-identity",
        "affiliation"
       ],
       "category_hits": {
-       "org-identity": [
-        "LEI"
-       ],
        "affiliation": [
         "engagementContextRole"
        ]

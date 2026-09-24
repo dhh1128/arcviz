@@ -357,6 +357,7 @@ RESIDUAL = "misc"
 # this is just as likely to be a user account." Anchored names that are unambiguously financial
 # (`masked_account_reference`, `iban`, ...) stay in the vocabulary above and need no support.
 ACCOUNT = re.compile(r"account")
+ORG_ID_ONLY = re.compile(r"^(lei|lids|taxid|partygln)$")
 
 # A SUBSET of ISO 4217, the codes in common use; extend it rather than trusting it as complete.
 ISO_CURRENCIES = {
@@ -393,6 +394,14 @@ def category_evidence(row: dict) -> dict[str, list[str]]:
     if not row.get("fields_known", False):
         return {}
     out = {c: sorted({h for v in CATEGORY_VOCAB[c] for h in hits(f, v)}) for c in CATEGORIES}
+    # An organization identifier beside a role names the organization the role is AT, not the
+    # credential's subject. Daniel, 2026-09-24, on the vLEI Engagement Context Role credential:
+    # "It is asserting that a person has a particular role at a given org" -- affiliation, not
+    # org-identity. Only a BARE identifier is discounted; an org's legal name or registration
+    # detail is still evidence that the organization itself is the subject.
+    roles = hits(f, "employment") + hits(f, "membership")
+    if roles and out["org-identity"] and all(ORG_ID_ONLY.search(x.lower().strip("`")) for x in out["org-identity"]):
+        out["org-identity"] = []
     accounts = [x for x in f if ACCOUNT.search(x.lower().strip("`"))]
     money = money_evidence(row) if accounts else []
     if money:

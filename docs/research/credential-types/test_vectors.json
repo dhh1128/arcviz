@@ -877,6 +877,34 @@
      "financial"
     ]
    }
+  },
+  {
+   "name": "affiliation -- an organization identifier beside a role names where the role is held",
+   "why": "Daniel, 2026-09-24, on the vLEI Engagement Context Role credential: 'It is asserting that a person has a particular role at a given org.' The LEI names the organization the role is at, so a bare org identifier beside a role field is not evidence of org-identity. An org's legal name or registration detail still would be.",
+   "row": {
+    "id": 9104,
+    "name": "t",
+    "fields": [
+     "d",
+     "i",
+     "LEI",
+     "personLegalName",
+     "engagementContextRole"
+    ],
+    "fields_known": true,
+    "structure": {
+     "has_issuee": true,
+     "names_other_credential": false,
+     "payload_section": "a"
+    }
+   },
+   "expect": {
+    "subject": "party",
+    "alignment": "ordinary",
+    "categories": [
+     "affiliation"
+    ]
+   }
   }
  ]
 }
