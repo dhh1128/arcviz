@@ -140,10 +140,16 @@ function Band({ cats }: { cats: string[] }) {
 // which is not true of the AIDs, whose posture stays the host's call.
 const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 
+// Experiment (Daniel, turn 18): entviz's colorbar icon, a miniature of the visualization's
+// colorbar that replaces the pill's constant 2x2 badge. It is value-derived and entviz only
+// draws it under corpus posture, so for AIDs it appears only when the host-corpus box is ticked.
+const PillIcons = createContext(false);
+
 function SaidHandle({ said }: { said: string }) {
+  const icons = useContext(PillIcons);
   return (
     <span className="said-pill">
-      <EntvizPill value={said} trust={SAID_TRUST} typeSignal="icon" maxWidth="100%" />
+      <EntvizPill value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
     </span>
   );
 }
@@ -151,6 +157,7 @@ function SaidHandle({ said }: { said: string }) {
 function PartyPill({ party }: { party?: Party }) {
   if (!party) return <span className="muted">(no party)</span>;
   const trust = useContext(Trust);
+  const icons = useContext(PillIcons);
   return (
     <span className="party">
       <EntvizPill
@@ -158,7 +165,7 @@ function PartyPill({ party }: { party?: Party }) {
         // undefined, never "": an empty string still wins the label precedence and blanks the pill.
         label={party.label ?? undefined}
         typeSignal="autoCombo"
-        trust={trust}
+        trust={trust && icons ? { ...trust, icon: true } : trust}
         onCompare={() => {}}
         maxWidth="100%"
       />
@@ -577,6 +584,7 @@ export default function App() {
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
   const [corpus, setCorpus] = useState(false);
+  const [icons, setIcons] = useState(false);
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
   useEffect(() => {
@@ -590,7 +598,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}>
+    <Marks.Provider value={marks}><Trust.Provider value={corpus ? { posture: "corpus", mnemonic: true } : undefined}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -609,6 +617,9 @@ export default function App() {
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
             <label title="The host's trust posture for these AIDs. Wild: an unnamed AID shows its type text. Corpus: it shows the mnemonic built from its value.">
               <input type="checkbox" checked={corpus} onChange={(e) => setCorpus(e.target.checked)} /> host treats AIDs as a corpus
+            </label>
+            <label title="entviz's colorbar icon at the pill's left edge: a miniature of the visualization's colorbar, derived from the value. Drawn only under corpus posture, so on SAIDs always and on AIDs only when the box to the left is ticked.">
+              <input type="checkbox" checked={icons} onChange={(e) => setIcons(e.target.checked)} /> pill colorbar icons
             </label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
@@ -636,6 +647,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Lexicon.Provider></Trust.Provider></Marks.Provider>
+    </PillIcons.Provider></Lexicon.Provider></Trust.Provider></Marks.Provider>
   );
 }

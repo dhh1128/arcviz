@@ -172,3 +172,6 @@ q.issuer-text { quotes: "“" "”"; }
 
 /* turn-17: the SAID is an entviz pill */
 .said-slot { margin-right: auto; min-width: 0; font-size: 0.85rem; }
+
+/* turn-18: the kind glyphs and "more" sit at the same distance from every card's bottom */
+.card-foot { margin-top: auto; }
