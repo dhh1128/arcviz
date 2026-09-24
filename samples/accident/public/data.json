@@ -137,7 +137,7 @@
    "short": "txn"
   }
  },
- "host_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). Every name here was invented for this sample. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
+ "host_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). The aliases are real COIA 2.0 aliases minted by the spec's reference implementation from the who/role/scope answers in alias_answers; regenerate with make_host.py. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
  "frames": [
   {
    "id": "accident",
@@ -1165,7 +1165,7 @@
    "parties": {
     "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": {
      "identifier": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
-     "label": "Alice Moreau",
+     "label": "alice-moreau-driver",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1173,12 +1173,12 @@
      "creditedReason": null,
      "pill": {
       "value": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
-      "label": "Alice Moreau"
+      "label": "alice-moreau-driver"
      }
     },
     "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": {
      "identifier": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
-     "label": "Northgate Mutual claims intake",
+     "label": "northgate-mutual-claims-intake",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1186,7 +1186,7 @@
      "creditedReason": null,
      "pill": {
       "value": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
-      "label": "Northgate Mutual claims intake"
+      "label": "northgate-mutual-claims-intake"
      }
     },
     "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO": {
@@ -1204,7 +1204,7 @@
     },
     "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": {
      "identifier": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
-     "label": "Jae Park witness",
+     "label": "jae-park-witness",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1212,12 +1212,12 @@
      "creditedReason": null,
      "pill": {
       "value": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
-      "label": "Jae Park witness"
+      "label": "jae-park-witness"
      }
     },
     "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
      "identifier": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
-     "label": "Rosa Iqbal claims adjuster Northgate Mutual",
+     "label": "rosa-iqbal-claims-adjuster-northgate-mutual",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1225,7 +1225,7 @@
      "creditedReason": null,
      "pill": {
       "value": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
-      "label": "Rosa Iqbal claims adjuster Northgate Mutual"
+      "label": "rosa-iqbal-claims-adjuster-northgate-mutual"
      }
     },
     "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2": {
@@ -1243,7 +1243,7 @@
     },
     "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": {
      "identifier": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
-     "label": "Driver Licence Division Utah",
+     "label": "utah-dld-licensing-authority",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1251,7 +1251,7 @@
      "creditedReason": null,
      "pill": {
       "value": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
-      "label": "Driver Licence Division Utah"
+      "label": "utah-dld-licensing-authority"
      }
     }
    },
@@ -1733,7 +1733,7 @@
    "parties": {
     "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": {
      "identifier": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
-     "label": "Fixture Legal Entity",
+     "label": "fixture-corp-legal-entity-vlei",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1741,12 +1741,12 @@
      "creditedReason": null,
      "pill": {
       "value": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
-      "label": "Fixture Legal Entity"
+      "label": "fixture-corp-legal-entity-vlei"
      }
     },
     "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": {
      "identifier": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
-     "label": "GLEIF root",
+     "label": "gleif-root-of-trust-vlei",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1754,7 +1754,7 @@
      "creditedReason": null,
      "pill": {
       "value": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
-      "label": "GLEIF root"
+      "label": "gleif-root-of-trust-vlei"
      }
     },
     "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD": {
@@ -1772,7 +1772,7 @@
     },
     "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": {
      "identifier": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
-     "label": "Fixture QVI",
+     "label": "fixture-qvi-qualified-issuer-vlei",
      "aliasState": "shown",
      "bindingConfident": null,
      "bindingSource": null,
@@ -1780,7 +1780,7 @@
      "creditedReason": null,
      "pill": {
       "value": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
-      "label": "Fixture QVI"
+      "label": "fixture-qvi-qualified-issuer-vlei"
      }
     }
    },

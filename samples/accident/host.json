@@ -1,13 +1,55 @@
 {
- "_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). Every name here was invented for this sample. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
+ "_note": "FICTIONAL. Stands in for the host application's alias lookup (credential-descriptors.md section 1: the host, never arcviz, knows who an AID is). The aliases are real COIA 2.0 aliases minted by the spec's reference implementation from the who/role/scope answers in alias_answers; regenerate with make_host.py. Some AIDs are deliberately left unnamed so the pill's own fallback shows.",
  "aliases": {
-  "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": "Rosa Iqbal claims adjuster Northgate Mutual",
-  "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": "Driver Licence Division Utah",
-  "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": "Alice Moreau",
-  "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": "Jae Park witness",
-  "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": "Northgate Mutual claims intake",
-  "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": "GLEIF root",
-  "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": "Fixture QVI",
-  "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": "Fixture Legal Entity"
+  "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": "rosa-iqbal-claims-adjuster-northgate-mutual",
+  "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": "utah-dld-licensing-authority",
+  "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": "alice-moreau-driver",
+  "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": "jae-park-witness",
+  "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": "northgate-mutual-claims-intake",
+  "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": "gleif-root-of-trust-vlei",
+  "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": "fixture-qvi-qualified-issuer-vlei",
+  "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": "fixture-corp-legal-entity-vlei"
+ },
+ "alias_answers": {
+  "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
+   "who": "Rosa Iqbal",
+   "role": "claims adjuster",
+   "scope": "Northgate Mutual"
+  },
+  "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-": {
+   "who": "Utah DLD",
+   "role": "licensing authority",
+   "scope": ""
+  },
+  "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP": {
+   "who": "Alice Moreau",
+   "role": "driver",
+   "scope": ""
+  },
+  "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": {
+   "who": "Jae Park",
+   "role": "witness",
+   "scope": ""
+  },
+  "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": {
+   "who": "Northgate Mutual",
+   "role": "claims intake",
+   "scope": ""
+  },
+  "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": {
+   "who": "GLEIF",
+   "role": "root of trust",
+   "scope": "vLEI"
+  },
+  "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": {
+   "who": "Fixture QVI",
+   "role": "qualified issuer",
+   "scope": "vLEI"
+  },
+  "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": {
+   "who": "Fixture Corp",
+   "role": "legal entity",
+   "scope": "vLEI"
+  }
  }
 }
