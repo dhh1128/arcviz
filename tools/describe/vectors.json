@@ -952,15 +952,11 @@
   ],
   "channels": [
     {
-      "name": "binding_confidence_and_evidentiary_stance_are_independent",
-      "defends": "Daniel's diploma-mill case, which is the one that makes the independence unmissable. The host is HIGHLY CONFIDENT the AID is controlled by a diploma mill -- so the identifier-to-alias binding is strongly trusted -- and has no intention whatever of crediting the diploma. Confidence in the naming is not endorsement of the content. A design storing one boolean cannot express this, which is why the abstraction it replaced was stopped before it was written.",
+      "name": "a_named_party_can_be_uncredited",
+      "defends": "Daniel's diploma-mill case. The host is certain the AID belongs to a diploma mill, so it returns the alias, and it has no intention of crediting the diploma. Naming a party is not endorsing its evidence. REVISED under Q-JX0D: the host's confidence in the alias is no longer a separate field; it is expressed by the lookup returning the alias at all.",
       "input": {
         "identifier": "EMILL",
         "alias": "acme-diploma-services",
-        "binding": {
-          "confident": true,
-          "source": "investigated 2026-03"
-        },
         "stance": {
           "credited": false,
           "reason": "known diploma mill"
@@ -968,7 +964,6 @@
       },
       "expect": {
         "label": "acme-diploma-services",
-        "bindingConfident": true,
         "credited": false,
         "creditedReason": "known diploma mill"
       }
@@ -979,16 +974,12 @@
       "input": {
         "identifier": "EBAD",
         "alias": "bob-payee-bitcoin,9",
-        "binding": {
-          "confident": false
-        },
         "stance": {
           "credited": false
         }
       },
       "expect": {
         "label": "bob-payee-bitcoin,9",
-        "bindingConfident": false,
         "credited": false
       }
     },
@@ -1002,7 +993,6 @@
       "expect": {
         "label": "someone-somewhere",
         "aliasState": "shown",
-        "bindingConfident": null,
         "credited": null
       }
     },
@@ -1057,10 +1047,9 @@
       "expect": {
         "label": null,
         "aliasState": "none",
-        "bindingConfident": null,
         "credited": null
       }
     }
   ],
-  "_channels_comment": "Vectors for what the host says about a party on a node -- the alias its lookup interface returned, its binding judgement, its evidentiary stance -- and for the per-(identifier, node) decision about whether to apply a known alias. Revised 2026-09-24 under D-DCTS: the alias creator's COIA flags are no longer a separate channel. They are part of the alias, which the host's interface returns and arcviz shows verbatim; Daniel: arcviz 'is *already* surfacing those flags if it displays coia aliases by calling the interface that looks them up.'"
+  "_channels_comment": "Vectors for what the host says about a party on a node -- the alias its lookup interface returned, and its evidentiary stance on the credential -- and for the per-(identifier, node) decision about whether to apply a known alias. Revised 2026-09-24 under D-DCTS and Q-JX0D: the alias is shown verbatim, flags included, and the host is always its creator ('Any alias not created by a host cannot be returned by the lookup interface'), so neither the creator's flags nor the host's confidence in the alias is a separate channel."
 }

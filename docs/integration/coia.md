@@ -26,7 +26,9 @@ So the lookup interface owns the alias and the risk it carries. Whatever it retu
 
 **A name withheld on one node is not the same as no name.** The host may decline to apply an alias it knows on a particular node, and `party_view` keeps `withheld-here` distinct from `none`.
 
-**The name slot carries identity only.** The host's evidentiary stance on a credential is never folded into the label; see `credential-descriptors.md` §1. Whether the host's confidence in an identifier-to-alias binding is also the lookup interface's to express is not yet settled. `Binding` is kept in `coia_reader.py` until Daniel rules.
+**The host is the alias's creator, always.** Daniel, 2026-09-24 (Q-JX0D): *"The host is always the creator. Any alias not created by a host cannot be returned by the lookup interface."* So the creator's flags and the host's confidence in an alias are the same thing, carried by what the lookup returns. arcviz has no separate field for either.
+
+**The name slot carries identity only.** The host's evidentiary stance on a credential is the one judgement that stays separate, and it is never folded into the label; see `credential-descriptors.md` §1.
 
 ## Conformance
 
@@ -34,4 +36,4 @@ So the lookup interface owns the alias and the risk it carries. Whatever it retu
 
 ## Where the pieces are
 
-`tools/describe/coia_reader.py` holds `AliasLookup`, `pill_props()`, `Binding`, `Stance` and `party_view()`. `tools/describe/vectors.json` §`channels` holds the vectors pinning the separation that remains. Both are a prototype and an executable specification, not arcviz's implementation.
+`tools/describe/coia_reader.py` holds `AliasLookup`, `pill_props()`, `Stance` and `party_view()`. `tools/describe/vectors.json` §`channels` holds the vectors pinning the separation that remains. Both are a prototype and an executable specification, not arcviz's implementation.

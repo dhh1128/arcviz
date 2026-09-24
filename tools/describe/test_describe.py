@@ -360,7 +360,6 @@ def test_channel_vectors():
         alias = i.get("alias")
         got = coia.party_view(
             i["identifier"], alias,
-            binding=coia.Binding(**i["binding"]) if i.get("binding") else None,
             stance=coia.Stance(**i["stance"]) if i.get("stance") else None,
             apply_alias=i.get("apply_alias"))
         for key, want in vec["expect"].items():

@@ -25,8 +25,8 @@ and returned them as a separate channel; that is gone, along with its tests, bec
 arcviz in the business of re-adjudicating a risk the interface had already communicated.
 
 What is left is small, and every piece of it is about not collapsing states: no alias versus an
-alias, a name withheld here versus none known, and a host that said nothing versus a host that
-said no.
+alias, a name withheld here versus none known, and a host that said nothing about a credential
+versus a host that said no.
 """
 
 from __future__ import annotations
@@ -63,8 +63,8 @@ def pill_props(identifier: str, alias: str | None) -> dict:
     "no alias known" must mean, and it is why arcviz passes None and never "" -- an empty
     string is still a label, wins the precedence with nothing in it, and blanks the pill.
 
-    The mnemonic rung is gated on entviz's `corpus` trust posture, and whether a presentation
-    is a corpus is the host's call, not arcviz's; see docs/integration/entviz.md.
+    The mnemonic rung is gated on entviz's `corpus` trust posture, which is per value: an AID
+    is in the corpus exactly when the host's lookup knows it (D-VTKV; docs/integration/entviz.md).
     """
     return {"value": identifier, "label": alias if alias else None}
 
@@ -77,21 +77,11 @@ def pill_props(identifier: str, alias: str | None) -> dict:
 # knowing that witness X is trustworthy, are radically different questions." So nothing below
 # is ever folded into the label.
 #
-# Two host judgements survive the D-DCTS revision. The alias creator's flags are no longer a
-# separate channel: they are part of the alias, which the interface returns and arcviz shows.
-# `Binding` is kept pending Daniel's reading of whether it, too, belongs to the lookup
-# interface -- it is the host's confidence that an alias names an identifier's controller.
-
-
-@dataclass(frozen=True)
-class Binding:
-    """The host's view of whether an alias names the controller of an identifier.
-
-    `confident` is a tri-state and the third state is load-bearing: None means the host did not
-    say, which is NOT "no".
-    """
-    confident: bool | None = None
-    source: str | None = None       # host-defined; rendered as attribution, never interpreted
+# ONE host judgement remains beside the alias. Daniel, 2026-09-24 (Q-JX0D): "the first and
+# second things are the same question. The host is always the creator. Any alias not created by
+# a host cannot be returned by the lookup interface." So the alias creator's flags and the host's
+# confidence in an alias are one thing, and it is expressed by what the lookup returns. What stays
+# separate is the host's stance on a CREDENTIAL, which is about the evidence, not the name.
 
 
 @dataclass(frozen=True)
@@ -106,7 +96,7 @@ class Stance:
 
 
 def party_view(identifier: str, alias: str | None, *,
-               binding: Binding | None = None, stance: Stance | None = None,
+               stance: Stance | None = None,
                apply_alias: bool | None = None) -> dict:
     """Everything known about one party as it appears on one node, with nothing merged.
 
@@ -125,8 +115,6 @@ def party_view(identifier: str, alias: str | None, *,
         "aliasState": ("shown" if known and show
                        else "withheld-here" if known
                        else "none"),
-        "bindingConfident": binding.confident if binding else None,
-        "bindingSource": binding.source if binding else None,
         "credited": stance.credited if stance else None,
         "creditedReason": stance.reason if stance else None,
     }

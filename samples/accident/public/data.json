@@ -1111,8 +1111,6 @@
      "identifier": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
      "label": "alice-moreau-driver",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1124,8 +1122,6 @@
      "identifier": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
      "label": "northgate-mutual-claims-intake",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1137,8 +1133,6 @@
      "identifier": "EHwkG2DrcdUn92vuRLQfhMTx72xpOEj02NBKUsBZn4xO",
      "label": null,
      "aliasState": "none",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1150,8 +1144,6 @@
      "identifier": "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC",
      "label": "jae-park-witness",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1163,8 +1155,6 @@
      "identifier": "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74",
      "label": "rosa-iqbal-claims-adjuster-northgate-mutual",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1176,8 +1166,6 @@
      "identifier": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
      "label": null,
      "aliasState": "none",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1189,8 +1177,6 @@
      "identifier": "EPVcVcU46oTcO1b_9GPi35bHlyiLz8Zqv0s9ziEjhTB-",
      "label": "utah-dld-licensing-authority",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1679,8 +1665,6 @@
      "identifier": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
      "label": "fixture-corp-legal-entity-vlei",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1692,8 +1676,6 @@
      "identifier": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
      "label": "gleif-root-of-trust-vlei",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1705,8 +1687,6 @@
      "identifier": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
      "label": null,
      "aliasState": "none",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
@@ -1718,8 +1698,6 @@
      "identifier": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
      "label": "fixture-qvi-qualified-issuer-vlei",
      "aliasState": "shown",
-     "bindingConfident": null,
-     "bindingSource": null,
      "credited": null,
      "creditedReason": null,
      "pill": {
