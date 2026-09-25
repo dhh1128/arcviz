@@ -219,6 +219,58 @@
        "operator": null
       }
      ],
+     "sections": {
+      "a": {
+       "d": "EK7AMYPsUmSHNDYStOG5zSKDT3Yemsfu6kZ04vrzD6FH",
+       "u": "0AA1Z8T-DBMKlC7EV9d8A85Q",
+       "dt": "2026-03-06T08:00:00+00:00",
+       "claimReference": "CLM-2026-0041",
+       "occurredAt": "2026-03-02T08:41:00+00:00"
+      },
+      "e": {
+       "d": "EDSoTnasVXDKVOT-J0ZdD4fV1xQ7315Rkd3lM1-cfJKA",
+       "licenceA": {
+        "d": "ENsDmqX9gKEaQmsBBx3PnqVLXrVZhdcGtzs5wkmPySkv",
+        "n": "EJpg3ia-NpS9iWR3ktgmar8qn2KHQ8CV1bfvGfi5ywRv",
+        "s": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ"
+       },
+       "licenceB": {
+        "d": "EEn0ptwzfV5DgdyCuETPPLtIQ6UlIz0_YTZKmRsdaWEg",
+        "n": "EEEHQNYHQAmIshnnl5gzBtNWqNC127qe0SNryI7IDCKQ",
+        "s": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ"
+       },
+       "photoA": {
+        "d": "ENyAr1Vt9zZMa6IM_1hZlJDPFJzXWBb1Ij17zabfvzOf",
+        "n": "ENz5FPBtAKzq_gwwOf24Ucn1gF0Ut2XmTNECYvNahSou",
+        "s": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r"
+       },
+       "photoB": {
+        "d": "EEMelHq7NjlNKO6uRIuIFtnKwPW2OWCKS0pgpcMoC2Gj",
+        "n": "EGTUmx98zz83miJ0RMuWidO2Tts2VqrcNCrJ-bla3cbq",
+        "s": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r"
+       },
+       "photoC": {
+        "d": "EFcp-1Ac1DZDw57cnEUaMDJO_Fmh2lj1UUn_vH2nLA11",
+        "n": "EFlyzvcWEdxT_YVi3_O7kZhhK_3j6ykTi9Q9tWEbDbkp",
+        "s": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r"
+       },
+       "photoD": {
+        "d": "EJzQIn4vVDQVMbWr-grPMAGgl8T1jp2n427Q7QMoL0-A",
+        "n": "EOaXnc6bLghdmaZ6cl9vlyty-t00aDxKU53FKt-IZNIg",
+        "s": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r"
+       },
+       "statementA": {
+        "d": "EF89OMDwLbWnQtn6GuY-rWj4bOjAMDjdf5WbmJF-XwnR",
+        "n": "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk",
+        "s": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF"
+       },
+       "statementB": {
+        "d": "EBrBxKMwG7NaKgx2r7RoxLDlIxleUeY1UTE4GOlqBOPI",
+        "n": "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja",
+        "s": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF"
+       }
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -258,6 +310,21 @@
       "portraitDigest": "EOREqTrbc7mtotS5YeLkwBFW7zuEqOuYIJwFIPKAFGrz"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EKhajAWIG2722lZxzkpsNkjc1_is45RFYPH8GV4XqRrq",
+       "u": "0ACgZWVQ9c5F2T2sIrz-qekX",
+       "i": "EDENM0x7P_uvLaT4RFlYxouW4tj37ZELUJtN7uYiN_UP",
+       "dt": "2021-06-30T09:12:00+00:00",
+       "licenceNumber": "D-4471-9920",
+       "holderName": "Alice Moreau",
+       "classes": [
+        "B"
+       ],
+       "expires": "2031-06-30",
+       "portraitDigest": "EOREqTrbc7mtotS5YeLkwBFW7zuEqOuYIJwFIPKAFGrz"
+      }
+     },
      "classified": {
       "categories": [
        "qualification",
@@ -337,6 +404,21 @@
       "portraitDigest": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EKOvl_NbZSZWga5hD8xHpYqv7L3tT_ncrGZsZI_GHE32",
+       "u": "0AA6XzjwotRLN1lYlIJxJgh9",
+       "i": "EPURWk8yJehlEuLhepJmh41tBP9aQjfpv0BM2QAkt3k2",
+       "dt": "2019-11-14T11:48:00+00:00",
+       "licenceNumber": "D-8813-2077",
+       "holderName": "Bob Ferreira",
+       "classes": [
+        "B"
+       ],
+       "expires": "2029-11-14",
+       "portraitDigest": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z"
+      }
+     },
      "classified": {
       "categories": [
        "qualification",
@@ -413,6 +495,18 @@
       "capturedAt": "2026-03-02T10:15:00+00:00"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EDYcBrI5bvtqutZrLknKM6TrNmeehWBFjWYaiRUb1Y-P",
+       "u": "0ABTKqzywii0Fa1gfMjZtTaT",
+       "dt": "2026-03-02T10:15:40+00:00",
+       "depicts": "front nearside impact damage, vehicle A",
+       "vehicleVin": "WVWZZZ1KZAW084471",
+       "plate": "UTA 1234",
+       "imageDigest": "EP7g94PQXobB1PGwpl1fCOGinJz7ZDGez04XhjUKgW9e",
+       "capturedAt": "2026-03-02T10:15:00+00:00"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -475,6 +569,18 @@
       "capturedAt": "2026-03-02T10:15:00+00:00"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EAWRNFTxMkyp6BtTJBezxFDQxYMsCV9hs4VaVSgxlYe6",
+       "u": "0AAkIEeE5hp7YRRCglgcFIe5",
+       "dt": "2026-03-02T10:16:05+00:00",
+       "depicts": "driver's door and wing, vehicle A",
+       "vehicleVin": "WVWZZZ1KZAW084471",
+       "plate": "UTA 1234",
+       "imageDigest": "ELnRVaMv7DkoWo169hT4nuhvhxl-Mvvggmpk3xjHP9rR",
+       "capturedAt": "2026-03-02T10:15:00+00:00"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -537,6 +643,18 @@
       "capturedAt": "2026-03-02T10:15:00+00:00"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EPPnJrJTi8rokMTz_N2BXYFS5jGDvJ2Js-ixZLWIlJMD",
+       "u": "0ADe3kRvvBmxEJ6e6yT3OMAF",
+       "dt": "2026-03-02T10:17:12+00:00",
+       "depicts": "front and passenger-side damage with maroon paint transfer, vehicle B",
+       "vehicleVin": "1FTDF15Y6PLA20877",
+       "plate": "77-YELLOW",
+       "imageDigest": "EPi36v691mmG_YW0ZikcqYVPIb8PocD-nSEBVbEPUpoI",
+       "capturedAt": "2026-03-02T10:15:00+00:00"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -597,6 +715,16 @@
       "capturedAt": "2026-03-02T10:15:00+00:00"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "ENKrzZnBYdl-Ij2pRQ0GA3H9yuCkc0IU7WtEJDRkc6b0",
+       "u": "0AAEOAJ3MrJACL3Am1kkBpWk",
+       "dt": "2026-03-02T10:22:41+00:00",
+       "depicts": "signal head and stop line, northbound approach",
+       "imageDigest": "EMyVCLfBWR6hZi9doiATErkJtlV1ELt0DFDRUzGE0ybI",
+       "capturedAt": "2026-03-02T10:15:00+00:00"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -636,6 +764,17 @@
       "vantagePoint": "northeast corner, on foot"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EIRcoT8_Kh7m6HGysdTdj03a1vrHuA2wWUh6cWhfqXmX",
+       "u": "0ACwMNW6jiFS9IITpjNVE9_B",
+       "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+       "dt": "2026-03-04T14:02:00+00:00",
+       "observedAt": "2026-03-02T08:41:00+00:00",
+       "account": "The northbound car entered the junction on amber.",
+       "vantagePoint": "northeast corner, on foot"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -671,6 +810,17 @@
       "vantagePoint": "southbound queue, second vehicle"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EFqiqrXe4rAKgjRIB8BiW9TdBykbJd2l2vKkMhTDVOaW",
+       "u": "0ABzOvEUfr3OK9OdtKJMID4v",
+       "i": "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw",
+       "dt": "2026-03-05T09:30:00+00:00",
+       "observedAt": "2026-03-02T08:41:00+00:00",
+       "account": "The northbound car was already in the junction.",
+       "vantagePoint": "southbound queue, second vehicle"
+      }
+     },
      "classified": {
       "categories": [],
       "category_hits": {},
@@ -1210,6 +1360,15 @@
       "dt": "2026-01-12T09:00:00.000000+00:00"
      },
      "edges": [],
+     "sections": {
+      "a": {
+       "d": "EGdD8OHB-_MG0sDjFAS9r9rBq8ev8Sk4WseDo1n9VH_7",
+       "u": "0ABKCYKzXs1hBmUkLt1hs4cM",
+       "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+       "LEI": "984500ARCV1Z0000FIX01",
+       "dt": "2026-01-12T09:00:00.000000+00:00"
+      }
+     },
      "classified": {
       "categories": [
        "qualification",
@@ -1274,6 +1433,23 @@
        "operator": null
       }
      ],
+     "sections": {
+      "a": {
+       "d": "EAbuYpDL8lbpNtTigT8d1-J2BPq7W8DSAqH1yjIdYOH0",
+       "u": "0AAwdDl--p2R5L3RNhkXZMaj",
+       "i": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
+       "LEI": "984500ARCV1Z0000FIX01",
+       "dt": "2026-01-15T11:30:00.000000+00:00"
+      },
+      "e": {
+       "d": "EOfM3CESW3NvLBiKK2t1RmJzzaQWiSQGZceEdh12tRhS",
+       "qvi": {
+        "d": "EJ5OOLY_lReUhhMygTgeWLkAgLz9KZob670tGkHgYreG",
+        "n": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+        "s": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3"
+       }
+      }
+     },
      "classified": {
       "categories": [
        "org-identity"
@@ -1337,6 +1513,26 @@
        "operator": null
       }
      ],
+     "sections": {
+      "a": {
+       "d": "EM3UwJMXlWOlRWI_kmVQ5IiNQoTi7Z1NnertAxRDM4kN",
+       "u": "0ADV56Sp6Q-B9UqjMdcNIA6E",
+       "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
+       "LEI": "984500ARCV1Z0000FIX01",
+       "dt": "2026-01-19T14:05:00.000000+00:00",
+       "AID": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+       "personLegalName": "Jordan Q. Fixture",
+       "engagementContextRole": "Compliance Analyst"
+      },
+      "e": {
+       "d": "ELoagrKTFLwahFUQ6Le8PvdUZGz8FZboKNuWjyJygWzo",
+       "le": {
+        "d": "EBcpDqsETVT3QvRzK8tuTx4qo_Gtqke4kjDEuPp8qEcp",
+        "n": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+        "s": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga"
+       }
+      }
+     },
      "classified": {
       "categories": [
        "authority"
@@ -1399,6 +1595,26 @@
        "operator": "I2I"
       }
      ],
+     "sections": {
+      "a": {
+       "d": "ECCRlUkO_-sc-Jer-y9Ibzx2FumY9xhRRplYEAWvFoFo",
+       "u": "0ADtJH6EdW0pImZlh61YaN7a",
+       "i": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
+       "LEI": "984500ARCV1Z0000FIX01",
+       "dt": "2026-01-21T08:45:00.000000+00:00",
+       "personLegalName": "Jordan Q. Fixture",
+       "engagementContextRole": "Compliance Analyst"
+      },
+      "e": {
+       "d": "ENIllVhT-Xia9lofkVTMylgcz0a9y8Sf5eCOsYBeNXSF",
+       "auth": {
+        "d": "EKcc9-7X2amC94hCS7a-OmC15bbXP1tpyLPokyn9EqPN",
+        "n": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+        "s": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
+        "o": "I2I"
+       }
+      }
+     },
      "classified": {
       "categories": [
        "affiliation"

@@ -51,6 +51,7 @@ export interface CNode {
   issuer: string;
   issuee?: string | null;
   attrs: Record<string, any>;
+  sections: Partial<Record<"a" | "A" | "e" | "r", any>>;
   edges: Edge[];
   classified: Classified;
   fixture_summary?: string;

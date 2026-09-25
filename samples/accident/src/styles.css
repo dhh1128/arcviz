@@ -224,3 +224,14 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 /* turn-50: without reviewer marks there is no legend column */
 .layout.no-legend { grid-template-columns: minmax(0, 1fr); }
 .details .reviewer { border-top: 1px dashed var(--ph); margin-top: 8px; }
+
+/* turn-51: the credential's content as a tree */
+.tree { list-style: none; margin: 0; padding-left: 14px; }
+.tree-root { padding-left: 0; }
+.tree summary { cursor: pointer; font-weight: 600; }
+.tree .tree .tree summary, .tree .tree summary { font-weight: 400; }
+.tree-count { font-size: var(--t-fine); margin-left: 4px; }
+.tree-leaf { padding: 1px 0; overflow-wrap: anywhere; }
+.tree-key { margin-right: 6px; }
+.tree-absent { font-weight: 600; padding-left: 14px; }
+.tree-absent .muted { font-weight: 400; margin-left: 4px; }

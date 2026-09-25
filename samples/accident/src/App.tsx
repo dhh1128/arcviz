@@ -358,6 +358,70 @@ function Card({
   );
 }
 
+// ---------------------------------------------------------------------------------------------
+// The credential's content as a tree (Daniel, turn 51): attribute values can be JSON objects with
+// fields of their own. Four top-level nodes, with Fields open and the rest closed. Edges and Rules
+// hold those sections. Undisclosed holds only what the credential COMMITS to but this presentation
+// does not show: a section given as a bare SAID (compact form), or an attachment committed by digest
+// and not supplied. It never lists a field the schema allows and the credential simply lacks.
+// That is absent, not undisclosed, and conflating the two is the failure AGENTS.md names first.
+
+const CESR_DIGEST = /^[A-Za-z0-9_-]{44}$/;
+
+function Leaf({ v }: { v: any }) {
+  if (typeof v === "string" && CESR_DIGEST.test(v)) return <SaidHandle said={v} />;
+  if (v === null) return <span className="muted">null</span>;
+  return <span className="issuer-text">{typeof v === "string" ? v : JSON.stringify(v)}</span>;
+}
+
+function TreeNode({ label, value, open = false, mono = true }: { label: string; value: any; open?: boolean; mono?: boolean }) {
+  const isBranch = value !== null && typeof value === "object";
+  if (!isBranch) {
+    return (
+      <li className="tree-leaf">
+        <span className="tree-key">{mono ? <code>{label}</code> : label}</span> <Leaf v={value} />
+      </li>
+    );
+  }
+  const entries: [string, any][] = Array.isArray(value) ? value.map((x, i) => [`[${i}]`, x]) : Object.entries(value);
+  return (
+    <li className="tree-branch">
+      <details open={open}>
+        <summary>{mono ? <code>{label}</code> : label} <span className="muted tree-count">{entries.length}</span></summary>
+        <ul className="tree">
+          {entries.length ? entries.map(([k, v]) => <TreeNode key={k} label={k} value={v} />)
+            : <li className="tree-leaf muted">none</li>}
+        </ul>
+      </details>
+    </li>
+  );
+}
+
+function FieldTree({ n }: { n: CNode }) {
+  const sec = n.sections ?? {};
+  const strip = (o: any, keys: string[]) =>
+    o && typeof o === "object" ? Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k))) : o;
+  const undisclosed: Record<string, any> = {};
+  for (const k of ["a", "A", "e", "r"] as const)
+    if (typeof sec[k] === "string") undisclosed[{ a: "fields", A: "fields", e: "edges", r: "rules" }[k] + " (compact)"] = sec[k];
+  if (n.image.state === "committed-not-resolved") undisclosed["picture (committed, not supplied)"] = n.image.digest;
+  const fields = typeof sec.a === "object" ? strip(sec.a, ["d", "u", "i"]) : typeof sec.A === "object" ? sec.A : {};
+  return (
+    <section>
+      <ul className="tree tree-root">
+        <TreeNode label="Fields" value={fields} open mono={false} />
+        {Object.keys(undisclosed).length > 0 && <TreeNode label="Undisclosed" value={undisclosed} mono={false} />}
+        {/* A section the credential does not have is said to be absent, not shown as an empty,
+            openable node that could pass for a hidden one. */}
+        {typeof sec.e === "object" ? <TreeNode label="Edges" value={strip(sec.e, ["d"])} mono={false} />
+          : !("e" in sec) && <li className="tree-leaf tree-absent">Edges <span className="muted">none in this credential</span></li>}
+        {typeof sec.r === "object" ? <TreeNode label="Rules" value={strip(sec.r, ["d"])} mono={false} />
+          : !("r" in sec) && <li className="tree-leaf tree-absent">Rules <span className="muted">none in this credential</span></li>}
+      </ul>
+    </section>
+  );
+}
+
 function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor }) {
   const marks = useContext(Marks);
   const c = n.classified;
@@ -368,19 +432,7 @@ function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor 
         <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
         {n.issuee ? <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p> : <p className="muted">No issuee.</p>}
       </section>
-      <section>
-        <h4>Fields</h4>
-        <table className="attrs">
-          <tbody>
-            {Object.entries(n.attrs).filter(([k]) => !["d", "u", "i"].includes(k)).map(([k, v]) => (
-              <tr key={k}><td><code>{k}</code></td><td className="issuer-text">{
-                // A digest-sized CESR value (a committed picture, say) gets a pill, as a SAID does.
-                typeof v === "string" && /^[A-Za-z0-9_-]{44}$/.test(v) ? <SaidHandle said={v} />
-                  : typeof v === "string" ? v : JSON.stringify(v)}</td></tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      <FieldTree n={n} />
       {/* Reviewer-only: how the label and the kind were computed, and what the fixture intended. */}
       {marks && (
         <div className="reviewer">

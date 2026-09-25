@@ -146,6 +146,9 @@ def node_json(name: str, s: dict, cls: dict, extra: dict | None = None) -> dict:
     a = s.get("a") if isinstance(s.get("a"), dict) else {}
     n = {"name": name, "said": s["d"], "schema": s["s"], "issuer": s["i"],
          "issuee": a.get("i"), "attrs": a, "edges": edges_of(s),
+         # The sections as they arrived, for the field tree: a section may be a block, a bare
+         # SAID standing in for a block (compact, so undisclosed), or missing altogether.
+         "sections": {k: s[k] for k in ("a", "A", "e", "r") if k in s},
          "classified": cls, "fixture_summary": json.loads(
              (CORPUS / f"{name}.meta.json").read_text()).get("summary")}
     n.update(extra or {})
