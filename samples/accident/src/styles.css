@@ -56,7 +56,7 @@ code { font-family: var(--mono); font-size: 1em; }
 .rank { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 14px; margin-bottom: 40px; }
 
 .card { position: relative; z-index: 1; display: flex; width: 300px; max-width: 100%; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-.card.presented { width: 380px; border-color: #9aa0a8; }
+.card.presented { border-color: #9aa0a8; }
 .card.open { width: 560px; }
 /* unknown: three cues -- the dotted amber outline, the '?' tag, the word. */
 .card-unknown { outline: 2px dotted var(--unknown); outline-offset: 2px; }
