@@ -735,11 +735,6 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       </svg>
       {rows.map((row, i) => (
         <div className="rank" key={i} ref={(el) => { bands.current[i] = el; }}>
-          {i > 0 && (
-            <div className="rank-label">
-              {i === 1 ? "referenced by the presented credential" : `${i} references away`} · {row.length}
-            </div>
-          )}
           {row.map((said) => {
             const n = bySaid.get(said)!;
             return (
