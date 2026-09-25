@@ -22,6 +22,9 @@ fixture at all -- absent or otherwise. A future fixture that models KEL
 events would be needed to close that gap.
 """
 
+import json
+from pathlib import Path
+
 from .. import determinism as det
 from .. import schemas
 from ..common import credential, make_registry, simple_edge
@@ -48,6 +51,17 @@ _ISSUED = {
 _LEI_PROP = {"LEI": {"type": "string"}}
 
 
+
+# The rules sections of the REAL vLEI schemas, vendored in vlei_rules.json (Daniel, 2026-09-25:
+# "all of those credentials say Rules: none when expanded. Yet they do have rules, if we're
+# using real vLEIs"). Each rule is {"l": <the schema's const text>}.
+_VLEI_RULES = json.loads((Path(__file__).parent / "vlei_rules.json").read_text())
+
+
+def _rules(kind):
+    return {"d": "", **{name: dict(v) for name, v in _VLEI_RULES[kind]["rules"].items()}}
+
+
 @fixture("vlei_qvi")
 def build_vlei_qvi(corpus_dir):
     issuer = det.aid("vlei:root_authority")          # stands in for EINmHd5g... (delegate of the absent root)
@@ -60,7 +74,7 @@ def build_vlei_qvi(corpus_dir):
     serder = credential(
         "vlei_qvi", issuer=issuer, issuee=issuee, schema_said=schema_said,
         attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["qvi"]},
-        registry=registry.said,
+        registry=registry.said, rule=_rules("qvi"),
     )
     return {
         "serder": serder,
@@ -94,7 +108,7 @@ def build_vlei_le(corpus_dir):
     serder = credential(
         "vlei_le", issuer=issuer, issuee=issuee, schema_said=schema_said,
         attrs={"LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["le"]},
-        registry=registry.said, edge=edge,
+        registry=registry.said, rule=_rules("le"), edge=edge,
     )
     return {
         "serder": serder,
@@ -139,7 +153,7 @@ def build_vlei_ecr_auth(corpus_dir):
             "AID": person_aid, "personLegalName": "Jordan Q. Fixture",
             "engagementContextRole": "Compliance Analyst",
         },
-        registry=registry.said, edge=edge,
+        registry=registry.said, rule=_rules("ecr_auth"), edge=edge,
     )
     return {
         "serder": serder,
@@ -188,7 +202,7 @@ def build_vlei_ecr(corpus_dir):
             "LEI": "984500ARCV1Z0000FIX01", "dt": _ISSUED["ecr"],
             "personLegalName": "Jordan Q. Fixture", "engagementContextRole": "Compliance Analyst",
         },
-        registry=registry.said, edge=edge,
+        registry=registry.said, rule=_rules("ecr"), edge=edge,
         top_uuid=det.nonce("vlei:ecr:top_u"),  # leaf-ONLY top-level u, per sec.4
     )
     return {

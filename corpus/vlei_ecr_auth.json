@@ -1,7 +1,7 @@
 {
-  "v": "ACDCCAACAAJSONAAMk.",
+  "v": "ACDCCAACAAJSONAAir.",
   "t": "acm",
-  "d": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+  "d": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
   "i": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
   "rd": "EIz-db8yaHMfgXfP76cfWqRMgrIhq9ILRqEDIFN2PjZZ",
   "s": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
@@ -16,11 +16,23 @@
     "engagementContextRole": "Compliance Analyst"
   },
   "e": {
-    "d": "ELoagrKTFLwahFUQ6Le8PvdUZGz8FZboKNuWjyJygWzo",
+    "d": "EKTn6N4wS12Yx6Mgice4tzriv038DH22-QaQix6qhxNJ",
     "le": {
-      "d": "EBcpDqsETVT3QvRzK8tuTx4qo_Gtqke4kjDEuPp8qEcp",
-      "n": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+      "d": "EFTAXnLJ8mF6j-ZXNGl9xOY_QEY8cV4_wYWv0I6f67pa",
+      "n": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
       "s": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga"
+    }
+  },
+  "r": {
+    "d": "EKHMDCNFlMBaMdDOq5Pf_vGMxkTqrDMrTx_28cZZJCcW",
+    "usageDisclaimer": {
+      "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+    },
+    "issuanceDisclaimer": {
+      "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+    },
+    "privacyDisclaimer": {
+      "l": "Privacy Considerations are applicable to QVI ECR AUTH vLEI Credentials.  It is the sole responsibility of QVIs as Issuees of QVI ECR AUTH vLEI Credentials to present these Credentials in a privacy-preserving manner using the mechanisms provided in the Issuance and Presentation Exchange (IPEX) protocol specification and the Authentic Chained Data Container (ACDC) specification.  https://github.com/WebOfTrust/IETF-IPEX and https://github.com/trustoverip/tswg-acdc-specification."
     }
   }
 }

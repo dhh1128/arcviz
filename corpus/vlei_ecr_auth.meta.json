@@ -15,6 +15,6 @@
     "sad": "vlei_ecr_auth.json",
     "cesr": "vlei_ecr_auth.cesr"
   },
-  "generated_at": "2026-09-24T19:00:36.657241+00:00",
+  "generated_at": "2026-09-25T03:48:20.867813+00:00",
   "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
 }
