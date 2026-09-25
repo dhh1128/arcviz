@@ -285,3 +285,6 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 /* turn-60: more/less as a chevron */
 .more.chevron { display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; line-height: 0; }
 .more.chevron path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* turn-74: the stance placeholder sits at the right of the kind glyphs */
+.glyph-row .reputation { align-self: center; margin-left: 6px; white-space: nowrap; }

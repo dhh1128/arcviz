@@ -397,7 +397,6 @@ function Card({
         {!pictures && !desc.distinguishing_as_text && <div className="annotation">⚠ cannot be told apart without its picture</div>}
         {marks && (
           <div className="review-marks">
-            <span className="reputation" title={PLACEHOLDERS.reputation.body}>host's stance: not supplied</span>
             {n.image.state === "committed-not-resolved" && <Ph id="thumbs" />}
           </div>
         )}
@@ -411,6 +410,9 @@ function Card({
               </span>
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
+            {/* Reviewer placeholder for the host's stance on this credential (turn 74: beside the
+                kind glyphs, and short). */}
+            {marks && <span className="reputation" title={`The host's stance on crediting this credential as evidence. ${PLACEHOLDERS.reputation.body}`}>no stance</span>}
           </span>
           {/* A chevron, not "more"/"less", so there is nothing to translate on the face; the
               screen-reader name still is. */}
