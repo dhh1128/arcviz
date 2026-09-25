@@ -163,16 +163,19 @@ const PopHost = createContext<(open: boolean) => void>(() => {});
 
 // Cross-reference, copied from bakobo/cesrview (CesrView.tsx useCrossRef, decision c7vn4k): the
 // pill's "Find other occurrences…" action selects an AID, and every pill showing the same AID
-// is highlighted by entviz's own `highlight` ring. Choosing it again clears it. AIDs only
-// (Daniel, turn 47): a SAID appears once per render and is never located.
+// is highlighted by entviz's own `highlight` ring. Choosing it again clears it. First AIDs only
+// (turn 47); SAIDs too since turn 84, once edges in the field tree began repeating them.
 const CrossRef = createContext<{ selected: string | null; locate: (v: string) => void }>({ selected: null, locate: () => {} });
 
 function SaidHandle({ said }: { said: string }) {
   const icons = useContext(PillIcons);
   const pop = useContext(PopHost);
+  // Locating is for SAIDs too (Daniel, turn 84): an edge in the field tree names its target by
+  // SAID, and that SAID is the handle on the target's card.
+  const xref = useContext(CrossRef);
   return (
     <span className="said-pill">
-      <EntvizPill onOpenChange={pop} textOverflow="clip" value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
+      <EntvizPill onOpenChange={pop} onLocate={() => xref.locate(said)} highlight={xref.selected === said} textOverflow="clip" value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
     </span>
   );
 }
