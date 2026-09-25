@@ -288,3 +288,9 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 
 /* turn-74: the stance placeholder sits at the right of the kind glyphs */
 .glyph-row .reputation { align-self: center; margin-left: 6px; white-space: nowrap; }
+
+/* turn-80: reference numbers above each card's left edge; bold marks the selected card */
+.card-num { font-size: var(--t-small); font-family: var(--mono); fill: var(--muted); font-weight: 400; paint-order: stroke; stroke: var(--page); stroke-width: 3px; }
+.card-num.selected { fill: var(--ink); font-weight: 700; }
+@media (prefers-color-scheme: dark) { .card-num { fill: #9aa0a8; } .card-num.selected { fill: #e4e6ea; } }
+.card.popping { z-index: 10; }

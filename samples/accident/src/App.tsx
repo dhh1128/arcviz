@@ -156,6 +156,11 @@ const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 // draws it under corpus posture: on every SAID, and on an AID only when the host's lookup knows it.
 const PillIcons = createContext(false);
 
+// A pill's popover lives inside its card (entviz portals it to the nearest flow ancestor), so it
+// can rise no higher than the card. While one is open the card is lifted above everything,
+// including the edge labels and reference numbers that otherwise stay on top.
+const PopHost = createContext<(open: boolean) => void>(() => {});
+
 // Cross-reference, copied from bakobo/cesrview (CesrView.tsx useCrossRef, decision c7vn4k): the
 // pill's "Find other occurrences…" action selects an AID, and every pill showing the same AID
 // is highlighted by entviz's own `highlight` ring. Choosing it again clears it. AIDs only
@@ -164,9 +169,10 @@ const CrossRef = createContext<{ selected: string | null; locate: (v: string) =>
 
 function SaidHandle({ said }: { said: string }) {
   const icons = useContext(PillIcons);
+  const pop = useContext(PopHost);
   return (
     <span className="said-pill">
-      <EntvizPill textOverflow="clip" value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
+      <EntvizPill onOpenChange={pop} textOverflow="clip" value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
     </span>
   );
 }
@@ -176,6 +182,7 @@ function PartyPill({ party }: { party?: Party }) {
   const icons = useContext(PillIcons);
   const trust = party.aliasState === "none" ? undefined : HOST_CORPUS;
   const xref = useContext(CrossRef);
+  const pop = useContext(PopHost);
   return (
     <span className="party">
       <EntvizPill
@@ -188,6 +195,7 @@ function PartyPill({ party }: { party?: Party }) {
         trust={trust && icons ? { ...trust, icon: true } : trust}
         onCompare={() => {}}
         onLocate={() => xref.locate(party.identifier)}
+        onOpenChange={pop}
         highlight={xref.selected === party.identifier}
         maxWidth="100%"
       />
@@ -335,6 +343,8 @@ function Card({
   register: (said: string, el: HTMLElement | null) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [popping, setPopping] = useState(0);
+  const onPop = useMemo(() => (o: boolean) => setPopping((k) => Math.max(0, k + (o ? 1 : -1))), []);
   const marks = useContext(Marks);
   const glyphs = glyphsFor(n);
   const meanings = useContext(Meanings);
@@ -365,10 +375,11 @@ function Card({
   return (
     <article
       ref={(el) => register(n.said, el)}
-      className={"card" + (unknown ? " card-unknown" : "") + (isPresented ? " presented" : "") + (open ? " open" : "") + (raised ? " raised" : "")}
+      className={"card" + (unknown ? " card-unknown" : "") + (isPresented ? " presented" : "") + (open ? " open" : "") + (raised ? " raised" : "") + (popping ? " popping" : "")}
       onPointerDown={onRaise}
       aria-expanded={open}
     >
+      <PopHost.Provider value={onPop}>
       <Band cats={cats} />
       <div className="card-body">
         {/* Daniel, turn 10: the top of a credential is its SAID and the (i); kind goes to the bottom. */}
@@ -423,6 +434,7 @@ function Card({
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}
       </div>
+      </PopHost.Provider>
     </article>
   );
 }
@@ -470,7 +482,11 @@ function Leaf({ v }: { v: any }) {
   return <span className="issuer-text">{typeof v === "string" ? v : JSON.stringify(v)}</span>;
 }
 
-function TreeNode({ label, value, open = false, mono = true }: { label: string; value: any; open?: boolean; mono?: boolean }) {
+// Inside Attribs, an array of three items or fewer starts open (Daniel, turn 81): short lists
+// such as `classes` or `lids` are cheaper to read than to click.
+const SHORT_ARRAY = 3;
+
+function TreeNode({ label, value, open = false, mono = true, openShort = false }: { label: string; value: any; open?: boolean; mono?: boolean; openShort?: boolean }) {
   const isBranch = value !== null && typeof value === "object";
   if (!isBranch) {
     return (
@@ -482,10 +498,10 @@ function TreeNode({ label, value, open = false, mono = true }: { label: string; 
   const entries: [string, any][] = Array.isArray(value) ? value.map((x, i) => [`[${i}]`, x]) : Object.entries(value);
   return (
     <li className="tree-branch">
-      <details open={open}>
+      <details open={open || (openShort && Array.isArray(value) && value.length <= SHORT_ARRAY)}>
         <summary>{label} <span className="muted tree-count">{entries.length}</span></summary>
         <ul className="tree">
-          {entries.length ? entries.map(([k, v]) => <TreeNode key={k} label={k} value={v} />)
+          {entries.length ? entries.map(([k, v]) => <TreeNode key={k} label={k} value={v} openShort={openShort} />)
             : <li className="tree-leaf muted">none</li>}
         </ul>
       </details>
@@ -505,7 +521,7 @@ function FieldTree({ n }: { n: CNode }) {
   return (
     <section>
       <ul className="tree tree-root">
-        <TreeNode label="Attribs" value={fields} open mono={false} />
+        <TreeNode label="Attribs" value={fields} open mono={false} openShort />
         {Object.keys(undisclosed).length > 0 && <TreeNode label="Undisclosed" value={undisclosed} mono={false} />}
         {/* A section the credential does not have is said to be absent, not shown as an empty,
             openable node that could pass for a hidden one. */}
@@ -575,6 +591,11 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const bands = useRef<(HTMLDivElement | null)[]>([]);
   const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[]>([]);
   const [raised, setRaised] = useState<string | null>(null);
+  // Reference numbers (Daniel, turn 80): auto-assigned in reading order, rank by rank and left to
+  // right within a rank, so someone can say "look at credential 6". Not credential content, and
+  // not a replacement for the SAID -- an affordance, drawn outside the card like the edge labels.
+  const order = useMemo(() => rows.flat(), [rows]);
+  const [nums, setNums] = useState<{ said: string; n: number; x: number; y: number }[]>([]);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
   const incoming = (said: string) =>
@@ -669,10 +690,16 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5 });
       }
     }
+    // Each number sits at its card's left edge, on the same baseline as an edge label.
+    const numbered = order.flatMap((sd, i) => {
+      const c = els.current.get(sd)?.getBoundingClientRect();
+      return c ? [{ said: sd, n: i + 1, x: c.left - r0.left + 1, y: c.top - r0.top - 5 }] : [];
+    });
     // Only set state when the geometry actually moved, or measuring re-renders forever.
-    const sig = out.map((p) => p.d).join("|") + `|${r0.width}x${r0.height}`;
+    const sig = out.map((p) => p.d).join("|") + numbered.map((q) => `${q.x},${q.y}`).join(";") + `|${r0.width}x${r0.height}`;
     if (sig === lastSig.current) return;
     lastSig.current = sig;
+    setNums(numbered);
     setPaths(out);
     setSize({ w: r0.width, h: r0.height });
   };
@@ -702,6 +729,9 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
         {paths.map((p) => <rect key={p.key + ":b"} x={p.bx} y={p.by} width={7} height={7} className="edge-box" />)}
         {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className="edge-label">{p.label}</text>)}
+        {nums.map((q) => (
+          <text key={q.said + ":n"} x={q.x} y={q.y} className={"card-num" + (raised === q.said ? " selected" : "")}>{q.n}</text>
+        ))}
       </svg>
       {rows.map((row, i) => (
         <div className="rank" key={i} ref={(el) => { bands.current[i] = el; }}>
