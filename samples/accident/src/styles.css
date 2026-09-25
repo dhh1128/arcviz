@@ -235,3 +235,10 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .tree-key { margin-right: 6px; }
 .tree-absent { font-weight: 600; padding-left: 14px; }
 .tree-absent .muted { font-weight: 400; margin-left: 4px; }
+
+/* turn-52: keys and values in one font; 1.5x the gap between them; top-level nodes aligned */
+.tree-key { margin-right: 15px; color: var(--muted); }
+.tree-leaf .issuer-text { color: var(--ink); }
+.tree-root > li { padding-left: 0; }
+.tree-absent { padding-left: 0; }
+.tree-root > .tree-absent::before { content: ""; display: inline-block; width: 1em; }

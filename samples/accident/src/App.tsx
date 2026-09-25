@@ -352,7 +352,7 @@ function Card({
           </span>
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
-        {open && <Details n={n} frame={frame} desc={desc} />}
+        {open && <Details n={n} frame={frame} desc={desc} partiesOnFace={kept.some((c) => c.kind === "parties")} />}
       </div>
     </article>
   );
@@ -379,7 +379,7 @@ function TreeNode({ label, value, open = false, mono = true }: { label: string; 
   if (!isBranch) {
     return (
       <li className="tree-leaf">
-        <span className="tree-key">{mono ? <code>{label}</code> : label}</span> <Leaf v={value} />
+        <span className="tree-key">{label}</span><Leaf v={value} />
       </li>
     );
   }
@@ -387,7 +387,7 @@ function TreeNode({ label, value, open = false, mono = true }: { label: string; 
   return (
     <li className="tree-branch">
       <details open={open}>
-        <summary>{mono ? <code>{label}</code> : label} <span className="muted tree-count">{entries.length}</span></summary>
+        <summary>{label} <span className="muted tree-count">{entries.length}</span></summary>
         <ul className="tree">
           {entries.length ? entries.map(([k, v]) => <TreeNode key={k} label={k} value={v} />)
             : <li className="tree-leaf muted">none</li>}
@@ -403,35 +403,39 @@ function FieldTree({ n }: { n: CNode }) {
     o && typeof o === "object" ? Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k))) : o;
   const undisclosed: Record<string, any> = {};
   for (const k of ["a", "A", "e", "r"] as const)
-    if (typeof sec[k] === "string") undisclosed[{ a: "fields", A: "fields", e: "edges", r: "rules" }[k] + " (compact)"] = sec[k];
+    if (typeof sec[k] === "string") undisclosed[{ a: "attribs", A: "attribs", e: "edges", r: "rules" }[k] + " (compact)"] = sec[k];
   if (n.image.state === "committed-not-resolved") undisclosed["picture (committed, not supplied)"] = n.image.digest;
   const fields = typeof sec.a === "object" ? strip(sec.a, ["d", "u", "i"]) : typeof sec.A === "object" ? sec.A : {};
   return (
     <section>
       <ul className="tree tree-root">
-        <TreeNode label="Fields" value={fields} open mono={false} />
+        <TreeNode label="Attribs" value={fields} open mono={false} />
         {Object.keys(undisclosed).length > 0 && <TreeNode label="Undisclosed" value={undisclosed} mono={false} />}
         {/* A section the credential does not have is said to be absent, not shown as an empty,
             openable node that could pass for a hidden one. */}
         {typeof sec.e === "object" ? <TreeNode label="Edges" value={strip(sec.e, ["d"])} mono={false} />
-          : !("e" in sec) && <li className="tree-leaf tree-absent">Edges <span className="muted">none in this credential</span></li>}
+          : !("e" in sec) && <li className="tree-leaf tree-absent">Edges <span className="muted">none</span></li>}
         {typeof sec.r === "object" ? <TreeNode label="Rules" value={strip(sec.r, ["d"])} mono={false} />
-          : !("r" in sec) && <li className="tree-leaf tree-absent">Rules <span className="muted">none in this credential</span></li>}
+          : !("r" in sec) && <li className="tree-leaf tree-absent">Rules <span className="muted">none</span></li>}
       </ul>
     </section>
   );
 }
 
-function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor }) {
+function Details({ n, frame, desc, partiesOnFace }: { n: CNode; frame: Frame; desc: Descriptor; partiesOnFace: boolean }) {
   const marks = useContext(Marks);
   const c = n.classified;
   return (
     <div className="details">
-      <section>
-        <h4>Parties</h4>
-        <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
-        {n.issuee ? <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p> : <p className="muted">No issuee.</p>}
-      </section>
+      {/* Issuer and issuee belong on the card face (Daniel, turn 52), so they are not repeated
+          here. They appear here only when the face does not show them: the line budget dropped
+          them, or the schema entails them and the host cannot name either party. */}
+      {!partiesOnFace && (
+        <section>
+          <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
+          {n.issuee && <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p>}
+        </section>
+      )}
       <FieldTree n={n} />
       {/* Reviewer-only: how the label and the kind were computed, and what the fixture intended. */}
       {marks && (
