@@ -405,7 +405,12 @@ function Card({
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
           </span>
-          <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
+          {/* A chevron, not "more"/"less", so there is nothing to translate on the face; the
+              screen-reader name still is. */}
+          <button className="more chevron" aria-expanded={open} aria-label={open ? "Show less" : "Show more"}
+            onClick={() => setOpen(!open)}>
+            <svg viewBox="0 0 12 8" width="12" height="8" aria-hidden><path d={open ? "M1,7 L6,2 L11,7" : "M1,1 L6,6 L11,1"} /></svg>
+          </button>
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}
       </div>
@@ -423,9 +428,36 @@ function Card({
 
 const CESR_DIGEST = /^[A-Za-z0-9_-]{44}$/;
 
+// ISO 8601 timestamps, whatever the field is called (Daniel, turn 60). Show only the precision
+// the value has: T becomes a space, then a zero fraction, zero seconds, and a 00:00 time are
+// dropped in turn. The offset is dropped only with the time. A time shown without its offset
+// would be read as the viewer's local time, so a UTC time keeps a "Z" (ISO's own mark, not a
+// word to translate) and any other offset stays as written. The full value is the hover text.
+const ISO_8601 = /^(\d{4}-\d{2}-\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d+))?)?(Z|[+-]\d{2}:\d{2})?)?$/;
+
+export function prettyDate(v: string): string | null {
+  const m = ISO_8601.exec(v);
+  if (!m) return null;
+  const [, date, hh, mm, ss, frac, zone] = m;
+  if (hh === undefined) return date;
+  // No offset at all is not UTC: it is an unstated zone, and it is shown as unstated.
+  const utc = zone === "Z" || zone === "+00:00" || zone === "-00:00";
+  const fracZero = !frac || /^0+$/.test(frac);
+  const secZero = fracZero && (!ss || ss === "00");
+  if (secZero && hh === "00" && mm === "00" && (utc || !zone)) return date;
+  let t = `${hh}:${mm}`;
+  if (!secZero) t += `:${ss}`;
+  if (!fracZero) t += `.${frac.replace(/0+$/, "")}`;
+  return `${date} ${t}${utc ? "Z" : zone ?? ""}`;
+}
+
 function Leaf({ v }: { v: any }) {
   if (typeof v === "string" && CESR_DIGEST.test(v)) return <SaidHandle said={v} />;
   if (v === null) return <span className="muted">null</span>;
+  if (typeof v === "string") {
+    const d = prettyDate(v);
+    if (d !== null && d !== v) return <span className="issuer-text date" title={v}>{d}</span>;
+  }
   return <span className="issuer-text">{typeof v === "string" ? v : JSON.stringify(v)}</span>;
 }
 
