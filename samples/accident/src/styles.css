@@ -220,3 +220,7 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
    entviz's --entviz-pill-highlight), but violet, because amber already means "subject unknown" here. */
 :root { --hl: #7c3aed; }
 .party { --entviz-pill-highlight: 0 0 0 2.5px var(--hl), 0 0 8px 1px color-mix(in srgb, var(--hl) 55%, transparent); }
+
+/* turn-50: without reviewer marks there is no legend column */
+.layout.no-legend { grid-template-columns: minmax(0, 1fr); }
+.details .reviewer { border-top: 1px dashed var(--ph); margin-top: 8px; }

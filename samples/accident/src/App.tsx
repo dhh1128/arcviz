@@ -296,13 +296,14 @@ function Card({
   const isPresented = frame.presented === n.said;
 
   const notes: string[] = [];
-  notes.push(`Kind: ${cats.join(", ")}${n.classified.categories.length ? "" : " (nothing matched, so the residual)"}.`);
-  if (unknown) notes.push("The classifier could not tell what this credential is about, so it cannot say whether it is evidence about the party presenting it. That is not the same as ordinary.");
-  for (const e of incoming) notes.push(`Referenced as “${e.label}” by the ${e.from.type.name ?? "unresolved type"}. The label is the referring issuer's choice.`);
-  if (desc.annotations.some((x) => x.kind === "subject_undetermined")) notes.push("This label tells it apart from its siblings but does not say what it is about.");
+  notes.push(`Kind: ${cats.join(", ")}.`);
+  if (unknown) notes.push("It is not known what this credential is about, so it cannot be assumed to be about the party presenting it.");
+  for (const e of incoming) notes.push(`Referenced as “${e.label}” by the ${e.from.type.name ?? "unresolved type"}.`);
+  // Reviewer-only notes (Daniel, turn 50: everything visible by default is what a user sees).
+  if (marks && desc.annotations.some((x) => x.kind === "subject_undetermined")) notes.push("This label tells it apart from its siblings but does not say what it is about.");
   if (desc.annotations.some((x) => x.kind === "image_committed_not_resolved")) notes.push("The credential commits to a picture that this presentation did not supply.");
-  if (dropped.length) notes.push(`${dropped.length} weaker ${dropped.length === 1 ? "datum" : "data"} not shown: ${dropped.map((c) => c.kind).join(", ")}. Raise the line budget or open “more”.`);
-  notes.push("No host judgement about this credential was supplied.");
+  if (marks && dropped.length) notes.push(`${dropped.length} weaker ${dropped.length === 1 ? "datum" : "data"} not shown: ${dropped.map((c) => c.kind).join(", ")}. Raise the line budget or open “more”.`);
+  if (marks) notes.push("No host judgement about this credential was supplied.");
 
   return (
     <article
@@ -358,9 +359,31 @@ function Card({
 }
 
 function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor }) {
+  const marks = useContext(Marks);
   const c = n.classified;
   return (
     <div className="details">
+      <section>
+        <h4>Parties</h4>
+        <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
+        {n.issuee ? <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p> : <p className="muted">No issuee.</p>}
+      </section>
+      <section>
+        <h4>Fields</h4>
+        <table className="attrs">
+          <tbody>
+            {Object.entries(n.attrs).filter(([k]) => !["d", "u", "i"].includes(k)).map(([k, v]) => (
+              <tr key={k}><td><code>{k}</code></td><td className="issuer-text">{
+                // A digest-sized CESR value (a committed picture, say) gets a pill, as a SAID does.
+                typeof v === "string" && /^[A-Za-z0-9_-]{44}$/.test(v) ? <SaidHandle said={v} />
+                  : typeof v === "string" ? v : JSON.stringify(v)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+      {/* Reviewer-only: how the label and the kind were computed, and what the fixture intended. */}
+      {marks && (
+        <div className="reviewer">
       <section>
         <h4>Why this label</h4>
         <p className="hint">Each datum earns its place by surprisal: how much it tells you that the type and the rest of the page did not. The line budget drops the weakest first.</p>
@@ -388,25 +411,12 @@ function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor 
           </p>
         )}
       </section>
-      <section>
-        <h4>Parties</h4>
-        <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
-        {n.issuee ? <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p> : <p className="muted">No issuee.</p>}
-      </section>
-      <section>
-        <h4>Disclosed attributes <span className="hint">(the issuer's words)</span></h4>
-        <table className="attrs">
-          <tbody>
-            {Object.entries(n.attrs).filter(([k]) => !["d", "u"].includes(k)).map(([k, v]) => (
-              <tr key={k}><td><code>{k}</code></td><td className="issuer-text">{typeof v === "string" ? v : JSON.stringify(v)}</td></tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
       <section className="instrument">
         <h4>Instrument, not arcviz: what the fixture intended</h4>
         <p>{n.fixture_summary}</p>
       </section>
+        </div>
+      )}
     </div>
   );
 }
@@ -653,7 +663,7 @@ export default function App() {
           <b>Not evaluated.</b> This sample checks no signatures, key event logs or revocation status, so nothing on this page means “fine”.
         </div>
 
-        <main className="layout">
+        <main className={"layout" + (marks ? "" : " no-legend")}>
           <section className="frame">
             <Kinds frame={frame} />
             {marks && frame.supplied_by_hand.length > 0 && (
@@ -662,7 +672,7 @@ export default function App() {
             )}
             <Graph frame={frame} desc={desc} lines={lines === 4 ? 99 : lines} pictures={pictures} />
           </section>
-          <Legend />
+          {marks && <Legend />}
         </main>
       </div>
     </Meanings.Provider></CrossRef.Provider></PillIcons.Provider></Lexicon.Provider></Marks.Provider>
