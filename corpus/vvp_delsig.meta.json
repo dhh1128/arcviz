@@ -1,0 +1,18 @@
+{
+  "title": "VVP dossier: Delegated Voice Call Signer role",
+  "summary": "The allocator delegates call signing. Its issuer edge points at the alloc role, which is how the allocator proves it may delegate.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_delsig",
+  "depends_on": [
+    "vvp_alloc"
+  ],
+  "files": {
+    "sad": "vvp_delsig.json",
+    "cesr": "vvp_delsig.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.144484+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

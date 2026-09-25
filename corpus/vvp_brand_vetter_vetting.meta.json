@@ -1,0 +1,15 @@
+{
+  "title": "VVP dossier: org vetting of the brand vetter",
+  "summary": "Proves who issued the brand credential, because the Brand Owner schema requires an issuer edge (I2I) to such a proof. Shares schema and issuer with vvp_vetting and differs in issuee.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_brand_vetter_vetting",
+  "files": {
+    "sad": "vvp_brand_vetter_vetting.json",
+    "cesr": "vvp_brand_vetter_vetting.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.108219+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

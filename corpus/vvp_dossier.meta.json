@@ -1,0 +1,22 @@
+{
+  "title": "VVP dossier (synthetic, shaped like the live one, plus a brand)",
+  "summary": "Seven credentials. The root is untargeted, carries only dt, and is made of its edges: vetting, alloc, tnalloc, delsig as in the live dossier, plus bownr to a Brand Owner credential.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_dossier",
+  "depends_on": [
+    "vvp_vetting",
+    "vvp_alloc",
+    "vvp_tnalloc",
+    "vvp_delsig",
+    "vvp_brand"
+  ],
+  "files": {
+    "sad": "vvp_dossier.json",
+    "cesr": "vvp_dossier.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.171252+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

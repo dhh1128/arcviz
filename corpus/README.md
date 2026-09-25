@@ -43,6 +43,13 @@ Each `<name>.json` is the disclosed field map (what a renderer would receive); `
 | `vlei_ecr_auth` | vLEI-equivalent chain: ECR-AUTH credential (depth 3 of 4) | H1 | RULE 9 | vlei_le |
 | `vlei_le` | vLEI-equivalent chain: LE credential (depth 2 of 4) | H1 | RULE 9 | vlei_qvi |
 | `vlei_qvi` | vLEI-equivalent chain: QVI credential (root, depth 1 of 4) | H1 | — | — |
+| `vvp_alloc` | VVP dossier: TN Allocator role | H1 | — | — |
+| `vvp_brand` | VVP dossier: brand owner | H1 | — | vvp_brand_vetter_vetting |
+| `vvp_brand_vetter_vetting` | VVP dossier: org vetting of the brand vetter | H1 | — | — |
+| `vvp_delsig` | VVP dossier: Delegated Voice Call Signer role | H1 | — | vvp_alloc |
+| `vvp_dossier` | VVP dossier (synthetic, shaped like the live one, plus a brand) | H1 | — | vvp_vetting, vvp_alloc, vvp_tnalloc, vvp_delsig, vvp_brand |
+| `vvp_tnalloc` | VVP dossier: TN allocation | H1 | — | — |
+| `vvp_vetting` | VVP dossier: org vetting of the legal entity | H1 | — | — |
 | `working_edge_group` | Working edge-group (AND, two real co-endorsers) | H1 | — | working_edge_group_endorser_a, working_edge_group_endorser_b |
 | `working_edge_group_endorser_a` | Working edge-group: endorser A's independent inspection credential | H1 | — | — |
 | `working_edge_group_endorser_b` | Working edge-group: endorser B's independent inspection credential | H1 | — | — |

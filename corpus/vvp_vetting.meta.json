@@ -1,0 +1,15 @@
+{
+  "title": "VVP dossier: org vetting of the legal entity",
+  "summary": "The accountable party's identity, vetted at loa 1 with an LEI as its linked identifier. Stands in for the live dossier's Provenant-internal 'Bronze' vetting with bakobo's public Org Vet. Its rules section is compact, so the rules are committed and not disclosed.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_vetting",
+  "files": {
+    "sad": "vvp_vetting.json",
+    "cesr": "vvp_vetting.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.096674+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

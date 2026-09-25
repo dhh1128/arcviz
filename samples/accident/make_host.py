@@ -26,6 +26,12 @@ ANSWERS = {
     "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": ("GLEIF", "root of trust", "vLEI"),
     "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": ("Fixture QVI", "qualified issuer", "vLEI"),
     "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": ("Fixture Corp", "legal entity", "vLEI"),
+    # The VVP dossier (fx_vvp.py). The signer is left unnamed so the wild fallback shows there too.
+    "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": ("Fixture Vetting Co", "org vetter", ""),
+    "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": ("Fixture Freight", "legal entity", "VVP"),
+    "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": ("Fixture Freight", "TN allocator", "VVP"),
+    "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": ("Fixture Brand Registry", "brand vetter", ""),
+    "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": ("Fixture Telecom", "carrier", ""),
 }
 
 

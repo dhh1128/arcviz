@@ -1,4 +1,17 @@
 {
+  "brand_logo": {
+    "bytes": 1748,
+    "depicts": "brand logo for the synthetic VVP dossier's brand owner",
+    "generated_at": null,
+    "generator": "drawn by or for Daniel Hardman; supplied as ~/xfer/arbitrary-brand-logo-2.svg",
+    "generator_confidence": "reported-by-supplier",
+    "imported_at": "2026-09-25T03:45:12+00:00",
+    "media_type": "image/svg+xml",
+    "note": "Synthetic. Represents no real brand. The one fill colour was changed from maroon (#741b47) to blue (#1f4e9c) at Daniel's request; nothing else was altered.",
+    "provenance_statement": "Daniel states he has the rights to publish it, including the colour change (2026-09-25).",
+    "sha256": "f7cfe8f88c5482f7fd34df725f6e32886cabc06fd76b7bf69aec3e9dcd49e38c",
+    "source": "supplied by Daniel Hardman, 2026-09-25, as ~/xfer/arbitrary-brand-logo-2.svg"
+  },
   "licence_a_portrait": {
     "bytes": 221507,
     "depicts": "identity portrait, driver A",

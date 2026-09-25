@@ -1,0 +1,26 @@
+{
+  "v": "ACDCCAACAAJSONAANX.",
+  "t": "acm",
+  "d": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+  "i": "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+  "rd": "EBNUywRj0bt5ApKgBofcwDCodggcxdX6pn2YKsaTjI5O",
+  "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+  "a": {
+    "d": "EIp5LtD3BRabmrHWXu1AgXApmoszX2apfry0D8FVvNZ2",
+    "u": "0ADxErZ3_H4VvY1jKl8FN2rt",
+    "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+    "dt": "2026-03-11T14:25:31.040498+00:00",
+    "numbers": {
+      "rangeStart": "+447700900123",
+      "rangeEnd": "+447700900123"
+    },
+    "channel": "voice",
+    "doNotOriginate": false,
+    "startDate": "2026-03-01T00:00:00+00:00",
+    "endDate": "2027-03-01T00:00:00+00:00"
+  },
+  "r": {
+    "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+    "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+  }
+}

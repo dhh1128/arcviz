@@ -1,0 +1,18 @@
+{
+  "title": "VVP dossier: brand owner",
+  "summary": "The legal entity's right to present a brand, with its logo committed by digest in a vCard LOGO line. The URI is example.com and serves nothing; the bytes are in corpus/attachments/brand_logo.svg.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_brand",
+  "depends_on": [
+    "vvp_brand_vetter_vetting"
+  ],
+  "files": {
+    "sad": "vvp_brand.json",
+    "cesr": "vvp_brand.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.156306+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

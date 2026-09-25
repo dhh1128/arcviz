@@ -1,0 +1,15 @@
+{
+  "title": "VVP dossier: TN allocation",
+  "summary": "A carrier allocates one number (a range whose start and end are equal) to the allocator. The number is in Ofcom's drama range.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_tnalloc",
+  "files": {
+    "sad": "vvp_tnalloc.json",
+    "cesr": "vvp_tnalloc.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.131620+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

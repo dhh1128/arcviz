@@ -1,0 +1,15 @@
+{
+  "title": "VVP dossier: TN Allocator role",
+  "summary": "The legal entity delegates number allocation to a committee (a GCD role). Shares its schema with vvp_delsig, and the two are separated only by the issuer-supplied role string.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_alloc",
+  "files": {
+    "sad": "vvp_alloc.json",
+    "cesr": "vvp_alloc.cesr"
+  },
+  "generated_at": "2026-09-25T03:48:21.119876+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

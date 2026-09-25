@@ -1521,11 +1521,11 @@
   {
    "id": "vlei",
    "title": "vLEI chain",
-   "presented": "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z",
+   "presented": "EJMuoKXbewmEjHAmNpkDIkUjk-7PDJgQCccCKq9KiKSj",
    "nodes": [
     {
      "name": "vlei_qvi",
-     "said": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+     "said": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
      "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
      "issuer": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
      "issuee": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
@@ -1544,12 +1544,21 @@
        "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
        "LEI": "984500ARCV1Z0000FIX01",
        "dt": "2026-01-12T09:00:00.000000+00:00"
+      },
+      "r": {
+       "d": "EGZ97EjPSINR-O-KHDN_uw4fdrTxeuRXrqT5ZHHQJujQ",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       }
       }
      },
      "sad": {
-      "v": "ACDCCAACAAJSONAAHD.",
+      "v": "ACDCCAACAAJSONAAVN.",
       "t": "acm",
-      "d": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+      "d": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
       "i": "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40",
       "rd": "EEZAG3AUc0NbevvbRPcW5EkX6gpxMW1sHxgfiyShmf26",
       "s": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
@@ -1559,6 +1568,15 @@
        "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
        "LEI": "984500ARCV1Z0000FIX01",
        "dt": "2026-01-12T09:00:00.000000+00:00"
+      },
+      "r": {
+       "d": "EGZ97EjPSINR-O-KHDN_uw4fdrTxeuRXrqT5ZHHQJujQ",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       }
       }
      },
      "classified": {
@@ -1606,7 +1624,7 @@
     },
     {
      "name": "vlei_le",
-     "said": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+     "said": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
      "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
      "issuer": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
      "issuee": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
@@ -1620,7 +1638,7 @@
      "edges": [
       {
        "label": "qvi",
-       "target": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+       "target": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
        "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
        "operator": null
       }
@@ -1634,18 +1652,27 @@
        "dt": "2026-01-15T11:30:00.000000+00:00"
       },
       "e": {
-       "d": "EOfM3CESW3NvLBiKK2t1RmJzzaQWiSQGZceEdh12tRhS",
+       "d": "ECtUK9ml_6qa9MYFS9B47A2VO9Vz8pplkqigW7y0AhbQ",
        "qvi": {
-        "d": "EJ5OOLY_lReUhhMygTgeWLkAgLz9KZob670tGkHgYreG",
-        "n": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+        "d": "EFJAxu0htHtbX5UMOh2oIkENp5GTHt58xWJWxNpA634j",
+        "n": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
         "s": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3"
+       }
+      },
+      "r": {
+       "d": "EGZ97EjPSINR-O-KHDN_uw4fdrTxeuRXrqT5ZHHQJujQ",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
        }
       }
      },
      "sad": {
-      "v": "ACDCCAACAAJSONAAKd.",
+      "v": "ACDCCAACAAJSONAAYn.",
       "t": "acm",
-      "d": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+      "d": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
       "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
       "rd": "EDCOPdr8xJtPW7YqEu3nN4xs9ILxpF83yhQ-wDffZAiT",
       "s": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
@@ -1657,11 +1684,20 @@
        "dt": "2026-01-15T11:30:00.000000+00:00"
       },
       "e": {
-       "d": "EOfM3CESW3NvLBiKK2t1RmJzzaQWiSQGZceEdh12tRhS",
+       "d": "ECtUK9ml_6qa9MYFS9B47A2VO9Vz8pplkqigW7y0AhbQ",
        "qvi": {
-        "d": "EJ5OOLY_lReUhhMygTgeWLkAgLz9KZob670tGkHgYreG",
-        "n": "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141",
+        "d": "EFJAxu0htHtbX5UMOh2oIkENp5GTHt58xWJWxNpA634j",
+        "n": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
         "s": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3"
+       }
+      },
+      "r": {
+       "d": "EGZ97EjPSINR-O-KHDN_uw4fdrTxeuRXrqT5ZHHQJujQ",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
        }
       }
      },
@@ -1706,7 +1742,7 @@
     },
     {
      "name": "vlei_ecr_auth",
-     "said": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+     "said": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
      "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
      "issuer": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
      "issuee": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
@@ -1723,7 +1759,7 @@
      "edges": [
       {
        "label": "le",
-       "target": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+       "target": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
        "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
        "operator": null
       }
@@ -1740,18 +1776,30 @@
        "engagementContextRole": "Compliance Analyst"
       },
       "e": {
-       "d": "ELoagrKTFLwahFUQ6Le8PvdUZGz8FZboKNuWjyJygWzo",
+       "d": "EKTn6N4wS12Yx6Mgice4tzriv038DH22-QaQix6qhxNJ",
        "le": {
-        "d": "EBcpDqsETVT3QvRzK8tuTx4qo_Gtqke4kjDEuPp8qEcp",
-        "n": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+        "d": "EFTAXnLJ8mF6j-ZXNGl9xOY_QEY8cV4_wYWv0I6f67pa",
+        "n": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
         "s": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga"
+       }
+      },
+      "r": {
+       "d": "EKHMDCNFlMBaMdDOq5Pf_vGMxkTqrDMrTx_28cZZJCcW",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       },
+       "privacyDisclaimer": {
+        "l": "Privacy Considerations are applicable to QVI ECR AUTH vLEI Credentials.  It is the sole responsibility of QVIs as Issuees of QVI ECR AUTH vLEI Credentials to present these Credentials in a privacy-preserving manner using the mechanisms provided in the Issuance and Presentation Exchange (IPEX) protocol specification and the Authentic Chained Data Container (ACDC) specification.  https://github.com/WebOfTrust/IETF-IPEX and https://github.com/trustoverip/tswg-acdc-specification."
        }
       }
      },
      "sad": {
-      "v": "ACDCCAACAAJSONAAMk.",
+      "v": "ACDCCAACAAJSONAAir.",
       "t": "acm",
-      "d": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+      "d": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
       "i": "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ",
       "rd": "EIz-db8yaHMfgXfP76cfWqRMgrIhq9ILRqEDIFN2PjZZ",
       "s": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
@@ -1766,11 +1814,23 @@
        "engagementContextRole": "Compliance Analyst"
       },
       "e": {
-       "d": "ELoagrKTFLwahFUQ6Le8PvdUZGz8FZboKNuWjyJygWzo",
+       "d": "EKTn6N4wS12Yx6Mgice4tzriv038DH22-QaQix6qhxNJ",
        "le": {
-        "d": "EBcpDqsETVT3QvRzK8tuTx4qo_Gtqke4kjDEuPp8qEcp",
-        "n": "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc",
+        "d": "EFTAXnLJ8mF6j-ZXNGl9xOY_QEY8cV4_wYWv0I6f67pa",
+        "n": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
         "s": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga"
+       }
+      },
+      "r": {
+       "d": "EKHMDCNFlMBaMdDOq5Pf_vGMxkTqrDMrTx_28cZZJCcW",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       },
+       "privacyDisclaimer": {
+        "l": "Privacy Considerations are applicable to QVI ECR AUTH vLEI Credentials.  It is the sole responsibility of QVIs as Issuees of QVI ECR AUTH vLEI Credentials to present these Credentials in a privacy-preserving manner using the mechanisms provided in the Issuance and Presentation Exchange (IPEX) protocol specification and the Authentic Chained Data Container (ACDC) specification.  https://github.com/WebOfTrust/IETF-IPEX and https://github.com/trustoverip/tswg-acdc-specification."
        }
       }
      },
@@ -1815,7 +1875,7 @@
     },
     {
      "name": "vlei_ecr",
-     "said": "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z",
+     "said": "EJMuoKXbewmEjHAmNpkDIkUjk-7PDJgQCccCKq9KiKSj",
      "schema": "EDyt0FijsXX7G8q_ZEaf33Dx0QI47CQoFu7ergn96W9k",
      "issuer": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
      "issuee": "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD",
@@ -1831,7 +1891,7 @@
      "edges": [
       {
        "label": "auth",
-       "target": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+       "target": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
        "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
        "operator": "I2I"
       }
@@ -1847,19 +1907,31 @@
        "engagementContextRole": "Compliance Analyst"
       },
       "e": {
-       "d": "ENIllVhT-Xia9lofkVTMylgcz0a9y8Sf5eCOsYBeNXSF",
+       "d": "EP5DbXqiiZSs5S_Fhfh1NkiO2Ixu2nnWdcwmZ8MX4kKz",
        "auth": {
-        "d": "EKcc9-7X2amC94hCS7a-OmC15bbXP1tpyLPokyn9EqPN",
-        "n": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+        "d": "EMiNTzcyzVGcQPxIgepXX3WgtsVc-Ul34LvApZVhSxZX",
+        "n": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
         "s": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
         "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EIfq_m1DI2IQ1MgHhUl9sq3IQ_PJP9WQ1LhbMscngDCB",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       },
+       "privacyDisclaimer": {
+        "l": "It is the sole responsibility of Holders as Issuees of an ECR vLEI Credential to present that Credential in a privacy-preserving manner using the mechanisms provided in the Issuance and Presentation Exchange (IPEX) protocol specification and the Authentic Chained Data Container (ACDC) specification. https://github.com/WebOfTrust/IETF-IPEX and https://github.com/trustoverip/tswg-acdc-specification."
        }
       }
      },
      "sad": {
-      "v": "ACDCCAACAAJSONAAMa.",
+      "v": "ACDCCAACAAJSONAAhR.",
       "t": "acm",
-      "d": "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z",
+      "d": "EJMuoKXbewmEjHAmNpkDIkUjk-7PDJgQCccCKq9KiKSj",
       "u": "0AB3xFKgvbLUzt5qZiNOzZ0C",
       "i": "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
       "rd": "EFiZI0ixQlk4sxMbZdeWy4UpRmiOP_fS1ZCTZFRgudxW",
@@ -1874,12 +1946,24 @@
        "engagementContextRole": "Compliance Analyst"
       },
       "e": {
-       "d": "ENIllVhT-Xia9lofkVTMylgcz0a9y8Sf5eCOsYBeNXSF",
+       "d": "EP5DbXqiiZSs5S_Fhfh1NkiO2Ixu2nnWdcwmZ8MX4kKz",
        "auth": {
-        "d": "EKcc9-7X2amC94hCS7a-OmC15bbXP1tpyLPokyn9EqPN",
-        "n": "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu",
+        "d": "EMiNTzcyzVGcQPxIgepXX3WgtsVc-Ul34LvApZVhSxZX",
+        "n": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
         "s": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
         "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EIfq_m1DI2IQ1MgHhUl9sq3IQ_PJP9WQ1LhbMscngDCB",
+       "usageDisclaimer": {
+        "l": "Usage of a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, does not assert that the Legal Entity is trustworthy, honest, reputable in its business dealings, safe to do business with, or compliant with any laws or that an implied or expressly intended purpose will be fulfilled."
+       },
+       "issuanceDisclaimer": {
+        "l": "All information in a valid, unexpired, and non-revoked vLEI Credential, as defined in the associated Ecosystem Governance Framework, is accurate as of the date the validation process was complete. The vLEI Credential has been issued to the legal entity or person named in the vLEI Credential as the subject; and the qualified vLEI Issuer exercised reasonable care to perform the validation process set forth in the vLEI Ecosystem Governance Framework."
+       },
+       "privacyDisclaimer": {
+        "l": "It is the sole responsibility of Holders as Issuees of an ECR vLEI Credential to present that Credential in a privacy-preserving manner using the mechanisms provided in the Issuance and Presentation Exchange (IPEX) protocol specification and the Authentic Chained Data Container (ACDC) specification. https://github.com/WebOfTrust/IETF-IPEX and https://github.com/trustoverip/tswg-acdc-specification."
        }
       }
      },
@@ -1928,7 +2012,7 @@
    ],
    "descriptors": {
     "no-aliases": {
-     "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141": {
+     "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754": {
       "components": [
        {
         "kind": "type",
@@ -1948,7 +2032,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc": {
+     "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_": {
       "components": [
        {
         "kind": "type",
@@ -1968,7 +2052,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu": {
+     "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR": {
       "components": [
        {
         "kind": "type",
@@ -1988,7 +2072,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z": {
+     "EJMuoKXbewmEjHAmNpkDIkUjk-7PDJgQCccCKq9KiKSj": {
       "components": [
        {
         "kind": "type",
@@ -2010,7 +2094,7 @@
      }
     },
     "host-aliases": {
-     "EJ5goC56O3wDVAHllBQRzNaQYxE3fUELMeUef9kc4141": {
+     "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754": {
       "components": [
        {
         "kind": "type",
@@ -2042,7 +2126,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EIOdUUKS-Br3X2W44qamg35KsIUxpBgNd5uSC3IJ-tfc": {
+     "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_": {
       "components": [
        {
         "kind": "type",
@@ -2074,7 +2158,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EEBDXHKnGfX3bIThND6EBohMPzWiWrQ3hJBLsY7076iu": {
+     "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR": {
       "components": [
        {
         "kind": "type",
@@ -2106,7 +2190,7 @@
       "distinguishing_as_text": true,
       "indistinguishable_from": []
      },
-     "EClWcveST996tmAlHkmEUf-DL99vksF8DWjZ_BrgD27z": {
+     "EJMuoKXbewmEjHAmNpkDIkUjk-7PDJgQCccCKq9KiKSj": {
       "components": [
        {
         "kind": "type",
@@ -2193,6 +2277,1214 @@
    "supplied_by_hand": [
     "schema entailments borrowed from the real vLEI schemas; the corpus chain uses stand-in schema SAIDs"
    ]
+  },
+  {
+   "id": "vvp",
+   "title": "VVP dossier",
+   "presented": "ENsu1oNqt9ofvX4eAVpZFIhkE_vksSo8oCvbFzFYVglW",
+   "nodes": [
+    {
+     "name": "vvp_dossier",
+     "said": "ENsu1oNqt9ofvX4eAVpZFIhkE_vksSo8oCvbFzFYVglW",
+     "schema": "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P",
+     "issuer": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+     "issuee": null,
+     "attrs": {
+      "d": "EIYJ1o85ihdCXUmc2_DiEP9k7e671VpYI2pk_yJfWn6E",
+      "u": "0AApPJy5QLUUl5zgCui5h6WB",
+      "dt": "2026-03-11T14:26:28.521000+00:00"
+     },
+     "edges": [
+      {
+       "label": "vetting",
+       "target": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
+       "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+       "operator": "NI2I"
+      },
+      {
+       "label": "alloc",
+       "target": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+       "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+       "operator": "I2I"
+      },
+      {
+       "label": "tnalloc",
+       "target": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+       "schema": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+       "operator": "I2I"
+      },
+      {
+       "label": "delsig",
+       "target": "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F",
+       "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+       "operator": "NI2I"
+      },
+      {
+       "label": "bownr",
+       "target": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+       "schema": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+       "operator": "NI2I"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EIYJ1o85ihdCXUmc2_DiEP9k7e671VpYI2pk_yJfWn6E",
+       "u": "0AApPJy5QLUUl5zgCui5h6WB",
+       "dt": "2026-03-11T14:26:28.521000+00:00"
+      },
+      "e": {
+       "d": "EIcHSYGs7sfowH8NTpaHYdX_m0BYTSKwxhDYZvhXBvRb",
+       "vetting": {
+        "d": "EG6n_ueQt0LmZtM4YnHQYZyWf8krM1LYv-5P1C-Jpr9M",
+        "n": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
+        "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+        "o": "NI2I"
+       },
+       "alloc": {
+        "d": "EKAJ9Cqt5tBuv_g5BkeSaOF2Z0xTHfWtjFzEcTFjYA-q",
+        "n": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "I2I"
+       },
+       "tnalloc": {
+        "d": "ED3BYmNUO976sqCzP4-p1HPvUkX_JladaDxsvJMJJYGF",
+        "n": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+        "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+        "o": "I2I"
+       },
+       "delsig": {
+        "d": "ENibxql2Sf8il5DO0BB0oHII3OjyTNFeHC7OONfpwC6P",
+        "n": "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "NI2I"
+       },
+       "bownr": {
+        "d": "ECvnuLdzJcM8N7mmDdGK8298EqKcnmVS35alcT22BSNp",
+        "n": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+        "s": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+        "o": "NI2I"
+       }
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAUU.",
+      "t": "acm",
+      "d": "ENsu1oNqt9ofvX4eAVpZFIhkE_vksSo8oCvbFzFYVglW",
+      "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+      "rd": "EPswMObPnhEIrvqg32smCtBZxmDe6J-cVtGPpO5gVq9i",
+      "s": "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P",
+      "a": {
+       "d": "EIYJ1o85ihdCXUmc2_DiEP9k7e671VpYI2pk_yJfWn6E",
+       "u": "0AApPJy5QLUUl5zgCui5h6WB",
+       "dt": "2026-03-11T14:26:28.521000+00:00"
+      },
+      "e": {
+       "d": "EIcHSYGs7sfowH8NTpaHYdX_m0BYTSKwxhDYZvhXBvRb",
+       "vetting": {
+        "d": "EG6n_ueQt0LmZtM4YnHQYZyWf8krM1LYv-5P1C-Jpr9M",
+        "n": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
+        "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+        "o": "NI2I"
+       },
+       "alloc": {
+        "d": "EKAJ9Cqt5tBuv_g5BkeSaOF2Z0xTHfWtjFzEcTFjYA-q",
+        "n": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "I2I"
+       },
+       "tnalloc": {
+        "d": "ED3BYmNUO976sqCzP4-p1HPvUkX_JladaDxsvJMJJYGF",
+        "n": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+        "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+        "o": "I2I"
+       },
+       "delsig": {
+        "d": "ENibxql2Sf8il5DO0BB0oHII3OjyTNFeHC7OONfpwC6P",
+        "n": "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "NI2I"
+       },
+       "bownr": {
+        "d": "ECvnuLdzJcM8N7mmDdGK8298EqKcnmVS35alcT22BSNp",
+        "n": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+        "s": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+        "o": "NI2I"
+       }
+      }
+     },
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "evidence",
+      "subject_why": "references other evidence and claims nothing itself",
+      "alignment": "not-a-party",
+      "alignment_why": "subject is evidence",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Seven credentials. The root is untargeted, carries only dt, and is made of its edges: vetting, alloc, tnalloc, delsig as in the live dossier, plus bownr to a Brand Owner credential.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Verifiable Voice Dossier Credential",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_vetting",
+     "said": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
+     "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+     "issuer": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+     "issuee": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+     "attrs": {
+      "d": "EKJkAoDBsVyUV7tFtbQBK0p222vals-5glZtq1p7ZBQm",
+      "u": "0AA38QrsHrUySpdUhblkXuDs",
+      "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+      "dt": "2025-12-19T15:58:42.686258+00:00",
+      "loa": 1,
+      "lids": [
+       "984500ARCV1Z0000FIX10"
+      ]
+     },
+     "edges": [],
+     "sections": {
+      "a": {
+       "d": "EKJkAoDBsVyUV7tFtbQBK0p222vals-5glZtq1p7ZBQm",
+       "u": "0AA38QrsHrUySpdUhblkXuDs",
+       "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+       "dt": "2025-12-19T15:58:42.686258+00:00",
+       "loa": 1,
+       "lids": [
+        "984500ARCV1Z0000FIX10"
+       ]
+      },
+      "r": "EPFGDcKNXJFuW41EVIac87paJs4FwkMzIMFxHyEBmh_w"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAIB.",
+      "t": "acm",
+      "d": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
+      "i": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+      "rd": "EAInyefzumCUErYfi6tOd_RyOGUp_CKUqs13940fyJQO",
+      "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+      "a": {
+       "d": "EKJkAoDBsVyUV7tFtbQBK0p222vals-5glZtq1p7ZBQm",
+       "u": "0AA38QrsHrUySpdUhblkXuDs",
+       "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+       "dt": "2025-12-19T15:58:42.686258+00:00",
+       "loa": 1,
+       "lids": [
+        "984500ARCV1Z0000FIX10"
+       ]
+      },
+      "r": "EPFGDcKNXJFuW41EVIac87paJs4FwkMzIMFxHyEBmh_w"
+     },
+     "classified": {
+      "categories": [
+       "org-identity",
+       "qualification"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "lids"
+       ],
+       "qualification": [
+        "loa"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['lids']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The accountable party's identity, vetted at loa 1 with an LEI as its linked identifier. Stands in for the live dossier's Provenant-internal 'Bronze' vetting with bakobo's public Org Vet. Its rules section is compact, so the rules are committed and not disclosed.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Org Vet",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_alloc",
+     "said": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+     "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+     "issuer": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+     "issuee": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+     "attrs": {
+      "d": "EJwG3eS5u0yrJ-e-3VSbroX5E6F1eXRe0mh2g1RDRKhV",
+      "u": "0AD3mAwlWRoSfWnliE4IfSOG",
+      "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+      "dt": "2025-12-19T15:59:46.988000+00:00",
+      "role": "TN Allocator",
+      "c_goal": [
+       "ops.it.telco.tnalloc"
+      ],
+      "c_pgeo": [
+       "US-CA",
+       "GB-ENG",
+       "FR"
+      ],
+      "c_rgeo": [
+       "US-CA",
+       "GB-ENG",
+       "FR"
+      ],
+      "c_proto": [
+       "ipex:issuer,issuee"
+      ],
+      "c_human": "",
+      "c_after": "2025-12-17T10:39:29.769000+00:00",
+      "c_before": "2026-12-17T10:39:29.769000+00:00"
+     },
+     "edges": [],
+     "sections": {
+      "a": {
+       "d": "EJwG3eS5u0yrJ-e-3VSbroX5E6F1eXRe0mh2g1RDRKhV",
+       "u": "0AD3mAwlWRoSfWnliE4IfSOG",
+       "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+       "dt": "2025-12-19T15:59:46.988000+00:00",
+       "role": "TN Allocator",
+       "c_goal": [
+        "ops.it.telco.tnalloc"
+       ],
+       "c_pgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_rgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_proto": [
+        "ipex:issuer,issuee"
+       ],
+       "c_human": "",
+       "c_after": "2025-12-17T10:39:29.769000+00:00",
+       "c_before": "2026-12-17T10:39:29.769000+00:00"
+      },
+      "r": {
+       "d": "EFthNcTE20MLMaCOoXlSmNtdooGEbZF8uGmO5G85eMSF",
+       "noRoleSemanticsWithoutGfw": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means.",
+       "issuerNotResponsibleOutsideConstraints": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise.",
+       "noConstraintSansPrefix": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix.",
+       "useStdIfPossible": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension.",
+       "onlyDelegateHeldAuthority": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAil.",
+      "t": "acm",
+      "d": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+      "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+      "rd": "EI8BzPtfHMP0N6FMNE80zGHdLVy1UjyIuIER2HVfJ3jc",
+      "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+      "a": {
+       "d": "EJwG3eS5u0yrJ-e-3VSbroX5E6F1eXRe0mh2g1RDRKhV",
+       "u": "0AD3mAwlWRoSfWnliE4IfSOG",
+       "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+       "dt": "2025-12-19T15:59:46.988000+00:00",
+       "role": "TN Allocator",
+       "c_goal": [
+        "ops.it.telco.tnalloc"
+       ],
+       "c_pgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_rgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_proto": [
+        "ipex:issuer,issuee"
+       ],
+       "c_human": "",
+       "c_after": "2025-12-17T10:39:29.769000+00:00",
+       "c_before": "2026-12-17T10:39:29.769000+00:00"
+      },
+      "r": {
+       "d": "EFthNcTE20MLMaCOoXlSmNtdooGEbZF8uGmO5G85eMSF",
+       "noRoleSemanticsWithoutGfw": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means.",
+       "issuerNotResponsibleOutsideConstraints": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise.",
+       "noConstraintSansPrefix": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix.",
+       "useStdIfPossible": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension.",
+       "onlyDelegateHeldAuthority": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+      }
+     },
+     "classified": {
+      "categories": [
+       "authority",
+       "affiliation"
+      ],
+      "category_hits": {
+       "affiliation": [
+        "role"
+       ],
+       "authority": [
+        "c_goal",
+        "c_proto",
+        "title: delegation",
+        "title: delegationcredential"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The legal entity delegates number allocation to a committee (a GCD role). Shares its schema with vvp_delsig, and the two are separated only by the issuer-supplied role string.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Generalized Cooperative Delegation Credential",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_tnalloc",
+     "said": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+     "schema": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+     "issuer": "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+     "issuee": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+     "attrs": {
+      "d": "EIp5LtD3BRabmrHWXu1AgXApmoszX2apfry0D8FVvNZ2",
+      "u": "0ADxErZ3_H4VvY1jKl8FN2rt",
+      "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+      "dt": "2026-03-11T14:25:31.040498+00:00",
+      "numbers": {
+       "rangeStart": "+447700900123",
+       "rangeEnd": "+447700900123"
+      },
+      "channel": "voice",
+      "doNotOriginate": false,
+      "startDate": "2026-03-01T00:00:00+00:00",
+      "endDate": "2027-03-01T00:00:00+00:00"
+     },
+     "edges": [],
+     "sections": {
+      "a": {
+       "d": "EIp5LtD3BRabmrHWXu1AgXApmoszX2apfry0D8FVvNZ2",
+       "u": "0ADxErZ3_H4VvY1jKl8FN2rt",
+       "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+       "dt": "2026-03-11T14:25:31.040498+00:00",
+       "numbers": {
+        "rangeStart": "+447700900123",
+        "rangeEnd": "+447700900123"
+       },
+       "channel": "voice",
+       "doNotOriginate": false,
+       "startDate": "2026-03-01T00:00:00+00:00",
+       "endDate": "2027-03-01T00:00:00+00:00"
+      },
+      "r": {
+       "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+       "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAANX.",
+      "t": "acm",
+      "d": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
+      "i": "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+      "rd": "EBNUywRj0bt5ApKgBofcwDCodggcxdX6pn2YKsaTjI5O",
+      "s": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+      "a": {
+       "d": "EIp5LtD3BRabmrHWXu1AgXApmoszX2apfry0D8FVvNZ2",
+       "u": "0ADxErZ3_H4VvY1jKl8FN2rt",
+       "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+       "dt": "2026-03-11T14:25:31.040498+00:00",
+       "numbers": {
+        "rangeStart": "+447700900123",
+        "rangeEnd": "+447700900123"
+       },
+       "channel": "voice",
+       "doNotOriginate": false,
+       "startDate": "2026-03-01T00:00:00+00:00",
+       "endDate": "2027-03-01T00:00:00+00:00"
+      },
+      "r": {
+       "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+       "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+      }
+     },
+     "classified": {
+      "categories": [
+       "authority"
+      ],
+      "category_hits": {
+       "authority": [
+        "channel",
+        "doNotOriginate",
+        "numbers"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "A carrier allocates one number (a range whose start and end are equal) to the allocator. The number is in Ofcom's drama range.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "TN Allocation Credential",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_delsig",
+     "said": "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F",
+     "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+     "issuer": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+     "issuee": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+     "attrs": {
+      "d": "EDRuKXGrpDNYwCp8J8dbSrKLMAbByV1HD-0kTJwZgcsp",
+      "u": "0AAla_aMVyhJPRE9v9zWUhB1",
+      "i": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+      "dt": "2026-03-11T14:25:58.648000+00:00",
+      "role": "Delegated Voice Call Signer",
+      "c_goal": [
+       "ops.it.telco.send.sign"
+      ],
+      "c_pgeo": [
+       "US-CA",
+       "GB-ENG",
+       "FR"
+      ],
+      "c_rgeo": [
+       "US-CA",
+       "GB-ENG",
+       "FR"
+      ],
+      "c_proto": [
+       "vvp:op"
+      ],
+      "c_human": "",
+      "c_after": "2025-12-17T10:39:29.769000+00:00",
+      "c_before": "2026-12-17T10:39:29.769000+00:00"
+     },
+     "edges": [
+      {
+       "label": "issuer",
+       "target": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+       "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+       "operator": "I2I"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EDRuKXGrpDNYwCp8J8dbSrKLMAbByV1HD-0kTJwZgcsp",
+       "u": "0AAla_aMVyhJPRE9v9zWUhB1",
+       "i": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+       "dt": "2026-03-11T14:25:58.648000+00:00",
+       "role": "Delegated Voice Call Signer",
+       "c_goal": [
+        "ops.it.telco.send.sign"
+       ],
+       "c_pgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_rgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_proto": [
+        "vvp:op"
+       ],
+       "c_human": "",
+       "c_after": "2025-12-17T10:39:29.769000+00:00",
+       "c_before": "2026-12-17T10:39:29.769000+00:00"
+      },
+      "e": {
+       "d": "EP7fOCno2DIcW_d-vOisQmAcyCxDRG1H-fyV73RduJOJ",
+       "issuer": {
+        "d": "EKAJ9Cqt5tBuv_g5BkeSaOF2Z0xTHfWtjFzEcTFjYA-q",
+        "n": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EFthNcTE20MLMaCOoXlSmNtdooGEbZF8uGmO5G85eMSF",
+       "noRoleSemanticsWithoutGfw": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means.",
+       "issuerNotResponsibleOutsideConstraints": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise.",
+       "noConstraintSansPrefix": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix.",
+       "useStdIfPossible": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension.",
+       "onlyDelegateHeldAuthority": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAmR.",
+      "t": "acm",
+      "d": "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F",
+      "i": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+      "rd": "EBNypngGbbJ_cH7yOkTlrMtLFXLCvW6rX39ntTNGV4s0",
+      "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+      "a": {
+       "d": "EDRuKXGrpDNYwCp8J8dbSrKLMAbByV1HD-0kTJwZgcsp",
+       "u": "0AAla_aMVyhJPRE9v9zWUhB1",
+       "i": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+       "dt": "2026-03-11T14:25:58.648000+00:00",
+       "role": "Delegated Voice Call Signer",
+       "c_goal": [
+        "ops.it.telco.send.sign"
+       ],
+       "c_pgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_rgeo": [
+        "US-CA",
+        "GB-ENG",
+        "FR"
+       ],
+       "c_proto": [
+        "vvp:op"
+       ],
+       "c_human": "",
+       "c_after": "2025-12-17T10:39:29.769000+00:00",
+       "c_before": "2026-12-17T10:39:29.769000+00:00"
+      },
+      "e": {
+       "d": "EP7fOCno2DIcW_d-vOisQmAcyCxDRG1H-fyV73RduJOJ",
+       "issuer": {
+        "d": "EKAJ9Cqt5tBuv_g5BkeSaOF2Z0xTHfWtjFzEcTFjYA-q",
+        "n": "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI",
+        "s": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EFthNcTE20MLMaCOoXlSmNtdooGEbZF8uGmO5G85eMSF",
+       "noRoleSemanticsWithoutGfw": "All parties agree that the role field has no enforceable semantics unless the gfw field is also defined, and its rules formally describe what the role means.",
+       "issuerNotResponsibleOutsideConstraints": "Although verifiers set their own standards for verification, verifiers and issuees/delegates agree that they cannot not use this credential as proof that delegator has the right to exercise delegated authority under conditions when the constraints say otherwise.",
+       "noConstraintSansPrefix": "Issuers agree that constraints exist only in fields with the c_ prefix, or in the role field with gfw defined. This allows verifiers to know with confidence whether all constraints have been satisfied, even if they do not understand some custom fields that lack the prefix.",
+       "useStdIfPossible": "Issuers agree that if it is reasonable to express a constraint in one of the pre-defined ways, they will do so, rather than expressing the constraint in a note or in a custom field. This allows verifiers to be confident that when one of the pre-defined constraints is absent, delegated authority is unconstrained in its corresponding dimension.",
+       "onlyDelegateHeldAuthority": "Issuers agree to only delegate authority that they reasonably believe they hold. Whether they do in fact hold that authority is still a matter for verifiers to evaluate (e.g., via edges or separate proving interactions), but this rule creates a modest accountability for data quality."
+      }
+     },
+     "classified": {
+      "categories": [
+       "authority",
+       "affiliation"
+      ],
+      "category_hits": {
+       "affiliation": [
+        "role"
+       ],
+       "authority": [
+        "c_goal",
+        "c_proto",
+        "title: delegation",
+        "title: delegationcredential"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The allocator delegates call signing. Its issuer edge points at the alloc role, which is how the allocator proves it may delegate.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Generalized Cooperative Delegation Credential",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_brand",
+     "said": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+     "schema": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+     "issuer": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+     "issuee": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+     "attrs": {
+      "d": "EKbSnXn1OQ_JuFzACEEbxDKB74r-8XgPXW0MsYzI3CpK",
+      "u": "0ACa-HBOw1yuaz5sHxfHoddT",
+      "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+      "dt": "2026-01-08T09:14:05.000000+00:00",
+      "vcard": [
+       "ORG:Fixture Freight Ltd",
+       "LOGO;HASH=EEn4igIR0ItREWe4PiOWM2uZKZSon1wKhccMvb-WdbWd;VALUE=URI:https://example.com/brand/logo.svg",
+       "URL:https://example.com",
+       "TEL;TYPE=support:+447700900123"
+      ],
+      "goals": [
+       "ops.it.telco.send"
+      ]
+     },
+     "edges": [
+      {
+       "label": "issuer",
+       "target": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+       "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+       "operator": "I2I"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EKbSnXn1OQ_JuFzACEEbxDKB74r-8XgPXW0MsYzI3CpK",
+       "u": "0ACa-HBOw1yuaz5sHxfHoddT",
+       "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+       "dt": "2026-01-08T09:14:05.000000+00:00",
+       "vcard": [
+        "ORG:Fixture Freight Ltd",
+        "LOGO;HASH=EEn4igIR0ItREWe4PiOWM2uZKZSon1wKhccMvb-WdbWd;VALUE=URI:https://example.com/brand/logo.svg",
+        "URL:https://example.com",
+        "TEL;TYPE=support:+447700900123"
+       ],
+       "goals": [
+        "ops.it.telco.send"
+       ]
+      },
+      "e": {
+       "d": "ENJmIy_cGR5VN3J9vNGjNPskeaIyE7EgTbyu7OBOVJY0",
+       "issuer": {
+        "d": "EDDNElYmjBJDuGW-TjW1crD960aFCFJ2qClri1eaFNB7",
+        "n": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+        "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+       "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAARm.",
+      "t": "acm",
+      "d": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+      "i": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+      "rd": "EIe6grOz4C2ealiYUyuGjvuFYBHj27rc0JxdVIF175u_",
+      "s": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+      "a": {
+       "d": "EKbSnXn1OQ_JuFzACEEbxDKB74r-8XgPXW0MsYzI3CpK",
+       "u": "0ACa-HBOw1yuaz5sHxfHoddT",
+       "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+       "dt": "2026-01-08T09:14:05.000000+00:00",
+       "vcard": [
+        "ORG:Fixture Freight Ltd",
+        "LOGO;HASH=EEn4igIR0ItREWe4PiOWM2uZKZSon1wKhccMvb-WdbWd;VALUE=URI:https://example.com/brand/logo.svg",
+        "URL:https://example.com",
+        "TEL;TYPE=support:+447700900123"
+       ],
+       "goals": [
+        "ops.it.telco.send"
+       ]
+      },
+      "e": {
+       "d": "ENJmIy_cGR5VN3J9vNGjNPskeaIyE7EgTbyu7OBOVJY0",
+       "issuer": {
+        "d": "EDDNElYmjBJDuGW-TjW1crD960aFCFJ2qClri1eaFNB7",
+        "n": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+        "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+       "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+      }
+     },
+     "classified": {
+      "categories": [
+       "authority"
+      ],
+      "category_hits": {
+       "authority": [
+        "goals",
+        "title: brand",
+        "title: brandowner",
+        "title: brandownercredential",
+        "vcard"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The legal entity's right to present a brand, with its logo committed by digest in a vCard LOGO line. The URI is example.com and serves nothing; the bytes are in corpus/attachments/brand_logo.svg.",
+     "image": {
+      "state": "resolved",
+      "src": "attachments/brand_logo.svg",
+      "digest": "EEn4igIR0ItREWe4PiOWM2uZKZSon1wKhccMvb-WdbWd",
+      "manifest": {
+       "bytes": 1748,
+       "depicts": "brand logo for the synthetic VVP dossier's brand owner",
+       "generated_at": null,
+       "generator": "drawn by or for Daniel Hardman; supplied as ~/xfer/arbitrary-brand-logo-2.svg",
+       "generator_confidence": "reported-by-supplier",
+       "imported_at": "2026-09-25T03:45:12+00:00",
+       "media_type": "image/svg+xml",
+       "note": "Synthetic. Represents no real brand. The one fill colour was changed from maroon (#741b47) to blue (#1f4e9c) at Daniel's request; nothing else was altered.",
+       "provenance_statement": "Daniel states he has the rights to publish it, including the colour change (2026-09-25).",
+       "sha256": "f7cfe8f88c5482f7fd34df725f6e32886cabc06fd76b7bf69aec3e9dcd49e38c",
+       "source": "supplied by Daniel Hardman, 2026-09-25, as ~/xfer/arbitrary-brand-logo-2.svg"
+      },
+      "media_type": "svg"
+     },
+     "type": {
+      "name": "Brand Owner Credential",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    },
+    {
+     "name": "vvp_brand_vetter_vetting",
+     "said": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+     "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+     "issuer": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+     "issuee": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+     "attrs": {
+      "d": "EKFTc3Ws-frKzuh14rTSM8Wa2KwqKzuhSWeYluyffNHL",
+      "u": "0AA801unRFFWipCRBi9QLMor",
+      "i": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+      "dt": "2025-11-03T10:02:11.000000+00:00",
+      "loa": 1,
+      "lids": [
+       "984500ARCV1Z0000FIX11"
+      ]
+     },
+     "edges": [],
+     "sections": {
+      "a": {
+       "d": "EKFTc3Ws-frKzuh14rTSM8Wa2KwqKzuhSWeYluyffNHL",
+       "u": "0AA801unRFFWipCRBi9QLMor",
+       "i": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+       "dt": "2025-11-03T10:02:11.000000+00:00",
+       "loa": 1,
+       "lids": [
+        "984500ARCV1Z0000FIX11"
+       ]
+      },
+      "r": "EPFGDcKNXJFuW41EVIac87paJs4FwkMzIMFxHyEBmh_w"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAIB.",
+      "t": "acm",
+      "d": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+      "i": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+      "rd": "EI6_sxQP9z9laFyruTbstsli_yMnKBgL-BYpW6gjgM97",
+      "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+      "a": {
+       "d": "EKFTc3Ws-frKzuh14rTSM8Wa2KwqKzuhSWeYluyffNHL",
+       "u": "0AA801unRFFWipCRBi9QLMor",
+       "i": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+       "dt": "2025-11-03T10:02:11.000000+00:00",
+       "loa": 1,
+       "lids": [
+        "984500ARCV1Z0000FIX11"
+       ]
+      },
+      "r": "EPFGDcKNXJFuW41EVIac87paJs4FwkMzIMFxHyEBmh_w"
+     },
+     "classified": {
+      "categories": [
+       "org-identity",
+       "qualification"
+      ],
+      "category_hits": {
+       "org-identity": [
+        "lids"
+       ],
+       "qualification": [
+        "loa"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['lids']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Proves who issued the brand credential, because the Brand Owner schema requires an issuer edge (I2I) to such a proof. Shares schema and issuer with vvp_vetting and differs in issuee.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Org Vet",
+      "source": "resolved from refs/schema-registry.json",
+      "schema_state": "verified"
+     }
+    }
+   ],
+   "descriptors": {
+    "host-aliases": {
+     "ENsu1oNqt9ofvX4eAVpZFIhkE_vksSo8oCvbFzFYVglW": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EH1jN4U4LMYHmPVI4FYdZ10bIPR7YWKp8TDdZ9Y9Al-P",
+         "name": "Verifiable Voice Dossier Credential"
+        },
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+         null
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+         "name": "Org Vet"
+        },
+        "gain": 1.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "vetting",
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+         "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EF88iL_xztkiO-nB1ufN874ApD2H9P-I0Kpz3N1PAlgI": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+         "name": "Generalized Cooperative Delegation Credential"
+        },
+        "gain": 1.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "alloc",
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+         "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
+         "name": "TN Allocation Credential"
+        },
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+         "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EKUscPFoTmskLov1At8hxZA0MgpdNHn5YMf2GgA0tO7F": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
+         "name": "Generalized Cooperative Delegation Credential"
+        },
+        "gain": 1.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+         "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+         "name": "Brand Owner Credential"
+        },
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "bownr",
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+         "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+         "name": "Org Vet"
+        },
+        "gain": 1.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "issuer",
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+         "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt"
+        ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [
+       {
+        "kind": "subject_undetermined"
+       }
+      ],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     }
+    }
+   },
+   "descriptor_variants": [
+    "host-aliases"
+   ],
+   "parties": {
+    "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": {
+     "identifier": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+     "label": "fixture-freight-legal-entity-vvp",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+      "label": "fixture-freight-legal-entity-vvp"
+     }
+    },
+    "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD": {
+     "identifier": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+     "label": null,
+     "aliasState": "none",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "ED1nfv9Cdz-ETdTYWALU3QwZZhYZ8ZwcnWKiezkdgBZD",
+      "label": null
+     }
+    },
+    "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": {
+     "identifier": "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+     "label": "fixture-telecom-carrier",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2",
+      "label": "fixture-telecom-carrier"
+     }
+    },
+    "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": {
+     "identifier": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+     "label": "fixture-brand-registry-brand-vetter",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+      "label": "fixture-brand-registry-brand-vetter"
+     }
+    },
+    "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": {
+     "identifier": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+     "label": "fixture-vetting-co-org-vetter",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR",
+      "label": "fixture-vetting-co-org-vetter"
+     }
+    },
+    "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": {
+     "identifier": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+     "label": "fixture-freight-tn-allocator-vvp",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
+      "label": "fixture-freight-tn-allocator-vvp"
+     }
+    }
+   },
+   "supplied_by_hand": []
   }
  ]
 }

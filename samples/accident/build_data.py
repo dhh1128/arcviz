@@ -69,6 +69,9 @@ def sniff(b: bytes) -> str | None:
         return "png"
     if b.startswith(b"\xff\xd8\xff"):
         return "jpg"
+    head = b[:200].lstrip()
+    if head.startswith(b"<svg") or (head.startswith(b"<?xml") and b"<svg" in b[:500]):
+        return "svg"
     return None
 
 
@@ -290,6 +293,59 @@ def vlei(host: dict) -> dict:
                                  "corpus chain uses stand-in schema SAIDs"]}
 
 
+# --------------------------------------------------------------------------------------------
+# Frame 3: a synthetic VVP dossier (tools/fixtures/src/arcviz_fixtures/fixtures/fx_vvp.py)
+
+
+VVP = ["vvp_dossier", "vvp_vetting", "vvp_alloc", "vvp_tnalloc", "vvp_delsig", "vvp_brand",
+       "vvp_brand_vetter_vetting"]
+
+
+def vvp(host: dict) -> dict:
+    """Every schema here is public and in refs/schema-registry.json, so type names, entailed
+    parties and pinned edges are RESOLVED, not supplied by hand as the other two frames' are."""
+    import re
+    sads = {n: sad(n) for n in VVP}
+    entailed, pinned, type_names = {}, {}, {}
+    for s in {x["s"] for x in sads.values()}:
+        info = schemas.resolve(s)
+        entailed[s], pinned[s], type_names[s] = info.entailed, info.pinned_edges, info.title
+
+    # The brand's logo is committed by digest in a vCard LOGO line, not in a field of its own.
+    manifest = json.loads((CORPUS / "attachments" / "MANIFEST.json").read_text())
+    images = {}
+    for n, x in sads.items():
+        for line in (x.get("a") or {}).get("vcard", []) if isinstance(x.get("a"), dict) else []:
+            m = re.match(r"LOGO;HASH=([A-Za-z0-9_-]{44});", line)
+            if not m:
+                continue
+            svg = CORPUS / "attachments" / "brand_logo.svg"
+            if svg.exists() and "brand_logo" in manifest:
+                images[n] = {"state": "resolved", "src": "attachments/brand_logo.svg",
+                             "digest": m.group(1), "manifest": manifest["brand_logo"],
+                             "media_type": sniff(svg.read_bytes())}
+            else:
+                images[n] = {"state": "committed-not-resolved", "digest": m.group(1)}
+
+    aids = {x for s in sads.values() for x in (s["i"], (s.get("a") or {}).get("i")) if x}
+    known_aliases = {a for a in aids if a in host["aliases"]}
+    dag = load_corpus_dag(CORPUS, VVP, type_names=type_names, entailed=entailed,
+                          pinned_edges=pinned, aliased=known_aliases)
+    nodes = []
+    for n in VVP:
+        x = sads[n]
+        nodes.append(node_json(n, x, classify_node(x, type_names[x["s"]]), {
+            "image": images.get(n, {"state": "none"}),
+            "type": {"name": type_names[x["s"]], "source": "resolved from refs/schema-registry.json",
+                     "schema_state": schemas.resolve(x["s"]).state}}))
+    return {"id": "vvp", "title": "VVP dossier",
+            "presented": sads["vvp_dossier"]["d"],
+            "nodes": nodes, "descriptors": {"host-aliases": describe_json(dag)},
+            "descriptor_variants": ["host-aliases"],
+            "parties": parties(host, aids),
+            "supplied_by_hand": []}
+
+
 def main() -> int:
     host = json.loads((HERE / "host.json").read_text())
     PUBLIC.mkdir(exist_ok=True)
@@ -297,14 +353,14 @@ def main() -> int:
     for svg in GLYPHS.glob("*.svg"):
         shutil.copy2(svg, PUBLIC / "glyphs" / svg.name)
     (PUBLIC / "attachments").mkdir(exist_ok=True)
-    for png in (CORPUS / "attachments").glob("*.png"):
-        shutil.copy2(png, PUBLIC / "attachments" / png.name)
+    for f in [*(CORPUS / "attachments").glob("*.png"), *(CORPUS / "attachments").glob("*.svg")]:
+        shutil.copy2(f, PUBLIC / "attachments" / f.name)
     lexicon = json.loads((ROOT / "refs" / "abbreviations.json").read_text())
     data = {"generated_by": "samples/accident/build_data.py",
             "abbreviations": lexicon["terms"],
             "category_meanings": category_meanings(),
             "host_note": host["_note"],
-            "frames": [accident(host), vlei(host)]}
+            "frames": [accident(host), vlei(host), vvp(host)]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {PUBLIC / 'data.json'}")
     return 0

@@ -1,0 +1,36 @@
+{
+  "v": "ACDCCAACAAJSONAARm.",
+  "t": "acm",
+  "d": "EGumj0YlLHANOy_q_8Sfq_XCGgrbdy-X2NijUf89K21Y",
+  "i": "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt",
+  "rd": "EIe6grOz4C2ealiYUyuGjvuFYBHj27rc0JxdVIF175u_",
+  "s": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
+  "a": {
+    "d": "EKbSnXn1OQ_JuFzACEEbxDKB74r-8XgPXW0MsYzI3CpK",
+    "u": "0ACa-HBOw1yuaz5sHxfHoddT",
+    "i": "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V",
+    "dt": "2026-01-08T09:14:05.000000+00:00",
+    "vcard": [
+      "ORG:Fixture Freight Ltd",
+      "LOGO;HASH=EEn4igIR0ItREWe4PiOWM2uZKZSon1wKhccMvb-WdbWd;VALUE=URI:https://example.com/brand/logo.svg",
+      "URL:https://example.com",
+      "TEL;TYPE=support:+447700900123"
+    ],
+    "goals": [
+      "ops.it.telco.send"
+    ]
+  },
+  "e": {
+    "d": "ENJmIy_cGR5VN3J9vNGjNPskeaIyE7EgTbyu7OBOVJY0",
+    "issuer": {
+      "d": "EDDNElYmjBJDuGW-TjW1crD960aFCFJ2qClri1eaFNB7",
+      "n": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
+      "s": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
+      "o": "I2I"
+    }
+  },
+  "r": {
+    "d": "EJFhpp0uU7D7PKooYM5QIO1hhPKTjHE18sR4Dn0GFscR",
+    "perBrand": "Issuees agree not to share the phone number with other brands which may have a common owner but which will make it difficult to consistently identify the originator of traffic."
+  }
+}
