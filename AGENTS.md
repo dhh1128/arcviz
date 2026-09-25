@@ -30,6 +30,10 @@ The project is in its research phase. Read [docs/research/PLAN.md](docs/research
 | `.ignored/private-refs/` | Captures that may not be republished — gitignored |
 | `corpus/` | ACDC fixtures: research instrument now, conformance corpus later |
 
+## Work queue
+
+Open work is tracked with `tick` (a local ledger on an orphan `tick` branch, not pushed anywhere yet). The agreed next items are tagged `next`: run `tick ls --tag next`, and `tick show <id>` for the context recorded on each. `tick ls` lists everything, including findings and recommendations carried over from the earlier `tagged` tracker. The runnable prototype is `samples/accident/` (see its README).
+
 ## Sibling projects
 
 `~/code/me/entviz` and `~/code/me/entviz-js` (identifier visualization; arcviz consumes `@entviz/react`), `~/code/me/coia` (alias convention), `~/code/me/papers` (the essays this design rests on: `oia.md`, `amp-diff.md`, `intent-boundaries.md`).
