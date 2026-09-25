@@ -470,57 +470,6 @@
       }
     },
     {
-      "name": "dates_band_into_pre_existing_and_assembled",
-      "defends": "F-NR1G. A bare timestamp discriminates but says little; what carried meaning in the live VVP dossier is that two credentials sat months before the rest while three sat within a minute of each other. So the channel is the CLUSTER, and the last cluster is the assembly. Two licences years old against two statements from this week must band apart.",
-      "dag": {
-        "nodes": [
-          {
-            "said": "OLD1",
-            "schema": "S1",
-            "issuer": "SAME",
-            "attrs": {
-              "dt": "2019-11-14T11:48:00+00:00"
-            }
-          },
-          {
-            "said": "OLD2",
-            "schema": "S2",
-            "issuer": "SAME",
-            "attrs": {
-              "dt": "2021-06-30T09:12:00+00:00"
-            }
-          },
-          {
-            "said": "NEW1",
-            "schema": "S3",
-            "issuer": "SAME",
-            "attrs": {
-              "dt": "2026-03-04T14:02:00+00:00"
-            }
-          },
-          {
-            "said": "NEW2",
-            "schema": "S4",
-            "issuer": "SAME",
-            "attrs": {
-              "dt": "2026-03-05T09:30:00+00:00"
-            }
-          }
-        ]
-      },
-      "expect": {
-        "NEW1": {
-          "band": "assembled-for-this-claim"
-        },
-        "NEW2": {
-          "band": "assembled-for-this-claim"
-        },
-        "OLD1": {
-          "band": "pre-existing-1"
-        }
-      }
-    },
-    {
       "name": "a_single_node_dag_needs_no_discriminator",
       "defends": "A presentation of one credential has no distractors, so nothing is added for the sake of telling it apart -- no date, no issuer used as a tiebreaker. What it DOES carry is its type and its party relation, because both say what the thing is rather than which one it is. An earlier version of this vector expected the type alone, written while the objective was minimality; under a role-first objective 'issued by X to Y' is not noise, it is half the content of a lone credential.",
       "dag": {

@@ -47,7 +47,6 @@ does not make. `render_plain` exists to make the tests readable, not to be the a
 
 from __future__ import annotations
 
-import datetime
 import json
 from dataclasses import dataclass, field
 
@@ -163,34 +162,6 @@ class Component:
     gain: float = 0.0
 
 
-# Channels whose value means something only by contrast with the other nodes' values. An
-# absolute channel is worth saying when it is constant; a relative one is not.
-_RELATIVE_CHANNELS = ("when",)
-
-
-def _is_deviation(dag: "Dag", get, target) -> bool:
-    """True when the target is NOT in the majority band for a relative channel.
-
-    ANNOUNCE THE DEVIATION, NOT THE DEFAULT -- which is not a new idea here but the rule
-    `credential-categories.md` already chose for its alignment axis: `ordinary` is the unmarked
-    default and every other value is something the viewer should notice. A date band is the
-    same shape. In the accident bundle, "these two licences predate the collision and
-    everything else was made for the claim" is worth saying about the two licences and is
-    noise on the other seven, and an earlier draft put it on all nine.
-    """
-    mine = get(target)
-    if mine is None:
-        return False
-    counts = {}
-    for n in dag.nodes:
-        v = get(n)
-        if v is not None:
-            counts[v] = counts.get(v, 0) + 1
-    if len(counts) < 2:
-        return False
-    return counts[mine] < max(counts.values())
-
-
 def _entailed_here(dag: "Dag", kind: str, target: "Node") -> bool:
     """True when this channel says nothing a viewer could not predict from the type.
 
@@ -288,45 +259,7 @@ def _role_stem(label: str) -> str:
     return label
 
 
-def _relative_date_band(dag: Dag, gap_days: int = 30) -> dict:
-    """Cluster issuance dates and name each node's cluster by position, not by value.
-
-    A bare timestamp discriminates but says little. What carried meaning in the live VVP
-    dossier is that two credentials sat months before the rest and three sat within 57 seconds
-    of each other -- pre-existing background against material assembled for this claim. So the
-    channel is the CLUSTER, ordered, and the last cluster is the assembly.
-    """
-    stamped = []
-    for n in dag.nodes:
-        raw = n.attrs.get("dt")
-        if not isinstance(raw, str):
-            continue
-        try:
-            stamped.append((datetime.datetime.fromisoformat(raw), n.said))
-        except ValueError:
-            continue
-    if len(stamped) < 2:
-        return {}
-    stamped.sort()
-    bands, current = [], [stamped[0]]
-    for prev, cur in zip(stamped, stamped[1:]):
-        if (cur[0] - prev[0]).days >= gap_days:
-            bands.append(current)
-            current = []
-        current.append(cur)
-    bands.append(current)
-    if len(bands) < 2:
-        return {}
-    out = {}
-    for i, band in enumerate(bands):
-        name = "assembled-for-this-claim" if i == len(bands) - 1 else f"pre-existing-{i + 1}"
-        for _, said in band:
-            out[said] = name
-    return out
-
-
 def _channels(dag: Dag):
-    bands = _relative_date_band(dag)
 
     def role(n):
         """The referring edge's label, with any instance index stripped.
@@ -418,7 +351,6 @@ def _channels(dag: Dag):
         ("collected",  collected,                  True,  True),
         ("issuee",     lambda n: n.issuee,         False, False),
         ("issuer",     lambda n: n.issuer,         False, False),
-        ("when",       lambda n: bands.get(n.said), True, False),
         ("filename",   lambda n: n.attrs.get("filename"),   False, True),
         ("size",       lambda n: n.attrs.get("byteCount"),  False, True),
     ]
@@ -549,15 +481,10 @@ def _select(dag: Dag, target: Node, skip: tuple = ()) -> tuple:
         # channels whose sole job is telling two nodes apart are gated on still needing to.
         if not distractors and not role_bearing:
             continue
-        # A ROLE-BEARING CHANNEL IS NOT AUTOMATICALLY WORTH SAYING. Two kinds hide under that
-        # flag. `type` and `parties` are ABSOLUTE -- what this is, who made it -- and mean
-        # something even when every node shares them. `when` is RELATIVE: the band
-        # "assembled-for-this-claim" is defined by contrast with the other bands, so when
-        # every node sits in one band the label says nothing at all and costs a phrase on
-        # every card. Found by overshooting: the first role-first draft put a date band on all
-        # nine nodes of the accident bundle, seven of which shared it.
-        if kind in _RELATIVE_CHANNELS and not _is_deviation(dag, get, target):
-            continue
+        # The issuance-date band ("when") that used to be tested here is gone. Daniel,
+        # 2026-09-25: "Of course driver's licenses predate a crash scene. The only thing that
+        # would be remarkable is if they didn't." It reported the expected case, which the
+        # credential types already predict, so it carried no surprisal.
         if _entailed_here(dag, kind, target):
             continue
         if kind == "role" and _role_constant_within_type(dag, get, target):
@@ -649,8 +576,6 @@ def render_plain(d: Description, names: dict | None = None) -> str:
             parts.append(f"with no {c.kind}")
         elif c.kind == "image":
             parts.append("shown by its picture")
-        elif c.kind == "when":
-            parts.append(c.value)
         elif c.kind == "locus":
             parts.append(f"at {c.value}")
         elif c.kind == "collected":

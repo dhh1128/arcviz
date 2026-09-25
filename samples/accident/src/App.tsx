@@ -193,10 +193,6 @@ function PartyPill({ party }: { party?: Party }) {
   );
 }
 
-const WHEN_TEXT = (band: string) =>
-  band === "assembled-for-this-claim" ? "made for this claim" :
-  band.startsWith("pre-existing-") ? `predates the claim (issuance cluster ${band.slice(-1)})` : band;
-
 function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pictures: boolean }) {
   let body: React.ReactNode;
   switch (c.kind) {
@@ -211,7 +207,6 @@ function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pic
     case "party_field": body = <>of <q className="issuer-text">{String(c.value)}</q></>; break;
     case "locus": body = <>at <q className="issuer-text">{String(c.value)}</q></>; break;
     case "collected": body = <>collected {String(c.value)}</>; break;
-    case "when": body = <>{WHEN_TEXT(String(c.value))}</>; break;
     case "issuer": body = <>issued by <PartyPill party={frame.parties[c.value]} /></>; break;
     case "issuee": body = c.negative ? <>with no issuee</> : <>to <PartyPill party={frame.parties[c.value]} /></>; break;
     default: body = <>{c.kind}: {String(c.value)}</>;

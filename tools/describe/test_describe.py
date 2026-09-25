@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from describe import (Dag, Node, _relative_date_band, _role_stem, describe,  # noqa: E402
+from describe import (Dag, Node, _role_stem, describe,  # noqa: E402
                       describe_node, load_corpus_dag)
 
 HERE = Path(__file__).resolve().parent
@@ -41,7 +41,6 @@ def _check_vector(vec: dict) -> list[str]:
     assert vec.get("defends"), f"{vec['name']} carries no `defends`"
     dag = _dag_from_spec(vec["dag"])
     by_said = {d.said: d for d in describe(dag)}
-    bands = _relative_date_band(dag)
     problems = []
 
     def bad(msg):
@@ -83,8 +82,6 @@ def _check_vector(vec: dict) -> list[str]:
             for kind, bits in want["gains"].items():
                 if abs(actual.get(kind, -1) - bits) > 0.01:
                     bad(f"{said} gain[{kind}] = {actual.get(kind)}, expected {bits}")
-        if "band" in want and bands.get(said) != want["band"]:
-            bad(f"{said} band {bands.get(said)!r} != {want['band']!r}")
     return problems
 
 

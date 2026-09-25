@@ -1104,15 +1104,6 @@
         "issuer_claim": false,
         "negative": false,
         "text_alternative": false
-       },
-       {
-        "kind": "when",
-        "value": "pre-existing-2",
-        "gain": 3.17,
-        "role_bearing": true,
-        "issuer_claim": false,
-        "negative": false,
-        "text_alternative": false
        }
       ],
       "annotations": [
@@ -1153,15 +1144,6 @@
        {
         "kind": "image",
         "value": "ECk2N1O2t2UD9nbKLpIeBgRC_A50d-MH3drRTDzkAI6z",
-        "gain": 3.17,
-        "role_bearing": true,
-        "issuer_claim": false,
-        "negative": false,
-        "text_alternative": false
-       },
-       {
-        "kind": "when",
-        "value": "pre-existing-1",
         "gain": 3.17,
         "role_bearing": true,
         "issuer_claim": false,
