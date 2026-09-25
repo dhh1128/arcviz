@@ -283,43 +283,31 @@ function AxisTags({ n }: { n: CNode }) {
   );
 }
 
-// Progressive disclosure for everything that explains rather than orients. Hover or focus
-// shows it; click pins it open.
-function Info({ notes }: { notes: string[] }) {
-  const [pinned, setPinned] = useState(false);
-  if (!notes.length) return null;
-  return (
-    <span className="info-wrap">
-      <button className="info" aria-label="About this credential" aria-expanded={pinned} title={notes.join("\n\n")}
-        onClick={() => setPinned(!pinned)}>
-        <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.4" /><circle cx="8" cy="4.6" r="1" fill="currentColor" /><rect x="7.2" y="6.6" width="1.6" height="5.4" rx="0.8" fill="currentColor" /></svg>
-      </button>
-      {pinned && <div className="info-pop" role="note">{notes.map((t, i) => <p key={i}>{t}</p>)}</div>}
-    </span>
-  );
-}
 
-// The card's own action menu. Its first action copies the credential as disclosed, as pretty JSON.
-function CardMenu({ n }: { n: CNode }) {
+// The card's own action menu: copy the credential as disclosed, as pretty JSON; show its details.
+function CardMenu({ n, notes }: { n: CNode; notes: string[] }) {
   const [open, setOpen] = useState(false);
+  const [details, setDetails] = useState(false);
   const [done, setDone] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    if (!open) return;
-    const away = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
-    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    if (!open && !details) return;
+    const close = () => { setOpen(false); setDetails(false); };
+    const away = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) close(); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
     document.addEventListener("mousedown", away);
     document.addEventListener("keydown", esc);
     return () => { document.removeEventListener("mousedown", away); document.removeEventListener("keydown", esc); };
-  }, [open]);
+  }, [open, details]);
   const act = (fn: () => Promise<void>) => async () => {
     setOpen(false);
     await fn();
     setDone(true);
     setTimeout(() => setDone(false), 1400);
   };
-  const actions: [string, () => Promise<void>][] = [
-    ["Copy JSON", () => navigator.clipboard.writeText(JSON.stringify(n.sad, null, 2))],
+  const actions: [string, () => void][] = [
+    ["Copy JSON", act(() => navigator.clipboard.writeText(JSON.stringify(n.sad, null, 2)))],
+    ["Details", () => { setOpen(false); setDetails(true); }],
   ];
   return (
     <span className="card-menu" ref={ref}>
@@ -328,11 +316,12 @@ function CardMenu({ n }: { n: CNode }) {
       {open && (
         <div className="card-menu-list" role="menu">
           {actions.map(([label, fn]) => (
-            <button key={label} role="menuitem" onClick={act(fn)}>{label}</button>
+            <button key={label} role="menuitem" onClick={fn}>{label}</button>
           ))}
         </div>
       )}
       {done && <span className="card-menu-done" role="status">copied</span>}
+      {details && <div className="info-pop card-details" role="note">{notes.map((t, i) => <p key={i}>{t}</p>)}</div>}
     </span>
   );
 }
@@ -376,12 +365,12 @@ function Card({
       <Band cats={cats} />
       <div className="card-body">
         {/* Daniel, turn 10: the top of a credential is its SAID and the (i); kind goes to the bottom. */}
-        {/* Daniel, turn 56: a kebab menu of actions at the card's upper left; the (i) moves to the
-            footer beside the kind glyphs, whose meaning it mostly explains. */}
+        {/* Daniel, turn 58: a kebab menu of actions at the card's upper right. Its "Details" item
+            shows what the (i) used to. */}
         <header className="card-top">
-          <CardMenu n={n} />
           {isPresented && <span className="presented-tag">presented</span>}
           <span className="said-slot"><SaidHandle said={n.said} /></span>
+          <CardMenu n={n} notes={notes} />
         </header>
         <div className="type-name">
           {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
@@ -416,7 +405,6 @@ function Card({
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
           </span>
-          <Info notes={notes} />
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}

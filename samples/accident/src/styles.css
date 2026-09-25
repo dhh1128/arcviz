@@ -273,3 +273,8 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .card-menu-done { position: absolute; left: 24px; top: 1px; font-size: var(--t-fine); color: var(--muted); white-space: nowrap; background: var(--paper); padding: 0 4px; }
 .card-foot .info-wrap { margin-left: 8px; margin-right: auto; align-self: center; }
 .card-foot .info-pop { right: auto; left: 0; top: auto; bottom: 22px; }
+
+/* turn-58: the card menu at the upper right, with Details in it */
+.card-menu-list { left: auto; right: 0; }
+.card-menu-done { left: auto; right: 26px; }
+.card-details { right: 0; left: auto; top: 22px; bottom: auto; }
