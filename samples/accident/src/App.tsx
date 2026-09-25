@@ -593,6 +593,37 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     const root = box.current;
     if (!root) return;
     equalize();
+    // TRUNK AND BRANCH (Daniel, turn 70). When a rank has collapsed to one column, curves from a
+    // parent's centre to each child's centre all fall on one vertical line. So each parent with
+    // edges into a stacked rank gets its own trunk in a left gutter, and each edge branches off
+    // that trunk into its target's box. Edges from one parent share a trunk because they share a
+    // source; edges from different parents get different trunks, so a diamond still shows two
+    // lines arriving. A rank laid out side by side keeps the direct curves.
+    const rankOf = new Map<string, number>();
+    rows.forEach((row, i) => row.forEach((sd) => rankOf.set(sd, i)));
+    const stacked = new Set<number>();
+    const lanes = new Map<number, string[]>();   // rank -> parents with a trunk into it
+    rows.forEach((row, i) => {
+      const lefts = new Set(row.map((sd) => Math.round(els.current.get(sd)?.getBoundingClientRect().left ?? 0)));
+      const tops = new Set(row.map((sd) => Math.round(els.current.get(sd)?.getBoundingClientRect().top ?? 0)));
+      if (row.length > 1 && lefts.size === 1 && tops.size === row.length) stacked.add(i);
+    });
+    for (const m of frame.nodes)
+      for (const e of m.edges) {
+        const r = rankOf.get(e.target);
+        if (r === undefined || !stacked.has(r)) continue;
+        const l = lanes.get(r) ?? [];
+        if (!l.includes(m.said)) l.push(m.said);
+        lanes.set(r, l);
+      }
+    const LANE = 8, GUTTER = 12;
+    rows.forEach((_, i) => {
+      const band = bands.current[i];
+      if (!band || i === 0) return;
+      const want = stacked.has(i) ? `${GUTTER + (lanes.get(i)?.length ?? 0) * LANE}px` : "";
+      if (band.style.paddingLeft !== want) band.style.paddingLeft = want;
+    });
+
     const r0 = root.getBoundingClientRect();
     const arrivals = new Map<string, number>();
     const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[] = [];
@@ -605,12 +636,24 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         arrivals.set(e.target, k + 1);
         const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
-        const bend = Math.max(30, (y2 - y1) / 2);
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
         // into the same target stacks its box and label higher.
         const by = y2 - 9 - k * 17;
-        const d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${by - bend} ${x2},${by}`;
+        const r = rankOf.get(e.target);
+        const band = r !== undefined ? bands.current[r]?.getBoundingClientRect() : undefined;
+        let d: string;
+        if (r !== undefined && stacked.has(r) && band) {
+          const lane = (lanes.get(r) ?? []).indexOf(m.said);
+          const gx = band.left - r0.left + GUTTER / 2 + 2 + lane * LANE;
+          const top = band.top - r0.top + 6;
+          const R = 8;   // radius of every turn, so the whole route is curves and straight runs
+          d = `M${x1},${y1} C${x1},${(y1 + top) / 2} ${gx},${(y1 + top) / 2} ${gx},${top}`
+            + ` L${gx},${by - R} Q${gx},${by} ${gx + R},${by} L${x2 - 5},${by}`;
+        } else {
+          const bend = Math.max(30, (y2 - y1) / 2);
+          d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${by - bend} ${x2},${by}`;
+        }
         out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5 });
       }
     }
