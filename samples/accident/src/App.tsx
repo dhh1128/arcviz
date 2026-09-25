@@ -166,7 +166,7 @@ function SaidHandle({ said }: { said: string }) {
   const icons = useContext(PillIcons);
   return (
     <span className="said-pill">
-      <EntvizPill value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
+      <EntvizPill textOverflow="clip" value={said} trust={icons ? { ...SAID_TRUST, icon: true } : SAID_TRUST} typeSignal="icon" maxWidth="100%" />
     </span>
   );
 }
@@ -179,6 +179,8 @@ function PartyPill({ party }: { party?: Party }) {
   return (
     <span className="party">
       <EntvizPill
+        // Daniel, turn 68: cut a long label without an ellipsis; it still scrolls on hover.
+        textOverflow="clip"
         value={party.identifier}
         // undefined, never "": an empty string still wins the label precedence and blanks the pill.
         label={party.label ?? undefined}
