@@ -1,8 +1,8 @@
-# Sample: the accident claim file and the vLEI chain
+# Sample: the accident claim file, the vLEI chain, and a VVP dossier
 
 An instrument, not arcviz. It exists so Daniel can react to every designed principle at once, and so the decisions that are still open are forced onto the screen where they can be ruled on. Nothing here is the implementation.
 
-Every value on screen comes from `public/data.json`, which `build_data.py` computes from the corpus. Descriptors come from `tools/describe` (the spec is `vectors.json`). Categories and the structural axes come from the synthesized `classify.py`, run over disclosed attribute names because no schema resolves. Party names come from `host.json`, which is fictional. The React side does layout and the line budget and computes nothing else.
+Three tabs: the accident claim file, the vLEI chain, and a synthetic VVP dossier with a brand (built by `tools/fixtures/.../fx_vvp.py`). Every value on screen comes from `public/data.json`, which `build_data.py` computes from the corpus. Descriptors come from `tools/describe` (the spec is `vectors.json`). Categories and the structural axes come from the synthesized `classify.py`, run over disclosed attribute names because no schema resolves. Party names come from `host.json`, which is fictional. The React side does layout and the line budget and computes nothing else.
 
 ```
 python3 build_data.py      # regenerate public/data.json, glyphs and attachments
