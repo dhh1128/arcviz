@@ -294,3 +294,10 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .card-num.selected { fill: var(--ink); font-weight: 700; }
 @media (prefers-color-scheme: dark) { .card-num { fill: #9aa0a8; } .card-num.selected { fill: #e4e6ea; } }
 .card.popping { z-index: 10; }
+
+/* turn-88: a located value's hidden occurrences, and the edges that reference a located SAID */
+.hidden-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; margin-left: 6px; border-radius: 8px; background: var(--hl); color: #fff; font-size: var(--t-fine); font-weight: 600; vertical-align: middle; }
+.card-foot .hidden-badge { margin-left: auto; margin-right: 6px; align-self: center; }
+.edges path.edge-glow { stroke: var(--hl); stroke-opacity: 0.45; stroke-width: 7; stroke-linecap: round; fill: none; }
+.edge-ends .edge-box.located { fill: var(--hl); }
+.edge-ends .edge-label.located { stroke: color-mix(in srgb, var(--hl) 35%, white); stroke-width: 4px; }

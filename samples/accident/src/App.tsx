@@ -352,6 +352,13 @@ function Card({
 }) {
   const [open, setOpen] = useState(false);
   const [popping, setPopping] = useState(0);
+  const xrefCard = useContext(CrossRef);
+  const secs = n.sections ?? {};
+  const hideKeys = (o: any, keys: string[]) =>
+    o && typeof o === "object" ? Object.fromEntries(Object.entries(o).filter(([k]) => !keys.includes(k))) : o;
+  // What the field tree would show, minus what the card face already shows (the issuee).
+  const hidden = occurrences([hideKeys(secs.a, ["d", "u", "i"]), hideKeys(secs.e, ["d"]), hideKeys(secs.r, ["d"]),
+    n.image.state === "committed-not-resolved" ? n.image.digest : null], xrefCard.selected);
   const onPop = useMemo(() => (o: boolean) => setPopping((k) => Math.max(0, k + (o ? 1 : -1))), []);
   const marks = useContext(Marks);
   const glyphs = glyphsFor(n);
@@ -435,6 +442,7 @@ function Card({
           </span>
           {/* A chevron, not "more"/"less", so there is nothing to translate on the face; the
               screen-reader name still is. */}
+          {!open && <HiddenBadge count={hidden} />}
           <button className="more chevron" aria-expanded={open} aria-label={open ? "Show less" : "Show more"}
             onClick={() => setOpen(!open)}>
             <svg viewBox="0 0 12 8" width="12" height="8" aria-hidden><path d={open ? "M1,7 L6,2 L11,7" : "M1,1 L6,6 L11,1"} /></svg>
@@ -490,12 +498,28 @@ function Leaf({ v }: { v: any }) {
   return <span className="issuer-text">{typeof v === "string" ? v : JSON.stringify(v)}</span>;
 }
 
+// How many times a located value occurs inside a JSON value. DD-8: a collapsed section carries
+// what is beneath it, so a closed card or tree node shows how many located occurrences it hides.
+function occurrences(value: any, v: string | null): number {
+  if (!v || value === null || value === undefined) return 0;
+  if (typeof value === "string") return value === v ? 1 : 0;
+  if (typeof value !== "object") return 0;
+  return (Array.isArray(value) ? value : Object.values(value)).reduce((t: number, x) => t + occurrences(x, v), 0);
+}
+
+function HiddenBadge({ count }: { count: number }) {
+  if (!count) return null;
+  return <span className="hidden-badge" title={`${count} located ${count === 1 ? "occurrence" : "occurrences"} inside`}>{count}</span>;
+}
+
 // Inside Attribs, an array of three items or fewer starts open (Daniel, turn 81): short lists
 // such as `classes` or `lids` are cheaper to read than to click.
 const SHORT_ARRAY = 3;
 
 function TreeNode({ label, value, open = false, mono = true, openShort = false }: { label: string; value: any; open?: boolean; mono?: boolean; openShort?: boolean }) {
   const isBranch = value !== null && typeof value === "object";
+  const [isOpen, setIsOpen] = useState(open || (openShort && Array.isArray(value) && value.length <= SHORT_ARRAY));
+  const xref = useContext(CrossRef);
   if (!isBranch) {
     return (
       <li className="tree-leaf">
@@ -506,8 +530,8 @@ function TreeNode({ label, value, open = false, mono = true, openShort = false }
   const entries: [string, any][] = Array.isArray(value) ? value.map((x, i) => [`[${i}]`, x]) : Object.entries(value);
   return (
     <li className="tree-branch">
-      <details open={open || (openShort && Array.isArray(value) && value.length <= SHORT_ARRAY)}>
-        <summary>{label} <span className="muted tree-count">{entries.length}</span></summary>
+      <details open={isOpen} onToggle={(e) => setIsOpen((e.currentTarget as HTMLDetailsElement).open)}>
+        <summary>{label} <span className="muted tree-count">{entries.length}</span>{!isOpen && <HiddenBadge count={occurrences(value, xref.selected)} />}</summary>
         <ul className="tree">
           {entries.length ? entries.map(([k, v]) => <TreeNode key={k} label={k} value={v} openShort={openShort} />)
             : <li className="tree-leaf muted">none</li>}
@@ -597,7 +621,8 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const els = useRef(new Map<string, HTMLElement>());
   const box = useRef<HTMLDivElement>(null);
   const bands = useRef<(HTMLDivElement | null)[]>([]);
-  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[]>([]);
+  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[]>([]);
+  const located = useContext(CrossRef).selected;
   const [raised, setRaised] = useState<string | null>(null);
   // Reference numbers (Daniel, turn 80): auto-assigned in reading order, rank by rank and left to
   // right within a rank, so someone can say "look at credential 6". Not credential content, and
@@ -667,7 +692,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
 
     const r0 = root.getBoundingClientRect();
     const arrivals = new Map<string, number>();
-    const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[] = [];
+    const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[] = [];
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
@@ -695,7 +720,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
           const bend = Math.max(30, (y2 - y1) / 2);
           d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${by - bend} ${x2},${by}`;
         }
-        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5 });
+        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5, t: e.target });
       }
     }
     // Each number sits at its card's left edge, on the same baseline as an edge label.
@@ -730,13 +755,16 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   return (
     <div className="graph" ref={box}>
       <svg className="edges" width={size.w} height={size.h} aria-hidden>
+        {/* A located SAID glows along every edge that references it. A glow, not a stroke colour:
+            stroke colour is kept for validity and dash pattern for the operator (turn 88). */}
+        {paths.filter((p) => p.t === located).map((p) => <path key={p.key + ":glow"} d={p.d} className="edge-glow" />)}
         {paths.map((p) => <path key={p.key} d={p.d} />)}
       </svg>
       {/* Terminators and labels sit above everything, including a raised card, so covering the
           lines never hides where an edge lands or what it is called. */}
       <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
-        {paths.map((p) => <rect key={p.key + ":b"} x={p.bx} y={p.by} width={7} height={7} className="edge-box" />)}
-        {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className="edge-label">{p.label}</text>)}
+        {paths.map((p) => <rect key={p.key + ":b"} x={p.bx} y={p.by} width={7} height={7} className={"edge-box" + (p.t === located ? " located" : "")} />)}
+        {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className={"edge-label" + (p.t === located ? " located" : "")}>{p.label}</text>)}
         {nums.map((q) => (
           <text key={q.said + ":n"} x={q.x} y={q.y} className={"card-num" + (raised === q.said ? " selected" : "")}>{q.n}</text>
         ))}
