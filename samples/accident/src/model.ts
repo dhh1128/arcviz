@@ -118,9 +118,9 @@ export function ranks(frame: Frame): string[][] {
 // the head and is always shown, so the budget applies to everything after it. Kept components
 // are displayed in the algorithm's own order; only the choice of WHICH to keep uses the gain.
 export function budgeted(d: Descriptor, lines: number): { kept: Component[]; dropped: Component[] } {
-  // Not budgeted: the type is the head, the role rides on the labelled arrow, and the image is
-  // the thumbnail. None of them is a line of text on the card.
-  const body = d.components.filter((c) => !["type", "role", "image"].includes(c.kind));
+  // Not budgeted: the type is the head, the role rides on the labelled arrow, the image is the
+  // thumbnail, and issuer and issuee are always shown in their own block (Daniel, turn 54).
+  const body = d.components.filter((c) => !["type", "role", "image", "parties", "issuer", "issuee"].includes(c.kind));
   if (lines >= body.length) return { kept: body, dropped: [] };
   const order = body
     .map((c, i) => ({ c, i }))

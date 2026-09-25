@@ -219,6 +219,27 @@ function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pic
   return <li className={"dline" + (c.negative ? " negative" : "")}>{body}</li>;
 }
 
+// Issuer and issuee, always shown (Daniel, turn 54), one per line so they align at the left, with
+// no "from" or "to": a drawn arrow looping from the issuer's line to the issuee's says it instead,
+// and a drawing needs no translation. With no issuee there is one line and no arrow. The relation
+// is still spoken to a screen reader, and that text will need localizing like any other.
+function Parties({ n, frame }: { n: CNode; frame: Frame }) {
+  return (
+    <div className={"parties" + (n.issuee ? " two" : "")}>
+      {n.issuee && (
+        <svg className="issue-arrow" viewBox="0 0 16 48" width="16" height="48" aria-hidden>
+          <path d="M14,12 C2,12 2,36 11,36" />
+          <path d="M9,32.5 L14,36 L9,39.5 z" className="head" />
+        </svg>
+      )}
+      <div className="party-row"><PartyPill party={frame.parties[n.issuer]} /></div>
+      {n.issuee && (
+        <div className="party-row"><span className="sr-only">issued to </span><PartyPill party={frame.parties[n.issuee]} /></div>
+      )}
+    </div>
+  );
+}
+
 function Thumb({ n, pictures }: { n: CNode; pictures: boolean }) {
   const img = n.image;
   if (img.state === "none") return null;
@@ -327,9 +348,12 @@ function Card({
         {marks && unknown && <div><Ph id="unknown" /></div>}
         <div className="card-main">
           <Thumb n={n} pictures={pictures} />
-          <ul className="desc">
-            {kept.map((c, i) => <ComponentLine key={i} c={c} frame={frame} pictures={pictures} />)}
-          </ul>
+          <div className="desc-col">
+            <Parties n={n} frame={frame} />
+            <ul className="desc">
+              {kept.map((c, i) => <ComponentLine key={i} c={c} frame={frame} pictures={pictures} />)}
+            </ul>
+          </div>
         </div>
         {!desc.distinguishing && <div className="annotation">⚠ not distinguishable from {desc.indistinguishable_from.length} other(s)</div>}
         {!pictures && !desc.distinguishing_as_text && <div className="annotation">⚠ cannot be told apart without its picture</div>}
@@ -352,7 +376,7 @@ function Card({
           </span>
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
-        {open && <Details n={n} frame={frame} desc={desc} partiesOnFace={kept.some((c) => c.kind === "parties")} />}
+        {open && <Details n={n} frame={frame} desc={desc} />}
       </div>
     </article>
   );
@@ -422,20 +446,11 @@ function FieldTree({ n }: { n: CNode }) {
   );
 }
 
-function Details({ n, frame, desc, partiesOnFace }: { n: CNode; frame: Frame; desc: Descriptor; partiesOnFace: boolean }) {
+function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor }) {
   const marks = useContext(Marks);
   const c = n.classified;
   return (
     <div className="details">
-      {/* Issuer and issuee belong on the card face (Daniel, turn 52), so they are not repeated
-          here. They appear here only when the face does not show them: the line budget dropped
-          them, or the schema entails them and the host cannot name either party. */}
-      {!partiesOnFace && (
-        <section>
-          <p>Issuer: <PartyPill party={frame.parties[n.issuer]} /></p>
-          {n.issuee && <p>Issuee: <PartyPill party={frame.parties[n.issuee]} /></p>}
-        </section>
-      )}
       <FieldTree n={n} />
       {/* Reviewer-only: how the label and the kind were computed, and what the fixture intended. */}
       {marks && (

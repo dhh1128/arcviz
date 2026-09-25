@@ -247,3 +247,13 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
    read as more children of Attribs. Children now indent past the marker, under a guide line. */
 .tree .tree { padding-left: 0; margin-left: 5px; border-left: 1px solid #c3c8cf; }
 .tree .tree > li { padding-left: 24px; }
+
+/* turn-54: issuer over issuee, joined by a looping arrow instead of "from" and "to" */
+.desc-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.parties { position: relative; }
+.parties.two { padding-left: 18px; }
+.party-row { height: 24px; display: flex; align-items: center; min-width: 0; }
+.issue-arrow { position: absolute; left: 0; top: 0; overflow: visible; }
+.issue-arrow path { fill: none; stroke: #7d848d; stroke-width: 1.4; }
+.issue-arrow path.head { fill: #7d848d; stroke: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
