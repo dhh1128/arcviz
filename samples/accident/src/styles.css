@@ -257,3 +257,7 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .issue-arrow path { fill: none; stroke: #7d848d; stroke-width: 1.4; }
 .issue-arrow path.head { fill: #7d848d; stroke: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* turn-55: the issue arrow in the field tree's style */
+.issue-arrow path { stroke: #c3c8cf; stroke-width: 1; }
+.issue-arrow path.head { fill: var(--ink); stroke: none; }

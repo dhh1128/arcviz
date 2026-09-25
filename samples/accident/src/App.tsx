@@ -228,8 +228,10 @@ function Parties({ n, frame }: { n: CNode; frame: Frame }) {
     <div className={"parties" + (n.issuee ? " two" : "")}>
       {n.issuee && (
         <svg className="issue-arrow" viewBox="0 0 16 48" width="16" height="48" aria-hidden>
-          <path d="M14,12 C2,12 2,36 11,36" />
-          <path d="M9,32.5 L14,36 L9,39.5 z" className="head" />
+          {/* Angular, not curved, so it is never mistaken for an edge connector, and drawn like
+              the field tree: its 1 px guide line and a filled triangle like its disclosure marker. */}
+          <path d="M13.5,12.5 L5.5,12.5 L5.5,36.5 L9,36.5" />
+          <path d="M9,32 L15,36.5 L9,41 z" className="head" />
         </svg>
       )}
       <div className="party-row"><PartyPill party={frame.parties[n.issuer]} /></div>
