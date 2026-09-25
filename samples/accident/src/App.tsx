@@ -299,6 +299,44 @@ function Info({ notes }: { notes: string[] }) {
   );
 }
 
+// The card's own action menu. Its first action copies the credential as disclosed, as pretty JSON.
+function CardMenu({ n }: { n: CNode }) {
+  const [open, setOpen] = useState(false);
+  const [done, setDone] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const away = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", away);
+    document.addEventListener("keydown", esc);
+    return () => { document.removeEventListener("mousedown", away); document.removeEventListener("keydown", esc); };
+  }, [open]);
+  const act = (fn: () => Promise<void>) => async () => {
+    setOpen(false);
+    await fn();
+    setDone(true);
+    setTimeout(() => setDone(false), 1400);
+  };
+  const actions: [string, () => Promise<void>][] = [
+    ["Copy JSON", () => navigator.clipboard.writeText(JSON.stringify(n.sad, null, 2))],
+  ];
+  return (
+    <span className="card-menu" ref={ref}>
+      <button className="kebab" aria-label="Credential actions" aria-haspopup="menu" aria-expanded={open}
+        onClick={() => setOpen(!open)}>⋮</button>
+      {open && (
+        <div className="card-menu-list" role="menu">
+          {actions.map(([label, fn]) => (
+            <button key={label} role="menuitem" onClick={act(fn)}>{label}</button>
+          ))}
+        </div>
+      )}
+      {done && <span className="card-menu-done" role="status">copied</span>}
+    </span>
+  );
+}
+
 function Card({
   n, frame, desc, lines, pictures, incoming, register, raised, onRaise,
 }: {
@@ -338,10 +376,12 @@ function Card({
       <Band cats={cats} />
       <div className="card-body">
         {/* Daniel, turn 10: the top of a credential is its SAID and the (i); kind goes to the bottom. */}
+        {/* Daniel, turn 56: a kebab menu of actions at the card's upper left; the (i) moves to the
+            footer beside the kind glyphs, whose meaning it mostly explains. */}
         <header className="card-top">
+          <CardMenu n={n} />
           {isPresented && <span className="presented-tag">presented</span>}
           <span className="said-slot"><SaidHandle said={n.said} /></span>
-          <Info notes={notes} />
         </header>
         <div className="type-name">
           {typeName ? <TypeName name={typeName} /> : <span className="muted">unresolved type</span>}
@@ -376,6 +416,7 @@ function Card({
             ))}
             {unknown && <span className="unknown-badge" title="Subject unknown: the classifier could not tell what this is about. Not the same as ordinary.">?</span>}
           </span>
+          <Info notes={notes} />
           <button className="more" onClick={() => setOpen(!open)}>{open ? "less" : "more"}</button>
         </footer>
         {open && <Details n={n} frame={frame} desc={desc} />}
