@@ -268,7 +268,7 @@ function Thumb({ n, pictures }: { n: CNode; pictures: boolean }) {
   }
   return (
     <figure className="thumb withheld" title={`This credential commits to a picture (digest ${img.digest}) that this presentation did not supply. Not the same as having no picture.`}>
-      <span>picture committed, not supplied</span>
+      <span className="withheld-mark">?</span>
     </figure>
   );
 }

@@ -301,3 +301,4 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edges path.edge-glow { stroke: var(--hl); stroke-opacity: 0.45; stroke-width: 7; stroke-linecap: round; fill: none; }
 .edge-ends .edge-box.located { fill: var(--hl); }
 .edge-ends .edge-label.located { stroke: color-mix(in srgb, var(--hl) 35%, white); stroke-width: 4px; }
+.thumb.withheld .withheld-mark { font-size: 1.6rem; font-weight: 600; color: var(--muted); }
