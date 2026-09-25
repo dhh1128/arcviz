@@ -242,3 +242,8 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .tree-root > li { padding-left: 0; }
 .tree-absent { padding-left: 0; }
 .tree-root > .tree-absent::before { content: ""; display: inline-block; width: 1em; }
+
+/* turn-53: a child's text started in the same column as its parent's peers, so Edges and Rules
+   read as more children of Attribs. Children now indent past the marker, under a guide line. */
+.tree .tree { padding-left: 0; margin-left: 5px; border-left: 1px solid #c3c8cf; }
+.tree .tree > li { padding-left: 24px; }
