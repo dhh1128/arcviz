@@ -121,6 +121,9 @@ class Dag:
     # Identifiers the host could put a name to. Host knowledge, which no schema can entail --
     # see `_entailed_here`.
     aliased: set = field(default_factory=set)
+    # The SAID of the credential the viewer was handed. Host knowledge: a presentation can
+    # have several roots, and which one is presented is not in the data.
+    presented: str | None = None
     # schema SAID -> edge labels that schema PINS to a fixed target type. Distinct from
     # `entailed` because this is a property of the REFERRING schema rather than of the node
     # being described: the Legal Entity vLEI schema requires exactly one edge named `qvi`
@@ -338,6 +341,13 @@ def _channels(dag: Dag):
         # kind,        getter,                     role_bearing, issuer_claim
         ("role",       role,                       True,  True),
         ("parties",    parties,                    True,  False),
+        # AS OF WHEN THE ARGUMENT IS MADE: the presented credential's own issuance date.
+        # Daniel, 2026-09-25, after the date band on every node was removed: the root's date
+        # is a different fact. It is when the whole argument was put together, the type does
+        # not predict it, and a dossier assembled a year ago is not the one assembled this
+        # morning. So it is said on the presented credential and on no other.
+        ("asof",       lambda n: n.attrs.get("dt") if n.said == dag.presented else None,
+                                                   True,  False),
         # Image before subject, on both of this project's own criteria. Provenance: the
         # credential commits to the image by digest, so the binding is cryptographic, while
         # the subject field is an unmarked issuer claim that nothing in the credential even

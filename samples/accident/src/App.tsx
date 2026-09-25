@@ -220,6 +220,11 @@ function ComponentLine({ c, frame, pictures }: { c: Component; frame: Frame; pic
     case "party_field": body = <>of <q className="issuer-text">{String(c.value)}</q></>; break;
     case "locus": body = <>at <q className="issuer-text">{String(c.value)}</q></>; break;
     case "collected": body = <>collected {String(c.value)}</>; break;
+    case "asof": {
+      const d = prettyDate(String(c.value));
+      body = <span className="date" title={String(c.value)}>{d ?? String(c.value)}</span>;
+      break;
+    }
     case "issuer": body = <>issued by <PartyPill party={frame.parties[c.value]} /></>; break;
     case "issuee": body = c.negative ? <>with no issuee</> : <>to <PartyPill party={frame.parties[c.value]} /></>; break;
     default: body = <>{c.kind}: {String(c.value)}</>;

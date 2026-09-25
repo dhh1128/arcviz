@@ -195,7 +195,7 @@ def accident(host: dict) -> dict:
                   sc["accident_statement_a"]: "witness statement",
                   sc["accident_bundle"]: "claim file"}
     dag = load_corpus_dag(
-        CORPUS, names, type_names=type_names,
+        CORPUS, names, type_names=type_names, presented=sads["accident_bundle"]["d"],
         subject_fields={sc["accident_photo_a"]: "depicts"},
         image_fields={sc["accident_photo_a"]: "imageDigest",
                       sc["accident_licence_a"]: "portraitDigest"},
@@ -260,7 +260,8 @@ def vlei(host: dict) -> dict:
     variants = {}
     for key, aliased in (("no-aliases", set()), ("host-aliases", known)):
         dag = load_corpus_dag(CORPUS, names, type_names=type_names, entailed=entailed,
-                              pinned_edges=pinned, aliased=aliased)
+                              pinned_edges=pinned, aliased=aliased,
+                              presented=sads["vlei_ecr"]["d"])
         variants[key] = describe_json(dag)
 
     known = json.loads((ROOT / "refs" / "schema-registry.json").read_text())["known_schemas"]
@@ -330,7 +331,8 @@ def vvp(host: dict) -> dict:
     aids = {x for s in sads.values() for x in (s["i"], (s.get("a") or {}).get("i")) if x}
     known_aliases = {a for a in aids if a in host["aliases"]}
     dag = load_corpus_dag(CORPUS, VVP, type_names=type_names, entailed=entailed,
-                          pinned_edges=pinned, aliased=known_aliases)
+                          pinned_edges=pinned, aliased=known_aliases,
+                          presented=sads["vvp_dossier"]["d"])
     nodes = []
     for n in VVP:
         x = sads[n]

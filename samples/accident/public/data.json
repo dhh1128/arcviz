@@ -1063,6 +1063,15 @@
         "issuer_claim": false,
         "negative": false,
         "text_alternative": false
+       },
+       {
+        "kind": "asof",
+        "value": "2026-03-06T08:00:00+00:00",
+        "gain": 3.17,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
        }
       ],
       "annotations": [],
@@ -2085,6 +2094,15 @@
         "issuer_claim": false,
         "negative": false,
         "text_alternative": false
+       },
+       {
+        "kind": "asof",
+        "value": "2026-01-21T08:45:00.000000+00:00",
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
        }
       ],
       "annotations": [],
@@ -2210,6 +2228,15 @@
          "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S",
          "ELiFwqI6jHNuQghGFaaJMNv0ICi8q_D4LnufSycJ3TVD"
         ],
+        "gain": 2.0,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "asof",
+        "value": "2026-01-21T08:45:00.000000+00:00",
         "gain": 2.0,
         "role_bearing": true,
         "issuer_claim": false,
@@ -3155,6 +3182,15 @@
          "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G",
          null
         ],
+        "gain": 2.807,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "asof",
+        "value": "2026-03-11T14:26:28.521000+00:00",
         "gain": 2.807,
         "role_bearing": true,
         "issuer_claim": false,

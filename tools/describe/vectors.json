@@ -897,6 +897,51 @@
           ]
         }
       }
+    },
+    {
+      "name": "the_presented_credential_says_as_of_when",
+      "defends": "Daniel, 2026-09-25: the root's date is not the date band that was removed. It is when the argument itself was assembled, nothing in its type predicts it, and a dossier assembled a year ago differs from one assembled this morning even over identical evidence. So the presented credential carries its own dt as 'asof', and no other credential does, even when it has a dt.",
+      "dag": {
+        "presented": "ROOT",
+        "nodes": [
+          {
+            "said": "ROOT",
+            "schema": "S0",
+            "issuer": "I0",
+            "attrs": {
+              "dt": "2026-03-11T14:26:28+00:00"
+            },
+            "out_edges": {
+              "a": "A"
+            }
+          },
+          {
+            "said": "A",
+            "schema": "S1",
+            "issuer": "I1",
+            "issuee": "P1",
+            "attrs": {
+              "dt": "2025-12-19T15:58:42+00:00"
+            }
+          }
+        ]
+      },
+      "expect": {
+        "ROOT": {
+          "kinds": [
+            "type",
+            "parties",
+            "asof"
+          ]
+        },
+        "A": {
+          "kinds": [
+            "type",
+            "role",
+            "parties"
+          ]
+        }
+      }
     }
   ],
   "channels": [
