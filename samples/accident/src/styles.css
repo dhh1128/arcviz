@@ -215,3 +215,8 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .party .entviz-pill__wrap, .said-pill .entviz-pill__wrap { max-width: 100%; min-width: 0; }
 .dline { min-width: 0; max-width: 100%; }
 .card-main > .desc { flex: 1; }
+
+/* turn-47: cross-reference ring, as bakobo/cesrview draws it (a saturated ring plus a glow through
+   entviz's --entviz-pill-highlight), but violet, because amber already means "subject unknown" here. */
+:root { --hl: #7c3aed; }
+.party { --entviz-pill-highlight: 0 0 0 2.5px var(--hl), 0 0 8px 1px color-mix(in srgb, var(--hl) 55%, transparent); }

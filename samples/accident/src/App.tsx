@@ -156,6 +156,12 @@ const SAID_TRUST: TrustAssumption = { posture: "corpus", mnemonic: true };
 // draws it under corpus posture: on every SAID, and on an AID only when the host's lookup knows it.
 const PillIcons = createContext(false);
 
+// Cross-reference, copied from bakobo/cesrview (CesrView.tsx useCrossRef, decision c7vn4k): the
+// pill's "Find other occurrences…" action selects an AID, and every pill showing the same AID
+// is highlighted by entviz's own `highlight` ring. Choosing it again clears it. AIDs only
+// (Daniel, turn 47): a SAID appears once per render and is never located.
+const CrossRef = createContext<{ selected: string | null; locate: (v: string) => void }>({ selected: null, locate: () => {} });
+
 function SaidHandle({ said }: { said: string }) {
   const icons = useContext(PillIcons);
   return (
@@ -169,6 +175,7 @@ function PartyPill({ party }: { party?: Party }) {
   if (!party) return <span className="muted">(no party)</span>;
   const icons = useContext(PillIcons);
   const trust = party.aliasState === "none" ? undefined : HOST_CORPUS;
+  const xref = useContext(CrossRef);
   return (
     <span className="party">
       <EntvizPill
@@ -178,6 +185,8 @@ function PartyPill({ party }: { party?: Party }) {
         typeSignal="autoCombo"
         trust={trust && icons ? { ...trust, icon: true } : trust}
         onCompare={() => {}}
+        onLocate={() => xref.locate(party.identifier)}
+        highlight={xref.selected === party.identifier}
         maxWidth="100%"
       />
     </span>
@@ -596,6 +605,9 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+  const locate = (v: string) => setSelected((cur) => (cur === v ? null : v));
+  useEffect(() => setSelected(null), [frameId]);
   const icons = true; // Daniel, turn 42: colorbar icons on permanently (on SAIDs, and on AIDs the lookup knows)
   const [variant, setVariant] = useState<Record<string, string>>({ vlei: "no-aliases" });
 
@@ -610,7 +622,7 @@ export default function App() {
   const desc = frame.descriptors[v];
 
   return (
-    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}><Meanings.Provider value={data.category_meanings}>
+    <Marks.Provider value={marks}><Lexicon.Provider value={data.abbreviations}><PillIcons.Provider value={icons}><CrossRef.Provider value={{ selected, locate }}><Meanings.Provider value={data.category_meanings}>
       <div className="page">
         <header className="page-head">
           <h1>arcviz sample</h1>
@@ -653,6 +665,6 @@ export default function App() {
           <Legend />
         </main>
       </div>
-    </Meanings.Provider></PillIcons.Provider></Lexicon.Provider></Marks.Provider>
+    </Meanings.Provider></CrossRef.Provider></PillIcons.Provider></Lexicon.Provider></Marks.Provider>
   );
 }
