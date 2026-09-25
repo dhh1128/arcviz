@@ -266,7 +266,10 @@ function AxisTags({ n }: { n: CNode }) {
   // dotted outline and the '?' badge in the header, and its explanation lives in the (i).
   const { subject, alignment } = n.classified;
   const tags: { text: string; why: string }[] = [];
-  const s = subject === "unknown" ? null : SUBJECT_TEXT[subject];
+  // The subject tag says what a known type name already says ("claim file" is plainly about an
+  // event), so it is shown only when the type is unresolved (Daniel, turn 72). Alignment is kept:
+  // no title says whether a credential is about its holder.
+  const s = subject === "unknown" || n.type.name ? null : SUBJECT_TEXT[subject];
   if (s) tags.push({ text: s, why: n.classified.subject_why });
   const a = alignment === "unknown" ? null : ALIGNMENT_TEXT[alignment];
   if (a) tags.push({ text: a, why: n.classified.alignment_why });
@@ -339,7 +342,14 @@ function Card({
   const primary = PALETTE[cats[0]] ?? PALETTE.misc;
   const typeName = n.type.name;
   const { kept, dropped } = budgeted(desc, lines);
-  const unknown = n.classified.subject === "unknown" || n.classified.alignment === "unknown";
+  // Unknown is marked only where it is news. With a known type name an unknown SUBJECT is not
+  // (the title says what the credential is about), and neither is an alignment that is unknown
+  // only because the subject was (classify.alignment_axis derives one from the other).
+  const typeKnown = !!n.type.name;
+  const subjUnknown = n.classified.subject === "unknown";
+  const unknown = typeKnown
+    ? n.classified.alignment === "unknown" && !subjUnknown
+    : subjUnknown || n.classified.alignment === "unknown";
   const isPresented = frame.presented === n.said;
 
   const notes: string[] = [];
