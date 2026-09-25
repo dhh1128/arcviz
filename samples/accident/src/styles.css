@@ -278,3 +278,6 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .card-menu-list { left: auto; right: 0; }
 .card-menu-done { left: auto; right: 26px; }
 .card-details { right: 0; left: auto; top: 22px; bottom: auto; }
+
+/* turn-59: no flex stretch; closed cards on a line are equalized in script, open ones are not */
+.rank { align-items: flex-start; }

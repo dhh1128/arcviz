@@ -542,9 +542,28 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   // One curved connector per edge, labelled with the edge's own label (DD-3: "we need to
   // expose that label"). Daniel, turn 11: curves everywhere, drawn over the cards, ending in a
   // small box at the middle of the target's top edge. A clicked card rises above the lines.
+  // Closed cards on one visual line share a height, so their footers line up (turn 18). An opened
+  // card does not raise its neighbours to its own height (Daniel, turn 59): they keep theirs and sit
+  // top-aligned beside it. Done here rather than by flex stretch, which cannot leave one item out.
+  const equalize = () => {
+    const cards = [...(box.current?.querySelectorAll<HTMLElement>(".card") ?? [])];
+    cards.forEach((c) => { c.style.minHeight = ""; });
+    const lines = new Map<number, HTMLElement[]>();
+    for (const c of cards) {
+      if (c.classList.contains("open")) continue;
+      const top = Math.round(c.getBoundingClientRect().top);
+      lines.set(top, [...(lines.get(top) ?? []), c]);
+    }
+    for (const line of lines.values()) {
+      const h = Math.max(...line.map((c) => c.offsetHeight));
+      line.forEach((c) => { c.style.minHeight = `${h}px`; });
+    }
+  };
+
   const measure = () => {
     const root = box.current;
     if (!root) return;
+    equalize();
     const r0 = root.getBoundingClientRect();
     const arrivals = new Map<string, number>();
     const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number }[] = [];
