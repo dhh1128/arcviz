@@ -757,7 +757,10 @@ function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc
         if (!a || !b) continue;
         const k = arrivals.get(e.target) ?? 0;
         arrivals.set(e.target, k + 1);
-        const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
+        // A line runs from the bottom of its outbound figure to the top of its inbound one, so the
+        // figures cap it at both ends rather than the line running through one of them (Daniel,
+        // 2026-10-06). The outbound figure sits 1 px below the card and is 7 px tall.
+        const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top + 8;
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
@@ -851,7 +854,7 @@ function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc
         const R = 8;   // radius of every turn, so the whole route is curves and straight runs
         d += seg(cx, cy, gx, top) + ` L${gx},${p.by - R} Q${gx},${p.by} ${gx + R},${p.by} L${p.xe - 5},${p.by}`;
       } else {
-        d += seg(cx, cy, p.xe, p.by);
+        d += seg(cx, cy, p.xe, p.by - 3.5);
       }
       out.push({ key: p.key, d, label: p.label, lx: p.xe + 7, ly: p.by + 4, bx: p.xe - 3.5, by: p.by - 3.5, t: p.target,
                  sx: p.x1, sy: p.y1, op: p.op, defaulted: p.defaulted, negated: p.negated });
@@ -926,7 +929,7 @@ function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc
         {paths.flatMap((p) => {
           const pick = () => setPicked((cur) => cur === p.key ? null : p.key);
           const cls = "edge-hit edge-box " + opClass(p.op, opColours) + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "");
-          const ends: [string, number, number][] = [["b", p.bx, p.by], ["s", p.sx - 3.5, p.sy + 1]];
+          const ends: [string, number, number][] = [["b", p.bx, p.by], ["s", p.sx - 3.5, p.sy - 7]];
           return ends.flatMap(([k, x, y]) => {
             const out = [];
             if (p.op === "I2I" || p.op === "E1E")
