@@ -367,7 +367,7 @@ def main() -> int:
             "abbreviations": lexicon["terms"],
             "category_meanings": category_meanings(),
             "host_note": host["_note"],
-            "frames": [accident(host), vlei(host), vvp(host),
+            "frames": [accident(host), vlei(host),
                        vvp(host, VVP_CITED, id="vvp-cited", title="VVP, as it should be")]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {PUBLIC / 'data.json'}")
