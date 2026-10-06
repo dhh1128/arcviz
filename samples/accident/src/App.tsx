@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, createContext, useContext } from "react";
 import { EntvizPill } from "@entviz/react";
 import type { TrustAssumption } from "@entviz/core";
-import { abbreviations, budgeted, ranks, type CNode, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
+import { abbreviations, budgeted, ranks, type CNode, type Edge, type Component, type Data, type Descriptor, type Frame, type Party } from "./model.ts";
 import { ALIGNMENT_TEXT, CATEGORY_ORDER, PALETTE, SUBJECT_TEXT, patternCss } from "./palette.ts";
 
 // ---------------------------------------------------------------------------------------------
@@ -615,13 +615,16 @@ function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor 
 // ---------------------------------------------------------------------------------------------
 // The graph: rows by height, leaves at the bottom, edges drawn over them.
 
-function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<string, Descriptor>; lines: number; pictures: boolean }) {
+const maskId = (key: string) => "m" + key.replace(/[^A-Za-z0-9_-]/g, "_");
+const opClass = (op: Edge["effective"], colours: boolean) => `op-${(op ?? "unknown").toLowerCase()}` + (colours ? " op-colour" : "");
+
+function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc: Record<string, Descriptor>; lines: number; pictures: boolean; opColours: boolean }) {
   const rows = useMemo(() => ranks(frame), [frame]);
   const bySaid = useMemo(() => new Map(frame.nodes.map((n) => [n.said, n])), [frame]);
   const els = useRef(new Map<string, HTMLElement>());
   const box = useRef<HTMLDivElement>(null);
   const bands = useRef<(HTMLDivElement | null)[]>([]);
-  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[]>([]);
+  const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string; sx: number; sy: number; op: Edge["effective"]; defaulted: boolean }[]>([]);
   const located = useContext(CrossRef).selected;
   const [raised, setRaised] = useState<string | null>(null);
   // A clicked connector is highlighted, with its box and label (Daniel, 2026-10-06). Clicking it
@@ -704,7 +707,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
 
     const r0 = root.getBoundingClientRect();
     const rel = (q: DOMRect) => ({ l: q.left - r0.left, r: q.right - r0.left, t: q.top - r0.top, b: q.bottom - r0.top });
-    const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[] = [];
+    const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string; sx: number; sy: number; op: Edge["effective"]; defaulted: boolean }[] = [];
 
     // An edge box is centred above its card TOGETHER WITH ITS LABEL, and then shifted by the
     // target's rank, alternately left and right and further each rank down (Daniel, 2026-10-06), so
@@ -743,7 +746,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       });
     });
 
-    type Plan = { key: string; m: CNode; label: string; target: string; x1: number; y1: number; xe: number; by: number;
+    type Plan = { key: string; m: CNode; label: string; target: string; op: Edge["effective"]; defaulted: boolean; x1: number; y1: number; xe: number; by: number;
       rs: number; rt: number; via: Gap[] };
     const plans: Plan[] = [];
     const arrivals = new Map<string, number>();
@@ -785,7 +788,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
           g.users.push({ key: m.said + e.label, x: want });
           via.push(g);
         }
-        plans.push({ key: m.said + e.label, m, label: e.label, target: e.target, x1, y1, xe, by, rs, rt, via });
+        plans.push({ key: m.said + e.label, m, label: e.label, target: e.target, op: e.effective, defaulted: e.defaulted, x1, y1, xe, by, rs, rt, via });
       }
     }
     // Lines sharing a gap stay as close to where they want to cross as the gap allows, a lane apart,
@@ -850,7 +853,8 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       } else {
         d += seg(cx, cy, p.xe, p.by);
       }
-      out.push({ key: p.key, d, label: p.label, lx: p.xe + 7, ly: p.by + 4, bx: p.xe - 3.5, by: p.by - 3.5, t: p.target });
+      out.push({ key: p.key, d, label: p.label, lx: p.xe + 7, ly: p.by + 4, bx: p.xe - 3.5, by: p.by - 3.5, t: p.target,
+                 sx: p.x1, sy: p.y1, op: p.op, defaulted: p.defaulted });
     }
     // Each number sits at its card's left edge, on the same baseline as an edge label.
     const numbered = order.flatMap((sd, i) => {
@@ -888,18 +892,49 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         {/* A located SAID glows along every edge that references it. A glow, not a stroke colour:
             stroke colour is kept for validity and dash pattern for the operator (turn 88). */}
         {paths.filter((p) => p.t === located).map((p) => <path key={p.key + ":glow"} d={p.d} className="edge-glow" />)}
-        {paths.filter((p) => p.key !== picked).map((p) => <path key={p.key} d={p.d} />)}
-        {paths.filter((p) => p.key === picked).map((p) => <path key={p.key} d={p.d} className="edge-picked" />)}
+        {/* OPERATOR PROTOTYPE (Daniel, 2026-10-06; R-PGDK). E1E is a double line, read as "=":
+            a wide stroke with its middle masked out, so it stays two lines over any background. */}
+        <defs>
+          {paths.filter((p) => p.op === "E1E").map((p) => (
+            <mask key={p.key + ":m"} id={maskId(p.key)} maskUnits="userSpaceOnUse" x={0} y={0} width={size.w} height={size.h}>
+              <rect x={0} y={0} width={size.w} height={size.h} style={{ fill: "white" }} />
+              {/* Inline style, because the stylesheet's ".edges path" rule outranks presentation attributes. */}
+              <path d={p.d} style={{ stroke: "black", strokeWidth: p.key === picked ? 2.6 : 2, fill: "none" }} />
+            </mask>
+          ))}
+        </defs>
+        {paths.map((p) => (
+          <path key={p.key} d={p.d} mask={p.op === "E1E" ? `url(#${maskId(p.key)})` : undefined}
+            className={opClass(p.op, opColours) + (p.op === "E1E" ? " edge-double" : "") + (p.key === picked ? " edge-picked" : "")} />
+        ))}
         {/* A wide invisible stroke along each line is what takes the click. */}
         {paths.map((p) => (
           <path key={p.key + ":hit"} d={p.d} className="edge-hit"
-            onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} />
+            onClick={() => setPicked((cur) => cur === p.key ? null : p.key)}>
+            <title>{`${p.label}: ${p.op ?? "operator unknown (far node absent)"}${p.defaulted && p.op ? ", by default (no o field)" : ""}`}</title>
+          </path>
         ))}
       </svg>
       {/* Terminators and labels sit above everything, including a raised card, so covering the
           lines never hides where an edge lands or what it is called. */}
       <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
-        {paths.map((p) => <rect key={p.key + ":b"} onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} x={p.bx} y={p.by} width={7} height={7} className={"edge-hit edge-box" + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "")} />)}
+        {paths.map((p) => {
+          const cls = "edge-hit edge-box " + opClass(p.op, opColours) + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "");
+          const pick = () => setPicked((cur) => cur === p.key ? null : p.key);
+          const cx = p.bx + 3.5, cy = p.by + 3.5;
+          // The far end: I2I and E1E a filled square, DI2I a filled diamond, NI2I a hollow square.
+          if (p.op === "DI2I")
+            return <polygon key={p.key + ":b"} onClick={pick} className={cls} points={`${cx},${cy - 4.6} ${cx + 4.6},${cy} ${cx},${cy + 4.6} ${cx - 4.6},${cy}`} />;
+          if (p.op === "NI2I" || p.op === null)
+            return <rect key={p.key + ":b"} onClick={pick} className={cls + " hollow"} x={p.bx + 0.6} y={p.by + 0.6} width={5.8} height={5.8} />;
+          return <rect key={p.key + ":b"} onClick={pick} className={cls} x={p.bx} y={p.by} width={7} height={7} />;
+        })}
+        {/* The near end says WHICH of this card's parties the operator binds: a filled dot for its
+            issuer (I2I, DI2I), a hollow dot for its issuee (E1E), nothing for NI2I, which binds none. */}
+        {paths.filter((p) => p.op && p.op !== "NI2I").map((p) => (
+          <circle key={p.key + ":s"} cx={p.sx} cy={p.sy + 3} r={3}
+            className={"edge-start " + opClass(p.op, opColours) + (p.op === "E1E" ? " hollow" : "") + (p.key === picked ? " picked" : "")} />
+        ))}
         {paths.map((p) => <text key={p.key + ":t"} onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} x={p.lx} y={p.ly} className={"edge-hit edge-label" + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "")}>{p.label}</text>)}
         {nums.map((q) => (
           <text key={q.said + ":n"} x={q.x} y={q.y} className={"card-num" + (raised === q.said ? " selected" : "")}>{q.n}</text>
@@ -1017,6 +1052,7 @@ export default function App() {
   const [lines, setLines] = useState(2);
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
+  const [opColours, setOpColours] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const locate = (v: string) => setSelected((cur) => (cur === v ? null : v));
   useEffect(() => setSelected(null), [frameId]);
@@ -1051,6 +1087,7 @@ export default function App() {
             </label>
             <label><input type="checkbox" checked={pictures} onChange={(e) => setPictures(e.target.checked)} /> pictures</label>
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
+            <label><input type="checkbox" checked={opColours} onChange={(e) => setOpColours(e.target.checked)} /> operator colours</label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
                 <input type="checkbox" checked={v === "host-aliases"}
@@ -1072,7 +1109,7 @@ export default function App() {
               <p className="hand">Supplied by hand for this sample: {frame.supplied_by_hand.join("; ")}.{" "}
                 {frame.id === "vlei" && <Ph id="borrowed" />}</p>
             )}
-            <Graph frame={frame} desc={desc} lines={lines === 4 ? 99 : lines} pictures={pictures} />
+            <Graph frame={frame} desc={desc} lines={lines === 4 ? 99 : lines} pictures={pictures} opColours={opColours} />
           </section>
           {marks && <Legend />}
         </main>

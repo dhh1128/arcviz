@@ -33,7 +33,12 @@ export interface Edge {
   label: string;
   target: string;
   schema: string;
-  operator?: string | null;
+  operator?: string | string[] | null;
+  // The effective unary operator by ACDC v1.1's defaulting rule (build_data.py annotate_operators);
+  // null when the far node is absent, so the default cannot be derived.
+  effective: "I2I" | "NI2I" | "DI2I" | "E1E" | null;
+  defaulted: boolean;
+  negated: boolean;
 }
 
 export interface Img {

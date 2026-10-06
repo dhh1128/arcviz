@@ -399,6 +399,34 @@ def sedi(host: dict) -> dict:
             "supplied_by_hand": ["type names (keripy's schemas are not published)"]}
 
 
+UNARY = ("I2I", "NI2I", "DI2I", "E1E")
+
+
+def annotate_operators(frame: dict) -> dict:
+    """Each edge's EFFECTIVE unary operator, by ACDC v1.1 (trustoverip/kswg-acdc-specification,
+    branch v1.1 at 2362e48, spec-body.md, "Unary Operators"): "When the Operator, `o`, field is
+    missing or empty or is present but does not include any of the `I2I`, `NI2I`, `DI2I`, or
+    `E1E` Operators then: If the node pointed to by the Edge is a targeted ACDC ... the `I2I`
+    Operator MUST be appended ... If ... an Untargeted ACDC ... the `NI2I` Operator MUST be
+    appended". A defaulted operator is marked as such, and so is one that cannot be derived
+    because the far node is not in the presentation. Whether the operator HOLDS is not computed
+    here: that is verification, and this sample verifies nothing."""
+    issuee = {n["said"]: n["issuee"] for n in frame["nodes"]}
+    for n in frame["nodes"]:
+        for e in n["edges"]:
+            ops = e["operator"] if isinstance(e["operator"], list) else ([e["operator"]] if e["operator"] else [])
+            unary = [o for o in ops if o in UNARY]
+            e["negated"] = "NOT" in ops
+            if unary:
+                e["effective"], e["defaulted"] = unary[0], False
+            elif e["target"] not in issuee:
+                e["effective"], e["defaulted"] = None, True
+            else:
+                e["effective"] = "I2I" if issuee[e["target"]] else "NI2I"
+                e["defaulted"] = True
+    return frame
+
+
 def main() -> int:
     host = json.loads((HERE / "host.json").read_text())
     PUBLIC.mkdir(exist_ok=True)
@@ -413,9 +441,9 @@ def main() -> int:
             "abbreviations": lexicon["terms"],
             "category_meanings": category_meanings(),
             "host_note": host["_note"],
-            "frames": [accident(host), vlei(host),
+            "frames": [annotate_operators(f) for f in [accident(host), vlei(host),
                        vvp(host, VVP_CITED, id="vvp-cited", title="VVP, as it should be"),
-                       sedi(host)]}
+                       sedi(host)]]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {PUBLIC / 'data.json'}")
     return 0

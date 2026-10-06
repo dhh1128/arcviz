@@ -339,3 +339,21 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edge-ends .edge-box.picked { fill: var(--edge-pick); }
 .edge-ends .edge-label.picked { fill: var(--edge-pick); text-decoration: underline; }
 .edge-ends .edge-hit { pointer-events: auto; cursor: pointer; }   /* the box and label pick their line too */
+
+/* OPERATOR PROTOTYPE (R-PGDK). Single lines for I2I, DI2I, NI2I; a masked double line for E1E. */
+.edges path.edge-double { stroke-width: 5.2; stroke: #9aa0a8; }
+.edges path.edge-double.edge-picked { stroke-width: 6.4; }
+.edge-ends .edge-box.hollow { fill: var(--page); stroke: #7d848d; stroke-width: 1.2; }
+.edge-ends .edge-start { fill: #7d848d; stroke: none; }
+.edge-ends .edge-start.hollow { fill: var(--paper); stroke: #7d848d; stroke-width: 1.3; }
+.edge-ends .edge-start.picked { fill: var(--edge-pick); }
+.edge-ends .edge-start.hollow.picked { fill: var(--paper); stroke: var(--edge-pick); }
+.edge-ends .edge-box.hollow.picked { fill: var(--page); stroke: var(--edge-pick); }
+/* Reinforcing colour, off by default: muted, and dark enough to stay clear of the category hues. */
+.op-colour.op-i2i { --op: #3d5a80; } .op-colour.op-di2i { --op: #6b5a1f; }
+.op-colour.op-ni2i { --op: #8a9099; } .op-colour.op-e1e { --op: #1f7a6d; }
+.edges path.op-colour:not(.edge-picked) { stroke: var(--op); }
+.edge-ends .edge-box.op-colour:not(.picked):not(.located) { fill: var(--op); }
+.edge-ends .edge-box.op-colour.hollow:not(.picked) { fill: var(--page); stroke: var(--op); }
+.edge-ends .edge-start.op-colour:not(.picked) { fill: var(--op); }
+.edge-ends .edge-start.op-colour.hollow:not(.picked) { fill: var(--paper); stroke: var(--op); }

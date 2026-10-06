@@ -174,49 +174,73 @@
        "label": "licenceA",
        "target": "EJpg3ia-NpS9iWR3ktgmar8qn2KHQ8CV1bfvGfi5ywRv",
        "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       },
       {
        "label": "licenceB",
        "target": "EEEHQNYHQAmIshnnl5gzBtNWqNC127qe0SNryI7IDCKQ",
        "schema": "EL66mqMYuofg3wHRxsQo1rkhK2gdWm2ROEkclAcWLmvZ",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       },
       {
        "label": "photoA",
        "target": "ENz5FPBtAKzq_gwwOf24Ucn1gF0Ut2XmTNECYvNahSou",
        "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": true
       },
       {
        "label": "photoB",
        "target": "EGTUmx98zz83miJ0RMuWidO2Tts2VqrcNCrJ-bla3cbq",
        "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": true
       },
       {
        "label": "photoC",
        "target": "EFlyzvcWEdxT_YVi3_O7kZhhK_3j6ykTi9Q9tWEbDbkp",
        "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": true
       },
       {
        "label": "photoD",
        "target": "EOaXnc6bLghdmaZ6cl9vlyty-t00aDxKU53FKt-IZNIg",
        "schema": "EAOb8e-cLSd9Eubr1LqUlsMCLww0G-WFxhhdL45aTz0r",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": true
       },
       {
        "label": "statementA",
        "target": "EK0QwTMQxzY0nRSbj6nnbzFdLoUKmPpRhYPNGX4oFWtk",
        "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       },
       {
        "label": "statementB",
        "target": "ED5qhEbF6kzN_U3I1MTeVsqvUasIDfm5NmzqKHJ_S_Ja",
        "schema": "EHfqyyWoYsQnsSn86eaW-fO_YSFOc6yMxREggAoFDjeF",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       }
      ],
      "sections": {
@@ -1649,7 +1673,10 @@
        "label": "qvi",
        "target": "EHDiuM1hywdhA70PkV1pErgHeluNXrPJqnVPn_0fU754",
        "schema": "EKCowGkbg1AiQNVEJL6wDoFDtCk36udxsxxaqoTgqER3",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       }
      ],
      "sections": {
@@ -1770,7 +1797,10 @@
        "label": "le",
        "target": "EKC5goPL_E18LUGyVgMdC_kzaJAKZzYbEBZJ52NTBQW_",
        "schema": "EC53kuutIEIIhl1YtEUbgo7lL3pwkc-nMMOGqjWWCDga",
-       "operator": null
+       "operator": null,
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": true
       }
      ],
      "sections": {
@@ -1902,7 +1932,10 @@
        "label": "auth",
        "target": "EFyOIJEkCsPRdXMOmSRVpoI2EgmhKZNQab3tmdcD9roR",
        "schema": "EIvYqH6KbfqHb9A4UVSc7pYdtA77jcbihEgHDzUiIACK",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -2326,31 +2359,46 @@
        "label": "vetting",
        "target": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
        "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
-       "operator": "NI2I"
+       "operator": "NI2I",
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": false
       },
       {
        "label": "alloc",
        "target": "EB55b3e31WISvdj1Z8tD4KCCpuOSXjBoeE6n8_u151UT",
        "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       },
       {
        "label": "tnalloc",
        "target": "EB1Az529jlMB0zEMyAaLe_94oZn28XVOvzxG47aiHFmJ",
        "schema": "EFvnoHDY7I-kaBBeKlbDbkjG4BaI0nKLGadxBdjMGgSQ",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       },
       {
        "label": "delsig",
        "target": "EN-9_deXZLQZ3Byn4WzlQOWl6EfOBJFPTP5_GtEz8ee0",
        "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
-       "operator": "NI2I"
+       "operator": "NI2I",
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": false
       },
       {
        "label": "bownr",
        "target": "EMQ9UR0zg7GKHYcZFtlO_a0cGPiUxpiT2kozSCkaQ06R",
        "schema": "EBpGNZSWwj-btOJMJSMLCVoXbtKdJTcggO-zMevr4vH_",
-       "operator": "NI2I"
+       "operator": "NI2I",
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -2563,7 +2611,10 @@
        "label": "issuer",
        "target": "EKGpzWGb6Pr7xwpNnFlqsOFLvP3POsthae_-WxCebUwp",
        "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -2823,7 +2874,10 @@
        "label": "issuer",
        "target": "EB55b3e31WISvdj1Z8tD4KCCpuOSXjBoeE6n8_u151UT",
        "schema": "EL7irIKYJL9Io0hhKSGWI4OznhwC7qgJG5Qf4aEs6j0o",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -2978,7 +3032,10 @@
        "label": "issuer",
        "target": "EKkMtN9QlmLssqcEZ78S-JLN0qj_JSkxErcZR_vEsuZm",
        "schema": "EJ5HgojIGN2_R9TzhCgnYe9NhNHxfWY0MkENZcs1CRZa",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -3536,13 +3593,19 @@
        "label": "authz",
        "target": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
        "schema": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       },
       {
        "label": "age",
        "target": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
        "schema": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -3698,13 +3761,19 @@
        "label": "authority",
        "target": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
        "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
-       "operator": "I2I"
+       "operator": "I2I",
+       "negated": false,
+       "effective": "I2I",
+       "defaulted": false
       },
       {
        "label": "subject",
        "target": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
        "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
-       "operator": "E1E"
+       "operator": "E1E",
+       "negated": false,
+       "effective": "E1E",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -3847,7 +3916,10 @@
        "label": "identity",
        "target": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
        "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
-       "operator": "E1E"
+       "operator": "E1E",
+       "negated": false,
+       "effective": "E1E",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -3957,7 +4029,10 @@
        "label": "guardian",
        "target": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
        "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
-       "operator": "NI2I"
+       "operator": "NI2I",
+       "negated": false,
+       "effective": "NI2I",
+       "defaulted": false
       }
      ],
      "sections": {
@@ -4072,7 +4147,10 @@
        "label": "citizen",
        "target": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
        "schema": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
-       "operator": "E1E"
+       "operator": "E1E",
+       "negated": false,
+       "effective": "E1E",
+       "defaulted": false
       }
      ],
      "sections": {
