@@ -160,7 +160,7 @@ def build_vvp_tnalloc(corpus_dir):
 @fixture("vvp_delsig", depends_on=["vvp_alloc"])
 def build_vvp_delsig(corpus_dir):
     edge = {"d": "", "issuer": simple_edge("vvp_delsig:issuer", n=_said(corpus_dir, "vvp_alloc"),
-                                           s=GCD_SCHEMA, o="I2I")}
+                                           s=GCD_SCHEMA, o="I2I", said=False)}
     return {"serder": _gcd("vvp_delsig", issuer=ALLOCATOR, issuee=SIGNER,
                            role="Delegated Voice Call Signer", goal="ops.it.telco.send.sign",
                            proto="vvp:op", issued=ISSUED["delsig"], edge=edge),
@@ -178,7 +178,7 @@ def build_vvp_brand(corpus_dir):
              f"TEL;TYPE=support:{NUMBER}"]
     edge = {"d": "", "issuer": simple_edge("vvp_brand:issuer",
                                            n=_said(corpus_dir, "vvp_brand_vetter_vetting"),
-                                           s=ORGVET_SCHEMA, o="I2I")}
+                                           s=ORGVET_SCHEMA, o="I2I", said=False)}
     serder = credential(
         "vvp_brand", issuer=BRAND_VETTER, issuee=LEGAL_ENTITY, schema_said=BRAND_SCHEMA,
         attrs={"dt": ISSUED["brand"], "vcard": vcard, "goals": ["ops.it.telco.send"]},
@@ -197,11 +197,11 @@ def build_vvp_dossier(corpus_dir):
     s = lambda n: _said(corpus_dir, n)   # noqa: E731
     edge = {
         "d": "",
-        "vetting": simple_edge("vvp_dossier:vetting", n=s("vvp_vetting"), s=ORGVET_SCHEMA, o="NI2I"),
-        "alloc": simple_edge("vvp_dossier:alloc", n=s("vvp_alloc"), s=GCD_SCHEMA, o="I2I"),
-        "tnalloc": simple_edge("vvp_dossier:tnalloc", n=s("vvp_tnalloc"), s=TNALLOC_SCHEMA, o="I2I"),
-        "delsig": simple_edge("vvp_dossier:delsig", n=s("vvp_delsig"), s=GCD_SCHEMA, o="NI2I"),
-        "bownr": simple_edge("vvp_dossier:bownr", n=s("vvp_brand"), s=BRAND_SCHEMA, o="NI2I"),
+        "vetting": simple_edge("vvp_dossier:vetting", n=s("vvp_vetting"), s=ORGVET_SCHEMA, o="NI2I", said=False),
+        "alloc": simple_edge("vvp_dossier:alloc", n=s("vvp_alloc"), s=GCD_SCHEMA, o="I2I", said=False),
+        "tnalloc": simple_edge("vvp_dossier:tnalloc", n=s("vvp_tnalloc"), s=TNALLOC_SCHEMA, o="I2I", said=False),
+        "delsig": simple_edge("vvp_dossier:delsig", n=s("vvp_delsig"), s=GCD_SCHEMA, o="NI2I", said=False),
+        "bownr": simple_edge("vvp_dossier:bownr", n=s("vvp_brand"), s=BRAND_SCHEMA, o="NI2I", said=False),
     }
     serder = credential("vvp_dossier", issuer=ALLOCATOR, schema_said=DOSSIER_SCHEMA,
                         attrs={"dt": ISSUED["dossier"]}, edge=edge,

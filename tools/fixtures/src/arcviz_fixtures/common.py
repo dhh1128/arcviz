@@ -181,9 +181,13 @@ def credential_with_compact_attribute(label, *, issuer, schema_said,
     return acdcmap(**kwargs)
 
 
-def simple_edge(label, *, n, s, o=None, u=None, w=None):
-    """A single (non-group) Edge block, order [d, u, n, s, o, w]."""
-    e = {'d': ''}
+def simple_edge(label, *, n, s, o=None, u=None, w=None, said=True):
+    """A single (non-group) Edge block, order [d, u, n, s, o, w].
+
+    said=False omits the block's own `d`. The ACDC spec allows it either way, but Provenant's
+    VVP schemas set additionalProperties false on each edge with only n, s and o, and the live
+    dossier's edges carry no `d`."""
+    e = {'d': ''} if said else {}
     if u is not None:
         e['u'] = u
     e['n'] = n
