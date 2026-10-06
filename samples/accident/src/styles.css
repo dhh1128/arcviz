@@ -206,6 +206,33 @@ q.issuer-text { quotes: "“" "”"; }
   .card { color: #1d1f23; }
 }
 
+/* DD-11, amended 2026-10-06: in a dark theme the paper is dimmed rather than white, so it is easier
+   on the eyes. Every colour drawn on paper is scaled by the same per-channel factors (R 0.91, G 0.90,
+   B 0.87) that turn #fff into the paper, so each contrast against the paper is close to its light-
+   theme value and nothing is re-tuned: muted text 4.98 -> 4.71, ink 16.5 -> 13.4. Glyphs, the
+   category band and photographs are dimmed by a filter instead, because their colours live in
+   palette.ts and in the images. A filter is not put on the card itself: entviz portals its
+   popovers into the card, and a filtered ancestor would capture their position:fixed.
+   The kinds strip and the legend become paper too, since their glyphs are tuned against it. */
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #e8e6de; --ink: #1a1c1e; --muted: #616568; --line: #c4c4c3; --issuer: #523800; --ph: #a0005c; --unknown: #b56c00; color: #d6d9de;
+    --entviz-pill-menu-bg: var(--paper); --entviz-pill-menu-fg: var(--ink); --entviz-pill-popover-bg: var(--paper); --entviz-pill-popover-border: 1px solid #d1cfd1; }
+  .glyph, .band, .thumb img, .swatch { filter: brightness(0.9); }
+  .card { box-shadow: none; }
+  .card.presented { border-color: #8c9092; }
+  .kinds, .legend { background: var(--paper); border-color: var(--line); color: var(--ink); }
+  .tabs button.on { background: var(--paper); color: var(--ink); }
+  .axis-tag { background: #d2d2cf; }
+  .axis-tag.unknown, .unknown-badge { background: #e8dcc2; color: #6f4300; }
+  .coia-flag { background: #e8d4c5; color: #7e2700; }
+  .annotation { color: #604300; }
+  .instrument { background: #e0d9da; }
+  .thumb { background: #d9d6cf; }
+  .thumb.withheld { background: repeating-linear-gradient(45deg, #dbd9d2 0 6px, #cdcac4 6px 8px); border-color: #8b8a85; }
+  .card-menu-list button:hover, .card-menu-list button:focus-visible { background: #d9d8d3; }
+  .tree .tree { border-left-color: #b1b4b4; }
+}
+
 /* font audit (turn 38): two weights only */
 h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 

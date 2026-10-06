@@ -174,6 +174,8 @@ A card's own colours do not follow `prefers-color-scheme`. The page around the c
 
 **Reversed if.** A palette is found that holds its contrast on both light and dark card backgrounds, or a host needs cards that match a dark UI.
 
+**Amended 2026-10-06.** In a dark theme the paper is dimmed rather than white. Daniel, asking for it: *"i'm wondering if the plain-white background should change to something a little bit more muted in dark mode. Possibly some other values should be tweaked slightly, too. Nothing huge, just so it's easier on the eyes?"* The tuned-once property survives: every colour drawn on the card is scaled by the same per-channel factors that turn white into the paper (R 0.91, G 0.90, B 0.87, giving `#e8e6de`), so each contrast against the paper stays close to its light-theme value, and glyphs, the category band and photographs are dimmed by the matching filter. Measured: muted text 4.98:1 → 4.71:1, ink 16.5:1 → 13.4:1. The card is still light paper; it does not invert. The kinds strip and legend became paper too in the dark theme, because their glyphs are tuned against it. Implementation: the second `prefers-color-scheme: dark` block in `samples/accident/src/styles.css`.
+
 ---
 
 ## Open
