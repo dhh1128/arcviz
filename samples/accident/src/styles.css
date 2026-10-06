@@ -366,3 +366,6 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edge-ends .edge-start.op-colour.hollow:not(.picked) { fill: var(--paper); stroke: var(--op); }
 .edge-ends .edge-box.cross { fill: none; stroke: #7d848d; stroke-width: 1.6; }
 .card, .kinds, .legend { color-scheme: light; }   /* DD-11: paper surfaces keep light native controls under a forced dark theme */
+.edge-ends .edge-box.stub { fill: #c3c8cf; }
+@media (prefers-color-scheme: dark) { .edge-ends .edge-box.stub { fill: #5b616a; } }
+.edge-ends .edge-box.stub.op-colour:not(.picked) { fill: var(--op); }

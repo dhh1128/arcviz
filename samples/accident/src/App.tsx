@@ -921,8 +921,8 @@ function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc
         {/* One figure per operator, the SAME at both ends of the line (Daniel, 2026-10-06: "Shouldn't
             they match?"), from the three he judged distinguishable at this size -- filled, empty
             outline, X -- plus absence. I2I and E1E filled (E1E is told apart by its double line),
-            DI2I an outline (I2I loosened to the issuee's delegates), NI2I nothing, since it
-            constrains no party. X is kept for NOT, which negates; on NI2I it would read as failed. */}
+            DI2I an outline (I2I loosened to the issuee's delegates), NI2I no figure, since it
+            constrains no party, only a stub that carries the line to the card. X is kept for NOT, which negates; on NI2I it would read as failed. */}
         {paths.flatMap((p) => {
           const pick = () => setPicked((cur) => cur === p.key ? null : p.key);
           const cls = "edge-hit edge-box " + opClass(p.op, opColours) + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "");
@@ -933,6 +933,12 @@ function Graph({ frame, desc, lines, pictures, opColours }: { frame: Frame; desc
               out.push(<rect key={p.key + ":" + k} onClick={pick} className={cls} x={x} y={y} width={7} height={7} />);
             else if (p.op === "DI2I")
               out.push(<rect key={p.key + ":" + k} onClick={pick} className={cls + " hollow"} x={x + 0.6} y={y + 0.6} width={5.8} height={5.8} />);
+            else {
+              // "None" is not nothing (Daniel, 2026-10-06): a stub the box's height and the line's own
+              // width, so the line visibly ends at the card instead of dangling short of it.
+              const w = opColours ? 1.8 : 1.2;
+              out.push(<rect key={p.key + ":" + k} onClick={pick} className={cls + " stub"} x={x + 3.5 - w / 2} y={y} width={w} height={7} />);
+            }
             if (p.negated)
               out.push(<path key={p.key + ":x" + k} onClick={pick} className={cls + " cross"} d={`M${x},${y} L${x + 7},${y + 7} M${x + 7},${y} L${x},${y + 7}`} />);
             return out;
