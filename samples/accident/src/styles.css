@@ -329,3 +329,13 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edge-ends .edge-box.located { fill: var(--hl); }
 .edge-ends .edge-label.located { stroke: color-mix(in srgb, var(--hl) 35%, white); stroke-width: 4px; }
 .thumb.withheld .withheld-mark { font-size: 1.6rem; font-weight: 600; color: var(--muted); }
+
+/* A picked connector: the line, its box and its label darken and thicken. Not violet, which is
+   the located-value glow, and not a stroke colour that could be read as validity. */
+:root { --edge-pick: #1d1f23; }
+@media (prefers-color-scheme: dark) { :root { --edge-pick: #f0f1f3; } }
+.edges path.edge-picked { stroke: var(--edge-pick); stroke-width: 2.6; }
+.edges path.edge-hit { stroke: transparent; stroke-width: 10; fill: none; pointer-events: stroke; cursor: pointer; }
+.edge-ends .edge-box.picked { fill: var(--edge-pick); }
+.edge-ends .edge-label.picked { fill: var(--edge-pick); text-decoration: underline; }
+.edge-ends .edge-hit { pointer-events: auto; cursor: pointer; }   /* the box and label pick their line too */

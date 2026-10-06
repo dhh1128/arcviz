@@ -624,6 +624,16 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
   const [paths, setPaths] = useState<{ d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[]>([]);
   const located = useContext(CrossRef).selected;
   const [raised, setRaised] = useState<string | null>(null);
+  // A clicked connector is highlighted, with its box and label (Daniel, 2026-10-06). Clicking it
+  // again, clicking anywhere else, or Escape clears it.
+  const [picked, setPicked] = useState<string | null>(null);
+  useEffect(() => {
+    const esc = (ev: KeyboardEvent) => { if (ev.key === "Escape") setPicked(null); };
+    const away = (ev: MouseEvent) => { if (!(ev.target as Element).closest?.(".edge-hit")) setPicked(null); };
+    window.addEventListener("keydown", esc);
+    document.addEventListener("click", away, true);
+    return () => { window.removeEventListener("keydown", esc); document.removeEventListener("click", away, true); };
+  }, []);
   // Reference numbers (Daniel, turn 80): auto-assigned in reading order, rank by rank and left to
   // right within a rank, so someone can say "look at credential 6". Not credential content, and
   // not a replacement for the SAID -- an affordance, drawn outside the card like the edge labels.
@@ -878,13 +888,19 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         {/* A located SAID glows along every edge that references it. A glow, not a stroke colour:
             stroke colour is kept for validity and dash pattern for the operator (turn 88). */}
         {paths.filter((p) => p.t === located).map((p) => <path key={p.key + ":glow"} d={p.d} className="edge-glow" />)}
-        {paths.map((p) => <path key={p.key} d={p.d} />)}
+        {paths.filter((p) => p.key !== picked).map((p) => <path key={p.key} d={p.d} />)}
+        {paths.filter((p) => p.key === picked).map((p) => <path key={p.key} d={p.d} className="edge-picked" />)}
+        {/* A wide invisible stroke along each line is what takes the click. */}
+        {paths.map((p) => (
+          <path key={p.key + ":hit"} d={p.d} className="edge-hit"
+            onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} />
+        ))}
       </svg>
       {/* Terminators and labels sit above everything, including a raised card, so covering the
           lines never hides where an edge lands or what it is called. */}
       <svg className="edge-ends" width={size.w} height={size.h} aria-hidden>
-        {paths.map((p) => <rect key={p.key + ":b"} x={p.bx} y={p.by} width={7} height={7} className={"edge-box" + (p.t === located ? " located" : "")} />)}
-        {paths.map((p) => <text key={p.key + ":t"} x={p.lx} y={p.ly} className={"edge-label" + (p.t === located ? " located" : "")}>{p.label}</text>)}
+        {paths.map((p) => <rect key={p.key + ":b"} onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} x={p.bx} y={p.by} width={7} height={7} className={"edge-hit edge-box" + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "")} />)}
+        {paths.map((p) => <text key={p.key + ":t"} onClick={() => setPicked((cur) => cur === p.key ? null : p.key)} x={p.lx} y={p.ly} className={"edge-hit edge-label" + (p.t === located ? " located" : "") + (p.key === picked ? " picked" : "")}>{p.label}</text>)}
         {nums.map((q) => (
           <text key={q.said + ":n"} x={q.x} y={q.y} className={"card-num" + (raised === q.said ? " selected" : "")}>{q.n}</text>
         ))}
