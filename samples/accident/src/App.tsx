@@ -683,6 +683,8 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         lanes.set(r, l);
       }
     const LANE = 8, GUTTER = 12;
+    const BOX_PULL = 7;   // one edge-box width
+    const DEPART_GAP = 6;
     rows.forEach((_, i) => {
       const band = bands.current[i];
       if (!band || i === 0) return;
@@ -693,6 +695,16 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     const r0 = root.getBoundingClientRect();
     const arrivals = new Map<string, number>();
     const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[] = [];
+    // Outbound edges leave a card a few pixels apart, ordered by where they are going, so lines
+    // to the left start on the left and none cross at the origin (Daniel, 2026-10-06).
+    const departs = new Map<string, number>();
+    for (const m of frame.nodes) {
+      const out = m.edges
+        .map((e) => ({ key: e.label, x: els.current.get(e.target)?.getBoundingClientRect() }))
+        .filter((o) => o.x)
+        .sort((p, q) => (p.x!.left + p.x!.width / 2) - (q.x!.left + q.x!.width / 2));
+      out.forEach((o, i) => departs.set(m.said + "\u0000" + o.key, (i - (out.length - 1) / 2) * DEPART_GAP));
+    }
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
@@ -700,13 +712,18 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         if (!a || !b) continue;
         const k = arrivals.get(e.target) ?? 0;
         arrivals.set(e.target, k + 1);
-        const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
+        const x1 = a.left + a.width / 2 - r0.left + (departs.get(m.said + "\u0000" + e.label) ?? 0), y1 = a.bottom - r0.top;
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
         // into the same target stacks its box and label higher.
         const by = y2 - 9 - k * 17;
+        // ...and is pulled toward where its edge came from, one box width per level it sits above
+        // the border (Daniel, 2026-10-06), so stacked boxes never line up into one column and each
+        // reads as the end of its own line.
         const r = rankOf.get(e.target);
+        const toward = r !== undefined && stacked.has(r) ? -1 : Math.sign(x1 - x2);
+        const xe = x2 + toward * k * BOX_PULL;
         const band = r !== undefined ? bands.current[r]?.getBoundingClientRect() : undefined;
         let d: string;
         if (r !== undefined && stacked.has(r) && band) {
@@ -715,12 +732,12 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
           const top = band.top - r0.top + 6;
           const R = 8;   // radius of every turn, so the whole route is curves and straight runs
           d = `M${x1},${y1} C${x1},${(y1 + top) / 2} ${gx},${(y1 + top) / 2} ${gx},${top}`
-            + ` L${gx},${by - R} Q${gx},${by} ${gx + R},${by} L${x2 - 5},${by}`;
+            + ` L${gx},${by - R} Q${gx},${by} ${gx + R},${by} L${xe - 5},${by}`;
         } else {
           const bend = Math.max(30, (y2 - y1) / 2);
-          d = `M${x1},${y1} C${x1},${y1 + bend} ${x2},${by - bend} ${x2},${by}`;
+          d = `M${x1},${y1} C${x1},${y1 + bend} ${xe},${by - bend} ${xe},${by}`;
         }
-        out.push({ key: m.said + e.label, d, label: e.label, lx: x2 + 7, ly: by + 4, bx: x2 - 3.5, by: by - 3.5, t: e.target });
+        out.push({ key: m.said + e.label, d, label: e.label, lx: xe + 7, ly: by + 4, bx: xe - 3.5, by: by - 3.5, t: e.target });
       }
     }
     // Each number sits at its card's left edge, on the same baseline as an edge label.
