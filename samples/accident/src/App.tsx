@@ -706,17 +706,6 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     const RANK_STEP = 12;
     const rankShift = (r: number) => (r % 2 ? -1 : 1) * r * RANK_STEP;
 
-    // Outbound edges leave a card a few pixels apart, ordered by where they are going, so lines
-    // to the left start on the left and none cross at the origin (Daniel, 2026-10-06).
-    const departs = new Map<string, number>();
-    for (const m of frame.nodes) {
-      const outs = m.edges
-        .map((e) => ({ key: e.label, x: els.current.get(e.target)?.getBoundingClientRect() }))
-        .filter((o) => o.x)
-        .sort((p, q) => (p.x!.left + p.x!.width / 2) - (q.x!.left + q.x!.width / 2));
-      outs.forEach((o, i) => departs.set(m.said + "\u0000" + o.key, (i - (outs.length - 1) / 2) * DEPART_GAP));
-    }
-
     // R-J179: an edge that skips rows runs through a gap between the cards of every row it passes,
     // never over a card. A rank whose cards wrap is several visual lines, and a line to a card on a
     // later one passes the earlier ones the same way. A gap is a channel clear of cards for the
@@ -755,7 +744,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         if (!a || !b) continue;
         const k = arrivals.get(e.target) ?? 0;
         arrivals.set(e.target, k + 1);
-        const x1 = a.left + a.width / 2 - r0.left + (departs.get(m.said + "\u0000" + e.label) ?? 0), y1 = a.bottom - r0.top;
+        const x1 = a.left + a.width / 2 - r0.left, y1 = a.bottom - r0.top;
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
@@ -811,6 +800,19 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
           }
           us.forEach((u, j) => laneX.set(u.key + "@" + g.lo + ":" + g.top, xs[j]));
         }
+
+    // Outbound edges leave a card a few pixels apart, ordered by where each line first heads -- the
+    // first gap it runs through, or else its box -- so lines to the left start on the left and none
+    // cross at the origin (Daniel, 2026-10-06). Ordering by the target card instead tangles the lines
+    // whose target is on a later wrapped line, since they first head for a gap, not for the card.
+    const heading = (p: Plan) => p.via.length
+      ? laneX.get(p.key + "@" + p.via[0].lo + ":" + p.via[0].top) ?? (p.via[0].lo + p.via[0].hi) / 2
+      : p.xe;
+    const bySource = new Map<string, Plan[]>();
+    for (const p of plans) bySource.set(p.m.said, [...(bySource.get(p.m.said) ?? []), p]);
+    for (const ps of bySource.values())
+      [...ps].sort((p, q) => heading(p) - heading(q))
+        .forEach((p, i) => { p.x1 += (i - (ps.length - 1) / 2) * DEPART_GAP; });
 
     const seg = (xa: number, ya: number, xb: number, yb: number) => {
       const bend = Math.max(12, (yb - ya) / 2);
