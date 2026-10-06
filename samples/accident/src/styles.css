@@ -358,3 +358,4 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edge-ends .edge-start.op-colour:not(.picked) { fill: var(--op); }
 .edge-ends .edge-start.op-colour.hollow:not(.picked) { fill: var(--paper); stroke: var(--op); }
 .edge-ends .edge-box.cross { fill: none; stroke: #7d848d; stroke-width: 1.6; }
+.card, .kinds, .legend { color-scheme: light; }   /* DD-11: paper surfaces keep light native controls under a forced dark theme */

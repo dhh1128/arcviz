@@ -1056,6 +1056,24 @@ export default function App() {
   const [pictures, setPictures] = useState(true);
   const [marks, setMarks] = useState(false);
   const [opColours, setOpColours] = useState(false);
+  // Theme override (Daniel, 2026-10-06): force light or dark without touching browser settings.
+  // Every dark rule lives in a prefers-color-scheme media block, so forcing rewrites those
+  // blocks' media text rather than duplicating the rules under a class.
+  const [theme, setTheme] = useState<"system" | "light" | "dark">("system");
+  useEffect(() => {
+    for (const sheet of Array.from(document.styleSheets)) {
+      let rules: CSSRuleList;
+      try { rules = sheet.cssRules; } catch { continue; }
+      for (const r of Array.from(rules)) {
+        if (!(r instanceof CSSMediaRule)) continue;
+        const m = r.media as MediaList & { __orig?: string };
+        m.__orig ??= m.mediaText;
+        if (!/prefers-color-scheme:\s*dark/.test(m.__orig)) continue;
+        m.mediaText = theme === "system" ? m.__orig : theme === "dark" ? "all" : "not all";
+      }
+    }
+    document.documentElement.style.colorScheme = theme === "system" ? "" : theme;
+  }, [theme]);
   const [selected, setSelected] = useState<string | null>(null);
   const locate = (v: string) => setSelected((cur) => (cur === v ? null : v));
   useEffect(() => setSelected(null), [frameId]);
@@ -1091,6 +1109,9 @@ export default function App() {
             <label><input type="checkbox" checked={pictures} onChange={(e) => setPictures(e.target.checked)} /> pictures</label>
             <label><input type="checkbox" checked={marks} onChange={(e) => setMarks(e.target.checked)} /> reviewer marks</label>
             <label><input type="checkbox" checked={opColours} onChange={(e) => setOpColours(e.target.checked)} /> operator colours</label>
+            <label>theme <select value={theme} onChange={(e) => setTheme(e.target.value as typeof theme)}>
+              <option value="system">system</option><option value="light">light</option><option value="dark">dark</option>
+            </select></label>
             {frame.descriptor_variants.length > 1 && (
               <label title="Whether the host can put names to the AIDs. A schema can entail that the issuee is a legal entity, not which one, so named parties bring the party relation back.">
                 <input type="checkbox" checked={v === "host-aliases"}
