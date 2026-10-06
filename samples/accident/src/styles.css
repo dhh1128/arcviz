@@ -350,8 +350,15 @@ h1, h3, h4, b, strong, .unknown-badge, .more-glyphs { font-weight: 600; }
 .edge-ends .edge-start.hollow.picked { fill: var(--paper); stroke: var(--edge-pick); }
 .edge-ends .edge-box.hollow.picked { fill: var(--page); stroke: var(--edge-pick); }
 /* Reinforcing colour, off by default: muted, and dark enough to stay clear of the category hues. */
-.op-colour.op-i2i { --op: #3d5a80; } .op-colour.op-di2i { --op: #6b5a1f; }
-.op-colour.op-ni2i { --op: #8a9099; } .op-colour.op-e1e { --op: #1f7a6d; }
+/* Vivid and well apart in hue (Daniel, 2026-10-06: the muted set was "so muted that they become
+   useless"): blue, green, pink, mustard. Kept off violet, which marks a located value. */
+.op-colour.op-i2i { --op: #2563eb; } .op-colour.op-e1e { --op: #16a34a; }
+.op-colour.op-di2i { --op: #db2777; } .op-colour.op-ni2i { --op: #ca8a04; }
+@media (prefers-color-scheme: dark) {
+  .op-colour.op-i2i { --op: #60a5fa; } .op-colour.op-e1e { --op: #4ade80; }
+  .op-colour.op-di2i { --op: #f472b6; } .op-colour.op-ni2i { --op: #facc15; }
+}
+.edges path.op-colour:not(.edge-double) { stroke-width: 1.8; }
 .edges path.op-colour:not(.edge-picked) { stroke: var(--op); }
 .edge-ends .edge-box.op-colour:not(.picked):not(.located) { fill: var(--op); }
 .edge-ends .edge-box.op-colour.hollow:not(.picked) { fill: var(--page); stroke: var(--op); }
