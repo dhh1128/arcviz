@@ -12,7 +12,7 @@ Each entry carries its status, the decision, why it beat the alternatives, what 
 
 > "dd-1: I am willing to treat this as settled for now." — Daniel Hardman, 2026-09-18. The *for now* is part of it.
 
-The node the viewer was handed sits at the top. Edges point downward, from a node to whatever its `e` section references. Rank is by longest path, so a node reachable at two different depths sits at its deepest.
+The node the viewer was handed sits at the top. Edges point downward, from a node to whatever its `e` section references. Rank is by height: a leaf sits on the bottom row and every other node one row above the highest thing it cites. **Amended 2026-10-06**, replacing longest path from the presented node, which a session had written in as the mechanism and which Daniel had not ruled on. His words: *"The credential that cites nothing is a leaf; it is only cited. It goes at the bottom. The dossier or the ECR credential (whatever is directly presented as the DAG origin) cites but is not cited; that is its defining characteristic."* Every edge still descends.
 
 **Why.** An ACDC chain is a *dependency* graph, not a hierarchy, and the domains split cleanly on that distinction: org charts, family trees and filesystems put the root on top because they encode descent or authority, while `git log --graph`, `npm ls` and stack traces put the subject on top because they encode "this thing and what it rests on." Structurally we are the second kind, and git is the closest match anyone has — a DAG of nodes referencing ancestors, diamonds included.
 

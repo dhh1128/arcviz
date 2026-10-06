@@ -613,7 +613,7 @@ function Details({ n, frame, desc }: { n: CNode; frame: Frame; desc: Descriptor 
 }
 
 // ---------------------------------------------------------------------------------------------
-// The graph: rows by longest-path rank, edges drawn over them.
+// The graph: rows by height, leaves at the bottom, edges drawn over them.
 
 function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<string, Descriptor>; lines: number; pictures: boolean }) {
   const rows = useMemo(() => ranks(frame), [frame]);

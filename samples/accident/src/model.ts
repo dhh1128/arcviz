@@ -90,27 +90,41 @@ export interface Data {
 
 // DD-1: the presented node on top, references descending, rank by LONGEST path so a node
 // reachable at two depths sits at its deepest.
+// Rows by height (Daniel, 2026-10-06): a leaf -- a credential that is cited and cites nothing
+// present -- sits on the bottom row, and every other node sits one row above the highest thing it
+// cites. The presented node cites and is not cited, so it is alone on the top row. Every edge
+// still descends. Edges to a referent that is not present do not count toward height.
 export function ranks(frame: Frame): string[][] {
   const bySaid = new Map(frame.nodes.map((n) => [n.said, n]));
-  const depth = new Map<string, number>();
-  const visit = (said: string, d: number, seen: Set<string>) => {
-    if (seen.has(said)) return;
-    if ((depth.get(said) ?? -1) >= d) return;
-    depth.set(said, d);
+  const height = new Map<string, number>();
+  const measure = (said: string, onPath: Set<string>): number => {
+    const known = height.get(said);
+    if (known !== undefined) return known;
     const n = bySaid.get(said);
-    if (!n) return;
-    const next = new Set(seen).add(said);
-    for (const e of n.edges) visit(e.target, d + 1, next);
+    if (!n || onPath.has(said)) return -1;
+    const path = new Set(onPath).add(said);
+    let h = 0;
+    for (const e of n.edges) {
+      if (!bySaid.has(e.target)) continue;
+      h = Math.max(h, measure(e.target, path) + 1);
+    }
+    height.set(said, h);
+    return h;
   };
-  visit(frame.presented, 0, new Set());
+  const reachable = new Set<string>();
+  const walk = (said: string) => {
+    if (reachable.has(said) || !bySaid.has(said)) return;
+    reachable.add(said);
+    for (const e of bySaid.get(said)!.edges) walk(e.target);
+  };
+  walk(frame.presented);
+  const top = measure(frame.presented, new Set());
   const rows: string[][] = [];
   for (const n of frame.nodes) {
-    const d = depth.get(n.said) ?? Number.MAX_SAFE_INTEGER;
-    const idx = d === Number.MAX_SAFE_INTEGER ? -1 : d;
-    if (idx < 0) continue;
-    (rows[idx] ??= []).push(n.said);
+    if (!reachable.has(n.said)) continue;
+    (rows[top - measure(n.said, new Set())] ??= []).push(n.said);
   }
-  const orphans = frame.nodes.filter((n) => !depth.has(n.said)).map((n) => n.said);
+  const orphans = frame.nodes.filter((n) => !reachable.has(n.said)).map((n) => n.said);
   if (orphans.length) rows.push(orphans);
   return rows.filter(Boolean);
 }
