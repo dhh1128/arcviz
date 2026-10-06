@@ -684,7 +684,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       }
     const LANE = 8, GUTTER = 12;
     const BOX_PULL = 7;   // one edge-box width
-    const DEPART_GAP = 6;
+    const DEPART_SHARE = 1 / 2;   // of the card's width, for its outbound edges
     rows.forEach((_, i) => {
       const band = bands.current[i];
       if (!band || i === 0) return;
@@ -801,7 +801,8 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
           us.forEach((u, j) => laneX.set(u.key + "@" + g.lo + ":" + g.top, xs[j]));
         }
 
-    // Outbound edges leave a card a few pixels apart, ordered by where each line first heads -- the
+    // Outbound edges leave a card spread evenly across the middle half of its bottom edge (Daniel,
+    // 2026-10-06), ordered by where each line first heads -- the
     // first gap it runs through, or else its box -- so lines to the left start on the left and none
     // cross at the origin (Daniel, 2026-10-06). Ordering by the target card instead tangles the lines
     // whose target is on a later wrapped line, since they first head for a gap, not for the card.
@@ -810,9 +811,11 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
       : p.xe;
     const bySource = new Map<string, Plan[]>();
     for (const p of plans) bySource.set(p.m.said, [...(bySource.get(p.m.said) ?? []), p]);
-    for (const ps of bySource.values())
+    for (const ps of bySource.values()) {
+      const span = (els.current.get(ps[0].m.said)?.getBoundingClientRect().width ?? 0) * DEPART_SHARE;
       [...ps].sort((p, q) => heading(p) - heading(q))
-        .forEach((p, i) => { p.x1 += (i - (ps.length - 1) / 2) * DEPART_GAP; });
+        .forEach((p, i) => { p.x1 += span * ((i + 0.5) / ps.length - 0.5); });
+    }
 
     const seg = (xa: number, ya: number, xb: number, yb: number) => {
       const bend = Math.max(12, (yb - ya) / 2);
