@@ -174,7 +174,7 @@ q.issuer-text { quotes: "“" "”"; }
 .edge-label { font-size: var(--t-small); }
 .card-top .said { font-size: var(--t-small); }
 .ext { font-size: 9px; }
-.rank { gap: 40px 14px; }
+.rank { gap: 40px 32px; }   /* R-J179: room for lines in the gaps */
 .rank + .rank { padding-top: 30px; }
 
 /* turn-16: lighter connectors */

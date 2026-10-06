@@ -693,18 +693,61 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     });
 
     const r0 = root.getBoundingClientRect();
-    const arrivals = new Map<string, number>();
+    const rel = (q: DOMRect) => ({ l: q.left - r0.left, r: q.right - r0.left, t: q.top - r0.top, b: q.bottom - r0.top });
     const out: { d: string; key: string; label: string; lx: number; ly: number; bx: number; by: number; t: string }[] = [];
+
+    // An edge box is centred above its card TOGETHER WITH ITS LABEL, and then shifted by the
+    // target's rank, alternately left and right and further each rank down (Daniel, 2026-10-06), so
+    // a line from one row to the next is never exactly vertical.
+    const fontPx = parseFloat(getComputedStyle(document.documentElement).fontSize) * 0.85;
+    const mono = getComputedStyle(document.documentElement).getPropertyValue("--mono");
+    const ctx = (labelCanvas.current ??= document.createElement("canvas")).getContext("2d")!;
+    ctx.font = `600 ${fontPx}px ${mono}`;
+    const RANK_STEP = 12;
+    const rankShift = (r: number) => (r % 2 ? -1 : 1) * r * RANK_STEP;
+
     // Outbound edges leave a card a few pixels apart, ordered by where they are going, so lines
     // to the left start on the left and none cross at the origin (Daniel, 2026-10-06).
     const departs = new Map<string, number>();
     for (const m of frame.nodes) {
-      const out = m.edges
+      const outs = m.edges
         .map((e) => ({ key: e.label, x: els.current.get(e.target)?.getBoundingClientRect() }))
         .filter((o) => o.x)
         .sort((p, q) => (p.x!.left + p.x!.width / 2) - (q.x!.left + q.x!.width / 2));
-      out.forEach((o, i) => departs.set(m.said + "\u0000" + o.key, (i - (out.length - 1) / 2) * DEPART_GAP));
+      outs.forEach((o, i) => departs.set(m.said + "\u0000" + o.key, (i - (outs.length - 1) / 2) * DEPART_GAP));
     }
+
+    // R-J179: an edge that skips rows runs through a gap between the cards of every row it passes,
+    // never over a card. A rank whose cards wrap is several visual lines, and a line to a card on a
+    // later one passes the earlier ones the same way. A gap is a channel clear of cards for the
+    // height of one visual line.
+    type Gap = { lo: number; hi: number; top: number; bot: number; users: { key: string; x: number }[] };
+    const vlines = rows.map((row, i) => {
+      const band = bands.current[i]?.getBoundingClientRect();
+      if (!band) return [] as { top: number; bot: number; members: string[]; gaps: Gap[] }[];
+      const B = rel(band);
+      const byTop = new Map<number, { said: string; q: ReturnType<typeof rel> }[]>();
+      for (const sd of row) {
+        const q = els.current.get(sd)?.getBoundingClientRect();
+        if (!q) continue;
+        const t = Math.round(q.top);
+        byTop.set(t, [...(byTop.get(t) ?? []), { said: sd, q: rel(q) }]);
+      }
+      return [...byTop.keys()].sort((p, q) => p - q).map((t) => {
+        const cs = byTop.get(t)!.sort((p, q) => p.q.l - q.q.l);
+        const top = Math.min(...cs.map((c) => c.q.t)), bot = Math.max(...cs.map((c) => c.q.b));
+        const gaps: Gap[] = [];
+        let at = B.l + 2;
+        for (const c of cs) { if (c.q.l - 2 - at >= 6) gaps.push({ lo: at, hi: c.q.l - 2, top, bot, users: [] }); at = Math.max(at, c.q.r + 2); }
+        if (B.r - 2 - at >= 6) gaps.push({ lo: at, hi: B.r - 2, top, bot, users: [] });
+        return { top, bot, members: cs.map((c) => c.said), gaps };
+      });
+    });
+
+    type Plan = { key: string; m: CNode; label: string; target: string; x1: number; y1: number; xe: number; by: number;
+      rs: number; rt: number; via: Gap[] };
+    const plans: Plan[] = [];
+    const arrivals = new Map<string, number>();
     for (const m of frame.nodes) {
       for (const e of m.edges) {
         const a = els.current.get(m.said)?.getBoundingClientRect();
@@ -716,29 +759,83 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         const x2 = b.left + b.width / 2 - r0.left, y2 = b.top - r0.top;
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
-        // into the same target stacks its box and label higher.
+        // into the same target stacks its box and label higher, and is pulled toward where its edge
+        // came from, one box width per level, so stacked boxes never line up into one column.
         const by = y2 - 9 - k * 17;
-        // ...and is pulled toward where its edge came from, one box width per level it sits above
-        // the border (Daniel, 2026-10-06), so stacked boxes never line up into one column and each
-        // reads as the end of its own line.
-        const r = rankOf.get(e.target);
-        const toward = r !== undefined && stacked.has(r) ? -1 : Math.sign(x1 - x2);
-        const xe = x2 + toward * k * BOX_PULL;
-        const band = r !== undefined ? bands.current[r]?.getBoundingClientRect() : undefined;
-        let d: string;
-        if (r !== undefined && stacked.has(r) && band) {
-          const lane = (lanes.get(r) ?? []).indexOf(m.said);
-          const gx = band.left - r0.left + GUTTER / 2 + 2 + lane * LANE;
-          const top = band.top - r0.top + 6;
-          const R = 8;   // radius of every turn, so the whole route is curves and straight runs
-          d = `M${x1},${y1} C${x1},${(y1 + top) / 2} ${gx},${(y1 + top) / 2} ${gx},${top}`
-            + ` L${gx},${by - R} Q${gx},${by} ${gx + R},${by} L${xe - 5},${by}`;
-        } else {
-          const bend = Math.max(30, (y2 - y1) / 2);
-          d = `M${x1},${y1} C${x1},${y1 + bend} ${xe},${by - bend} ${xe},${by}`;
+        const rs = rankOf.get(m.said) ?? 0, rt = rankOf.get(e.target) ?? rs + 1;
+        const unit = 7 + 3.5 + ctx.measureText(e.label).width;
+        const toward = stacked.has(rt) ? -1 : Math.sign(x1 - x2);
+        const xe = x2 - unit / 2 + 3.5 + rankShift(rt) + toward * k * BOX_PULL;
+        // Every visual line strictly between the source's and the target's. A stacked target rank
+        // is reached by its trunk in the gutter, which already clears its cards.
+        const passes: { top: number; bot: number; gaps: Gap[] }[] = [];
+        for (let r = rs; r <= rt; r++)
+          for (const vl of vlines[r] ?? []) {
+            if (r === rs && vl.top <= y1 - 1) continue;          // the source's own line and earlier
+            if (r === rt && (stacked.has(rt) || vl.members.includes(e.target) || vl.top >= y2 - 1)) continue;
+            if (vl.bot <= y1 || vl.top >= y2) continue;
+            passes.push(vl);
+          }
+        const via: Gap[] = [];
+        for (const vl of passes) {
+          if (!vl.gaps.length) continue;
+          const mid = (vl.top + vl.bot) / 2;
+          const want = x1 + (x2 - x1) * (mid - y1) / Math.max(1, y2 - y1);
+          const dist = (h: Gap) => want < h.lo ? h.lo - want : want > h.hi ? want - h.hi : 0;
+          const g = vl.gaps.reduce((best, h) => dist(h) < dist(best) ? h : best);
+          g.users.push({ key: m.said + e.label, x: want });
+          via.push(g);
         }
-        out.push({ key: m.said + e.label, d, label: e.label, lx: xe + 7, ly: by + 4, bx: xe - 3.5, by: by - 3.5, t: e.target });
+        plans.push({ key: m.said + e.label, m, label: e.label, target: e.target, x1, y1, xe, by, rs, rt, via });
       }
+    }
+    // Lines sharing a gap stay as close to where they want to cross as the gap allows, a lane apart,
+    // in the order they want to cross it.
+    const LANE_GAP = 7;
+    const laneX = new Map<string, number>();
+    for (const vls of vlines)
+      for (const vl of vls)
+        for (const g of vl.gaps) {
+          const us = [...g.users].sort((p, q) => p.x - q.x);
+          // A narrow gap between two cards is crossed down its middle; a wide margin is crossed as
+          // near as it allows to where the line wants to go, but never hugging a card's border.
+          const pad = 10, lo = g.lo + pad, hi = g.hi - pad;
+          const narrow = g.hi - g.lo < 60;
+          const xs = us.map((u, j) => narrow
+            ? (g.lo + g.hi) / 2 + (j - (us.length - 1) / 2) * LANE_GAP
+            : Math.min(hi, Math.max(lo, u.x)));
+          if (!narrow) {
+            for (let j = 1; j < xs.length; j++) xs[j] = Math.max(xs[j], xs[j - 1] + LANE_GAP);
+            const over = xs.length ? xs[xs.length - 1] - hi : 0;
+            if (over > 0) for (let j = 0; j < xs.length; j++) xs[j] = Math.max(lo, xs[j] - over);
+          }
+          us.forEach((u, j) => laneX.set(u.key + "@" + g.lo + ":" + g.top, xs[j]));
+        }
+
+    const seg = (xa: number, ya: number, xb: number, yb: number) => {
+      const bend = Math.max(12, (yb - ya) / 2);
+      return ` C${xa},${ya + bend} ${xb},${yb - bend} ${xb},${yb}`;
+    };
+    for (const p of plans) {
+      let d = `M${p.x1},${p.y1}`;
+      let cx = p.x1, cy = p.y1;
+      for (const g of p.via) {
+        const gx = laneX.get(p.key + "@" + g.lo + ":" + g.top) ?? (g.lo + g.hi) / 2;
+        d += seg(cx, cy, gx, g.top) + ` L${gx},${g.bot}`;
+        cx = gx; cy = g.bot;
+      }
+      const r = p.rt;
+      const band = bands.current[r]?.getBoundingClientRect();
+      if (stacked.has(r) && band) {
+        const lane = (lanes.get(r) ?? []).indexOf(p.m.said);
+        const gx = band.left - r0.left + GUTTER / 2 + 2 + lane * LANE;
+        const top = band.top - r0.top + 6;
+        const R = 8;   // radius of every turn, so the whole route is curves and straight runs
+        d += seg(cx, cy, gx, top) + ` L${gx},${p.by - R} Q${gx},${p.by} ${gx + R},${p.by} L${p.xe - 5},${p.by}`;
+      } else {
+        d += seg(cx, cy, p.xe, p.by);
+      }
+      out.push({ key: p.key, d, label: p.label, lx: p.xe + 7, ly: p.by + 4, bx: p.xe - 3.5, by: p.by - 3.5, t: p.target });
     }
     // Each number sits at its card's left edge, on the same baseline as an edge label.
     const numbered = order.flatMap((sd, i) => {
@@ -754,6 +851,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
     setSize({ w: r0.width, h: r0.height });
   };
   const lastSig = useRef("");
+  const labelCanvas = useRef<HTMLCanvasElement | null>(null);
   const measureRef = useRef(measure);
   measureRef.current = measure;
 
