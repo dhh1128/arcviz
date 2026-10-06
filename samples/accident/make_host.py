@@ -29,7 +29,7 @@ ANSWERS = {
     # The VVP dossier (fx_vvp.py). The signer is left unnamed so the wild fallback shows there too.
     "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": ("Kesterly Vetting", "org vetter", ""),
     "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": ("Quillon Freight", "legal entity", "VVP"),
-    "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": ("Quillon Numbering", "TN allocator", "VVP"),
+    "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": ("Palisade Numbering", "TN allocator", "VVP"),
     "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": ("Ostrel Brand Registry", "brand vetter", ""),
     "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": ("Corvane Telecom", "carrier", ""),
 }

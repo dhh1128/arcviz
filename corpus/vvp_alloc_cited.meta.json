@@ -1,0 +1,18 @@
+{
+  "title": "VVP dossier, cited: TN Allocator role citing its issuer's vetting",
+  "summary": "vvp_alloc plus the GCD issuer edge to vvp_vetting, the citation the live dossier leaves out.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_alloc_cited",
+  "depends_on": [
+    "vvp_vetting"
+  ],
+  "files": {
+    "sad": "vvp_alloc_cited.json",
+    "cesr": "vvp_alloc_cited.cesr"
+  },
+  "generated_at": "2026-10-06T11:15:42.220147+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

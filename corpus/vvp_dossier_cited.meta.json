@@ -1,0 +1,22 @@
+{
+  "title": "VVP dossier as it should have been built",
+  "summary": "vvp_dossier, except that the TN Allocator role cites the legal entity's Org Vet through the GCD issuer edge. The delegated signer role and the dossier are re-issued only because what they cite changed SAID.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_dossier_cited",
+  "depends_on": [
+    "vvp_vetting",
+    "vvp_alloc_cited",
+    "vvp_tnalloc",
+    "vvp_delsig_cited",
+    "vvp_brand"
+  ],
+  "files": {
+    "sad": "vvp_dossier_cited.json",
+    "cesr": "vvp_dossier_cited.cesr"
+  },
+  "generated_at": "2026-10-06T11:15:42.344998+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -302,11 +302,16 @@ VVP = ["vvp_dossier", "vvp_vetting", "vvp_alloc", "vvp_tnalloc", "vvp_delsig", "
        "vvp_brand_vetter_vetting"]
 
 
-def vvp(host: dict) -> dict:
+VVP_CITED = ["vvp_dossier_cited", "vvp_vetting", "vvp_alloc_cited", "vvp_tnalloc",
+             "vvp_delsig_cited", "vvp_brand", "vvp_brand_vetter_vetting"]
+
+
+def vvp(host: dict, names: list[str] = VVP, *, id: str = "vvp", title: str = "VVP dossier") -> dict:
     """Every schema here is public and in refs/schema-registry.json, so type names, entailed
     parties and pinned edges are RESOLVED, not supplied by hand as the other two frames' are."""
     import re
-    sads = {n: sad(n) for n in VVP}
+    sads = {n: sad(n) for n in names}
+    root = names[0]
     entailed, pinned, type_names = {}, {}, {}
     for s in {x["s"] for x in sads.values()}:
         info = schemas.resolve(s)
@@ -330,18 +335,18 @@ def vvp(host: dict) -> dict:
 
     aids = {x for s in sads.values() for x in (s["i"], (s.get("a") or {}).get("i")) if x}
     known_aliases = {a for a in aids if a in host["aliases"]}
-    dag = load_corpus_dag(CORPUS, VVP, type_names=type_names, entailed=entailed,
+    dag = load_corpus_dag(CORPUS, names, type_names=type_names, entailed=entailed,
                           pinned_edges=pinned, aliased=known_aliases,
-                          presented=sads["vvp_dossier"]["d"])
+                          presented=sads[root]["d"])
     nodes = []
-    for n in VVP:
+    for n in names:
         x = sads[n]
         nodes.append(node_json(n, x, classify_node(x, type_names[x["s"]]), {
             "image": images.get(n, {"state": "none"}),
             "type": {"name": type_names[x["s"]], "source": "resolved from refs/schema-registry.json",
                      "schema_state": schemas.resolve(x["s"]).state}}))
-    return {"id": "vvp", "title": "VVP dossier",
-            "presented": sads["vvp_dossier"]["d"],
+    return {"id": id, "title": title,
+            "presented": sads[root]["d"],
             "nodes": nodes, "descriptors": {"host-aliases": describe_json(dag)},
             "descriptor_variants": ["host-aliases"],
             "parties": parties(host, aids),
@@ -362,7 +367,8 @@ def main() -> int:
             "abbreviations": lexicon["terms"],
             "category_meanings": category_meanings(),
             "host_note": host["_note"],
-            "frames": [accident(host), vlei(host), vvp(host)]}
+            "frames": [accident(host), vlei(host), vvp(host),
+                       vvp(host, VVP_CITED, id="vvp-cited", title="VVP, as it should be")]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {PUBLIC / 'data.json'}")
     return 0

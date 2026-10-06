@@ -1,0 +1,18 @@
+{
+  "title": "VVP dossier, cited: Delegated Voice Call Signer role",
+  "summary": "vvp_delsig, re-issued because the alloc role it cites changed SAID.",
+  "matrix_cells": [
+    "H1"
+  ],
+  "rules_exercised": [],
+  "name": "vvp_delsig_cited",
+  "depends_on": [
+    "vvp_alloc_cited"
+  ],
+  "files": {
+    "sad": "vvp_delsig_cited.json",
+    "cesr": "vvp_delsig_cited.cesr"
+  },
+  "generated_at": "2026-10-06T11:15:42.277399+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

@@ -130,15 +130,34 @@ def _gcd(label, *, issuer, issuee, role, goal, proto, issued, edge=None):
                       registry=make_registry(label, issuer).said)
 
 
+def _alloc(label, edge=None):
+    return _gcd(label, issuer=LEGAL_ENTITY, issuee=ALLOCATOR, role="TN Allocator",
+                goal="ops.it.telco.tnalloc", proto="ipex:issuer,issuee", issued=ISSUED["alloc"],
+                edge=edge)
+
+
 @fixture("vvp_alloc")
 def build_vvp_alloc(corpus_dir):
-    return {"serder": _gcd("vvp_alloc", issuer=LEGAL_ENTITY, issuee=ALLOCATOR, role="TN Allocator",
-                           goal="ops.it.telco.tnalloc", proto="ipex:issuer,issuee",
-                           issued=ISSUED["alloc"]),
+    return {"serder": _alloc("vvp_alloc"),
             "meta": _meta("VVP dossier: TN Allocator role",
                           "The legal entity delegates number allocation to a committee (a GCD role). "
                           "Shares its schema with vvp_delsig, and the two are separated only by the "
                           "issuer-supplied role string.")}
+
+
+@fixture("vvp_alloc_cited", depends_on=["vvp_vetting"])
+def build_vvp_alloc_cited(corpus_dir):
+    """The allocator role as it should have been built (Daniel, 2026-10-06). The GCD schema's
+    optional `issuer` edge -- "Edge credential that proves the identity of the issuer" -- cites the
+    legal entity's Org Vet, I2I, because the legal entity issues this role and is that vetting's
+    issuee. The live credential carries no edges at all."""
+    edge = {"d": "", "issuer": simple_edge("vvp_alloc_cited:issuer",
+                                           n=_said(corpus_dir, "vvp_vetting"),
+                                           s=ORGVET_SCHEMA, o="I2I", said=False)}
+    return {"serder": _alloc("vvp_alloc_cited", edge=edge),
+            "meta": _meta("VVP dossier, cited: TN Allocator role citing its issuer's vetting",
+                          "vvp_alloc plus the GCD issuer edge to vvp_vetting, the citation the live "
+                          "dossier leaves out.")}
 
 
 @fixture("vvp_tnalloc")
@@ -157,16 +176,26 @@ def build_vvp_tnalloc(corpus_dir):
                           "the allocator. The number is in Ofcom's drama range.")}
 
 
+def _delsig(corpus_dir, label, alloc):
+    edge = {"d": "", "issuer": simple_edge(f"{label}:issuer", n=_said(corpus_dir, alloc),
+                                           s=GCD_SCHEMA, o="I2I", said=False)}
+    return _gcd(label, issuer=ALLOCATOR, issuee=SIGNER, role="Delegated Voice Call Signer",
+                goal="ops.it.telco.send.sign", proto="vvp:op", issued=ISSUED["delsig"], edge=edge)
+
+
 @fixture("vvp_delsig", depends_on=["vvp_alloc"])
 def build_vvp_delsig(corpus_dir):
-    edge = {"d": "", "issuer": simple_edge("vvp_delsig:issuer", n=_said(corpus_dir, "vvp_alloc"),
-                                           s=GCD_SCHEMA, o="I2I", said=False)}
-    return {"serder": _gcd("vvp_delsig", issuer=ALLOCATOR, issuee=SIGNER,
-                           role="Delegated Voice Call Signer", goal="ops.it.telco.send.sign",
-                           proto="vvp:op", issued=ISSUED["delsig"], edge=edge),
+    return {"serder": _delsig(corpus_dir, "vvp_delsig", "vvp_alloc"),
             "meta": _meta("VVP dossier: Delegated Voice Call Signer role",
                           "The allocator delegates call signing. Its issuer edge points at the alloc "
                           "role, which is how the allocator proves it may delegate.")}
+
+
+@fixture("vvp_delsig_cited", depends_on=["vvp_alloc_cited"])
+def build_vvp_delsig_cited(corpus_dir):
+    return {"serder": _delsig(corpus_dir, "vvp_delsig_cited", "vvp_alloc_cited"),
+            "meta": _meta("VVP dossier, cited: Delegated Voice Call Signer role",
+                          "vvp_delsig, re-issued because the alloc role it cites changed SAID.")}
 
 
 @fixture("vvp_brand", depends_on=["vvp_brand_vetter_vetting"])
@@ -191,23 +220,37 @@ def build_vvp_brand(corpus_dir):
                           "the bytes are in corpus/attachments/brand_logo.svg.")}
 
 
-@fixture("vvp_dossier", depends_on=["vvp_vetting", "vvp_alloc", "vvp_tnalloc", "vvp_delsig",
-                                    "vvp_brand"])
-def build_vvp_dossier(corpus_dir):
+def _dossier(corpus_dir, label, alloc, delsig):
     s = lambda n: _said(corpus_dir, n)   # noqa: E731
     edge = {
         "d": "",
-        "vetting": simple_edge("vvp_dossier:vetting", n=s("vvp_vetting"), s=ORGVET_SCHEMA, o="NI2I", said=False),
-        "alloc": simple_edge("vvp_dossier:alloc", n=s("vvp_alloc"), s=GCD_SCHEMA, o="I2I", said=False),
-        "tnalloc": simple_edge("vvp_dossier:tnalloc", n=s("vvp_tnalloc"), s=TNALLOC_SCHEMA, o="I2I", said=False),
-        "delsig": simple_edge("vvp_dossier:delsig", n=s("vvp_delsig"), s=GCD_SCHEMA, o="NI2I", said=False),
-        "bownr": simple_edge("vvp_dossier:bownr", n=s("vvp_brand"), s=BRAND_SCHEMA, o="NI2I", said=False),
+        "vetting": simple_edge(f"{label}:vetting", n=s("vvp_vetting"), s=ORGVET_SCHEMA, o="NI2I", said=False),
+        "alloc": simple_edge(f"{label}:alloc", n=s(alloc), s=GCD_SCHEMA, o="I2I", said=False),
+        "tnalloc": simple_edge(f"{label}:tnalloc", n=s("vvp_tnalloc"), s=TNALLOC_SCHEMA, o="I2I", said=False),
+        "delsig": simple_edge(f"{label}:delsig", n=s(delsig), s=GCD_SCHEMA, o="NI2I", said=False),
+        "bownr": simple_edge(f"{label}:bownr", n=s("vvp_brand"), s=BRAND_SCHEMA, o="NI2I", said=False),
     }
-    serder = credential("vvp_dossier", issuer=ALLOCATOR, schema_said=DOSSIER_SCHEMA,
-                        attrs={"dt": ISSUED["dossier"]}, edge=edge,
-                        registry=make_registry("vvp_dossier", ALLOCATOR).said)
-    return {"serder": serder,
+    return credential(label, issuer=ALLOCATOR, schema_said=DOSSIER_SCHEMA,
+                      attrs={"dt": ISSUED["dossier"]}, edge=edge,
+                      registry=make_registry(label, ALLOCATOR).said)
+
+
+@fixture("vvp_dossier", depends_on=["vvp_vetting", "vvp_alloc", "vvp_tnalloc", "vvp_delsig",
+                                    "vvp_brand"])
+def build_vvp_dossier(corpus_dir):
+    return {"serder": _dossier(corpus_dir, "vvp_dossier", "vvp_alloc", "vvp_delsig"),
             "meta": _meta("VVP dossier (synthetic, shaped like the live one, plus a brand)",
                           "Seven credentials. The root is untargeted, carries only dt, and is made of "
                           "its edges: vetting, alloc, tnalloc, delsig as in the live dossier, plus "
                           "bownr to a Brand Owner credential.")}
+
+
+@fixture("vvp_dossier_cited", depends_on=["vvp_vetting", "vvp_alloc_cited", "vvp_tnalloc",
+                                          "vvp_delsig_cited", "vvp_brand"])
+def build_vvp_dossier_cited(corpus_dir):
+    return {"serder": _dossier(corpus_dir, "vvp_dossier_cited", "vvp_alloc_cited",
+                               "vvp_delsig_cited"),
+            "meta": _meta("VVP dossier as it should have been built",
+                          "vvp_dossier, except that the TN Allocator role cites the legal entity's "
+                          "Org Vet through the GCD issuer edge. The delegated signer role and the "
+                          "dossier are re-issued only because what they cite changed SAID.")}
