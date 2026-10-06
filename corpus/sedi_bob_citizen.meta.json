@@ -1,0 +1,14 @@
+{
+  "title": "SEDI: Bob Carver's Citizen credential (issuee only)",
+  "summary": "State -> Bob, keripy's 'SEDI Citizen Credential'. Disclosed with only its issuee; name, dob and residence travel as block SAIDs.",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_bob_citizen",
+  "files": {
+    "sad": "sedi_bob_citizen.json",
+    "cesr": "sedi_bob_citizen.cesr",
+    "expanded": "sedi_bob_citizen.expanded.json"
+  },
+  "generated_at": "2026-10-06T12:20:42.821991+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

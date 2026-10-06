@@ -32,6 +32,12 @@ ANSWERS = {
     "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": ("Palisade Numbering", "TN allocator", "VVP"),
     "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": ("Ostrel Brand Registry", "brand vetter", ""),
     "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": ("Corvane Telecom", "carrier", ""),
+    # The SEDI ward presentation (fx_sedi.py). AIDs are keripy's, from
+    # tests/acdc/test_ward_authz_presentation.py; the names Bob and Cara Carver are keripy's too.
+    "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf": ("Utah DGO", "SEDI issuer", ""),
+    "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq": ("Bob Carver", "guardian", ""),
+    "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p": ("Cara Carver", "ward", ""),
+    "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR": ("SocialWeb", "platform", ""),
 }
 
 

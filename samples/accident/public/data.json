@@ -3512,6 +3512,1039 @@
     }
    },
    "supplied_by_hand": []
+  },
+  {
+   "id": "sedi",
+   "title": "SEDI ward",
+   "presented": "EI4oMOkcmzp1exvqy2d1pt-Hl2u7P_O_FH9pJHKGZHah",
+   "nodes": [
+    {
+     "name": "sedi_presentation",
+     "said": "EI4oMOkcmzp1exvqy2d1pt-Hl2u7P_O_FH9pJHKGZHah",
+     "schema": "EIByftHWQY6cls3f1KO8Uh2VHwLZY0mAb5MZgeULaTA3",
+     "issuer": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+     "issuee": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+     "attrs": {
+      "d": "EJxMOXJzm-Wi3h6mHb-bqyo_3F6GaT8m58bhylFMcURY",
+      "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+      "i": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+      "purpose": "Exercise a guardian-authorized change to my own account settings.",
+      "occurredAt": "2026-08-03T18:00:30.000000+00:00"
+     },
+     "edges": [
+      {
+       "label": "authz",
+       "target": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
+       "schema": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+       "operator": "I2I"
+      },
+      {
+       "label": "age",
+       "target": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
+       "schema": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+       "operator": "I2I"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EJxMOXJzm-Wi3h6mHb-bqyo_3F6GaT8m58bhylFMcURY",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "i": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+       "purpose": "Exercise a guardian-authorized change to my own account settings.",
+       "occurredAt": "2026-08-03T18:00:30.000000+00:00"
+      },
+      "e": {
+       "d": "EESQnol50KE7pOZpazYcPGHZ-l4e7zMC5SARAphEwX3d",
+       "u": "0ACs1-Vu1ZPa30iNXBEHi42_",
+       "authz": {
+        "d": "ENN-a4H1eNEdT8LuVKCN2-FToAmroReuJt8JEpwqFkG2",
+        "u": "0AAnSsOJ2rK66NMuQTcoTdii",
+        "n": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
+        "s": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+        "o": "I2I"
+       },
+       "age": {
+        "d": "EF0_eg5Lodw8dlijsGu550oT6FBYIxklej5y3MAKn2BE",
+        "u": "0ADHovZbrtSHPbaW72jnvjWg",
+        "n": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
+        "s": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EPEBF4wuuVsLcdJvBN4KjPcjfIXf67LaMdkmxvcPyXIZ",
+       "Purpose": {
+        "d": "EKDAWhRcBf5HsYmScGamwc5NLgboVDCNt2RwcQ2XWCZd",
+        "l": "One-time verification by the Verifier that the Discloser is a minor acting under the guardian authorization referenced by the edge section, for the sole purpose of applying the account changes that authorization permits."
+       },
+       "Assimilation": {
+        "d": "EJKZrv0aXCtlmVG78QZ5W8eCdVRTN6GVXjYt9hwGz_om",
+        "l": "Verifier agrees to NOT assimilate, aggregate, correlate, sell, or otherwise use in combination with other information available to the Verifier -- including information collected by independent means before, during, or after this presentation -- the information referenced by this container or any containers recursively referenced by the edge section, for any purpose other than that expressly permitted by the Purpose clause."
+       },
+       "SafeHarbor": {
+        "d": "EHVlfnxH0T7nsKdLDEXa_XIoqs0JVmVn1VF9rJGgEg9P",
+        "l": "This disclosure is made under SEDI governance-framework provision ENgB_ncvbeapyNNbsX1PUzPO6WWyD8rAksKymRt9_FlE. By accepting these terms (a signed IPEX agree referencing this container's SAID), the Verifier elects the safe harbor therein against liability under Utah Code 63A-20-701, conditioned on compliance with the Purpose and Assimilation clauses. Breach forfeits the safe harbor and constitutes evidence under 63A-20-801."
+       }
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAkZ.",
+      "t": "acm",
+      "d": "EI4oMOkcmzp1exvqy2d1pt-Hl2u7P_O_FH9pJHKGZHah",
+      "u": "0ACRoLLWaGmn9Rai1sPz7v86",
+      "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+      "s": "EIByftHWQY6cls3f1KO8Uh2VHwLZY0mAb5MZgeULaTA3",
+      "a": {
+       "d": "EJxMOXJzm-Wi3h6mHb-bqyo_3F6GaT8m58bhylFMcURY",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "i": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+       "purpose": "Exercise a guardian-authorized change to my own account settings.",
+       "occurredAt": "2026-08-03T18:00:30.000000+00:00"
+      },
+      "e": {
+       "d": "EESQnol50KE7pOZpazYcPGHZ-l4e7zMC5SARAphEwX3d",
+       "u": "0ACs1-Vu1ZPa30iNXBEHi42_",
+       "authz": {
+        "d": "ENN-a4H1eNEdT8LuVKCN2-FToAmroReuJt8JEpwqFkG2",
+        "u": "0AAnSsOJ2rK66NMuQTcoTdii",
+        "n": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
+        "s": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+        "o": "I2I"
+       },
+       "age": {
+        "d": "EF0_eg5Lodw8dlijsGu550oT6FBYIxklej5y3MAKn2BE",
+        "u": "0ADHovZbrtSHPbaW72jnvjWg",
+        "n": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
+        "s": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+        "o": "I2I"
+       }
+      },
+      "r": {
+       "d": "EPEBF4wuuVsLcdJvBN4KjPcjfIXf67LaMdkmxvcPyXIZ",
+       "Purpose": {
+        "d": "EKDAWhRcBf5HsYmScGamwc5NLgboVDCNt2RwcQ2XWCZd",
+        "l": "One-time verification by the Verifier that the Discloser is a minor acting under the guardian authorization referenced by the edge section, for the sole purpose of applying the account changes that authorization permits."
+       },
+       "Assimilation": {
+        "d": "EJKZrv0aXCtlmVG78QZ5W8eCdVRTN6GVXjYt9hwGz_om",
+        "l": "Verifier agrees to NOT assimilate, aggregate, correlate, sell, or otherwise use in combination with other information available to the Verifier -- including information collected by independent means before, during, or after this presentation -- the information referenced by this container or any containers recursively referenced by the edge section, for any purpose other than that expressly permitted by the Purpose clause."
+       },
+       "SafeHarbor": {
+        "d": "EHVlfnxH0T7nsKdLDEXa_XIoqs0JVmVn1VF9rJGgEg9P",
+        "l": "This disclosure is made under SEDI governance-framework provision ENgB_ncvbeapyNNbsX1PUzPO6WWyD8rAksKymRt9_FlE. By accepting these terms (a signed IPEX agree referencing this container's SAID), the Verifier elects the safe harbor therein against liability under Utah Code 63A-20-701, conditioned on compliance with the Purpose and Assimilation clauses. Breach forfeits the safe harbor and constitutes evidence under 63A-20-801."
+       }
+      }
+     },
+     "classified": {
+      "categories": [
+       "civil-status"
+      ],
+      "category_hits": {
+       "civil-status": [
+        "title: ward"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "The DAG's origin, issued by Cara to SocialWeb, one-time and not registry-bound. keripy's Ward Presentation plus an I2I age edge and the Purpose / Assimilation / SafeHarbor rules of test_cp_disclosure.py (SafeHarbor cites Utah Code 63A-20-701 and -801).",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Ward Presentation",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "sedi_authz",
+     "said": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
+     "schema": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+     "issuer": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+     "issuee": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+     "attrs": {
+      "d": "EOrY-scewnT53-ly3-hR83wx16ZTg7GBVgTx8we2g7nB",
+      "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+      "authz": {
+       "rc": {
+        "social_feed": [
+         "read"
+        ],
+        "social_posts": [
+         "read",
+         "post"
+        ],
+        "social_dm": [
+         "read",
+         "message"
+        ]
+       },
+       "window": {
+        "start": "2026-08-01T00:00:00+00:00",
+        "end": "2026-11-30T23:59:59+00:00",
+        "dailyHours": "16:00-20:00",
+        "tz": "America/Denver"
+       }
+      },
+      "issuedAt": "2026-08-01T09:00:00.000000+00:00",
+      "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+     },
+     "edges": [
+      {
+       "label": "authority",
+       "target": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+       "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+       "operator": "I2I"
+      },
+      {
+       "label": "subject",
+       "target": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+       "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+       "operator": "E1E"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EOrY-scewnT53-ly3-hR83wx16ZTg7GBVgTx8we2g7nB",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "authz": {
+        "rc": {
+         "social_feed": [
+          "read"
+         ],
+         "social_posts": [
+          "read",
+          "post"
+         ],
+         "social_dm": [
+          "read",
+          "message"
+         ]
+        },
+        "window": {
+         "start": "2026-08-01T00:00:00+00:00",
+         "end": "2026-11-30T23:59:59+00:00",
+         "dailyHours": "16:00-20:00",
+         "tz": "America/Denver"
+        }
+       },
+       "issuedAt": "2026-08-01T09:00:00.000000+00:00",
+       "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+      },
+      "e": {
+       "d": "EA69eGa-wR_iGbtVa_bR3qFZq3jD7HwFTgTnIS_qNXiz",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "authority": {
+        "d": "EGSxs4TFYf4ChtnVxukAdSoqVSSvuS4zUr7m30G7InHT",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+        "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+        "o": "I2I"
+       },
+       "subject": {
+        "d": "EBiTGpLtrhawm7ADduLsDENcUoMa30lpRIyj7NKujYJq",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+        "s": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+        "o": "E1E"
+       }
+      },
+      "r": "EFUiJw-_GYe66zumHP-KXF6LQO3817_i4FflnS7uiKkt"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAATb.",
+      "t": "acm",
+      "d": "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi",
+      "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+      "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+      "rd": "ECLRhwpPqTPuibk7Z2V3MbzEzpGVdwgFIkwaL3FUCL5W",
+      "s": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+      "a": {
+       "d": "EOrY-scewnT53-ly3-hR83wx16ZTg7GBVgTx8we2g7nB",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "authz": {
+        "rc": {
+         "social_feed": [
+          "read"
+         ],
+         "social_posts": [
+          "read",
+          "post"
+         ],
+         "social_dm": [
+          "read",
+          "message"
+         ]
+        },
+        "window": {
+         "start": "2026-08-01T00:00:00+00:00",
+         "end": "2026-11-30T23:59:59+00:00",
+         "dailyHours": "16:00-20:00",
+         "tz": "America/Denver"
+        }
+       },
+       "issuedAt": "2026-08-01T09:00:00.000000+00:00",
+       "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+      },
+      "e": {
+       "d": "EA69eGa-wR_iGbtVa_bR3qFZq3jD7HwFTgTnIS_qNXiz",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "authority": {
+        "d": "EGSxs4TFYf4ChtnVxukAdSoqVSSvuS4zUr7m30G7InHT",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+        "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+        "o": "I2I"
+       },
+       "subject": {
+        "d": "EBiTGpLtrhawm7ADduLsDENcUoMa30lpRIyj7NKujYJq",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+        "s": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+        "o": "E1E"
+       }
+      },
+      "r": "EFUiJw-_GYe66zumHP-KXF6LQO3817_i4FflnS7uiKkt"
+     },
+     "classified": {
+      "categories": [
+       "civil-status"
+      ],
+      "category_hits": {
+       "civil-status": [
+        "title: ward"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "keripy's 'Ward AuthZ Social', in Bob's own registry: social_feed read, social_posts read+post, social_dm read+message, 16:00-20:00 America/Denver from 2026-08-01 to 2026-11-30. I2I authority edge to the guardianship, E1E subject edge to Cara's Ward Citizen credential.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Ward AuthZ Social",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "sedi_age",
+     "said": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
+     "schema": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+     "issuer": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+     "issuee": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+     "attrs": {},
+     "edges": [
+      {
+       "label": "identity",
+       "target": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+       "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+       "operator": "E1E"
+      }
+     ],
+     "sections": {
+      "A": [
+       "EMbpE5F-yLd2TcVt-Jwts1vky8skQCeQxUvs5GH1cMIw",
+       {
+        "d": "EK9YOiWQoaUZFq82mbfDhwQzlRsxkZMQkmiPVu3cbTIL",
+        "u": "0ABA82lsc89noCcgQCfrhJwf",
+        "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+       },
+       "EATE1DibC3sHgOty8RzbR954KLxlOV6JD6JhLQaUc9NC",
+       "EADXNmADvHXoTpp-6w3XpsP2E2csIey15hDfkzuwZ4wL",
+       {
+        "d": "EKFQd43xfmuhSxOHjbGthPsxLV2Wj1_wLXUPyThG8w2z",
+        "u": "0AB8XLgIizCbxj8OrD_7WgYQ",
+        "over18": false
+       },
+       "ECjjAojhXt1EZkkH_OLy7MN7se5tk_iLb2Dx5Iz0X4rv",
+       "EDnrDq83LPjMidIwcoyk0Ya0GayyhYfkt0FCW29TT_Ip",
+       "EHHp0kk9FV1oHhm1z3DSiaVkE06v_qKGLkS9tYqb0x0h"
+      ],
+      "e": {
+       "d": "EJXVvqArO2pUEQ_RNm0R6YCvdwM11Cvxow5lbk0RetzI",
+       "u": "0AAdeMn9h74RHWXzRKBRiaXX",
+       "identity": {
+        "d": "ECZpLXiORwrx6xVwW2ghYzNad9anHPyTpvwLrewmBkMg",
+        "u": "0ABN7eDNS9nOVyvNpZMrI5pb",
+        "n": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+        "s": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+        "o": "E1E"
+       }
+      }
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAARC.",
+      "t": "acm",
+      "d": "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW",
+      "u": "0ACZCRoRT9sXP-WYRUeW0dfu",
+      "i": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+      "rd": "EIqPqX0akQnM_GkggYTmSQKovY2jERK2i8yQEQIPUVQJ",
+      "s": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+      "A": [
+       "EMbpE5F-yLd2TcVt-Jwts1vky8skQCeQxUvs5GH1cMIw",
+       {
+        "d": "EK9YOiWQoaUZFq82mbfDhwQzlRsxkZMQkmiPVu3cbTIL",
+        "u": "0ABA82lsc89noCcgQCfrhJwf",
+        "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+       },
+       "EATE1DibC3sHgOty8RzbR954KLxlOV6JD6JhLQaUc9NC",
+       "EADXNmADvHXoTpp-6w3XpsP2E2csIey15hDfkzuwZ4wL",
+       {
+        "d": "EKFQd43xfmuhSxOHjbGthPsxLV2Wj1_wLXUPyThG8w2z",
+        "u": "0AB8XLgIizCbxj8OrD_7WgYQ",
+        "over18": false
+       },
+       "ECjjAojhXt1EZkkH_OLy7MN7se5tk_iLb2Dx5Iz0X4rv",
+       "EDnrDq83LPjMidIwcoyk0Ya0GayyhYfkt0FCW29TT_Ip",
+       "EHHp0kk9FV1oHhm1z3DSiaVkE06v_qKGLkS9tYqb0x0h"
+      ],
+      "e": {
+       "d": "EJXVvqArO2pUEQ_RNm0R6YCvdwM11Cvxow5lbk0RetzI",
+       "u": "0AAdeMn9h74RHWXzRKBRiaXX",
+       "identity": {
+        "d": "ECZpLXiORwrx6xVwW2ghYzNad9anHPyTpvwLrewmBkMg",
+        "u": "0ABN7eDNS9nOVyvNpZMrI5pb",
+        "n": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+        "s": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+        "o": "E1E"
+       }
+      }
+     },
+     "classified": {
+      "categories": [],
+      "category_hits": {},
+      "subject": "evidence",
+      "subject_why": "references other evidence and claims nothing itself",
+      "alignment": "not-a-party",
+      "alignment_why": "subject is evidence",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "Not in keripy's ward graph; added at Daniel's request. Schema is the precreated-registry module's Age Threshold Credential, issued by the State to Cara, E1E identity edge to her Ward Citizen credential. Discloses the issuee and over18=false only.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "Age Threshold Credential",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "sedi_cara_citizen",
+     "said": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+     "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+     "issuer": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+     "issuee": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+     "attrs": {
+      "d": "EDZh8zMo_WO-BXtIT210uwsMxBqMsG1R6i7NT2QF95P9",
+      "u": "0AB3YXJkYXV0aHpleGFtcmFj",
+      "name": "EEev3nnuV4fJgX6V3Zv45LHgQPJIOf-bsFMalmkhPEn7",
+      "dob": "EGoSx25UxFLrLsXmnNtVvAVwjHvTgqgsdcyYiQMSSjvv",
+      "residence": "ELvc7hJQdL-s8WC7Pxvpf3-e-sU6Uw9eGUDHU7XOEXji",
+      "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+     },
+     "edges": [
+      {
+       "label": "guardian",
+       "target": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+       "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+       "operator": "NI2I"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EDZh8zMo_WO-BXtIT210uwsMxBqMsG1R6i7NT2QF95P9",
+       "u": "0AB3YXJkYXV0aHpleGFtcmFj",
+       "name": "EEev3nnuV4fJgX6V3Zv45LHgQPJIOf-bsFMalmkhPEn7",
+       "dob": "EGoSx25UxFLrLsXmnNtVvAVwjHvTgqgsdcyYiQMSSjvv",
+       "residence": "ELvc7hJQdL-s8WC7Pxvpf3-e-sU6Uw9eGUDHU7XOEXji",
+       "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+      },
+      "e": {
+       "d": "EE9KzTD7nKe9CeX8xlPzv5VGWCcZGlfiPmY9Kd4yWdV9",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "guardian": {
+        "d": "EOAaqZ-PO7h_3d-PqaDrlWc4ixuE1ZicYqK4Rd8ZZPvq",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+        "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+        "o": "NI2I"
+       }
+      },
+      "r": "EMw6K45FPDRNUBPhckvdxNclWhYUFMG4SejNP3pVbxg8"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAOd.",
+      "t": "acm",
+      "d": "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ",
+      "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+      "i": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+      "rd": "ED7Tqxa4Olx1oaLxR1pptPdybnythDFNjdlwICHNgs3J",
+      "s": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+      "a": {
+       "d": "EDZh8zMo_WO-BXtIT210uwsMxBqMsG1R6i7NT2QF95P9",
+       "u": "0AB3YXJkYXV0aHpleGFtcmFj",
+       "name": "EEev3nnuV4fJgX6V3Zv45LHgQPJIOf-bsFMalmkhPEn7",
+       "dob": "EGoSx25UxFLrLsXmnNtVvAVwjHvTgqgsdcyYiQMSSjvv",
+       "residence": "ELvc7hJQdL-s8WC7Pxvpf3-e-sU6Uw9eGUDHU7XOEXji",
+       "i": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+      },
+      "e": {
+       "d": "EE9KzTD7nKe9CeX8xlPzv5VGWCcZGlfiPmY9Kd4yWdV9",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+       "guardian": {
+        "d": "EOAaqZ-PO7h_3d-PqaDrlWc4ixuE1ZicYqK4Rd8ZZPvq",
+        "u": "0AB3YXJkYXV0aHpleGFtcmEx",
+        "n": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+        "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+        "o": "NI2I"
+       }
+      },
+      "r": "EMw6K45FPDRNUBPhckvdxNclWhYUFMG4SejNP3pVbxg8"
+     },
+     "classified": {
+      "categories": [
+       "civil-status",
+       "identity"
+      ],
+      "category_hits": {
+       "identity": [
+        "dob",
+        "residence"
+       ],
+       "civil-status": [
+        "title: ward"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['dob']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "State -> Cara, keripy's 'SEDI Ward Citizen Credential', encumbered by its NI2I edge to the guardianship. Disclosed with only its issuee.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "SEDI Ward Citizen Credential",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "sedi_guardian",
+     "said": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+     "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+     "issuer": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+     "issuee": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+     "attrs": {
+      "d": "EJXzhJ6oXn5k44gDcim3boB04DgYFpejIj3chpND24FK",
+      "u": "0AB3YXJkYXV0aHpleGFtcmE4",
+      "ward": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+      "basis": "custodialParent",
+      "scope": [
+       "digitalIdentity"
+      ],
+      "powers": [
+       "read",
+       "post",
+       "message",
+       "profile",
+       "configure"
+      ],
+      "fiduciary": "bestInterest",
+      "effectiveDate": "2026-01-06",
+      "expiryDate": "2027-04-10",
+      "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+     },
+     "edges": [
+      {
+       "label": "citizen",
+       "target": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+       "schema": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+       "operator": "E1E"
+      }
+     ],
+     "sections": {
+      "a": {
+       "d": "EJXzhJ6oXn5k44gDcim3boB04DgYFpejIj3chpND24FK",
+       "u": "0AB3YXJkYXV0aHpleGFtcmE4",
+       "ward": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+       "basis": "custodialParent",
+       "scope": [
+        "digitalIdentity"
+       ],
+       "powers": [
+        "read",
+        "post",
+        "message",
+        "profile",
+        "configure"
+       ],
+       "fiduciary": "bestInterest",
+       "effectiveDate": "2026-01-06",
+       "expiryDate": "2027-04-10",
+       "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+      },
+      "e": {
+       "d": "EP7KNzHkChow6j312Vwn4-AvT_WfGxUxyw6ct0qOCYII",
+       "u": "0AB3YXJkYXV0aHpleGFtcmFh",
+       "citizen": {
+        "d": "EF1lxFvC_vYuXtvNk2R9wNc7iCfHbEoVOnAWFfPfjtS-",
+        "u": "0AB3YXJkYXV0aHpleGFtcmFi",
+        "n": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+        "s": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+        "o": "E1E"
+       }
+      },
+      "r": "EMG5LVousROocTvp3nBDpMCtKvD6CdyPUqdWaGxDGxKu"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAPs.",
+      "t": "acm",
+      "d": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+      "u": "0AB3YXJkYXV0aHpleGFtcmE5",
+      "i": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+      "rd": "EM7s0MF7ngRGSj7zBQeoRbrC-NbMLy1nQ8GSgem9cOe8",
+      "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+      "a": {
+       "d": "EJXzhJ6oXn5k44gDcim3boB04DgYFpejIj3chpND24FK",
+       "u": "0AB3YXJkYXV0aHpleGFtcmE4",
+       "ward": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+       "basis": "custodialParent",
+       "scope": [
+        "digitalIdentity"
+       ],
+       "powers": [
+        "read",
+        "post",
+        "message",
+        "profile",
+        "configure"
+       ],
+       "fiduciary": "bestInterest",
+       "effectiveDate": "2026-01-06",
+       "expiryDate": "2027-04-10",
+       "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+      },
+      "e": {
+       "d": "EP7KNzHkChow6j312Vwn4-AvT_WfGxUxyw6ct0qOCYII",
+       "u": "0AB3YXJkYXV0aHpleGFtcmFh",
+       "citizen": {
+        "d": "EF1lxFvC_vYuXtvNk2R9wNc7iCfHbEoVOnAWFfPfjtS-",
+        "u": "0AB3YXJkYXV0aHpleGFtcmFi",
+        "n": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+        "s": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+        "o": "E1E"
+       }
+      },
+      "r": "EMG5LVousROocTvp3nBDpMCtKvD6CdyPUqdWaGxDGxKu"
+     },
+     "classified": {
+      "categories": [
+       "authority",
+       "civil-status"
+      ],
+      "category_hits": {
+       "authority": [
+        "fiduciary",
+        "powers",
+        "title: guardian"
+       ],
+       "civil-status": [
+        "ward"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "an issuee is declared, so the payload's objects are what is claimed about them",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "State -> Bob, keripy's 'SEDI Digital Guardian'. Flat, so disclosed whole: ward, basis, scope, powers, fiduciary, effective and expiry dates. The expiry is Cara's 18th birthday, keripy's recorded residual leak. E1E edge to Bob's Citizen credential.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "SEDI Digital Guardian",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    },
+    {
+     "name": "sedi_bob_citizen",
+     "said": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+     "schema": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+     "issuer": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+     "issuee": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+     "attrs": {
+      "d": "EGQOMmBe3vNWrYgdm0NFvKBoR7UyJ_AgUDefXjgwoY9y",
+      "u": "0AB3YXJkYXV0aHpleGFtcmEz",
+      "name": "ECaUDW3TTP0suj5HuTOE_JI_mfDyN0J3oBYywG-F4FZu",
+      "dob": "EC0jRQ1LdqBxCEdDhCLqPSPivJTfaIkTsb7WCxpgFFrn",
+      "residence": "ENwLP8iQC_cQXLCXY2priOqCbRi4Rr-C6d29TrDbi-iJ",
+      "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+     },
+     "edges": [],
+     "sections": {
+      "a": {
+       "d": "EGQOMmBe3vNWrYgdm0NFvKBoR7UyJ_AgUDefXjgwoY9y",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEz",
+       "name": "ECaUDW3TTP0suj5HuTOE_JI_mfDyN0J3oBYywG-F4FZu",
+       "dob": "EC0jRQ1LdqBxCEdDhCLqPSPivJTfaIkTsb7WCxpgFFrn",
+       "residence": "ENwLP8iQC_cQXLCXY2priOqCbRi4Rr-C6d29TrDbi-iJ",
+       "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+      },
+      "r": "EPqDt0fDJIjoaLCJ16Xl4EW1ENs8LaAbcZL9M1ZvG9Gn"
+     },
+     "sad": {
+      "v": "ACDCCAACAAJSONAAJ1.",
+      "t": "acm",
+      "d": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+      "u": "0AB3YXJkYXV0aHpleGFtcmE3",
+      "i": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+      "rd": "ED7Tqxa4Olx1oaLxR1pptPdybnythDFNjdlwICHNgs3J",
+      "s": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+      "a": {
+       "d": "EGQOMmBe3vNWrYgdm0NFvKBoR7UyJ_AgUDefXjgwoY9y",
+       "u": "0AB3YXJkYXV0aHpleGFtcmEz",
+       "name": "ECaUDW3TTP0suj5HuTOE_JI_mfDyN0J3oBYywG-F4FZu",
+       "dob": "EC0jRQ1LdqBxCEdDhCLqPSPivJTfaIkTsb7WCxpgFFrn",
+       "residence": "ENwLP8iQC_cQXLCXY2priOqCbRi4Rr-C6d29TrDbi-iJ",
+       "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+      },
+      "r": "EPqDt0fDJIjoaLCJ16Xl4EW1ENs8LaAbcZL9M1ZvG9Gn"
+     },
+     "classified": {
+      "categories": [
+       "identity"
+      ],
+      "category_hits": {
+       "identity": [
+        "dob",
+        "residence"
+       ]
+      },
+      "subject": "party",
+      "subject_why": "party attributes ['dob']",
+      "alignment": "ordinary",
+      "alignment_why": "an issuee is declared",
+      "input": "disclosed attribute names; no schema resolved"
+     },
+     "fixture_summary": "State -> Bob, keripy's 'SEDI Citizen Credential'. Disclosed with only its issuee; name, dob and residence travel as block SAIDs.",
+     "image": {
+      "state": "none"
+     },
+     "type": {
+      "name": "SEDI Citizen Credential",
+      "source": "hand-supplied (keripy schema title)",
+      "schema_state": "unavailable"
+     }
+    }
+   ],
+   "descriptors": {
+    "host-aliases": {
+     "EI4oMOkcmzp1exvqy2d1pt-Hl2u7P_O_FH9pJHKGZHah": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EIByftHWQY6cls3f1KO8Uh2VHwLZY0mAb5MZgeULaTA3",
+         "name": "Ward Presentation"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+         "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR"
+        ],
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EDccew0We_pDxhtHrEOQcP4DIIBeteqZhaokGb7kXtNi": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EP_6kA4inOsIK6DjNEy_qEPUF-vTExbfda1R_NgcPBVo",
+         "name": "Ward AuthZ Social"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "authz",
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+         "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+        ],
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EHj8A9Ru0dtiLPkRM4sjI4Wo-cH8GoEncb-a7vyIvGdW": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EHyVKtyAdH1iGVzJPtJkGqtcV2jJt5HjF4VMT7WvkyQB",
+         "name": "Age Threshold Credential"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "age",
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+         null
+        ],
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EI8xD7zuclwId0GunRi2e9q92K1oXuGfSo-HwaXaQOAQ": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EGg6ihxJmig7CE0cFSuxdQF6Gl4ByVTQqP5qYK8R6bW6",
+         "name": "SEDI Ward Citizen Credential"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "identity",
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+         "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p"
+        ],
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+         "name": "SEDI Digital Guardian"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "authority",
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+         "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+        ],
+        "gain": 1.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     },
+     "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ": {
+      "components": [
+       {
+        "kind": "type",
+        "value": {
+         "schema": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+         "name": "SEDI Citizen Credential"
+        },
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "role",
+        "value": "citizen",
+        "gain": 2.585,
+        "role_bearing": true,
+        "issuer_claim": true,
+        "negative": false,
+        "text_alternative": false
+       },
+       {
+        "kind": "parties",
+        "value": [
+         "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+         "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+        ],
+        "gain": 1.585,
+        "role_bearing": true,
+        "issuer_claim": false,
+        "negative": false,
+        "text_alternative": false
+       }
+      ],
+      "annotations": [],
+      "distinguishing": true,
+      "distinguishing_as_text": true,
+      "indistinguishable_from": []
+     }
+    }
+   },
+   "descriptor_variants": [
+    "host-aliases"
+   ],
+   "parties": {
+    "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR": {
+     "identifier": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+     "label": "socialweb-platform",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR",
+      "label": "socialweb-platform"
+     }
+    },
+    "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq": {
+     "identifier": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+     "label": "bob-carver-guardian",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq",
+      "label": "bob-carver-guardian"
+     }
+    },
+    "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p": {
+     "identifier": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+     "label": "cara-carver-ward",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+      "label": "cara-carver-ward"
+     }
+    },
+    "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf": {
+     "identifier": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+     "label": "utah-dgo-sedi-issuer",
+     "aliasState": "shown",
+     "credited": null,
+     "creditedReason": null,
+     "pill": {
+      "value": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+      "label": "utah-dgo-sedi-issuer"
+     }
+    }
+   },
+   "supplied_by_hand": [
+    "type names (keripy's schemas are not published)"
+   ]
   }
  ]
 }

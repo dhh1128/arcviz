@@ -1,0 +1,41 @@
+{
+  "v": "ACDCCAACAAJSONAAPs.",
+  "t": "acm",
+  "d": "EEFqTgzTDdysCOKfIqRtIzTWYhKkHov16QKXmI0R0BbM",
+  "u": "0AB3YXJkYXV0aHpleGFtcmE5",
+  "i": "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf",
+  "rd": "EM7s0MF7ngRGSj7zBQeoRbrC-NbMLy1nQ8GSgem9cOe8",
+  "s": "ENv3zT7Ni1yl8WOE4dIby4thRGXCKrgHMLqG86K1voFd",
+  "a": {
+    "d": "EJXzhJ6oXn5k44gDcim3boB04DgYFpejIj3chpND24FK",
+    "u": "0AB3YXJkYXV0aHpleGFtcmE4",
+    "ward": "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p",
+    "basis": "custodialParent",
+    "scope": [
+      "digitalIdentity"
+    ],
+    "powers": [
+      "read",
+      "post",
+      "message",
+      "profile",
+      "configure"
+    ],
+    "fiduciary": "bestInterest",
+    "effectiveDate": "2026-01-06",
+    "expiryDate": "2027-04-10",
+    "i": "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq"
+  },
+  "e": {
+    "d": "EP7KNzHkChow6j312Vwn4-AvT_WfGxUxyw6ct0qOCYII",
+    "u": "0AB3YXJkYXV0aHpleGFtcmFh",
+    "citizen": {
+      "d": "EF1lxFvC_vYuXtvNk2R9wNc7iCfHbEoVOnAWFfPfjtS-",
+      "u": "0AB3YXJkYXV0aHpleGFtcmFi",
+      "n": "EPA-I6kmtswtU_Zgvy1Btlp3Hh8e_llzuMjy3pbD_mpZ",
+      "s": "EJVQ1b7CfiAQiq3MB0ffqaM6W3UT_6UW182Hvs9os7dS",
+      "o": "E1E"
+    }
+  },
+  "r": "EMG5LVousROocTvp3nBDpMCtKvD6CdyPUqdWaGxDGxKu"
+}

@@ -8,3 +8,4 @@ from . import fx_holes          # noqa: F401
 from . import fx_rule8          # noqa: F401
 from . import fx_bundles       # noqa: F401
 from . import fx_vvp           # noqa: F401
+from . import fx_sedi           # noqa: F401

@@ -36,6 +36,12 @@ Each `<name>.json` is the disclosed field map (what a renderer would receive); `
 | `same_schema_alice` | Same-schema-twice DAG: Alice's identity credential | H1 | — | — |
 | `same_schema_bob` | Same-schema-twice DAG: Bob's identity credential | H1 | — | — |
 | `same_schema_household` | Same-schema-twice DAG (household presentation) | H1 | — | same_schema_alice, same_schema_bob |
+| `sedi_age` | SEDI: Cara's Age Threshold credential (over-18 only) | — | — | — |
+| `sedi_authz` | SEDI: Ward AuthZ Social (Bob -> Cara), disclosed whole | — | — | — |
+| `sedi_bob_citizen` | SEDI: Bob Carver's Citizen credential (issuee only) | — | — | — |
+| `sedi_cara_citizen` | SEDI: Cara Carver's Ward Citizen credential (issuee only) | — | — | — |
+| `sedi_guardian` | SEDI: Digital Guardian (Bob for Cara), disclosed whole | — | — | — |
+| `sedi_presentation` | SEDI: Cara's presentation to SocialWeb | — | — | sedi_age |
 | `two_blinded_edges_converge` | Two blinded edges, one node -- convergence unknowable (ground truth: converge) | H8 | RULE 1 | — |
 | `two_blinded_edges_diverge` | Two blinded edges, one node -- convergence unknowable (ground truth: diverge) | H8 | RULE 1 | — |
 | `unblinded_commitment_h2` | Unblinded commitment (H2): schema reserves no u | H2 | RULE 8 | — |

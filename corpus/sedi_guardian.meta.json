@@ -1,0 +1,13 @@
+{
+  "title": "SEDI: Digital Guardian (Bob for Cara), disclosed whole",
+  "summary": "State -> Bob, keripy's 'SEDI Digital Guardian'. Flat, so disclosed whole: ward, basis, scope, powers, fiduciary, effective and expiry dates. The expiry is Cara's 18th birthday, keripy's recorded residual leak. E1E edge to Bob's Citizen credential.",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_guardian",
+  "files": {
+    "sad": "sedi_guardian.json",
+    "cesr": "sedi_guardian.cesr"
+  },
+  "generated_at": "2026-10-06T12:20:42.854938+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

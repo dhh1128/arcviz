@@ -1,0 +1,14 @@
+{
+  "title": "SEDI: Cara's Age Threshold credential (over-18 only)",
+  "summary": "Not in keripy's ward graph; added at Daniel's request. Schema is the precreated-registry module's Age Threshold Credential, issued by the State to Cara, E1E identity edge to her Ward Citizen credential. Discloses the issuee and over18=false only.",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_age",
+  "files": {
+    "sad": "sedi_age.json",
+    "cesr": "sedi_age.cesr",
+    "expanded": "sedi_age.expanded.json"
+  },
+  "generated_at": "2026-10-06T12:20:42.976417+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

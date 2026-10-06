@@ -13,7 +13,11 @@
   "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": "quillon-freight-legal-entity-vvp",
   "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": "palisade-numbering-tn-allocator-vvp",
   "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": "ostrel-brand-registry-brand-vetter",
-  "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": "corvane-telecom-carrier"
+  "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": "corvane-telecom-carrier",
+  "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf": "utah-dgo-sedi-issuer",
+  "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq": "bob-carver-guardian",
+  "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p": "cara-carver-ward",
+  "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR": "socialweb-platform"
  },
  "alias_answers": {
   "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
@@ -79,6 +83,26 @@
   "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": {
    "who": "Corvane Telecom",
    "role": "carrier",
+   "scope": ""
+  },
+  "EKEFJKk1-ETdyUmqWvSU-ONLwCiSdgMQLSqzua7fVONf": {
+   "who": "Utah DGO",
+   "role": "SEDI issuer",
+   "scope": ""
+  },
+  "EEDI34-3k4_W0IBfni7_ZZOS9vAT_TEBPfExyUbQqQDq": {
+   "who": "Bob Carver",
+   "role": "guardian",
+   "scope": ""
+  },
+  "EKBuSpAYMiTKuCI2ZNHqcej1th9Hja6BgMfKFpwJGH2p": {
+   "who": "Cara Carver",
+   "role": "ward",
+   "scope": ""
+  },
+  "EE4nw29GnQTLNFMQrBfbMFCrpMzqNiH3prsozG9wBPzR": {
+   "who": "SocialWeb",
+   "role": "platform",
    "scope": ""
   }
  }

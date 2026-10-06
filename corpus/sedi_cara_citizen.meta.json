@@ -1,0 +1,14 @@
+{
+  "title": "SEDI: Cara Carver's Ward Citizen credential (issuee only)",
+  "summary": "State -> Cara, keripy's 'SEDI Ward Citizen Credential', encumbered by its NI2I edge to the guardianship. Disclosed with only its issuee.",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_cara_citizen",
+  "files": {
+    "sad": "sedi_cara_citizen.json",
+    "cesr": "sedi_cara_citizen.cesr",
+    "expanded": "sedi_cara_citizen.expanded.json"
+  },
+  "generated_at": "2026-10-06T12:20:42.891832+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

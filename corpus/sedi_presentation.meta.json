@@ -1,0 +1,16 @@
+{
+  "title": "SEDI: Cara's presentation to SocialWeb",
+  "summary": "The DAG's origin, issued by Cara to SocialWeb, one-time and not registry-bound. keripy's Ward Presentation plus an I2I age edge and the Purpose / Assimilation / SafeHarbor rules of test_cp_disclosure.py (SafeHarbor cites Utah Code 63A-20-701 and -801).",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_presentation",
+  "depends_on": [
+    "sedi_age"
+  ],
+  "files": {
+    "sad": "sedi_presentation.json",
+    "cesr": "sedi_presentation.cesr"
+  },
+  "generated_at": "2026-10-06T12:20:43.038947+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

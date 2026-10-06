@@ -1,0 +1,13 @@
+{
+  "title": "SEDI: Ward AuthZ Social (Bob -> Cara), disclosed whole",
+  "summary": "keripy's 'Ward AuthZ Social', in Bob's own registry: social_feed read, social_posts read+post, social_dm read+message, 16:00-20:00 America/Denver from 2026-08-01 to 2026-11-30. I2I authority edge to the guardianship, E1E subject edge to Cara's Ward Citizen credential.",
+  "matrix_cells": [],
+  "rules_exercised": [],
+  "name": "sedi_authz",
+  "files": {
+    "sad": "sedi_authz.json",
+    "cesr": "sedi_authz.cesr"
+  },
+  "generated_at": "2026-10-06T12:20:42.925219+00:00",
+  "keripy_commit": "e85a924f50abe156175c06556a0bfa7891afd890-dirty (branch feat-indep-registry-bulk-issuance)"
+}

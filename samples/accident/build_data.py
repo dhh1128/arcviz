@@ -145,10 +145,20 @@ def edges_of(s: dict) -> list:
     return out
 
 
+def issuee_of(s: dict):
+    """The issuee, from an attribute section or, in an aggregate, from its issuee element."""
+    if isinstance(s.get("a"), dict):
+        return s["a"].get("i")
+    for el in s.get("A") if isinstance(s.get("A"), list) else []:
+        if isinstance(el, dict) and "i" in el:
+            return el["i"]
+    return None
+
+
 def node_json(name: str, s: dict, cls: dict, extra: dict | None = None) -> dict:
     a = s.get("a") if isinstance(s.get("a"), dict) else {}
     n = {"name": name, "said": s["d"], "schema": s["s"], "issuer": s["i"],
-         "issuee": a.get("i"), "attrs": a, "edges": edges_of(s),
+         "issuee": issuee_of(s), "attrs": a, "edges": edges_of(s),
          # The sections as they arrived, for the field tree: a section may be a block, a bare
          # SAID standing in for a block (compact, so undisclosed), or missing altogether.
          "sections": {k: s[k] for k in ("a", "A", "e", "r") if k in s},
@@ -353,6 +363,42 @@ def vvp(host: dict, names: list[str] = VVP, *, id: str = "vvp", title: str = "VV
             "supplied_by_hand": []}
 
 
+# --------------------------------------------------------------------------------------------
+# Frame: the SEDI ward presentation (fx_sedi.py)
+
+SEDI = ["sedi_presentation", "sedi_authz", "sedi_age", "sedi_cara_citizen", "sedi_guardian",
+        "sedi_bob_citizen"]
+
+
+def sedi(host: dict) -> dict:
+    """keripy's purpose-authored schemas are not published, so type names are their titles,
+    supplied by hand. Cara's AID also appears inside the guardianship's `ward` attribute."""
+    sads = {n: sad(n) for n in SEDI}
+    titles = {"sedi_presentation": "Ward Presentation", "sedi_authz": "Ward AuthZ Social",
+              "sedi_age": "Age Threshold Credential",
+              "sedi_cara_citizen": "SEDI Ward Citizen Credential",
+              "sedi_guardian": "SEDI Digital Guardian",
+              "sedi_bob_citizen": "SEDI Citizen Credential"}
+    type_names = {sads[n]["s"]: t for n, t in titles.items()}
+    dag = load_corpus_dag(CORPUS, SEDI, type_names=type_names,
+                          presented=sads["sedi_presentation"]["d"])
+    nodes = []
+    for n in SEDI:
+        x = sads[n]
+        nodes.append(node_json(n, x, classify_node(x, type_names[x["s"]]), {
+            "image": {"state": "none"},
+            "type": {"name": type_names[x["s"]], "source": "hand-supplied (keripy schema title)",
+                     "schema_state": schemas.resolve(x["s"]).state}}))
+    aids = {a for x in sads.values() for a in (x["i"], issuee_of(x)) if a}
+    aids.add(sads["sedi_guardian"]["a"]["ward"])
+    return {"id": "sedi", "title": "SEDI ward",
+            "presented": sads["sedi_presentation"]["d"],
+            "nodes": nodes, "descriptors": {"host-aliases": describe_json(dag)},
+            "descriptor_variants": ["host-aliases"],
+            "parties": parties(host, aids),
+            "supplied_by_hand": ["type names (keripy's schemas are not published)"]}
+
+
 def main() -> int:
     host = json.loads((HERE / "host.json").read_text())
     PUBLIC.mkdir(exist_ok=True)
@@ -368,7 +414,8 @@ def main() -> int:
             "category_meanings": category_meanings(),
             "host_note": host["_note"],
             "frames": [accident(host), vlei(host),
-                       vvp(host, VVP_CITED, id="vvp-cited", title="VVP, as it should be")]}
+                       vvp(host, VVP_CITED, id="vvp-cited", title="VVP, as it should be"),
+                       sedi(host)]}
     (PUBLIC / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     print(f"wrote {PUBLIC / 'data.json'}")
     return 0
