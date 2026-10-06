@@ -683,7 +683,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         lanes.set(r, l);
       }
     const LANE = 8, GUTTER = 12;
-    const BOX_PULL = 7;   // one edge-box width
+    const BOX_PULL = 14;   // two edge-box widths per level (Daniel, 2026-10-06)
     const DEPART_SHARE = 1 / 2;   // of the card's width, for its outbound edges
     rows.forEach((_, i) => {
       const band = bands.current[i];
@@ -749,7 +749,7 @@ function Graph({ frame, desc, lines, pictures }: { frame: Frame; desc: Record<st
         // The box and its label sit wholly above the target's top border: the label's baseline is
         // placed so its whole text box, descent included, clears the border by 1 px (Daniel, turn 14). A second edge
         // into the same target stacks its box and label higher, and is pulled toward where its edge
-        // came from, one box width per level, so stacked boxes never line up into one column.
+        // came from, two box widths per level, so stacked boxes never line up into one column.
         const by = y2 - 9 - k * 17;
         const rs = rankOf.get(m.said) ?? 0, rt = rankOf.get(e.target) ?? rs + 1;
         const unit = 7 + 3.5 + ctx.measureText(e.label).width;
