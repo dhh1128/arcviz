@@ -172,7 +172,7 @@ def build_vvp_delsig(corpus_dir):
 @fixture("vvp_brand", depends_on=["vvp_brand_vetter_vetting"])
 def build_vvp_brand(corpus_dir):
     logo = _logo_digest(corpus_dir)
-    vcard = ["ORG:Fixture Freight Ltd",
+    vcard = ["ORG:Quillon Freight Ltd",
              f"LOGO;HASH={logo};VALUE=URI:https://example.com/brand/logo.svg",
              "URL:https://example.com",
              f"TEL;TYPE=support:{NUMBER}"]

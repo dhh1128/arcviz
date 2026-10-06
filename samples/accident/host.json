@@ -7,13 +7,13 @@
   "EKkmidwYBfZLXEstkVnvHJeE-bnoeQcGzoF29AJ6ViyC": "jae-park-witness",
   "EDV3OZ37h8Z8Ii5qi-YeHy6lDP04geVaZF_-zUdEFNGw": "northgate-mutual-claims-intake",
   "ELTGvn2ZmepBNl0JkXyPfjnd_DEYvXHxK-AiUMBoKr40": "gleif-root-of-trust-vlei",
-  "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": "fixture-qvi-qualified-issuer-vlei",
-  "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": "fixture-corp-legal-entity-vlei",
-  "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": "fixture-vetting-co-org-vetter",
-  "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": "fixture-freight-legal-entity-vvp",
-  "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": "fixture-freight-tn-allocator-vvp",
-  "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": "fixture-brand-registry-brand-vetter",
-  "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": "fixture-telecom-carrier"
+  "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": "vallory-qvi-qualified-issuer-vlei",
+  "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": "tarnby-corp-legal-entity-vlei",
+  "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": "kesterly-vetting-org-vetter",
+  "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": "quillon-freight-legal-entity-vvp",
+  "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": "quillon-numbering-tn-allocator-vvp",
+  "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": "ostrel-brand-registry-brand-vetter",
+  "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": "corvane-telecom-carrier"
  },
  "alias_answers": {
   "EL37ZkrKxqN-2hkOCDDaaeb7ozbmM6BTYpczUEBqQm74": {
@@ -47,37 +47,37 @@
    "scope": "vLEI"
   },
   "EOvbsyiKJgxQxsQVfIsZTch5ay6NvcEh0T7GFoy3b48S": {
-   "who": "Fixture QVI",
+   "who": "Vallory QVI",
    "role": "qualified issuer",
    "scope": "vLEI"
   },
   "EErZ90n2jH2yBA4CjlZ03jzJx17wR653gpqUspe1p_RZ": {
-   "who": "Fixture Corp",
+   "who": "Tarnby Corp",
    "role": "legal entity",
    "scope": "vLEI"
   },
   "EHFV-4hgzf-4szqXrEjjd08kaTSVIQRdJMXsN2eibuPR": {
-   "who": "Fixture Vetting Co",
+   "who": "Kesterly Vetting",
    "role": "org vetter",
    "scope": ""
   },
   "EAAc2QueRr8fgGcuB5hyeRHW_6v0XXarwUYP96CUNn_V": {
-   "who": "Fixture Freight",
+   "who": "Quillon Freight",
    "role": "legal entity",
    "scope": "VVP"
   },
   "EHJoGjupAw92kDefvAhlmEc2WpMdnMo6RzElxWcfUk1G": {
-   "who": "Fixture Freight",
+   "who": "Quillon Numbering",
    "role": "TN allocator",
    "scope": "VVP"
   },
   "EFZdGunMnJ4t8-4YfeWx5g4gfmfXgzUq3XVXz3O_sirt": {
-   "who": "Fixture Brand Registry",
+   "who": "Ostrel Brand Registry",
    "role": "brand vetter",
    "scope": ""
   },
   "EEpeGT9Ek2ea2geTQSH_Ez7gZXzz8db788JPY6Ozx5Y2": {
-   "who": "Fixture Telecom",
+   "who": "Corvane Telecom",
    "role": "carrier",
    "scope": ""
   }
