@@ -59,6 +59,10 @@ def ring(cx, cy, r_out, r_in):
     return diff(circle(cx, cy, r_out), circle(cx, cy, r_in))
 
 
+def intersect(a, b):
+    return list(ops.intersection([a, b], ["nonzero"] * 2))
+
+
 def transform(seq, a):
     return cmds(SVGPath.from_commands(seq).apply_transform(a))
 
@@ -156,6 +160,19 @@ def marriage():
     return union(diff(band, dilate(stone, 0.9)), stone, setting)
 
 
+def interlocked():
+    """Two interlocked rings, as the Olympic rings interlock: the left ring passes over the right
+    at the top crossing and under it at the bottom. Daniel, 2026-10-06, replacing the solitaire as
+    the civil-status category glyph: it "could suggest marriage but also social circles". Each
+    ring is cut where it passes under, by a gap of 0.9 units, the set's minimum."""
+    r_out, r_in, dx = 6.6, 4.6, 3.6
+    left, right = ring(12 - dx, 12, r_out, r_in), ring(12 + dx, 12, r_out, r_in)
+    top, bottom = rect(0, 0, GRID, 12), rect(0, 12, GRID, 12)
+    right_cut = diff(right, intersect(dilate(left, 0.9), top))
+    left_cut = diff(left, intersect(dilate(right, 0.9), bottom))
+    return union(left_cut, right_cut)
+
+
 # --- the set ---------------------------------------------------------------------
 def file_blank():
     """`misc` with its two text lines removed, so a renderer can print a file extension on the
@@ -190,6 +207,7 @@ GLYPHS = {
     "authority.control": (lambda: load(SRC / "font-awesome/key.svg"), "authority: control", "Font Awesome Free 'key' (solid), CC BY 4.0; rescaled and centred on a 24-unit grid"),
     "civil-status.birth": (lambda: load(SRC / "phosphor/baby-fill.svg"), "civil-status: birth", "Phosphor Icons 'baby' (fill), MIT; rescaled and centred on a 24-unit grid"),
     "civil-status.marriage": (marriage, "civil-status: marriage", None),
+    "civil-status": (interlocked, "civil-status", None),
     "misc": (lambda: load(SRC / "material-symbols/description-fill.svg"), "misc", "Material Symbols 'description' (rounded, fill), Apache-2.0; rescaled and centred on a 24-unit grid"),
     "misc.file": (file_blank, "misc: file", "Material Symbols 'description' (rounded, fill), Apache-2.0; its two text lines removed, rescaled and centred on a 24-unit grid"),
 }
@@ -219,7 +237,8 @@ COMPOSITIONS = [
 ]
 # Categories whose own glyph is one of their subcategories' pictures (his ruling, 2026-09-24).
 # Written as separate files, with their own <title>, so a renderer looks glyphs up by category name.
-ALIASES = {"authority": "authority.control", "civil-status": "civil-status.marriage"}
+# civil-status had the marriage ring until 2026-10-06, when Daniel replaced it with interlocked rings.
+ALIASES = {"authority": "authority.control"}
 
 GAP = 4  # px between adjacent 32 px glyphs: one eighth of the glyph
 

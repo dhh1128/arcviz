@@ -8,7 +8,7 @@ This is the second channel for [credential categories](credential-categories.md)
 
 ![all nineteen pictures at 32 px](iconography/contact-32.png)
 
-Twenty pictures in twenty-two files: every one of the nine categories, ten subcategories, `misc`, and `misc.file`. `authority` and `civil-status` reuse a subcategory's picture as the category glyph (his ruling). `authority` is the key from `authority.control`, and `civil-status` is the ring from `civil-status.marriage`. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
+Twenty-one pictures in twenty-two files: every one of the nine categories, ten subcategories, `misc`, and `misc.file`. `authority` reuses a subcategory's picture as the category glyph (his ruling): the key from `authority.control`. `civil-status` did the same with the ring from `civil-status.marriage` until 2026-10-06, when Daniel replaced it with two interlocked rings, linked the way the Olympic rings are, because they *"could suggest marriage but also social circles"*. Each is written as its own file with its own `<title>`, so a renderer can look a glyph up by the category name the classifier returns. [ladder.png](iconography/ladder.png) shows each one at 32, 64 and 128 px, so the claim that each survives at 32 px can be checked. The SVGs are in [iconography/glyphs/](iconography/glyphs/) and are named `category` or `category.subcategory`. A dot separates the two because `org-identity` and `civil-status` already contain a hyphen.
 
 | Glyph | Picture | Source |
 |---|---|---|
@@ -29,7 +29,7 @@ Twenty pictures in twenty-two files: every one of the nine categories, ten subca
 | `authority` | key (as `authority.control`) | Font Awesome |
 | `authority.delegation` | hierarchy tree | Font Awesome |
 | `authority.control` | key | Font Awesome |
-| `civil-status` | ring (as `civil-status.marriage`) | original |
+| `civil-status` | two interlocked rings (Daniel, 2026-10-06; was the ring from `civil-status.marriage`) | original |
 | `civil-status.birth` | baby | Phosphor |
 | `civil-status.marriage` | solitaire ring | original |
 | `misc` | document | Material Symbols |
